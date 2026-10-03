@@ -9,6 +9,8 @@
 #include <lob/workload/format.hpp>
 
 #include <algorithm>
+#include <array>
+#include <bit>
 #include <functional>
 #include <map>
 #include <print>
@@ -19,6 +21,29 @@ using namespace lob;
 
 struct NullSink {
     template <class E> void on(const E&) noexcept {}
+};
+
+// Attempted replacement for ChecksumSink (2026-10-04, rejected: no gain):
+// fields round-robin into four independent lanes, lane = rotl(lane,1) ^ x,
+// instead of one imul chain. Kept to document that the sink's cost is its
+// instruction count (throughput), not the multiply latency chain.
+struct LaneSink {
+    std::uint64_t events = 0, trades = 0;
+    std::array<std::uint64_t, 4> lane{};
+    void on(const Trade& e) noexcept { ++trades; mix(1, e.taker, e.maker, static_cast<std::uint64_t>(e.price), e.qty); }
+    void on(const Rested& e) noexcept {
+        mix(2, e.id, static_cast<std::uint64_t>(e.side), static_cast<std::uint64_t>(e.price), e.qty);
+    }
+    void on(const Cancelled& e) noexcept { mix(3, e.id, e.qty); }
+    void on(const Reduced& e) noexcept { mix(4, e.id, e.new_qty); }
+    void on(const Rejected& e) noexcept {
+        mix(5, e.id, static_cast<std::uint64_t>(e.op), static_cast<std::uint64_t>(e.reason));
+    }
+    template <class... T> void mix(T... xs) noexcept {
+        ++events;
+        std::size_t i = 0;
+        ((lane[i % 4] = std::rotl(lane[i % 4], 1) ^ static_cast<std::uint64_t>(xs), ++i), ...);
+    }
 };
 
 template <class B, class S>
@@ -54,6 +79,7 @@ int main(int argc, char** argv) {
     else
         add.template operator()<abl::BookT<ChecksumSink, 16, true, 1>, ChecksumSink>("B: compile-time tick (no div)");
     add.template operator()<abl::BookT<NullSink>, NullSink>("C: null sink");
+    add.template operator()<abl::BookT<LaneSink>, LaneSink>("D: lane sink (rotl/xor, no imul)");
 
     std::map<std::string, std::pair<std::vector<double>, std::vector<double>>> res;
     for (int r = 0; r <= rounds; ++r)

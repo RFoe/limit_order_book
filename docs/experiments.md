@@ -460,3 +460,23 @@ AAPL 在簿订单的 ref 跨度：中位数 1.2 亿，最大 2.55 亿（ITCH 的
   2. 订单簿：一次探测同时完成重复检查和插入（push 开头就 `try_emplace`，如果完全成交再删除）。按消融 A 的结果，上限约为指令 −6.5%、cycles −1–3%。
   3. 剩下的 13% 节点池、13% 网格，以及 7% 无法归类的代码，需要更细的手段（例如 PEBS，只有裸金属上才有）才能继续拆分。
 
+## [2026-10-04] 测量框架：尝试降低 ChecksumSink 的开销（失败，已回退）
+
+- **假设**：消融实验 C 显示，ChecksumSink 占 v4 cycles 的 5–10%。我当时的解释是，它对每个字段做 `value = (value ^ x) * K`，在所有事件之间形成一条串行的 `imul` 依赖链（每次 3 周期延迟，每个 op 约 4–6 次）。换成 4 条互相独立的 lane、每个字段做 `rotl + xor`（都是 1 周期操作）之后，开销应该接近空 sink。
+- **改动（未提交，已回退）**：在 `ChecksumSink` 里用 4 条 lane 加 `value()`（只在最后用乘法混合一次）。v0–v4 的 checksum 仍然彼此一致（AAPL 为 `4c10bd9d214822db`），release 测试 35/35 通过。
+- **结果**（`results/ablation_20261004-0627_4bcd209-dirty_vm_sink.txt`，`tools/ablate_v4` 的变体 D 是这个 lane sink，与当前的 ChecksumSink 交替运行 9 轮）：
+
+| workload | lane sink 相对当前 sink 的 cycles | instr/op | 空 sink 的 cycles |
+|---|---:|---:|---:|
+| itch AAPL | −1.8%（spread 17% / 10%） | +0.3% | −5.7% |
+| itch QQQ | −0.8%（spread 3% / 3%） | +0.3% | −7.6% |
+| syn_default | −0.6%（spread 8% / 7%） | +0.3% | −9.0% |
+| syn_deep | −1.3%（spread 9% / 11%） | +0.3% | −6.7% |
+
+  更早一次运行（当时 lane sink 是 baseline，旧 sink 是变体）的结果相同：旧 sink 相对 lane sink 为 −2.4% 到 +1.5%。
+- **解释**：假设是错的。sink 的成本不是乘法的**延迟**。每个 op 的乘法链只有约 20 个周期，而 op 本身要约 100 个周期，乱序执行完全可以把链藏在订单簿的工作后面。sink 的成本在于**吞吐**：每个事件约 16 条指令（读写 sink 的字段、折叠每个字段），约占总指令数的 7%，cycles 也就差不多是 7%。lane sink 的指令数和旧 sink 一样（rotl+xor 对 xor+imul），所以没有改善。只有减少 sink 执行的指令（也就是少消费事件）才能降低这部分开销。
+- **处理**：ChecksumSink 保持原样，所有历史 results 的 checksum 仍然可以对照。消融工具里保留 lane sink 作为变体 D，用来记录这次实验。
+- **意外与遗留问题**：
+  - 这次的错误在于，只根据代码结构（依赖链）推断瓶颈，没有先用数据区分是"延迟受限"还是"吞吐受限"。消融实验在提交之前就把它否掉了。
+  - sink 约 7 cycles/op 的开销（AAPL），在所有版本里都差不多是常数，会压低版本之间的相对加速比。是否把它从测量中拿掉（换成只计数的 sink，或者在报告时扣除这部分），是测量方法上的决定，待定。
+
