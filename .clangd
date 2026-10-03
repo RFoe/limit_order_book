@@ -1,0 +1,82 @@
+---
+If:
+  PathMatch: ((^|/)(src|source|include|test|perf|benchmark|fuzz)/.*\.(c|h)$|(^|/)main\.c$)
+  PathExclude: build/.*
+CompileFlags:
+  Add: [-x, c, -std=gnu23]
+---
+If:
+  PathMatch: ((^|/)(src|source|include|test|module|perf|benchmark|fuzz)/.*\.(cpp|cxx|hpp|hxx|txx|ixx)$|(^|/)main\.(cpp|cxx)$)
+  PathExclude: build/.*
+CompileFlags:
+  Add: [-xc++, -ferror-limit=10]
+
+  Remove: [-Mmodules, -fmodules-ts, -fmodule-mapper=*, -fdeps-format=*]
+  CompilationDatabase: build/debug
+Index:
+  StandardLibrary: false
+  Background: Skip
+---
+If:
+  PathMatch: ((^|/)(src|source|include|test|perf|benchmark|fuzz)/.*\.(c|h)$|(^|/)main\.c$)
+  PathExclude: build/.*
+Diagnostics:
+  ClangTidy:
+    Add: ["*"]
+---
+If:
+  PathMatch: ((^|/)(src|source|include|test|perf|benchmark|fuzz|modules)/.*\.(cpp|cxx|hpp|hxx|txx|ixx)$|(^|/)main\.(cpp|cxx)$)
+  PathExclude: build/.*
+Diagnostics:
+  ClangTidy:
+    Add: ["*"]
+    Remove:
+      [
+        llvmlibc-*,
+        fuchsia-trailing-return,
+        readability-math-missing-parentheses,
+        cppcoreguidelines-pro-type-reinterpret-cast,
+        google-runtime-int,
+        cppcoreguidelines-avoid-magic-numbers,
+        readability-magic-numbers,
+        cppcoreguidelines-avoid-const-or-ref-data-members,
+        cppcoreguidelines-macro-usage,
+        bugprone-macro-parentheses,
+        readability-identifier-length,
+        readability-named-parameter,
+        hicpp-named-parameter,
+        altera-struct-pack-align,
+        cert-dcl51-cpp,
+        cert-dcl37-c,
+        bugprone-reserved-identifier,
+        misc-non-private-member-variables-in-classes,
+        bugprone-easily-swappable-parameters,
+        fuchsia-overloaded-operator,
+        cppcoreguidelines-missing-std-forward,
+        modernize-use-nodiscard,
+        "*-braces-around-statements",
+        "*-avoid-c-arrays",
+        google-readability-casting,
+        cppcoreguidelines-non-private-member-variables-in-classes,
+        google-explicit-constructor,
+        hicpp-explicit-conversions,
+        readability-enum-initial-value,
+        cppcoreguidelines-pro-type-static-cast-downcast,
+        cert-int09-c,
+        cppcoreguidelines-pro-type-const-cast,
+        fuchsia-multiple-inheritance,
+        altera-unroll-loops,
+        cppcoreguidelines-avoid-do-while,
+        fuchsia-default-arguments-calls,
+        readability-redundant-inline-specifier,
+        "*-member-init",
+        cppcoreguidelines-owning-memory,
+        cppcoreguidelines-pro-type-union-access,
+        fuchsia-statically-constructed-objects,
+      ]
+  Suppress:
+    - constexpr_var_requires_const_init
+InlayHints:
+  Enabled: true
+  ParameterNames: true
+  DeducedTypes: true
