@@ -18,7 +18,7 @@
 ## 环境与限制
 
 - VMware Workstation 中的 Ubuntu 24.04 LTS，宿主机是配置一般的笔记本(笔记本的问题主要是频率不稳, cpu governor, turbo, C-state, cgroup set,isolcpus、nohz_full、大页、绑核)。
-- **硬件 PMU 默认不可用**：`perf stat -e cycles,cache-misses` 等硬件事件可能报 `<not supported>`。先用 `perf stat -e cycles true` 检查一次；不可用就改用下面的替代工具，不要反复尝试。
+- **硬件 PMU（2026-10-04 起已在 VMware 中开启虚拟化性能计数器）**：Icelake PMU，8 个通用 + 4 个固定计数器；cycles/instructions/branch/L1d/dTLB、`mem_load_retired.*`、`cycle_activity.*`、TopDown 原始事件可用。**不可用**：PEBS（`max_precise=0`，无 `:pp`、无 `perf mem`，采样有 skid）、`-M TopdownL1`（perf-metrics 未虚拟化）、通用 `LLC-*` 别名（用 `mem_load_retired.l3_miss` 代替）。每次开机后先 `scripts/env_tune.sh apply`（`perf_event_paranoid` 重启后回到 4），再用 `scripts/env_check.sh` 确认；探测结果以输出为准，不可用就退回 cachegrind，不要反复尝试。
 - 墙钟计时噪声大，绝对延迟数字不可信，只做**相对对比**。
 - 之后会把同一套代码和脚本放到租用的裸金属服务器上跑最终数字，因此：脚本不写死本机路径；不提交二进制；`-march=native` 的产物必须在目标机器上重新构建。
 
@@ -28,6 +28,7 @@
 指标优先级：
 
 1. **cachegrind 的指令数（Ir）和 D1/LL 未命中**：结果确定，不受 VM 噪声影响，是 VM 环境下的主指标。以及perf record/annotate + trace + heaptrack
+   - **硬件计数器**（交叉验证 + cachegrind 看不到的东西：真实 stall、分支预测、预取效果）：`book counters`（进程内、版本交替、每 op 中位数）和 `scripts/perf.sh stat|topdown`（命名事件，每轮 ≤4 个可编程事件避免复用）。instructions 跨轮稳定（spread≈0%），cycles 受 VM 噪声影响（spread 数 %），只看相对变化。
 2. **Google Benchmark 中位数**：`--benchmark_repetitions=20 --benchmark_report_aggregates_only=true`，看中位数和变异系数（CV），不看均值和单次结果。
 3. **自研延迟 harness**：每次操作的延迟分布（p50 / p99 / p99.9 / max），用 `rdtscp` 计时，启动时校准 TSC 频率；先确认 `/proc/cpuinfo` 里有 `constant_tsc` 和 `nonstop_tsc`。VM 中仅作参考。
 
@@ -61,7 +62,8 @@ scripts/itch_convert.sh [gz] [SYM..] # zcat 流式转换 -> data/itch<day>_<SYM>
 scripts/cachegrind.sh [ops] [ver..]  # 主指标(VM)：Ir / D1 / LL，只统计回放区间
 scripts/bench.sh                     # Google Benchmark，20 reps，随机交错，看 median + CV
 scripts/latency.sh [ops] [vers]      # rdtscp 每 op 延迟分布(VM 中仅参考)
-scripts/perf.sh record|stat|trace    # PMU 不可用时退回 cpu-clock:u
+scripts/perf.sh record|stat|topdown|trace  # 只统计回放区间(--control ROI)；无 PMU 时 record 退回 cpu-clock:u
+build/release/book counters --workload F  # 进程内硬件计数器，版本交替，每 op 中位数
 scripts/heaptrack.sh [ops] [ver]     # 分配次数 / 峰值
 ```
 

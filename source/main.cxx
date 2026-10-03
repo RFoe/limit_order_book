@@ -6,14 +6,19 @@
 //   book itch2ops  IN|- --symbols A,B [--out-dir D] [--tag T] [--top N]
 //   book replay    --workload F [--version v0] [--repeat N]
 //   book latency   --workload F [--versions v0,v1] [--rounds R] [--csv F]
+//   book counters  --workload F [--versions v0,v1] [--rounds R] [--csv F]
 //   book versions
 //
-// `replay` is the target for cachegrind/perf/heaptrack: under valgrind only the
-// replay loop is instrumented (CACHEGRIND_START/STOP_INSTRUMENTATION), so file
-// loading does not show up in Ir.
+// `replay` is the target for cachegrind/perf/heaptrack: only the replay loop is
+// measured - under valgrind via CACHEGRIND_START/STOP_INSTRUMENTATION, under
+// `perf -D -1 --control fd:C,A` via enable/disable (scripts/perf.sh) - so file
+// loading does not show up in Ir or in hardware counters.
+// `counters` reads hardware counters in-process (perf_event_open) around each
+// replay, versions interleaved round by round, and reports per-op medians.
 
 #include <lob/events.hpp>
 #include <lob/harness/latency.hpp>
+#include <lob/harness/perf_counters.hpp>
 #include <lob/harness/tsc.hpp>
 #include <lob/itch/messages.hpp>
 #include <lob/itch/parser.hpp>
@@ -275,14 +280,17 @@ auto cmd_replay(const Args& a) -> int {
   const auto w = load_or_die(a.str("workload"));
   const std::string version = a.str("version", "v0");
   const auto repeat = a.num<int>("repeat", 1);
+  harness::PerfControl perf;  // no-op unless run under scripts/perf.sh
   with_version(version, [&]<class B>() {
     for (int r = 0; r < repeat; ++r) {
       ChecksumSink sink;
       auto book = std::make_unique<B>(sink);
       const auto t0 = std::chrono::steady_clock::now();
+      perf.enable();
       LOB_CG_START;
       replay(*book, std::span<const Op>(w.ops));
       LOB_CG_STOP;
+      perf.disable();
       const auto t1 = std::chrono::steady_clock::now();
       harness::do_not_optimize(sink.value);
       std::println("{} run={} ops={} events={} trades={} checksum={:016x} orders_left={} wall_ms={:.1f}", B::name, r,
@@ -346,6 +354,79 @@ auto cmd_latency(const Args& a) -> int {
   return 0;
 }
 
+// Hardware counters per op, versions interleaved (same process, same data).
+auto cmd_counters(const Args& a) -> int {
+  const auto w = load_or_die(a.str("workload"));
+  const std::string vs = a.str("versions", "all");
+  const auto versions = vs == "all" ? version_names() : split(vs, ',');
+  const auto rounds = a.num<int>("rounds", 5);
+  const std::string csv = a.str("csv");
+
+  harness::PerfGroup group(harness::default_counters());
+  if (!group.ok()) throw std::runtime_error(group.error());
+  for (const auto& s : group.skipped()) std::println("skipped event: {}", s);
+  const auto& names = group.names();
+
+  // samples[version][event] = per-op value of each measured round
+  std::vector<std::vector<std::vector<double>>> samples(versions.size(),
+                                                        std::vector<std::vector<double>>(names.size()));
+  double min_ratio = 1.0;
+  for (int r = 0; r <= rounds; ++r) {  // round 0 = warm-up, discarded
+    for (std::size_t k = 0; k < versions.size(); ++k) {
+      const std::size_t v = (k + static_cast<std::size_t>(r)) % versions.size();
+      harness::PerfGroup::Reading reading;
+      with_version(versions[v], [&]<class B>() {
+        ChecksumSink sink;
+        auto book = std::make_unique<B>(sink);
+        group.start();
+        replay(*book, std::span<const Op>(w.ops));
+        group.stop();
+        harness::do_not_optimize(sink.value);
+        reading = group.read();
+      });
+      if (r == 0) continue;
+      min_ratio = std::min(min_ratio, reading.running_ratio);
+      for (std::size_t e = 0; e < names.size() && e < reading.values.size(); ++e)
+        samples[v][e].push_back(static_cast<double>(reading.values[e]) / static_cast<double>(w.ops.size()));
+    }
+  }
+
+  auto median = [](std::vector<double> x) {
+    std::ranges::sort(x);
+    return x.empty() ? 0.0 : x[x.size() / 2];
+  };
+  auto spread = [&](const std::vector<double>& x) {  // (max - min) / median
+    if (x.empty()) return 0.0;
+    const auto [lo, hi] = std::ranges::minmax(x);
+    const double m = median(x);
+    return m == 0 ? 0.0 : (hi - lo) / m;
+  };
+
+  std::ofstream out;
+  if (!csv.empty()) {
+    out.open(csv);
+    out << std::format("# workload={} rounds={} min_running_ratio={:.3f}\n", a.str("workload"), rounds, min_ratio);
+    out << "version,event,per_op_median,spread\n";
+  }
+  std::println("per-op medians over {} rounds (user space, replay region only); min running ratio {:.3f}{}", rounds,
+               min_ratio, min_ratio < 0.999 ? "  <- multiplexed, values are scaled estimates" : "");
+  for (std::size_t v = 0; v < versions.size(); ++v) {
+    std::println("{}:", versions[v]);
+    double cycles = 0;
+    double instr = 0;
+    for (std::size_t e = 0; e < names.size(); ++e) {
+      const double m = median(samples[v][e]);
+      if (names[e] == "cycles") cycles = m;
+      if (names[e] == "instructions") instr = m;
+      std::println("  {:<18} {:>10.3f} /op   spread {:.1f}%", names[e], m, 100.0 * spread(samples[v][e]));
+      if (out.is_open()) out << std::format("{},{},{:.4f},{:.4f}\n", versions[v], names[e], m, spread(samples[v][e]));
+    }
+    if (cycles > 0) std::println("  {:<18} {:>10.3f}", "IPC", instr / cycles);
+  }
+  if (out.is_open()) std::println("wrote {}", csv);
+  return 0;
+}
+
 auto cmd_versions(const Args&) -> int {
   for (const auto& n : version_names()) std::println("{}", n);
   return 0;
@@ -353,7 +434,7 @@ auto cmd_versions(const Args&) -> int {
 
 void usage() {
   std::println(stderr,
-               "usage: book <gen|info|validate|itch2ops|replay|latency|versions> [args]\n"
+               "usage: book <gen|info|validate|itch2ops|replay|latency|counters|versions> [args]\n"
                "  see the header comment of source/main.cxx for options");
 }
 
@@ -373,6 +454,7 @@ auto main(int argc, char** argv) -> int {
     if (cmd == "itch2ops") return cmd_itch2ops(args);
     if (cmd == "replay") return cmd_replay(args);
     if (cmd == "latency") return cmd_latency(args);
+    if (cmd == "counters") return cmd_counters(args);
     if (cmd == "versions") return cmd_versions(args);
     usage();
     return 2;

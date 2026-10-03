@@ -42,9 +42,15 @@ lob_git_hash() {
 # <YYYYmmdd-HHMM>_<hash>_<vm|metal>; computed once per script run
 LOB_PREFIX="${LOB_PREFIX:-$(date +%Y%m%d-%H%M)_$(lob_git_hash)_$(lob_env_tag)}"
 
-lob_build() { # lob_build <preset>
-    local preset="$1"
-    (cd "$LOB_ROOT" && cmake --preset "$preset" >/dev/null && cmake --build --preset "$preset")
+lob_build() { # lob_build <preset>; quiet unless the build fails
+    local preset="$1" log
+    log="$(mktemp)"
+    if ! (cd "$LOB_ROOT" && cmake --preset "$preset" && cmake --build --preset "$preset") >"$log" 2>&1; then
+        cat "$log" >&2
+        rm -f "$log"
+        return 1
+    fi
+    rm -f "$log"
 }
 
 lob_bin() { # lob_bin <preset> <target>

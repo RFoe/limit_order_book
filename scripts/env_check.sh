@@ -61,6 +61,29 @@ has_flag() { grep -m1 '^flags' /proc/cpuinfo | grep -qw "$1" && echo yes || echo
             show pmu_verdict "UNAVAILABLE -> use cachegrind Ir/D1/LL as primary metric"
         elif grep -qE '^[0-9]' <<<"$pmu"; then
             show pmu_verdict "available"
+            # capability details: each probe runs once, the answer is recorded
+            show pmu_name "$(rd /sys/bus/event_source/devices/cpu/caps/pmu_name)"
+            show max_precise "$(rd /sys/bus/event_source/devices/cpu/caps/max_precise) (0 = no PEBS: no :pp, no perf mem)"
+            probe() { # probe <label> <perf args...>
+                local out
+                out="$("$PERF" "${@:2}" -- true 2>&1)" || true
+                if grep -qiE 'not supported|error|unable|cannot|bad event' <<<"$out"; then
+                    show "$1" "no"
+                else
+                    show "$1" "yes"
+                fi
+            }
+            probe "sampling cycles" record -e cycles:u -o /dev/null
+            probe "precise cycles:pp" record -e cycles:pp -o /dev/null
+            probe "LLC-loads (generic)" stat -e LLC-loads
+            probe "mem_load_retired.l3_miss" stat -e mem_load_retired.l3_miss
+            probe "TopdownL1 metric" stat -M TopdownL1
+            probe "topdown.slots (raw)" stat -e topdown.slots
+            if sudo -n true 2>/dev/null; then
+                show counters "$(sudo -n dmesg | grep -oE '(generic registers|fixed-purpose events): +[0-9]+' | tr -s ' ' | paste -sd';')"
+            else
+                show counters "n/a (needs root: dmesg | grep -A8 'Performance Events')"
+            fi
         else
             show pmu_verdict "unknown (permission? see perf_event_paranoid)"
         fi

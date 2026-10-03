@@ -20,21 +20,37 @@ knobs() { # path <TAB> value
     done
 }
 
-write() { echo "$2" | sudo tee "$1" >/dev/null; }
+# root needs no sudo (e.g. `sudo scripts/env_tune.sh apply` from a non-tty shell)
+if ((EUID == 0)); then SUDO=(); else SUDO=(sudo); fi
+write() { echo "$2" | "${SUDO[@]}" tee "$1" >/dev/null; }
 
 case "${1:-}" in
 apply)
+    ((${#SUDO[@]} == 0)) || sudo -v || { lob_log "sudo failed; nothing changed"; exit 1; }
     mkdir -p "$state_dir"
-    : >"$state"
+    # keep the *original* values if apply runs twice, so restore still works
+    save=1
+    if [[ -s "$state" ]]; then
+        lob_log "already applied once; keeping original values in $state"
+        save=0
+    fi
+    ((save)) && : >"$state"
+    failed=0
     while IFS=$'\t' read -r path value; do
         if [[ ! -e "$path" ]]; then
             lob_log "skip (not present): $path"
             continue
         fi
-        printf '%s\t%s\n' "$path" "$(cat "$path")" >>"$state"
-        write "$path" "$value" && lob_log "set $path = $value"
+        old="$(cat "$path")"
+        if write "$path" "$value"; then
+            ((save)) && printf '%s\t%s\n' "$path" "$old" >>"$state"
+            lob_log "set $path = $value (was $old)"
+        else
+            lob_log "FAILED to set $path"
+            failed=1
+        fi
     done < <(knobs)
-    lob_log "previous values saved to $state"
+    ((save)) && lob_log "previous values saved to $state"
     cat <<EOF
 
 Boot-time knobs (not changed by this script; edit GRUB_CMDLINE_LINUX in
@@ -43,9 +59,11 @@ Boot-time knobs (not changed by this script; edit GRUB_CMDLINE_LINUX in
   intel_idle.max_cstate=0 processor.max_cstate=1           # shallow C-states (bare metal only)
   default_hugepagesz=2M hugepages=512                      # reserve huge pages
 EOF
+    exit "$failed"
     ;;
 restore)
     [[ -f "$state" ]] || { lob_log "nothing saved at $state"; exit 1; }
+    ((${#SUDO[@]} == 0)) || sudo -v || { lob_log "sudo failed; nothing changed"; exit 1; }
     while IFS=$'\t' read -r path value; do
         write "$path" "$value" && lob_log "restored $path = $value"
     done <"$state"
