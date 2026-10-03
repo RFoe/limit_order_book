@@ -93,8 +93,29 @@ struct Result {
     double cyc, ins, brm, l1, ratio;
 };
 
-auto run(const std::vector<IxOp> &t, harness::PerfGroup &g, harness::PerfControl &ctl) -> Result {
-    boost::unordered_flat_map<OrderId, Loc> m;
+// Layout under test. Wide: v4's map (8-byte key + 16-byte Loc = 24-byte slot).
+// Compact: 32-bit key (id - base) + 32-bit node index = 8-byte slot; the key
+// encoding mirrors the proposed v5 (ids outside [base, base + 2^32) would need
+// a fallback; the traces here never produce them).
+struct Wide {
+    using Map = boost::unordered_flat_map<OrderId, Loc>;
+    static auto key(OrderId id, OrderId) { return id; }
+    static auto value(const IxOp &o) { return Loc{o.price, o.node, Side::Buy}; }
+    static auto node(const Loc &l) { return l.node; }
+    static void touch(Loc &l) { l.node ^= 1; }
+};
+struct Compact {
+    using Map = boost::unordered_flat_map<std::uint32_t, std::uint32_t>;
+    static auto key(OrderId id, OrderId base) { return static_cast<std::uint32_t>(id - base); }
+    static auto value(const IxOp &o) { return o.node; }
+    static auto node(std::uint32_t v) { return v; }
+    static void touch(std::uint32_t &v) { v ^= 1; }
+};
+
+template <class L>
+auto run(const std::vector<IxOp> &t, OrderId base, harness::PerfGroup &g, harness::PerfControl &ctl) -> Result {
+    typename L::Map m;
+    static const double max_load = [] { const char *e = std::getenv("LOB_IX_MAXLOAD"); return e ? std::stod(e) : 0.0; }();
     if (const char *r = std::getenv("LOB_IX_RESERVE")) m.reserve(std::stoul(r)); // pre-size (experiment)
     std::uint64_t                           sink = 0;
 #ifdef LOB_IX_STATS
@@ -104,26 +125,29 @@ auto run(const std::vector<IxOp> &t, harness::PerfGroup &g, harness::PerfControl
     g.start();
     for (const IxOp &o : t) {
         switch (o.kind) {
-        case Kind::Contains: sink += m.contains(o.id); break;
+        case Kind::Contains: sink += m.contains(L::key(o.id, base)); break;
         case Kind::Emplace:
+            // LOB_IX_MAXLOAD=0.4: grow early so the load stays below it (boost's own
+            // limit is 0.875 and cannot be changed); generic, unlike a fixed reserve
+            if (max_load > 0 && double(m.size() + 1) > max_load * double(m.bucket_count())) m.reserve(m.bucket_count());
 #ifdef LOB_IX_STATS
         {
             const auto before = m.bucket_count();
-            m.emplace(o.id, Loc{o.price, o.node, Side::Buy});
+            m.emplace(L::key(o.id, base), L::value(o));
             rehashes += m.bucket_count() != before;
             break;
         }
 #else
-            m.emplace(o.id, Loc{o.price, o.node, Side::Buy});
+            m.emplace(L::key(o.id, base), L::value(o));
             break;
 #endif
         case Kind::FindErase: {
-            auto it = m.find(o.id);
-            sink += it->second.node;
+            auto it = m.find(L::key(o.id, base));
+            sink += L::node(it->second);
             m.erase(it);
             break;
         }
-        case Kind::FindUpdate: m.find(o.id)->second.node ^= 1; break;
+        case Kind::FindUpdate: L::touch(m.find(L::key(o.id, base))->second); break;
         }
     }
     g.stop();
@@ -171,7 +195,7 @@ auto random_mix(std::size_t live, std::size_t n_push, std::uint64_t seed) -> std
 
 int main(int argc, char **argv) {
     // argv[1]: workload, "syn:<live>" (periodic) or "rnd:<live>" (random mix); argv[2]: rounds
-    const std::string    what   = argv[1];
+    std::string          what   = argv[1];
     const int            rounds = argc > 2 ? std::stoi(argv[2]) : 7;
     std::vector<IxOp>    t;
     if (what.starts_with("syn:")) {
@@ -186,11 +210,15 @@ int main(int argc, char **argv) {
         }
         t = trace_from(w->ops);
     }
+    OrderId base = ~OrderId{0}, top = 0;
+    for (const IxOp &o : t) { base = std::min(base, o.id); top = std::max(top, o.id); }
+    const bool compact = std::getenv("LOB_IX_COMPACT") != nullptr;
+    if (compact && top - base > 0xFFFFFFFFull) { std::println("id span exceeds 32 bits"); return 1; }
     harness::PerfGroup   g(harness::default_counters());
     harness::PerfControl ctl;
     std::vector<Result>  rs;
     for (int r = 0; r <= rounds; ++r) {
-        auto x = run(t, g, ctl);
+        auto x = compact ? run<Compact>(t, base, g, ctl) : run<Wide>(t, base, g, ctl);
         if (r > 0) rs.push_back(x);
     }
     auto med = [&](auto f) {
@@ -199,6 +227,8 @@ int main(int argc, char **argv) {
         std::ranges::sort(v);
         return v[v.size() / 2];
     };
+    if (compact) what += " [compact 8B]";
+    if (const char *e = std::getenv("LOB_IX_MAXLOAD")) what += std::string(" [maxload ") + e + "]";
     std::println("{:<34} index ops {:>9}  cycles/op {:6.2f}  instr/op {:6.2f}  IPC {:4.2f}  br-miss/op {:5.3f}  "
                  "L1d-miss/op {:5.3f}",
                  what, t.size(), med([](auto &x) { return x.cyc; }), med([](auto &x) { return x.ins; }),

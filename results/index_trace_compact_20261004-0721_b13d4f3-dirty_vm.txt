@@ -1,0 +1,43 @@
+data/itch12302019_AAPL.ops         index ops   2404859  cycles/op  36.11  instr/op  61.35  IPC 1.70  br-miss/op 0.463  L1d-miss/op 1.706
+data/itch12302019_QQQ.ops          index ops   3704316  cycles/op  27.33  instr/op  55.45  IPC 2.03  br-miss/op 0.353  L1d-miss/op 1.217
+syn:2000                           index ops   2398000  cycles/op  18.12  instr/op  54.86  IPC 3.03  br-miss/op 0.007  L1d-miss/op 1.259
+syn:27000                          index ops   2373000  cycles/op  21.82  instr/op  55.47  IPC 2.54  br-miss/op 0.002  L1d-miss/op 2.292
+rnd:27000                          index ops   2385393  cycles/op  27.39  instr/op  55.11  IPC 2.01  br-miss/op 0.332  L1d-miss/op 2.173
+data/itch12302019_AAPL.ops [compact 8B] index ops   2404859  cycles/op  34.78  instr/op  61.28  IPC 1.76  br-miss/op 0.457  L1d-miss/op 1.451
+data/itch12302019_QQQ.ops [compact 8B] index ops   3704316  cycles/op  26.33  instr/op  55.90  IPC 2.12  br-miss/op 0.349  L1d-miss/op 0.998
+syn:2000 [compact 8B]              index ops   2398000  cycles/op  14.26  instr/op  55.51  IPC 3.89  br-miss/op 0.007  L1d-miss/op 0.637
+syn:27000 [compact 8B]             index ops   2373000  cycles/op  21.58  instr/op  56.03  IPC 2.60  br-miss/op 0.002  L1d-miss/op 1.941
+rnd:27000 [compact 8B]             index ops   2385393  cycles/op  25.85  instr/op  55.72  IPC 2.16  br-miss/op 0.332  L1d-miss/op 1.815
+data/itch12302019_AAPL.ops [maxload 0.4] index ops   2404859  cycles/op  29.04  instr/op  59.14  IPC 2.04  br-miss/op 0.312  L1d-miss/op 1.643
+data/itch12302019_QQQ.ops [maxload 0.4] index ops   3704316  cycles/op  27.89  instr/op  58.37  IPC 2.09  br-miss/op 0.331  L1d-miss/op 1.325
+syn:2000 [maxload 0.4]             index ops   2398000  cycles/op  20.71  instr/op  58.41  IPC 2.82  br-miss/op 0.002  L1d-miss/op 1.505
+syn:27000 [maxload 0.4]            index ops   2373000  cycles/op  24.09  instr/op  59.13  IPC 2.45  br-miss/op 0.001  L1d-miss/op 2.668
+rnd:27000 [maxload 0.4]            index ops   2385393  cycles/op  28.45  instr/op  58.74  IPC 2.06  br-miss/op 0.329  L1d-miss/op 2.281
+data/itch12302019_AAPL.ops [compact 8B] index ops   2404859  cycles/op  34.79  instr/op  61.28  IPC 1.76  br-miss/op 0.458  L1d-miss/op 1.456
+data/itch12302019_QQQ.ops [compact 8B] index ops   3704316  cycles/op  28.07  instr/op  55.90  IPC 1.99  br-miss/op 0.350  L1d-miss/op 1.008
+syn:2000 [compact 8B]              index ops   2398000  cycles/op  14.07  instr/op  55.51  IPC 3.94  br-miss/op 0.007  L1d-miss/op 0.685
+syn:27000 [compact 8B]             index ops   2373000  cycles/op  20.19  instr/op  56.03  IPC 2.78  br-miss/op 0.002  L1d-miss/op 1.941
+rnd:27000 [compact 8B]             index ops   2385393  cycles/op  25.51  instr/op  55.72  IPC 2.18  br-miss/op 0.333  L1d-miss/op 1.760
+data/itch12302019_AAPL.ops [compact 8B] index ops   2404859  cycles/op  34.66  instr/op  61.28  IPC 1.77  br-miss/op 0.457  L1d-miss/op 1.443
+data/itch12302019_QQQ.ops [compact 8B] index ops   3704316  cycles/op  26.28  instr/op  55.90  IPC 2.13  br-miss/op 0.348  L1d-miss/op 0.994
+syn:2000 [compact 8B]              index ops   2398000  cycles/op  15.16  instr/op  55.51  IPC 3.66  br-miss/op 0.007  L1d-miss/op 0.655
+syn:27000 [compact 8B]             index ops   2373000  cycles/op  17.98  instr/op  56.03  IPC 3.12  br-miss/op 0.002  L1d-miss/op 1.929
+rnd:27000 [compact 8B]             index ops   2385393  cycles/op  25.31  instr/op  55.72  IPC 2.20  br-miss/op 0.333  L1d-miss/op 1.783
+## probe statistics
+[]   stats: rehashes=12 final buckets=61439 | insert n=1034601 probe=1.109 | hit n=813435 probe=1.128 cmp=1.042 | miss n=1591424 probe=1.143 cmp=0.048
+[LOB_IX_COMPACT=1]   stats: rehashes=12 final buckets=61439 | insert n=1031972 probe=1.103 | hit n=813435 probe=1.121 cmp=1.042 | miss n=1591424 probe=1.138 cmp=0.047
+[LOB_IX_COMPACT=1 LOB_IX_MAXLOAD=0.4]   stats: rehashes=12 final buckets=61439 | insert n=1031972 probe=1.103 | hit n=813435 probe=1.121 cmp=1.042 | miss n=1591424 probe=1.138 cmp=0.047
+## rerun of the combined configurations (the first attempt passed both variables as one word under zsh, so MAXLOAD was not applied)
+data/itch12302019_AAPL.ops [compact 8B] [maxload 0.4] index ops   2404859  cycles/op  26.73  instr/op  59.69  IPC 2.23  br-miss/op 0.314  L1d-miss/op 1.376
+data/itch12302019_QQQ.ops [compact 8B] [maxload 0.4] index ops   3704316  cycles/op  26.61  instr/op  59.01  IPC 2.22  br-miss/op 0.331  L1d-miss/op 1.067
+syn:2000 [compact 8B] [maxload 0.4] index ops   2398000  cycles/op  16.05  instr/op  59.07  IPC 3.68  br-miss/op 0.001  L1d-miss/op 1.040
+syn:27000 [compact 8B] [maxload 0.4] index ops   2373000  cycles/op  21.16  instr/op  59.71  IPC 2.82  br-miss/op 0.001  L1d-miss/op 2.315
+rnd:27000 [compact 8B] [maxload 0.4] index ops   2385393  cycles/op  27.49  instr/op  59.37  IPC 2.16  br-miss/op 0.331  L1d-miss/op 1.923
+data/itch12302019_AAPL.ops [compact 8B] [maxload 0.25] index ops   2404859  cycles/op  26.52  instr/op  59.39  IPC 2.24  br-miss/op 0.308  L1d-miss/op 1.432
+data/itch12302019_QQQ.ops [compact 8B] [maxload 0.25] index ops   3704316  cycles/op  27.12  instr/op  58.99  IPC 2.17  br-miss/op 0.328  L1d-miss/op 1.147
+syn:2000 [compact 8B] [maxload 0.25] index ops   2398000  cycles/op  16.21  instr/op  59.06  IPC 3.64  br-miss/op 0.000  L1d-miss/op 1.592
+syn:27000 [compact 8B] [maxload 0.25] index ops   2373000  cycles/op  25.17  instr/op  59.50  IPC 2.36  br-miss/op 0.001  L1d-miss/op 2.313
+rnd:27000 [compact 8B] [maxload 0.25] index ops   2385393  cycles/op  28.17  instr/op  59.26  IPC 2.10  br-miss/op 0.331  L1d-miss/op 1.928
+## probe statistics, combined
+  stats: rehashes=1 final buckets=122879 | insert n=844840 probe=1.000 | hit n=813435 probe=1.000 cmp=1.014 | miss n=1591424 probe=1.000 cmp=0.020
+[wide maxload 0.4]  stats: rehashes=1 final buckets=122879 | insert n=844840 probe=1.000 | hit n=813435 probe=1.000 cmp=1.014 | miss n=1591424 probe=1.000 cmp=0.020
