@@ -1,0 +1,906 @@
+--------------------------------------------------------------------------------
+-- Metadata
+--------------------------------------------------------------------------------
+Invocation:       /usr/bin/cg_annotate --diff --mod-funcname=s/::v[0-9]+::/::vN::/ --mod-filename=s/v[0-9]+.book/vN.book/ results/cachegrind_20261004-0545_034d371_vm_itch12302019_AAPL_v3.out results/cachegrind_20261004-0545_034d371_vm_itch12302019_AAPL_v4.out
+I1 cache:         32768 B, 64 B, 8-way associative
+D1 cache:         49152 B, 64 B, 12-way associative
+LL cache:         6291456 B, 64 B, 12-way associative
+Command 1:        /home/wang/sources/cxx/book/build/profile/book replay --workload data/itch12302019_AAPL.ops --version v3
+Command 2:        /home/wang/sources/cxx/book/build/profile/book replay --workload data/itch12302019_AAPL.ops --version v4
+Events recorded:  Ir I1mr ILmr Dr D1mr DLmr Dw D1mw DLmw
+Events shown:     Ir I1mr ILmr Dr D1mr DLmr Dw D1mw DLmw
+Event sort order: Ir I1mr ILmr Dr D1mr DLmr Dw D1mw DLmw
+Threshold:        0.1%
+Annotation:       on
+
+--------------------------------------------------------------------------------
+-- Summary
+--------------------------------------------------------------------------------
+Ir_________________ I1mr______ ILmr_______ Dr_________________ D1mr____________ DLmr____________ Dw_________________ D1mw____________ DLmw____________ 
+
+-3,932,159 (100.0%) 6 (100.0%) -2 (100.0%) -1,034,598 (100.0%) -66,355 (100.0%) -16,356 (100.0%) -1,052,455 (100.0%) -95,040 (100.0%) -26,751 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+-- File:function summary
+--------------------------------------------------------------------------------
+  Ir__________________________ I1mr________________ ILmr_________________ Dr__________________________ D1mr___________________ DLmr___________________ Dw_________________________ D1mw______________________ DLmw______________________  file:function
+
+< -2,069,202   (52.6%,  52.6%) -2  (-33.3%, -33.3%) -2  (100.0%,  100.0%) -1,034,601  (100.0%, 100.0%)  -8,645  (13.0%, 13.0%)  -7,950  (48.6%, 48.6%) -1,034,601  (98.3%,  98.3%)  -91,361   (96.1%,  96.1%)  -33,399  (124.9%, 124.9%)  /usr/include/c++/v1/__utility/pair.h:
+  -1,591,358   (40.5%)          0                    0                      -795,679   (76.9%)               0                       0                   -795,679  (75.6%)          -61,733   (65.0%)           -7,762   (29.0%)            lob::vN::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+  -1,433,334   (36.5%)         -1  (-16.7%)         -1   (50.0%)            -716,667   (69.3%)         -67,747 (102.1%)        -18,223 (111.4%)          -716,667  (68.1%)         -136,779  (143.9%)         -107,429  (401.6%)            _ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v35BookTINS5_12ChecksumSinkELj16EE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_
+     955,556  (-24.3%)          0                    0                       477,778  (-46.2%)          59,102 (-89.1%)         10,273 (-62.8%)           477,778 (-45.4%)          107,157 (-112.7%)           81,797 (-305.8%)            _ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v45BookTINS5_12ChecksumSinkELj16EE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_
+
+< -1,863,046   (47.4%, 100.0%)  0    (0.0%, -33.3%) -1   (50.0%,  150.0%)     17,723   (-1.7%,  98.3%)  -8,151  (12.3%, 25.3%)      -8   (0.0%, 48.7%)    -17,882   (1.7%, 100.0%)      -18    (0.0%,  96.1%)       -1    (0.0%, 124.9%)  /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:
+  -7,095,319  (180.4%)         -6 (-100.0%)         -6  (300.0%)          -2,186,083  (211.3%)         -11,150  (16.8%)            -18   (0.1%)            -4,402   (0.4%)              -46    (0.0%)               -4    (0.0%)            _ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v35BookTINS5_12ChecksumSinkELj16EE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_
+   6,856,430 (-174.4%)          6  (100.0%)          6 (-300.0%)           2,186,083 (-211.3%)          11,109 (-16.7%)              7  (-0.0%)             4,402  (-0.4%)               28   (-0.0%)                3   (-0.0%)            _ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v45BookTINS5_12ChecksumSinkELj16EE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_
+    -829,098   (21.1%)          0                   -1   (50.0%)                   0                    -7,978  (12.0%)              2  (-0.0%)                 0                         0                          0                      (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+    -795,679   (20.2%)         -1  (-16.7%)         -1   (50.0%)                   0                       -56   (0.1%)              0                          0                         0                          0                      lob::vN::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+
+<     17,723   (-0.5%,  99.6%)  3   (50.0%,  16.7%)  3 (-150.0%,   -0.0%)    -53,169    (5.1%, 103.4%) -24,493  (36.9%, 62.2%)    -692   (4.2%, 52.9%)          0  (-0.0%, 100.0%)   -3,738    (3.9%, 100.1%)     -719    (2.7%, 127.5%)  /home/wang/sources/cxx/book/include/lob/vN.book.hpp:
+      17,723   (-0.5%)         -1  (-16.7%)         -1   (50.0%)             -53,169    (5.1%)            -347   (0.5%)              1  (-0.0%)                 0                         0                          0                      lob::vN::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+
+<    -17,723    (0.5%, 100.0%)  1   (16.7%,  33.3%)  1  (-50.0%,  -50.0%)          0   (-0.0%, 103.4%) -21,096  (31.8%, 94.0%)  -6,829  (41.8%, 94.6%)          0  (-0.0%, 100.0%)        0   (-0.0%, 100.1%)        0   (-0.0%, 127.5%)  /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/mulx.hpp:
+    -477,778   (12.2%)          0                    0                      -238,889   (23.1%)         -64,274  (96.9%)        -14,976  (91.6%)                 0                         0                          0                      _ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v35BookTINS5_12ChecksumSinkELj16EE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_
+     477,778  (-12.2%)          0                    0                       238,889  (-23.1%)          43,178 (-65.1%)          8,147 (-49.8%)                 0                         0                          0                      _ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v45BookTINS5_12ChecksumSinkELj16EE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_
+     -17,723    (0.5%)          0                    0                             0                         0                       0                          0                         0                          0                      lob::vN::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+
+<          0   (-0.0%, 100.0%)  1   (16.7%,  50.0%)  1  (-50.0%, -100.0%)          0   (-0.0%, 103.4%)       0  (-0.0%, 94.0%)       0  (-0.0%, 94.6%)          0  (-0.0%, 100.0%)        0   (-0.0%, 100.1%)        0   (-0.0%, 127.5%)  /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/table.hpp:
+     244,353   (-6.2%)          0                    0                         5,464   (-0.5%)               0                       0                    238,889 (-22.7%)                0                          0                      _ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v45BookTINS5_12ChecksumSinkELj16EE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_
+    -244,353    (6.2%)          0                    0                        -5,464    (0.5%)               0                       0                   -238,889  (22.7%)                0                          0                      _ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v35BookTINS5_12ChecksumSinkELj16EE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_
+
+--------------------------------------------------------------------------------
+-- Function:file summary
+--------------------------------------------------------------------------------
+  Ir__________________________ I1mr_________________ ILmr________________ Dr__________________________ D1mr______________________ DLmr_____________________ Dw_______________________ D1mw______________________ DLmw______________________  function:file
+
+> -9,250,784  (235.3%, 235.3%) -7 (-116.7%, -116.7%) -7  (350.0%, 350.0%) -3,147,103  (304.2%, 304.2%) -143,171  (215.8%, 215.8%) -33,217  (203.1%, 203.1%) -959,958  (91.2%,  91.2%) -136,825  (144.0%, 144.0%) -107,433  (401.6%, 401.6%)  _ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v35BookTINS5_12ChecksumSinkELj16EE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_:
+  -7,095,319  (180.4%)         -6 (-100.0%)          -6  (300.0%)         -2,186,083  (211.3%)          -11,150   (16.8%)             -18    (0.1%)           -4,402   (0.4%)              -46    (0.0%)               -4    (0.0%)            /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp
+  -1,433,334   (36.5%)         -1  (-16.7%)          -1   (50.0%)           -716,667   (69.3%)          -67,747  (102.1%)         -18,223  (111.4%)         -716,667  (68.1%)         -136,779  (143.9%)         -107,429  (401.6%)            /usr/include/c++/v1/__utility/pair.h
+    -477,778   (12.2%)          0                     0                     -238,889   (23.1%)          -64,274   (96.9%)         -14,976   (91.6%)                0                         0                          0                      /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/mulx.hpp
+    -244,353    (6.2%)          0                     0                       -5,464    (0.5%)                0                         0                   -238,889  (22.7%)                0                          0                      /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/table.hpp
+
+>  8,534,117 (-217.0%,  18.2%)  6  (100.0%,  -16.7%)  6 (-300.0%,  50.0%)  2,908,214 (-281.1%,  23.1%)  113,389 (-170.9%,  44.9%)  18,427 (-112.7%,  90.4%)  721,069 (-68.5%,  22.7%)  107,185 (-112.8%,  31.2%)   81,800 (-305.8%,  95.8%)  _ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v45BookTINS5_12ChecksumSinkELj16EE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_:
+   6,856,430 (-174.4%)          6  (100.0%)           6 (-300.0%)          2,186,083 (-211.3%)           11,109  (-16.7%)               7   (-0.0%)            4,402  (-0.4%)               28   (-0.0%)                3   (-0.0%)            /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp
+     955,556  (-24.3%)          0                     0                      477,778  (-46.2%)           59,102  (-89.1%)          10,273  (-62.8%)          477,778 (-45.4%)          107,157 (-112.7%)           81,797 (-305.8%)            /usr/include/c++/v1/__utility/pair.h
+     477,778  (-12.2%)          0                     0                      238,889  (-23.1%)           43,178  (-65.1%)           8,147  (-49.8%)                0                         0                          0                      /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/mulx.hpp
+     244,353   (-6.2%)          0                     0                        5,464   (-0.5%)                0                         0                    238,889 (-22.7%)                0                          0                      /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/table.hpp
+
+> -2,387,037   (60.7%,  78.9%)  0    (0.0%,  -16.7%) -1   (50.0%, 100.0%)   -795,679   (76.9%, 100.0%)     -663    (1.0%,  45.9%)    -124    (0.8%,  91.2%) -795,679  (75.6%,  98.3%)  -62,848   (66.1%,  97.3%)   -7,826   (29.3%, 125.1%)  lob::vN::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int):
+  -1,591,358   (40.5%)          0                     0                     -795,679   (76.9%)                0                         0                   -795,679  (75.6%)          -61,733   (65.0%)           -7,762   (29.0%)            /usr/include/c++/v1/__utility/pair.h
+    -795,679   (20.2%)         -1  (-16.7%)          -1   (50.0%)                  0                        -56    (0.1%)               0                          0                         0                          0                      /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp
+
+>   -829,127   (21.1%, 100.0%)  1   (16.7%,    0.0%)  0   (-0.0%, 100.0%)          0   (-0.0%, 100.0%)  -34,959   (52.7%,  98.6%)  -1,364    (8.3%,  99.5%)        0  (-0.0%,  98.3%)   -2,128    (2.2%,  99.6%)     -636    (2.4%, 127.5%)  (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&):
+    -829,098   (21.1%)          0                    -1   (50.0%)                  0                     -7,978   (12.0%)               2   (-0.0%)                0                         0                          0                      /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp
+
+>        588   (-0.0%, 100.0%) -1  (-16.7%,  -16.7%) -1   (50.0%, 150.0%)          0   (-0.0%, 100.0%)     -508    (0.8%,  99.3%)       2   (-0.0%,  99.5%)  -17,849   (1.7%, 100.0%)        0   (-0.0%,  99.6%)        0   (-0.0%, 127.5%)  lob::vN::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int):
+      17,723   (-0.5%)         -1  (-16.7%)          -1   (50.0%)            -53,169    (5.1%)             -347    (0.5%)               1   (-0.0%)                0                         0                          0                      /home/wang/sources/cxx/book/include/lob/vN.book.hpp
+     -17,723    (0.5%)          0                     0                            0                          0                         0                          0                         0                          0                      /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/mulx.hpp
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp
+--------------------------------------------------------------------------------
+Ir________________ I1mr_______ ILmr_______ Dr____________ D1mr__________ DLmr_______ Dw____________ D1mw______ DLmw_____ 
+
+    18,437 (-0.5%)  2  (33.3%)  1 (-50.0%) 17,723 (-1.7%)      0           0             -33 (0.0%) -18 (0.0%) -1 (0.0%)  <unknown (line 0)>
+
+-- line 263 ----------------------------------------
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           static inline void reset(unsigned char* pc)
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             *reinterpret_cast<slot_type*>(pc)=available_;
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           inline int match(std::size_t hash)const
+         .          .           .               .              .           .               .          .         .           {
+         0          0           0               0              0           0               0          0         0             return _mm_movemask_epi8(
+         0          1  (16.7%)  1 (-50.0%)      0              0           0               0          0         0               _mm_cmpeq_epi8(load_metadata(),_mm_set1_epi32(match_word(hash))))&0x7FFF;
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           inline bool is_not_overflowed(std::size_t hash)const
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             static constexpr unsigned char shift[]={1,2,4,8,16,32,64,128};
+         .          .           .               .              .           .               .          .         .         
+         0          0           0               0              0           0               0          0         0             return !(overflow()&shift[hash%8]);
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           inline void mark_overflow(std::size_t hash)
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             overflow()|=static_cast<unsigned char>(1<<(hash%8));
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           static inline bool maybe_caused_overflow(unsigned char* pc)
+-- line 287 ----------------------------------------
+-- line 288 ----------------------------------------
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             std::size_t pos=reinterpret_cast<uintptr_t>(pc)%sizeof(group15);
+         .          .           .               .              .           .               .          .         .             group15    *pg=reinterpret_cast<group15*>(pc-pos);
+         .          .           .               .              .           .               .          .         .             return !pg->is_not_overflowed(*pc);
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           inline int match_available()const
+         .          .           .               .              .           .               .          .         .           {
+         0          0           0               0           -101  (0.2%)   0               0          0         0             return _mm_movemask_epi8(
+         0         -1 (-16.7%) -1  (50.0%)      0              0           0               0          0         0               _mm_cmpeq_epi8(load_metadata(),_mm_setzero_si128()))&0x7FFF;
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           inline bool is_occupied(std::size_t pos)const
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             BOOST_ASSERT(pos<N);
+         .          .           .               .              .           .               .          .         .             return at(pos)!=available_;
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           static inline bool is_occupied(unsigned char* pc)noexcept
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             return *reinterpret_cast<slot_type*>(pc)!=available_;
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           inline int match_occupied()const
+         .          .           .               .              .           .               .          .         .           {
+         0          0           0               0              0           0               0          0         0             return (~match_available())&0x7FFF;
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .         private:
+         .          .           .               .              .           .               .          .         .           using slot_type=IntegralWrapper<unsigned char>;
+         .          .           .               .              .           .               .          .         .           BOOST_UNORDERED_STATIC_ASSERT(sizeof(slot_type)==1);
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           static constexpr unsigned char available_=0,
+         .          .           .               .              .           .               .          .         .                                          sentinel_=1;
+-- line 321 ----------------------------------------
+-- line 328 ----------------------------------------
+         .          .           .               .              .           .               .          .         .              */
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .             return _mm_set_epi8(
+         .          .           .               .              .           .               .          .         .               (char)m[15],(char)m[14],(char)m[13],(char)m[12],
+         .          .           .               .              .           .               .          .         .               (char)m[11],(char)m[10],(char)m[ 9],(char)m[ 8],
+         .          .           .               .              .           .               .          .         .               (char)m[ 7],(char)m[ 6],(char)m[ 5],(char)m[ 4],
+         .          .           .               .              .           .               .          .         .               (char)m[ 3],(char)m[ 2],(char)m[ 1],(char)m[ 0]);
+         .          .           .               .              .           .               .          .         .         #else
+         0         -1 (-16.7%) -1  (50.0%)      0         -7,975 (12.0%)   0               0          0         0             return _mm_load_si128(reinterpret_cast<const __m128i*>(m));
+         .          .           .               .              .           .               .          .         .         #endif
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           inline static int match_word(std::size_t hash)
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             static constexpr boost::uint32_t word[]=
+         .          .           .               .              .           .               .          .         .             {
+         .          .           .               .              .           .               .          .         .               0x08080808u,0x09090909u,0x02020202u,0x03030303u,0x04040404u,0x05050505u,
+-- line 344 ----------------------------------------
+-- line 381 ----------------------------------------
+         .          .           .               .              .           .               .          .         .               0xDEDEDEDEu,0xDFDFDFDFu,0xE0E0E0E0u,0xE1E1E1E1u,0xE2E2E2E2u,0xE3E3E3E3u,
+         .          .           .               .              .           .               .          .         .               0xE4E4E4E4u,0xE5E5E5E5u,0xE6E6E6E6u,0xE7E7E7E7u,0xE8E8E8E8u,0xE9E9E9E9u,
+         .          .           .               .              .           .               .          .         .               0xEAEAEAEAu,0xEBEBEBEBu,0xECECECECu,0xEDEDEDEDu,0xEEEEEEEEu,0xEFEFEFEFu,
+         .          .           .               .              .           .               .          .         .               0xF0F0F0F0u,0xF1F1F1F1u,0xF2F2F2F2u,0xF3F3F3F3u,0xF4F4F4F4u,0xF5F5F5F5u,
+         .          .           .               .              .           .               .          .         .               0xF6F6F6F6u,0xF7F7F7F7u,0xF8F8F8F8u,0xF9F9F9F9u,0xFAFAFAFAu,0xFBFBFBFBu,
+         .          .           .               .              .           .               .          .         .               0xFCFCFCFCu,0xFDFDFDFDu,0xFEFEFEFEu,0xFFFFFFFFu,
+         .          .           .               .              .           .               .          .         .             };
+         .          .           .               .              .           .               .          .         .         
+         0          0           0               0              4 (-0.0%) -11  (0.1%)       0          0         0             return (int)word[narrow_cast<unsigned char>(hash)];
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           inline static unsigned char reduced_hash(std::size_t hash)
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             return narrow_cast<unsigned char>(match_word(hash));
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           inline slot_type& at(std::size_t pos)
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             return m[pos];
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           inline const slot_type& at(std::size_t pos)const
+         .          .           .               .              .           .               .          .         .           {
+         0          0           0               0              0           0               0          0         0             return m[pos];
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           inline slot_type& overflow()
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             return at(N);
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           inline const slot_type& overflow()const
+-- line 412 ----------------------------------------
+-- line 829 ----------------------------------------
+         .          .           .               .              .           .               .          .         .         struct pow2_size_policy
+         .          .           .               .              .           .               .          .         .         {
+         .          .           .               .              .           .               .          .         .           static inline std::size_t size_index(std::size_t n)
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             // TODO: min size is 2, see if we can bring it down to 1 without loss
+         .          .           .               .              .           .               .          .         .             // of performance
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .             return sizeof(std::size_t)*CHAR_BIT-
+         0          0           0               0              0           0               0          0         0               (n<=2?1:((std::size_t)(boost::core::bit_width(n-1))));
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           static inline std::size_t size(std::size_t size_index_)
+         .          .           .               .              .           .               .          .         .           {
+         0          0           0               0              0           0               0          0         0              return std::size_t(1)<<(sizeof(std::size_t)*CHAR_BIT-size_index_);  
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .             
+         .          .           .               .              .           .               .          .         .           static constexpr std::size_t min_size(){return 2;}
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           static inline std::size_t position(std::size_t hash,std::size_t size_index_)
+         .          .           .               .              .           .               .          .         .           {
+         0          1  (16.7%)  1 (-50.0%)      0            -79  (0.1%)   3 (-0.0%)       0          0         0             return hash>>size_index_;
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         };
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .         /* size index of a group array for a given *element* capacity */
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .         template<typename Group,typename SizePolicy>
+         .          .           .               .              .           .               .          .         .         static inline std::size_t size_index_for(std::size_t n)
+         .          .           .               .              .           .               .          .         .         {
+         .          .           .               .              .           .               .          .         .           /* n/N+1 == ceil((n+1)/N) (extra +1 for the sentinel) */
+         0          0           0               0              0           0               0          0         0           return SizePolicy::size_index(n/Group::N+1);
+         .          .           .               .              .           .               .          .         .         }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .         /* Quadratic prober over a power-of-two range using triangular numbers.
+         .          .           .               .              .           .               .          .         .          * mask in next(mask) must be the range size minus one (and since size is 2^n,
+         .          .           .               .              .           .               .          .         .          * mask has exactly its n first bits set to 1).
+         .          .           .               .              .           .               .          .         .          */
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .         struct pow2_quadratic_prober
+-- line 867 ----------------------------------------
+-- line 873 ----------------------------------------
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           /* next returns false when the whole array has been traversed, which ends
+         .          .           .               .              .           .               .          .         .            * probing (in practice, full-table probing will only happen with very small
+         .          .           .               .              .           .               .          .         .            * arrays).
+         .          .           .               .              .           .               .          .         .            */
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           inline bool next(std::size_t mask)
+         .          .           .               .              .           .               .          .         .           {
+         0          0           0               0              0           0               0          0         0             step+=1;
+         0          0           0               0              0           0               0          0         0             pos=(pos+step)&mask;
+         0          0           0               0              0           0               0          0         0             return step<=mask;
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .         private:
+         .          .           .               .              .           .               .          .         .           std::size_t pos,step=0;
+         .          .           .               .              .           .               .          .         .         };
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .         /* Mixing policies: no_mix is the identity function, and mulx_mix
+         .          .           .               .              .           .               .          .         .          * uses the mulx function from <boost/unordered/detail/mulx.hpp>.
+-- line 891 ----------------------------------------
+-- line 919 ----------------------------------------
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .         inline unsigned int unchecked_countr_zero(int x)
+         .          .           .               .              .           .               .          .         .         {
+         .          .           .               .              .           .               .          .         .         #if defined(BOOST_MSVC)
+         .          .           .               .              .           .               .          .         .           unsigned long r;
+         .          .           .               .              .           .               .          .         .           _BitScanForward(&r,(unsigned long)x);
+         .          .           .               .              .           .               .          .         .           return (unsigned int)r;
+         .          .           .               .              .           .               .          .         .         #elif defined(BOOST_GCC)||defined(BOOST_CLANG)
+         0          0           0               0              0           0               0          0         0           return (unsigned int)__builtin_ctz((unsigned int)x);
+         .          .           .               .              .           .               .          .         .         #else
+         .          .           .               .              .           .               .          .         .           BOOST_UNORDERED_ASSUME(x!=0);
+         .          .           .               .              .           .               .          .         .           return (unsigned int)boost::core::countr_zero((unsigned int)x);
+         .          .           .               .              .           .               .          .         .         #endif
+         .          .           .               .              .           .               .          .         .         }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .         /* table_arrays controls allocation, initialization and deallocation of
+         .          .           .               .              .           .               .          .         .          * paired arrays of groups and element slots. Only one chunk of memory is
+-- line 935 ----------------------------------------
+-- line 1023 ----------------------------------------
+         .          .           .               .              .           .               .          .         .           // For natvis purposes
+         .          .           .               .              .           .               .          .         .           using char_pointer=
+         .          .           .               .              .           .               .          .         .             typename boost::pointer_traits<value_type_pointer>::template
+         .          .           .               .              .           .               .          .         .               rebind<unsigned char>;
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           table_arrays(
+         .          .           .               .              .           .               .          .         .             std::size_t gsi,std::size_t gsm,
+         .          .           .               .              .           .               .          .         .             group_type_pointer pg,value_type_pointer pe):
+         0          0           0               0              0           0               0          0         0             groups_size_index{gsi},groups_size_mask{gsm},groups_{pg},elements_{pe}{}
+         .          .           .               .              .           .               .          .         .         
+         0          0           0               0              0           0               0          0         0           value_type* elements()const noexcept{return boost::to_address(elements_);}
+         0          0           0               0              0           0               0          0         0           group_type* groups()const noexcept{return boost::to_address(groups_);}
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           static void set_arrays(table_arrays& arrays,allocator_type al,std::size_t n)
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             return set_arrays(
+         .          .           .               .              .           .               .          .         .               arrays,al,n,std::is_same<group_type*,group_type_pointer>{});
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           static void set_arrays(
+-- line 1042 ----------------------------------------
+-- line 1043 ----------------------------------------
+         .          .           .               .              .           .               .          .         .             table_arrays& arrays,allocator_type al,std::size_t,
+         .          .           .               .              .           .               .          .         .             std::false_type /* always allocate */)
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             using storage_traits=boost::allocator_traits<allocator_type>;
+         .          .           .               .              .           .               .          .         .             auto groups_size_index=arrays.groups_size_index;
+         .          .           .               .              .           .               .          .         .             auto groups_size=size_policy::size(groups_size_index);
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .             auto sal=allocator_type(al);
+         0          0           0               0              0           0               0          0         0             arrays.elements_=storage_traits::allocate(sal,buffer_size(groups_size));
+         .          .           .               .              .           .               .          .         .             
+         .          .           .               .              .           .               .          .         .             /* Align arrays.groups to sizeof(group_type). table_iterator critically
+         .          .           .               .              .           .               .          .         .               * depends on such alignment for its increment operation.
+         .          .           .               .              .           .               .          .         .               */
+         .          .           .               .              .           .               .          .         .         
+         0          0           0               0              0           0               0          0         0             auto p=reinterpret_cast<unsigned char*>(arrays.elements()+groups_size*N-1);
+         0          1  (16.7%)  1 (-50.0%)      0              0           0               0          0         0             p+=(uintptr_t(sizeof(group_type))-
+         0          0           0               0              0           0               0          0         0                 reinterpret_cast<uintptr_t>(p))%sizeof(group_type);
+         .          .           .               .              .           .               .          .         .             arrays.groups_=
+         .          .           .               .              .           .               .          .         .               group_type_pointer_traits::pointer_to(*reinterpret_cast<group_type*>(p));
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .             initialize_groups(
+         .          .           .               .              .           .               .          .         .               arrays.groups(),groups_size,
+         .          .           .               .              .           .               .          .         .               is_trivially_default_constructible<group_type>{});
+         0          0           0               0              0           0               0          0         0             arrays.groups()[groups_size-1].set_sentinel();
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           static void set_arrays(
+         .          .           .               .              .           .               .          .         .             table_arrays& arrays,allocator_type al,std::size_t n,
+         .          .           .               .              .           .               .          .         .             std::true_type /* optimize for n==0*/)
+         .          .           .               .              .           .               .          .         .           {
+         0          0           0               0              0           0               0          0         0             if(!n){
+         .          .           .               .              .           .               .          .         .               arrays.groups_=dummy_groups<group_type,size_policy::min_size()>();
+         .          .           .               .              .           .               .          .         .             }
+         .          .           .               .              .           .               .          .         .             else{
+         .          .           .               .              .           .               .          .         .               set_arrays(arrays,al,n,std::false_type{});
+         .          .           .               .              .           .               .          .         .             }
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           static table_arrays new_(allocator_type al,std::size_t n)
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             auto         groups_size_index=size_index_for<group_type,size_policy>(n);
+         .          .           .               .              .           .               .          .         .             auto         groups_size=size_policy::size(groups_size_index);
+         0          0           0               0              0           0               0          0         0             table_arrays arrays{groups_size_index,groups_size-1,nullptr,nullptr};
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .             set_arrays(arrays,al,n);
+         .          .           .               .              .           .               .          .         .             return arrays;
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           static void delete_(allocator_type al,table_arrays& arrays)noexcept
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             using storage_traits=boost::allocator_traits<allocator_type>;
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .             auto sal=allocator_type(al);
+         0          0           0               0              0           0               0          0         0             if(arrays.elements()){
+         .          .           .               .              .           .               .          .         .               storage_traits::deallocate(
+         .          .           .               .              .           .               .          .         .                 sal,arrays.elements_,buffer_size(arrays.groups_size_mask+1));
+         .          .           .               .              .           .               .          .         .             }
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           /* combined space for elements and groups measured in sizeof(value_type)s */
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           static std::size_t buffer_size(std::size_t groups_size)
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             auto buffer_bytes=
+         .          .           .               .              .           .               .          .         .               /* space for elements (we subtract 1 because of the sentinel) */
+       -32  (0.0%)  0           0               0              0           0               0          0         0               sizeof(value_type)*(groups_size*N-1)+
+         .          .           .               .              .           .               .          .         .               /* space for groups + padding for group alignment */
+         .          .           .               .              .           .               .          .         .               sizeof(group_type)*(groups_size+1)-1;
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .             /* ceil(buffer_bytes/sizeof(value_type)) */
+        97 (-0.0%)  0           0               0              0           0               0          0         0             return (buffer_bytes+sizeof(value_type)-1)/sizeof(value_type);
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           static void initialize_groups(
+         .          .           .               .              .           .               .          .         .             group_type* pg,std::size_t size,std::true_type /* memset */)
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             /* memset faster/not slower than manual, assumes all zeros is group_type's
+         .          .           .               .              .           .               .          .         .              * default layout.
+         .          .           .               .              .           .               .          .         .              * reinterpret_cast: GCC may complain about group_type not being trivially
+         .          .           .               .              .           .               .          .         .              * copy-assignable when we're relying on trivial copy constructibility.
+         .          .           .               .              .           .               .          .         .              */
+         .          .           .               .              .           .               .          .         .         
+         0         -1 (-16.7%) -1  (50.0%)      0              0           0               0          0         0             std::memset(
+         0          0           0               0              0           0               0          0         0               reinterpret_cast<unsigned char*>(pg),0,sizeof(group_type)*size);
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           static void initialize_groups(
+         .          .           .               .              .           .               .          .         .             group_type* pg,std::size_t size,std::false_type /* manual */)
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             while(size--!=0)::new (pg++) group_type();
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+-- line 1134 ----------------------------------------
+-- line 1555 ----------------------------------------
+         .          .           .               .              .           .               .          .         .             delete_arrays(arrays);
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           std::size_t initial_max_load()const
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             static constexpr std::size_t small_capacity=2*N-1;
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .             auto capacity_=capacity();
+         0          0           0               0              0           0               0          0         0             if(capacity_<=small_capacity){
+         .          .           .               .              .           .               .          .         .               return capacity_; /* we allow 100% usage */
+         .          .           .               .              .           .               .          .         .             }
+         .          .           .               .              .           .               .          .         .             else{
+         .          .           .               .              .           .               .          .         .               return (std::size_t)(mlf*(float)(capacity_));
+         .          .           .               .              .           .               .          .         .             }
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           arrays_holder_type make_empty_arrays()const
+-- line 1571 ----------------------------------------
+-- line 1681 ----------------------------------------
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .         #if defined(BOOST_MSVC)
+         .          .           .               .              .           .               .          .         .         #pragma warning(pop) /* C4127 */
+         .          .           .               .              .           .               .          .         .         #endif
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           allocator_type get_allocator()const noexcept{return al();}
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           bool        empty()const noexcept{return size()==0;}
+         0          0           0               0              0           0               0          0         0           std::size_t size()const noexcept{return size_ctrl.size;}
+         .          .           .               .              .           .               .          .         .           std::size_t max_size()const noexcept{return SIZE_MAX;}
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           BOOST_FORCEINLINE
+         .          .           .               .              .           .               .          .         .           void erase(group_type* pg,unsigned int pos,element_type* p)noexcept
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             destroy_element(p);
+         .          .           .               .              .           .               .          .         .             recover_slot(pg,pos);
+         .          .           .               .              .           .               .          .         .           }
+-- line 1697 ----------------------------------------
+-- line 1719 ----------------------------------------
+         .          .           .               .              .           .               .          .         .           template<typename Key>
+         .          .           .               .              .           .               .          .         .           BOOST_FORCEINLINE locator find(
+         .          .           .               .              .           .               .          .         .             const Key& x,std::size_t pos0,std::size_t hash)const
+         .          .           .               .              .           .               .          .         .           {    
+         .          .           .               .              .           .               .          .         .             BOOST_UNORDERED_STATS_COUNTER(num_cmps);
+         .          .           .               .              .           .               .          .         .             prober pb(pos0);
+         .          .           .               .              .           .               .          .         .             do{
+         .          .           .               .              .           .               .          .         .               auto pos=pb.get();
+         0         -1 (-16.7%) -1  (50.0%)      0              0           0               0          0         0               auto pg=arrays.groups()+pos;
+         .          .           .               .              .           .               .          .         .               auto mask=pg->match(hash);
+         0          0           0               0              0           0               0          0         0               if(mask){
+         .          .           .               .              .           .               .          .         .                 auto elements=arrays.elements();
+         .          .           .               .              .           .               .          .         .                 BOOST_UNORDERED_ASSUME(elements!=nullptr);
+         0          0           0               0              0           0               0          0         0                 auto p=elements+pos*N;
+   -17,849  (0.5%)  1  (16.7%)  1 (-50.0%)      0              0           0         -17,849 (1.7%)   0         0                 BOOST_UNORDERED_PREFETCH_ELEMENTS(p,N);
+         .          .           .               .              .           .               .          .         .                 do{
+         .          .           .               .              .           .               .          .         .                   BOOST_UNORDERED_INCREMENT_STATS_COUNTER(num_cmps);
+         .          .           .               .              .           .               .          .         .                   auto n=unchecked_countr_zero(mask);
+  -829,098 (21.1%) -1 (-16.7%) -1  (50.0%)      0              0           0               0          0         0                   if(BOOST_LIKELY(bool(pred()(x,key_from(p[n]))))){
+         .          .           .               .              .           .               .          .         .                     BOOST_UNORDERED_ADD_STATS(
+         .          .           .               .              .           .               .          .         .                       cstats.successful_lookup,(pb.length(),num_cmps));
+         .          .           .               .              .           .               .          .         .                     return {pg,n,p+n};
+         .          .           .               .              .           .               .          .         .                   }
+         .          .           .               .              .           .               .          .         .                   mask&=mask-1;
+         0          0           0               0              0           0               0          0         0                 }while(mask);
+         .          .           .               .              .           .               .          .         .               }
+         0          0           0               0              0           0               0          0         0               if(BOOST_LIKELY(pg->is_not_overflowed(hash))){
+         .          .           .               .              .           .               .          .         .                 BOOST_UNORDERED_ADD_STATS(
+         .          .           .               .              .           .               .          .         .                   cstats.unsuccessful_lookup,(pb.length(),num_cmps));
+         .          .           .               .              .           .               .          .         .                 return {};
+         .          .           .               .              .           .               .          .         .               }
+         0          0           0               0              0           0               0          0         0             }
+         .          .           .               .              .           .               .          .         .             while(BOOST_LIKELY(pb.next(arrays.groups_size_mask)));
+         .          .           .               .              .           .               .          .         .             BOOST_UNORDERED_ADD_STATS(
+         .          .           .               .              .           .               .          .         .               cstats.unsuccessful_lookup,(pb.length(),num_cmps));
+         .          .           .               .              .           .               .          .         .             return {};
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .         #if defined(BOOST_MSVC)
+         .          .           .               .              .           .               .          .         .         #pragma warning(pop) /* C4800 */
+-- line 1758 ----------------------------------------
+-- line 1803 ----------------------------------------
+         .          .           .               .              .           .               .          .         .             }
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           hasher hash_function()const{return h();}
+         .          .           .               .              .           .               .          .         .           key_equal key_eq()const{return pred();}
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           std::size_t capacity()const noexcept
+         .          .           .               .              .           .               .          .         .           {
+         0          1  (16.7%)  1 (-50.0%)      0              0           0               0          0         0             return arrays.elements()?(arrays.groups_size_mask+1)*N-1:0;
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .           
+         .          .           .               .              .           .               .          .         .           float load_factor()const noexcept
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             if(capacity()==0)return 0;
+         .          .           .               .              .           .               .          .         .             else             return float(size())/float(capacity());
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+-- line 1819 ----------------------------------------
+-- line 1947 ----------------------------------------
+         .          .           .               .              .           .               .          .         .           inline std::size_t position_for(std::size_t hash)const
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             return position_for(hash,arrays);
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           static inline std::size_t position_for(
+         .          .           .               .              .           .               .          .         .             std::size_t hash,const arrays_type& arrays_)
+         .          .           .               .              .           .               .          .         .           {
+         0         -2 (-33.3%) -2 (100.0%)      0              0           0               0          0         0             return size_policy::position(hash,arrays_.groups_size_index);
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           static inline int match_really_occupied(group_type* pg,group_type* last)
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             /* excluding the sentinel */
+         0          0           0               0              0           0               0          0         0             return pg->match_occupied()&~(int(pg==last-1)<<(N-1));
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           template<typename... Args>
+         .          .           .               .              .           .               .          .         .           locator unchecked_emplace_at(
+         .          .           .               .              .           .               .          .         .             std::size_t pos0,std::size_t hash,Args&&... args)
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             auto res=nosize_unchecked_emplace_at(
+         .          .           .               .              .           .               .          .         .               arrays,pos0,hash,std::forward<Args>(args)...);
+         0          0           0               0              0           0               0          0         0             ++size_ctrl.size;
+         .          .           .               .              .           .               .          .         .             return res;
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           BOOST_NOINLINE void unchecked_rehash_for_growth()
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             auto new_arrays_=new_arrays_for_growth();
+         .          .           .               .              .           .               .          .         .             unchecked_rehash(new_arrays_);
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           template<typename... Args>
+         .          .           .               .              .           .               .          .         .           BOOST_NOINLINE locator
+         .          .           .               .              .           .               .          .         .           unchecked_emplace_with_rehash(std::size_t hash,Args&&... args)
+         0          0           0               0              0           0               0          0         0           {
+         .          .           .               .              .           .               .          .         .             auto    new_arrays_=new_arrays_for_growth();
+         .          .           .               .              .           .               .          .         .             locator it;
+         .          .           .               .              .           .               .          .         .             BOOST_TRY{
+         .          .           .               .              .           .               .          .         .               /* strong exception guarantee -> try insertion before rehash */
+         0          1  (16.7%)  1 (-50.0%)      0              0           0               0          0         0               it=nosize_unchecked_emplace_at(
+         .          .           .               .              .           .               .          .         .                 new_arrays_,position_for(hash,new_arrays_),
+         .          .           .               .              .           .               .          .         .                 hash,std::forward<Args>(args)...);
+         .          .           .               .              .           .               .          .         .             }
+         .          .           .               .              .           .               .          .         .             BOOST_CATCH(...){
+         .          .           .               .              .           .               .          .         .               delete_arrays(new_arrays_);
+         .          .           .               .              .           .               .          .         .               BOOST_RETHROW
+         .          .           .               .              .           .               .          .         .             }
+         .          .           .               .              .           .               .          .         .             BOOST_CATCH_END
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .             /* new_arrays_ lifetime taken care of by unchecked_rehash */
+         0          0           0               0              0           0               0          0         0             unchecked_rehash(new_arrays_);
+         0          0           0               0              0           0               0          0         0             ++size_ctrl.size;
+         .          .           .               .              .           .               .          .         .             return it;
+         0         -1 (-16.7%) -1  (50.0%)      0              0           1 (-0.0%)       0          0         0           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           void noshrink_reserve(std::size_t n)
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             /* used only on assignment after element clearance */
+         .          .           .               .              .           .               .          .         .             BOOST_ASSERT(empty());
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .             if(n){
+         .          .           .               .              .           .               .          .         .               n=std::size_t(std::ceil(float(n)/mlf)); /* elements -> slots */
+-- line 2010 ----------------------------------------
+-- line 2017 ----------------------------------------
+         .          .           .               .              .           .               .          .         .                 size_ctrl.ml=initial_max_load();
+         .          .           .               .              .           .               .          .         .               }
+         .          .           .               .              .           .               .          .         .             }
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           template<typename F>
+         .          .           .               .              .           .               .          .         .           void for_all_elements(F f)const
+         .          .           .               .              .           .               .          .         .           {
+         0         -1 (-16.7%) -1  (50.0%)      0              0           0               0          0         0             for_all_elements(arrays,f);
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           template<typename F>
+         .          .           .               .              .           .               .          .         .           static auto for_all_elements(const arrays_type& arrays_,F f)
+         .          .           .               .              .           .               .          .         .             ->decltype(f(nullptr),void())
+         .          .           .               .              .           .               .          .         .           {
+         0          0           0               0              0           0               0          0         0             for_all_elements_while(arrays_,[&](element_type* p){f(p);return true;});
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           template<typename F>
+         .          .           .               .              .           .               .          .         .           static auto for_all_elements(const arrays_type& arrays_,F f)
+         .          .           .               .              .           .               .          .         .             ->decltype(f(nullptr,0,nullptr),void())
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             for_all_elements_while(
+         .          .           .               .              .           .               .          .         .               arrays_,[&](group_type* pg,unsigned int n,element_type* p)
+-- line 2040 ----------------------------------------
+-- line 2046 ----------------------------------------
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             return for_all_elements_while(arrays,f);
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           template<typename F>
+         .          .           .               .              .           .               .          .         .           static auto for_all_elements_while(const arrays_type& arrays_,F f)
+         .          .           .               .              .           .               .          .         .             ->decltype(f(nullptr),bool())
+         .          .           .               .              .           .               .          .         .           {
+         0          0           0               0              0           0               0          0         0             return for_all_elements_while(
+         .          .           .               .              .           .               .          .         .               arrays_,[&](group_type*,unsigned int,element_type* p){return f(p);});
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           template<typename F>
+         .          .           .               .              .           .               .          .         .           static auto for_all_elements_while(const arrays_type& arrays_,F f)
+         .          .           .               .              .           .               .          .         .             ->decltype(f(nullptr,0,nullptr),bool())
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             auto p=arrays_.elements();
+         0          0           0               0              0           0               0          0         0             if(p){
+         0          0           0               0              0           0               0          0         0               for(auto pg=arrays_.groups(),last=pg+arrays_.groups_size_mask+1;
+         0          0           0               0              0           0               0          0         0                   pg!=last;++pg,p+=N){
+         .          .           .               .              .           .               .          .         .                 auto mask=match_really_occupied(pg,last);
+         0          0           0               0              0           0               0          0         0                 while(mask){
+         .          .           .               .              .           .               .          .         .                   auto n=unchecked_countr_zero(mask);
+         0          0           0               0              0           0               0          0         0                   if(!f(pg,n,p+n))return false;
+         .          .           .               .              .           .               .          .         .                   mask&=mask-1;
+         .          .           .               .              .           .               .          .         .                 }
+         .          .           .               .              .           .               .          .         .               }
+         .          .           .               .              .           .               .          .         .             }
+         .          .           .               .              .           .               .          .         .             return true;
+         0          0           0               0              0           0               0          0         0           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           arrays_type              arrays;
+         .          .           .               .              .           .               .          .         .           size_ctrl_type           size_ctrl;
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .         #if defined(BOOST_UNORDERED_ENABLE_STATS)
+         .          .           .               .              .           .               .          .         .           mutable cumulative_stats cstats;
+         .          .           .               .              .           .               .          .         .         #endif
+         .          .           .               .              .           .               .          .         .         
+-- line 2083 ----------------------------------------
+-- line 2124 ----------------------------------------
+         .          .           .               .              .           .               .          .         .              * capacity after a costly rehash. To avoid this, we jump to the next
+         .          .           .               .              .           .               .          .         .              * capacity level when the number of erased elements is <= 10% of total
+         .          .           .               .              .           .               .          .         .              * elements at full load, which is implemented by requesting additional
+         .          .           .               .              .           .               .          .         .              * F*size elements, with F = P * 10% / (1 - P * 10%), where P is the
+         .          .           .               .              .           .               .          .         .              * probability of an element having caused overflow; P has been measured as
+         .          .           .               .              .           .               .          .         .              * ~0.162 under ideal conditions, yielding F ~ 0.0165 ~ 1/61.
+         .          .           .               .              .           .               .          .         .              */
+         .          .           .               .              .           .               .          .         .             return new_arrays(std::size_t(
+         0          0           0               0              0          -1  (0.0%)       0          0         0               std::ceil(static_cast<float>(size()+size()/61+1)/mlf)));
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           void delete_arrays(arrays_type& arrays_)noexcept
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             arrays_type::delete_(typename arrays_type::allocator_type(al()),arrays_);
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           arrays_holder_type make_arrays(std::size_t n)const
+-- line 2140 ----------------------------------------
+-- line 2258 ----------------------------------------
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           void recover_slot(unsigned char* pc)
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             /* If this slot potentially caused overflow, we decrease the maximum load
+         .          .           .               .              .           .               .          .         .              * so that average probe length won't increase unboundedly in repeated
+         .          .           .               .              .           .               .          .         .              * insert/erase cycles (drift).
+         .          .           .               .              .           .               .          .         .              */
+         0         -1 (-16.7%) -1  (50.0%)      0              0           0               0          0         0             size_ctrl.ml-=group_type::maybe_caused_overflow(pc);
+         .          .           .               .              .           .               .          .         .             group_type::reset(pc);
+         .          .           .               .              .           .               .          .         .             --size_ctrl.size;
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           void recover_slot(group_type* pg,std::size_t pos)
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             recover_slot(reinterpret_cast<unsigned char*>(pg)+pos);
+         .          .           .               .              .           .               .          .         .           }
+-- line 2274 ----------------------------------------
+-- line 2280 ----------------------------------------
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           BOOST_NOINLINE void unchecked_rehash(std::size_t n)
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             auto new_arrays_=new_arrays(n);
+         .          .           .               .              .           .               .          .         .             unchecked_rehash(new_arrays_);
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           BOOST_NOINLINE void unchecked_rehash(arrays_type& new_arrays_)
+         0          0           0               0              0           0               0          0         0           {
+         0          1  (16.7%)  1 (-50.0%)      0              0           0               0          0         0             std::size_t num_destroyed=0;
+         .          .           .               .              .           .               .          .         .             BOOST_TRY{
+         .          .           .               .              .           .               .          .         .               for_all_elements([&,this](element_type* p){
+         0          0           0               0              0           0               0          0         0                 nosize_transfer_element(p,new_arrays_,num_destroyed);
+         .          .           .               .              .           .               .          .         .               });
+         .          .           .               .              .           .               .          .         .             }
+         .          .           .               .              .           .               .          .         .             BOOST_CATCH(...){
+         .          .           .               .              .           .               .          .         .               if(num_destroyed){
+         .          .           .               .              .           .               .          .         .                 for_all_elements_while(
+         .          .           .               .              .           .               .          .         .                   [&,this](group_type* pg,unsigned int n,element_type*){
+         .          .           .               .              .           .               .          .         .                     recover_slot(pg,n);
+         .          .           .               .              .           .               .          .         .                     return --num_destroyed!=0;
+-- line 2300 ----------------------------------------
+-- line 2312 ----------------------------------------
+         .          .           .               .              .           .               .          .         .             /* either all moved and destroyed or all copied */
+         .          .           .               .              .           .               .          .         .             BOOST_ASSERT(num_destroyed==size()||num_destroyed==0);
+         .          .           .               .              .           .               .          .         .             if(num_destroyed!=size()){
+         .          .           .               .              .           .               .          .         .               for_all_elements([this](element_type* p){
+         .          .           .               .              .           .               .          .         .                 destroy_element(p);
+         .          .           .               .              .           .               .          .         .               });
+         .          .           .               .              .           .               .          .         .             }
+         .          .           .               .              .           .               .          .         .             delete_arrays(arrays);
+         0          0           0               0              0           0               0          0         0             arrays=new_arrays_;
+         0          0           0               0              0           0               0          0         0             size_ctrl.ml=initial_max_load();
+         0          0           0               0              0           0               0          0         0           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           template<typename Value>
+         .          .           .               .              .           .               .          .         .           void unchecked_insert(Value&& x)
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             auto hash=hash_for(key_from(x));
+         .          .           .               .              .           .               .          .         .             unchecked_emplace_at(position_for(hash),hash,std::forward<Value>(x));
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+-- line 2330 ----------------------------------------
+-- line 2342 ----------------------------------------
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           void nosize_transfer_element(
+         .          .           .               .              .           .               .          .         .             element_type* p,std::size_t hash,const arrays_type& arrays_,
+         .          .           .               .              .           .               .          .         .             std::size_t& num_destroyed,std::true_type /* ->move */)
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             /* Destroy p even if an an exception is thrown in the middle of move
+         .          .           .               .              .           .               .          .         .              * construction, which could leave the source half-moved.
+         .          .           .               .              .           .               .          .         .              */
+         0          0           0               0              0           0               0          0         0             ++num_destroyed;
+         .          .           .               .              .           .               .          .         .             destroy_element_on_exit d{this,p};
+         .          .           .               .              .           .               .          .         .             (void)d; /* unused var warning */
+         .          .           .               .              .           .               .          .         .             nosize_unchecked_emplace_at(
+         .          .           .               .              .           .               .          .         .               arrays_,position_for(hash,arrays_),hash,type_policy::move(*p));
+         .          .           .               .              .           .               .          .         .           }
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           void nosize_transfer_element(
+         .          .           .               .              .           .               .          .         .             element_type* p,std::size_t hash,const arrays_type& arrays_,
+-- line 2358 ----------------------------------------
+-- line 2365 ----------------------------------------
+         .          .           .               .              .           .               .          .         .         
+         .          .           .               .              .           .               .          .         .           template<typename... Args>
+         .          .           .               .              .           .               .          .         .           locator nosize_unchecked_emplace_at(
+         .          .           .               .              .           .               .          .         .             const arrays_type& arrays_,std::size_t pos0,std::size_t hash,
+         .          .           .               .              .           .               .          .         .             Args&&... args)
+         .          .           .               .              .           .               .          .         .           {
+         .          .           .               .              .           .               .          .         .             for(prober pb(pos0);;pb.next(arrays_.groups_size_mask)){
+         .          .           .               .              .           .               .          .         .               auto pos=pb.get();
+         0          0           0               0              0           0               0          0         0               auto pg=arrays_.groups()+pos;
+         .          .           .               .              .           .               .          .         .               auto mask=pg->match_available();
+         0          0           0               0              0           0               0          0         0               if(BOOST_LIKELY(mask!=0)){
+         .          .           .               .              .           .               .          .         .                 auto n=unchecked_countr_zero(mask);
+-1,034,601 (26.3%)  1  (16.7%)  1 (-50.0%)      0              0           0               0          0         0                 auto p=arrays_.elements()+pos*N+n;
+         .          .           .               .              .           .               .          .         .                 construct_element(p,std::forward<Args>(args)...);
+         .          .           .               .              .           .               .          .         .                 pg->set(n,hash);
+         .          .           .               .              .           .               .          .         .                 BOOST_UNORDERED_ADD_STATS(cstats.insertion,(pb.length()));
+         .          .           .               .              .           .               .          .         .                 return {pg,n,p};
+         .          .           .               .              .           .               .          .         .               }
+         .          .           .               .              .           .               .          .         .               else pg->mark_overflow(hash);
+         .          .           .               .              .           .               .          .         .             }
+         .          .           .               .              .           .               .          .         .           }
+-- line 2385 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/table.hpp
+--------------------------------------------------------------------------------
+Ir I1mr_____ ILmr______ Dr D1mr DLmr Dw D1mw DLmw 
+
+ 0 1 (16.7%) 1 (-50.0%)  0    0    0  0    0    0  <unknown (line 0)>
+
+-- line 32 ----------------------------------------
+ . .         .           .    .    .  .    .    .  namespace foa{
+ . .         .           .    .    .  .    .    .  
+ . .         .           .    .    .  .    .    .  /* use plain integrals for group metadata storage */
+ . .         .           .    .    .  .    .    .  
+ . .         .           .    .    .  .    .    .  template<typename Integral>
+ . .         .           .    .    .  .    .    .  struct plain_integral
+ . .         .           .    .    .  .    .    .  {
+ . .         .           .    .    .  .    .    .    operator Integral()const{return n;}
+ 0 0         0           0    0    0  0    0    0    void operator=(Integral m){n=m;}
+ . .         .           .    .    .  .    .    .  
+ . .         .           .    .    .  .    .    .  #if BOOST_WORKAROUND(BOOST_GCC,>=50000 && BOOST_GCC<60000)
+ . .         .           .    .    .  .    .    .    void operator|=(Integral m){n=static_cast<Integral>(n|m);}
+ . .         .           .    .    .  .    .    .    void operator&=(Integral m){n=static_cast<Integral>(n&m);}
+ . .         .           .    .    .  .    .    .  #else
+ 0 0         0           0    0    0  0    0    0    void operator|=(Integral m){n|=m;}
+ . .         .           .    .    .  .    .    .    void operator&=(Integral m){n&=m;}
+ . .         .           .    .    .  .    .    .  #endif
+ . .         .           .    .    .  .    .    .  
+ . .         .           .    .    .  .    .    .    Integral n;
+ . .         .           .    .    .  .    .    .  };
+ . .         .           .    .    .  .    .    .  
+ . .         .           .    .    .  .    .    .  struct plain_size_control
+ . .         .           .    .    .  .    .    .  {
+-- line 54 ----------------------------------------
+-- line 632 ----------------------------------------
+ . .         .           .    .    .  .    .    .      const auto &k=this->key_from(std::forward<Args>(args)...);
+ . .         .           .    .    .  .    .    .      auto        hash=this->hash_for(k);
+ . .         .           .    .    .  .    .    .      auto        pos0=this->position_for(hash);
+ . .         .           .    .    .  .    .    .      auto        loc=super::find(k,pos0,hash);
+ . .         .           .    .    .  .    .    .  
+ . .         .           .    .    .  .    .    .      if(loc){
+ . .         .           .    .    .  .    .    .        return {make_iterator(loc),false};
+ . .         .           .    .    .  .    .    .      }
+ 0 0         0           0    0    0  0    0    0      if(BOOST_LIKELY(this->size_ctrl.size<this->size_ctrl.ml)){
+ . .         .           .    .    .  .    .    .        return {
+ . .         .           .    .    .  .    .    .          make_iterator(
+ . .         .           .    .    .  .    .    .            this->unchecked_emplace_at(pos0,hash,std::forward<Args>(args)...)),
+ . .         .           .    .    .  .    .    .          true
+ . .         .           .    .    .  .    .    .        };  
+ . .         .           .    .    .  .    .    .      }
+ . .         .           .    .    .  .    .    .      else{
+ . .         .           .    .    .  .    .    .        return {
+ . .         .           .    .    .  .    .    .          make_iterator(
+ 0 0         0           0    0    0  0    0    0            this->unchecked_emplace_with_rehash(
+ . .         .           .    .    .  .    .    .              hash,std::forward<Args>(args)...)),
+ . .         .           .    .    .  .    .    .          true
+ . .         .           .    .    .  .    .    .        };  
+ . .         .           .    .    .  .    .    .      }
+ . .         .           .    .    .  .    .    .    }
+ . .         .           .    .    .  .    .    .  };
+ . .         .           .    .    .  .    .    .  
+ . .         .           .    .    .  .    .    .  #if defined(BOOST_MSVC)
+-- line 658 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/mulx.hpp
+--------------------------------------------------------------------------------
+Ir____________ I1mr_____ ILmr______ Dr D1mr___________ DLmr__________ Dw D1mw DLmw 
+
+-- line 37 ----------------------------------------
+      .        .         .           .       .              .          .    .    .      boost::uint64_t r2 = __umulh( x, y );
+      .        .         .           .       .              .          .    .    .      return r ^ r2;
+      .        .         .           .       .              .          .    .    .  }
+      .        .         .           .       .              .          .    .    .  
+      .        .         .           .       .              .          .    .    .  #elif defined(__SIZEOF_INT128__)
+      .        .         .           .       .              .          .    .    .  
+      .        .         .           .       .              .          .    .    .  inline boost::uint64_t mulx64( boost::uint64_t x, boost::uint64_t y )
+      .        .         .           .       .              .          .    .    .  {
+-17,723 (0.5%) 1 (16.7%) 1 (-50.0%)  0 -21,096 (31.8%) -6,829 (41.8%)  0    0    0      __uint128_t r = (__uint128_t)x * y;
+      0        0         0           0       0              0          0    0    0      return (boost::uint64_t)r ^ (boost::uint64_t)( r >> 64 );
+      .        .         .           .       .              .          .    .    .  }
+      .        .         .           .       .              .          .    .    .  
+      .        .         .           .       .              .          .    .    .  #else
+      .        .         .           .       .              .          .    .    .  
+      .        .         .           .       .              .          .    .    .  inline boost::uint64_t mulx64( boost::uint64_t x, boost::uint64_t y )
+      .        .         .           .       .              .          .    .    .  {
+      .        .         .           .       .              .          .    .    .      boost::uint64_t x1 = (boost::uint32_t)x;
+      .        .         .           .       .              .          .    .    .      boost::uint64_t x2 = x >> 32;
+-- line 54 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /home/wang/sources/cxx/book/include/lob/vN.book.hpp
+--------------------------------------------------------------------------------
+Unannotated because two or more of these original files are not identical:
+- /home/wang/sources/cxx/book/include/lob/v3/book.hpp
+- /home/wang/sources/cxx/book/include/lob/v4/book.hpp
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /usr/include/c++/v1/__utility/pair.h
+--------------------------------------------------------------------------------
+Ir________________ I1mr_______ ILmr______ Dr______________ D1mr__________ DLmr__________ Dw______________ D1mw___________ DLmw___________ 
+
+-- line 188 ----------------------------------------
+         .          .           .                .              .              .                .               .               .          
+         .          .           .                .              .              .                .               .               .            template <class _U1,
+         .          .           .                .              .              .                .               .               .                      class _U2,
+         .          .           .                .              .              .                .               .               .                      __enable_if_t<__check_pair_construction<_T1, _T2>::template __is_pair_constructible<_U1, _U2>(), int> = 0>
+         .          .           .                .              .              .                .               .               .            _LIBCPP_HIDE_FROM_ABI
+         .          .           .                .              .              .                .               .               .            _LIBCPP_CONSTEXPR_SINCE_CXX14 explicit(!__check_pair_construction<_T1, _T2>::template __is_implicit<_U1, _U2>())
+         .          .           .                .              .              .                .               .               .                pair(pair<_U1, _U2>&& __p) noexcept(is_nothrow_constructible<first_type, _U1&&>::value &&
+         .          .           .                .              .              .                .               .               .                                                    is_nothrow_constructible<second_type, _U2&&>::value)
+  -477,778 (12.2%) -1 (-16.7%) -1 (50.0%) -238,889 (23.1%) -8,645 (13.0%) -7,950 (48.6%) -238,889 (22.7%) -29,622 (31.2%) -25,632 (95.8%)        : first(std::forward<_U1>(__p.first)), second(std::forward<_U2>(__p.second)) {}
+         .          .           .                .              .              .                .               .               .          
+         .          .           .                .              .              .                .               .               .          #  if _LIBCPP_STD_VER >= 23
+         .          .           .                .              .              .                .               .               .            template <
+         .          .           .                .              .              .                .               .               .                class _U1,
+         .          .           .                .              .              .                .               .               .                class _U2,
+         .          .           .                .              .              .                .               .               .                __enable_if_t<__check_pair_construction<_T1, _T2>::template __is_pair_constructible<const _U1&&, const _U2&&>(),
+         .          .           .                .              .              .                .               .               .                              int> = 0>
+         .          .           .                .              .              .                .               .               .            _LIBCPP_HIDE_FROM_ABI constexpr explicit(
+-- line 204 ----------------------------------------
+-- line 437 ----------------------------------------
+         .          .           .                .              .              .                .               .               .          #ifndef _LIBCPP_CXX03_LANG
+         .          .           .                .              .              .                .               .               .            template <class... _Args1, class... _Args2, size_t... _I1, size_t... _I2>
+         .          .           .                .              .              .                .               .               .            _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20
+         .          .           .                .              .              .                .               .               .            pair(piecewise_construct_t,
+         .          .           .                .              .              .                .               .               .                 tuple<_Args1...>& __first_args,
+         .          .           .                .              .              .                .               .               .                 tuple<_Args2...>& __second_args,
+         .          .           .                .              .              .                .               .               .                 __tuple_indices<_I1...>,
+         .          .           .                .              .              .                .               .               .                 __tuple_indices<_I2...>)
+         0          0           0                0              0              0                0          -4,240  (4.5%)  -1,168  (4.4%)        : first(std::forward<_Args1>(std::get<_I1>(__first_args))...),
+-1,591,424 (40.5%) -1 (-16.7%) -1 (50.0%) -795,712 (76.9%)      0              0         -795,712 (75.6%) -57,499 (60.5%)  -6,599 (24.7%)          second(std::forward<_Args2>(std::get<_I2>(__second_args))...) {}
+         .          .           .                .              .              .                .               .               .          #endif
+         .          .           .                .              .              .                .               .               .          };
+         .          .           .                .              .              .                .               .               .          
+         .          .           .                .              .              .                .               .               .          #if _LIBCPP_STD_VER >= 17
+         .          .           .                .              .              .                .               .               .          template <class _T1, class _T2>
+         .          .           .                .              .              .                .               .               .          pair(_T1, _T2) -> pair<_T1, _T2>;
+         .          .           .                .              .              .                .               .               .          #endif
+         .          .           .                .              .              .                .               .               .          
+-- line 454 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Annotation summary
+--------------------------------------------------------------------------------
+Ir_________________ I1mr_______ ILmr________ Dr_________________ D1mr___________ DLmr___________ Dw_________________ D1mw___________ DLmw____________ 
+
+-3,968,408 (100.9%) -3 (-50.0%) -3  (150.0%) -1,034,601 (100.0%) -37,892 (57.1%) -14,787 (90.4%) -1,052,450 (100.0%) -91,361 (96.1%) -33,399 (124.9%)    annotated: files known & above threshold & readable, line numbers known
+    18,437  (-0.5%)  3  (50.0%)  2 (-100.0%)     17,723  (-1.7%)       0               0                -33   (0.0%)     -18  (0.0%)      -1   (0.0%)    annotated: files known & above threshold & readable, line numbers unknown
+    17,723  (-0.5%)  3  (50.0%)  3 (-150.0%)    -53,169   (5.1%) -24,493 (36.9%)    -692  (4.2%)          0           -3,738  (3.9%)    -719   (2.7%)  unannotated: files known & above threshold & two or more non-identical
+         0           0           0                    0                0               0                  0                0               0           unannotated: files known & above threshold & unreadable 
+        89  (-0.0%)  3  (50.0%) -4  (200.0%)     35,449  (-3.4%)  -3,967  (6.0%)    -874  (5.3%)         28  (-0.0%)      77 (-0.1%)   7,368 (-27.5%)  unannotated: files known & below threshold
+         0           0           0                    0               -3  (0.0%)      -3  (0.0%)          0                0               0           unannotated: files unknown
+

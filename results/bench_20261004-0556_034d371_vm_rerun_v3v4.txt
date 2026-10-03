@@ -1,0 +1,35 @@
+---------------------------------------------------------------------------------------------
+Benchmark                                   Time             CPU   Iterations UserCounters...
+---------------------------------------------------------------------------------------------
+replay/syn_deep_s42/v3_mean              86.8 ms         86.7 ms           20 items_per_second=11.5737M/s ns_per_op=86.7182ns
+replay/syn_deep_s42/v3_median            84.7 ms         84.6 ms           20 items_per_second=11.8192M/s ns_per_op=84.6115ns
+replay/syn_deep_s42/v3_stddev            5.55 ms         5.54 ms           20 items_per_second=694.247k/s ns_per_op=5.54452ns
+replay/syn_deep_s42/v3_cv                6.40 %          6.39 %            20 items_per_second=6.00% ns_per_op=6.39%
+replay/itch12302019_QQQ/v4_mean           197 ms          197 ms           20 items_per_second=12.6549M/s ns_per_op=79.2361ns
+replay/itch12302019_QQQ/v4_median         194 ms          194 ms           20 items_per_second=12.8073M/s ns_per_op=78.0808ns
+replay/itch12302019_QQQ/v4_stddev        11.1 ms         11.1 ms           20 items_per_second=644.371k/s ns_per_op=4.46688ns
+replay/itch12302019_QQQ/v4_cv            5.64 %          5.64 %            20 items_per_second=5.09% ns_per_op=5.64%
+replay/itch12302019_QQQ/v3_mean           202 ms          202 ms           20 items_per_second=12.4363M/s ns_per_op=81.2258ns
+replay/itch12302019_QQQ/v3_median         194 ms          194 ms           20 items_per_second=12.8267M/s ns_per_op=77.9627ns
+replay/itch12302019_QQQ/v3_stddev        23.5 ms         23.5 ms           20 items_per_second=1.13409M/s ns_per_op=9.44757ns
+replay/itch12302019_QQQ/v3_cv           11.66 %         11.63 %            20 items_per_second=9.12% ns_per_op=11.63%
+replay/syn_default_s42/v3_mean           69.9 ms         69.8 ms           20 items_per_second=14.3223M/s ns_per_op=69.8472ns
+replay/syn_default_s42/v3_median         69.4 ms         69.3 ms           20 items_per_second=14.4214M/s ns_per_op=69.3413ns
+replay/syn_default_s42/v3_stddev         1.41 ms         1.41 ms           20 items_per_second=280.367k/s ns_per_op=1.40573ns
+replay/syn_default_s42/v3_cv             2.01 %          2.01 %            20 items_per_second=1.96% ns_per_op=2.01%
+replay/itch12302019_AAPL/v3_mean          161 ms          161 ms           20 items_per_second=10.0054M/s ns_per_op=99.979ns
+replay/itch12302019_AAPL/v3_median        160 ms          160 ms           20 items_per_second=10.0464M/s ns_per_op=99.5382ns
+replay/itch12302019_AAPL/v3_stddev       3.02 ms         3.02 ms           20 items_per_second=184.242k/s ns_per_op=1.87508ns
+replay/itch12302019_AAPL/v3_cv           1.88 %          1.88 %            20 items_per_second=1.84% ns_per_op=1.88%
+replay/itch12302019_AAPL/v4_mean          168 ms          168 ms           20 items_per_second=9.74048M/s ns_per_op=104.295ns
+replay/itch12302019_AAPL/v4_median        159 ms          159 ms           20 items_per_second=10.1415M/s ns_per_op=98.6059ns
+replay/itch12302019_AAPL/v4_stddev       24.8 ms         24.7 ms           20 items_per_second=1.09168M/s ns_per_op=15.3637ns
+replay/itch12302019_AAPL/v4_cv          14.75 %         14.73 %            20 items_per_second=11.21% ns_per_op=14.73%
+replay/syn_deep_s42/v4_mean              83.2 ms         83.2 ms           20 items_per_second=12.0327M/s ns_per_op=83.1993ns
+replay/syn_deep_s42/v4_median            83.1 ms         83.1 ms           20 items_per_second=12.035M/s ns_per_op=83.0913ns
+replay/syn_deep_s42/v4_stddev            2.96 ms         2.96 ms           20 items_per_second=397.814k/s ns_per_op=2.95874ns
+replay/syn_deep_s42/v4_cv                3.55 %          3.56 %            20 items_per_second=3.31% ns_per_op=3.56%
+replay/syn_default_s42/v4_mean           70.6 ms         70.6 ms           20 items_per_second=14.232M/s ns_per_op=70.6002ns
+replay/syn_default_s42/v4_median         69.5 ms         69.5 ms           20 items_per_second=14.3969M/s ns_per_op=69.4596ns
+replay/syn_default_s42/v4_stddev         5.65 ms         5.64 ms           20 items_per_second=895.367k/s ns_per_op=5.6417ns
+replay/syn_default_s42/v4_cv             8.00 %          7.99 %            20 items_per_second=6.29% ns_per_op=7.99%

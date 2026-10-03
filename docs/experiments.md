@@ -356,3 +356,64 @@ Google Benchmark（20 次重复，v0–v3 随机交错，中位数 ns/op 和 CV�
 - **slot_of 里有一次 64 位除法**：用来计算 `(price-base)/tick` 和取余，在 rest、erase、level_of 中都会执行。在这次 annotate 的热点里没有出现，暂不处理。
 - **v4 的线索**：v3 在 AAPL 上剩下的热点是 flat_map 索引。cycles 采样中，回放循环（内联了查找）占 50%，`rest` 占 29%；L3 未命中样本中 `rest` 占 44%。其中 42% 落在 `emplace` 写槽位的 `vmovdqu`，`erase` 里读取 `Loc` 的那一行（book.hpp:383）也在热点里。候选方向：把 `Loc` 从 24 字节压到 16 字节，让槽位从 32 字节降到 24 字节。
 
+## [2026-10-04] v4: Loc 从 24 字节压缩到 16 字节（无效：没有可测量的墙钟收益）
+
+- **假设**：v3 在 AAPL 上剩下的热点是 flat_map 索引。`rest` 里 42% 的 L3 未命中样本落在 `emplace` 写槽位的 `vmovdqu` 上，`erase` 读取 `Loc` 的指令也在热点里。v3 的 `Loc{Side, Price, uint32}` 因为 padding 占 24 字节，每个槽位 `pair<const OrderId, Loc>` 是 32 字节。重排字段可以把 Loc 压到 16 字节、槽位压到 24 字节（−25%），预期：
+  - 索引的 L1/L2 未命中下降，cycles 小幅下降
+  - 指令数基本不变（24 字节的步长不能用移位寻址，可能多一条 `lea`）
+- **改动**：commit `034d371`。和 v3 唯一的区别是 `struct Loc { Price price; uint32_t node; Side side; }`，并用 `static_assert` 检查 Loc 是 16 字节、`value_type` 是 24 字节。v3/v4 的网格 + 兜底 map 差分测试改为同时覆盖两个版本。
+- **正确性**：debug 下 ctest 35/35。差分测试 30 个 seed × 20 万 op 全部一致（6 个测试用例）。6 个 workload 上的回放 checksum 一致。
+- **环境**：vm，绑核 CPU 3，commit `034d371`。测量期间 VM 里有 `mysqld` 在运行（占用约 1% CPU），第一次 bench 的 CV 偏高（4–18%），所以对 v3/v4 重跑了一次 bench（`results/bench_*rerun_v3v4*`）。
+
+### 结果（v3 → v4）
+
+cachegrind：
+
+| workload | Ir | D1 读未命中 | D1 写未命中 |
+|---|---:|---:|---:|
+| syn_default | −0.94% | **+5.1%** | **+11.3%** |
+| syn_aggressive | −0.84% | +3.1% | +13.3% |
+| syn_deep | −0.96% | −5.6% | −7.4% |
+| itch AAPL | −1.14% | −3.5% | −7.2% |
+| itch SPY | −1.00% | −6.2% | −26.9% |
+| itch QQQ | −1.00% | −6.5% | −18.5% |
+
+heaptrack：峰值堆内存 AAPL 42.53M → 41.79M（索引变小），分配次数不变（190 → 191）。
+
+硬件计数器（`book counters`，v0/v3/v4 同一进程内交替，9 轮取中位数）：cycles/op 变化 AAPL −0.8%（spread 7.8% / 5.7%）、QQQ −2.1%、syn_default −0.9%、syn_aggressive −1.8%、syn_deep −3.3%（spread 14.3% / 7.7%），**全部落在 spread 之内**。instructions 约 −1%，branch-miss 不变。
+
+`perf.sh stat`（5 次，括号内是 perf 给出的误差）：
+
+| | itch AAPL | syn_deep |
+|---|---:|---:|
+| cycles | −1.9%（±0.6% / ±5.0%） | −6.1%（±0.8% / ±2.5%） |
+| mem_load_retired.l2_miss | **−15.3%**（±2%） | **−12.2%**（±1–2%） |
+| mem_load_retired.l3_miss | −18.6%（±9.5% / ±6.4%） | +19.5%（±15% / ±30%） |
+| cycle_activity.stalls_mem_any | +13.4%（±1.2% / ±13.8%） | −0.9% |
+
+Google Benchmark（中位数 ns/op，CV）：
+
+| workload | 第一次 v3 → v4 | 重跑 v3 → v4 |
+|---|---:|---:|
+| syn_default | 72.8 (4.8%) → 72.8 (13.5%)，−0.0% | 69.3 (2.0%) → 69.5 (8.0%)，+0.2% |
+| syn_deep | 87.6 (13.6%) → 85.2 (8.1%)，−2.7% | 84.6 (6.4%) → 83.1 (3.6%)，−1.8% |
+| itch AAPL | 105.5 (8.2%) → 100.6 (4.2%)，−4.6% | 99.5 (1.9%) → 98.6 (14.7%)，−0.9% |
+| itch QQQ | 83.4 (7.1%) → 78.6 (6.9%)，−5.8% | 78.0 (11.6%) → 78.1 (5.6%)，+0.2% |
+
+累计 v0 → v4（第一次 bench）：AAPL 4.24x，QQQ 3.79x，syn_deep 3.59x，syn_default 2.79x。v4 和 v3 之间没有显著差别，累计数字的变化来自这一轮的噪声。
+
+延迟（AAPL，cycles）：p50 199 → 193，p99 608 → 487，p99.9 1,186 → 944；v3 那一组的 max 是 1590 万 cycles 的离群值，说明这一轮噪声较大。
+
+### 解释
+
+- **槽位变小，确实让 L2 这一层少了未命中**：AAPL 和 syn_deep 的 L2 未命中减少 12–15%，误差只有 1–2%，在 cachegrind 里大索引的 workload 上 D1 读写未命中也都下降了。
+- **但没有转化成 cycles**：v3 之后，访存 stall 只占 AAPL cycles 的约 14%，其中索引又只占一部分。L2 未命中减少 15%，按比例折算到 cycles 上是个位数以下，淹没在 VM 的噪声里。v3 那一轮的 profile 显示索引是头号热点，但"热点里的未命中变少"和"cycles 变少"是两回事：热点的 cycles 里还有大量本身不是访存的指令（SIMD 探测、哈希计算）。
+- **索引小的时候反而吃亏**：syn_default/syn_aggressive 的 D1 读写未命中上升，增量正好集中在槽位写（`pair.h` 写未命中 +81k）和读 `Loc`（`book.hpp` 读未命中 +97k）上。推测（**未验证**）：24 字节的槽位不能整除 64 字节的 cache line，大约 1/4 的槽位跨两条 line；32 字节的槽位永远不跨线。索引放得进缓存时，容量缩小的好处很小，跨线的代价就显露出来了。验证方法：做一个"Loc 仍是 16 字节、但槽位按 32 字节对齐"的对照版本。
+- **预测与实测**：L2 未命中下降，相符；cycles 下降，**不相符**（落在噪声里）；指令数持平或略升，实际是下降约 1%（24 字节的拷贝比 32 字节少），方向猜错了。
+
+### 意外与遗留问题
+
+- 这是第一个"无效"的优化。代码保留，日志如实记录：在 VM 上无法测出收益，到裸金属机器上可以再验证一次。
+- 24 字节槽位跨 cache line 的推测需要用上面提到的对照版本来验证。
+- **v5 的线索**：v4 的 profile 和 v3 基本一样（回放循环 52%、`rest` 27%、`match` 各约 6%）。下一步应该先弄清楚回放循环里 52% 的 cycles 具体花在哪里（`push`/`cancel` 内联后的探测、`slot_of` 的 64 位除法、sink 回调等），而不是继续在索引的内存布局上抠细节。
+
