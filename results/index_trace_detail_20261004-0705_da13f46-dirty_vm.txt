@@ -1,0 +1,49 @@
+# index-only replay of v4's flat_map operations; replay loop only; 9 rounds (median); vm, CPU 
+## timing
+syn:64                             index ops   2399936  cycles/op  17.34  instr/op  53.61  IPC 3.09  br-miss/op 0.015  L1d-miss/op 0.386
+rnd:64                             index ops   2399963  cycles/op  25.60  instr/op  53.49  IPC 2.09  br-miss/op 0.335  L1d-miss/op 0.392
+syn:27000                          index ops   2373000  cycles/op  21.72  instr/op  54.12  IPC 2.49  br-miss/op 0.002  L1d-miss/op 2.263
+rnd:27000                          index ops   2385393  cycles/op  26.23  instr/op  53.77  IPC 2.05  br-miss/op 0.332  L1d-miss/op 2.161
+data/itch12302019_AAPL.ops         index ops   2404859  cycles/op  35.26  instr/op  60.06  IPC 1.70  br-miss/op 0.459  L1d-miss/op 1.691
+## AAPL with table pre-sized to 131072
+data/itch12302019_AAPL.ops         index ops   2404859  cycles/op  28.89  instr/op  53.28  IPC 1.84  br-miss/op 0.301  L1d-miss/op 1.774
+## probe statistics (BOOST_UNORDERED_ENABLE_STATS build; one replay, printed twice: warm-up + measured)
+  stats: rehashes=12 final buckets=61439 | insert n=853726 probe=1.000 | hit n=773000 probe=1.000 cmp=1.000 | miss n=1600000 probe=1.000 cmp=0.002
+  stats: rehashes=12 final buckets=61439 | insert n=853726 probe=1.000 | hit n=773000 probe=1.000 cmp=1.000 | miss n=1600000 probe=1.000 cmp=0.002
+syn:27000                          index ops   2373000  cycles/op  61.33  instr/op 151.76  IPC 2.47  br-miss/op 0.002  L1d-miss/op 2.311
+  stats: rehashes=11 final buckets=30719 | insert n=826847 probe=1.000 | hit n=785393 probe=1.000 cmp=1.003 | miss n=1600000 probe=1.000 cmp=0.005
+  stats: rehashes=11 final buckets=30719 | insert n=826847 probe=1.000 | hit n=785393 probe=1.000 cmp=1.003 | miss n=1600000 probe=1.000 cmp=0.005
+rnd:27000                          index ops   2385393  cycles/op  71.03  instr/op 150.78  IPC 2.12  br-miss/op 0.333  L1d-miss/op 2.243
+  stats: rehashes=12 final buckets=61439 | insert n=1034601 probe=1.109 | hit n=813435 probe=1.128 cmp=1.042 | miss n=1591424 probe=1.143 cmp=0.048
+  stats: rehashes=12 final buckets=61439 | insert n=1034601 probe=1.109 | hit n=813435 probe=1.128 cmp=1.042 | miss n=1591424 probe=1.143 cmp=0.048
+data/itch12302019_AAPL.ops         index ops   2404859  cycles/op  69.57  instr/op 160.48  IPC 2.31  br-miss/op 0.465  L1d-miss/op 1.742
+## AAPL probe statistics, pre-sized
+  stats: rehashes=0 final buckets=245759 | insert n=795712 probe=1.000 | hit n=813435 probe=1.000 cmp=1.004 | miss n=1591424 probe=1.000 cmp=0.005
+  stats: rehashes=0 final buckets=245759 | insert n=795712 probe=1.000 | hit n=813435 probe=1.000 cmp=1.004 | miss n=1591424 probe=1.000 cmp=0.005
+data/itch12302019_AAPL.ops         index ops   2404859  cycles/op  68.77  instr/op 149.30  IPC 2.17  br-miss/op 0.299  L1d-miss/op 2.046
+## branch-miss samples by source line (period 1000; no PEBS: skid)
+    rnd:27000     25.84%  table.hpp:541
+    rnd:27000     21.16%  pair.h:446
+    rnd:27000      5.81%  core.hpp:2266
+    rnd:27000      5.81%  core.hpp:271
+    rnd:27000      5.81%  table.hpp:40
+    rnd:27000      5.43%  core.hpp:0
+    rnd:27000      3.75%  driver.cxx:122
+    rnd:27000      3.18%  driver.cxx:0
+    rnd:27000      2.62%  core.hpp:1729
+    rnd:27000      2.43%  core.hpp:272
+    rnd:27000      2.06%  driver.cxx:106
+    data/itch12302019_AAPL.ops     16.20%  pair.h:446
+    data/itch12302019_AAPL.ops      8.93%  core.hpp:2266
+    data/itch12302019_AAPL.ops      8.10%  core.hpp:271
+    data/itch12302019_AAPL.ops      7.93%  table.hpp:541
+    data/itch12302019_AAPL.ops      6.61%  core.hpp:0
+    data/itch12302019_AAPL.ops      4.13%  core.hpp:1743
+    data/itch12302019_AAPL.ops      2.98%  core.hpp:1729
+    data/itch12302019_AAPL.ops      2.98%  core.hpp:272
+    data/itch12302019_AAPL.ops      2.98%  driver.cxx:0
+    data/itch12302019_AAPL.ops      2.81%  table.hpp:40
+    data/itch12302019_AAPL.ops      2.64%  hash.hpp:538
+    data/itch12302019_AAPL.ops      2.48%  core.hpp:1737
+    data/itch12302019_AAPL.ops      2.48%  core.hpp:297
+    data/itch12302019_AAPL.ops      2.15%  core.hpp:849

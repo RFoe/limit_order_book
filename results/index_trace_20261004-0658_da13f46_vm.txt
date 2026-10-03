@@ -1,0 +1,60 @@
+data/itch12302019_AAPL.ops         index ops   2404859  cycles/op  35.47  instr/op  60.06  IPC 1.69  br-miss/op 0.460  L1d-miss/op 1.719
+    data/itch12302019_AAPL.ops                                                  Events disabled
+    data/itch12302019_AAPL.ops                                                  Events enabled
+    data/itch12302019_AAPL.ops                                                  Events disabled
+    data/itch12302019_AAPL.ops                                                  Events enabled
+    data/itch12302019_AAPL.ops                                                  Events disabled
+    data/itch12302019_AAPL.ops         cycles:u                                 172344218
+    data/itch12302019_AAPL.ops         cycle_activity.stalls_mem_any:u          30794891
+    data/itch12302019_AAPL.ops         mem_load_retired.l2_miss:u               205814
+    data/itch12302019_AAPL.ops         mem_load_retired.l3_miss:u               32879
+data/itch12302019_QQQ.ops          index ops   3704316  cycles/op  27.61  instr/op  54.13  IPC 1.96  br-miss/op 0.352  L1d-miss/op 1.215
+    data/itch12302019_QQQ.ops                                                   Events disabled
+    data/itch12302019_QQQ.ops                                                   Events enabled
+    data/itch12302019_QQQ.ops                                                   Events disabled
+    data/itch12302019_QQQ.ops                                                   Events enabled
+    data/itch12302019_QQQ.ops                                                   Events disabled
+    data/itch12302019_QQQ.ops          cycles:u                                 199352223
+    data/itch12302019_QQQ.ops          cycle_activity.stalls_mem_any:u          31543250
+    data/itch12302019_QQQ.ops          mem_load_retired.l2_miss:u               80210
+    data/itch12302019_QQQ.ops          mem_load_retired.l3_miss:u               30904
+syn:64                             index ops   2399936  cycles/op  17.37  instr/op  53.61  IPC 3.09  br-miss/op 0.015  L1d-miss/op 0.385
+    syn:64                                                                      Events disabled
+    syn:64                                                                      Events enabled
+    syn:64                                                                      Events disabled
+    syn:64                                                                      Events enabled
+    syn:64                                                                      Events disabled
+    syn:64                             cycles:u                                 88034492
+    syn:64                             cycle_activity.stalls_mem_any:u          5424504
+    syn:64                             mem_load_retired.l2_miss:u               5478
+    syn:64                             mem_load_retired.l3_miss:u               2708
+syn:2000                           index ops   2398000  cycles/op  17.61  instr/op  53.53  IPC 3.04  br-miss/op 0.007  L1d-miss/op 1.251
+    syn:2000                                                                    Events disabled
+    syn:2000                                                                    Events enabled
+    syn:2000                                                                    Events disabled
+    syn:2000                                                                    Events enabled
+    syn:2000                                                                    Events disabled
+    syn:2000                           cycles:u                                 85827487
+    syn:2000                           cycle_activity.stalls_mem_any:u          4991151
+    syn:2000                           mem_load_retired.l2_miss:u               19347
+    syn:2000                           mem_load_retired.l3_miss:u               5692
+syn:27000                          index ops   2373000  cycles/op  23.24  instr/op  54.12  IPC 2.33  br-miss/op 0.002  L1d-miss/op 2.283
+    syn:27000                                                                   Events disabled
+    syn:27000                                                                   Events enabled
+    syn:27000                                                                   Events disabled
+    syn:27000                                                                   Events enabled
+    syn:27000                                                                   Events disabled
+    syn:27000                          cycles:u                                 112664502
+    syn:27000                          cycle_activity.stalls_mem_any:u          19474007
+    syn:27000                          mem_load_retired.l2_miss:u               1763719
+    syn:27000                          mem_load_retired.l3_miss:u               39620
+syn:200000                         index ops   2200000  cycles/op  32.53  instr/op  57.10  IPC 1.76  br-miss/op 0.038  L1d-miss/op 2.700
+    syn:200000                                                                  Events disabled
+    syn:200000                                                                  Events enabled
+    syn:200000                                                                  Events disabled
+    syn:200000                                                                  Events enabled
+    syn:200000                                                                  Events disabled
+    syn:200000                         cycles:u                                 161711477
+    syn:200000                         cycle_activity.stalls_mem_any:u          51377820
+    syn:200000                         mem_load_retired.l2_miss:u               2501745
+    syn:200000                         mem_load_retired.l3_miss:u               463774
