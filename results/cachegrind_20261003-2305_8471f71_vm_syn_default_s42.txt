@@ -1,0 +1,12 @@
+# cachegrind 20261003-2305_8471f71_vm workload=syn_default_s42 cache: --I1=32768,8,64 --D1=49152,12,64 --LL=6291456,12,64
+v0 run=0 ops=1000000 events=1052922 trades=61706 checksum=e12f1b85e716675c orders_left=1802 wall_ms=11249.5
+## v0
+I refs:        464,224,729
+I1  miss rate:        0.00%
+LLi miss rate:        0.00%
+D refs:        189,629,963  (117,719,326 rd   + 71,910,637 wr)
+D1  miss rate:         2.1% (        2.6%     +        1.4%  )
+LLd miss rate:         0.2% (        0.3%     +        0.0%  )
+LL refs:         4,003,151  (  3,020,023 rd   +    983,128 wr)
+LL misses:         379,437  (    375,433 rd   +      4,004 wr)
+LL miss rate:          0.1% (        0.1%     +        0.0%  )

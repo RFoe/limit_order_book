@@ -1,0 +1,34 @@
+parsed 268744780 messages (8.25 GB) in 219.9s, malformed=0
+wrote /home/wang/sources/cxx/book/data/itch12302019_AAPL.ops (1609147 ops)
+  itch itch12302019 symbol=AAPL adds=698744 exec=60543 cancel=1467 delete=654457 replace=96968 overfills=0
+  op mix: push=795712 (49.4%) cancel=795712 (49.4%) modify=17723 (1.1%)
+  v0 replay: ops=1609147 trades=0 traded_qty=0 rested=795712 cancelled=795712 reduced=17723 rejected=0 final_orders=0 bid_levels=0 ask_levels=0
+wrote /home/wang/sources/cxx/book/data/itch12302019_SPY.ops (2249458 ops)
+  itch itch12302019 symbol=SPY adds=991829 exec=42635 cancel=19861 delete=960499 replace=117317 overfills=0
+  op mix: push=1109146 (49.3%) cancel=1109146 (49.3%) modify=31166 (1.4%)
+  v0 replay: ops=2249458 trades=0 traded_qty=0 rested=1109146 cancelled=1109146 reduced=31166 rejected=0 final_orders=0 bid_levels=0 ask_levels=0
+wrote /home/wang/sources/cxx/book/data/itch12302019_QQQ.ops (2483220 ops)
+  itch itch12302019 symbol=QQQ adds=1111822 exec=22095 cancel=34226 delete=1096529 replace=109274 overfills=0
+  op mix: push=1221096 (49.2%) cancel=1221096 (49.2%) modify=41028 (1.7%)
+  v0 replay: ops=2483220 trades=0 traded_qty=0 rested=1221096 cancelled=1221096 reduced=41028 rejected=0 final_orders=0 bid_levels=0 ask_levels=0
+top 20 symbols by add orders:
+  QQQ      adds=1111822
+  SPY      adds=991829
+  IWM      adds=926749
+  TQQQ     adds=746238
+  AAPL     adds=698744
+  AMD      adds=686997
+  MSFT     adds=576026
+  XLK      adds=447239
+  XLY      adds=434113
+  TNA      adds=426892
+  DIA      adds=421118
+  NUGT     adds=386802
+  SLB      adds=379991
+  MU       adds=371315
+  TVIX     adds=362623
+  GDXJ     adds=362434
+  EWZ      adds=357692
+  INTC     adds=351663
+  GOOGL    adds=334819
+  URTY     adds=334364

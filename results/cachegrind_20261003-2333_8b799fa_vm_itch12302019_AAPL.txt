@@ -1,0 +1,12 @@
+# cachegrind 20261003-2333_8b799fa_vm workload=itch12302019_AAPL cache: --I1=32768,8,64 --D1=49152,12,64 --LL=6291456,12,64
+v0 run=0 ops=1609147 events=1609147 trades=0 checksum=24e4aa582b142c44 orders_left=0 wall_ms=25788.8
+## v0
+I refs:        908,458,419
+I1  miss rate:        0.00%
+LLi miss rate:        0.00%
+D refs:        351,189,247  (229,013,294 rd   + 122,175,953 wr)
+D1  miss rate:         1.4% (        2.0%     +         0.4%  )
+LLd miss rate:         0.2% (        0.3%     +         0.1%  )
+LL refs:         4,977,981  (  4,529,303 rd   +     448,678 wr)
+LL misses:         703,814  (    631,843 rd   +      71,971 wr)
+LL miss rate:          0.1% (        0.1%     +         0.1%  )

@@ -1,0 +1,12 @@
+
+ Performance counter stats for 'taskset -c 3 /home/wang/sources/cxx/book/build/release/book replay --workload /home/wang/sources/cxx/book/data/syn_default_s42.ops --version v0 --repeat 10' (5 runs):
+
+          2,119.40 msec task-clock                       #    0.999 CPUs utilized               ( +-  1.31% )
+             6,112      page-faults                      #    2.884 K/sec                       ( +-  0.00% )
+             6,112      minor-faults                     #    2.884 K/sec                       ( +-  0.00% )
+                 0      major-faults                     #    0.000 /sec                      
+                15      context-switches                 #    7.077 /sec                        ( +-  4.52% )
+                 0      cpu-migrations                   #    0.000 /sec                      
+
+            2.1218 +- 0.0278 seconds time elapsed  ( +-  1.31% )
+
