@@ -1,0 +1,23 @@
+# cachegrind 20261004-0324_9688ed7-dirty_vm workload=itch12302019_QQQ cache: --I1=32768,8,64 --D1=49152,12,64 --LL=6291456,12,64
+v0 run=0 ops=2483220 events=2483220 trades=0 checksum=804a1538e77acfb2 orders_left=0 wall_ms=28057.3
+## v0
+I refs:        1,306,456,748
+I1  miss rate:          0.00%
+LLi miss rate:          0.00%
+D refs:          511,112,000  (331,056,585 rd   + 180,055,415 wr)
+D1  miss rate:           0.9% (        1.4%     +         0.2%  )
+LLd miss rate:           0.2% (        0.3%     +         0.0%  )
+LL refs:           4,782,627  (  4,508,077 rd   +     274,550 wr)
+LL misses:           964,059  (    941,348 rd   +      22,711 wr)
+LL miss rate:            0.1% (        0.1%     +         0.0%  )
+v1 run=0 ops=2483220 events=2483220 trades=0 checksum=804a1538e77acfb2 orders_left=0 wall_ms=19449.7
+## v1
+I refs:        864,481,169
+I1  miss rate:        0.00%
+LLi miss rate:        0.00%
+D refs:        354,121,692  (243,073,687 rd   + 111,048,005 wr)
+D1  miss rate:         1.1% (        1.0%     +         1.5%  )
+LLd miss rate:         0.3% (        0.4%     +         0.0%  )
+LL refs:         4,059,486  (  2,350,216 rd   +   1,709,270 wr)
+LL misses:         989,265  (    951,661 rd   +      37,604 wr)
+LL miss rate:          0.1% (        0.1%     +         0.0%  )

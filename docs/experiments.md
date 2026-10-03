@@ -84,3 +84,92 @@ Workload：`syn_*` 由 `scripts/gen_workloads.sh` 生成（sha256 见 `results/w
 - **AAPL 的 instructions 在各轮之间并不完全相同**（spread 0.5%），合成数据是 0.0%。原因未查。
 - **TopDown 的 Bad Speculation 约 30%，看起来偏高。** branch-miss 只有 2–3 次/op，而公式依赖 `uops_issued.any` 和 `uops_retired.slots` 的计数口径一致，在 VM 里没法和 perf-metrics 对照。这个值只用于同一台机器上不同版本之间的相对比较。
 
+## [2026-10-04] v1: 订单索引换成 boost::unordered_flat_map
+
+- **假设**：根据 v0 开启 PMU 后的数据，AAPL 的瓶颈在等内存：IPC 1.08，30% 的周期 stall 在内存上。按 `mem_load_retired.l3_miss` 采样，51% 的 L3 未命中、55% 的 L2 未命中落在 `push`。annotate 显示 83% 的样本集中在 `index_.contains(id)` 遍历哈希桶链表时读取 `__hash_` 的那条 load。原因是 `std::unordered_map` 给每个订单单独分配一个堆节点，每次查找都要追一次指针；AAPL 的峰值是 27,110 个在簿订单，工作集超出了 L2。换成开放寻址表后，槽位连续存放、不需要逐节点分配，预期：
+  - 分配次数：AAPL 每个挂单少一次，1.78M → 约 0.98M
+  - `__hash_table` 相关的 Ir 和 D1 读未命中大幅下降
+  - AAPL 的 L2/L3 未命中、stall 下降，IPC 上升
+  - syn_default 的提升主要来自指令数减少
+- **改动**：commit `9688ed7`。`include/lob/v1/book.hpp` 是从 v0 复制来的，唯一的实质改动是 `using Index = boost::unordered_flat_map<OrderId, Loc>;`（boost 1.90，vcpkg 包 `boost-unordered`）。CMake 增加了 `find_package(boost_unordered)` 并链接 `Boost::unordered`。
+- **正确性**：debug 下 ctest 24/24 通过（ASan+UBSan，每一步检查不变量）。release 下差分测试 30 个 seed × 20 万 op，三种生成画像全部一致。ITCH AAPL/SPY/QQQ 和 syn_aggressive 的回放 checksum 与 v0 相同。
+- **环境**：vm，绑核 CPU 3，`results/env_20261004-0321_9688ed7-dirty_vm.txt`。结果文件名带 `-dirty`，是因为工作区里有一处尚未提交的 `include/lob/types.hpp` 格式调整，不影响生成的代码。
+
+### 结果（v0 → v1）
+
+cachegrind（确定性，只统计回放区间；profile 构建）：
+
+| workload | Ir | D1 读未命中 | D1 写未命中 | LLd 未命中（读+写） |
+|---|---:|---:|---:|---:|
+| syn_default | 464.2M → 290.8M (**−37.4%**) | 3.02M → 1.55M (−48.6%) | 0.98M → 1.12M (+13.5%) | +0.6% |
+| syn_aggressive | 473.0M → 304.7M (−35.6%) | −49.0% | +13.6% | +0.0% |
+| syn_deep | 473.9M → 297.1M (−37.3%) | −22.1% | +40.0% | +2.0% |
+| itch AAPL | 908.5M → 623.3M (**−31.4%**) | 4.53M → 2.64M (−41.6%) | 0.45M → 1.42M (**+217.6%**) | +20.8% |
+| itch SPY | 1137.7M → 737.9M (−35.1%) | −62.5% | +203.5% | +0.9% |
+| itch QQQ | 1306.5M → 864.5M (−33.8%) | −47.9% | +522.6% | +2.6% |
+
+heaptrack（分配调用次数）：syn_default 993,497 → 497,393（−49.9%）；AAPL 1,775,571 → 979,877（**−44.8%**，预测约 0.98M）；QQQ 2,590,750 → 1,369,743（−47.1%）。峰值堆内存：AAPL 41.74M → 42.98M。
+
+硬件计数器（`book counters`，同一进程内 v0/v1 交替运行，7 轮取中位数，单位为每 op）：
+
+| workload | cycles | instructions | IPC | branch-miss | L1d miss* | dTLB miss |
+|---|---:|---:|---:|---:|---:|---:|
+| syn_default | 222.5 → 150.3 (−32.5%) | −37.9% | 2.06 → 1.90 | −10.5% | −16.7% | −10.9% |
+| syn_aggressive | 228.3 → 155.7 (−31.8%) | −35.9% | 2.05 → 1.93 | −10.0% | −24.6% | −26.9% |
+| syn_deep | 324.1 → 178.1 (−45.0%) | −37.7% | 1.45 → 1.64 | −19.2% | −5.8% | −62.0% |
+| itch AAPL | 516.8 → 301.7 (**−41.6%**) | −31.9% | **1.08 → 1.26** | −15.8% | −18.6% | −75.8% |
+| itch QQQ | 321.0 → 200.8 (−37.4%) | −34.4% | 1.62 → 1.70 | −28.3% | −9.0% | −67.0% |
+
+\* 内核把 generic 的 L1d read miss 映射成 Icelake 的 L1D.REPLACEMENT，统计的是"L1 换入了多少行"，写操作导致的换入也算在内。所以它要和 cachegrind 的"读+写未命中"对比：AAPL 上 cachegrind 是 4.98M → 4.07M（−18%），和这里的 −18.6% 一致。
+
+`perf.sh stat`（只统计回放区间，5 次取均值）：
+
+| 事件 | AAPL v0 → v1 | syn_default v0 → v1 |
+|---|---:|---:|
+| mem_load_retired.l1_miss | 4.25M → 1.99M (−53.3%) | −54.5% |
+| mem_load_retired.l2_miss | 2.01M → 0.30M (**−85.1%**) | −69.5% |
+| mem_load_retired.l3_miss | 784k → 86k (**−89.0%**) | −48.7% |
+| cycle_activity.stalls_mem_any / cycles | 28.5% → 21.3% | 12.2% → 12.0% |
+| cycle_activity.stalls_l3_miss | 66.5M → 10.9M (−83.7%) | −40.9% |
+| dtlb_load_misses.walk_completed | −81.4% | −30.8% |
+| TopDown 近似值（FE / BadSpec / Ret / BE） | 13.7/30.1/23.9/**32.2** → 17.0/34.6/25.8/**22.6** % | 16.2/29.6/42.7/11.4 → 14.0/37.3/40.4/8.3 % |
+
+Google Benchmark（20 次重复，随机交错，中位数）：
+
+| workload | v0 ns/op (CV) | v1 ns/op (CV) | 变化 |
+|---|---:|---:|---:|
+| syn_default | 193.9 (4.08%) | 127.8 (1.88%) | −34.1%（1.52x） |
+| syn_aggressive | 200.9 (4.50%) | 138.1 (2.15%) | −31.3%（1.45x） |
+| syn_deep | 272.1 (4.16%) | 152.9 (2.06%) | −43.8%（1.78x） |
+| itch AAPL | 396.4 (5.24%) | 258.0 (2.30%) | −34.9%（1.54x） |
+| itch QQQ | 276.4 (2.09%) | 175.1 (1.81%) | −36.7%（1.58x） |
+
+延迟（cycles，包含约 58 cycles 的计时开销，5 轮，VM 中仅作参考）：
+
+| | p50 | p99 | p99.9 |
+|---|---:|---:|---:|
+| syn_default all | 287 → 228 | 744 → 479 | 1,339 → 837 |
+| AAPL all | 508 → 372 | 1,554 → 926 | 3,696 → 2,668 |
+| AAPL push_rest | 533 → 341 | 1,635 → 882 | 4,416 → 2,480 |
+
+### 解释
+
+- **节省来自哪里**（`cg_annotate --diff`，AAPL）：
+  - `__hash_table`：Ir −221.0M，D1 读未命中 −3.03M
+  - `malloc.c`：Ir −110.8M，因为哈希节点不再分配
+  - 新增 boost `foa/core.hpp`：Ir +101.7M，D1 读未命中 +0.81M
+  - 新增 `mulx.hpp`：Ir +6.9M。这是 boost 对 `boost::hash<uint64_t>`（恒等函数）结果做的再混合，正好解决了 v0 遗留假设里说的 id 分布问题
+  
+  净效果是指令数 −31%，D1 读未命中 −42%。原始文件见 `results/cachegrind_*9688ed7*_diff_v0_v1.txt`。
+- **为什么 AAPL 收益最大**：v0 在 AAPL 上的瓶颈是索引节点的 L2/L3 未命中。v1 把 L3 未命中降低了 89%，stall_l3 降低了 84%，所以 cycles 的降幅（−41.6%）大于 instructions 的降幅（−31.9%），IPC 从 1.08 升到 1.26。syn_default 本来就不太受内存限制，stall 占比也没变（12.2% → 12.0%），收益基本来自指令变少，所以 IPC 反而从 2.06 降到 1.90：剩下的代码里，追指针的比例更高了。
+- **预测与实测**：分配次数预测约 0.98M，实测 979,877，相符。L2/L3 未命中、IPC 的变化方向都和预测一致。
+
+### 意外与遗留问题
+
+- **D1 写未命中大幅上升**（AAPL +1.11M，几乎全部来自 `pair.h`，即把 `pair<OrderId, Loc>` 写进槽位）。v0 往刚 malloc 出来的节点写入，而 glibc tcache 是后进先出的，复用的是刚释放、还在缓存里的内存；v1 是按哈希值往一个大数组的随机槽位写入，所以更容易未命中。代价被读未命中的下降抵消掉了，但它说明 v1 的写路径对缓存并不友好。cachegrind 里 AAPL 的 LL 写未命中也从 72k 升到 186k。
+- **扁平表按峰值容量分配，之后不会缩小**，峰值堆内存略有增加。
+- **TopDown 的 Bad Speculation 占比上升（30% → 35%）**，但 branch-miss 的绝对次数下降了 16%。占比上升只是因为总周期（分母）变少了。这个近似公式本身仍然只适合做相对比较。
+- **同一份 AAPL workload，两种方式测出的 instructions 不完全一致**：进程内多轮（`book counters`）测到 v1 为 611.8M，新进程（perf stat）测到 620.0M，相差约 1.3%。推测与 malloc 的堆状态有关，未查证。
+- **`perf record` 推算出的事件总数不能当作绝对值**：按 l3_miss 采样时，推算的总数远低于 perf stat 的精确计数（dmesg 里有采样降频的提示），所以只看比例分布。为此给 `perf.sh` 加了 `LOB_PERF_PERIOD`，稀有事件可以按固定间隔采样。
+- **v2 的线索**：v1 在 AAPL 上剩下的 L3 未命中样本里，`rest`（插入 map 和 list）占 29%，删除价位/链表节点的 `erase` lambda 占 22.5%，内联到回放循环里的扁平表查找占 25%，malloc 约 10%。cycles 采样里 `rest` 占 29%，`erase` 占 18%。瓶颈已经转移到价位树（`std::map`）和订单链表节点（`std::list`）上，下一步的候选是订单节点池（或侵入式链表）以及价位结构。
+

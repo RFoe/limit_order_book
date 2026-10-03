@@ -1,0 +1,2000 @@
+ Percent |	Source code & Disassembly of book for mem_load_retired.l3_miss:u (7907 samples, percent: local period)
+----------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     000000000001eb90 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)>:
+         : 6     Qty qty;
+         : 7     };
+         :
+         : 9     explicit Book(Sink& sink) : sink_(sink) {}
+         :
+         : 11    void push(OrderId id, Side side, Price price, Qty qty) {
+    0.04 :   1eb90:  push   %rbp
+    0.01 :   1eb91:  push   %r15
+    0.00 :   1eb93:  push   %r14
+    0.00 :   1eb95:  push   %rbx
+    0.00 :   1eb96:  push   %rax
+    0.00 :   1eb97:  mov    %rsi,%rbx
+         : 18    if (qty == 0) return reject(id, OpType::Push, RejectReason::InvalidQty);
+    0.00 :   1eb9a:  test   %r8d,%r8d
+    0.00 :   1eb9d:  je     1ebed <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x5d>
+    0.00 :   1eb9f:  mov    %rcx,%r14
+         : 22    if (price <= 0) return reject(id, OpType::Push, RejectReason::InvalidPrice);
+    0.03 :   1eba2:  test   %rcx,%rcx
+    0.00 :   1eba5:  jle    1ec22 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x92>
+    0.00 :   1eba7:  mov    %edx,%ebp
+         : 26    : __size_(std::move(__x.__size_)), __alloc_(std::move(__x.__alloc_)) {
+         : 27    __x.size() = 0;
+         : 28    }
+         :
+         : 30    _LIBCPP_HIDE_FROM_ABI size_type& size() _NOEXCEPT { return __size_; }
+         : 31    _LIBCPP_HIDE_FROM_ABI size_type size() const _NOEXCEPT { return __size_; }
+    0.00 :   1eba9:  mov    0x40(%rdi),%rsi
+         : 33    template <class _Tp, class _Hash, class _Equal, class _Alloc>
+         : 34    template <class _Key>
+         : 35    typename __hash_table<_Tp, _Hash, _Equal, _Alloc>::const_iterator
+         : 36    __hash_table<_Tp, _Hash, _Equal, _Alloc>::find(const _Key& __k) const {
+         : 37    size_type __bc = bucket_count();
+         : 38    if (__bc != 0 && size() != 0) {
+    0.00 :   1ebad:  test   %rsi,%rsi
+    0.00 :   1ebb0:  je     1ed70 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x1e0>
+    0.00 :   1ebb6:  cmpq   $0x0,0x50(%rdi)
+    0.00 :   1ebbb:  je     1ed70 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x1e0>
+         : 43    return !(__bc & (__bc - 1)) ? __h & (__bc - 1) : (__h < __bc ? __h : __h % __bc);
+    0.01 :   1ebc1:  popcnt %rsi,%r10
+    0.00 :   1ebc6:  cmp    $0x1,%r10
+    0.00 :   1ebca:  ja     1ec5f <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0xcf>
+    0.00 :   1ebd0:  lea    -0x1(%rsi),%rcx
+    0.00 :   1ebd4:  and    %rbx,%rcx
+         : 49    }
+         :
+         : 51    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX23 __add_lvalue_reference_t<_Tp> operator[](size_t __i) const {
+         : 52    _LIBCPP_ASSERT_VALID_ELEMENT_ACCESS(__checker_.__in_bounds<deleter_type>(std::__to_address(__ptr_), __i),
+         : 53    "unique_ptr<T[]>::operator[](index): index out of range");
+         : 54    return __ptr_[__i];
+    0.00 :   1ebd7:  mov    0x38(%rdi),%rax
+         : 56    size_t __hash       = hash_function()(__k);
+         : 57    size_t __chash      = std::__constrain_hash(__hash, __bc);
+         : 58    __next_pointer __nd = __bucket_list_[__chash];
+    0.00 :   1ebdb:  mov    (%rax,%rcx,8),%rax
+         : 60    if (__nd != nullptr) {
+    0.00 :   1ebdf:  test   %rax,%rax
+    0.00 :   1ebe2:  jne    1ec93 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x103>
+    0.00 :   1ebe8:  jmp    1ed70 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x1e0>
+         : 64    };
+         : 65    using Index = std::unordered_map<OrderId, Loc>;
+         :
+         : 67    [[noreturn]] static void fail(const std::string& what) { throw std::logic_error("v0 invariant: " + what); }
+         :
+         : 69    void reject(OrderId id, OpType op, RejectReason reason) { sink_.on(Rejected{id, op, reason}); }
+    0.00 :   1ebed:  mov    (%rdi),%rax
+         : 71    }
+         :
+         : 73    private:
+         : 74    template <class... T>
+         : 75    void mix(T... xs) noexcept {
+         : 76    ++events;
+    0.00 :   1ebf0:  incq   0x8(%rax)
+         : 78    ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.00 :   1ebf4:  mov    (%rax),%rcx
+    0.00 :   1ebf7:  xor    $0x5,%rcx
+    0.00 :   1ebfb:  movabs $0x9e3779b97f4a7c15,%rdx
+    0.00 :   1ec05:  imul   %rcx,%rdx
+    0.00 :   1ec09:  xor    %rbx,%rdx
+    0.00 :   1ec0c:  movabs $0x604a5ce3addef82d,%rcx
+    0.00 :   1ec16:  imul   %rdx,%rcx
+    0.00 :   1ec1a:  mov    %rcx,(%rax)
+         : 87    if (qty == 0) return reject(id, OpType::Push, RejectReason::InvalidQty);
+    0.00 :   1ec1d:  jmp    1edeb <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x25b>
+         : 89    void reject(OrderId id, OpType op, RejectReason reason) { sink_.on(Rejected{id, op, reason}); }
+    0.00 :   1ec22:  mov    (%rdi),%rax
+         : 91    ++events;
+    0.00 :   1ec25:  incq   0x8(%rax)
+         : 93    ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.00 :   1ec29:  mov    (%rax),%rcx
+    0.00 :   1ec2c:  xor    $0x5,%rcx
+    0.00 :   1ec30:  movabs $0x9e3779b97f4a7c15,%rdx
+    0.00 :   1ec3a:  imul   %rdx,%rcx
+    0.00 :   1ec3e:  xor    %rbx,%rcx
+    0.00 :   1ec41:  movabs $0xdf442d22ce4859b9,%rsi
+    0.00 :   1ec4b:  imul   %rcx,%rsi
+    0.00 :   1ec4f:  xor    $0x1,%rsi
+    0.00 :   1ec53:  imul   %rdx,%rsi
+    0.00 :   1ec57:  mov    %rsi,(%rax)
+         : 104   if (price <= 0) return reject(id, OpType::Push, RejectReason::InvalidPrice);
+    0.00 :   1ec5a:  jmp    1edeb <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x25b>
+    0.01 :   1ec5f:  mov    %rbx,%rcx
+         : 107   return !(__bc & (__bc - 1)) ? __h & (__bc - 1) : (__h < __bc ? __h : __h % __bc);
+    0.00 :   1ec62:  cmp    %rsi,%rbx
+    0.00 :   1ec65:  jb     1ec82 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0xf2>
+    0.00 :   1ec67:  mov    %rbx,%rax
+    0.00 :   1ec6a:  or     %rsi,%rax
+    0.00 :   1ec6d:  shr    $0x20,%rax
+    0.00 :   1ec71:  je     1ed57 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x1c7>
+    0.00 :   1ec77:  mov    %rbx,%rax
+    0.00 :   1ec7a:  xor    %edx,%edx
+    0.00 :   1ec7c:  div    %rsi
+    0.00 :   1ec7f:  mov    %rdx,%rcx
+    0.00 :   1ec82:  mov    0x38(%rdi),%rax
+         : 119   __next_pointer __nd = __bucket_list_[__chash];
+    0.00 :   1ec86:  mov    (%rax,%rcx,8),%rax
+         : 121   if (__nd != nullptr) {
+    0.00 :   1ec8a:  test   %rax,%rax
+    0.00 :   1ec8d:  je     1ed70 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x1e0>
+    0.06 :   1ec93:  mov    (%rax),%r9
+         : 125   for (__nd = __nd->__next_;
+         : 126   __nd != nullptr && (__hash == __nd->__hash() || std::__constrain_hash(__nd->__hash(), __bc) == __chash);
+    5.63 :   1ec96:  test   %r9,%r9
+    0.00 :   1ec99:  je     1ed70 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x1e0>
+         : 129   return !(__bc & (__bc - 1)) ? __h & (__bc - 1) : (__h < __bc ? __h : __h % __bc);
+    0.03 :   1ec9f:  cmp    $0x2,%r10d
+    0.00 :   1eca3:  jae    1ecc2 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x132>
+    0.00 :   1eca5:  dec    %rsi
+    0.00 :   1eca8:  jmp    1ed0e <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x17e>
+    0.00 :   1ecaa:  nopw   0x0(%rax,%rax,1)
+         : 135   template <class _Tp>
+         : 136   #endif
+         : 137   struct equal_to : __binary_function<_Tp, _Tp, bool> {
+         : 138   typedef bool __result_type; // used by valarray
+         : 139   _LIBCPP_CONSTEXPR_SINCE_CXX14 _LIBCPP_HIDE_FROM_ABI bool operator()(const _Tp& __x, const _Tp& __y) const {
+         : 140   return __x == __y;
+    0.00 :   1ecb0:  cmp    %rbx,0x10(%r9)
+         : 142   __nd = __nd->__next_) {
+         : 143   if ((__nd->__hash() == __hash) && key_eq()(__nd->__upcast()->__get_value(), __k))
+    0.00 :   1ecb4:  je     1ed21 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x191>
+    0.59 :   1ecb6:  mov    (%r9),%r9
+         : 146   __nd != nullptr && (__hash == __nd->__hash() || std::__constrain_hash(__nd->__hash(), __bc) == __chash);
+    2.50 :   1ecb9:  test   %r9,%r9
+    0.00 :   1ecbc:  je     1ed70 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x1e0>
+         : 149   _LIBCPP_HIDE_FROM_ABI size_t __hash() const _NOEXCEPT { return static_cast<__node_type const&>(*this).__hash_; }
+    5.34 :   1ecc2:  mov    0x8(%r9),%rax
+         : 151   __nd != nullptr && (__hash == __nd->__hash() || std::__constrain_hash(__nd->__hash(), __bc) == __chash);
+   78.89 :   1ecc6:  cmp    %rax,%rbx
+    0.00 :   1ecc9:  je     1ecb0 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x120>
+         : 154   return !(__bc & (__bc - 1)) ? __h & (__bc - 1) : (__h < __bc ? __h : __h % __bc);
+    1.04 :   1eccb:  cmp    %rsi,%rax
+    0.00 :   1ecce:  jb     1ece4 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x154>
+    0.20 :   1ecd0:  mov    %rax,%rdx
+    0.05 :   1ecd3:  or     %rsi,%rdx
+    0.06 :   1ecd6:  shr    $0x20,%rdx
+    0.29 :   1ecda:  je     1ecee <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x15e>
+    0.00 :   1ecdc:  xor    %edx,%edx
+    0.00 :   1ecde:  div    %rsi
+    0.00 :   1ece1:  mov    %rdx,%rax
+         : 164   __nd != nullptr && (__hash == __nd->__hash() || std::__constrain_hash(__nd->__hash(), __bc) == __chash);
+    0.00 :   1ece4:  cmp    %rcx,%rax
+         : 166   for (__nd = __nd->__next_;
+    0.00 :   1ece7:  je     1ecb6 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x126>
+    0.00 :   1ece9:  jmp    1ed70 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x1e0>
+         : 169   return !(__bc & (__bc - 1)) ? __h & (__bc - 1) : (__h < __bc ? __h : __h % __bc);
+    0.15 :   1ecee:  xor    %edx,%edx
+    0.00 :   1ecf0:  div    %esi
+    0.76 :   1ecf2:  mov    %edx,%eax
+         : 173   __nd != nullptr && (__hash == __nd->__hash() || std::__constrain_hash(__nd->__hash(), __bc) == __chash);
+    0.15 :   1ecf4:  cmp    %rcx,%rax
+         : 175   for (__nd = __nd->__next_;
+    0.00 :   1ecf7:  je     1ecb6 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x126>
+    0.28 :   1ecf9:  jmp    1ed70 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x1e0>
+    0.00 :   1ecfb:  nopl   0x0(%rax,%rax,1)
+    0.00 :   1ed00:  cmp    %rbx,0x10(%r9)
+         : 180   if ((__nd->__hash() == __hash) && key_eq()(__nd->__upcast()->__get_value(), __k))
+    0.00 :   1ed04:  je     1ed21 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x191>
+    0.00 :   1ed06:  mov    (%r9),%r9
+         : 183   __nd != nullptr && (__hash == __nd->__hash() || std::__constrain_hash(__nd->__hash(), __bc) == __chash);
+    0.00 :   1ed09:  test   %r9,%r9
+    0.00 :   1ed0c:  je     1ed70 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x1e0>
+         : 186   _LIBCPP_HIDE_FROM_ABI size_t __hash() const _NOEXCEPT { return static_cast<__node_type const&>(*this).__hash_; }
+    0.00 :   1ed0e:  mov    0x8(%r9),%rax
+         : 188   __nd != nullptr && (__hash == __nd->__hash() || std::__constrain_hash(__nd->__hash(), __bc) == __chash);
+    0.00 :   1ed12:  cmp    %rax,%rbx
+    0.00 :   1ed15:  je     1ed00 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x170>
+         : 191   return !(__bc & (__bc - 1)) ? __h & (__bc - 1) : (__h < __bc ? __h : __h % __bc);
+    0.00 :   1ed17:  and    %rsi,%rax
+         : 193   __nd != nullptr && (__hash == __nd->__hash() || std::__constrain_hash(__nd->__hash(), __bc) == __chash);
+    0.00 :   1ed1a:  cmp    %rcx,%rax
+         : 195   for (__nd = __nd->__next_;
+    0.00 :   1ed1d:  je     1ed06 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x176>
+    0.00 :   1ed1f:  jmp    1ed70 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x1e0>
+         : 198   void reject(OrderId id, OpType op, RejectReason reason) { sink_.on(Rejected{id, op, reason}); }
+    0.00 :   1ed21:  mov    (%rdi),%rax
+         : 200   ++events;
+    0.00 :   1ed24:  incq   0x8(%rax)
+         : 202   ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.00 :   1ed28:  mov    (%rax),%rcx
+    0.00 :   1ed2b:  xor    $0x5,%rcx
+    0.00 :   1ed2f:  movabs $0x9e3779b97f4a7c15,%rdx
+    0.00 :   1ed39:  imul   %rdx,%rcx
+    0.00 :   1ed3d:  xor    %rbx,%rcx
+    0.00 :   1ed40:  movabs $0xdf442d22ce4859b9,%rsi
+    0.00 :   1ed4a:  imul   %rcx,%rsi
+    0.00 :   1ed4e:  xor    $0x2,%rsi
+    0.00 :   1ed52:  jmp    1ec53 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0xc3>
+         : 212   return !(__bc & (__bc - 1)) ? __h & (__bc - 1) : (__h < __bc ? __h : __h % __bc);
+    0.00 :   1ed57:  mov    %ebx,%eax
+    0.00 :   1ed59:  xor    %edx,%edx
+    0.01 :   1ed5b:  div    %esi
+    0.09 :   1ed5d:  mov    %edx,%ecx
+    0.00 :   1ed5f:  mov    0x38(%rdi),%rax
+         : 218   __next_pointer __nd = __bucket_list_[__chash];
+    0.00 :   1ed63:  mov    (%rax,%rcx,8),%rax
+         : 220   if (__nd != nullptr) {
+    0.32 :   1ed67:  test   %rax,%rax
+    0.00 :   1ed6a:  jne    1ec93 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x103>
+         : 223   auto level_of(const Loc& loc) -> Level& {
+         : 224   return loc.side == Side::Buy ? bids_.find(loc.price)->second : asks_.find(loc.price)->second;
+         : 225   }
+         :
+         : 227   void add(OrderId id, Side side, Price price, Qty qty) {
+         : 228   if (side == Side::Buy)
+    0.19 :   1ed70:  test   %bpl,%bpl
+    0.00 :   1ed73:  je     1edb1 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x221>
+         : 231   qty = match(asks_, id, qty, [price](Price ask) { return ask <= price; });
+         : 232   else
+         : 233   qty = match(bids_, id, qty, [price](Price bid) { return bid >= price; });
+    0.87 :   1ed75:  lea    0x8(%rdi),%rsi
+    0.09 :   1ed79:  mov    %rdi,%r15
+    0.00 :   1ed7c:  mov    %rbx,%rdx
+    0.00 :   1ed7f:  mov    %r8d,%ecx
+    0.03 :   1ed82:  mov    %r14,%r8
+    0.15 :   1ed85:  call   1f5e0 <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})>
+         : 240   if (qty == 0) return;
+    0.00 :   1ed8a:  test   %eax,%eax
+    0.00 :   1ed8c:  je     1edeb <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x25b>
+    0.00 :   1ed8e:  mov    %r15,%rdi
+         : 244   if (side == Side::Buy)
+         : 245   rest(bids_, id, side, price, qty);
+         : 246   else
+         : 247   rest(asks_, id, side, price, qty);
+    0.00 :   1ed91:  lea    0x20(%r15),%rsi
+    0.01 :   1ed95:  movzbl %bpl,%ecx
+    0.00 :   1ed99:  mov    %rbx,%rdx
+    0.00 :   1ed9c:  mov    %r14,%r8
+    0.00 :   1ed9f:  mov    %eax,%r9d
+    0.08 :   1eda2:  add    $0x8,%rsp
+    0.04 :   1eda6:  pop    %rbx
+    0.01 :   1eda7:  pop    %r14
+    0.00 :   1eda9:  pop    %r15
+    0.00 :   1edab:  pop    %rbp
+    0.05 :   1edac:  jmp    1f970 <void lob::v0::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)>
+         : 259   qty = match(asks_, id, qty, [price](Price ask) { return ask <= price; });
+    1.38 :   1edb1:  lea    0x20(%rdi),%rsi
+    0.06 :   1edb5:  mov    %rdi,%r15
+    0.00 :   1edb8:  mov    %rbx,%rdx
+    0.00 :   1edbb:  mov    %r8d,%ecx
+    0.04 :   1edbe:  mov    %r14,%r8
+    0.11 :   1edc1:  call   1f3f0 <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1})>
+         : 266   if (qty == 0) return;
+    0.03 :   1edc6:  test   %eax,%eax
+    0.00 :   1edc8:  je     1edeb <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)+0x25b>
+    0.03 :   1edca:  mov    %r15,%rdi
+         : 270   rest(bids_, id, side, price, qty);
+    0.00 :   1edcd:  lea    0x8(%r15),%rsi
+    0.00 :   1edd1:  mov    %rbx,%rdx
+    0.00 :   1edd4:  xor    %ecx,%ecx
+    0.11 :   1edd6:  mov    %r14,%r8
+    0.00 :   1edd9:  mov    %eax,%r9d
+    0.09 :   1eddc:  add    $0x8,%rsp
+    0.05 :   1ede0:  pop    %rbx
+    0.03 :   1ede1:  pop    %r14
+    0.00 :   1ede3:  pop    %r15
+    0.00 :   1ede5:  pop    %rbp
+    0.01 :   1ede6:  jmp    1f7d0 <void lob::v0::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)>
+         : 282   }
+    0.00 :   1edeb:  add    $0x8,%rsp
+    0.00 :   1edef:  pop    %rbx
+    0.00 :   1edf0:  pop    %r14
+    0.00 :   1edf2:  pop    %r15
+    0.00 :   1edf4:  pop    %rbp
+    0.00 :   1edf5:  ret
+ Percent |	Source code & Disassembly of libc.so.6 for mem_load_retired.l3_miss:u (863 samples, percent: local period)
+--------------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     00000000000ad650 <__libc_malloc>:
+    0.46 :   ad650:  endbr64
+    0.00 :   ad654:  push   %rbp
+    0.12 :   ad655:  mov    %rsp,%rbp
+    0.00 :   ad658:  push   %r13
+   32.44 :   ad65a:  push   %r12
+    0.00 :   ad65c:  push   %rbx
+    0.00 :   ad65d:  mov    %rdi,%rbx
+    0.12 :   ad660:  sub    $0x18,%rsp
+    0.12 :   ad664:  cmpb   $0x0,0x15cb1d(%rip)        # 20a188 <__malloc_initialized>
+    0.23 :   ad66b:  je     ad860 <__libc_malloc+0x210>
+   23.75 :   ad671:  test   %rbx,%rbx
+    0.00 :   ad674:  js     ad86e <__libc_malloc+0x21e>
+    0.00 :   ad67a:  lea    0x17(%rbx),%rax
+    0.23 :   ad67e:  xor    %r12d,%r12d
+    0.12 :   ad681:  cmp    $0x1f,%rax
+    0.00 :   ad685:  jbe    ad693 <__libc_malloc+0x43>
+    0.00 :   ad687:  and    $0xfffffffffffffff0,%rax
+    0.00 :   ad68b:  lea    -0x11(%rax),%r12
+    0.23 :   ad68f:  shr    $0x4,%r12
+    0.12 :   ad693:  mov    0x1556fe(%rip),%r13        # 202d98 <_GLOBAL_OFFSET_TABLE_+0x218>
+   17.96 :   ad69a:  mov    %fs:0x0(%r13),%rdx
+    2.78 :   ad69f:  test   %rdx,%rdx
+    0.00 :   ad6a2:  je     ad760 <__libc_malloc+0x110>
+    0.12 :   ad6a8:  cmp    0x155b39(%rip),%r12        # 2031e8 <mp_+0x68>
+    0.00 :   ad6af:  jb     ad798 <__libc_malloc+0x148>
+    0.00 :   ad6b5:  cmpb   $0x0,0x15d984(%rip)        # 20b040 <__libc_single_threaded>
+    0.35 :   ad6bc:  jne    ad7e0 <__libc_malloc+0x190>
+    0.00 :   ad6c2:  mov    0x1556c7(%rip),%rax        # 202d90 <_GLOBAL_OFFSET_TABLE_+0x210>
+    0.00 :   ad6c9:  mov    %fs:(%rax),%r12
+    0.00 :   ad6cd:  test   %r12,%r12
+    0.00 :   ad6d0:  je     ad890 <__libc_malloc+0x240>
+    0.00 :   ad6d6:  xor    %eax,%eax
+    0.00 :   ad6d8:  mov    $0x1,%edx
+    0.00 :   ad6dd:  lock cmpxchg %edx,(%r12)
+    0.00 :   ad6e3:  jne    ad918 <__libc_malloc+0x2c8>
+    0.00 :   ad6e9:  mov    %rbx,%rsi
+    0.00 :   ad6ec:  mov    %r12,%rdi
+    0.00 :   ad6ef:  call   ab570 <_int_malloc>
+    0.00 :   ad6f4:  test   %rax,%rax
+    0.00 :   ad6f7:  je     ad8c8 <__libc_malloc+0x278>
+    0.00 :   ad6fd:  xor    %edx,%edx
+    0.00 :   ad6ff:  xchg   %edx,(%r12)
+    0.00 :   ad703:  cmp    $0x1,%edx
+    0.00 :   ad706:  jg     ad928 <__libc_malloc+0x2d8>
+    0.00 :   ad70c:  mov    -0x8(%rax),%rdx
+    0.00 :   ad710:  test   $0x2,%dl
+    0.00 :   ad713:  jne    ad754 <__libc_malloc+0x104>
+    0.00 :   ad715:  and    $0x4,%edx
+    0.00 :   ad718:  lea    0x1563a1(%rip),%rcx        # 203ac0 <main_arena>
+    0.00 :   ad71f:  je     ad74b <__libc_malloc+0xfb>
+    0.00 :   ad721:  mov    0x155a88(%rip),%rcx        # 2031b0 <mp_+0x30>
+    0.00 :   ad728:  lea    0x0(,%rcx,4),%rdx
+    0.00 :   ad730:  neg    %rdx
+    0.00 :   ad733:  test   %rcx,%rcx
+    0.00 :   ad736:  mov    $0xfffffffffc000000,%rcx
+    0.00 :   ad73d:  cmove  %rcx,%rdx
+    0.00 :   ad741:  lea    -0x10(%rax),%rcx
+    0.00 :   ad745:  and    %rcx,%rdx
+    0.00 :   ad748:  mov    (%rdx),%rcx
+    0.00 :   ad74b:  cmp    %r12,%rcx
+    0.00 :   ad74e:  jne    ad8f4 <__libc_malloc+0x2a4>
+    0.00 :   ad754:  add    $0x18,%rsp
+    0.00 :   ad758:  pop    %rbx
+    0.00 :   ad759:  pop    %r12
+    0.00 :   ad75b:  pop    %r13
+    0.00 :   ad75d:  pop    %rbp
+    0.00 :   ad75e:  ret
+    0.00 :   ad75f:  nop
+    0.00 :   ad760:  mov    0x155639(%rip),%rax        # 202da0 <_GLOBAL_OFFSET_TABLE_+0x220>
+    0.00 :   ad767:  cmpb   $0x0,%fs:(%rax)
+    0.00 :   ad76b:  jne    ad6b5 <__libc_malloc+0x65>
+    0.00 :   ad771:  call   ace10 <tcache_init.part.0>
+    0.00 :   ad776:  cmp    0x155a6b(%rip),%r12        # 2031e8 <mp_+0x68>
+    0.00 :   ad77d:  jae    ad6b5 <__libc_malloc+0x65>
+    0.00 :   ad783:  mov    %fs:0x0(%r13),%rdx
+    0.00 :   ad788:  test   %rdx,%rdx
+    0.00 :   ad78b:  je     ad6b5 <__libc_malloc+0x65>
+    0.00 :   ad791:  nopl   0x0(%rax)
+    0.00 :   ad798:  movzwl (%rdx,%r12,2),%ecx
+    0.70 :   ad79d:  test   %cx,%cx
+    0.00 :   ad7a0:  je     ad6b5 <__libc_malloc+0x65>
+    0.12 :   ad7a6:  lea    0x10(%r12),%rdi
+    0.00 :   ad7ab:  mov    (%rdx,%rdi,8),%rax
+   14.25 :   ad7af:  test   $0xf,%al
+    0.00 :   ad7b1:  jne    ad940 <__libc_malloc+0x2f0>
+    0.00 :   ad7b7:  mov    %rax,%rsi
+    0.12 :   ad7ba:  sub    $0x1,%ecx
+    0.00 :   ad7bd:  shr    $0xc,%rsi
+    0.00 :   ad7c1:  xor    (%rax),%rsi
+    1.51 :   ad7c4:  mov    %rsi,(%rdx,%rdi,8)
+    0.23 :   ad7c8:  mov    %cx,(%rdx,%r12,2)
+    0.12 :   ad7cd:  movq   $0x0,0x8(%rax)
+    3.48 :   ad7d5:  add    $0x18,%rsp
+    0.00 :   ad7d9:  pop    %rbx
+    0.00 :   ad7da:  pop    %r12
+    0.00 :   ad7dc:  pop    %r13
+    0.12 :   ad7de:  pop    %rbp
+    0.00 :   ad7df:  ret
+    0.23 :   ad7e0:  mov    %rbx,%rsi
+    0.00 :   ad7e3:  lea    0x1562d6(%rip),%rbx        # 203ac0 <main_arena>
+    0.00 :   ad7ea:  mov    %rbx,%rdi
+    0.00 :   ad7ed:  call   ab570 <_int_malloc>
+    0.00 :   ad7f2:  test   %rax,%rax
+    0.00 :   ad7f5:  je     ad87c <__libc_malloc+0x22c>
+    0.00 :   ad7fb:  mov    -0x8(%rax),%rdx
+    0.00 :   ad7ff:  test   $0x2,%dl
+    0.00 :   ad802:  jne    ad754 <__libc_malloc+0x104>
+    0.00 :   ad808:  and    $0x4,%edx
+    0.00 :   ad80b:  je     ad754 <__libc_malloc+0x104>
+    0.00 :   ad811:  mov    0x155998(%rip),%rcx        # 2031b0 <mp_+0x30>
+    0.00 :   ad818:  lea    0x0(,%rcx,4),%rdx
+    0.00 :   ad820:  neg    %rdx
+    0.00 :   ad823:  test   %rcx,%rcx
+    0.00 :   ad826:  mov    $0xfffffffffc000000,%rcx
+    0.00 :   ad82d:  cmove  %rcx,%rdx
+    0.00 :   ad831:  lea    -0x10(%rax),%rcx
+    0.00 :   ad835:  and    %rcx,%rdx
+    0.00 :   ad838:  cmp    %rbx,(%rdx)
+    0.00 :   ad83b:  je     ad754 <__libc_malloc+0x104>
+    0.00 :   ad841:  lea    0x124cc8(%rip),%rcx        # 1d2510 <__PRETTY_FUNCTION__.1>
+    0.00 :   ad848:  mov    $0xd01,%edx
+    0.00 :   ad84d:  lea    0x11ed55(%rip),%rsi        # 1cc5a9 <null+0xeae>
+    0.00 :   ad854:  lea    0x1248dd(%rip),%rdi        # 1d2138 <__PRETTY_FUNCTION__.1+0xce8>
+    0.00 :   ad85b:  call   3b2f0 <__libc_assert_fail>
+    0.00 :   ad860:  call   a9d70 <ptmalloc_init.part.0>
+    0.00 :   ad865:  test   %rbx,%rbx
+    0.00 :   ad868:  jns    ad67a <__libc_malloc+0x2a>
+    0.00 :   ad86e:  mov    0x155583(%rip),%rax        # 202df8 <_GLOBAL_OFFSET_TABLE_+0x278>
+    0.00 :   ad875:  movl   $0xc,%fs:(%rax)
+    0.00 :   ad87c:  xor    %eax,%eax
+    0.00 :   ad87e:  add    $0x18,%rsp
+    0.00 :   ad882:  pop    %rbx
+    0.00 :   ad883:  pop    %r12
+    0.00 :   ad885:  pop    %r13
+    0.00 :   ad887:  pop    %rbp
+    0.00 :   ad888:  ret
+    0.00 :   ad889:  nopl   0x0(%rax)
+    0.00 :   ad890:  call   a92a0 <get_free_list>
+    0.00 :   ad895:  mov    %rax,%r12
+    0.00 :   ad898:  test   %rax,%rax
+    0.00 :   ad89b:  jne    ad6e9 <__libc_malloc+0x99>
+    0.00 :   ad8a1:  xor    %esi,%esi
+    0.00 :   ad8a3:  mov    %rbx,%rdi
+    0.00 :   ad8a6:  call   aa300 <arena_get2.part.0>
+    0.00 :   ad8ab:  mov    %rbx,%rsi
+    0.00 :   ad8ae:  mov    %rax,%rdi
+    0.00 :   ad8b1:  mov    %rax,%r12
+    0.00 :   ad8b4:  call   ab570 <_int_malloc>
+    0.00 :   ad8b9:  test   %rax,%rax
+    0.00 :   ad8bc:  jne    ad8e2 <__libc_malloc+0x292>
+    0.00 :   ad8be:  test   %r12,%r12
+    0.00 :   ad8c1:  je     ad8e7 <__libc_malloc+0x297>
+    0.00 :   ad8c3:  nopl   0x0(%rax,%rax,1)
+    0.00 :   ad8c8:  nop
+    0.00 :   ad8c9:  mov    %r12,%rdi
+    0.00 :   ad8cc:  mov    %rbx,%rsi
+    0.00 :   ad8cf:  call   aa800 <arena_get_retry>
+    0.00 :   ad8d4:  mov    %rbx,%rsi
+    0.00 :   ad8d7:  mov    %rax,%rdi
+    0.00 :   ad8da:  mov    %rax,%r12
+    0.00 :   ad8dd:  call   ab570 <_int_malloc>
+    0.00 :   ad8e2:  test   %r12,%r12
+    0.00 :   ad8e5:  jne    ad94c <__libc_malloc+0x2fc>
+    0.00 :   ad8e7:  test   %rax,%rax
+    0.00 :   ad8ea:  jne    ad70c <__libc_malloc+0xbc>
+    0.00 :   ad8f0:  xor    %eax,%eax
+    0.00 :   ad8f2:  jmp    ad87e <__libc_malloc+0x22e>
+    0.00 :   ad8f4:  lea    0x124c15(%rip),%rcx        # 1d2510 <__PRETTY_FUNCTION__.1>
+    0.00 :   ad8fb:  mov    $0xd17,%edx
+    0.00 :   ad900:  lea    0x11eca2(%rip),%rsi        # 1cc5a9 <null+0xeae>
+    0.00 :   ad907:  lea    0x124892(%rip),%rdi        # 1d21a0 <__PRETTY_FUNCTION__.1+0xd50>
+    0.00 :   ad90e:  call   3b2f0 <__libc_assert_fail>
+    0.00 :   ad913:  nopl   0x0(%rax,%rax,1)
+    0.00 :   ad918:  mov    %r12,%rdi
+    0.00 :   ad91b:  call   98ee0 <__lll_lock_wait_private>
+    0.00 :   ad920:  jmp    ad6e9 <__libc_malloc+0x99>
+    0.00 :   ad925:  nopl   (%rax)
+    0.00 :   ad928:  mov    %r12,%rdi
+    0.00 :   ad92b:  mov    %rax,-0x28(%rbp)
+    0.00 :   ad92f:  call   98fa0 <__lll_lock_wake_private>
+    0.00 :   ad934:  mov    -0x28(%rbp),%rax
+    0.00 :   ad938:  jmp    ad70c <__libc_malloc+0xbc>
+    0.00 :   ad93d:  nopl   (%rax)
+    0.00 :   ad940:  lea    0x124571(%rip),%rdi        # 1d1eb8 <__PRETTY_FUNCTION__.1+0xa68>
+    0.00 :   ad947:  call   a8fe0 <malloc_printerr>
+    0.00 :   ad94c:  xor    %edx,%edx
+    0.00 :   ad94e:  xchg   %edx,(%r12)
+    0.00 :   ad952:  sub    $0x1,%edx
+    0.00 :   ad955:  jle    ad8e7 <__libc_malloc+0x297>
+    0.00 :   ad957:  mov    %r12,%rdi
+    0.00 :   ad95a:  mov    %rax,-0x28(%rbp)
+    0.00 :   ad95e:  call   98fa0 <__lll_lock_wake_private>
+    0.00 :   ad963:  mov    -0x28(%rbp),%rax
+    0.00 :   ad967:  jmp    ad8e7 <__libc_malloc+0x297>
+ Percent |	Source code & Disassembly of book for mem_load_retired.l3_miss:u (615 samples, percent: local period)
+---------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     000000000001f7d0 <void lob::v0::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)>:
+         : 6     }
+         : 7     return qty;
+         : 8     }
+         :
+         : 10    template <class Levels>
+         : 11    void rest(Levels& levels, OrderId id, Side side, Price price, Qty qty) {
+    0.00 :   1f7d0:  push   %rbp
+    0.81 :   1f7d1:  push   %r15
+    0.00 :   1f7d3:  push   %r14
+    0.00 :   1f7d5:  push   %r13
+    0.00 :   1f7d7:  push   %r12
+    0.00 :   1f7d9:  push   %rbx
+    0.00 :   1f7da:  sub    $0x38,%rsp
+    0.16 :   1f7de:  mov    %r9d,%r15d
+    0.33 :   1f7e1:  mov    %r8,%rbx
+    0.00 :   1f7e4:  mov    %ecx,0x4(%rsp)
+    0.00 :   1f7e8:  mov    %rdx,%r12
+    0.00 :   1f7eb:  mov    %rsi,%rbp
+    0.00 :   1f7ee:  mov    %rdi,0x18(%rsp)
+    0.00 :   1f7f3:  mov    %rdx,0x8(%rsp)
+         : 26    _LIBCPP_HIDE_FROM_ABI value_compare& value_comp() _NOEXCEPT { return __value_comp_; }
+         : 27    _LIBCPP_HIDE_FROM_ABI const value_compare& value_comp() const _NOEXCEPT { return __value_comp_; }
+         :
+         : 29    public:
+         : 30    _LIBCPP_HIDE_FROM_ABI __node_pointer __root() const _NOEXCEPT {
+         : 31    return static_cast<__node_pointer>(__end_node()->__left_);
+    0.00 :   1f7f8:  mov    0x8(%rsi),%rax
+         : 33    template <class _Key>
+         : 34    typename __tree<_Tp, _Compare, _Allocator>::__node_base_pointer&
+         : 35    __tree<_Tp, _Compare, _Allocator>::__find_equal(__end_node_pointer& __parent, const _Key& __v) {
+         : 36    __node_pointer __nd           = __root();
+         : 37    __node_base_pointer* __nd_ptr = __root_ptr();
+         : 38    if (__nd != nullptr) {
+    0.49 :   1f7fc:  test   %rax,%rax
+    0.00 :   1f7ff:  jne    1f81c <void lob::v0::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)+0x4c>
+    0.00 :   1f801:  lea    0x8(%rbp),%r14
+    0.00 :   1f805:  mov    %r14,%r13
+    0.00 :   1f808:  jmp    1f837 <void lob::v0::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)+0x67>
+    0.00 :   1f80a:  nopw   0x0(%rax,%rax,1)
+         : 45    while (true) {
+         : 46    if (value_comp()(__v, __nd->__value_)) {
+         : 47    if (__nd->__left_ != nullptr) {
+    2.60 :   1f810:  mov    0x0(%r13),%rax
+    9.76 :   1f814:  mov    %r13,%r14
+    0.16 :   1f817:  test   %rax,%rax
+    0.00 :   1f81a:  je     1f837 <void lob::v0::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)+0x67>
+   14.15 :   1f81c:  mov    %rax,%r13
+         : 53    struct greater<void> {
+         : 54    template <class _T1, class _T2>
+         : 55    _LIBCPP_CONSTEXPR_SINCE_CXX14 _LIBCPP_HIDE_FROM_ABI auto operator()(_T1&& __t, _T2&& __u) const
+         : 56    noexcept(noexcept(std::forward<_T1>(__t) > std::forward<_T2>(__u))) //
+         : 57    -> decltype(std::forward<_T1>(__t) > std::forward<_T2>(__u)) {
+         : 58    return std::forward<_T1>(__t) > std::forward<_T2>(__u);
+    1.79 :   1f81f:  mov    0x20(%rax),%rax
+   44.88 :   1f823:  cmp    %rax,%rbx
+         : 61    if (value_comp()(__v, __nd->__value_)) {
+    0.00 :   1f826:  jg     1f810 <void lob::v0::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)+0x40>
+         : 63    __nd     = static_cast<__node_pointer>(__nd->__left_);
+         : 64    } else {
+         : 65    __parent = static_cast<__end_node_pointer>(__nd);
+         : 66    return __parent->__left_;
+         : 67    }
+         : 68    } else if (value_comp()(__nd->__value_, __v)) {
+    1.30 :   1f828:  jge    1f89e <void lob::v0::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)+0xce>
+         : 70    if (__nd->__right_ != nullptr) {
+    6.50 :   1f82a:  mov    0x8(%r13),%rax
+    1.46 :   1f82e:  test   %rax,%rax
+    0.00 :   1f831:  jne    1f81c <void lob::v0::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)+0x4c>
+    0.65 :   1f833:  lea    0x8(%r13),%r14
+    0.98 :   1f837:  mov    %r12,0x10(%rsp)
+    1.46 :   1f83c:  mov    %r15d,%r12d
+    0.49 :   1f83f:  mov    %r13,%r15
+         : 78    #if _LIBCPP_HAS_ALIGNED_ALLOCATION
+         : 79    if (__is_overaligned_for_new(__align))
+         : 80    return static_cast<_Tp*>(__builtin_operator_new(__size, static_cast<align_val_t>(__align)));
+         : 81    #endif
+         :
+         : 83    return static_cast<_Tp*>(__builtin_operator_new(__size));
+    0.98 :   1f842:  mov    $0x48,%edi
+    1.63 :   1f847:  call   30f0 <operator new(unsigned long)@plt>
+    0.00 :   1f84c:  mov    %rax,%r13
+         : 87    pair(piecewise_construct_t,
+         : 88    tuple<_Args1...>& __first_args,
+         : 89    tuple<_Args2...>& __second_args,
+         : 90    __tuple_indices<_I1...>,
+         : 91    __tuple_indices<_I2...>)
+         : 92    : first(std::forward<_Args1>(std::get<_I1>(__first_args))...),
+    0.00 :   1f84f:  mov    %rbx,0x20(%rax)
+         : 94    second(std::forward<_Args2>(std::get<_I2>(__second_args))...) {}
+    0.00 :   1f853:  add    $0x28,%rax
+         : 96    typedef typename _NodeTraits::__base_pointer __base_pointer;
+         :
+         : 98    __base_pointer __prev_;
+         : 99    __base_pointer __next_;
+         :
+         : 101   _LIBCPP_CONSTEXPR_SINCE_CXX26 _LIBCPP_HIDE_FROM_ABI __list_node_base() : __prev_(__self()), __next_(__self()) {}
+    0.00 :   1f857:  mov    %rax,0x28(%r13)
+    0.00 :   1f85b:  mov    %rax,0x30(%r13)
+         : 104   std::uint64_t total_qty = 0;
+    0.00 :   1f85f:  vxorps %xmm0,%xmm0,%xmm0
+    0.00 :   1f863:  vmovups %xmm0,0x38(%r13)
+         :
+         : 108   template <class _Tp, class _Compare, class _Allocator>
+         : 109   void __tree<_Tp, _Compare, _Allocator>::__insert_node_at(
+         : 110   __end_node_pointer __parent, __node_base_pointer& __child, __node_base_pointer __new_node) _NOEXCEPT {
+         : 111   __new_node->__left_   = nullptr;
+         : 112   __new_node->__right_  = nullptr;
+    0.16 :   1f869:  vmovups %xmm0,0x0(%r13)
+         : 114   __new_node->__parent_ = __parent;
+    0.00 :   1f86f:  mov    %r15,0x10(%r13)
+         : 116   // __new_node->__is_black_ is initialized in __tree_balance_after_insert
+         : 117   __child = __new_node;
+    0.00 :   1f873:  mov    %r13,(%r14)
+         : 119   if (__begin_node()->__left_ != nullptr)
+    0.00 :   1f876:  mov    0x0(%rbp),%rax
+    0.00 :   1f87a:  mov    (%rax),%rax
+    0.16 :   1f87d:  test   %rax,%rax
+    0.00 :   1f880:  je     1f886 <void lob::v0::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)+0xb6>
+         : 124   __begin_node() = static_cast<__end_node_pointer>(__begin_node()->__left_);
+    0.00 :   1f882:  mov    %rax,0x0(%rbp)
+         : 126   std::__tree_balance_after_insert(__end_node()->__left_, __child);
+    0.00 :   1f886:  mov    0x8(%rbp),%rdi
+    0.00 :   1f88a:  mov    %r13,%rsi
+    0.00 :   1f88d:  call   1cc00 <void std::__1::__tree_balance_after_insert[abi:ne210105]<std::__1::__tree_node_base<void*>*>(std::__1::__tree_node_base<void*>*, std::__1::__tree_node_base<void*>*)>
+         : 130   ++size();
+    0.00 :   1f892:  incq   0x10(%rbp)
+    0.00 :   1f896:  mov    %r12d,%r15d
+    0.00 :   1f899:  mov    0x10(%rsp),%r12
+         :
+         : 135   template <class _Key, class _Tp, class _Compare, class _Allocator>
+         : 136   _Tp& map<_Key, _Tp, _Compare, _Allocator>::operator[](const key_type& __k) {
+         : 137   return __tree_
+         : 138   .__emplace_unique_key_args(__k, std::piecewise_construct, std::forward_as_tuple(__k), std::forward_as_tuple())
+         : 139   .first->second;
+    5.37 :   1f89e:  lea    0x28(%r13),%r14
+    0.16 :   1f8a2:  mov    $0x20,%edi
+    0.98 :   1f8a7:  call   30f0 <operator new(unsigned long)@plt>
+         : 143   #if _LIBCPP_STD_VER >= 20
+         :
+         : 145   template <class _Tp, class... _Args, class = decltype(::new(std::declval<void*>()) _Tp(std::declval<_Args>()...))>
+         : 146   _LIBCPP_HIDE_FROM_ABI constexpr _Tp* construct_at(_Tp* __location, _Args&&... __args) {
+         : 147   _LIBCPP_ASSERT_NON_NULL(__location != nullptr, "null pointer given to construct_at");
+         : 148   return ::new (static_cast<void*>(__location)) _Tp(std::forward<_Args>(__args)...);
+    0.00 :   1f8ac:  mov    %r12,0x10(%rax)
+    0.00 :   1f8b0:  mov    %r15d,0x18(%rax)
+         :
+         : 152   // Link in nodes [__f, __l] at the back of the list
+         : 153   template <class _Tp, class _Alloc>
+         : 154   _LIBCPP_CONSTEXPR_SINCE_CXX26 inline void
+         : 155   list<_Tp, _Alloc>::__link_nodes_at_back(__base_pointer __f, __base_pointer __l) {
+         : 156   __l->__next_           = __base::__end_as_link();
+    0.00 :   1f8b4:  mov    %r14,0x8(%rax)
+         : 158   __f->__prev_           = __base::__end_.__prev_;
+    0.00 :   1f8b8:  mov    0x28(%r13),%rcx
+    0.16 :   1f8bc:  mov    %rcx,(%rax)
+         : 161   __f->__prev_->__next_  = __f;
+    0.00 :   1f8bf:  mov    %rax,0x8(%rcx)
+         : 163   __base::__end_.__prev_ = __l;
+    0.81 :   1f8c3:  mov    %rax,0x28(%r13)
+         : 165   Level& level = levels[price];
+         : 166   level.orders.push_back(Order{id, qty});
+         : 167   level.total_qty += qty;
+    0.00 :   1f8c7:  mov    %r15d,%r15d
+         : 169   template <class _Tp, class _Alloc>
+         : 170   _LIBCPP_CONSTEXPR_SINCE_CXX26 void list<_Tp, _Alloc>::push_back(value_type&& __x) {
+         : 171   __node_pointer __node = this->__create_node(/* prev = */ nullptr, /* next = */ nullptr, std::move(__x));
+         : 172   __base_pointer __nl   = __node->__as_link();
+         : 173   __link_nodes_at_back(__nl, __nl);
+         : 174   ++this->__size_;
+    0.00 :   1f8ca:  vpmovsxbq 0xfc11(%rip),%xmm0        # 2f4e4 <_IO_stdin_used+0x4e4>
+    0.00 :   1f8d3:  vpinsrq $0x1,%r15,%xmm0,%xmm0
+    0.16 :   1f8d9:  vpaddq 0x38(%r13),%xmm0,%xmm0
+    0.00 :   1f8df:  vmovdqu %xmm0,0x38(%r13)
+    0.00 :   1f8e5:  mov    0x18(%rsp),%r14
+         : 180   index_.emplace(id, Loc{side, price, std::prev(level.orders.end())});
+    0.00 :   1f8ea:  lea    0x38(%r14),%rdi
+    0.00 :   1f8ee:  mov    0x4(%rsp),%ebp
+    0.00 :   1f8f2:  mov    %bpl,0x20(%rsp)
+    0.00 :   1f8f7:  mov    %rbx,0x28(%rsp)
+    0.00 :   1f8fc:  mov    %rax,0x30(%rsp)
+    0.00 :   1f901:  lea    0x8(%rsp),%rdx
+    0.00 :   1f906:  lea    0x20(%rsp),%rcx
+         :
+         : 189   template <class _First,
+         : 190   class _Second,
+         : 191   __enable_if_t<__can_extract_map_key<_First, key_type, __container_value_type>::value, int> = 0>
+         : 192   _LIBCPP_HIDE_FROM_ABI pair<iterator, bool> __emplace_unique(_First&& __f, _Second&& __s) {
+         : 193   return __emplace_unique_key_args(__f, std::forward<_First>(__f), std::forward<_Second>(__s));
+    0.00 :   1f90b:  mov    %rdx,%rsi
+    0.00 :   1f90e:  call   1fe00 <std::__1::pair<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*>, bool> std::__1::__hash_table<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, std::__1::__unordered_map_hasher<unsigned long, std::__1::pair<unsigned long const, lob::v0::Book<lob::ChecksumSink>::Loc>, std::__1::hash<unsigned long>, std::__1::equal_to<unsigned long>, true>, std::__1::__unordered_map_equal<unsigned long, std::__1::pair<unsigned long const, lob::v0::Book<lob::ChecksumSink>::Loc>, std::__1::equal_to<unsigned long>, std::__1::hash<unsigned long>, true>, std::__1::allocator<std::__1::pair<unsigned long const, lob::v0::Book<lob::ChecksumSink>::Loc> > >::__emplace_unique_key_args<unsigned long, unsigned long&, lob::v0::Book<lob::ChecksumSink>::Loc>(unsigned long const&, unsigned long&, lob::v0::Book<lob::ChecksumSink>::Loc&&)>
+         : 196   sink_.on(Rested{id, side, price, qty});
+    0.00 :   1f913:  mov    (%r14),%rax
+         :
+         : 199   private:
+         : 200   template <class... T>
+         : 201   void mix(T... xs) noexcept {
+         : 202   ++events;
+         : 203   ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.00 :   1f916:  mov    (%rax),%rcx
+    0.33 :   1f919:  xor    $0x2,%rcx
+    0.00 :   1f91d:  movabs $0x9e3779b97f4a7c15,%rdx
+    0.00 :   1f927:  imul   %rdx,%rcx
+    0.00 :   1f92b:  xor    0x8(%rsp),%rcx
+         : 209   mix(2, e.id, static_cast<std::uint64_t>(e.side), static_cast<std::uint64_t>(e.price), e.qty);
+    0.00 :   1f930:  movzbl %bpl,%esi
+         : 211   ++events;
+    0.00 :   1f934:  incq   0x8(%rax)
+         : 213   ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.33 :   1f938:  imul   %rdx,%rcx
+    0.00 :   1f93c:  xor    %rsi,%rcx
+    0.00 :   1f93f:  imul   %rdx,%rcx
+    0.16 :   1f943:  xor    %rbx,%rcx
+    0.16 :   1f946:  imul   %rdx,%rcx
+    0.16 :   1f94a:  xor    %r15,%rcx
+    0.00 :   1f94d:  imul   %rdx,%rcx
+    0.16 :   1f951:  mov    %rcx,(%rax)
+         : 222   }
+    0.16 :   1f954:  add    $0x38,%rsp
+    0.00 :   1f958:  pop    %rbx
+    0.00 :   1f959:  pop    %r12
+    0.00 :   1f95b:  pop    %r13
+    0.00 :   1f95d:  pop    %r14
+    0.00 :   1f95f:  pop    %r15
+    0.00 :   1f961:  pop    %rbp
+    0.00 :   1f962:  ret
+ Percent |	Source code & Disassembly of book for mem_load_retired.l3_miss:u (581 samples, percent: local period)
+---------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     000000000001ee00 <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)>:
+         : 6     if (price <= 0) return reject(id, OpType::Push, RejectReason::InvalidPrice);
+         : 7     if (index_.contains(id)) return reject(id, OpType::Push, RejectReason::DuplicateId);
+         : 8     add(id, side, price, qty);
+         : 9     }
+         :
+         : 11    void cancel(OrderId id) {
+    0.52 :   1ee00:  push   %rbp
+    0.00 :   1ee01:  push   %r15
+    0.00 :   1ee03:  push   %r14
+    0.00 :   1ee05:  push   %r13
+    0.00 :   1ee07:  push   %r12
+    0.00 :   1ee09:  push   %rbx
+    0.00 :   1ee0a:  sub    $0x28,%rsp
+    0.17 :   1ee0e:  movabs $0x9e3779b97f4a7c15,%r15
+         : 20    : __size_(std::move(__x.__size_)), __alloc_(std::move(__x.__alloc_)) {
+         : 21    __x.size() = 0;
+         : 22    }
+         :
+         : 24    _LIBCPP_HIDE_FROM_ABI size_type& size() _NOEXCEPT { return __size_; }
+         : 25    _LIBCPP_HIDE_FROM_ABI size_type size() const _NOEXCEPT { return __size_; }
+    0.00 :   1ee18:  mov    0x40(%rdi),%r8
+         : 27    template <class _Tp, class _Hash, class _Equal, class _Alloc>
+         : 28    template <class _Key>
+         : 29    typename __hash_table<_Tp, _Hash, _Equal, _Alloc>::iterator
+         : 30    __hash_table<_Tp, _Hash, _Equal, _Alloc>::find(const _Key& __k) {
+         : 31    size_type __bc = bucket_count();
+         : 32    if (__bc != 0 && size() != 0) {
+    0.00 :   1ee1c:  test   %r8,%r8
+    0.00 :   1ee1f:  je     1ef6c <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0x16c>
+    0.00 :   1ee25:  cmpq   $0x0,0x50(%rdi)
+    0.00 :   1ee2a:  je     1ef6c <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0x16c>
+    0.00 :   1ee30:  lea    0x38(%rdi),%rbx
+         : 38    return !(__bc & (__bc - 1)) ? __h & (__bc - 1) : (__h < __bc ? __h : __h % __bc);
+    0.00 :   1ee34:  popcnt %r8,%r9
+    0.00 :   1ee39:  cmp    $0x1,%r9
+    0.00 :   1ee3d:  ja     1ee57 <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0x57>
+    0.00 :   1ee3f:  lea    -0x1(%r8),%rcx
+    0.00 :   1ee43:  and    %rsi,%rcx
+         : 44    }
+         :
+         : 46    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX23 __add_lvalue_reference_t<_Tp> operator[](size_t __i) const {
+         : 47    _LIBCPP_ASSERT_VALID_ELEMENT_ACCESS(__checker_.__in_bounds<deleter_type>(std::__to_address(__ptr_), __i),
+         : 48    "unique_ptr<T[]>::operator[](index): index out of range");
+         : 49    return __ptr_[__i];
+    0.00 :   1ee46:  mov    (%rbx),%rax
+         : 51    size_t __hash       = hash_function()(__k);
+         : 52    size_t __chash      = std::__constrain_hash(__hash, __bc);
+         : 53    __next_pointer __nd = __bucket_list_[__chash];
+    0.00 :   1ee49:  mov    (%rax,%rcx,8),%rax
+         : 55    if (__nd != nullptr) {
+    0.00 :   1ee4d:  test   %rax,%rax
+    0.00 :   1ee50:  jne    1ee8a <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0x8a>
+    0.00 :   1ee52:  jmp    1ef6c <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0x16c>
+    0.17 :   1ee57:  mov    %rsi,%rcx
+         : 60    return !(__bc & (__bc - 1)) ? __h & (__bc - 1) : (__h < __bc ? __h : __h % __bc);
+    0.00 :   1ee5a:  cmp    %r8,%rsi
+    0.00 :   1ee5d:  jb     1ee7a <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0x7a>
+    0.00 :   1ee5f:  mov    %rsi,%rax
+    0.00 :   1ee62:  or     %r8,%rax
+    0.00 :   1ee65:  shr    $0x20,%rax
+    0.00 :   1ee69:  je     1ef53 <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0x153>
+    0.00 :   1ee6f:  mov    %rsi,%rax
+    0.00 :   1ee72:  xor    %edx,%edx
+    0.00 :   1ee74:  div    %r8
+    0.00 :   1ee77:  mov    %rdx,%rcx
+    0.00 :   1ee7a:  mov    (%rbx),%rax
+         : 72    __next_pointer __nd = __bucket_list_[__chash];
+    0.00 :   1ee7d:  mov    (%rax,%rcx,8),%rax
+         : 74    if (__nd != nullptr) {
+    0.00 :   1ee81:  test   %rax,%rax
+    0.00 :   1ee84:  je     1ef6c <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0x16c>
+    0.34 :   1ee8a:  mov    (%rax),%r14
+         : 78    for (__nd = __nd->__next_;
+         : 79    __nd != nullptr && (__nd->__hash() == __hash || std::__constrain_hash(__nd->__hash(), __bc) == __chash);
+   23.41 :   1ee8d:  test   %r14,%r14
+    0.00 :   1ee90:  je     1ef6c <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0x16c>
+         : 82    return !(__bc & (__bc - 1)) ? __h & (__bc - 1) : (__h < __bc ? __h : __h % __bc);
+    0.52 :   1ee96:  cmp    $0x2,%r9d
+    0.00 :   1ee9a:  jae    1eeee <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0xee>
+    0.00 :   1ee9c:  dec    %r8
+    0.00 :   1ee9f:  jmp    1eec2 <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0xc2>
+    0.00 :   1eea1:  data16 data16 data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+         : 88    template <class _Tp>
+         : 89    #endif
+         : 90    struct equal_to : __binary_function<_Tp, _Tp, bool> {
+         : 91    typedef bool __result_type; // used by valarray
+         : 92    _LIBCPP_CONSTEXPR_SINCE_CXX14 _LIBCPP_HIDE_FROM_ABI bool operator()(const _Tp& __x, const _Tp& __y) const {
+         : 93    return __x == __y;
+    0.00 :   1eeb0:  cmp    %rsi,0x10(%r14)
+         : 95    __nd = __nd->__next_) {
+         : 96    if ((__nd->__hash() == __hash) && key_eq()(__nd->__upcast()->__get_value(), __k))
+    0.00 :   1eeb4:  je     1ef25 <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0x125>
+    0.00 :   1eeb6:  mov    (%r14),%r14
+         : 99    __nd != nullptr && (__nd->__hash() == __hash || std::__constrain_hash(__nd->__hash(), __bc) == __chash);
+    0.00 :   1eeb9:  test   %r14,%r14
+    0.00 :   1eebc:  je     1ef6c <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0x16c>
+         : 102   _LIBCPP_HIDE_FROM_ABI size_t __hash() const _NOEXCEPT { return static_cast<__node_type const&>(*this).__hash_; }
+    0.00 :   1eec2:  mov    0x8(%r14),%rax
+         : 104   __nd != nullptr && (__nd->__hash() == __hash || std::__constrain_hash(__nd->__hash(), __bc) == __chash);
+    0.00 :   1eec6:  cmp    %rsi,%rax
+    0.00 :   1eec9:  je     1eeb0 <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0xb0>
+         : 107   return !(__bc & (__bc - 1)) ? __h & (__bc - 1) : (__h < __bc ? __h : __h % __bc);
+    0.00 :   1eecb:  and    %r8,%rax
+         : 109   __nd != nullptr && (__nd->__hash() == __hash || std::__constrain_hash(__nd->__hash(), __bc) == __chash);
+    0.00 :   1eece:  cmp    %rcx,%rax
+         : 111   for (__nd = __nd->__next_;
+    0.00 :   1eed1:  je     1eeb6 <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0xb6>
+    0.00 :   1eed3:  jmp    1ef6c <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0x16c>
+    0.00 :   1eed8:  nopl   0x0(%rax,%rax,1)
+    0.86 :   1eee0:  cmp    %rsi,0x10(%r14)
+         : 116   if ((__nd->__hash() == __hash) && key_eq()(__nd->__upcast()->__get_value(), __k))
+    0.00 :   1eee4:  je     1ef25 <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0x125>
+    0.17 :   1eee6:  mov    (%r14),%r14
+         : 119   __nd != nullptr && (__nd->__hash() == __hash || std::__constrain_hash(__nd->__hash(), __bc) == __chash);
+    0.00 :   1eee9:  test   %r14,%r14
+    0.00 :   1eeec:  je     1ef6c <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0x16c>
+         : 122   _LIBCPP_HIDE_FROM_ABI size_t __hash() const _NOEXCEPT { return static_cast<__node_type const&>(*this).__hash_; }
+    0.00 :   1eeee:  mov    0x8(%r14),%rax
+         : 124   __nd != nullptr && (__nd->__hash() == __hash || std::__constrain_hash(__nd->__hash(), __bc) == __chash);
+   33.22 :   1eef2:  cmp    %rsi,%rax
+    0.00 :   1eef5:  je     1eee0 <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0xe0>
+         : 127   return !(__bc & (__bc - 1)) ? __h & (__bc - 1) : (__h < __bc ? __h : __h % __bc);
+    0.17 :   1eef7:  cmp    %r8,%rax
+    0.00 :   1eefa:  jb     1ef10 <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0x110>
+    0.00 :   1eefc:  mov    %rax,%rdx
+    0.00 :   1eeff:  or     %r8,%rdx
+    0.00 :   1ef02:  shr    $0x20,%rdx
+    0.00 :   1ef06:  je     1ef17 <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0x117>
+    0.00 :   1ef08:  xor    %edx,%edx
+    0.00 :   1ef0a:  div    %r8
+    0.00 :   1ef0d:  mov    %rdx,%rax
+         : 137   __nd != nullptr && (__nd->__hash() == __hash || std::__constrain_hash(__nd->__hash(), __bc) == __chash);
+    0.00 :   1ef10:  cmp    %rcx,%rax
+         : 139   for (__nd = __nd->__next_;
+    0.00 :   1ef13:  je     1eee6 <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0xe6>
+    0.00 :   1ef15:  jmp    1ef6c <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0x16c>
+         : 142   return !(__bc & (__bc - 1)) ? __h & (__bc - 1) : (__h < __bc ? __h : __h % __bc);
+    0.00 :   1ef17:  xor    %edx,%edx
+    0.00 :   1ef19:  div    %r8d
+    1.55 :   1ef1c:  mov    %edx,%eax
+         : 146   __nd != nullptr && (__nd->__hash() == __hash || std::__constrain_hash(__nd->__hash(), __bc) == __chash);
+    0.00 :   1ef1e:  cmp    %rcx,%rax
+         : 148   for (__nd = __nd->__next_;
+    0.00 :   1ef21:  je     1eee6 <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0xe6>
+    0.00 :   1ef23:  jmp    1ef6c <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0x16c>
+    3.10 :   1ef25:  mov    %rsi,%r13
+         :
+         : 153   _LIBCPP_CONSTEXPR_SINCE_CXX26 _LIBCPP_HIDE_FROM_ABI reference operator*() const {
+         : 154   return __ptr_->__as_node()->__get_value();
+         : 155   }
+         : 156   _LIBCPP_CONSTEXPR_SINCE_CXX26 _LIBCPP_HIDE_FROM_ABI pointer operator->() const {
+         : 157   return pointer_traits<pointer>::pointer_to(__ptr_->__as_node()->__get_value());
+    0.00 :   1ef28:  mov    0x28(%r14),%rax
+         : 159   auto it = index_.find(id);
+         : 160   if (it == index_.end()) return reject(id, OpType::Cancel, RejectReason::UnknownId);
+         : 161   const Qty remaining = it->second.order->qty;
+    5.51 :   1ef2c:  mov    0x18(%rax),%r12d
+         : 163   index_.emplace(id, Loc{side, price, std::prev(level.orders.end())});
+         : 164   sink_.on(Rested{id, side, price, qty});
+         : 165   }
+         :
+         : 167   void erase(typename Index::iterator it) {
+         : 168   const Loc& loc = it->second;
+   17.73 :   1ef30:  lea    0x18(%r14),%rax
+         : 170   auto remove_from = [&](auto& levels) {
+    0.00 :   1ef34:  mov    %rax,0x8(%rsp)
+         : 172   Level& level = level_it->second;
+         : 173   level.total_qty -= loc.order->qty;
+         : 174   level.orders.erase(loc.order);
+         : 175   if (level.orders.empty()) levels.erase(level_it);
+         : 176   };
+         : 177   if (loc.side == Side::Buy)
+    0.00 :   1ef39:  cmpb   $0x0,0x18(%r14)
+    0.00 :   1ef3e:  je     1efa7 <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0x1a7>
+    0.86 :   1ef40:  mov    %rdi,%rbp
+         : 181   remove_from(bids_);
+         : 182   else
+         : 183   remove_from(asks_);
+    1.55 :   1ef43:  lea    0x20(%rdi),%rsi
+    0.00 :   1ef47:  lea    0x8(%rsp),%rdi
+    0.00 :   1ef4c:  call   20460 <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const>
+    0.00 :   1ef51:  jmp    1efb8 <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0x1b8>
+         : 188   return !(__bc & (__bc - 1)) ? __h & (__bc - 1) : (__h < __bc ? __h : __h % __bc);
+    0.00 :   1ef53:  mov    %esi,%eax
+    0.00 :   1ef55:  xor    %edx,%edx
+    0.00 :   1ef57:  div    %r8d
+    0.52 :   1ef5a:  mov    %edx,%ecx
+    0.34 :   1ef5c:  mov    (%rbx),%rax
+         : 194   __next_pointer __nd = __bucket_list_[__chash];
+    0.00 :   1ef5f:  mov    (%rax,%rcx,8),%rax
+         : 196   if (__nd != nullptr) {
+    1.55 :   1ef63:  test   %rax,%rax
+    0.00 :   1ef66:  jne    1ee8a <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0x8a>
+         : 199   void reject(OrderId id, OpType op, RejectReason reason) { sink_.on(Rejected{id, op, reason}); }
+    0.00 :   1ef6c:  mov    (%rdi),%rax
+         : 201   }
+         :
+         : 203   private:
+         : 204   template <class... T>
+         : 205   void mix(T... xs) noexcept {
+         : 206   ++events;
+    0.00 :   1ef6f:  incq   0x8(%rax)
+         : 208   ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.00 :   1ef73:  mov    (%rax),%rcx
+    0.00 :   1ef76:  xor    $0x5,%rcx
+    0.00 :   1ef7a:  imul   %r15,%rcx
+    0.00 :   1ef7e:  xor    %rsi,%rcx
+    0.00 :   1ef81:  imul   %r15,%rcx
+    0.00 :   1ef85:  xor    $0x1,%rcx
+    0.00 :   1ef89:  imul   %r15,%rcx
+    0.00 :   1ef8d:  xor    $0x3,%rcx
+    0.00 :   1ef91:  imul   %r15,%rcx
+    0.34 :   1ef95:  mov    %rcx,(%rax)
+         : 219   }
+    0.00 :   1ef98:  add    $0x28,%rsp
+    2.75 :   1ef9c:  pop    %rbx
+    0.00 :   1ef9d:  pop    %r12
+    0.00 :   1ef9f:  pop    %r13
+    0.00 :   1efa1:  pop    %r14
+    0.00 :   1efa3:  pop    %r15
+    0.00 :   1efa5:  pop    %rbp
+    0.17 :   1efa6:  ret
+    0.52 :   1efa7:  mov    %rdi,%rbp
+         : 229   remove_from(bids_);
+    1.55 :   1efaa:  lea    0x8(%rdi),%rsi
+    0.00 :   1efae:  lea    0x8(%rsp),%rdi
+    0.17 :   1efb3:  call   20320 <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const>
+    0.00 :   1efb8:  lea    0x10(%rsp),%rdi
+         : 234   __next_pointer __np = __p.__node_;
+         : 235   _LIBCPP_ASSERT_VALID_ELEMENT_ACCESS(
+         : 236   __p != end(), "unordered container::erase(iterator) called with a non-dereferenceable iterator");
+         : 237   iterator __r(__np);
+         : 238   ++__r;
+         : 239   remove(__p);
+    0.00 :   1efbd:  mov    %rbx,%rsi
+    0.00 :   1efc0:  mov    %r14,%rdx
+    0.17 :   1efc3:  call   1fc50 <std::__1::__hash_table<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, std::__1::__unordered_map_hasher<unsigned long, std::__1::pair<unsigned long const, lob::v0::Book<lob::ChecksumSink>::Loc>, std::__1::hash<unsigned long>, std::__1::equal_to<unsigned long>, true>, std::__1::__unordered_map_equal<unsigned long, std::__1::pair<unsigned long const, lob::v0::Book<lob::ChecksumSink>::Loc>, std::__1::equal_to<unsigned long>, std::__1::hash<unsigned long>, true>, std::__1::allocator<std::__1::pair<unsigned long const, lob::v0::Book<lob::ChecksumSink>::Loc> > >::remove(std::__1::__hash_const_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*>)>
+         : 243   pointer __tmp = __ptr_;
+    0.17 :   1efc8:  mov    0x10(%rsp),%rdi
+         : 245   __ptr_        = __p;
+    0.00 :   1efcd:  movq   $0x0,0x10(%rsp)
+         : 247   if (__tmp)
+    0.17 :   1efd6:  test   %rdi,%rdi
+    0.00 :   1efd9:  je     1efe5 <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0x1e5>
+         : 250   #if _LIBCPP_HAS_ALIGNED_ALLOCATION
+         : 251   if (__is_overaligned_for_new(__align))
+         : 252   return __builtin_operator_delete(
+         : 253   __ptr _LIBCPP_ONLY_IF_SIZED_DEALLOCATION(, __size), static_cast<align_val_t>(__align));
+         : 254   #endif
+         : 255   return __builtin_operator_delete(__ptr _LIBCPP_ONLY_IF_SIZED_DEALLOCATION(, __size));
+    0.00 :   1efdb:  mov    $0x30,%esi
+    0.00 :   1efe0:  call   3530 <operator delete(void*, unsigned long)@plt>
+         : 258   sink_.on(Cancelled{id, remaining});
+    0.34 :   1efe5:  mov    0x0(%rbp),%rax
+         : 260   ++events;
+    0.00 :   1efe9:  incq   0x8(%rax)
+         : 262   ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.00 :   1efed:  mov    (%rax),%rcx
+    0.00 :   1eff0:  xor    $0x3,%rcx
+    0.00 :   1eff4:  imul   %r15,%rcx
+    0.52 :   1eff8:  xor    %r13,%rcx
+    0.69 :   1effb:  imul   %r15,%rcx
+    0.00 :   1efff:  xor    %r12,%rcx
+    0.17 :   1f002:  jmp    1ef91 <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)+0x191>
+ Percent |	Source code & Disassembly of book for mem_load_retired.l3_miss:u (460 samples, percent: local period)
+---------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     0000000000020320 <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const>:
+         : 6     sink_.on(Rested{id, side, price, qty});
+         : 7     }
+         :
+         : 9     void erase(typename Index::iterator it) {
+         : 10    const Loc& loc = it->second;
+         : 11    auto remove_from = [&](auto& levels) {
+    0.87 :   20320:  push   %r15
+    0.43 :   20322:  push   %r14
+    0.00 :   20324:  push   %rbx
+    0.00 :   20325:  mov    %rsi,%r14
+         : 16    auto level_it = levels.find(loc.price);
+    0.65 :   20328:  mov    (%rdi),%rax
+         : 18    public:
+         : 19    _LIBCPP_HIDE_FROM_ABI __end_node_pointer __end_node() _NOEXCEPT {
+         : 20    return pointer_traits<__end_node_pointer>::pointer_to(__end_node_);
+         : 21    }
+         : 22    _LIBCPP_HIDE_FROM_ABI __end_node_pointer __end_node() const _NOEXCEPT {
+         : 23    return pointer_traits<__end_node_pointer>::pointer_to(const_cast<__end_node_t&>(__end_node_));
+    0.22 :   2032b:  lea    0x8(%rsi),%rcx
+         : 25    _LIBCPP_HIDE_FROM_ABI value_compare& value_comp() _NOEXCEPT { return __value_comp_; }
+         : 26    _LIBCPP_HIDE_FROM_ABI const value_compare& value_comp() const _NOEXCEPT { return __value_comp_; }
+         :
+         : 28    public:
+         : 29    _LIBCPP_HIDE_FROM_ABI __node_pointer __root() const _NOEXCEPT {
+         : 30    return static_cast<__node_pointer>(__end_node()->__left_);
+    0.22 :   2032f:  mov    0x8(%rsi),%rsi
+         :
+         : 33    template <class _Tp, class _Compare, class _Allocator>
+         : 34    template <class _Key>
+         : 35    typename __tree<_Tp, _Compare, _Allocator>::iterator
+         : 36    __tree<_Tp, _Compare, _Allocator>::__lower_bound(const _Key& __v, __node_pointer __root, __end_node_pointer __result) {
+         : 37    while (__root != nullptr) {
+    0.22 :   20333:  test   %rsi,%rsi
+    0.00 :   20336:  je     20362 <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0x42>
+    0.22 :   20338:  mov    0x8(%rax),%rdx
+    0.43 :   2033c:  mov    %rcx,%rbx
+    0.00 :   2033f:  nop
+         : 43    struct greater<void> {
+         : 44    template <class _T1, class _T2>
+         : 45    _LIBCPP_CONSTEXPR_SINCE_CXX14 _LIBCPP_HIDE_FROM_ABI auto operator()(_T1&& __t, _T2&& __u) const
+         : 46    noexcept(noexcept(std::forward<_T1>(__t) > std::forward<_T2>(__u))) //
+         : 47    -> decltype(std::forward<_T1>(__t) > std::forward<_T2>(__u)) {
+         : 48    return std::forward<_T1>(__t) > std::forward<_T2>(__u);
+    2.83 :   20340:  xor    %edi,%edi
+    0.00 :   20342:  cmp    %rdx,0x20(%rsi)
+   46.09 :   20346:  setg   %dil
+         : 52    if (!value_comp()(__root->__value_, __v)) {
+    3.26 :   2034a:  cmovle %rsi,%rbx
+    1.96 :   2034e:  mov    (%rsi,%rdi,8),%rsi
+         : 55    while (__root != nullptr) {
+   34.35 :   20352:  test   %rsi,%rsi
+    0.00 :   20355:  jne    20340 <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0x20>
+         : 58    return __x.__ptr_ == __y.__ptr_;
+    1.74 :   20357:  cmp    %rcx,%rbx
+         : 60    if (__p != end() && !value_comp()(__v, *__p))
+    0.00 :   2035a:  je     20362 <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0x42>
+    0.65 :   2035c:  cmp    0x20(%rbx),%rdx
+    0.00 :   20360:  jle    20365 <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0x45>
+    0.00 :   20362:  mov    %rcx,%rbx
+         :
+         : 66    _LIBCPP_CONSTEXPR_SINCE_CXX26 _LIBCPP_HIDE_FROM_ABI reference operator*() const {
+         : 67    return __ptr_->__as_node()->__get_value();
+         : 68    }
+         : 69    _LIBCPP_CONSTEXPR_SINCE_CXX26 _LIBCPP_HIDE_FROM_ABI pointer operator->() const {
+         : 70    return pointer_traits<pointer>::pointer_to(__ptr_->__as_node()->__get_value());
+    0.22 :   20365:  mov    0x10(%rax),%rdi
+         : 72    Level& level = level_it->second;
+         : 73    level.total_qty -= loc.order->qty;
+    0.00 :   20369:  mov    0x18(%rdi),%eax
+         :
+         : 76    // Unlink nodes [__f, __l]
+         : 77    template <class _Tp, class _Alloc>
+         : 78    _LIBCPP_CONSTEXPR_SINCE_CXX26 inline void
+         : 79    __list_imp<_Tp, _Alloc>::__unlink_nodes(__base_pointer __f, __base_pointer __l) _NOEXCEPT {
+         : 80    __f->__prev_->__next_ = __l->__next_;
+    0.43 :   2036c:  mov    (%rdi),%rcx
+         :
+         : 83    template <class _Tp, class _Alloc>
+         : 84    _LIBCPP_CONSTEXPR_SINCE_CXX26 typename list<_Tp, _Alloc>::iterator list<_Tp, _Alloc>::erase(const_iterator __p) {
+         : 85    _LIBCPP_ASSERT_VALID_ELEMENT_ACCESS(__p != end(), "list::erase(iterator) called with a non-dereferenceable iterator");
+         : 86    __base_pointer __n = __p.__ptr_;
+         : 87    __base_pointer __r = __n->__next_;
+    0.00 :   2036f:  mov    0x8(%rdi),%rdx
+         : 89    __f->__prev_->__next_ = __l->__next_;
+    0.00 :   20373:  mov    %rdx,0x8(%rcx)
+         : 91    __l->__next_->__prev_ = __f->__prev_;
+    1.74 :   20377:  mov    %rcx,(%rdx)
+         : 93    __base::__unlink_nodes(__n, __n);
+         : 94    --this->__size_;
+    0.87 :   2037a:  vmovdqu 0x38(%rbx),%xmm0
+    0.65 :   2037f:  vpmovsxbq 0xf160(%rip),%xmm1        # 2f4e8 <_IO_stdin_used+0x4e8>
+    0.00 :   20388:  vpinsrq $0x1,%rax,%xmm1,%xmm1
+    0.00 :   2038e:  vpsubq %xmm1,%xmm0,%xmm0
+    0.00 :   20392:  vmovdqu %xmm0,0x38(%rbx)
+         : 100   #if _LIBCPP_HAS_ALIGNED_ALLOCATION
+         : 101   if (__is_overaligned_for_new(__align))
+         : 102   return __builtin_operator_delete(
+         : 103   __ptr _LIBCPP_ONLY_IF_SIZED_DEALLOCATION(, __size), static_cast<align_val_t>(__align));
+         : 104   #endif
+         : 105   return __builtin_operator_delete(__ptr _LIBCPP_ONLY_IF_SIZED_DEALLOCATION(, __size));
+    0.22 :   20397:  mov    $0x20,%esi
+    0.00 :   2039c:  call   3530 <operator delete(void*, unsigned long)@plt>
+         : 108   _LIBCPP_CONSTEXPR_SINCE_CXX26 _LIBCPP_HIDE_FROM_ABI bool empty() const _NOEXCEPT { return __size_ == 0; }
+    0.00 :   203a1:  cmpq   $0x0,0x38(%rbx)
+         : 110   level.orders.erase(loc.order);
+         : 111   if (level.orders.empty()) levels.erase(level_it);
+    0.00 :   203a6:  je     203ae <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0x8e>
+         : 113   };
+    0.00 :   203a8:  pop    %rbx
+    0.00 :   203a9:  pop    %r14
+    0.00 :   203ab:  pop    %r15
+    0.00 :   203ad:  ret
+         : 118   if (__x->__right_ != nullptr)
+    0.00 :   203ae:  mov    0x8(%rbx),%rcx
+    0.43 :   203b2:  test   %rcx,%rcx
+    0.00 :   203b5:  je     203cd <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0xad>
+    0.22 :   203b7:  nopw   0x0(%rax,%rax,1)
+    0.43 :   203c0:  mov    %rcx,%rax
+         : 124   while (__x->__left_ != nullptr)
+    0.00 :   203c3:  mov    (%rcx),%rcx
+    0.22 :   203c6:  test   %rcx,%rcx
+    0.00 :   203c9:  jne    203c0 <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0xa0>
+    0.00 :   203cb:  jmp    203dc <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0xbc>
+    0.00 :   203cd:  mov    %rbx,%rax
+    0.22 :   203d0:  mov    %rax,%rcx
+         : 131   return __x == __x->__parent_->__left_;
+    0.00 :   203d3:  mov    0x10(%rax),%rax
+    0.00 :   203d7:  cmp    (%rax),%rcx
+         : 134   while (!std::__tree_is_left_child(__x))
+    0.00 :   203da:  jne    203d0 <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0xb0>
+         : 136   if (__begin_node() == __ptr)
+    0.00 :   203dc:  cmp    %rbx,(%r14)
+    0.00 :   203df:  jne    203e4 <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0xc4>
+         : 139   __begin_node() = __r.__ptr_;
+    0.00 :   203e1:  mov    %rax,(%r14)
+         : 141   --size();
+    0.22 :   203e4:  decq   0x10(%r14)
+         : 143   std::__tree_remove(__end_node()->__left_, static_cast<__node_base_pointer>(__ptr));
+    0.00 :   203e8:  mov    0x8(%r14),%rdi
+    0.00 :   203ec:  mov    %rbx,%rsi
+    0.00 :   203ef:  call   1dab0 <void std::__1::__tree_remove[abi:ne210105]<std::__1::__tree_node_base<void*>*>(std::__1::__tree_node_base<void*>*, std::__1::__tree_node_base<void*>*)>
+    0.00 :   203f4:  cmpq   $0x0,0x38(%rbx)
+         : 148   if (!empty()) {
+    0.00 :   203f9:  je     20446 <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0x126>
+    0.00 :   203fb:  lea    0x28(%rbx),%r14
+         : 151   __unlink_nodes(__f, __l->__prev_);
+    0.00 :   203ff:  mov    0x28(%rbx),%rax
+         : 153   __base_pointer __f = __end_.__next_;
+    0.00 :   20403:  mov    0x30(%rbx),%rdi
+         : 155   __f->__prev_->__next_ = __l->__next_;
+    0.00 :   20407:  mov    0x8(%rax),%rax
+    0.00 :   2040b:  mov    (%rdi),%rcx
+    0.00 :   2040e:  mov    %rax,0x8(%rcx)
+         : 159   __l->__next_->__prev_ = __f->__prev_;
+    0.00 :   20412:  mov    %rcx,(%rax)
+         : 161   __size_ = 0;
+    0.00 :   20415:  movq   $0x0,0x38(%rbx)
+         : 163   while (__f != __l) {
+    0.00 :   2041d:  cmp    %r14,%rdi
+    0.00 :   20420:  je     20446 <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0x126>
+    0.00 :   20422:  data16 data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+         : 167   __f                 = __f->__next_;
+    0.00 :   20430:  mov    0x8(%rdi),%r15
+    0.00 :   20434:  mov    $0x20,%esi
+    0.00 :   20439:  call   3530 <operator delete(void*, unsigned long)@plt>
+    0.00 :   2043e:  mov    %r15,%rdi
+         : 172   while (__f != __l) {
+    0.00 :   20441:  cmp    %r14,%r15
+    0.00 :   20444:  jne    20430 <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0x110>
+    0.00 :   20446:  mov    $0x48,%esi
+    0.00 :   2044b:  mov    %rbx,%rdi
+    0.00 :   2044e:  pop    %rbx
+    0.00 :   2044f:  pop    %r14
+    0.00 :   20451:  pop    %r15
+    0.00 :   20453:  jmp    3530 <operator delete(void*, unsigned long)@plt>
+ Percent |	Source code & Disassembly of libc++abi.so.1.0 for mem_load_retired.l3_miss:u (428 samples, percent: local period)
+---------------------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section __lcxx_override:
+         :
+         : 5     000000000002faf0 <operator new(unsigned long)@@Base>:
+    6.54 :   2faf0:  endbr64
+    0.00 :   2faf4:  push   %rbp
+    0.93 :   2faf5:  mov    %rsp,%rbp
+    0.23 :   2faf8:  push   %rbx
+    0.23 :   2faf9:  push   %rax
+   39.25 :   2fafa:  mov    %rdi,%rbx
+    0.00 :   2fafd:  cmp    $0x1,%rdi
+    7.01 :   2fb01:  adc    $0x0,%rbx
+    0.70 :   2fb05:  data16 cs nopw 0x0(%rax,%rax,1)
+   39.72 :   2fb10:  mov    %rbx,%rdi
+    0.00 :   2fb13:  call   10b00 <__cxa_bad_cast@@Base-0x5c0>
+    0.47 :   2fb18:  test   %rax,%rax
+    0.00 :   2fb1b:  jne    2fb2b <operator new(unsigned long)@@Base+0x3b>
+    0.00 :   2fb1d:  call   10f80 <__cxa_bad_cast@@Base-0x140>
+    0.00 :   2fb22:  test   %rax,%rax
+    0.00 :   2fb25:  je     2fb32 <operator new(unsigned long)@@Base+0x42>
+    0.00 :   2fb27:  call   *%rax
+    0.00 :   2fb29:  jmp    2fb10 <operator new(unsigned long)@@Base+0x20>
+    0.00 :   2fb2b:  add    $0x8,%rsp
+    2.57 :   2fb2f:  pop    %rbx
+    1.40 :   2fb30:  pop    %rbp
+    0.93 :   2fb31:  ret
+    0.00 :   2fb32:  mov    $0x8,%edi
+    0.00 :   2fb37:  call   10a60 <__cxa_bad_cast@@Base-0x660>
+    0.00 :   2fb3c:  mov    %rax,%rbx
+    0.00 :   2fb3f:  mov    %rax,%rdi
+    0.00 :   2fb42:  call   10f90 <__cxa_bad_cast@@Base-0x130>
+    0.00 :   2fb47:  mov    0xf472(%rip),%rsi        # 3efc0 <typeinfo for std::bad_alloc@@Base+0x11c8>
+    0.00 :   2fb4e:  mov    0xf473(%rip),%rdx        # 3efc8 <std::bad_alloc::~bad_alloc()@@Base+0x12d88>
+    0.00 :   2fb55:  mov    %rbx,%rdi
+    0.00 :   2fb58:  call   10a80 <__cxa_bad_cast@@Base-0x640>
+ Percent |	Source code & Disassembly of book for mem_load_retired.l3_miss:u (366 samples, percent: local period)
+---------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     0000000000020460 <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const>:
+         : 6     sink_.on(Rested{id, side, price, qty});
+         : 7     }
+         :
+         : 9     void erase(typename Index::iterator it) {
+         : 10    const Loc& loc = it->second;
+         : 11    auto remove_from = [&](auto& levels) {
+    1.09 :   20460:  push   %r15
+    0.82 :   20462:  push   %r14
+    0.00 :   20464:  push   %rbx
+    0.27 :   20465:  mov    %rsi,%r14
+         : 16    auto level_it = levels.find(loc.price);
+    0.27 :   20468:  mov    (%rdi),%rax
+         : 18    public:
+         : 19    _LIBCPP_HIDE_FROM_ABI __end_node_pointer __end_node() _NOEXCEPT {
+         : 20    return pointer_traits<__end_node_pointer>::pointer_to(__end_node_);
+         : 21    }
+         : 22    _LIBCPP_HIDE_FROM_ABI __end_node_pointer __end_node() const _NOEXCEPT {
+         : 23    return pointer_traits<__end_node_pointer>::pointer_to(const_cast<__end_node_t&>(__end_node_));
+    0.27 :   2046b:  lea    0x8(%rsi),%rcx
+         : 25    _LIBCPP_HIDE_FROM_ABI value_compare& value_comp() _NOEXCEPT { return __value_comp_; }
+         : 26    _LIBCPP_HIDE_FROM_ABI const value_compare& value_comp() const _NOEXCEPT { return __value_comp_; }
+         :
+         : 28    public:
+         : 29    _LIBCPP_HIDE_FROM_ABI __node_pointer __root() const _NOEXCEPT {
+         : 30    return static_cast<__node_pointer>(__end_node()->__left_);
+    0.00 :   2046f:  mov    0x8(%rsi),%rsi
+         :
+         : 33    template <class _Tp, class _Compare, class _Allocator>
+         : 34    template <class _Key>
+         : 35    typename __tree<_Tp, _Compare, _Allocator>::iterator
+         : 36    __tree<_Tp, _Compare, _Allocator>::__lower_bound(const _Key& __v, __node_pointer __root, __end_node_pointer __result) {
+         : 37    while (__root != nullptr) {
+    0.00 :   20473:  test   %rsi,%rsi
+    0.00 :   20476:  je     204a2 <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0x42>
+    0.82 :   20478:  mov    0x8(%rax),%rdx
+    0.55 :   2047c:  mov    %rcx,%rbx
+    0.00 :   2047f:  nop
+         : 43    struct less<void> {
+         : 44    template <class _T1, class _T2>
+         : 45    _LIBCPP_CONSTEXPR_SINCE_CXX14 _LIBCPP_HIDE_FROM_ABI auto operator()(_T1&& __t, _T2&& __u) const
+         : 46    noexcept(noexcept(std::forward<_T1>(__t) < std::forward<_T2>(__u))) //
+         : 47    -> decltype(std::forward<_T1>(__t) < std::forward<_T2>(__u)) {
+         : 48    return std::forward<_T1>(__t) < std::forward<_T2>(__u);
+    3.83 :   20480:  xor    %edi,%edi
+    0.00 :   20482:  cmp    %rdx,0x20(%rsi)
+   43.44 :   20486:  setl   %dil
+         : 52    if (!value_comp()(__root->__value_, __v)) {
+    4.10 :   2048a:  cmovge %rsi,%rbx
+    1.91 :   2048e:  mov    (%rsi,%rdi,8),%rsi
+         : 55    while (__root != nullptr) {
+   25.96 :   20492:  test   %rsi,%rsi
+    0.00 :   20495:  jne    20480 <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0x20>
+         : 58    return __x.__ptr_ == __y.__ptr_;
+    1.37 :   20497:  cmp    %rcx,%rbx
+         : 60    if (__p != end() && !value_comp()(__v, *__p))
+    0.00 :   2049a:  je     204a2 <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0x42>
+    1.91 :   2049c:  cmp    0x20(%rbx),%rdx
+    0.00 :   204a0:  jge    204a5 <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0x45>
+    0.00 :   204a2:  mov    %rcx,%rbx
+         :
+         : 66    _LIBCPP_CONSTEXPR_SINCE_CXX26 _LIBCPP_HIDE_FROM_ABI reference operator*() const {
+         : 67    return __ptr_->__as_node()->__get_value();
+         : 68    }
+         : 69    _LIBCPP_CONSTEXPR_SINCE_CXX26 _LIBCPP_HIDE_FROM_ABI pointer operator->() const {
+         : 70    return pointer_traits<pointer>::pointer_to(__ptr_->__as_node()->__get_value());
+    1.37 :   204a5:  mov    0x10(%rax),%rdi
+         : 72    Level& level = level_it->second;
+         : 73    level.total_qty -= loc.order->qty;
+    0.00 :   204a9:  mov    0x18(%rdi),%eax
+         :
+         : 76    // Unlink nodes [__f, __l]
+         : 77    template <class _Tp, class _Alloc>
+         : 78    _LIBCPP_CONSTEXPR_SINCE_CXX26 inline void
+         : 79    __list_imp<_Tp, _Alloc>::__unlink_nodes(__base_pointer __f, __base_pointer __l) _NOEXCEPT {
+         : 80    __f->__prev_->__next_ = __l->__next_;
+    1.37 :   204ac:  mov    (%rdi),%rcx
+         :
+         : 83    template <class _Tp, class _Alloc>
+         : 84    _LIBCPP_CONSTEXPR_SINCE_CXX26 typename list<_Tp, _Alloc>::iterator list<_Tp, _Alloc>::erase(const_iterator __p) {
+         : 85    _LIBCPP_ASSERT_VALID_ELEMENT_ACCESS(__p != end(), "list::erase(iterator) called with a non-dereferenceable iterator");
+         : 86    __base_pointer __n = __p.__ptr_;
+         : 87    __base_pointer __r = __n->__next_;
+    0.00 :   204af:  mov    0x8(%rdi),%rdx
+         : 89    __f->__prev_->__next_ = __l->__next_;
+    0.00 :   204b3:  mov    %rdx,0x8(%rcx)
+         : 91    __l->__next_->__prev_ = __f->__prev_;
+    3.28 :   204b7:  mov    %rcx,(%rdx)
+         : 93    __base::__unlink_nodes(__n, __n);
+         : 94    --this->__size_;
+    2.46 :   204ba:  vmovdqu 0x38(%rbx),%xmm0
+    0.82 :   204bf:  vpmovsxbq 0xf022(%rip),%xmm1        # 2f4ea <_IO_stdin_used+0x4ea>
+    0.00 :   204c8:  vpinsrq $0x1,%rax,%xmm1,%xmm1
+    0.27 :   204ce:  vpsubq %xmm1,%xmm0,%xmm0
+    0.27 :   204d2:  vmovdqu %xmm0,0x38(%rbx)
+         : 100   #if _LIBCPP_HAS_ALIGNED_ALLOCATION
+         : 101   if (__is_overaligned_for_new(__align))
+         : 102   return __builtin_operator_delete(
+         : 103   __ptr _LIBCPP_ONLY_IF_SIZED_DEALLOCATION(, __size), static_cast<align_val_t>(__align));
+         : 104   #endif
+         : 105   return __builtin_operator_delete(__ptr _LIBCPP_ONLY_IF_SIZED_DEALLOCATION(, __size));
+    0.27 :   204d7:  mov    $0x20,%esi
+    0.00 :   204dc:  call   3530 <operator delete(void*, unsigned long)@plt>
+         : 108   _LIBCPP_CONSTEXPR_SINCE_CXX26 _LIBCPP_HIDE_FROM_ABI bool empty() const _NOEXCEPT { return __size_ == 0; }
+    0.00 :   204e1:  cmpq   $0x0,0x38(%rbx)
+         : 110   level.orders.erase(loc.order);
+         : 111   if (level.orders.empty()) levels.erase(level_it);
+    0.00 :   204e6:  je     204ee <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0x8e>
+         : 113   };
+    0.00 :   204e8:  pop    %rbx
+    0.27 :   204e9:  pop    %r14
+    0.00 :   204eb:  pop    %r15
+    0.00 :   204ed:  ret
+         : 118   if (__x->__right_ != nullptr)
+    0.00 :   204ee:  mov    0x8(%rbx),%rcx
+    0.27 :   204f2:  test   %rcx,%rcx
+    0.00 :   204f5:  je     2050d <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0xad>
+    0.27 :   204f7:  nopw   0x0(%rax,%rax,1)
+    0.00 :   20500:  mov    %rcx,%rax
+         : 124   while (__x->__left_ != nullptr)
+    0.00 :   20503:  mov    (%rcx),%rcx
+    0.82 :   20506:  test   %rcx,%rcx
+    0.00 :   20509:  jne    20500 <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0xa0>
+    0.00 :   2050b:  jmp    2051c <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0xbc>
+    0.27 :   2050d:  mov    %rbx,%rax
+    0.55 :   20510:  mov    %rax,%rcx
+         : 131   return __x == __x->__parent_->__left_;
+    0.00 :   20513:  mov    0x10(%rax),%rax
+    0.00 :   20517:  cmp    (%rax),%rcx
+         : 134   while (!std::__tree_is_left_child(__x))
+    0.00 :   2051a:  jne    20510 <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0xb0>
+         : 136   if (__begin_node() == __ptr)
+    0.00 :   2051c:  cmp    %rbx,(%r14)
+    0.00 :   2051f:  jne    20524 <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0xc4>
+         : 139   __begin_node() = __r.__ptr_;
+    0.27 :   20521:  mov    %rax,(%r14)
+         : 141   --size();
+    0.00 :   20524:  decq   0x10(%r14)
+         : 143   std::__tree_remove(__end_node()->__left_, static_cast<__node_base_pointer>(__ptr));
+    0.00 :   20528:  mov    0x8(%r14),%rdi
+    0.00 :   2052c:  mov    %rbx,%rsi
+    0.00 :   2052f:  call   1dab0 <void std::__1::__tree_remove[abi:ne210105]<std::__1::__tree_node_base<void*>*>(std::__1::__tree_node_base<void*>*, std::__1::__tree_node_base<void*>*)>
+    0.27 :   20534:  cmpq   $0x0,0x38(%rbx)
+         : 148   if (!empty()) {
+    0.00 :   20539:  je     20586 <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0x126>
+    0.00 :   2053b:  lea    0x28(%rbx),%r14
+         : 151   __unlink_nodes(__f, __l->__prev_);
+    0.00 :   2053f:  mov    0x28(%rbx),%rax
+         : 153   __base_pointer __f = __end_.__next_;
+    0.00 :   20543:  mov    0x30(%rbx),%rdi
+         : 155   __f->__prev_->__next_ = __l->__next_;
+    0.00 :   20547:  mov    0x8(%rax),%rax
+    0.00 :   2054b:  mov    (%rdi),%rcx
+    0.00 :   2054e:  mov    %rax,0x8(%rcx)
+         : 159   __l->__next_->__prev_ = __f->__prev_;
+    0.00 :   20552:  mov    %rcx,(%rax)
+         : 161   __size_ = 0;
+    0.00 :   20555:  movq   $0x0,0x38(%rbx)
+         : 163   while (__f != __l) {
+    0.00 :   2055d:  cmp    %r14,%rdi
+    0.00 :   20560:  je     20586 <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0x126>
+    0.00 :   20562:  data16 data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+         : 167   __f                 = __f->__next_;
+    0.00 :   20570:  mov    0x8(%rdi),%r15
+    0.00 :   20574:  mov    $0x20,%esi
+    0.00 :   20579:  call   3530 <operator delete(void*, unsigned long)@plt>
+    0.00 :   2057e:  mov    %r15,%rdi
+         : 172   while (__f != __l) {
+    0.00 :   20581:  cmp    %r14,%r15
+    0.00 :   20584:  jne    20570 <auto lob::v0::Book<lob::ChecksumSink>::erase(std::__1::__hash_map_iterator<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*> >)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&) const+0x110>
+    0.00 :   20586:  mov    $0x48,%esi
+    0.00 :   2058b:  mov    %rbx,%rdi
+    0.00 :   2058e:  pop    %rbx
+    0.00 :   2058f:  pop    %r14
+    0.27 :   20591:  pop    %r15
+    0.00 :   20593:  jmp    3530 <operator delete(void*, unsigned long)@plt>
+ Percent |	Source code & Disassembly of book for mem_load_retired.l3_miss:u (304 samples, percent: local period)
+---------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     000000000001f970 <void lob::v0::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)>:
+         : 6     }
+         : 7     return qty;
+         : 8     }
+         :
+         : 10    template <class Levels>
+         : 11    void rest(Levels& levels, OrderId id, Side side, Price price, Qty qty) {
+    0.00 :   1f970:  push   %rbp
+    2.30 :   1f971:  push   %r15
+    1.32 :   1f973:  push   %r14
+    0.00 :   1f975:  push   %r13
+    0.00 :   1f977:  push   %r12
+    0.00 :   1f979:  push   %rbx
+    0.00 :   1f97a:  sub    $0x38,%rsp
+    0.99 :   1f97e:  mov    %r9d,%r15d
+    5.92 :   1f981:  mov    %r8,%rbx
+    0.66 :   1f984:  mov    %ecx,0x4(%rsp)
+    0.99 :   1f988:  mov    %rdx,%r12
+    0.00 :   1f98b:  mov    %rsi,%rbp
+    1.32 :   1f98e:  mov    %rdi,0x18(%rsp)
+    0.00 :   1f993:  mov    %rdx,0x8(%rsp)
+         : 26    _LIBCPP_HIDE_FROM_ABI value_compare& value_comp() _NOEXCEPT { return __value_comp_; }
+         : 27    _LIBCPP_HIDE_FROM_ABI const value_compare& value_comp() const _NOEXCEPT { return __value_comp_; }
+         :
+         : 29    public:
+         : 30    _LIBCPP_HIDE_FROM_ABI __node_pointer __root() const _NOEXCEPT {
+         : 31    return static_cast<__node_pointer>(__end_node()->__left_);
+    0.33 :   1f998:  mov    0x8(%rsi),%rax
+         : 33    template <class _Key>
+         : 34    typename __tree<_Tp, _Compare, _Allocator>::__node_base_pointer&
+         : 35    __tree<_Tp, _Compare, _Allocator>::__find_equal(__end_node_pointer& __parent, const _Key& __v) {
+         : 36    __node_pointer __nd           = __root();
+         : 37    __node_base_pointer* __nd_ptr = __root_ptr();
+         : 38    if (__nd != nullptr) {
+    0.00 :   1f99c:  test   %rax,%rax
+    0.00 :   1f99f:  jne    1f9bc <void lob::v0::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)+0x4c>
+    0.00 :   1f9a1:  lea    0x8(%rbp),%r14
+    0.00 :   1f9a5:  mov    %r14,%r13
+    0.00 :   1f9a8:  jmp    1f9d7 <void lob::v0::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)+0x67>
+    0.00 :   1f9aa:  nopw   0x0(%rax,%rax,1)
+         : 45    while (true) {
+         : 46    if (value_comp()(__v, __nd->__value_)) {
+         : 47    if (__nd->__left_ != nullptr) {
+    3.62 :   1f9b0:  mov    0x0(%r13),%rax
+   11.51 :   1f9b4:  mov    %r13,%r14
+    0.00 :   1f9b7:  test   %rax,%rax
+    0.00 :   1f9ba:  je     1f9d7 <void lob::v0::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)+0x67>
+   11.18 :   1f9bc:  mov    %rax,%r13
+         : 53    struct less<void> {
+         : 54    template <class _T1, class _T2>
+         : 55    _LIBCPP_CONSTEXPR_SINCE_CXX14 _LIBCPP_HIDE_FROM_ABI auto operator()(_T1&& __t, _T2&& __u) const
+         : 56    noexcept(noexcept(std::forward<_T1>(__t) < std::forward<_T2>(__u))) //
+         : 57    -> decltype(std::forward<_T1>(__t) < std::forward<_T2>(__u)) {
+         : 58    return std::forward<_T1>(__t) < std::forward<_T2>(__u);
+    1.97 :   1f9bf:  mov    0x20(%rax),%rax
+   25.00 :   1f9c3:  cmp    %rax,%rbx
+         : 61    if (value_comp()(__v, __nd->__value_)) {
+    0.00 :   1f9c6:  jl     1f9b0 <void lob::v0::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)+0x40>
+         : 63    __nd     = static_cast<__node_pointer>(__nd->__left_);
+         : 64    } else {
+         : 65    __parent = static_cast<__end_node_pointer>(__nd);
+         : 66    return __parent->__left_;
+         : 67    }
+         : 68    } else if (value_comp()(__nd->__value_, __v)) {
+    2.63 :   1f9c8:  jle    1fa3e <void lob::v0::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)+0xce>
+         : 70    if (__nd->__right_ != nullptr) {
+    5.59 :   1f9ca:  mov    0x8(%r13),%rax
+    3.29 :   1f9ce:  test   %rax,%rax
+    0.00 :   1f9d1:  jne    1f9bc <void lob::v0::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)+0x4c>
+    0.00 :   1f9d3:  lea    0x8(%r13),%r14
+    1.32 :   1f9d7:  mov    %r12,0x10(%rsp)
+    1.97 :   1f9dc:  mov    %r15d,%r12d
+    0.66 :   1f9df:  mov    %r13,%r15
+         : 78    #if _LIBCPP_HAS_ALIGNED_ALLOCATION
+         : 79    if (__is_overaligned_for_new(__align))
+         : 80    return static_cast<_Tp*>(__builtin_operator_new(__size, static_cast<align_val_t>(__align)));
+         : 81    #endif
+         :
+         : 83    return static_cast<_Tp*>(__builtin_operator_new(__size));
+    0.99 :   1f9e2:  mov    $0x48,%edi
+    1.32 :   1f9e7:  call   30f0 <operator new(unsigned long)@plt>
+    0.33 :   1f9ec:  mov    %rax,%r13
+         : 87    pair(piecewise_construct_t,
+         : 88    tuple<_Args1...>& __first_args,
+         : 89    tuple<_Args2...>& __second_args,
+         : 90    __tuple_indices<_I1...>,
+         : 91    __tuple_indices<_I2...>)
+         : 92    : first(std::forward<_Args1>(std::get<_I1>(__first_args))...),
+    0.00 :   1f9ef:  mov    %rbx,0x20(%rax)
+         : 94    second(std::forward<_Args2>(std::get<_I2>(__second_args))...) {}
+    0.00 :   1f9f3:  add    $0x28,%rax
+         : 96    typedef typename _NodeTraits::__base_pointer __base_pointer;
+         :
+         : 98    __base_pointer __prev_;
+         : 99    __base_pointer __next_;
+         :
+         : 101   _LIBCPP_CONSTEXPR_SINCE_CXX26 _LIBCPP_HIDE_FROM_ABI __list_node_base() : __prev_(__self()), __next_(__self()) {}
+    0.00 :   1f9f7:  mov    %rax,0x28(%r13)
+    0.33 :   1f9fb:  mov    %rax,0x30(%r13)
+         : 104   std::uint64_t total_qty = 0;
+    0.00 :   1f9ff:  vxorps %xmm0,%xmm0,%xmm0
+    0.33 :   1fa03:  vmovups %xmm0,0x38(%r13)
+         :
+         : 108   template <class _Tp, class _Compare, class _Allocator>
+         : 109   void __tree<_Tp, _Compare, _Allocator>::__insert_node_at(
+         : 110   __end_node_pointer __parent, __node_base_pointer& __child, __node_base_pointer __new_node) _NOEXCEPT {
+         : 111   __new_node->__left_   = nullptr;
+         : 112   __new_node->__right_  = nullptr;
+    0.00 :   1fa09:  vmovups %xmm0,0x0(%r13)
+         : 114   __new_node->__parent_ = __parent;
+    0.00 :   1fa0f:  mov    %r15,0x10(%r13)
+         : 116   // __new_node->__is_black_ is initialized in __tree_balance_after_insert
+         : 117   __child = __new_node;
+    0.00 :   1fa13:  mov    %r13,(%r14)
+         : 119   if (__begin_node()->__left_ != nullptr)
+    0.00 :   1fa16:  mov    0x0(%rbp),%rax
+    0.00 :   1fa1a:  mov    (%rax),%rax
+    0.00 :   1fa1d:  test   %rax,%rax
+    0.00 :   1fa20:  je     1fa26 <void lob::v0::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)+0xb6>
+         : 124   __begin_node() = static_cast<__end_node_pointer>(__begin_node()->__left_);
+    0.00 :   1fa22:  mov    %rax,0x0(%rbp)
+         : 126   std::__tree_balance_after_insert(__end_node()->__left_, __child);
+    0.00 :   1fa26:  mov    0x8(%rbp),%rdi
+    0.00 :   1fa2a:  mov    %r13,%rsi
+    0.00 :   1fa2d:  call   1cc00 <void std::__1::__tree_balance_after_insert[abi:ne210105]<std::__1::__tree_node_base<void*>*>(std::__1::__tree_node_base<void*>*, std::__1::__tree_node_base<void*>*)>
+         : 130   ++size();
+    0.00 :   1fa32:  incq   0x10(%rbp)
+    0.00 :   1fa36:  mov    %r12d,%r15d
+    0.00 :   1fa39:  mov    0x10(%rsp),%r12
+         :
+         : 135   template <class _Key, class _Tp, class _Compare, class _Allocator>
+         : 136   _Tp& map<_Key, _Tp, _Compare, _Allocator>::operator[](const key_type& __k) {
+         : 137   return __tree_
+         : 138   .__emplace_unique_key_args(__k, std::piecewise_construct, std::forward_as_tuple(__k), std::forward_as_tuple())
+         : 139   .first->second;
+    4.61 :   1fa3e:  lea    0x28(%r13),%r14
+    0.99 :   1fa42:  mov    $0x20,%edi
+    2.63 :   1fa47:  call   30f0 <operator new(unsigned long)@plt>
+         : 143   #if _LIBCPP_STD_VER >= 20
+         :
+         : 145   template <class _Tp, class... _Args, class = decltype(::new(std::declval<void*>()) _Tp(std::declval<_Args>()...))>
+         : 146   _LIBCPP_HIDE_FROM_ABI constexpr _Tp* construct_at(_Tp* __location, _Args&&... __args) {
+         : 147   _LIBCPP_ASSERT_NON_NULL(__location != nullptr, "null pointer given to construct_at");
+         : 148   return ::new (static_cast<void*>(__location)) _Tp(std::forward<_Args>(__args)...);
+    0.00 :   1fa4c:  mov    %r12,0x10(%rax)
+    0.00 :   1fa50:  mov    %r15d,0x18(%rax)
+         :
+         : 152   // Link in nodes [__f, __l] at the back of the list
+         : 153   template <class _Tp, class _Alloc>
+         : 154   _LIBCPP_CONSTEXPR_SINCE_CXX26 inline void
+         : 155   list<_Tp, _Alloc>::__link_nodes_at_back(__base_pointer __f, __base_pointer __l) {
+         : 156   __l->__next_           = __base::__end_as_link();
+    0.00 :   1fa54:  mov    %r14,0x8(%rax)
+         : 158   __f->__prev_           = __base::__end_.__prev_;
+    0.33 :   1fa58:  mov    0x28(%r13),%rcx
+    1.64 :   1fa5c:  mov    %rcx,(%rax)
+         : 161   __f->__prev_->__next_  = __f;
+    0.00 :   1fa5f:  mov    %rax,0x8(%rcx)
+         : 163   __base::__end_.__prev_ = __l;
+    1.32 :   1fa63:  mov    %rax,0x28(%r13)
+         : 165   Level& level = levels[price];
+         : 166   level.orders.push_back(Order{id, qty});
+         : 167   level.total_qty += qty;
+    0.00 :   1fa67:  mov    %r15d,%r15d
+         : 169   template <class _Tp, class _Alloc>
+         : 170   _LIBCPP_CONSTEXPR_SINCE_CXX26 void list<_Tp, _Alloc>::push_back(value_type&& __x) {
+         : 171   __node_pointer __node = this->__create_node(/* prev = */ nullptr, /* next = */ nullptr, std::move(__x));
+         : 172   __base_pointer __nl   = __node->__as_link();
+         : 173   __link_nodes_at_back(__nl, __nl);
+         : 174   ++this->__size_;
+    0.00 :   1fa6a:  vpmovsxbq 0xfa73(%rip),%xmm0        # 2f4e6 <_IO_stdin_used+0x4e6>
+    0.00 :   1fa73:  vpinsrq $0x1,%r15,%xmm0,%xmm0
+    0.00 :   1fa79:  vpaddq 0x38(%r13),%xmm0,%xmm0
+    0.66 :   1fa7f:  vmovdqu %xmm0,0x38(%r13)
+    0.00 :   1fa85:  mov    0x18(%rsp),%r14
+         : 180   index_.emplace(id, Loc{side, price, std::prev(level.orders.end())});
+    0.33 :   1fa8a:  lea    0x38(%r14),%rdi
+    0.00 :   1fa8e:  mov    0x4(%rsp),%ebp
+    0.00 :   1fa92:  mov    %bpl,0x20(%rsp)
+    0.00 :   1fa97:  mov    %rbx,0x28(%rsp)
+    0.00 :   1fa9c:  mov    %rax,0x30(%rsp)
+    0.00 :   1faa1:  lea    0x8(%rsp),%rdx
+    0.00 :   1faa6:  lea    0x20(%rsp),%rcx
+         :
+         : 189   template <class _First,
+         : 190   class _Second,
+         : 191   __enable_if_t<__can_extract_map_key<_First, key_type, __container_value_type>::value, int> = 0>
+         : 192   _LIBCPP_HIDE_FROM_ABI pair<iterator, bool> __emplace_unique(_First&& __f, _Second&& __s) {
+         : 193   return __emplace_unique_key_args(__f, std::forward<_First>(__f), std::forward<_Second>(__s));
+    0.00 :   1faab:  mov    %rdx,%rsi
+    0.00 :   1faae:  call   1fe00 <std::__1::pair<std::__1::__hash_iterator<std::__1::__hash_node<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, void*>*>, bool> std::__1::__hash_table<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, std::__1::__unordered_map_hasher<unsigned long, std::__1::pair<unsigned long const, lob::v0::Book<lob::ChecksumSink>::Loc>, std::__1::hash<unsigned long>, std::__1::equal_to<unsigned long>, true>, std::__1::__unordered_map_equal<unsigned long, std::__1::pair<unsigned long const, lob::v0::Book<lob::ChecksumSink>::Loc>, std::__1::equal_to<unsigned long>, std::__1::hash<unsigned long>, true>, std::__1::allocator<std::__1::pair<unsigned long const, lob::v0::Book<lob::ChecksumSink>::Loc> > >::__emplace_unique_key_args<unsigned long, unsigned long&, lob::v0::Book<lob::ChecksumSink>::Loc>(unsigned long const&, unsigned long&, lob::v0::Book<lob::ChecksumSink>::Loc&&)>
+         : 196   sink_.on(Rested{id, side, price, qty});
+    0.00 :   1fab3:  mov    (%r14),%rax
+         :
+         : 199   private:
+         : 200   template <class... T>
+         : 201   void mix(T... xs) noexcept {
+         : 202   ++events;
+         : 203   ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.00 :   1fab6:  mov    (%rax),%rcx
+    0.00 :   1fab9:  xor    $0x2,%rcx
+    0.33 :   1fabd:  movabs $0x9e3779b97f4a7c15,%rdx
+    0.00 :   1fac7:  imul   %rdx,%rcx
+    0.00 :   1facb:  xor    0x8(%rsp),%rcx
+         : 209   mix(2, e.id, static_cast<std::uint64_t>(e.side), static_cast<std::uint64_t>(e.price), e.qty);
+    0.00 :   1fad0:  movzbl %bpl,%esi
+         : 211   ++events;
+    0.00 :   1fad4:  incq   0x8(%rax)
+         : 213   ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.00 :   1fad8:  imul   %rdx,%rcx
+    0.00 :   1fadc:  xor    %rsi,%rcx
+    0.00 :   1fadf:  imul   %rdx,%rcx
+    0.00 :   1fae3:  xor    %rbx,%rcx
+    0.00 :   1fae6:  imul   %rdx,%rcx
+    0.00 :   1faea:  xor    %r15,%rcx
+    0.33 :   1faed:  imul   %rdx,%rcx
+    0.66 :   1faf1:  mov    %rcx,(%rax)
+         : 222   }
+    0.33 :   1faf4:  add    $0x38,%rsp
+    0.00 :   1faf8:  pop    %rbx
+    0.00 :   1faf9:  pop    %r12
+    0.00 :   1fafb:  pop    %r13
+    0.00 :   1fafd:  pop    %r14
+    0.00 :   1faff:  pop    %r15
+    0.00 :   1fb01:  pop    %rbp
+    0.00 :   1fb02:  ret
+ Percent |	Source code & Disassembly of book for mem_load_retired.l3_miss:u (172 samples, percent: local period)
+---------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     000000000001f5e0 <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})>:
+         : 6     else
+         : 7     rest(asks_, id, side, price, qty);
+         : 8     }
+         :
+         : 10    template <class Levels, class Crosses>
+         : 11    auto match(Levels& opposite_levels, OrderId taker, Qty qty, Crosses crosses) -> Qty {
+   67.44 :   1f5e0:  push   %rbp
+    8.72 :   1f5e1:  push   %r15
+    0.00 :   1f5e3:  push   %r14
+    5.81 :   1f5e5:  push   %r13
+    0.00 :   1f5e7:  push   %r12
+    0.00 :   1f5e9:  push   %rbx
+    0.00 :   1f5ea:  sub    $0x18,%rsp
+    3.49 :   1f5ee:  mov    %r8,0x10(%rsp)
+    0.58 :   1f5f3:  mov    %rsi,(%rsp)
+         : 21    while (qty > 0 && !opposite_levels.empty()) {
+    0.00 :   1f5f7:  test   %ecx,%ecx
+    0.00 :   1f5f9:  je     1f7bb <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})+0x1db>
+    0.00 :   1f5ff:  mov    %ecx,%ebx
+    0.00 :   1f601:  mov    %rdx,%r15
+    0.58 :   1f604:  mov    %rdi,%r13
+    0.00 :   1f607:  movabs $0x9e3779b97f4a7c15,%rbp
+    0.00 :   1f611:  mov    %rdx,0x8(%rsp)
+    4.07 :   1f616:  jmp    1f63a <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})+0x5a>
+    0.00 :   1f618:  nopl   0x0(%rax,%rax,1)
+         : 31    #if _LIBCPP_HAS_ALIGNED_ALLOCATION
+         : 32    if (__is_overaligned_for_new(__align))
+         : 33    return __builtin_operator_delete(
+         : 34    __ptr _LIBCPP_ONLY_IF_SIZED_DEALLOCATION(, __size), static_cast<align_val_t>(__align));
+         : 35    #endif
+         : 36    return __builtin_operator_delete(__ptr _LIBCPP_ONLY_IF_SIZED_DEALLOCATION(, __size));
+    0.00 :   1f620:  mov    $0x48,%esi
+    0.00 :   1f625:  mov    %r14,%rdi
+    0.00 :   1f628:  call   3530 <operator delete(void*, unsigned long)@plt>
+    0.00 :   1f62d:  test   %ebx,%ebx
+    0.00 :   1f62f:  mov    0x8(%rsp),%r15
+    0.00 :   1f634:  je     1f7bb <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})+0x1db>
+    1.16 :   1f63a:  mov    (%rsp),%rax
+         : 44    _LIBCPP_HIDE_FROM_ABI const_iterator cbegin() const _NOEXCEPT { return begin(); }
+         : 45    _LIBCPP_HIDE_FROM_ABI const_iterator cend() const _NOEXCEPT { return end(); }
+         : 46    _LIBCPP_HIDE_FROM_ABI const_reverse_iterator crbegin() const _NOEXCEPT { return rbegin(); }
+         : 47    _LIBCPP_HIDE_FROM_ABI const_reverse_iterator crend() const _NOEXCEPT { return rend(); }
+         :
+         : 49    [[__nodiscard__]] _LIBCPP_HIDE_FROM_ABI bool empty() const _NOEXCEPT { return __tree_.size() == 0; }
+    1.16 :   1f63e:  cmpq   $0x0,0x10(%rax)
+    2.91 :   1f643:  je     1f7bd <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})+0x1dd>
+         : 52    is_nothrow_move_assignable<__node_allocator>::value) ||
+         : 53    allocator_traits<__node_allocator>::is_always_equal::value));
+         :
+         : 55    _LIBCPP_HIDE_FROM_ABI ~__tree();
+         :
+         : 57    _LIBCPP_HIDE_FROM_ABI iterator begin() _NOEXCEPT { return iterator(__begin_node()); }
+    0.58 :   1f649:  mov    (%rax),%r14
+    0.00 :   1f64c:  mov    0x10(%rsp),%rax
+         : 60    qty = match(bids_, id, qty, [price](Price bid) { return bid >= price; });
+    0.58 :   1f651:  cmp    %rax,0x20(%r14)
+         : 62    auto level_it = opposite_levels.begin();
+         : 63    if (!crosses(level_it->first)) break;
+    0.00 :   1f655:  jge    1f669 <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})+0x89>
+    1.16 :   1f657:  jmp    1f7bd <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})+0x1dd>
+    0.00 :   1f65c:  nopl   0x0(%rax)
+    0.00 :   1f660:  sub    %r12d,%ebx
+         : 68    Level& level = level_it->second;
+         : 69    while (qty > 0 && !level.orders.empty()) {
+    0.00 :   1f663:  je     1f710 <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})+0x130>
+         : 71    #  ifndef _LIBCPP_CXX03_LANG
+         : 72    _LIBCPP_CONSTEXPR_SINCE_CXX26 _LIBCPP_HIDE_FROM_ABI __list_imp(__node_allocator&& __a) _NOEXCEPT;
+         : 73    #  endif
+         : 74    _LIBCPP_CONSTEXPR_SINCE_CXX26 _LIBCPP_HIDE_FROM_ABI ~__list_imp();
+         : 75    _LIBCPP_CONSTEXPR_SINCE_CXX26 _LIBCPP_HIDE_FROM_ABI void clear() _NOEXCEPT;
+         : 76    _LIBCPP_CONSTEXPR_SINCE_CXX26 _LIBCPP_HIDE_FROM_ABI bool empty() const _NOEXCEPT { return __size_ == 0; }
+    0.00 :   1f669:  cmpq   $0x0,0x38(%r14)
+    0.00 :   1f66e:  je     1f71d <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})+0x13d>
+         : 79    return const_reverse_iterator(begin());
+         : 80    }
+         :
+         : 82    _LIBCPP_CONSTEXPR_SINCE_CXX26 _LIBCPP_HIDE_FROM_ABI reference front() {
+         : 83    _LIBCPP_ASSERT_VALID_ELEMENT_ACCESS(!empty(), "list::front called on empty list");
+         : 84    return __base::__end_.__next_->__as_node()->__get_value();
+    0.00 :   1f674:  mov    0x30(%r14),%rsi
+         :
+         : 87    template <>
+         : 88    struct __less<void, void> {
+         : 89    template <class _Tp, class _Up>
+         : 90    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX14 bool operator()(const _Tp& __lhs, const _Up& __rhs) const {
+         : 91    return __lhs < __rhs;
+    0.00 :   1f678:  mov    0x18(%rsi),%eax
+         : 93    Order& maker = level.orders.front();
+         : 94    const Qty fill = std::min(qty, maker.qty);
+    0.00 :   1f67b:  cmp    %ebx,%eax
+    0.00 :   1f67d:  mov    %ebx,%r12d
+         : 97    sink_.on(Trade{taker, maker.id, level_it->first, fill});
+    0.00 :   1f680:  mov    0x0(%r13),%rcx
+         : 99    }
+         :
+         : 101   private:
+         : 102   template <class... T>
+         : 103   void mix(T... xs) noexcept {
+         : 104   ++events;
+    0.00 :   1f684:  vmovdqu 0x8(%rcx),%xmm0
+         : 106   const Qty fill = std::min(qty, maker.qty);
+    0.00 :   1f689:  cmovb  %eax,%r12d
+    0.00 :   1f68d:  vpcmpeqd %xmm1,%xmm1,%xmm1
+    0.00 :   1f691:  vpsubq %xmm1,%xmm0,%xmm0
+         : 110   ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.00 :   1f695:  mov    (%rcx),%rdx
+    0.00 :   1f698:  xor    $0x1,%rdx
+    0.00 :   1f69c:  imul   %rbp,%rdx
+    0.00 :   1f6a0:  xor    %r15,%rdx
+    0.00 :   1f6a3:  imul   %rbp,%rdx
+    0.00 :   1f6a7:  xor    0x10(%rsi),%rdx
+    0.00 :   1f6ab:  imul   %rbp,%rdx
+    0.00 :   1f6af:  xor    0x20(%r14),%rdx
+         : 119   ++events;
+    0.00 :   1f6b3:  vmovdqu %xmm0,0x8(%rcx)
+         : 121   ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.00 :   1f6b8:  imul   %rbp,%rdx
+    0.00 :   1f6bc:  xor    %r12,%rdx
+    0.00 :   1f6bf:  imul   %rbp,%rdx
+    0.00 :   1f6c3:  mov    %rdx,(%rcx)
+         : 126   qty -= fill;
+         : 127   maker.qty -= fill;
+    0.00 :   1f6c6:  mov    %eax,%ecx
+    0.00 :   1f6c8:  sub    %r12d,%ecx
+    0.00 :   1f6cb:  mov    %ecx,0x18(%rsi)
+         : 131   level.total_qty -= fill;
+    0.00 :   1f6ce:  sub    %r12,0x40(%r14)
+         : 133   const Qty fill = std::min(qty, maker.qty);
+    0.00 :   1f6d2:  cmp    %ebx,%eax
+         : 135   if (maker.qty == 0) {
+    0.00 :   1f6d4:  ja     1f660 <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})+0x80>
+    0.00 :   1f6d6:  add    $0x10,%rsi
+         : 138   }
+         : 139   #  endif // _LIBCPP_STD_VER >= 17
+         :
+         : 141   _LIBCPP_HIDE_FROM_ABI iterator erase(const_iterator __p) { return __table_.erase(__p.__i_); }
+         : 142   _LIBCPP_HIDE_FROM_ABI iterator erase(iterator __p) { return __table_.erase(__p.__i_); }
+         : 143   _LIBCPP_HIDE_FROM_ABI size_type erase(const key_type& __k) { return __table_.__erase_unique(__k); }
+    0.00 :   1f6da:  lea    0x38(%r13),%rdi
+    0.00 :   1f6de:  call   1fb10 <unsigned long std::__1::__hash_table<std::__1::__hash_value_type<unsigned long, lob::v0::Book<lob::ChecksumSink>::Loc>, std::__1::__unordered_map_hasher<unsigned long, std::__1::pair<unsigned long const, lob::v0::Book<lob::ChecksumSink>::Loc>, std::__1::hash<unsigned long>, std::__1::equal_to<unsigned long>, true>, std::__1::__unordered_map_equal<unsigned long, std::__1::pair<unsigned long const, lob::v0::Book<lob::ChecksumSink>::Loc>, std::__1::equal_to<unsigned long>, std::__1::hash<unsigned long>, true>, std::__1::allocator<std::__1::pair<unsigned long const, lob::v0::Book<lob::ChecksumSink>::Loc> > >::__erase_unique<unsigned long>(unsigned long const&)>
+         : 146   #  endif // _LIBCPP_CXX03_LANG
+         :
+         : 148   template <class _Tp, class _Alloc>
+         : 149   _LIBCPP_CONSTEXPR_SINCE_CXX26 void list<_Tp, _Alloc>::pop_front() {
+         : 150   _LIBCPP_ASSERT_VALID_ELEMENT_ACCESS(!empty(), "list::pop_front() called with empty list");
+         : 151   __base_pointer __n = __base::__end_.__next_;
+    0.00 :   1f6e3:  mov    0x30(%r14),%rdi
+         : 153   __f->__prev_->__next_ = __l->__next_;
+    0.00 :   1f6e7:  mov    (%rdi),%rax
+    0.00 :   1f6ea:  mov    0x8(%rdi),%rcx
+    0.00 :   1f6ee:  mov    %rcx,0x8(%rax)
+         : 157   __l->__next_->__prev_ = __f->__prev_;
+    0.00 :   1f6f2:  mov    %rax,(%rcx)
+         : 159   __base::__unlink_nodes(__n, __n);
+         : 160   --this->__size_;
+    0.00 :   1f6f5:  decq   0x38(%r14)
+    0.00 :   1f6f9:  mov    $0x20,%esi
+    0.00 :   1f6fe:  call   3530 <operator delete(void*, unsigned long)@plt>
+    0.00 :   1f703:  jmp    1f660 <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})+0x80>
+    0.00 :   1f708:  nopl   0x0(%rax,%rax,1)
+    0.00 :   1f710:  xor    %ebx,%ebx
+         : 167   _LIBCPP_CONSTEXPR_SINCE_CXX26 _LIBCPP_HIDE_FROM_ABI bool empty() const _NOEXCEPT { return __size_ == 0; }
+    0.00 :   1f712:  cmpq   $0x0,0x38(%r14)
+         : 169   index_.erase(maker.id);
+         : 170   level.orders.pop_front();
+         : 171   }
+         : 172   }
+         : 173   if (level.orders.empty()) opposite_levels.erase(level_it);
+    0.00 :   1f717:  jne    1f7bd <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})+0x1dd>
+         : 175   if (__x->__right_ != nullptr)
+    0.00 :   1f71d:  mov    0x8(%r14),%rcx
+    0.00 :   1f721:  mov    %r14,%rax
+    0.00 :   1f724:  test   %rcx,%rcx
+    0.00 :   1f727:  je     1f740 <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})+0x160>
+    0.00 :   1f729:  nopl   0x0(%rax)
+    0.00 :   1f730:  mov    %rcx,%rax
+         : 182   while (__x->__left_ != nullptr)
+    0.00 :   1f733:  mov    (%rcx),%rcx
+    0.00 :   1f736:  test   %rcx,%rcx
+    0.00 :   1f739:  jne    1f730 <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})+0x150>
+    0.00 :   1f73b:  jmp    1f74c <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})+0x16c>
+    0.00 :   1f73d:  nopl   (%rax)
+    0.00 :   1f740:  mov    %rax,%rcx
+         : 189   return __x == __x->__parent_->__left_;
+    0.00 :   1f743:  mov    0x10(%rax),%rax
+    0.00 :   1f747:  cmp    (%rax),%rcx
+         : 192   while (!std::__tree_is_left_child(__x))
+    0.00 :   1f74a:  jne    1f740 <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})+0x160>
+    0.00 :   1f74c:  mov    (%rsp),%rcx
+         : 195   template <class _Tp, class _Compare, class _Allocator>
+         : 196   typename __tree<_Tp, _Compare, _Allocator>::iterator
+         : 197   __tree<_Tp, _Compare, _Allocator>::__remove_node_pointer(__node_pointer __ptr) _NOEXCEPT {
+         : 198   iterator __r(__ptr);
+         : 199   ++__r;
+         : 200   if (__begin_node() == __ptr)
+    0.00 :   1f750:  cmp    %r14,(%rcx)
+    0.00 :   1f753:  jne    1f758 <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})+0x178>
+         : 203   __begin_node() = __r.__ptr_;
+    0.00 :   1f755:  mov    %rax,(%rcx)
+         : 205   --size();
+    0.00 :   1f758:  decq   0x10(%rcx)
+         : 207   std::__tree_remove(__end_node()->__left_, static_cast<__node_base_pointer>(__ptr));
+    0.00 :   1f75c:  mov    0x8(%rcx),%rdi
+    0.00 :   1f760:  mov    %r14,%rsi
+    0.00 :   1f763:  call   1dab0 <void std::__1::__tree_remove[abi:ne210105]<std::__1::__tree_node_base<void*>*>(std::__1::__tree_node_base<void*>*, std::__1::__tree_node_base<void*>*)>
+    0.00 :   1f768:  cmpq   $0x0,0x38(%r14)
+         : 212   if (!empty()) {
+    0.00 :   1f76d:  je     1f620 <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})+0x40>
+    0.00 :   1f773:  lea    0x28(%r14),%r12
+         : 215   __unlink_nodes(__f, __l->__prev_);
+    0.00 :   1f777:  mov    0x28(%r14),%rax
+         : 217   __base_pointer __f = __end_.__next_;
+    0.00 :   1f77b:  mov    0x30(%r14),%rdi
+         : 219   __f->__prev_->__next_ = __l->__next_;
+    0.00 :   1f77f:  mov    0x8(%rax),%rax
+    0.00 :   1f783:  mov    (%rdi),%rcx
+    0.00 :   1f786:  mov    %rax,0x8(%rcx)
+         : 223   __l->__next_->__prev_ = __f->__prev_;
+    0.00 :   1f78a:  mov    %rcx,(%rax)
+         : 225   __size_ = 0;
+    0.00 :   1f78d:  movq   $0x0,0x38(%r14)
+         : 227   while (__f != __l) {
+    0.00 :   1f795:  cmp    %r12,%rdi
+    0.00 :   1f798:  je     1f620 <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})+0x40>
+    0.00 :   1f79e:  xchg   %ax,%ax
+         : 231   __f                 = __f->__next_;
+    0.00 :   1f7a0:  mov    0x8(%rdi),%r15
+    0.00 :   1f7a4:  mov    $0x20,%esi
+    0.00 :   1f7a9:  call   3530 <operator delete(void*, unsigned long)@plt>
+    0.00 :   1f7ae:  mov    %r15,%rdi
+         : 236   while (__f != __l) {
+    0.00 :   1f7b1:  cmp    %r12,%r15
+    0.00 :   1f7b4:  jne    1f7a0 <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})+0x1c0>
+    0.00 :   1f7b6:  jmp    1f620 <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})+0x40>
+    0.00 :   1f7bb:  xor    %ebx,%ebx
+         : 241   }
+         : 242   return qty;
+    0.58 :   1f7bd:  mov    %ebx,%eax
+    0.00 :   1f7bf:  add    $0x18,%rsp
+    0.00 :   1f7c3:  pop    %rbx
+    0.00 :   1f7c4:  pop    %r12
+    0.00 :   1f7c6:  pop    %r13
+    0.00 :   1f7c8:  pop    %r14
+    0.00 :   1f7ca:  pop    %r15
+    0.00 :   1f7cc:  pop    %rbp
+    1.16 :   1f7cd:  ret
+ Percent |	Source code & Disassembly of book for mem_load_retired.l3_miss:u (170 samples, percent: local period)
+---------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     000000000001f3f0 <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1})>:
+         : 6     else
+         : 7     rest(asks_, id, side, price, qty);
+         : 8     }
+         :
+         : 10    template <class Levels, class Crosses>
+         : 11    auto match(Levels& opposite_levels, OrderId taker, Qty qty, Crosses crosses) -> Qty {
+   70.00 :   1f3f0:  push   %rbp
+    6.47 :   1f3f1:  push   %r15
+    0.00 :   1f3f3:  push   %r14
+    1.18 :   1f3f5:  push   %r13
+    0.00 :   1f3f7:  push   %r12
+    0.00 :   1f3f9:  push   %rbx
+    0.00 :   1f3fa:  sub    $0x18,%rsp
+    1.76 :   1f3fe:  mov    %r8,0x10(%rsp)
+    1.76 :   1f403:  mov    %rsi,(%rsp)
+         : 21    while (qty > 0 && !opposite_levels.empty()) {
+    0.00 :   1f407:  test   %ecx,%ecx
+    0.00 :   1f409:  je     1f5cb <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1})+0x1db>
+    0.00 :   1f40f:  mov    %ecx,%ebx
+    0.00 :   1f411:  mov    %rdx,%r15
+    0.59 :   1f414:  mov    %rdi,%r13
+    0.00 :   1f417:  movabs $0x9e3779b97f4a7c15,%rbp
+    0.00 :   1f421:  mov    %rdx,0x8(%rsp)
+    2.94 :   1f426:  jmp    1f44a <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1})+0x5a>
+    0.00 :   1f428:  nopl   0x0(%rax,%rax,1)
+         : 31    #if _LIBCPP_HAS_ALIGNED_ALLOCATION
+         : 32    if (__is_overaligned_for_new(__align))
+         : 33    return __builtin_operator_delete(
+         : 34    __ptr _LIBCPP_ONLY_IF_SIZED_DEALLOCATION(, __size), static_cast<align_val_t>(__align));
+         : 35    #endif
+         : 36    return __builtin_operator_delete(__ptr _LIBCPP_ONLY_IF_SIZED_DEALLOCATION(, __size));
+    0.00 :   1f430:  mov    $0x48,%esi
+    0.00 :   1f435:  mov    %r14,%rdi
+    0.00 :   1f438:  call   3530 <operator delete(void*, unsigned long)@plt>
+    0.00 :   1f43d:  test   %ebx,%ebx
+    0.00 :   1f43f:  mov    0x8(%rsp),%r15
+    0.00 :   1f444:  je     1f5cb <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1})+0x1db>
+    0.59 :   1f44a:  mov    (%rsp),%rax
+         : 44    _LIBCPP_HIDE_FROM_ABI const_iterator cbegin() const _NOEXCEPT { return begin(); }
+         : 45    _LIBCPP_HIDE_FROM_ABI const_iterator cend() const _NOEXCEPT { return end(); }
+         : 46    _LIBCPP_HIDE_FROM_ABI const_reverse_iterator crbegin() const _NOEXCEPT { return rbegin(); }
+         : 47    _LIBCPP_HIDE_FROM_ABI const_reverse_iterator crend() const _NOEXCEPT { return rend(); }
+         :
+         : 49    [[__nodiscard__]] _LIBCPP_HIDE_FROM_ABI bool empty() const _NOEXCEPT { return __tree_.size() == 0; }
+    1.18 :   1f44e:  cmpq   $0x0,0x10(%rax)
+    3.53 :   1f453:  je     1f5cd <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1})+0x1dd>
+         : 52    is_nothrow_move_assignable<__node_allocator>::value) ||
+         : 53    allocator_traits<__node_allocator>::is_always_equal::value));
+         :
+         : 55    _LIBCPP_HIDE_FROM_ABI ~__tree();
+         :
+         : 57    _LIBCPP_HIDE_FROM_ABI iterator begin() _NOEXCEPT { return iterator(__begin_node()); }
+    0.59 :   1f459:  mov    (%rax),%r14
+    0.00 :   1f45c:  mov    0x10(%rsp),%rax
+         : 60    qty = match(asks_, id, qty, [price](Price ask) { return ask <= price; });
+    1.18 :   1f461:  cmp    %rax,0x20(%r14)
+         : 62    auto level_it = opposite_levels.begin();
+         : 63    if (!crosses(level_it->first)) break;
+    0.00 :   1f465:  jle    1f479 <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1})+0x89>
+    2.94 :   1f467:  jmp    1f5cd <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1})+0x1dd>
+    0.00 :   1f46c:  nopl   0x0(%rax)
+    0.00 :   1f470:  sub    %r12d,%ebx
+         : 68    Level& level = level_it->second;
+         : 69    while (qty > 0 && !level.orders.empty()) {
+    0.00 :   1f473:  je     1f520 <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1})+0x130>
+         : 71    #  ifndef _LIBCPP_CXX03_LANG
+         : 72    _LIBCPP_CONSTEXPR_SINCE_CXX26 _LIBCPP_HIDE_FROM_ABI __list_imp(__node_allocator&& __a) _NOEXCEPT;
+         : 73    #  endif
+         : 74    _LIBCPP_CONSTEXPR_SINCE_CXX26 _LIBCPP_HIDE_FROM_ABI ~__list_imp();
+         : 75    _LIBCPP_CONSTEXPR_SINCE_CXX26 _LIBCPP_HIDE_FROM_ABI void clear() _NOEXCEPT;
+         : 76    _LIBCPP_CONSTEXPR_SINCE_CXX26 _LIBCPP_HIDE_FROM_ABI bool empty() const _NOEXCEPT { return __size_ == 0; }
+    0.00 :   1f479:  cmpq   $0x0,0x38(%r14)
+    0.00 :   1f47e:  je     1f52d <unsigned int lob::v0::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1}>(std::__1::map<long, lob::v0::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v0::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1})+0x13d>
+         : 79    return const_reverse_iterator(begin());
+         : 80    }
+         :
+         : 82    _LIBCPP_CONSTEXPR_SINCE_CXX26 _LIBCPP_HIDE_FROM_ABI reference front() {
+         : 83    _LIBCPP_ASSERT_VALID_ELEMENT_ACCESS(!empty(), "list::front called on empty list");
+         : 84    return __base::__end_.__next_->__as_node()->__get_value();
+    0.00 :   1f484:  mov    0x30(%r14),%rsi
+         :
+         : 87    template <>
+         : 88    struct __less<void, void> {
+         : 89    template <class _Tp, class _Up>
+         : 90    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX14 bool operator()(const _Tp& __lhs, const _Up& __rhs) const {
+         : 91    return __lhs < __rhs;
+    0.00 :   1f488:  mov    0x18(%rsi),%eax
+         : 93    Order& maker = level.orders.front();
+         : 94    const Qty fill = std::min(qty, maker.qty);
+    0.00 :   1f48b:  cmp    %ebx,%eax
+    0.00 :   1f48d:  mov    %ebx,%r12d
+         : 97    sink_.on(Trade{taker, maker.id, level_it->first, fill});
+    0.00 :   1f490:  mov    0x0(%r13),%rcx
+         : 99    }
+         :
+         : 101   private:
+         : 102   template <class... T>
+         : 103   void mix(T... xs) noexcept {
+         : 104   ++events;
+    0.00 :   1f494:  vmovdqu 0x8(%rcx),%xmm0
+         : 106   const Qty fill = std::min(qty, maker.qty);
+    0.00 :   1f499:  cmovb  %eax,%r12d

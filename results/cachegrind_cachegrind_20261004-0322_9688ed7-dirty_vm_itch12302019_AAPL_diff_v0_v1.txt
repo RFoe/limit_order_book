@@ -1,0 +1,8 @@
+usage: cg_annotate [-h] [--version] [--diff] [--mod-filename REGEX]
+                   [--mod-funcname REGEX] [--show A,B,C] [--sort A,B,C]
+                   [--threshold N:[0,20]] [--show-percs | --no-show-percs]
+                   [--show-percs=yes] [--show-percs=no]
+                   [--annotate | --no-annotate] [--auto=yes] [--auto=no]
+                   [--context N]
+                   cachegrind-out-file [cachegrind-out-file ...]
+cg_annotate: error: argument --mod-filename: invalid search_and_replace value: 's#/v[0-9]+/#/vN/#'

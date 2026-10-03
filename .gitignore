@@ -10,4 +10,4 @@ data/
 # raw profiler outputs (text summaries in results/ are committed)
 perf.data*
 *.zst
-results/**/*.perf.data
+results/**/*.perf.data*
