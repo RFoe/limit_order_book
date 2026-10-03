@@ -1,0 +1,1369 @@
+desc: I1 cache:         32768 B, 64 B, 8-way associative
+desc: D1 cache:         49152 B, 64 B, 12-way associative
+desc: LL cache:         6291456 B, 64 B, 12-way associative
+cmd: /home/wang/sources/cxx/book/build/profile/book replay --workload data/itch12302019_QQQ.ops --version v2
+events: Ir I1mr ILmr Dr D1mr DLmr Dw D1mw DLmw 
+fl=./malloc/./malloc/arena.c
+fn=free
+153 445932 0 0 0 0 0 0 0 0
+fn=malloc
+153 5890 0 0 0 0 0 0 0 0
+fl=./malloc/./malloc/malloc.c
+fn=_int_free
+1792 4022 0 0 4022 14 0 0 0 0
+1992 11754 1 1 3918 0 0 0 0 0
+3163 289244 1 1 144622 0 0 144622 0 0
+3165 578488 0 0 144622 196 4 144622 0 0
+3166 144622 0 0 0 0 0 144622 0 0
+3167 289244 0 0 0 0 0 144622 0 0
+4495 1040508 1 1 0 0 0 594576 3 0
+4499 445932 1 1 148644 0 0 0 0 0
+4505 594576 0 0 0 0 0 0 0 0
+4506 297288 0 0 0 0 0 0 0 0
+4510 743220 0 0 0 0 0 0 0 0
+4517 297288 0 0 0 0 0 0 0 0
+4518 891864 1 1 445932 185 0 0 0 0
+4521 148540 0 0 0 0 0 0 0 0
+4527 445620 0 0 297080 693 1 0 0 0
+4547 742700 1 1 297080 452 0 0 0 0
+4550 144622 0 0 0 0 0 0 0 0
+4561 8044 0 0 0 0 0 0 0 0
+4572 15672 0 0 3918 433 37 0 0 0
+4574 11754 0 0 3918 377 0 0 0 0
+4593 3918 0 0 0 0 0 0 0 0
+4595 3918 0 0 0 0 0 3918 302 0
+4596 3918 0 0 0 0 0 0 0 0
+4600 11754 0 0 3918 0 0 0 0 0
+4602 7836 0 0 3918 369 0 0 0 0
+4606 7836 0 0 0 0 0 0 0 0
+4608 11754 0 0 0 0 0 3918 0 0
+4609 3918 0 0 0 0 0 3918 0 0
+4628 15672 0 0 0 0 0 0 0 0
+4637 208 0 0 104 0 0 0 0 0
+4640 208 0 0 104 7 0 0 0 0
+4643 208 1 1 0 0 0 0 0 0
+4646 208 0 0 0 0 0 0 0 0
+4658 891760 1 1 743116 0 0 0 0 0
+fn=_int_free_maybe_consolidate
+4770 1144 1 1 104 6 0 728 1 0
+4776 208 0 0 0 0 0 0 0 0
+4778 188 0 0 47 0 0 0 0 0
+4781 141 0 0 0 0 0 0 0 0
+4784 235 2 2 141 31 1 0 0 0
+4785 15 0 0 9 0 0 0 0 0
+4798 1132 1 1 927 0 0 0 0 0
+fn=_int_free_merge_chunk
+1992 312 0 0 104 0 0 0 0 0
+4665 832 1 1 0 0 0 624 0 0
+4666 104 0 0 0 0 0 0 0 0
+4670 624 0 0 104 7 0 0 0 0
+4673 416 1 1 104 7 0 0 0 0
+4675 312 1 1 104 20 0 0 0 0
+4678 312 0 0 104 7 0 0 0 0
+4681 208 0 0 0 0 0 0 0 0
+4682 208 0 0 0 0 0 0 0 0
+4683 208 0 0 104 7 0 0 0 0
+4689 208 1 1 104 0 0 0 0 0
+4691 15 0 0 15 0 0 0 0 0
+4692 15 0 0 0 0 0 0 0 0
+4693 15 0 0 0 0 0 0 0 0
+4694 60 0 0 15 6 0 0 0 0
+4696 30 0 0 0 0 0 15 3 0
+4701 312 0 0 0 0 0 0 0 0
+4702 728 0 0 624 0 0 0 0 0
+4714 208 0 0 104 0 0 0 0 0
+4720 122 0 0 61 7 0 0 0 0
+4721 8 0 0 0 0 0 4 0 0
+4722 8 0 0 0 0 0 0 0 0
+4724 57 0 0 57 0 0 0 0 0
+4732 61 0 0 0 0 0 0 0 0
+4733 244 1 1 61 0 0 0 0 0
+4734 122 0 0 61 0 0 0 0 0
+4736 61 0 0 0 0 0 61 1 0
+4738 122 0 0 0 0 0 0 0 0
+4740 183 1 1 0 0 0 61 0 0
+4743 61 0 0 0 0 0 61 0 0
+4744 61 0 0 0 0 0 61 0 0
+4746 183 0 0 0 0 0 61 0 0
+4747 61 0 0 0 0 0 61 0 0
+4756 43 0 0 0 0 0 0 0 0
+4757 129 0 0 0 0 0 43 0 0
+4758 86 1 1 0 0 0 43 0 0
+fn=_int_malloc
+1326 5890 0 0 0 0 0 0 0 0
+1345 17670 0 0 0 0 0 0 0 0
+1794 2945 1 1 2945 0 0 0 0 0
+1985 864 0 0 288 0 0 0 0 0
+2008 16 0 0 4 0 0 0 0 0
+2552 48 0 0 16 16 6 16 0 0
+2553 4 1 1 0 0 0 4 0 0
+2564 16 1 1 8 8 2 0 0 0
+2565 12 0 0 8 0 0 0 0 0
+2568 16 0 0 4 0 0 0 0 0
+2576 24 0 0 4 0 0 8 1 0
+2577 8 0 0 0 0 0 0 0 0
+2589 16 0 0 4 0 0 4 0 0
+2590 8 0 0 0 0 0 4 0 0
+2599 48 1 1 12 0 0 0 0 0
+2605 12 0 0 8 0 0 0 0 0
+2608 12 1 1 0 0 0 0 0 0
+2669 12 1 1 4 0 0 4 0 0
+2677 8 0 0 4 0 0 0 0 0
+2678 12 0 0 4 0 0 4 0 0
+2691 12 1 1 4 0 0 0 0 0
+2693 4 0 0 4 0 0 0 0 0
+2699 20 0 0 4 0 0 4 0 0
+2707 8 0 0 0 0 0 0 0 0
+2709 16 2 2 0 0 0 8 1 0
+2710 12 0 0 4 0 0 0 0 0
+2711 4 0 0 0 0 0 0 0 0
+2712 4 0 0 0 0 0 0 0 0
+2715 8 0 0 0 0 0 0 0 0
+2744 28 1 1 12 0 0 0 0 0
+2746 8 1 1 0 0 0 4 0 0
+2752 32 0 0 4 0 0 0 0 0
+2753 24 0 0 4 0 0 4 0 0
+2921 12 1 1 8 0 0 0 0 0
+2922 4 0 0 0 0 0 4 0 0
+2926 4 0 0 4 0 0 0 0 0
+2930 20 1 1 8 0 0 0 0 0
+2932 4 0 0 0 0 0 0 0 0
+2933 4 0 0 0 0 0 0 0 0
+2934 4 0 0 0 0 0 4 0 0
+2935 28 0 0 0 0 0 4 0 0
+2936 8 0 0 0 0 0 4 4 4
+2938 4 0 0 0 0 0 0 0 0
+3159 184 1 1 0 0 0 92 0 0
+3163 2214 1 1 1107 1 0 1107 0 0
+3165 2642 0 0 1119 1 0 1131 0 0
+3166 1211 1 1 104 0 0 1107 0 0
+3167 2214 0 0 0 0 0 1107 0 0
+3168 184 0 0 0 0 0 0 0 0
+3178 11 0 0 11 0 0 0 0 0
+3182 22 0 0 0 0 0 0 0 0
+3186 44 1 1 11 0 0 11 0 0
+3190 22 0 0 22 0 0 0 0 0
+3191 22 0 0 0 0 0 11 0 0
+3199 11 0 0 11 0 0 0 0 0
+3846 32395 2 2 2945 201 1 20615 206 3
+3887 5890 0 0 0 0 0 0 0 0
+3914 5890 0 0 0 0 0 0 0 0
+3916 11324 0 0 0 0 0 0 0 0
+3917 172 0 0 0 0 0 0 0 0
+3919 2831 0 0 2831 154 1 0 0 0
+3921 5662 0 0 0 0 0 0 0 0
+3923 344 0 0 0 0 0 0 0 0
+3926 344 1 1 172 0 0 0 0 0
+3927 860 0 0 172 106 0 172 0 0
+3930 7977 2 2 0 0 0 0 0 0
+3932 344 0 0 172 28 0 0 0 0
+3933 344 0 0 0 0 0 0 0 0
+3939 344 0 0 0 0 0 0 0 0
+3940 1032 1 1 516 0 0 0 0 0
+3945 1519 0 0 344 0 0 0 0 0
+3946 5497 1 1 1049 0 0 0 0 0
+3948 2006 0 0 0 0 0 0 0 0
+3950 2006 0 0 1003 0 0 0 0 0
+3951 6018 0 0 1003 675 14 1003 0 0
+3977 228 1 1 0 0 0 0 0 0
+3979 5686 0 0 0 0 0 0 0 0
+3980 5326 1 1 0 0 0 0 0 0
+3982 7989 0 0 2663 85 7 0 0 0
+3984 20 0 0 20 10 1 0 0 0
+3985 40 0 0 20 12 4 0 0 0
+3987 20 0 0 20 13 5 0 0 0
+3988 20 0 0 0 0 0 20 0 0
+3989 20 0 0 0 0 0 20 0 0
+3991 60 1 1 0 0 0 0 0 0
+3997 40 0 0 0 0 0 0 0 0
+3998 120 1 1 60 0 0 0 0 0
+4003 376 0 0 40 0 0 0 0 0
+4004 206 0 0 0 0 0 0 0 0
+4006 184 0 0 0 0 0 0 0 0
+4008 92 0 0 92 0 0 0 0 0
+4009 92 0 0 92 64 28 0 0 0
+4010 184 0 0 0 0 0 0 0 0
+4012 92 0 0 0 0 0 92 0 0
+4013 92 0 0 0 0 0 92 69 31
+4020 20 0 0 0 0 0 0 0 0
+4039 1152 1 1 0 0 0 0 0 0
+4040 330 0 0 110 7 0 0 0 0
+4041 96 0 0 0 0 0 32 17 2
+4058 8259 1 1 2753 0 0 0 0 0
+4059 8259 0 0 0 0 0 2753 55 0
+4060 8259 1 1 5506 0 0 0 0 0
+4069 4718 0 0 0 0 0 2359 0 0
+4070 14426 2 2 2960 56 1 2753 0 0
+4072 2478 0 0 2478 9 0 0 0 0
+4073 4956 0 0 2478 20 0 0 0 0
+4074 2478 0 0 0 0 0 0 0 0
+4076 4956 0 0 0 0 0 0 0 0
+4077 7434 1 1 2478 33 0 0 0 0
+4079 2478 0 0 2478 27 1 0 0 0
+4080 9912 0 0 0 0 0 0 0 0
+4082 9912 0 0 2478 0 0 0 0 0
+4084 4956 1 1 2478 1 0 0 0 0
+4085 4956 0 0 2478 0 0 0 0 0
+4087 4956 0 0 0 0 0 0 0 0
+4098 9912 0 0 0 0 0 0 0 0
+4099 4552 1 1 2276 0 0 0 0 0
+4100 4488 0 0 0 0 0 0 0 0
+4101 2244 0 0 0 0 0 0 0 0
+4104 2228 0 0 0 0 0 0 0 0
+4105 2228 1 1 0 0 0 0 0 0
+4106 2228 0 0 0 0 0 2228 0 0
+4107 6684 0 0 0 0 0 2228 0 0
+4108 6684 1 1 0 0 0 2228 2193 130
+4109 4456 0 0 0 0 0 0 0 0
+4111 4276 0 0 0 0 0 2138 528 28
+4115 17824 0 0 0 0 0 2228 0 0
+4117 6684 1 1 0 0 0 2228 28 4
+4118 2228 0 0 0 0 0 2228 0 0
+4121 2271 0 0 0 0 0 0 0 0
+4122 6684 0 0 0 0 0 2228 0 0
+4123 2228 0 0 0 0 0 0 0 0
+4127 250 0 0 0 0 0 250 0 0
+4128 250 0 0 0 0 0 250 0 0
+4132 500 0 0 0 0 0 0 0 0
+4134 86 0 0 0 0 0 43 0 0
+4135 129 0 0 0 0 0 0 0 0
+4140 86 0 0 0 0 0 0 0 0
+4141 72 0 0 48 0 0 0 0 0
+4144 4 0 0 0 0 0 0 0 0
+4161 435 2 2 0 0 0 0 0 0
+4163 284 0 0 0 0 0 142 0 0
+4164 568 0 0 0 0 0 0 0 0
+4165 142 0 0 142 26 11 0 0 0
+4169 887 2 2 0 0 0 65 0 0
+4170 194 1 1 0 0 0 0 0 0
+4171 65 0 0 65 39 9 0 0 0
+4174 130 0 0 0 0 0 0 0 0
+4177 1 0 0 0 0 0 0 0 0
+4179 4 0 0 2 0 0 0 0 0
+4180 2 0 0 0 0 0 0 0 0
+4192 3 1 1 1 0 0 0 0 0
+4193 2 0 0 0 0 0 0 0 0
+4199 1 0 0 0 0 0 0 0 0
+4205 4 0 0 0 0 0 1 0 0
+4206 1 0 0 1 0 0 0 0 0
+4207 2 1 1 1 0 0 0 0 0
+4209 1 0 0 0 0 0 1 0 0
+4210 3 0 0 1 0 0 1 0 0
+4212 1 0 0 1 0 0 0 0 0
+4213 2 0 0 1 0 0 0 0 0
+4218 256 0 0 0 0 0 64 3 0
+4221 1449 2 2 414 39 2 0 0 0
+4222 207 0 0 0 0 0 207 0 0
+4223 207 0 0 0 0 0 207 0 0
+4224 207 0 0 0 0 0 207 4 1
+4225 207 0 0 0 0 0 207 0 0
+4230 414 0 0 414 0 0 0 0 0
+4231 414 0 0 0 0 0 0 0 0
+4232 1 0 0 1 0 0 0 0 0
+4233 4 0 0 0 0 0 0 0 0
+4240 828 2 2 414 0 0 0 0 0
+4246 180 0 0 0 0 0 0 0 0
+4248 11 0 0 0 0 0 0 0 0
+4257 1449 1 1 0 0 0 0 0 0
+4259 316 0 0 0 0 0 0 0 0
+4262 237 0 0 79 51 9 0 0 0
+4263 493 1 1 8 1 0 0 0 0
+4266 6 0 0 6 2 0 0 0 0
+4267 36 0 0 6 0 0 0 0 0
+4273 12 1 1 6 0 0 0 0 0
+4278 18 0 0 0 0 0 6 0 0
+4279 18 0 0 0 0 0 12 0 0
+4282 24 0 0 12 0 0 0 0 0
+4284 5 1 1 5 0 0 0 0 0
+4285 15 1 1 0 0 0 0 0 0
+4291 1 0 0 0 0 0 0 0 0
+4295 4 1 1 1 0 0 0 0 0
+4296 2 0 0 1 0 0 0 0 0
+4299 1 0 0 0 0 0 1 0 0
+4300 1 0 0 0 0 0 1 0 0
+4301 1 0 0 0 0 0 1 0 0
+4302 2 0 0 0 0 0 0 0 0
+4307 8 1 1 0 0 0 1 0 0
+4309 3 0 0 0 0 0 1 0 0
+4310 1 0 0 0 0 0 1 0 0
+4313 1 0 0 0 0 0 0 0 0
+4330 477 0 0 0 0 0 0 0 0
+4331 954 0 0 0 0 0 0 0 0
+4332 954 0 0 0 0 0 0 0 0
+4333 954 0 0 477 31 1 0 0 0
+4334 2862 0 0 0 0 0 0 0 0
+4339 2150 1 1 0 0 0 0 0 0
+4343 4412 2 2 0 0 0 0 0 0
+4346 4624 1 1 1156 0 0 0 0 0
+4348 204 0 0 0 0 0 0 0 0
+4349 102 0 0 0 0 0 0 0 0
+4353 1854 0 0 0 0 0 0 0 0
+4355 798 0 0 0 0 0 0 0 0
+4357 1596 0 0 0 0 0 0 0 0
+4361 129 0 0 129 60 2 0 0 0
+4364 258 0 0 0 0 0 0 0 0
+4366 320 0 0 0 0 0 64 0 0
+4367 64 0 0 0 0 0 0 0 0
+4368 64 0 0 0 0 0 0 0 0
+4373 260 0 0 65 16 1 0 0 0
+4376 133 1 1 1 0 0 0 0 0
+4378 195 1 1 0 0 0 65 0 0
+4381 195 0 0 0 0 0 130 1 0
+4384 260 0 0 130 0 0 0 0 0
+4394 65 0 0 0 0 0 0 0 0
+4399 260 0 0 65 0 0 0 0 0
+4400 130 1 1 65 0 0 0 0 0
+4403 65 0 0 0 0 0 65 51 5
+4404 65 0 0 0 0 0 65 0 0
+4405 65 0 0 0 0 0 65 0 0
+4408 130 0 0 0 0 0 0 0 0
+4409 56 0 0 0 0 0 56 0 0
+4410 130 0 0 0 0 0 0 0 0
+4412 86 0 0 0 0 0 43 10 0
+4415 520 1 1 0 0 0 65 0 0
+4417 195 0 0 0 0 0 65 2 0
+4418 65 0 0 0 0 0 65 0 0
+4421 65 0 0 0 0 0 0 0 0
+4443 412 1 1 412 0 0 0 0 0
+4444 824 0 0 412 32 2 0 0 0
+4446 824 0 0 412 19 1 0 0 0
+4449 1236 0 0 0 0 0 0 0 0
+4451 404 0 0 0 0 0 0 0 0
+4452 808 1 1 0 0 0 0 0 0
+4453 404 0 0 0 0 0 404 0 0
+4454 3232 1 1 0 0 0 404 0 0
+4456 808 0 0 0 0 0 404 373 190
+4459 820 0 0 0 0 0 0 0 0
+4460 1254 0 0 0 0 0 418 3 1
+4461 418 0 0 0 0 0 0 0 0
+4466 32 0 0 8 0 0 8 0 0
+4482 12 0 0 0 0 0 0 0 0
+4487 35340 2 2 26505 0 0 0 0 0
+fn=alloc_perturb
+1985 7938 1 1 2646 0 0 0 0 0
+1987 2646 0 0 2646 0 0 0 0 0
+fn=free
+3359 1040536 2 2 0 0 0 594592 4 0
+3363 297296 0 0 0 0 0 0 0 0
+3371 297296 0 0 297296 414 3 0 0 0
+3373 148648 0 0 0 0 0 0 0 0
+3375 445944 0 0 148648 3992 55 0 0 0
+3379 12 1 1 4 4 0 0 0 0
+3381 16 0 0 4 4 0 0 0 0
+3383 6 0 0 0 0 0 3 0 0
+3384 6 0 0 0 0 0 3 0 0
+3385 3 0 0 0 0 0 0 0 0
+3388 8 0 0 0 0 0 4 3 0
+3392 445932 0 0 297288 479 3 0 0 0
+3398 445932 1 1 0 0 0 148644 4 0
+3401 148648 0 0 0 0 0 148648 0 0
+3402 891888 1 1 743240 0 0 0 0 0
+fn=malloc
+1326 297300 0 0 0 0 0 0 0 0
+1345 743250 1 1 0 0 0 0 0 0
+3178 291410 0 0 145705 31 0 0 0 0
+3182 291410 0 0 0 0 0 0 0 0
+3186 582820 0 0 145705 2516 1 145705 0 0
+3190 291410 0 0 0 0 0 145705 0 0
+3191 145705 0 0 0 0 0 145705 0 0
+3294 1189200 1 1 0 0 0 594600 310 3
+3301 297300 0 0 148650 579 1 0 0 0
+3311 297300 0 0 0 0 0 0 0 0
+3313 594600 0 0 297300 53 2 0 0 0
+3316 297300 0 0 148650 26 1 0 0 0
+3318 445620 1 1 148540 59 3 0 0 0
+3326 5890 1 1 2945 203 1 0 0 0
+3328 11780 1 1 0 0 0 2945 1 1
+3329 14725 1 1 2945 1 0 0 0 0
+3354 891900 1 1 743250 0 0 0 0 0
+fn=malloc_consolidate
+4811 288 2 2 0 0 0 192 27 3
+4826 32 0 0 0 0 0 32 0 0
+4828 64 0 0 0 0 0 32 0 0
+4839 32 0 0 0 0 0 0 0 0
+4841 640 0 0 640 3 0 0 0 0
+4842 640 0 0 0 0 0 0 0 0
+4845 270 1 1 0 0 0 0 0 0
+4849 405 0 0 135 82 43 0 0 0
+4850 540 0 0 0 0 0 0 0 0
+4855 675 1 1 135 11 5 0 0 0
+4858 270 0 0 0 0 0 0 0 0
+4859 135 0 0 0 0 0 0 0 0
+4860 405 0 0 135 76 37 0 0 0
+4862 270 0 0 0 0 0 0 0 0
+4863 4 0 0 4 0 0 0 0 0
+4864 4 0 0 0 0 0 0 0 0
+4865 4 0 0 0 0 0 0 0 0
+4866 16 0 0 4 3 1 0 0 0
+4868 48 0 0 20 0 0 24 2 1
+4871 270 1 1 135 9 2 0 0 0
+4874 270 1 1 135 79 32 0 0 0
+4875 10 1 1 0 0 0 0 0 0
+4876 80 0 0 30 0 0 30 7 2
+4878 250 0 0 0 0 0 125 0 0
+4880 135 0 0 135 0 0 0 0 0
+4881 270 0 0 0 0 0 135 0 0
+4882 270 0 0 135 0 0 135 5 1
+4884 270 0 0 0 0 0 0 0 0
+4885 6 0 0 0 0 0 3 0 0
+4889 405 0 0 0 0 0 135 0 0
+4891 135 0 0 0 0 0 135 0 0
+4892 155 0 0 0 0 0 145 0 0
+4901 387 0 0 0 0 0 0 0 0
+4904 960 0 0 320 0 0 0 0 0
+4905 256 0 0 224 0 0 0 0 0
+fn=munmap_chunk
+3024 8 1 1 0 0 0 4 0 0
+3025 8 0 0 8 8 0 0 0 0
+3026 12 0 0 4 0 0 0 0 0
+3028 8 0 0 0 0 0 0 0 0
+3030 4 0 0 0 0 0 0 0 0
+3031 12 0 0 4 0 0 0 0 0
+3032 4 0 0 0 0 0 0 0 0
+3038 16 0 0 0 0 0 0 0 0
+3039 20 1 1 0 0 0 0 0 0
+3042 4 0 0 8 0 0 0 0 0
+3043 12 0 0 8 0 0 0 0 0
+3048 8 0 0 0 0 0 0 0 0
+3049 4 0 0 4 0 0 0 0 0
+fn=sysmalloc_mmap.isra.0
+2008 16 0 0 4 0 0 0 0 0
+2400 24 1 1 0 0 0 16 1 0
+2413 12 0 0 0 0 0 0 0 0
+2418 8 0 0 0 0 0 0 0 0
+2421 40 1 1 0 0 0 4 1 0
+2424 8 1 1 0 0 0 0 0 0
+2428 8 0 0 0 0 0 0 0 0
+2432 16 0 0 0 0 0 4 0 0
+2448 12 0 0 0 0 0 0 0 0
+2466 4 0 0 0 0 0 4 4 4
+2467 12 1 1 0 0 0 4 0 0
+2471 12 0 0 8 0 0 0 0 0
+2472 18 0 0 7 0 0 0 0 0
+2475 12 1 1 8 0 0 0 0 0
+2476 20 0 0 8 0 0 0 0 0
+2481 28 0 0 20 0 0 0 0 0
+fn=systrim.constprop.0
+2957 18 1 1 0 0 0 12 0 0
+2966 9 0 0 6 0 0 0 0 0
+2968 3 0 0 0 0 0 0 0 0
+2969 6 0 0 0 0 0 0 0 0
+2970 2 0 0 0 0 0 0 0 0
+2974 9 0 0 3 0 0 0 0 0
+2975 3 0 0 0 0 0 0 0 0
+2978 15 1 1 6 6 0 0 0 0
+2980 6 0 0 0 0 0 0 0 0
+2987 3 0 0 0 0 0 1 0 0
+2988 4 0 0 1 0 0 0 0 0
+3000 3 1 1 0 0 0 1 0 0
+3001 2 0 0 0 0 0 1 0 0
+3003 1 0 0 0 0 0 0 0 0
+3005 2 0 0 0 0 0 0 0 0
+3009 2 0 0 0 0 0 0 0 0
+3012 1 0 0 1 0 0 0 0 0
+3013 4 0 0 1 0 0 1 0 0
+3015 2 0 0 0 0 0 0 0 0
+3020 18 0 0 15 0 0 0 0 0
+fn=unlink_chunk.isra.0
+1608 208 1 1 0 0 0 104 0 0
+1610 520 0 0 208 22 4 0 0 0
+1613 208 0 0 208 10 2 0 0 0
+1614 208 0 0 104 0 0 0 0 0
+1616 416 1 1 208 21 5 0 0 0
+1619 104 0 0 0 0 0 104 0 0
+1620 104 0 0 0 0 0 104 0 0
+1621 412 0 0 68 7 0 0 0 0
+1623 130 0 0 65 0 0 0 0 0
+1624 195 0 0 130 0 0 0 0 0
+1627 130 0 0 65 9 0 0 0 0
+1641 65 0 0 0 0 0 65 0 0
+1642 65 1 1 0 0 0 65 0 0
+1645 208 0 0 208 0 0 0 0 0
+fl=./malloc/./malloc/morecore.c
+fn=__glibc_morecore
+25 21 1 1 0 0 0 7 0 0
+26 14 0 0 7 0 0 0 0 0
+29 7 0 0 0 0 0 7 1 0
+30 14 0 0 0 0 0 0 0 0
+34 14 0 0 14 0 0 0 0 0
+fl=./misc/../sysdeps/unix/syscall-template.S
+fn=munmap
+117 20 2 2 0 0 0 0 0 0
+122 4 0 0 4 0 0 0 0 0
+fl=./misc/../sysdeps/unix/sysv/linux/brk.c
+fn=brk
+36 5 1 1 0 0 0 0 0 0
+37 10 0 0 5 0 0 5 0 0
+38 10 0 0 0 0 0 0 0 0
+44 5 0 0 0 0 0 0 0 0
+45 5 0 0 5 0 0 0 0 0
+fl=./misc/../sysdeps/unix/sysv/linux/brk_call.h
+fn=brk
+24 10 0 0 0 0 0 0 0 0
+fl=./misc/../sysdeps/unix/sysv/linux/mmap64.c
+fn=mmap
+47 28 1 1 0 0 0 12 0 0
+50 8 0 0 0 0 0 0 0 0
+53 28 1 1 0 0 0 0 0 0
+58 24 1 1 0 0 0 0 0 0
+60 16 0 0 16 0 0 0 0 0
+fl=./misc/../sysdeps/unix/sysv/linux/setvmaname.c
+fn=__set_vma_name
+33 28 2 2 0 0 0 16 2 0
+35 20 0 0 8 4 2 4 0 0
+49 36 0 0 28 0 0 0 0 0
+fl=./misc/./misc/sbrk.c
+fn=sbrk
+37 56 1 1 0 0 0 28 1 0
+40 14 0 0 14 10 5 0 0 0
+43 14 1 1 7 5 2 0 0 0
+58 14 0 0 0 0 0 0 0 0
+62 14 0 0 0 0 0 0 0 0
+66 20 1 1 0 0 0 0 0 0
+68 2 0 0 0 0 0 0 0 0
+74 15 1 1 0 0 0 5 0 0
+78 49 0 0 35 0 0 0 0 0
+fl=./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S
+fn=__memcpy_avx_unaligned_erms
+255 15 1 1 0 0 0 0 0 0
+256 15 0 0 0 0 0 0 0 0
+262 15 0 0 0 0 0 0 0 0
+263 15 0 0 0 0 0 0 0 0
+265 13 0 0 13 3 1 0 0 0
+266 13 0 0 0 0 0 0 0 0
+267 13 0 0 0 0 0 0 0 0
+270 1 0 0 1 0 0 0 0 0
+271 1 0 0 0 0 0 1 0 0
+272 1 0 0 0 0 0 1 0 0
+275 2 0 0 1 0 0 0 0 0
+305 2 0 0 0 0 0 0 0 0
+306 2 0 0 0 0 0 0 0 0
+308 1 0 0 0 0 0 0 0 0
+309 1 0 0 0 0 0 0 0 0
+311 1 0 0 0 0 0 0 0 0
+315 1 0 0 0 0 0 0 0 0
+316 1 1 1 0 0 0 0 0 0
+317 1 0 0 0 0 0 0 0 0
+325 1 0 0 1 0 0 0 0 0
+342 1 0 0 1 0 0 0 0 0
+343 1 0 0 1 0 0 0 0 0
+344 1 0 0 0 0 0 1 0 0
+345 1 0 0 0 0 0 1 0 0
+347 1 0 0 1 0 0 0 0 0
+375 1 1 1 1 0 0 0 0 0
+376 1 0 0 1 0 0 0 0 0
+377 1 0 0 0 0 0 1 1 1
+378 1 0 0 0 0 0 1 0 0
+379 1 0 0 0 0 0 1 0 0
+380 1 0 0 0 0 0 1 0 0
+381 2 0 0 1 0 0 0 0 0
+386 12 1 1 12 7 1 0 0 0
+387 12 0 0 0 0 0 0 0 0
+392 7 0 0 0 0 0 0 0 0
+393 7 0 0 0 0 0 0 0 0
+395 2 0 0 2 0 0 0 0 0
+396 2 0 0 0 0 0 0 0 0
+397 2 0 0 0 0 0 0 0 0
+399 1 0 0 1 0 0 0 0 0
+400 1 0 0 1 0 0 0 0 0
+401 1 0 0 1 0 0 0 0 0
+402 1 0 0 1 0 0 0 0 0
+403 1 0 0 1 0 0 0 0 0
+404 1 1 1 1 0 0 0 0 0
+405 1 0 0 0 0 0 1 0 0
+406 1 0 0 0 0 0 1 1 1
+407 1 0 0 0 0 0 1 0 0
+408 1 0 0 0 0 0 1 1 1
+409 1 0 0 0 0 0 1 0 0
+410 1 0 0 0 0 0 1 0 0
+411 1 0 0 0 0 0 1 0 0
+412 1 0 0 0 0 0 1 0 0
+413 2 0 0 1 0 0 0 0 0
+417 5 0 0 0 0 0 0 0 0
+418 5 0 0 0 0 0 0 0 0
+422 5 0 0 0 0 0 0 0 0
+424 5 1 1 0 0 0 0 0 0
+428 5 0 0 5 4 1 0 0 0
+429 5 0 0 0 0 0 0 0 0
+440 5 0 0 0 0 0 0 0 0
+443 5 0 0 0 0 0 0 0 0
+445 5 0 0 0 0 0 0 0 0
+447 5 0 0 0 0 0 0 0 0
+451 5 0 0 0 0 0 0 0 0
+452 5 0 0 0 0 0 0 0 0
+461 5 0 0 5 0 0 0 0 0
+462 5 0 0 5 0 0 0 0 0
+464 5 0 0 0 0 0 0 0 0
+466 5 0 0 0 0 0 0 0 0
+467 5 1 1 5 0 0 0 0 0
+468 5 0 0 5 0 0 0 0 0
+471 5 0 0 0 0 0 0 0 0
+473 5 0 0 0 0 0 0 0 0
+475 5 0 0 0 0 0 0 0 0
+477 10 0 0 0 0 0 0 0 0
+483 88 0 0 88 0 0 0 0 0
+484 88 0 0 88 19 0 0 0 0
+485 88 0 0 88 0 0 0 0 0
+486 88 0 0 88 17 0 0 0 0
+487 88 0 0 0 0 0 0 0 0
+488 88 0 0 0 0 0 88 8 8
+489 88 0 0 0 0 0 88 59 47
+490 88 1 1 0 0 0 88 7 7
+491 88 0 0 0 0 0 88 58 47
+492 88 0 0 0 0 0 0 0 0
+493 88 0 0 0 0 0 0 0 0
+494 88 0 0 0 0 0 0 0 0
+496 5 0 0 0 0 0 5 2 1
+497 5 0 0 0 0 0 5 2 2
+498 5 0 0 0 0 0 5 0 0
+499 5 0 0 0 0 0 5 0 0
+501 5 0 0 0 0 0 5 0 0
+505 10 0 0 5 0 0 0 0 0
+563 5 1 1 5 3 1 0 0 0
+570 5 0 0 0 0 0 0 0 0
+571 5 0 0 0 0 0 0 0 0
+601 5 1 1 0 0 0 0 0 0
+602 5 0 0 0 0 0 0 0 0
+606 5 0 0 0 0 0 0 0 0
+608 5 0 0 0 0 0 0 0 0
+611 5 0 0 0 0 0 0 0 0
+615 5 0 0 5 5 1 0 0 0
+616 5 0 0 0 0 0 0 0 0
+620 5 0 0 5 0 0 0 0 0
+624 5 0 0 0 0 0 0 0 0
+648 5 0 0 0 0 0 0 0 0
+650 5 0 0 0 0 0 0 0 0
+652 5 0 0 0 0 0 0 0 0
+654 5 1 1 0 0 0 0 0 0
+657 5 0 0 0 0 0 0 0 0
+658 5 0 0 0 0 0 0 0 0
+660 380725 0 0 380720 5813 2270 380720 5951 5220
+663 5 0 0 0 0 0 5 4 0
+665 5 0 0 0 0 0 5 3 0
+667 10 0 0 5 4 0 0 0 0
+fl=./string/../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+fn=__memset_avx2_unaligned_erms
+158 102 1 1 0 0 0 0 0 0
+159 204 0 0 0 0 0 0 0 0
+164 102 0 0 0 0 0 0 0 0
+165 102 0 0 0 0 0 0 0 0
+166 102 0 0 0 0 0 0 0 0
+167 102 0 0 0 0 0 0 0 0
+168 102 0 0 0 0 0 0 0 0
+170 29 0 0 0 0 0 29 6 5
+171 29 0 0 0 0 0 29 0 0
+172 58 0 0 29 0 0 0 0 0
+181 15 0 0 0 0 0 15 3 2
+182 15 0 0 0 0 0 15 0 0
+184 30 0 0 15 0 0 0 0 0
+237 73 1 1 73 29 2 0 0 0
+238 73 0 0 0 0 0 0 0 0
+244 68 0 0 0 0 0 68 34 10
+245 68 0 0 0 0 0 68 15 5
+257 68 0 0 0 0 0 0 0 0
+260 68 0 0 0 0 0 0 0 0
+261 68 0 0 0 0 0 0 0 0
+273 53 0 0 0 0 0 53 12 2
+274 53 0 0 0 0 0 53 11 4
+287 53 0 0 0 0 0 0 0 0
+288 53 0 0 0 0 0 0 0 0
+290 53 0 0 0 0 0 0 0 0
+293 11 0 0 0 0 0 0 0 0
+296 11 0 0 0 0 0 0 0 0
+299 47 0 0 0 0 0 47 14 8
+300 47 0 0 0 0 0 47 32 17
+301 47 0 0 0 0 0 47 15 9
+302 47 0 0 0 0 0 47 32 17
+303 47 0 0 0 0 0 0 0 0
+304 47 0 0 0 0 0 0 0 0
+305 58 0 0 0 0 0 0 0 0
+308 53 1 1 0 0 0 53 8 1
+309 53 0 0 0 0 0 53 10 3
+310 53 0 0 0 0 0 53 8 1
+311 53 0 0 0 0 0 53 9 2
+314 106 0 0 53 0 0 0 0 0
+325 5 1 1 0 0 0 0 0 0
+326 5 0 0 0 0 0 0 0 0
+327 5 0 0 0 0 0 0 0 0
+328 61445 0 0 0 0 0 61440 964 964
+329 5 0 0 0 0 0 0 0 0
+330 10 0 0 5 0 0 0 0 0
+fl=/home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp
+fn=(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+0 3672433 1 1 1221096 0 0 0 0 0
+271 2458442 0 0 0 0 0 0 0 0
+272 2450827 0 0 0 0 0 0 0 0
+279 4900634 0 0 2450317 0 0 0 0 0
+336 1229221 0 0 1229221 71151 0 0 0 0
+404 2442192 0 0 0 0 0 0 0 0
+849 8547672 0 0 3663288 210 4 0 0 0
+881 8125 0 0 0 0 0 0 0 0
+882 24375 0 0 0 0 0 0 0 0
+883 8125 0 0 0 0 0 0 0 0
+927 2499198 0 0 0 0 0 0 0 0
+1727 2458442 0 0 0 0 0 0 0 0
+1729 1229221 0 0 0 0 0 0 0 0
+1732 2443212 0 0 0 0 0 0 0 0
+1733 1221606 0 0 0 0 0 0 0 0
+1737 3748797 1 1 0 0 0 0 0 0
+1743 57006 0 0 0 0 0 0 0 0
+1745 8125 0 0 0 0 0 0 0 0
+1750 8125 0 0 0 0 0 0 0 0
+1955 1221096 0 0 1221096 0 0 0 0 0
+2266 8547672 0 0 2442192 3 2 1221096 0 0
+fn=_ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v24BookINS5_12ChecksumSinkEE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_
+0 44674 1 1 41978 6 0 887 3 0
+296 91286 1 1 45643 1611 0 0 0 0
+297 41409 0 0 0 0 0 0 0 0
+313 4234 0 0 0 0 0 0 0 0
+389 82182 0 0 41091 9 2 0 0 0
+849 41091 0 0 0 0 0 0 0 0
+882 636 0 0 318 0 0 0 0 0
+927 123273 1 1 0 0 0 0 0 0
+1033 102 1 1 102 0 0 0 0 0
+1034 101 0 0 101 0 0 0 0 0
+1955 41091 0 0 41091 0 0 0 0 0
+1961 25404 0 0 0 0 0 0 0 0
+2032 41091 0 0 41091 0 0 0 0 0
+2063 204 0 0 0 0 0 0 0 0
+2064 4537 0 0 101 0 0 0 0 0
+2065 8468 0 0 0 0 0 0 0 0
+2067 94884 0 0 0 0 0 0 0 0
+2069 82182 0 0 0 0 0 0 0 0
+2075 204 1 1 102 0 0 0 0 0
+2292 82182 0 0 82182 0 0 0 0 0
+2350 41091 0 0 41091 0 0 0 0 0
+2373 165636 1 1 0 0 0 0 0 0
+2375 42082 0 0 0 0 0 0 0 0
+2377 164364 0 0 41091 0 0 0 0 0
+fn=boost::unordered::detail::foa::table_core<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::table_arrays, boost::unordered::detail::foa::plain_size_control, boost::hash<unsigned long>, std::__1::equal_to<unsigned long>, std::__1::allocator<std::__1::pair<unsigned long const, lob::v2::Book<lob::ChecksumSink>::Loc> > >::unchecked_rehash(boost::unordered::detail::foa::table_arrays<std::__1::pair<unsigned long const, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::pow2_size_policy, std::__1::allocator<std::__1::pair<unsigned long const, lob::v2::Book<lob::ChecksumSink>::Loc> > >&)
+0 408 0 0 0 0 0 102 0 0
+1033 204 0 0 204 7 2 0 0 0
+1096 204 0 0 0 0 0 0 0 0
+1108 202 0 0 101 0 0 0 0 0
+1563 1224 1 1 204 7 0 0 0 0
+1811 510 0 0 102 0 0 0 0 0
+2025 510 1 1 0 0 0 306 0 0
+2054 102 0 0 0 0 0 102 0 0
+2288 510 1 1 0 0 0 204 0 0
+2289 102 0 0 0 0 0 102 0 0
+2320 204 1 1 102 0 0 102 7 2
+2321 102 0 0 0 0 0 102 0 0
+2322 510 0 0 306 0 0 0 0 0
+fn=boost::unordered::detail::foa::table_locator<boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, std::__1::pair<unsigned long const, lob::v2::Book<lob::ChecksumSink>::Loc> > boost::unordered::detail::foa::table_core<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::table_arrays, boost::unordered::detail::foa::plain_size_control, boost::hash<unsigned long>, std::__1::equal_to<unsigned long>, std::__1::allocator<std::__1::pair<unsigned long const, lob::v2::Book<lob::ChecksumSink>::Loc> > >::unchecked_emplace_with_rehash<boost::unordered::detail::foa::try_emplace_args_t, unsigned long&, lob::v2::Book<lob::ChecksumSink>::Loc>(unsigned long, boost::unordered::detail::foa::try_emplace_args_t&&, unsigned long&, lob::v2::Book<lob::ChecksumSink>::Loc&&)
+0 1836 1 1 306 0 0 102 0 0
+296 204 0 0 102 0 0 0 0 0
+297 204 1 1 0 0 0 0 0 0
+389 306 0 0 102 0 0 0 0 0
+837 408 0 0 0 0 0 0 0 0
+842 204 0 0 0 0 0 0 0 0
+849 102 0 0 0 0 0 0 0 0
+859 204 1 1 0 0 0 0 0 0
+927 204 0 0 0 0 0 0 0 0
+1031 408 1 1 0 0 0 408 0 0
+1051 204 0 0 0 0 0 102 0 0
+1057 408 0 0 0 0 0 0 0 0
+1058 306 0 0 0 0 0 0 0 0
+1059 102 0 0 0 0 0 0 0 0
+1066 102 0 0 0 0 0 0 0 0
+1073 204 0 0 0 0 0 0 0 0
+1085 102 0 0 0 0 0 0 0 0
+1108 102 0 0 0 0 0 0 0 0
+1125 306 1 1 0 0 0 102 0 0
+1126 102 0 0 0 0 0 0 0 0
+1689 102 0 0 102 0 0 0 0 0
+1983 1020 1 1 0 0 0 612 0 0
+1988 408 0 0 0 0 0 306 0 0
+1999 204 0 0 0 0 0 102 0 0
+2000 102 0 0 102 0 0 0 0 0
+2002 918 1 1 714 0 0 0 0 0
+2132 1836 1 1 204 45 3 0 0 0
+2373 204 0 0 0 0 0 0 0 0
+2375 102 0 0 0 0 0 0 0 0
+2377 510 0 0 0 0 0 0 0 0
+fn=lob::v2::Book<lob::ChecksumSink>::modify(unsigned long, long, unsigned int)
+0 413255 0 0 123084 4 0 0 0 0
+271 82374 0 0 0 0 0 0 0 0
+272 82219 0 0 0 0 0 0 0 0
+279 159 0 0 159 0 0 0 0 0
+336 41187 0 0 41187 884 0 0 0 0
+849 82056 0 0 41028 0 0 0 0 0
+881 159 0 0 0 0 0 0 0 0
+882 477 0 0 0 0 0 0 0 0
+883 159 0 0 0 0 0 0 0 0
+927 83928 0 0 0 0 0 0 0 0
+1727 82374 1 1 0 0 0 0 0 0
+1729 41187 0 0 0 0 0 0 0 0
+1732 82064 0 0 0 0 0 0 0 0
+1733 41032 0 0 0 0 0 0 0 0
+1737 125892 1 1 0 0 0 0 0 0
+1743 1872 0 0 0 0 0 0 0 0
+1745 159 0 0 0 0 0 0 0 0
+1750 159 0 0 0 0 0 0 0 0
+1955 41028 0 0 41028 0 0 0 0 0
+fn=lob::v2::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)
+0 6127322 2 2 1221096 0 0 0 0 0
+271 2485876 0 0 0 0 0 0 0 0
+272 1278258 0 0 0 0 0 0 0 0
+279 2485876 0 0 1242938 1 1 0 0 0
+336 1242938 0 0 1242938 523121 1 0 0 0
+849 8547672 0 0 3663288 861 41 0 0 0
+881 21842 0 0 0 0 0 0 0 0
+882 65526 0 0 0 0 0 0 0 0
+883 21842 0 0 0 0 0 0 0 0
+927 71528 0 0 0 0 0 0 0 0
+1727 2485876 0 0 0 0 0 0 0 0
+1729 1242938 0 0 0 0 0 0 0 0
+1732 70640 0 0 0 0 0 0 0 0
+1733 35320 0 0 0 0 0 0 0 0
+1737 71528 0 0 0 0 0 0 0 0
+1743 71528 0 0 0 0 0 0 0 0
+1745 1242938 0 0 0 0 0 0 0 0
+1750 21842 0 0 0 0 0 0 0 0
+1955 1221096 0 0 1221096 1 1 0 0 0
+fn=void lob::v2::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)
+0 10760678 5 5 3941291 4 1 38135 0 0
+271 1320492 0 0 0 0 0 0 0 0
+272 679182 0 0 0 0 0 0 0 0
+279 660246 0 0 660246 2 1 0 0 0
+296 1307592 0 0 653796 47 0 0 0 0
+297 1301852 1 1 0 0 0 0 0 0
+336 660246 0 0 660246 2 0 0 0 0
+849 648116 0 0 0 0 0 0 0 0
+881 12130 0 0 0 0 0 0 0 0
+882 47870 0 0 0 0 0 0 0 0
+883 12130 0 0 0 0 0 0 0 0
+927 1334510 0 0 0 0 0 0 0 0
+1727 1320492 0 0 0 0 0 0 0 0
+1729 660246 0 0 0 0 0 0 0 0
+1732 37872 1 1 0 0 0 0 0 0
+1733 18936 0 0 0 0 0 0 0 0
+1737 38398 0 0 0 0 0 0 0 0
+1743 38398 0 0 0 0 0 0 0 0
+1745 660246 0 0 0 0 0 0 0 0
+1750 12130 0 0 0 0 0 0 0 0
+1955 648116 0 0 648116 0 0 0 0 0
+1970 648056 0 0 648056 0 0 0 0 0
+2373 2615184 0 0 0 0 0 0 0 0
+2375 666074 0 0 0 0 0 0 0 0
+2377 2592224 0 0 0 0 0 0 0 0
+fn=void lob::v2::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)
+0 9504973 3 3 3484050 4 0 32949 0 0
+271 1165384 0 0 0 0 0 0 0 0
+272 599076 0 0 0 0 0 0 0 0
+279 582692 0 0 582692 2 0 0 0 0
+296 1153416 0 0 576708 29 0 0 0 0
+297 1149646 1 1 0 0 0 0 0 0
+336 582692 0 0 582692 2 0 0 0 0
+849 572980 0 0 0 0 0 0 0 0
+881 9712 0 0 0 0 0 0 0 0
+882 36676 0 0 0 0 0 0 0 0
+883 9712 0 0 0 0 0 0 0 0
+927 1179006 0 0 0 0 0 0 0 0
+1727 1165384 0 0 0 0 0 0 0 0
+1729 582692 1 1 0 0 0 0 0 0
+1732 32768 0 0 0 0 0 0 0 0
+1733 16384 0 0 0 0 0 0 0 0
+1737 33130 0 0 0 0 0 0 0 0
+1743 33130 0 0 0 0 0 0 0 0
+1745 582692 0 0 0 0 0 0 0 0
+1750 9712 0 0 0 0 0 0 0 0
+1955 572980 0 0 572980 0 0 0 0 0
+1970 572938 0 0 572938 0 0 0 0 0
+2373 2306832 0 0 0 0 0 0 0 0
+2375 584535 0 0 0 0 0 0 0 0
+2377 2291752 0 0 0 0 0 0 0 0
+fl=/home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/table.hpp
+fn=(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+40 1221096 1 1 0 0 0 1221096 0 0
+fn=_ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v24BookINS5_12ChecksumSinkEE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_
+40 41091 0 0 0 0 0 41091 0 0
+46 318 0 0 318 0 0 0 0 0
+fn=boost::unordered::detail::foa::table_locator<boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, std::__1::pair<unsigned long const, lob::v2::Book<lob::ChecksumSink>::Loc> > boost::unordered::detail::foa::table_core<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::table_arrays, boost::unordered::detail::foa::plain_size_control, boost::hash<unsigned long>, std::__1::equal_to<unsigned long>, std::__1::allocator<std::__1::pair<unsigned long const, lob::v2::Book<lob::ChecksumSink>::Loc> > >::unchecked_emplace_with_rehash<boost::unordered::detail::foa::try_emplace_args_t, unsigned long&, lob::v2::Book<lob::ChecksumSink>::Loc>(unsigned long, boost::unordered::detail::foa::try_emplace_args_t&&, unsigned long&, lob::v2::Book<lob::ChecksumSink>::Loc&&)
+0 306 0 0 102 0 0 102 0 0
+40 204 0 0 0 0 0 204 0 0
+fn=void lob::v2::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)
+0 60 0 0 0 0 0 0 0 0
+40 648056 0 0 0 0 0 648056 0 0
+46 5740 0 0 5740 0 0 0 0 0
+640 1944348 0 0 1296232 0 0 0 0 0
+650 180 0 0 0 0 0 60 0 0
+fn=void lob::v2::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)
+0 42 0 0 0 0 0 0 0 0
+40 572938 0 0 0 0 0 572938 0 0
+46 3770 0 0 3770 0 0 0 0 0
+640 1718940 0 0 1145960 0 0 0 0 0
+650 126 0 0 0 0 0 42 0 0
+fl=/home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/mulx.hpp
+fn=(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+45 2442192 0 0 0 0 0 0 0 0
+46 1221096 0 0 0 0 0 0 0 0
+fn=_ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v24BookINS5_12ChecksumSinkEE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_
+45 41091 0 0 41091 6694 768 0 0 0
+46 41091 0 0 0 0 0 0 0 0
+fn=lob::v2::Book<lob::ChecksumSink>::modify(unsigned long, long, unsigned int)
+45 41028 0 0 0 0 0 0 0 0
+46 41028 0 0 0 0 0 0 0 0
+fn=lob::v2::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)
+45 2442192 0 0 0 0 0 0 0 0
+46 1221096 0 0 0 0 0 0 0 0
+fn=void lob::v2::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)
+45 648116 1 1 0 0 0 0 0 0
+46 648116 0 0 0 0 0 0 0 0
+fn=void lob::v2::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)
+45 572980 0 0 0 0 0 0 0 0
+46 572980 0 0 0 0 0 0 0 0
+fl=/home/wang/sources/cxx/book/include/lob/events.hpp
+fn=(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+0 9768768 1 1 1221096 0 0 1221096 0 0
+92 1221096 0 0 1221096 0 0 0 0 0
+93 2442192 0 0 1221096 0 0 0 0 0
+fn=lob::v2::Book<lob::ChecksumSink>::modify(unsigned long, long, unsigned int)
+0 41028 1 1 41028 0 0 0 0 0
+92 41028 0 0 41028 0 0 0 0 0
+93 287196 0 0 41028 0 0 0 0 0
+fn=void lob::v2::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)
+81 648116 0 0 648116 0 0 0 0 0
+92 648116 0 0 648116 0 0 0 0 0
+93 8425508 1 1 1944348 12 0 648116 0 0
+fn=void lob::v2::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)
+81 572980 1 1 572980 0 0 0 0 0
+92 572980 0 0 572980 0 0 0 0 0
+93 7448740 0 0 1718940 6 4 572980 0 0
+fl=/home/wang/sources/cxx/book/include/lob/replay.hpp
+fn=(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+0 3704316 0 0 2483220 310402 310402 0 0 0
+21 12334044 1 1 2483220 463723 463714 0 0 0
+23 8547672 2 2 3663288 151956 151956 1221096 1 1
+29 205140 0 0 82056 5136 5136 41028 0 0
+37 2483221 0 0 0 0 0 0 0 0
+fl=/home/wang/sources/cxx/book/include/lob/v2/book.hpp
+fn=(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+0 6030344 1 1 1794076 0 0 1221096 0 0
+60 2442192 0 0 2442192 118484 379 0 0 0
+62 1221096 0 0 1221096 0 0 0 0 0
+203 1145960 0 0 572980 0 0 572980 0 0
+204 572980 0 0 0 0 0 572980 0 0
+221 2291920 0 0 572980 5762 8 0 0 0
+222 469089 0 0 0 0 0 469089 35342 27
+224 103891 1 1 0 0 0 103891 0 0
+225 1145960 0 0 0 0 0 0 0 0
+226 494348 0 0 0 0 0 247174 15875 32
+228 325806 0 0 0 0 0 325806 0 0
+229 572980 0 0 572980 0 0 0 0 0
+280 1221096 0 0 0 0 0 0 0 0
+281 2442192 0 0 0 0 0 2442192 21 2
+284 572980 0 0 572980 3143 15 0 0 0
+287 1145960 0 0 572980 0 0 0 0 0
+289 2442192 1 1 1221096 0 0 0 0 0
+290 1944348 0 0 0 0 0 648116 0 0
+fn=auto lob::v2::Book<lob::ChecksumSink>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&) const
+0 1944348 0 0 1296232 0 0 0 0 0
+203 1296232 0 0 648116 0 0 648116 0 0
+204 648116 0 0 0 0 0 648116 0 0
+221 2592464 0 0 648116 5475 31 0 0 0
+222 530242 0 0 0 0 0 530242 36687 108
+224 117874 1 1 0 0 0 117874 0 0
+225 1296232 0 0 0 0 0 0 0 0
+226 591266 0 0 0 0 0 295633 18627 98
+228 352483 0 0 0 0 0 352483 0 0
+229 648116 0 0 648116 0 0 0 0 0
+281 648116 0 0 0 0 0 648116 0 0
+282 648116 0 0 648116 0 0 0 0 0
+284 1944348 0 0 1944348 3942 59 0 0 0
+287 1296232 1 1 648116 0 0 0 0 0
+288 1142168 0 0 1142168 0 0 0 0 0
+fn=lob::v2::Book<lob::ChecksumSink>::alloc_node(unsigned long, unsigned int)
+0 1221096 0 0 0 0 0 0 0 0
+189 8547672 1 1 0 0 0 7326576 0 0
+190 2442192 1 1 1221096 0 0 0 0 0
+191 1221096 0 0 0 0 0 0 0 0
+192 3636747 0 0 1212249 17883 245 1212249 0 0
+193 1212249 0 0 0 0 0 0 0 0
+194 17694 1 1 0 0 0 0 0 0
+198 3672135 0 0 0 0 0 3663288 17907 84
+199 9768768 0 0 8547672 0 0 0 0 0
+fn=lob::v2::Book<lob::ChecksumSink>::modify(unsigned long, long, unsigned int)
+0 246168 0 0 82056 464 3 41028 0 0
+65 451308 2 2 0 0 0 328224 0 0
+68 82056 0 0 0 0 0 0 0 0
+69 82056 1 1 0 0 0 0 0 0
+71 41028 0 0 0 0 0 0 0 0
+72 41028 0 0 41028 713 1 0 0 0
+73 164112 0 0 41028 0 0 0 0 0
+74 82056 1 1 41028 10 0 0 0 0
+75 41028 0 0 0 0 0 41028 0 0
+76 41028 0 0 41028 0 0 0 0 0
+84 328224 0 0 287196 0 0 0 0 0
+185 82056 0 0 41028 0 0 0 0 0
+fn=lob::v2::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)
+0 3663288 1 1 0 0 0 0 0 0
+50 8547672 1 1 0 0 0 8547672 1 1
+51 2442192 0 0 0 0 0 0 0 0
+52 2442192 0 0 0 0 0 0 0 0
+233 2442192 1 1 0 0 0 0 0 0
+234 3888696 2 2 0 0 0 648116 0 0
+236 3437880 0 0 0 0 0 572980 0 0
+237 2442192 0 0 0 0 0 0 0 0
+239 8425508 0 0 3888696 0 0 0 0 0
+241 7448740 1 1 3437880 0 0 0 0 0
+fn=unsigned int lob::v2::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >, lob::v2::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v2::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})
+0 5156820 1 1 572980 0 0 1145960 0 0
+236 572980 0 0 572980 0 0 0 0 0
+245 4583840 0 0 0 0 0 4010860 3 0
+246 1718940 0 0 0 0 0 0 0 0
+248 1145960 1 1 572980 6 0 0 0 0
+266 5156820 1 1 4010860 0 0 0 0 0
+fn=unsigned int lob::v2::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >, lob::v2::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1}>(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v2::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1})
+0 5833044 1 1 648116 10 1 1296232 0 0
+234 648115 0 0 648115 0 0 0 0 0
+245 5184928 1 1 0 0 0 4536812 6 2
+246 1944348 0 0 0 0 0 0 0 0
+248 1296230 1 1 648115 11 0 0 0 0
+266 5833044 2 2 4536812 0 0 0 0 0
+fn=void lob::v2::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)
+0 1974000 0 0 653058 0 0 648116 0 0
+166 77032 0 0 0 0 0 77032 0 0
+168 154064 0 0 0 0 0 77032 434 1
+209 2592464 0 0 648116 0 0 648116 0 0
+210 1296232 0 0 0 0 0 648116 0 0
+211 648116 0 0 0 0 0 0 0 0
+212 1142168 0 0 0 0 0 571084 16941 271
+214 77032 1 1 0 0 0 77032 0 0
+215 648116 0 0 0 0 0 648116 0 0
+216 648116 0 0 648116 4464 74 0 0 0
+270 8425508 1 1 0 0 0 5833044 0 0
+271 2592464 1 1 0 0 0 648116 0 0
+274 1944348 0 0 1296232 0 0 648116 0 0
+275 3240580 0 0 648116 0 0 1944348 2 0
+276 648116 1 1 648116 5 0 0 0 0
+277 5184928 0 0 4536812 12 0 0 0 0
+fn=void lob::v2::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)
+0 1739838 2 2 576463 0 0 572980 0 0
+166 71501 0 0 0 0 0 71501 0 0
+168 143002 0 0 0 0 0 71501 340 2
+209 2291920 0 0 572980 0 0 572980 0 0
+210 1145960 1 1 0 0 0 572980 0 0
+211 572980 0 0 0 0 0 0 0 0
+212 1002958 0 0 0 0 0 501479 15328 69
+214 71501 0 0 0 0 0 71501 0 0
+215 572980 0 0 0 0 0 572980 0 0
+216 572980 0 0 572980 3100 14 0 0 0
+270 7448740 1 1 0 0 0 5156820 0 0
+271 2291920 0 0 0 0 0 572980 0 0
+274 1718940 0 0 1145960 0 0 572980 0 0
+275 2864900 0 0 572980 0 0 1718940 2 0
+276 572980 0 0 572980 4 2 0 0 0
+277 4583840 0 0 4010860 6 4 0 0 0
+fl=/home/wang/sources/cxx/book/source/main.cxx
+fn=(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+0 1 0 0 0 0 0 0 0 0
+293 2 1 1 0 0 0 1 1 1
+295 9 2 2 0 0 0 6 1 1
+fl=/usr/include/c++/v1/__functional/operations.h
+fn=(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+300 1249599 0 0 1249599 148246 1551 0 0 0
+375 15577753 0 0 5574571 33740 173 0 0 0
+fn=auto lob::v2::Book<lob::ChecksumSink>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&) const
+462 25096502 0 0 8797578 37053 754 0 0 0
+fn=lob::v2::Book<lob::ChecksumSink>::modify(unsigned long, long, unsigned int)
+300 41964 0 0 41964 1905 6 0 0 0
+375 473689 0 0 169335 1021 0 0 0 0
+462 945371 0 0 331037 41 0 0 0 0
+fn=lob::v2::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)
+300 35764 0 0 35764 33220 7191 0 0 0
+fn=void lob::v2::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)
+300 38398 0 0 38398 0 0 0 0 0
+462 15862358 0 0 7931179 19059 1002 0 0 0
+fn=void lob::v2::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)
+300 33130 0 0 33130 0 0 0 0 0
+375 8929732 0 0 4464866 12512 192 0 0 0
+fl=/usr/include/c++/v1/__iterator/wrap_iter.h
+fn=(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+65 2483220 0 0 0 0 0 0 0 0
+125 2483222 1 1 2483220 10 2 1 1 1
+fl=/usr/include/c++/v1/__math/rounding_functions.h
+fn=boost::unordered::detail::foa::table_locator<boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, std::__1::pair<unsigned long const, lob::v2::Book<lob::ChecksumSink>::Loc> > boost::unordered::detail::foa::table_core<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::table_arrays, boost::unordered::detail::foa::plain_size_control, boost::hash<unsigned long>, std::__1::equal_to<unsigned long>, std::__1::allocator<std::__1::pair<unsigned long const, lob::v2::Book<lob::ChecksumSink>::Loc> > >::unchecked_emplace_with_rehash<boost::unordered::detail::foa::try_emplace_args_t, unsigned long&, lob::v2::Book<lob::ChecksumSink>::Loc>(unsigned long, boost::unordered::detail::foa::try_emplace_args_t&&, unsigned long&, lob::v2::Book<lob::ChecksumSink>::Loc&&)
+29 102 0 0 0 0 0 0 0 0
+fl=/usr/include/c++/v1/__memory/allocator.h
+fn=lob::v2::Book<lob::ChecksumSink>::alloc_node(unsigned long, unsigned int)
+100 30 0 0 0 0 0 0 0 0
+fl=/usr/include/c++/v1/__memory/construct_at.h
+fn=lob::v2::Book<lob::ChecksumSink>::alloc_node(unsigned long, unsigned int)
+38 26541 0 0 0 0 0 17694 3331 2503
+fl=/usr/include/c++/v1/__memory/uninitialized_algorithms.h
+fn=lob::v2::Book<lob::ChecksumSink>::alloc_node(unsigned long, unsigned int)
+0 15 0 0 15 4 1 0 0 0
+638 60 0 0 0 0 0 15 0 0
+fl=/usr/include/c++/v1/__new/allocate.h
+fn=(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+63 214503 0 0 0 0 0 71501 0 0
+fn=auto lob::v2::Book<lob::ChecksumSink>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&) const
+63 308128 1 1 77032 0 0 0 0 0
+fn=boost::unordered::detail::foa::table_core<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::table_arrays, boost::unordered::detail::foa::plain_size_control, boost::hash<unsigned long>, std::__1::equal_to<unsigned long>, std::__1::allocator<std::__1::pair<unsigned long const, lob::v2::Book<lob::ChecksumSink>::Loc> > >::unchecked_rehash(boost::unordered::detail::foa::table_arrays<std::__1::pair<unsigned long const, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::pow2_size_policy, std::__1::allocator<std::__1::pair<unsigned long const, lob::v2::Book<lob::ChecksumSink>::Loc> > >&)
+57 101 0 0 0 0 0 0 0 0
+63 101 0 0 0 0 0 101 0 0
+fn=boost::unordered::detail::foa::table_locator<boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, std::__1::pair<unsigned long const, lob::v2::Book<lob::ChecksumSink>::Loc> > boost::unordered::detail::foa::table_core<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::table_arrays, boost::unordered::detail::foa::plain_size_control, boost::hash<unsigned long>, std::__1::equal_to<unsigned long>, std::__1::allocator<std::__1::pair<unsigned long const, lob::v2::Book<lob::ChecksumSink>::Loc> > >::unchecked_emplace_with_rehash<boost::unordered::detail::foa::try_emplace_args_t, unsigned long&, lob::v2::Book<lob::ChecksumSink>::Loc>(unsigned long, boost::unordered::detail::foa::try_emplace_args_t&&, unsigned long&, lob::v2::Book<lob::ChecksumSink>::Loc&&)
+0 408 0 0 0 0 0 306 0 0
+37 102 0 0 0 0 0 0 0 0
+43 204 1 1 0 0 0 102 11 0
+fn=lob::v2::Book<lob::ChecksumSink>::alloc_node(unsigned long, unsigned int)
+0 59 1 1 59 0 0 0 0 0
+37 30 0 0 0 0 0 0 0 0
+43 45 0 0 0 0 0 15 0 0
+63 42 0 0 0 0 0 14 0 0
+fn=void lob::v2::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)
+43 231096 0 0 0 0 0 77032 0 0
+fn=void lob::v2::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)
+43 214503 0 0 0 0 0 71501 0 0
+fl=/usr/include/c++/v1/__split_buffer
+fn=lob::v2::Book<lob::ChecksumSink>::alloc_node(unsigned long, unsigned int)
+335 15 0 0 0 0 0 0 0 0
+341 30 0 0 0 0 0 0 0 0
+fl=/usr/include/c++/v1/__tree
+fn=(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+0 8548222 0 0 6147551 16009 57 0 0 0
+105 189862 0 0 189862 0 0 0 0 0
+163 28304 0 0 7242 675 14 0 0 0
+191 286004 1 1 71501 0 0 0 0 0
+193 94931 0 0 0 0 0 0 0 0
+680 572980 0 0 0 0 0 0 0 0
+884 572980 0 0 572980 0 0 0 0 0
+1824 214503 0 0 71501 0 0 0 0 0
+1825 71308 0 0 0 0 0 35654 0 0
+1826 71501 0 0 71501 0 0 0 0 0
+1827 143002 0 0 0 0 0 71501 0 0
+1994 1145960 1 1 0 0 0 0 0 0
+2049 11149142 0 0 0 0 0 0 0 0
+2050 5001591 0 0 0 0 0 0 0 0
+fn=auto lob::v2::Book<lob::ChecksumSink>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&) const
+0 10912630 1 1 8797578 16457 312 0 0 0
+105 170090 0 0 170090 0 0 0 0 0
+163 31692 0 0 8627 741 100 0 0 0
+191 231096 0 0 77032 0 0 0 0 0
+193 85045 0 0 0 0 0 0 0 0
+680 648116 0 0 0 0 0 0 0 0
+862 648116 0 0 0 0 0 0 0 0
+884 648116 0 0 648116 0 0 0 0 0
+1824 154064 0 0 77032 0 0 0 0 0
+1825 51765 0 0 0 0 0 51765 0 0
+1826 77032 0 0 77032 0 0 0 0 0
+1827 154064 0 0 0 0 0 77032 0 0
+1994 1296232 0 0 0 0 0 0 0 0
+2049 17595156 0 0 0 0 0 0 0 0
+2050 8149462 0 0 0 0 0 0 0 0
+fn=lob::v2::Book<lob::ChecksumSink>::modify(unsigned long, long, unsigned int)
+0 541400 0 0 459344 265 0 0 0 0
+680 41028 0 0 0 0 0 0 0 0
+862 41028 2 2 0 0 0 0 0 0
+884 41028 0 0 41028 0 0 0 0 0
+1994 99214 1 1 0 0 0 0 0 0
+2049 1000744 0 0 0 0 0 0 0 0
+2050 459344 0 0 0 0 0 0 0 0
+fn=unsigned int lob::v2::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >, lob::v2::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v2::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})
+915 572980 0 0 572980 0 0 0 0 0
+fn=unsigned int lob::v2::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >, lob::v2::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1}>(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v2::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1})
+915 648115 0 0 648115 0 0 0 0 0
+fn=void lob::v2::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)
+0 8095908 1 1 77032 0 0 0 0 0
+884 648116 0 0 648116 3 1 0 0 0
+1591 1944350 0 0 0 0 0 648116 2 0
+1593 7931179 0 0 0 0 0 0 0 0
+1594 28012604 0 0 7003151 3814 217 0 0 0
+1601 928028 0 0 0 0 0 0 0 0
+1602 1070832 0 0 356944 2465 156 0 0 0
+1673 77032 0 0 0 0 0 77032 0 0
+1674 77032 0 0 0 0 0 77032 0 0
+1676 77032 0 0 0 0 0 77032 0 0
+1677 308128 1 1 154064 7 0 0 0 0
+1678 51632 0 0 0 0 0 51632 0 0
+1679 231096 0 0 77032 0 0 77032 0 0
+1680 77032 0 0 77032 0 0 0 0 0
+fn=void lob::v2::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)
+0 4624929 1 1 71501 0 0 0 0 0
+884 572980 0 0 572980 0 0 0 0 0
+1591 1718942 0 0 0 0 0 572980 2 0
+1593 4464866 0 0 0 0 0 0 0 0
+1594 14849940 0 0 3712485 1925 35 0 0 0
+1601 752381 0 0 0 0 0 0 0 0
+1602 752706 0 0 250902 1293 34 0 0 0
+1673 71501 0 0 0 0 0 71501 0 0
+1674 71501 1 1 0 0 0 71501 0 0
+1676 71501 0 0 0 0 0 71501 0 0
+1677 286004 0 0 143002 3 0 0 0 0
+1678 35809 0 0 0 0 0 35809 0 0
+1679 214503 0 0 71501 0 0 71501 0 0
+1680 71501 0 0 71501 0 0 0 0 0
+fn=void std::__1::__tree_balance_after_insert[abi:ne210105]<std::__1::__tree_node_base<void*>*>(std::__1::__tree_node_base<void*>*, std::__1::__tree_node_base<void*>*)
+0 17857 1 1 0 0 0 0 0 0
+105 102018 0 0 76376 0 0 0 0 0
+235 7447 1 1 7447 0 0 0 0 0
+236 14894 0 0 7447 0 0 7447 0 0
+237 14894 0 0 0 0 0 0 0 0
+239 9892 0 0 2445 0 0 7447 0 0
+240 2445 0 0 0 0 0 0 0 0
+241 6130 0 0 0 0 0 6130 0 0
+243 1317 0 0 0 0 0 1317 0 0
+244 7447 0 0 0 0 0 7447 0 0
+254 5438 0 0 5438 0 0 0 0 0
+255 24994 0 0 12497 0 0 12497 0 0
+256 24994 0 0 0 0 0 0 0 0
+258 24722 0 0 12225 0 0 12497 0 0
+259 12497 0 0 0 0 0 0 0 0
+260 8215 0 0 0 0 0 8215 0 0
+262 4620 0 0 0 0 0 4282 0 0
+263 12497 0 0 0 0 0 12497 0 0
+278 297066 1 1 0 0 0 148533 0 0
+279 483397 0 0 157967 0 0 0 0 0
+281 23633 0 0 0 0 0 0 0 0
+282 18943 1 1 18943 0 0 0 0 0
+283 55320 0 0 8717 773 19 0 0 0
+285 6784 0 0 0 0 0 6784 0 0
+287 13568 0 0 0 0 0 6784 0 0
+288 13568 0 0 0 0 0 6784 0 0
+290 18880 0 0 0 0 0 0 0 0
+295 12159 0 0 0 0 0 12159 0 0
+297 12159 0 0 0 0 0 12159 0 0
+303 15974 0 0 3297 321 20 0 0 0
+305 2681 0 0 0 0 0 2681 0 0
+307 5362 0 0 0 0 0 2681 0 0
+308 5362 0 0 0 0 0 2681 0 0
+310 3680 1 1 0 0 0 0 0 0
+315 2009 1 1 0 0 0 2009 0 0
+317 2009 0 0 0 0 0 2009 0 0
+323 148533 0 0 148533 0 0 0 0 0
+569 163743 0 0 163743 0 0 0 0 0
+571 22995 0 0 0 0 0 22995 182 7
+fn=void std::__1::__tree_remove[abi:ne210105]<std::__1::__tree_node_base<void*>*>(std::__1::__tree_node_base<void*>*, std::__1::__tree_node_base<void*>*)
+0 190333 1 1 14238 0 0 8348 0 0
+105 778886 1 1 329872 1501 192 0 0 0
+163 31278 0 0 10426 0 0 0 0 0
+235 2846 0 0 2846 0 0 0 0 0
+236 6032 1 1 3016 28 2 3016 0 0
+237 6032 0 0 0 0 0 0 0 0
+239 6032 0 0 3016 0 0 3016 0 0
+240 3016 0 0 0 0 0 0 0 0
+241 2545 0 0 0 0 0 2545 0 0
+243 639 0 0 0 0 0 471 0 0
+244 3016 0 0 0 0 0 3016 0 0
+254 638 0 0 638 0 0 0 0 0
+255 2504 0 0 1252 16 1 1252 0 0
+256 2504 0 0 0 0 0 0 0 0
+258 2504 0 0 1252 0 0 1252 0 0
+259 1252 0 0 0 0 0 0 0 0
+260 581 1 1 0 0 0 581 0 0
+262 1140 0 0 0 0 0 671 0 0
+263 1252 0 0 0 0 0 1252 0 0
+339 624712 1 1 156178 0 0 0 0 0
+341 147834 1 1 147834 0 0 0 0 0
+345 295668 0 0 0 0 0 0 0 0
+346 20652 0 0 6884 22 1 6884 139 17
+347 148533 0 0 0 0 0 0 0 0
+348 122148 0 0 0 0 0 122148 0 0
+349 244296 0 0 0 0 0 0 0 0
+350 122141 0 0 122141 0 0 0 0 0
+354 26385 0 0 0 0 0 26385 0 0
+358 148533 0 0 148533 0 0 0 0 0
+361 417692 1 1 0 0 0 0 0 0
+363 13892 0 0 6946 0 0 6946 0 0
+364 6946 0 0 0 0 0 0 0 0
+365 3095 0 0 0 0 0 3095 0 0
+367 7702 0 0 0 0 0 3851 0 0
+368 13892 0 0 6946 0 0 6946 0 0
+370 13892 0 0 6946 0 0 6946 0 0
+371 13892 0 0 0 0 0 0 0 0
+373 13892 0 0 6946 0 0 6946 0 0
+374 13892 0 0 0 0 0 0 0 0
+379 445591 1 1 0 0 0 0 0 0
+392 30464 0 0 0 0 0 0 0 0
+393 6884 0 0 0 0 0 6884 0 0
+401 11293 0 0 0 0 0 0 0 0
+403 18152 1 1 0 0 0 0 0 0
+404 1656 0 0 0 0 0 1656 0 0
+405 1656 0 0 0 0 0 1656 5 0
+409 4968 0 0 1656 0 0 0 0 0
+412 1656 0 0 1656 0 0 0 0 0
+415 37042 1 1 13983 2942 837 0 0 0
+416 25134 0 0 8378 0 0 0 0 0
+417 7886 0 0 0 0 0 7886 0 0
+420 37190 0 0 7870 29 6 0 0 0
+429 4836 0 0 1667 225 24 0 0 0
+431 386 0 0 0 0 0 386 0 0
+432 386 0 0 0 0 0 386 0 0
+439 2380 0 0 1190 8 0 1190 0 0
+440 1190 0 0 0 0 0 1190 0 0
+441 1190 0 0 0 0 0 1190 0 0
+446 4434 1 1 0 0 0 0 0 0
+447 228 0 0 0 0 0 228 0 0
+448 228 0 0 0 0 0 228 0 0
+452 684 0 0 228 0 0 0 0 0
+455 228 0 0 228 0 0 0 0 0
+458 9891 1 1 3752 492 50 0 0 0
+459 5247 0 0 1749 0 0 0 0 0
+460 1579 0 0 0 0 0 1579 0 0
+463 4686 0 0 1579 0 0 0 0 0
+472 716 0 0 39 0 0 0 0 0
+474 209 0 0 39 0 0 170 0 0
+475 170 0 0 0 0 0 170 0 0
+482 1276 0 0 638 0 0 638 0 0
+483 638 0 0 0 0 0 638 0 0
+484 638 0 0 0 0 0 638 0 0
+492 148533 0 0 148533 0 0 0 0 0
+569 11293 3 3 11293 0 0 0 0 0
+571 14304 0 0 0 0 0 14304 418 46
+fl=/usr/include/c++/v1/__utility/pair.h
+fn=_ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v24BookINS5_12ChecksumSinkEE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_
+196 246546 1 1 123273 11314 1965 123273 20466 17833
+fn=boost::unordered::detail::foa::table_locator<boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, std::__1::pair<unsigned long const, lob::v2::Book<lob::ChecksumSink>::Loc> > boost::unordered::detail::foa::table_core<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::table_arrays, boost::unordered::detail::foa::plain_size_control, boost::hash<unsigned long>, std::__1::equal_to<unsigned long>, std::__1::allocator<std::__1::pair<unsigned long const, lob::v2::Book<lob::ChecksumSink>::Loc> > >::unchecked_emplace_with_rehash<boost::unordered::detail::foa::try_emplace_args_t, unsigned long&, lob::v2::Book<lob::ChecksumSink>::Loc>(unsigned long, boost::unordered::detail::foa::try_emplace_args_t&&, unsigned long&, lob::v2::Book<lob::ChecksumSink>::Loc&&)
+445 204 0 0 102 0 0 102 36 18
+446 408 1 1 204 0 0 204 6 2
+fn=void lob::v2::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)
+445 725088 0 0 0 0 0 725088 507655 2019
+446 2592224 0 0 1296112 0 0 1296112 234819 3870
+fn=void lob::v2::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)
+445 644439 0 0 0 0 0 644439 461305 1365
+446 2291752 1 1 1145876 0 0 1145876 212570 1995
+fl=/usr/include/c++/v1/__utility/swap.h
+fn=lob::v2::Book<lob::ChecksumSink>::alloc_node(unsigned long, unsigned int)
+44 45 0 0 0 0 0 45 4 0
+fl=/usr/include/c++/v1/__vector/vector.h
+fn=(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+0 1 0 0 1 1 1 0 0 0
+407 3158455 0 0 1221096 0 0 0 0 0
+449 1 0 0 1 1 1 0 0 0
+fn=auto lob::v2::Book<lob::ChecksumSink>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&) const
+407 2122107 0 0 648116 0 0 0 0 0
+fn=lob::v2::Book<lob::ChecksumSink>::alloc_node(unsigned long, unsigned int)
+0 90 2 2 0 0 0 60 1 1
+388 79623 0 0 17694 0 0 0 0 0
+391 60 0 0 0 0 0 0 0 0
+407 3654441 0 0 1221096 0 0 0 0 0
+475 8832 0 0 0 0 0 0 0 0
+902 30 0 0 0 0 0 0 0 0
+905 75 0 0 0 0 0 0 0 0
+1128 15 0 0 0 0 0 0 0 0
+1131 30 1 1 0 0 0 0 0 0
+1146 26541 0 0 8847 0 0 0 0 0
+1149 8832 0 0 0 0 0 0 0 0
+1152 8847 0 0 0 0 0 8847 0 0
+fn=lob::v2::Book<lob::ChecksumSink>::modify(unsigned long, long, unsigned int)
+407 82056 0 0 41028 0 0 0 0 0
+fn=void lob::v2::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)
+407 1867316 0 0 648116 0 0 0 0 0
+fn=void lob::v2::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)
+407 1647439 0 0 572980 0 0 0 0 0
+fl=/usr/include/c++/v1/map
+fn=unsigned int lob::v2::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >, lob::v2::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2}>(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v2::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#2})
+1031 572980 1 1 572980 0 0 0 0 0
+fn=unsigned int lob::v2::Book<lob::ChecksumSink>::match<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >, lob::v2::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1}>(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, unsigned int, lob::v2::Book<lob::ChecksumSink>::add(unsigned long, lob::Side, long, unsigned int)::{lambda(long)#1})
+1031 648116 1 1 648116 0 0 0 0 0
+fl=???
+fn=???
+0 1189307 5 5 743361 2023 7 0 0 0
+fn=operator delete(void*)
+0 743240 0 0 148648 0 0 148648 0 0
+fn=operator delete(void*, unsigned long)
+0 743240 1 1 148648 0 0 148648 0 0
+fn=operator new(unsigned long)
+0 2527050 2 2 445950 0 0 594600 1 1
+summary: 705439610 283 283 202159331 2068897 950438 85588551 1609985 37179

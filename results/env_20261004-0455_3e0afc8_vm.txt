@@ -1,0 +1,64 @@
+# environment snapshot 20261004-0455_3e0afc8_vm
+
+## host
+env_tag                    vm
+virt                       vmware
+kernel                     6.14.0-34-generic
+cpu                        Intel(R) Core(TM) i5-1035G1 CPU @ 1.00GHz
+nproc                      4
+bench_cpu                  3 (LOB_CPU)
+caches                     L1d cache=192 KiB (4 instances); L2 cache=2 MiB (4 instances); L3 cache=6 MiB (1 instance); 
+git                        3e0afc8
+
+## frequency scaling
+scaling_driver             n/a
+governor                   n/a
+intel_pstate.no_turbo      n/a
+cpufreq.boost              n/a
+cpu_mhz                    1190.400 1190.400 1190.400 1190.400 
+
+## idle states
+cpuidle.driver             none
+cpuidle.governor           menu
+
+## isolation
+cmdline                    BOOT_IMAGE=/boot/vmlinuz-6.14.0-34-generic root=UUID=4343072c-dd50-44c8-857a-698fa15898f9 ro quiet splash
+isolated                   
+nohz_full                                                                                                                                            (null)
+
+## memory
+thp.enabled                always [madvise] never
+thp.defrag                 always defer defer+madvise [madvise] never
+hugepages                  HugePages_Total: 16 ; Hugepagesize: 2048 kB; 
+mem_total                  10135264 kB
+
+## perf / PMU
+perf_event_paranoid        -1
+kptr_restrict              0
+nmi_watchdog               0
+perf                       perf version 6.8.12
+pmu (cycles,instructions)  1282652,cycles 782362,instructions 
+pmu_verdict                available
+pmu_name                   icelake
+max_precise                0 (0 = no PEBS: no :pp, no perf mem)
+sampling cycles            yes
+precise cycles:pp          no
+LLC-loads (generic)        no
+mem_load_retired.l3_miss   yes
+TopdownL1 metric           no
+topdown.slots (raw)        yes
+counters                   n/a (needs root: dmesg | grep -A8 'Performance Events')
+
+## TSC
+constant_tsc               yes
+nonstop_tsc                yes
+rdtscp                     yes
+tsc_known_freq             yes
+clocksource                tsc
+
+## tools
+clang++                    Ubuntu clang version 23.0.0 (++20260403081745+a7bf24919f87-1~exp1~20260403081920.1558)
+cmake                      cmake version 4.0.1
+valgrind                   valgrind-3.22.0
+heaptrack                  heaptrack 1.5.0
+VCPKG_ROOT                 /home/wang/git-repositories/vcpkg

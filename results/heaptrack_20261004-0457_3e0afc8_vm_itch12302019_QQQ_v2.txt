@@ -1,0 +1,984 @@
+reading file "/home/wang/sources/cxx/book/results/heaptrack_20261004-0457_3e0afc8_vm_itch12302019_QQQ_v2.zst" - please wait, this might take some time...
+Debuggee command was: /home/wang/sources/cxx/book/build/release/book replay --workload data/itch12302019_QQQ.ops --version v2
+finished reading file, now analyzing data:
+
+MOST CALLS TO ALLOCATION FUNCTIONS
+148533 calls to allocation functions with 149.50K peak consumption from
+std::__1::__tree_node<>* std::__1::__libcpp_allocate[abi:ne210105]<>(std::__1::__element_count, unsigned long)
+  at /usr/include/c++/v1/__new/allocate.h:43
+  in /home/wang/sources/cxx/book/build/release/book
+std::__1::allocator<>::allocate[abi:ne210105](unsigned long)
+  at /usr/include/c++/v1/__memory/allocator.h:105
+std::__1::allocator_traits<>::allocate[abi:ne210105](std::__1::allocator<>&, unsigned long)
+  at /usr/include/c++/v1/__memory/allocator_traits.h:259
+std::__1::unique_ptr<> std::__1::__tree<>::__construct_node<>(std::__1::piecewise_construct_t const&, std::__1::tuple<>&&, std::__1::tuple<>&&)
+  at /usr/include/c++/v1/__tree:1724
+std::__1::pair<> std::__1::__tree<>::__emplace_unique_key_args<>(long const&, std::__1::piecewise_construct_t const&, std::__1::tuple<>&&, std::__1::tuple<>&&)
+  at /usr/include/c++/v1/__tree:1692
+std::__1::map<>::operator[](long const&)
+  at /usr/include/c++/v1/map:1398
+void lob::v2::Book<>::rest<>(std::__1::map<>&, unsigned long, lob::Side, long, unsigned int)
+  at /home/wang/sources/cxx/book/include/lob/v2/book.hpp:272
+77032 calls with 128.38K peak consumption from:
+    void lob::apply<>(lob::v2::Book<>&, lob::Op const&)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:23
+      in /home/wang/sources/cxx/book/build/release/book
+    void lob::replay<>(lob::v2::Book<>&, std::__1::span<>)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:38
+    auto (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:294
+    auto (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:138
+    auto lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)::{lambda<>(std::__1::integer_sequence<>)#1}::operator()<>(std::__1::integer_sequence<>) const
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:29
+    void lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:28
+    void (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)
+      at /home/wang/sources/cxx/book/source/main.cxx:135
+    (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:287
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:461
+      in /home/wang/sources/cxx/book/build/release/book
+71501 calls with 21.12K peak consumption from:
+    void lob::apply<>(lob::v2::Book<>&, lob::Op const&)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:23
+      in /home/wang/sources/cxx/book/build/release/book
+    void lob::replay<>(lob::v2::Book<>&, std::__1::span<>)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:38
+    auto (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:294
+    auto (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:138
+    auto lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)::{lambda<>(std::__1::integer_sequence<>)#1}::operator()<>(std::__1::integer_sequence<>) const
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:29
+    void lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:28
+    void (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)
+      at /home/wang/sources/cxx/book/source/main.cxx:135
+    (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:287
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:461
+      in /home/wang/sources/cxx/book/build/release/book
+
+102 calls to allocation functions with 1.02M peak consumption from
+std::__1::pair<>* std::__1::__libcpp_allocate[abi:ne210105]<>(std::__1::__element_count, unsigned long)
+  at /usr/include/c++/v1/__new/allocate.h:43
+  in /home/wang/sources/cxx/book/build/release/book
+std::__1::allocator<>::allocate[abi:ne210105](unsigned long)
+  at /usr/include/c++/v1/__memory/allocator.h:105
+boost::allocator_pointer<>::type boost::allocator_allocate<>(std::__1::allocator<>&, boost::allocator_size_type<>::type)
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/core/allocator_access.hpp:375
+boost::allocator_traits<>::allocate(std::__1::allocator<>&, unsigned long)
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/core/allocator_traits.hpp:55
+boost::unordered::detail::foa::table_arrays<>::set_arrays(boost::unordered::detail::foa::table_arrays<>&, std::__1::allocator<>, unsigned long, std::__1::integral_constant<>)
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:1051
+boost::unordered::detail::foa::table_arrays<>::set_arrays(boost::unordered::detail::foa::table_arrays<>&, std::__1::allocator<>, unsigned long, std::__1::integral_constant<>)
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:1077
+boost::unordered::detail::foa::table_arrays<>::set_arrays(boost::unordered::detail::foa::table_arrays<>&, std::__1::allocator<>, unsigned long)
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:1038
+boost::unordered::detail::foa::table_arrays<>::new_(std::__1::allocator<>, unsigned long)
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:1087
+boost::unordered::detail::foa::table_core<>::new_arrays(unsigned long) const
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:2116
+boost::unordered::detail::foa::table_core<>::new_arrays_for_growth() const
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:2131
+boost::unordered::detail::foa::table_locator<> boost::unordered::detail::foa::table_core<>::unchecked_emplace_with_rehash<>(unsigned long, boost::unordered::detail::foa::try_emplace_args_t&&, unsigned long&, lob::v2::Book<>::Loc&&)
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:1984
+60 calls with 0B peak consumption from:
+    std::__1::pair<> boost::unordered::detail::foa::table<>::emplace_impl<>(boost::unordered::detail::foa::try_emplace_args_t&&, unsigned long&, lob::v2::Book<>::Loc&&)
+      at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/table.hpp:650
+      in /home/wang/sources/cxx/book/build/release/book
+    std::__1::enable_if<>::type boost::unordered::detail::foa::table<>::emplace<>(unsigned long&, lob::v2::Book<>::Loc&&)
+      at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/table.hpp:433
+    std::__1::pair<> boost::unordered::unordered_flat_map<>::emplace<>(unsigned long&, lob::v2::Book<>::Loc&&)
+      at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/unordered_flat_map.hpp:346
+    void lob::v2::Book<>::rest<>(std::__1::map<>&, unsigned long, lob::Side, long, unsigned int)
+      at /home/wang/sources/cxx/book/include/lob/v2/book.hpp:275
+    void lob::apply<>(lob::v2::Book<>&, lob::Op const&)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:23
+      in /home/wang/sources/cxx/book/build/release/book
+    void lob::replay<>(lob::v2::Book<>&, std::__1::span<>)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:38
+    auto (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:294
+    auto (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:138
+    auto lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)::{lambda<>(std::__1::integer_sequence<>)#1}::operator()<>(std::__1::integer_sequence<>) const
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:29
+    void lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:28
+    void (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)
+      at /home/wang/sources/cxx/book/source/main.cxx:135
+    (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:287
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:461
+      in /home/wang/sources/cxx/book/build/release/book
+42 calls with 1.02M peak consumption from:
+    std::__1::pair<> boost::unordered::detail::foa::table<>::emplace_impl<>(boost::unordered::detail::foa::try_emplace_args_t&&, unsigned long&, lob::v2::Book<>::Loc&&)
+      at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/table.hpp:650
+      in /home/wang/sources/cxx/book/build/release/book
+    std::__1::enable_if<>::type boost::unordered::detail::foa::table<>::emplace<>(unsigned long&, lob::v2::Book<>::Loc&&)
+      at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/table.hpp:433
+    std::__1::pair<> boost::unordered::unordered_flat_map<>::emplace<>(unsigned long&, lob::v2::Book<>::Loc&&)
+      at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/unordered_flat_map.hpp:346
+    void lob::v2::Book<>::rest<>(std::__1::map<>&, unsigned long, lob::Side, long, unsigned int)
+      at /home/wang/sources/cxx/book/include/lob/v2/book.hpp:275
+    void lob::apply<>(lob::v2::Book<>&, lob::Op const&)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:23
+      in /home/wang/sources/cxx/book/build/release/book
+    void lob::replay<>(lob::v2::Book<>&, std::__1::span<>)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:38
+    auto (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:294
+    auto (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:138
+    auto lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)::{lambda<>(std::__1::integer_sequence<>)#1}::operator()<>(std::__1::integer_sequence<>) const
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:29
+    void lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:28
+    void (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)
+      at /home/wang/sources/cxx/book/source/main.cxx:135
+    (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:287
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:461
+      in /home/wang/sources/cxx/book/build/release/book
+
+15 calls to allocation functions with 196.61K peak consumption from
+lob::v2::Book<>::OrderNode* std::__1::__libcpp_allocate[abi:ne210105]<>(std::__1::__element_count, unsigned long)
+  at /usr/include/c++/v1/__new/allocate.h:43
+  in /home/wang/sources/cxx/book/build/release/book
+std::__1::allocator<>::allocate[abi:ne210105](unsigned long)
+  at /usr/include/c++/v1/__memory/allocator.h:105
+std::__1::allocator<>::allocate_at_least[abi:ne210105](unsigned long)
+  at /usr/include/c++/v1/__memory/allocator.h:112
+std::__1::allocation_result<> std::__1::allocator_traits<>::allocate_at_least[abi:ne210105]<>(std::__1::allocator<>&, unsigned long)
+  at /usr/include/c++/v1/__memory/allocator_traits.h:280
+auto std::__1::__allocate_at_least[abi:ne210105]<>(std::__1::allocator<>&, unsigned long)
+  at /usr/include/c++/v1/__memory/allocate_at_least.h:26
+std::__1::__split_buffer<>::__split_buffer(unsigned long, unsigned long, std::__1::allocator<>&)
+  at /usr/include/c++/v1/__split_buffer:330
+lob::v2::Book<>::OrderNode* std::__1::vector<>::__emplace_back_slow_path<>()
+  at /usr/include/c++/v1/__vector/vector.h:1128
+lob::v2::Book<>::OrderNode& std::__1::vector<>::emplace_back<>()
+  at /usr/include/c++/v1/__vector/vector.h:1150
+lob::v2::Book<>::alloc_node(unsigned long, unsigned int)
+  at /home/wang/sources/cxx/book/include/lob/v2/book.hpp:196
+9 calls with 196.61K peak consumption from:
+    void lob::v2::Book<>::rest<>(std::__1::map<>&, unsigned long, lob::Side, long, unsigned int)
+      at /home/wang/sources/cxx/book/include/lob/v2/book.hpp:271
+      in /home/wang/sources/cxx/book/build/release/book
+    void lob::apply<>(lob::v2::Book<>&, lob::Op const&)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:23
+      in /home/wang/sources/cxx/book/build/release/book
+    void lob::replay<>(lob::v2::Book<>&, std::__1::span<>)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:38
+    auto (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:294
+    auto (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:138
+    auto lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)::{lambda<>(std::__1::integer_sequence<>)#1}::operator()<>(std::__1::integer_sequence<>) const
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:29
+    void lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:28
+    void (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)
+      at /home/wang/sources/cxx/book/source/main.cxx:135
+    (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:287
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:461
+      in /home/wang/sources/cxx/book/build/release/book
+6 calls with 0B peak consumption from:
+    void lob::v2::Book<>::rest<>(std::__1::map<>&, unsigned long, lob::Side, long, unsigned int)
+      at /home/wang/sources/cxx/book/include/lob/v2/book.hpp:271
+      in /home/wang/sources/cxx/book/build/release/book
+    void lob::apply<>(lob::v2::Book<>&, lob::Op const&)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:23
+      in /home/wang/sources/cxx/book/build/release/book
+    void lob::replay<>(lob::v2::Book<>&, std::__1::span<>)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:38
+    auto (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:294
+    auto (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:138
+    auto lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)::{lambda<>(std::__1::integer_sequence<>)#1}::operator()<>(std::__1::integer_sequence<>) const
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:29
+    void lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:28
+    void (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)
+      at /home/wang/sources/cxx/book/source/main.cxx:135
+    (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:287
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:461
+      in /home/wang/sources/cxx/book/build/release/book
+
+4 calls to allocation functions with 32B peak consumption from
+char* std::__1::__libcpp_allocate[abi:ne210105]<>(std::__1::__element_count, unsigned long)
+  at /usr/include/c++/v1/__new/allocate.h:43
+  in /home/wang/sources/cxx/book/build/release/book
+std::__1::allocator<>::allocate[abi:ne210105](unsigned long)
+  at /usr/include/c++/v1/__memory/allocator.h:105
+std::__1::allocator<>::allocate_at_least[abi:ne210105](unsigned long)
+  at /usr/include/c++/v1/__memory/allocator.h:112
+std::__1::allocation_result<> std::__1::allocator_traits<>::allocate_at_least[abi:ne210105]<>(std::__1::allocator<>&, unsigned long)
+  at /usr/include/c++/v1/__memory/allocator_traits.h:280
+auto std::__1::__allocate_at_least[abi:ne210105]<>(std::__1::allocator<>&, unsigned long)
+  at /usr/include/c++/v1/__memory/allocate_at_least.h:26
+std::__1::basic_string<>::__init(char const*, unsigned long)
+  at /usr/include/c++/v1/string:2555
+_ZNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2B8ne210105ILi0EEEPKc
+  at /usr/include/c++/v1/string:1063
+_ZNSt3__14pairIKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES6_EC2B8ne210105IS6_RPcTnNS_9enable_ifIXclsr25__check_pair_constructionIS7_S6_EE23__is_pair_constructibleIT_T0_EEEiE4typeELi0EEEOSD_OSE_
+  at /usr/include/c++/v1/__utility/pair.h:165
+std::__1::pair<>* std::__1::construct_at[abi:ne210105]<>(std::__1::pair<>*, std::__1::basic_string<>&&, char*&)
+  at /usr/include/c++/v1/__memory/construct_at.h:38
+std::__1::pair<>* std::__1::__construct_at[abi:ne210105]<>(std::__1::pair<>*, std::__1::basic_string<>&&, char*&)
+  at /usr/include/c++/v1/__memory/construct_at.h:46
+_ZNSt3__116allocator_traitsINS_9allocatorINS_11__tree_nodeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS1_IcEEEES8_EEPvEEEEE9constructB8ne210105INS_4pairIKS8_S8_EEJS8_RPcETnNS_9enable_ifIXnt17__has_construct_vISC_PT_DpT0_EEiE4typeELi0EEEvRSC_SM_DpOSN_
+  at /usr/include/c++/v1/__memory/allocator_traits.h:302
+std::__1::unique_ptr<> std::__1::__tree<>::__construct_node<>(std::__1::basic_string<>&&, char*&)
+  at /usr/include/c++/v1/__tree:1725
+1 calls with 32B peak consumption from:
+    std::__1::pair<> std::__1::__tree<>::__emplace_unique_key_args<>(std::__1::basic_string<> const&, std::__1::basic_string<>&&, char*&)
+      at /usr/include/c++/v1/__tree:1692
+      in /home/wang/sources/cxx/book/build/release/book
+    _ZNSt3__16__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_NS_4pairIKS7_S7_EENS_4lessIvEELb1EEENS5_ISC_EEE16__emplace_uniqueB8ne210105IS7_RPcTnNS_9enable_ifIXsr21__can_extract_map_keyIT_S7_SC_EE5valueEiE4typeELi0EEENSA_INS_15__tree_iteratorIS8_PNS_11__tree_nodeIS8_PvEElEEbEEOSM_OT0_
+      at /usr/include/c++/v1/__tree:960
+      in /home/wang/sources/cxx/book/build/release/book
+    std::__1::pair<> std::__1::map<>::emplace[abi:ne210105]<>(std::__1::basic_string<>&&, char*&)
+      at /usr/include/c++/v1/map:1050
+    (anonymous namespace)::parse_args(int, char**, int)
+      at /home/wang/sources/cxx/book/source/main.cxx:95
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:456
+    __libc_start_call_main
+      at ../sysdeps/nptl/libc_start_call_main.h:58
+      in /lib/x86_64-linux-gnu/libc.so.6
+    __libc_start_main_impl
+      at ../csu/libc-start.c:360
+      in /lib/x86_64-linux-gnu/libc.so.6
+    _start
+      in /home/wang/sources/cxx/book/build/release/book
+1 calls with 0B peak consumption from:
+    (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:282
+      in /home/wang/sources/cxx/book/build/release/book
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:461
+      in /home/wang/sources/cxx/book/build/release/book
+1 calls with 0B peak consumption from:
+    _ZNSt3__14__fs10filesystem8_PathCVTIcE14__append_rangeB8ne210105IPKcTnNS_9enable_ifIXsr31__has_forward_iterator_categoryIT_EE5valueEiE4typeELi0EEEvRNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES8_S8_
+      at /usr/include/c++/v1/__filesystem/path.h:274
+      in /home/wang/sources/cxx/book/build/release/book
+    void std::__1::__fs::filesystem::_PathCVT<>::__append_source[abi:ne210105]<>(std::__1::basic_string<>&, std::__1::basic_string<> const&)
+      at /usr/include/c++/v1/__filesystem/path.h:287
+    std::__1::basic_string<> const& std::__1::__fs::filesystem::path::path[abi:ne210105]<>(std::__1::__fs::filesystem::path::format)
+      at /usr/include/c++/v1/__filesystem/path.h:414
+    (anonymous namespace)::load_or_die(std::__1::basic_string<> const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:118
+    (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:282
+      in /home/wang/sources/cxx/book/build/release/book
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:461
+      in /home/wang/sources/cxx/book/build/release/book
+1 calls with 0B peak consumption from:
+    void std::__1::__print::__vprint_unicode_posix[abi:ne210105]<>(_IO_FILE*, std::__1::basic_string_view<>, std::__1::basic_format_args<>, bool, bool)
+      at /usr/include/c++/v1/print:246
+      in /home/wang/sources/cxx/book/build/release/book
+    void std::__1::__print::__vprint_unicode[abi:ne210105]<>(_IO_FILE*, std::__1::basic_string_view<>, std::__1::basic_format_args<>, bool)
+      at /usr/include/c++/v1/print:319
+    void std::__1::println[abi:ne210105]<>(_IO_FILE*, std::__1::basic_format_string<>, std::__1::basic_string_view<> const&, int&, unsigned long&&, unsigned long&, unsigned long&, unsigned long&, unsigned long&&, long const&, double&&)
+      at /usr/include/c++/v1/print:355
+    void std::__1::println[abi:ne210105]<>(std::__1::basic_format_string<>, std::__1::basic_string_view<> const&, int&, unsigned long&&, unsigned long&, unsigned long&, unsigned long&, unsigned long&&, long const&, double&&)
+      at /usr/include/c++/v1/print:375
+    auto (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:299
+    auto (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:138
+    auto lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)::{lambda<>(std::__1::integer_sequence<>)#1}::operator()<>(std::__1::integer_sequence<>) const
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:29
+    void lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:28
+    void (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)
+      at /home/wang/sources/cxx/book/source/main.cxx:135
+    (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:287
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:461
+      in /home/wang/sources/cxx/book/build/release/book
+
+2 calls to allocation functions with 160B peak consumption from
+std::__1::__tree_node<>* std::__1::__libcpp_allocate[abi:ne210105]<>(std::__1::__element_count, unsigned long)
+  at /usr/include/c++/v1/__new/allocate.h:43
+  in /home/wang/sources/cxx/book/build/release/book
+std::__1::allocator<>::allocate[abi:ne210105](unsigned long)
+  at /usr/include/c++/v1/__memory/allocator.h:105
+std::__1::allocator_traits<>::allocate[abi:ne210105](std::__1::allocator<>&, unsigned long)
+  at /usr/include/c++/v1/__memory/allocator_traits.h:259
+std::__1::unique_ptr<> std::__1::__tree<>::__construct_node<>(std::__1::basic_string<>&&, char*&)
+  at /usr/include/c++/v1/__tree:1724
+2 calls with 160B peak consumption from:
+    std::__1::pair<> std::__1::__tree<>::__emplace_unique_key_args<>(std::__1::basic_string<> const&, std::__1::basic_string<>&&, char*&)
+      at /usr/include/c++/v1/__tree:1692
+      in /home/wang/sources/cxx/book/build/release/book
+    _ZNSt3__16__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_NS_4pairIKS7_S7_EENS_4lessIvEELb1EEENS5_ISC_EEE16__emplace_uniqueB8ne210105IS7_RPcTnNS_9enable_ifIXsr21__can_extract_map_keyIT_S7_SC_EE5valueEiE4typeELi0EEENSA_INS_15__tree_iteratorIS8_PNS_11__tree_nodeIS8_PvEElEEbEEOSM_OT0_
+      at /usr/include/c++/v1/__tree:960
+      in /home/wang/sources/cxx/book/build/release/book
+    std::__1::pair<> std::__1::map<>::emplace[abi:ne210105]<>(std::__1::basic_string<>&&, char*&)
+      at /usr/include/c++/v1/map:1050
+    (anonymous namespace)::parse_args(int, char**, int)
+      at /home/wang/sources/cxx/book/source/main.cxx:95
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:456
+    __libc_start_call_main
+      at ../sysdeps/nptl/libc_start_call_main.h:58
+      in /lib/x86_64-linux-gnu/libc.so.6
+    __libc_start_main_impl
+      at ../csu/libc-start.c:360
+      in /lib/x86_64-linux-gnu/libc.so.6
+    _start
+      in /home/wang/sources/cxx/book/build/release/book
+
+2 calls to allocation functions with 0B peak consumption from
+__GI__IO_file_doallocate
+  at ./libio/filedoalloc.c:101
+  in /lib/x86_64-linux-gnu/libc.so.6
+1 calls with 0B peak consumption from:
+    __GI__IO_doallocbuf
+      at ./libio/genops.c:347
+      in /lib/x86_64-linux-gnu/libc.so.6
+    __GI__IO_file_xsgetn
+      at ./libio/fileops.c:1288
+      in /lib/x86_64-linux-gnu/libc.so.6
+    __GI__IO_fread
+      at ./libio/iofread.c:38
+      in /lib/x86_64-linux-gnu/libc.so.6
+    lob::workload::load(std::__1::__fs::filesystem::path const&)
+      at /home/wang/sources/cxx/book/source/workload/format.cxx:61
+      in /home/wang/sources/cxx/book/build/release/book
+    (anonymous namespace)::load_or_die(std::__1::basic_string<> const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:118
+      in /home/wang/sources/cxx/book/build/release/book
+    (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:282
+      in /home/wang/sources/cxx/book/build/release/book
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:461
+      in /home/wang/sources/cxx/book/build/release/book
+1 calls with 0B peak consumption from:
+    __GI__IO_doallocbuf
+      at ./libio/genops.c:347
+      in /lib/x86_64-linux-gnu/libc.so.6
+    _IO_new_file_overflow
+      at ./libio/fileops.c:745
+      in /lib/x86_64-linux-gnu/libc.so.6
+    _IO_new_file_xsputn::_IO_new_file_xsputn
+      at ./libio/fileops.c:1244
+      in /lib/x86_64-linux-gnu/libc.so.6
+    _IO_new_file_xsputn
+      at ./libio/./libio/fileops.c:1197
+    __GI__IO_fwrite
+      at ./libio/iofwrite.c:39
+      in /lib/x86_64-linux-gnu/libc.so.6
+    void std::__1::__print::__vprint_nonunicode[abi:ne210105]<>(_IO_FILE*, std::__1::basic_string_view<>, std::__1::basic_format_args<>, bool)
+      at /usr/include/c++/v1/print:224
+      in /home/wang/sources/cxx/book/build/release/book
+    void std::__1::__print::__vprint_unicode_posix[abi:ne210105]<>(_IO_FILE*, std::__1::basic_string_view<>, std::__1::basic_format_args<>, bool, bool)
+      at /usr/include/c++/v1/print:246
+      in /home/wang/sources/cxx/book/build/release/book
+    void std::__1::__print::__vprint_unicode[abi:ne210105]<>(_IO_FILE*, std::__1::basic_string_view<>, std::__1::basic_format_args<>, bool)
+      at /usr/include/c++/v1/print:319
+    void std::__1::println[abi:ne210105]<>(_IO_FILE*, std::__1::basic_format_string<>, std::__1::basic_string_view<> const&, int&, unsigned long&&, unsigned long&, unsigned long&, unsigned long&, unsigned long&&, long const&, double&&)
+      at /usr/include/c++/v1/print:355
+    void std::__1::println[abi:ne210105]<>(std::__1::basic_format_string<>, std::__1::basic_string_view<> const&, int&, unsigned long&&, unsigned long&, unsigned long&, unsigned long&, unsigned long&&, long const&, double&&)
+      at /usr/include/c++/v1/print:375
+    auto (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:299
+    auto (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:138
+    auto lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)::{lambda<>(std::__1::integer_sequence<>)#1}::operator()<>(std::__1::integer_sequence<>) const
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:29
+    void lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:28
+    void (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)
+      at /home/wang/sources/cxx/book/source/main.cxx:135
+    (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:287
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:461
+      in /home/wang/sources/cxx/book/build/release/book
+
+1 calls to allocation functions with 59.60M peak consumption from
+lob::Op* std::__1::__libcpp_allocate[abi:ne210105]<>(std::__1::__element_count, unsigned long)
+  at /usr/include/c++/v1/__new/allocate.h:43
+  in /home/wang/sources/cxx/book/build/release/book
+std::__1::allocator<>::allocate[abi:ne210105](unsigned long)
+  at /usr/include/c++/v1/__memory/allocator.h:105
+std::__1::allocator<>::allocate_at_least[abi:ne210105](unsigned long)
+  at /usr/include/c++/v1/__memory/allocator.h:112
+std::__1::allocation_result<> std::__1::allocator_traits<>::allocate_at_least[abi:ne210105]<>(std::__1::allocator<>&, unsigned long)
+  at /usr/include/c++/v1/__memory/allocator_traits.h:280
+auto std::__1::__allocate_at_least[abi:ne210105]<>(std::__1::allocator<>&, unsigned long)
+  at /usr/include/c++/v1/__memory/allocate_at_least.h:26
+std::__1::__split_buffer<>::__split_buffer(unsigned long, unsigned long, std::__1::allocator<>&)
+  at /usr/include/c++/v1/__split_buffer:330
+std::__1::vector<>::__append(unsigned long)
+  at /usr/include/c++/v1/__vector/vector.h:957
+1 calls with 59.60M peak consumption from:
+    std::__1::vector<>::resize(unsigned long)
+      at /usr/include/c++/v1/__vector/vector.h:1361
+      in /home/wang/sources/cxx/book/build/release/book
+    lob::workload::load(std::__1::__fs::filesystem::path const&)
+      at /home/wang/sources/cxx/book/source/workload/format.cxx:68
+    (anonymous namespace)::load_or_die(std::__1::basic_string<> const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:118
+      in /home/wang/sources/cxx/book/build/release/book
+    (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:282
+      in /home/wang/sources/cxx/book/build/release/book
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:461
+      in /home/wang/sources/cxx/book/build/release/book
+
+1 calls to allocation functions with 136B peak consumption from
+_ZNSt3__111make_uniqueB8ne210105IN3lob2v24BookINS1_12ChecksumSinkEEEJRS4_ETnNS_9enable_ifIXntsr8is_arrayIT_EE5valueEiE4typeELi0EEENS_10unique_ptrIS8_NS_14default_deleteIS8_EEEEDpOT0_
+  at /usr/include/c++/v1/__memory/unique_ptr.h:759
+  in /home/wang/sources/cxx/book/build/release/book
+std::__1::unique_ptr<> lob::make_book<>(lob::ChecksumSink&, lob::BookConfig const&)
+  at /home/wang/sources/cxx/book/include/lob/book_config.hpp:22
+auto (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0::operator()<>() const
+  at /home/wang/sources/cxx/book/source/main.cxx:290
+auto (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}::operator()<>() const
+  at /home/wang/sources/cxx/book/source/main.cxx:138
+auto lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)::{lambda<>(std::__1::integer_sequence<>)#1}::operator()<>(std::__1::integer_sequence<>) const
+  at /home/wang/sources/cxx/book/include/lob/versions.hpp:29
+void lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)
+  at /home/wang/sources/cxx/book/include/lob/versions.hpp:28
+void (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)
+  at /home/wang/sources/cxx/book/source/main.cxx:135
+(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+  at /home/wang/sources/cxx/book/source/main.cxx:287
+1 calls with 136B peak consumption from:
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:461
+      in /home/wang/sources/cxx/book/build/release/book
+
+1 calls to allocation functions with 0B peak consumption from
+_IO_new_fopen::__fopen_internal
+  at ./libio/iofopen.c:65
+  in /lib/x86_64-linux-gnu/libc.so.6
+_IO_new_fopen
+  at ./libio/./libio/iofopen.c:86
+1 calls with 0B peak consumption from:
+    lob::workload::load(std::__1::__fs::filesystem::path const&)
+      at /home/wang/sources/cxx/book/source/workload/format.cxx:58
+      in /home/wang/sources/cxx/book/build/release/book
+    (anonymous namespace)::load_or_die(std::__1::basic_string<> const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:118
+      in /home/wang/sources/cxx/book/build/release/book
+    (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:282
+      in /home/wang/sources/cxx/book/build/release/book
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:461
+      in /home/wang/sources/cxx/book/build/release/book
+
+1 calls to allocation functions with 73.73K peak consumption from
+0x7d91e3eb738e
+  in /lib/x86_64-linux-gnu/libstdc++.so.6
+1 calls with 73.73K peak consumption from:
+    call_init
+      at ./elf/dl-init.c:74
+      in /lib64/ld-linux-x86-64.so.2
+    _dl_init::call_init
+      at ./elf/dl-init.c:120
+      in /lib64/ld-linux-x86-64.so.2
+    _dl_init
+      at ./elf/./elf/dl-init.c:121
+    _dl_start_user
+      in /lib64/ld-linux-x86-64.so.2
+
+
+PEAK MEMORY CONSUMERS
+59.60M peak memory consumed over 1 calls from
+lob::Op* std::__1::__libcpp_allocate[abi:ne210105]<>(std::__1::__element_count, unsigned long)
+  at /usr/include/c++/v1/__new/allocate.h:43
+  in /home/wang/sources/cxx/book/build/release/book
+std::__1::allocator<>::allocate[abi:ne210105](unsigned long)
+  at /usr/include/c++/v1/__memory/allocator.h:105
+std::__1::allocator<>::allocate_at_least[abi:ne210105](unsigned long)
+  at /usr/include/c++/v1/__memory/allocator.h:112
+std::__1::allocation_result<> std::__1::allocator_traits<>::allocate_at_least[abi:ne210105]<>(std::__1::allocator<>&, unsigned long)
+  at /usr/include/c++/v1/__memory/allocator_traits.h:280
+auto std::__1::__allocate_at_least[abi:ne210105]<>(std::__1::allocator<>&, unsigned long)
+  at /usr/include/c++/v1/__memory/allocate_at_least.h:26
+std::__1::__split_buffer<>::__split_buffer(unsigned long, unsigned long, std::__1::allocator<>&)
+  at /usr/include/c++/v1/__split_buffer:330
+std::__1::vector<>::__append(unsigned long)
+  at /usr/include/c++/v1/__vector/vector.h:957
+59.60M consumed over 1 calls from:
+    std::__1::vector<>::resize(unsigned long)
+      at /usr/include/c++/v1/__vector/vector.h:1361
+      in /home/wang/sources/cxx/book/build/release/book
+    lob::workload::load(std::__1::__fs::filesystem::path const&)
+      at /home/wang/sources/cxx/book/source/workload/format.cxx:68
+    (anonymous namespace)::load_or_die(std::__1::basic_string<> const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:118
+      in /home/wang/sources/cxx/book/build/release/book
+    (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:282
+      in /home/wang/sources/cxx/book/build/release/book
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:461
+      in /home/wang/sources/cxx/book/build/release/book
+
+1.02M peak memory consumed over 102 calls from
+std::__1::pair<>* std::__1::__libcpp_allocate[abi:ne210105]<>(std::__1::__element_count, unsigned long)
+  at /usr/include/c++/v1/__new/allocate.h:43
+  in /home/wang/sources/cxx/book/build/release/book
+std::__1::allocator<>::allocate[abi:ne210105](unsigned long)
+  at /usr/include/c++/v1/__memory/allocator.h:105
+boost::allocator_pointer<>::type boost::allocator_allocate<>(std::__1::allocator<>&, boost::allocator_size_type<>::type)
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/core/allocator_access.hpp:375
+boost::allocator_traits<>::allocate(std::__1::allocator<>&, unsigned long)
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/core/allocator_traits.hpp:55
+boost::unordered::detail::foa::table_arrays<>::set_arrays(boost::unordered::detail::foa::table_arrays<>&, std::__1::allocator<>, unsigned long, std::__1::integral_constant<>)
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:1051
+boost::unordered::detail::foa::table_arrays<>::set_arrays(boost::unordered::detail::foa::table_arrays<>&, std::__1::allocator<>, unsigned long, std::__1::integral_constant<>)
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:1077
+boost::unordered::detail::foa::table_arrays<>::set_arrays(boost::unordered::detail::foa::table_arrays<>&, std::__1::allocator<>, unsigned long)
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:1038
+boost::unordered::detail::foa::table_arrays<>::new_(std::__1::allocator<>, unsigned long)
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:1087
+boost::unordered::detail::foa::table_core<>::new_arrays(unsigned long) const
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:2116
+boost::unordered::detail::foa::table_core<>::new_arrays_for_growth() const
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:2131
+boost::unordered::detail::foa::table_locator<> boost::unordered::detail::foa::table_core<>::unchecked_emplace_with_rehash<>(unsigned long, boost::unordered::detail::foa::try_emplace_args_t&&, unsigned long&, lob::v2::Book<>::Loc&&)
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:1984
+1.02M consumed over 42 calls from:
+    std::__1::pair<> boost::unordered::detail::foa::table<>::emplace_impl<>(boost::unordered::detail::foa::try_emplace_args_t&&, unsigned long&, lob::v2::Book<>::Loc&&)
+      at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/table.hpp:650
+      in /home/wang/sources/cxx/book/build/release/book
+    std::__1::enable_if<>::type boost::unordered::detail::foa::table<>::emplace<>(unsigned long&, lob::v2::Book<>::Loc&&)
+      at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/table.hpp:433
+    std::__1::pair<> boost::unordered::unordered_flat_map<>::emplace<>(unsigned long&, lob::v2::Book<>::Loc&&)
+      at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/unordered_flat_map.hpp:346
+    void lob::v2::Book<>::rest<>(std::__1::map<>&, unsigned long, lob::Side, long, unsigned int)
+      at /home/wang/sources/cxx/book/include/lob/v2/book.hpp:275
+    void lob::apply<>(lob::v2::Book<>&, lob::Op const&)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:23
+      in /home/wang/sources/cxx/book/build/release/book
+    void lob::replay<>(lob::v2::Book<>&, std::__1::span<>)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:38
+    auto (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:294
+    auto (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:138
+    auto lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)::{lambda<>(std::__1::integer_sequence<>)#1}::operator()<>(std::__1::integer_sequence<>) const
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:29
+    void lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:28
+    void (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)
+      at /home/wang/sources/cxx/book/source/main.cxx:135
+    (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:287
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:461
+      in /home/wang/sources/cxx/book/build/release/book
+
+196.61K peak memory consumed over 15 calls from
+lob::v2::Book<>::OrderNode* std::__1::__libcpp_allocate[abi:ne210105]<>(std::__1::__element_count, unsigned long)
+  at /usr/include/c++/v1/__new/allocate.h:43
+  in /home/wang/sources/cxx/book/build/release/book
+std::__1::allocator<>::allocate[abi:ne210105](unsigned long)
+  at /usr/include/c++/v1/__memory/allocator.h:105
+std::__1::allocator<>::allocate_at_least[abi:ne210105](unsigned long)
+  at /usr/include/c++/v1/__memory/allocator.h:112
+std::__1::allocation_result<> std::__1::allocator_traits<>::allocate_at_least[abi:ne210105]<>(std::__1::allocator<>&, unsigned long)
+  at /usr/include/c++/v1/__memory/allocator_traits.h:280
+auto std::__1::__allocate_at_least[abi:ne210105]<>(std::__1::allocator<>&, unsigned long)
+  at /usr/include/c++/v1/__memory/allocate_at_least.h:26
+std::__1::__split_buffer<>::__split_buffer(unsigned long, unsigned long, std::__1::allocator<>&)
+  at /usr/include/c++/v1/__split_buffer:330
+lob::v2::Book<>::OrderNode* std::__1::vector<>::__emplace_back_slow_path<>()
+  at /usr/include/c++/v1/__vector/vector.h:1128
+lob::v2::Book<>::OrderNode& std::__1::vector<>::emplace_back<>()
+  at /usr/include/c++/v1/__vector/vector.h:1150
+lob::v2::Book<>::alloc_node(unsigned long, unsigned int)
+  at /home/wang/sources/cxx/book/include/lob/v2/book.hpp:196
+196.61K consumed over 9 calls from:
+    void lob::v2::Book<>::rest<>(std::__1::map<>&, unsigned long, lob::Side, long, unsigned int)
+      at /home/wang/sources/cxx/book/include/lob/v2/book.hpp:271
+      in /home/wang/sources/cxx/book/build/release/book
+    void lob::apply<>(lob::v2::Book<>&, lob::Op const&)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:23
+      in /home/wang/sources/cxx/book/build/release/book
+    void lob::replay<>(lob::v2::Book<>&, std::__1::span<>)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:38
+    auto (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:294
+    auto (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:138
+    auto lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)::{lambda<>(std::__1::integer_sequence<>)#1}::operator()<>(std::__1::integer_sequence<>) const
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:29
+    void lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:28
+    void (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)
+      at /home/wang/sources/cxx/book/source/main.cxx:135
+    (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:287
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:461
+      in /home/wang/sources/cxx/book/build/release/book
+
+149.50K peak memory consumed over 148533 calls from
+std::__1::__tree_node<>* std::__1::__libcpp_allocate[abi:ne210105]<>(std::__1::__element_count, unsigned long)
+  at /usr/include/c++/v1/__new/allocate.h:43
+  in /home/wang/sources/cxx/book/build/release/book
+std::__1::allocator<>::allocate[abi:ne210105](unsigned long)
+  at /usr/include/c++/v1/__memory/allocator.h:105
+std::__1::allocator_traits<>::allocate[abi:ne210105](std::__1::allocator<>&, unsigned long)
+  at /usr/include/c++/v1/__memory/allocator_traits.h:259
+std::__1::unique_ptr<> std::__1::__tree<>::__construct_node<>(std::__1::piecewise_construct_t const&, std::__1::tuple<>&&, std::__1::tuple<>&&)
+  at /usr/include/c++/v1/__tree:1724
+std::__1::pair<> std::__1::__tree<>::__emplace_unique_key_args<>(long const&, std::__1::piecewise_construct_t const&, std::__1::tuple<>&&, std::__1::tuple<>&&)
+  at /usr/include/c++/v1/__tree:1692
+std::__1::map<>::operator[](long const&)
+  at /usr/include/c++/v1/map:1398
+void lob::v2::Book<>::rest<>(std::__1::map<>&, unsigned long, lob::Side, long, unsigned int)
+  at /home/wang/sources/cxx/book/include/lob/v2/book.hpp:272
+128.38K consumed over 77032 calls from:
+    void lob::apply<>(lob::v2::Book<>&, lob::Op const&)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:23
+      in /home/wang/sources/cxx/book/build/release/book
+    void lob::replay<>(lob::v2::Book<>&, std::__1::span<>)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:38
+    auto (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:294
+    auto (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:138
+    auto lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)::{lambda<>(std::__1::integer_sequence<>)#1}::operator()<>(std::__1::integer_sequence<>) const
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:29
+    void lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:28
+    void (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)
+      at /home/wang/sources/cxx/book/source/main.cxx:135
+    (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:287
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:461
+      in /home/wang/sources/cxx/book/build/release/book
+21.12K consumed over 71501 calls from:
+    void lob::apply<>(lob::v2::Book<>&, lob::Op const&)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:23
+      in /home/wang/sources/cxx/book/build/release/book
+    void lob::replay<>(lob::v2::Book<>&, std::__1::span<>)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:38
+    auto (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:294
+    auto (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:138
+    auto lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)::{lambda<>(std::__1::integer_sequence<>)#1}::operator()<>(std::__1::integer_sequence<>) const
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:29
+    void lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:28
+    void (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)
+      at /home/wang/sources/cxx/book/source/main.cxx:135
+    (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:287
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:461
+      in /home/wang/sources/cxx/book/build/release/book
+
+73.73K peak memory consumed over 1 calls from
+0x7d91e3eb738e
+  in /lib/x86_64-linux-gnu/libstdc++.so.6
+73.73K consumed over 1 calls from:
+    call_init
+      at ./elf/dl-init.c:74
+      in /lib64/ld-linux-x86-64.so.2
+    _dl_init::call_init
+      at ./elf/dl-init.c:120
+      in /lib64/ld-linux-x86-64.so.2
+    _dl_init
+      at ./elf/./elf/dl-init.c:121
+    _dl_start_user
+      in /lib64/ld-linux-x86-64.so.2
+
+160B peak memory consumed over 2 calls from
+std::__1::__tree_node<>* std::__1::__libcpp_allocate[abi:ne210105]<>(std::__1::__element_count, unsigned long)
+  at /usr/include/c++/v1/__new/allocate.h:43
+  in /home/wang/sources/cxx/book/build/release/book
+std::__1::allocator<>::allocate[abi:ne210105](unsigned long)
+  at /usr/include/c++/v1/__memory/allocator.h:105
+std::__1::allocator_traits<>::allocate[abi:ne210105](std::__1::allocator<>&, unsigned long)
+  at /usr/include/c++/v1/__memory/allocator_traits.h:259
+std::__1::unique_ptr<> std::__1::__tree<>::__construct_node<>(std::__1::basic_string<>&&, char*&)
+  at /usr/include/c++/v1/__tree:1724
+160B consumed over 2 calls from:
+    std::__1::pair<> std::__1::__tree<>::__emplace_unique_key_args<>(std::__1::basic_string<> const&, std::__1::basic_string<>&&, char*&)
+      at /usr/include/c++/v1/__tree:1692
+      in /home/wang/sources/cxx/book/build/release/book
+    _ZNSt3__16__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_NS_4pairIKS7_S7_EENS_4lessIvEELb1EEENS5_ISC_EEE16__emplace_uniqueB8ne210105IS7_RPcTnNS_9enable_ifIXsr21__can_extract_map_keyIT_S7_SC_EE5valueEiE4typeELi0EEENSA_INS_15__tree_iteratorIS8_PNS_11__tree_nodeIS8_PvEElEEbEEOSM_OT0_
+      at /usr/include/c++/v1/__tree:960
+      in /home/wang/sources/cxx/book/build/release/book
+    std::__1::pair<> std::__1::map<>::emplace[abi:ne210105]<>(std::__1::basic_string<>&&, char*&)
+      at /usr/include/c++/v1/map:1050
+    (anonymous namespace)::parse_args(int, char**, int)
+      at /home/wang/sources/cxx/book/source/main.cxx:95
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:456
+    __libc_start_call_main
+      at ../sysdeps/nptl/libc_start_call_main.h:58
+      in /lib/x86_64-linux-gnu/libc.so.6
+    __libc_start_main_impl
+      at ../csu/libc-start.c:360
+      in /lib/x86_64-linux-gnu/libc.so.6
+    _start
+      in /home/wang/sources/cxx/book/build/release/book
+
+136B peak memory consumed over 1 calls from
+_ZNSt3__111make_uniqueB8ne210105IN3lob2v24BookINS1_12ChecksumSinkEEEJRS4_ETnNS_9enable_ifIXntsr8is_arrayIT_EE5valueEiE4typeELi0EEENS_10unique_ptrIS8_NS_14default_deleteIS8_EEEEDpOT0_
+  at /usr/include/c++/v1/__memory/unique_ptr.h:759
+  in /home/wang/sources/cxx/book/build/release/book
+std::__1::unique_ptr<> lob::make_book<>(lob::ChecksumSink&, lob::BookConfig const&)
+  at /home/wang/sources/cxx/book/include/lob/book_config.hpp:22
+auto (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0::operator()<>() const
+  at /home/wang/sources/cxx/book/source/main.cxx:290
+auto (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}::operator()<>() const
+  at /home/wang/sources/cxx/book/source/main.cxx:138
+auto lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)::{lambda<>(std::__1::integer_sequence<>)#1}::operator()<>(std::__1::integer_sequence<>) const
+  at /home/wang/sources/cxx/book/include/lob/versions.hpp:29
+void lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)
+  at /home/wang/sources/cxx/book/include/lob/versions.hpp:28
+void (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)
+  at /home/wang/sources/cxx/book/source/main.cxx:135
+(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+  at /home/wang/sources/cxx/book/source/main.cxx:287
+136B consumed over 1 calls from:
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:461
+      in /home/wang/sources/cxx/book/build/release/book
+
+32B peak memory consumed over 4 calls from
+char* std::__1::__libcpp_allocate[abi:ne210105]<>(std::__1::__element_count, unsigned long)
+  at /usr/include/c++/v1/__new/allocate.h:43
+  in /home/wang/sources/cxx/book/build/release/book
+std::__1::allocator<>::allocate[abi:ne210105](unsigned long)
+  at /usr/include/c++/v1/__memory/allocator.h:105
+std::__1::allocator<>::allocate_at_least[abi:ne210105](unsigned long)
+  at /usr/include/c++/v1/__memory/allocator.h:112
+std::__1::allocation_result<> std::__1::allocator_traits<>::allocate_at_least[abi:ne210105]<>(std::__1::allocator<>&, unsigned long)
+  at /usr/include/c++/v1/__memory/allocator_traits.h:280
+auto std::__1::__allocate_at_least[abi:ne210105]<>(std::__1::allocator<>&, unsigned long)
+  at /usr/include/c++/v1/__memory/allocate_at_least.h:26
+std::__1::basic_string<>::__init(char const*, unsigned long)
+  at /usr/include/c++/v1/string:2555
+_ZNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2B8ne210105ILi0EEEPKc
+  at /usr/include/c++/v1/string:1063
+_ZNSt3__14pairIKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES6_EC2B8ne210105IS6_RPcTnNS_9enable_ifIXclsr25__check_pair_constructionIS7_S6_EE23__is_pair_constructibleIT_T0_EEEiE4typeELi0EEEOSD_OSE_
+  at /usr/include/c++/v1/__utility/pair.h:165
+std::__1::pair<>* std::__1::construct_at[abi:ne210105]<>(std::__1::pair<>*, std::__1::basic_string<>&&, char*&)
+  at /usr/include/c++/v1/__memory/construct_at.h:38
+std::__1::pair<>* std::__1::__construct_at[abi:ne210105]<>(std::__1::pair<>*, std::__1::basic_string<>&&, char*&)
+  at /usr/include/c++/v1/__memory/construct_at.h:46
+_ZNSt3__116allocator_traitsINS_9allocatorINS_11__tree_nodeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS1_IcEEEES8_EEPvEEEEE9constructB8ne210105INS_4pairIKS8_S8_EEJS8_RPcETnNS_9enable_ifIXnt17__has_construct_vISC_PT_DpT0_EEiE4typeELi0EEEvRSC_SM_DpOSN_
+  at /usr/include/c++/v1/__memory/allocator_traits.h:302
+std::__1::unique_ptr<> std::__1::__tree<>::__construct_node<>(std::__1::basic_string<>&&, char*&)
+  at /usr/include/c++/v1/__tree:1725
+32B consumed over 1 calls from:
+    std::__1::pair<> std::__1::__tree<>::__emplace_unique_key_args<>(std::__1::basic_string<> const&, std::__1::basic_string<>&&, char*&)
+      at /usr/include/c++/v1/__tree:1692
+      in /home/wang/sources/cxx/book/build/release/book
+    _ZNSt3__16__treeINS_12__value_typeINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEES7_EENS_19__map_value_compareIS7_NS_4pairIKS7_S7_EENS_4lessIvEELb1EEENS5_ISC_EEE16__emplace_uniqueB8ne210105IS7_RPcTnNS_9enable_ifIXsr21__can_extract_map_keyIT_S7_SC_EE5valueEiE4typeELi0EEENSA_INS_15__tree_iteratorIS8_PNS_11__tree_nodeIS8_PvEElEEbEEOSM_OT0_
+      at /usr/include/c++/v1/__tree:960
+      in /home/wang/sources/cxx/book/build/release/book
+    std::__1::pair<> std::__1::map<>::emplace[abi:ne210105]<>(std::__1::basic_string<>&&, char*&)
+      at /usr/include/c++/v1/map:1050
+    (anonymous namespace)::parse_args(int, char**, int)
+      at /home/wang/sources/cxx/book/source/main.cxx:95
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:456
+    __libc_start_call_main
+      at ../sysdeps/nptl/libc_start_call_main.h:58
+      in /lib/x86_64-linux-gnu/libc.so.6
+    __libc_start_main_impl
+      at ../csu/libc-start.c:360
+      in /lib/x86_64-linux-gnu/libc.so.6
+    _start
+      in /home/wang/sources/cxx/book/build/release/book
+
+
+MOST TEMPORARY ALLOCATIONS
+77561 temporary allocations of 148533 allocations in total (52.22%) from
+std::__1::__tree_node<>* std::__1::__libcpp_allocate[abi:ne210105]<>(std::__1::__element_count, unsigned long)
+  at /usr/include/c++/v1/__new/allocate.h:43
+  in /home/wang/sources/cxx/book/build/release/book
+std::__1::allocator<>::allocate[abi:ne210105](unsigned long)
+  at /usr/include/c++/v1/__memory/allocator.h:105
+std::__1::allocator_traits<>::allocate[abi:ne210105](std::__1::allocator<>&, unsigned long)
+  at /usr/include/c++/v1/__memory/allocator_traits.h:259
+std::__1::unique_ptr<> std::__1::__tree<>::__construct_node<>(std::__1::piecewise_construct_t const&, std::__1::tuple<>&&, std::__1::tuple<>&&)
+  at /usr/include/c++/v1/__tree:1724
+std::__1::pair<> std::__1::__tree<>::__emplace_unique_key_args<>(long const&, std::__1::piecewise_construct_t const&, std::__1::tuple<>&&, std::__1::tuple<>&&)
+  at /usr/include/c++/v1/__tree:1692
+std::__1::map<>::operator[](long const&)
+  at /usr/include/c++/v1/map:1398
+void lob::v2::Book<>::rest<>(std::__1::map<>&, unsigned long, lob::Side, long, unsigned int)
+  at /home/wang/sources/cxx/book/include/lob/v2/book.hpp:272
+43429 temporary allocations of 77032 allocations in total (56.38%) from:
+    void lob::apply<>(lob::v2::Book<>&, lob::Op const&)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:23
+      in /home/wang/sources/cxx/book/build/release/book
+    void lob::replay<>(lob::v2::Book<>&, std::__1::span<>)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:38
+    auto (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:294
+    auto (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:138
+    auto lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)::{lambda<>(std::__1::integer_sequence<>)#1}::operator()<>(std::__1::integer_sequence<>) const
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:29
+    void lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:28
+    void (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)
+      at /home/wang/sources/cxx/book/source/main.cxx:135
+    (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:287
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:461
+      in /home/wang/sources/cxx/book/build/release/book
+34132 temporary allocations of 71501 allocations in total (47.74%) from:
+    void lob::apply<>(lob::v2::Book<>&, lob::Op const&)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:23
+      in /home/wang/sources/cxx/book/build/release/book
+    void lob::replay<>(lob::v2::Book<>&, std::__1::span<>)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:38
+    auto (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:294
+    auto (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:138
+    auto lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)::{lambda<>(std::__1::integer_sequence<>)#1}::operator()<>(std::__1::integer_sequence<>) const
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:29
+    void lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:28
+    void (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)
+      at /home/wang/sources/cxx/book/source/main.cxx:135
+    (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:287
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:461
+      in /home/wang/sources/cxx/book/build/release/book
+
+58 temporary allocations of 102 allocations in total (56.86%) from
+std::__1::pair<>* std::__1::__libcpp_allocate[abi:ne210105]<>(std::__1::__element_count, unsigned long)
+  at /usr/include/c++/v1/__new/allocate.h:43
+  in /home/wang/sources/cxx/book/build/release/book
+std::__1::allocator<>::allocate[abi:ne210105](unsigned long)
+  at /usr/include/c++/v1/__memory/allocator.h:105
+boost::allocator_pointer<>::type boost::allocator_allocate<>(std::__1::allocator<>&, boost::allocator_size_type<>::type)
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/core/allocator_access.hpp:375
+boost::allocator_traits<>::allocate(std::__1::allocator<>&, unsigned long)
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/core/allocator_traits.hpp:55
+boost::unordered::detail::foa::table_arrays<>::set_arrays(boost::unordered::detail::foa::table_arrays<>&, std::__1::allocator<>, unsigned long, std::__1::integral_constant<>)
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:1051
+boost::unordered::detail::foa::table_arrays<>::set_arrays(boost::unordered::detail::foa::table_arrays<>&, std::__1::allocator<>, unsigned long, std::__1::integral_constant<>)
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:1077
+boost::unordered::detail::foa::table_arrays<>::set_arrays(boost::unordered::detail::foa::table_arrays<>&, std::__1::allocator<>, unsigned long)
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:1038
+boost::unordered::detail::foa::table_arrays<>::new_(std::__1::allocator<>, unsigned long)
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:1087
+boost::unordered::detail::foa::table_core<>::new_arrays(unsigned long) const
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:2116
+boost::unordered::detail::foa::table_core<>::new_arrays_for_growth() const
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:2131
+boost::unordered::detail::foa::table_locator<> boost::unordered::detail::foa::table_core<>::unchecked_emplace_with_rehash<>(unsigned long, boost::unordered::detail::foa::try_emplace_args_t&&, unsigned long&, lob::v2::Book<>::Loc&&)
+  at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:1984
+35 temporary allocations of 60 allocations in total (58.33%) from:
+    std::__1::pair<> boost::unordered::detail::foa::table<>::emplace_impl<>(boost::unordered::detail::foa::try_emplace_args_t&&, unsigned long&, lob::v2::Book<>::Loc&&)
+      at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/table.hpp:650
+      in /home/wang/sources/cxx/book/build/release/book
+    std::__1::enable_if<>::type boost::unordered::detail::foa::table<>::emplace<>(unsigned long&, lob::v2::Book<>::Loc&&)
+      at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/table.hpp:433
+    std::__1::pair<> boost::unordered::unordered_flat_map<>::emplace<>(unsigned long&, lob::v2::Book<>::Loc&&)
+      at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/unordered_flat_map.hpp:346
+    void lob::v2::Book<>::rest<>(std::__1::map<>&, unsigned long, lob::Side, long, unsigned int)
+      at /home/wang/sources/cxx/book/include/lob/v2/book.hpp:275
+    void lob::apply<>(lob::v2::Book<>&, lob::Op const&)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:23
+      in /home/wang/sources/cxx/book/build/release/book
+    void lob::replay<>(lob::v2::Book<>&, std::__1::span<>)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:38
+    auto (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:294
+    auto (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:138
+    auto lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)::{lambda<>(std::__1::integer_sequence<>)#1}::operator()<>(std::__1::integer_sequence<>) const
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:29
+    void lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:28
+    void (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)
+      at /home/wang/sources/cxx/book/source/main.cxx:135
+    (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:287
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:461
+      in /home/wang/sources/cxx/book/build/release/book
+23 temporary allocations of 42 allocations in total (54.76%) from:
+    std::__1::pair<> boost::unordered::detail::foa::table<>::emplace_impl<>(boost::unordered::detail::foa::try_emplace_args_t&&, unsigned long&, lob::v2::Book<>::Loc&&)
+      at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/table.hpp:650
+      in /home/wang/sources/cxx/book/build/release/book
+    std::__1::enable_if<>::type boost::unordered::detail::foa::table<>::emplace<>(unsigned long&, lob::v2::Book<>::Loc&&)
+      at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/table.hpp:433
+    std::__1::pair<> boost::unordered::unordered_flat_map<>::emplace<>(unsigned long&, lob::v2::Book<>::Loc&&)
+      at /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/unordered_flat_map.hpp:346
+    void lob::v2::Book<>::rest<>(std::__1::map<>&, unsigned long, lob::Side, long, unsigned int)
+      at /home/wang/sources/cxx/book/include/lob/v2/book.hpp:275
+    void lob::apply<>(lob::v2::Book<>&, lob::Op const&)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:23
+      in /home/wang/sources/cxx/book/build/release/book
+    void lob::replay<>(lob::v2::Book<>&, std::__1::span<>)
+      at /home/wang/sources/cxx/book/include/lob/replay.hpp:38
+    auto (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:294
+    auto (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}::operator()<>() const
+      at /home/wang/sources/cxx/book/source/main.cxx:138
+    auto lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)::{lambda<>(std::__1::integer_sequence<>)#1}::operator()<>(std::__1::integer_sequence<>) const
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:29
+    void lob::for_each_type<>((anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<>()#1}&&)
+      at /home/wang/sources/cxx/book/include/lob/versions.hpp:28
+    void (anonymous namespace)::with_version<>(std::__1::basic_string_view<>, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)
+      at /home/wang/sources/cxx/book/source/main.cxx:135
+    (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)
+      at /home/wang/sources/cxx/book/source/main.cxx:287
+    main
+      at /home/wang/sources/cxx/book/source/main.cxx:461
+      in /home/wang/sources/cxx/book/build/release/book
+
+1 temporary allocations of 1 allocations in total (100.00%) from
+0x7d91e3eb738e
+  in /lib/x86_64-linux-gnu/libstdc++.so.6
+1 temporary allocations of 1 allocations in total (100.00%) from:
+    call_init
+      at ./elf/dl-init.c:74
+      in /lib64/ld-linux-x86-64.so.2
+    _dl_init::call_init
+      at ./elf/dl-init.c:120
+      in /lib64/ld-linux-x86-64.so.2
+    _dl_init
+      at ./elf/./elf/dl-init.c:121
+    _dl_start_user
+      in /lib64/ld-linux-x86-64.so.2
+
+
+total runtime: 1.34s.
+calls to allocation functions: 148662 (110776/s)
+temporary memory allocations: 77620 (57839/s)
+peak heap memory consumption: 61.03M
+peak RSS (including heaptrack overhead): 66.50M
+total memory leaked: 4.10K
