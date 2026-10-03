@@ -53,7 +53,7 @@ Workload：`syn_*` 由 `scripts/gen_workloads.sh` 生成（sha256 见 `results/w
 ### 补充：硬件计数器（2026-10-04，环境：vm，VMware 开启虚拟化性能计数器后）
 
 - commit：`79fb520`。结果文件名带 `-dirty`，因为工作区里有一处未提交的改动：`include/lob/types.hpp` 的格式调整和新增的 static_assert，不影响生成的代码。
-- 工具：`book counters`（进程内 perf_event_open，只统计回放区间，5 轮取中位数）、`scripts/perf.sh stat|topdown`（perf `--control` ROI，每组 ≤4 个可编程事件，5 次取均值）。PMU 能力见 `results/env_*_79fb520*`：没有 PEBS，没有 `-M TopdownL1`，没有通用 LLC 事件。
+- 工具：`book counters`（进程内 perf_event_open，只统计回放区间，5 轮取中位数）、`scripts/perf.sh stat|topdown`（perf `--control` ROI，每组 ≤4 个可编程事件，5 次取均值）。PMU 能力见 `results/env_20261004-0109_1a1582b-dirty_vm.txt`：没有 PEBS，没有 `-M TopdownL1`，没有通用 LLC 事件。
 
 | workload | cycles/op (spread) | instr/op | IPC | branch-miss/op | L1d miss/op | dTLB miss/op |
 |---|---:|---:|---:|---:|---:|---:|
