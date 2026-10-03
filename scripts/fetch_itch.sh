@@ -26,13 +26,18 @@ fi
 
 if ((have < size)); then
     lob_log "downloading $url ($((size >> 20)) MiB, resuming from $((have >> 20)) MiB)"
-    # emi.nasdaq.com throttles each connection (~30 KB/s measured from a CN
-    # network); aria2c with 16 connections reached ~650 KB/s. Both resume.
+    # wget and aria2c only read lower-case https_proxy; curl also honours
+    # HTTPS_PROXY. Pass the proxy explicitly so both spellings work.
+    # (Measured from a CN network: direct ~18 KB/s per connection, via proxy
+    # ~2-3 MB/s.) Both tools resume partial downloads.
+    proxy="${https_proxy:-${HTTPS_PROXY:-${all_proxy:-${ALL_PROXY:-}}}}"
+    [[ -n "$proxy" ]] && lob_log "using proxy $proxy"
     if command -v aria2c >/dev/null; then
         aria2c --no-conf -c --file-allocation=none -x 16 -s 16 -k 1M \
+            ${proxy:+--all-proxy="$proxy"} \
             --summary-interval=60 --console-log-level=warn -o "$file" "$url"
     else
-        wget -c -q --show-progress -O "$file" "$url"
+        https_proxy="$proxy" wget -c -q --show-progress -O "$file" "$url"
     fi
 fi
 
