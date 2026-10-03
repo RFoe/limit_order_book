@@ -44,8 +44,10 @@ record)
     # irq-restore points. No PEBS in this VM, so cycles samples have skid.
     if ((pmu)); then event=cycles; else event=cpu-clock; fi
     event="${LOB_PERF_EVENT:-$event:u}"
-    lob_log "sampling event: $event (repeat=$repeat)"
-    "$PERF" record "${roi[@]}" -e "$event" -F "${LOB_PERF_FREQ:-4999}" --call-graph dwarf \
+    lob_log "sampling event: $event (repeat=$repeat, ${LOB_PERF_PERIOD:+period=$LOB_PERF_PERIOD}${LOB_PERF_PERIOD:-freq=${LOB_PERF_FREQ:-4999}})"
+    # rare events (e.g. mem_load_retired.l3_miss) need a fixed period: LOB_PERF_PERIOD=N -> -c N
+    if [[ -n "${LOB_PERF_PERIOD:-}" ]]; then rate=(-c "$LOB_PERF_PERIOD"); else rate=(-F "${LOB_PERF_FREQ:-4999}"); fi
+    "$PERF" record "${roi[@]}" -e "$event" "${rate[@]}" --call-graph dwarf \
         -o "$base.perf.data" -- "${cmd[@]}" --repeat "$repeat" >/dev/null
     {
         echo "# event=$event workload=$stem version=$version repeat=$repeat (replay region only)"
