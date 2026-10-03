@@ -66,10 +66,9 @@ file (GLOB_RECURSE __SOURCES__ CONFIGURE_DEPENDS
 set (__LIB_SOURCES__ ${__SOURCES__})
 list (FILTER __LIB_SOURCES__ EXCLUDE REGEX ".*/main\\.cxx$")
 
-# header-only until the first library source lands in source/
-add_library (lob_core INTERFACE)
-target_include_directories (lob_core INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
-target_link_libraries (lob_core INTERFACE lob_options)
+add_library (lob_core STATIC ${__LIB_SOURCES__})
+target_include_directories (lob_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_link_libraries (lob_core PUBLIC lob_options)
 
 # ---- CLI: gen / info / itch2ops / validate / replay / latency --------------
 add_executable (${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/source/main.cxx)
