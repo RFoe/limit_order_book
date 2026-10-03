@@ -8,6 +8,7 @@
 // --benchmark_enable_random_interleaving=true so repetitions of different
 // versions alternate and share the same noise (scripts/bench.sh does this).
 
+#include <lob/book_config.hpp>
 #include <lob/events.hpp>
 #include <lob/replay.hpp>
 #include <lob/versions.hpp>
@@ -31,11 +32,11 @@ namespace {
 using namespace lob;
 
 template <class Book>
-void bm_replay(benchmark::State& state, std::span<const Op> ops) {
+void bm_replay(benchmark::State& state, std::span<const Op> ops, const BookConfig& cfg) {
   for (auto _ : state) {
     state.PauseTiming();
     ChecksumSink sink;
-    auto book = std::make_unique<Book>(sink);
+    auto book = make_book<Book>(sink, cfg);
     state.ResumeTiming();
 
     replay(*book, ops);
@@ -89,9 +90,10 @@ auto main(int argc, char** argv) -> int {
     }
     const std::string stem = std::filesystem::path(path).stem().string();
     const auto& stored = workloads.emplace_back(std::move(*w));
+    const BookConfig cfg{.tick = infer_tick(stored.ops)};
     for_each_type<Versions::with_sink<ChecksumSink>>([&]<class B>() {
       benchmark::RegisterBenchmark(std::format("replay/{}/{}", stem, B::name),
-                                   [&stored](benchmark::State& st) { bm_replay<B>(st, stored.ops); })
+                                   [&stored, cfg](benchmark::State& st) { bm_replay<B>(st, stored.ops, cfg); })
           ->Unit(benchmark::kMillisecond);
     });
   }

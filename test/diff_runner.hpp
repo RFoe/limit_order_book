@@ -5,6 +5,7 @@
 // stream to a short reproduction.
 
 #include <lob/book_concept.hpp>
+#include <lob/book_config.hpp>
 #include <lob/events.hpp>
 #include <lob/replay.hpp>
 #include <lob/types.hpp>
@@ -39,11 +40,13 @@ inline auto format_levels(const std::vector<LevelSnapshot>& levels) -> std::stri
 
 // Ref and Cand are book types instantiated with RecordingSink.
 template <class Ref, class Cand>
-auto run_diff(std::span<const Op> ops) -> std::optional<DiffFailure> {
+auto run_diff(std::span<const Op> ops, const BookConfig& cfg = {}) -> std::optional<DiffFailure> {
   RecordingSink ref_sink;
   RecordingSink cand_sink;
-  Ref ref(ref_sink);
-  Cand cand(cand_sink);
+  const auto ref_book = make_book<Ref>(ref_sink, cfg);
+  const auto cand_book = make_book<Cand>(cand_sink, cfg);
+  Ref& ref = *ref_book;
+  Cand& cand = *cand_book;
   for (std::size_t i = 0; i < ops.size(); ++i) {
     try {
       apply(ref, ops[i]);
@@ -78,8 +81,8 @@ auto run_diff(std::span<const Op> ops) -> std::optional<DiffFailure> {
 // Deleting ops can turn later ops into rejects; that is fine, both books must
 // still agree on them.
 template <class Ref, class Cand>
-auto shrink(std::vector<Op> ops, std::size_t max_runs = 2'000) -> std::vector<Op> {
-  auto first = run_diff<Ref, Cand>(ops);
+auto shrink(std::vector<Op> ops, const BookConfig& cfg = {}, std::size_t max_runs = 2'000) -> std::vector<Op> {
+  auto first = run_diff<Ref, Cand>(ops, cfg);
   if (!first) return ops;
   auto truncate = [&](std::size_t idx) {
     if (idx < ops.size()) ops.resize(idx + 1);
@@ -94,7 +97,7 @@ auto shrink(std::vector<Op> ops, std::size_t max_runs = 2'000) -> std::vector<Op
       candidate.insert(candidate.end(), ops.begin() + static_cast<std::ptrdiff_t>(std::min(i + chunk, ops.size())),
                        ops.end());
       ++runs;
-      if (auto f = run_diff<Ref, Cand>(candidate)) {
+      if (auto f = run_diff<Ref, Cand>(candidate, cfg)) {
         ops = std::move(candidate);
         truncate(f->op_index);
       } else {

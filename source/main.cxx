@@ -16,6 +16,7 @@
 // `counters` reads hardware counters in-process (perf_event_open) around each
 // replay, versions interleaved round by round, and reports per-op medians.
 
+#include <lob/book_config.hpp>
 #include <lob/events.hpp>
 #include <lob/harness/latency.hpp>
 #include <lob/harness/perf_counters.hpp>
@@ -216,6 +217,7 @@ auto cmd_info(const Args& a) -> int {
     std::println("{}: source={} n_ops={} seed={} checksum={:016x}\n  {}", path, to_string(w.header.source),
                  w.header.n_ops, w.header.seed, w.header.checksum, w.description());
     print_op_mix(w.ops);
+    std::println("  inferred tick: {}", infer_tick(w.ops));
   }
   return 0;
 }
@@ -280,11 +282,12 @@ auto cmd_replay(const Args& a) -> int {
   const auto w = load_or_die(a.str("workload"));
   const std::string version = a.str("version", "v0");
   const auto repeat = a.num<int>("repeat", 1);
+  const BookConfig cfg{.tick = infer_tick(w.ops)};
   harness::PerfControl perf;  // no-op unless run under scripts/perf.sh
   with_version(version, [&]<class B>() {
     for (int r = 0; r < repeat; ++r) {
       ChecksumSink sink;
-      auto book = std::make_unique<B>(sink);
+      auto book = make_book<B>(sink, cfg);
       const auto t0 = std::chrono::steady_clock::now();
       perf.enable();
       LOB_CG_START;
@@ -293,9 +296,10 @@ auto cmd_replay(const Args& a) -> int {
       perf.disable();
       const auto t1 = std::chrono::steady_clock::now();
       harness::do_not_optimize(sink.value);
-      std::println("{} run={} ops={} events={} trades={} checksum={:016x} orders_left={} wall_ms={:.1f}", B::name, r,
-                   w.ops.size(), sink.events, sink.trades, sink.value, book->order_count(),
+      std::println("{} run={} ops={} events={} trades={} checksum={:016x} orders_left={} tick={} wall_ms={:.1f}", B::name,
+                   r, w.ops.size(), sink.events, sink.trades, sink.value, book->order_count(), cfg.tick,
                    std::chrono::duration<double, std::milli>(t1 - t0).count());
+      if constexpr (requires { book->memory_info(); }) std::println("  {}", book->memory_info());
     }
   });
   return 0;
@@ -303,6 +307,7 @@ auto cmd_replay(const Args& a) -> int {
 
 auto cmd_latency(const Args& a) -> int {
   const auto w = load_or_die(a.str("workload"));
+  const BookConfig cfg{.tick = infer_tick(w.ops)};
   const std::string vs = a.str("versions", "all");
   const auto versions = vs == "all" ? version_names() : split(vs, ',');
   const auto rounds = a.num<int>("rounds", 5);
@@ -320,7 +325,7 @@ auto cmd_latency(const Args& a) -> int {
     for (std::size_t k = 0; k < versions.size(); ++k) {
       const std::size_t v = (k + static_cast<std::size_t>(r)) % versions.size();
       harness::Samples s;
-      with_version(versions[v], [&]<class B>() { harness::measure_once<B>(w.ops, s); });
+      with_version(versions[v], [&]<class B>() { harness::measure_once<B>(w.ops, cfg, s); });
       if (r == 0) continue;
       for (std::size_t c = 0; c < harness::kOpClasses; ++c)
         samples[v].by_class[c].insert(samples[v].by_class[c].end(), s.by_class[c].begin(), s.by_class[c].end());
@@ -357,6 +362,7 @@ auto cmd_latency(const Args& a) -> int {
 // Hardware counters per op, versions interleaved (same process, same data).
 auto cmd_counters(const Args& a) -> int {
   const auto w = load_or_die(a.str("workload"));
+  const BookConfig cfg{.tick = infer_tick(w.ops)};
   const std::string vs = a.str("versions", "all");
   const auto versions = vs == "all" ? version_names() : split(vs, ',');
   const auto rounds = a.num<int>("rounds", 5);
@@ -377,7 +383,7 @@ auto cmd_counters(const Args& a) -> int {
       harness::PerfGroup::Reading reading;
       with_version(versions[v], [&]<class B>() {
         ChecksumSink sink;
-        auto book = std::make_unique<B>(sink);
+        auto book = make_book<B>(sink, cfg);
         group.start();
         replay(*book, std::span<const Op>(w.ops));
         group.stop();

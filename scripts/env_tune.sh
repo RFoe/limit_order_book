@@ -13,6 +13,8 @@ knobs() { # path <TAB> value
     printf '%s\t%s\n' /proc/sys/kernel/perf_event_paranoid -1
     printf '%s\t%s\n' /proc/sys/kernel/kptr_restrict 0
     printf '%s\t%s\n' /proc/sys/kernel/nmi_watchdog 0
+    # 2 MiB huge pages for books that map their index with MAP_HUGETLB (v3+)
+    printf '%s\t%s\n' /proc/sys/vm/nr_hugepages "${LOB_HUGEPAGES:-16}"
     printf '%s\t%s\n' /sys/devices/system/cpu/intel_pstate/no_turbo 1
     printf '%s\t%s\n' /sys/devices/system/cpu/cpufreq/boost 0
     for g in /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor; do
@@ -28,13 +30,9 @@ case "${1:-}" in
 apply)
     ((${#SUDO[@]} == 0)) || sudo -v || { lob_log "sudo failed; nothing changed"; exit 1; }
     mkdir -p "$state_dir"
-    # keep the *original* values if apply runs twice, so restore still works
-    save=1
-    if [[ -s "$state" ]]; then
-        lob_log "already applied once; keeping original values in $state"
-        save=0
-    fi
-    ((save)) && : >"$state"
+    touch "$state"
+    # record the *original* value of each knob once: re-running apply (or adding
+    # knobs later) never overwrites what restore will put back
     failed=0
     while IFS=$'\t' read -r path value; do
         if [[ ! -e "$path" ]]; then
@@ -43,14 +41,14 @@ apply)
         fi
         old="$(cat "$path")"
         if write "$path" "$value"; then
-            ((save)) && printf '%s\t%s\n' "$path" "$old" >>"$state"
+            grep -q "^$path"$'\t' "$state" || printf '%s\t%s\n' "$path" "$old" >>"$state"
             lob_log "set $path = $value (was $old)"
         else
             lob_log "FAILED to set $path"
             failed=1
         fi
     done < <(knobs)
-    ((save)) && lob_log "previous values saved to $state"
+    lob_log "original values kept in $state"
     cat <<EOF
 
 Boot-time knobs (not changed by this script; edit GRUB_CMDLINE_LINUX in

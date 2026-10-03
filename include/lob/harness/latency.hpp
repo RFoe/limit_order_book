@@ -4,6 +4,7 @@
 // bucketed by op class afterwards. Numbers are raw cycles including the timer
 // overhead (reported separately). In a VM treat them as relative only.
 
+#include <lob/book_config.hpp>
 #include <lob/events.hpp>
 #include <lob/harness/tsc.hpp>
 #include <lob/replay.hpp>
@@ -38,11 +39,11 @@ auto percentiles(std::vector<std::uint32_t> v) -> Percentiles;
 
 // One timed pass of `ops` through a fresh Book; appends to `out`.
 template <class Book>
-void measure_once(std::span<const Op> ops, Samples& out) {
+void measure_once(std::span<const Op> ops, const BookConfig& cfg, Samples& out) {
   std::vector<std::uint32_t> cycles(ops.size());
   std::vector<std::uint8_t> cls(ops.size());
   ChecksumSink sink;
-  auto book = std::make_unique<Book>(sink);
+  auto book = make_book<Book>(sink, cfg);
   for (std::size_t i = 0; i < ops.size(); ++i) {
     const std::uint64_t trades_before = sink.trades;
     const std::uint64_t t0 = tsc_begin();
