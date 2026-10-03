@@ -1,0 +1,20 @@
+# workload=data/syn_deep_s42.ops rounds=7 min_running_ratio=1.000
+version,event,per_op_median,spread
+v0,cycles,327.2792,0.1174
+v0,instructions,467.7517,0.0031
+v0,branches,93.3184,0.0028
+v0,branch-misses,2.1700,0.0094
+v0,L1d-load-misses,6.0541,0.1016
+v0,dTLB-load-misses,0.1152,1.1708
+v1,cycles,175.3300,0.0749
+v1,instructions,293.4116,0.0068
+v1,branches,45.1947,0.0083
+v1,branch-misses,1.7637,0.0038
+v1,L1d-load-misses,5.9236,0.1476
+v1,dTLB-load-misses,0.0257,1.9786
+v2,cycles,140.5199,0.0685
+v2,instructions,224.9896,0.0027
+v2,branches,28.9169,0.0042
+v2,branch-misses,1.6756,0.0080
+v2,L1d-load-misses,5.3603,0.1028
+v2,dTLB-load-misses,0.0174,1.0334

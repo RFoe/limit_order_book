@@ -1,0 +1,34 @@
+# cachegrind 20261004-0401_9f38b37_vm workload=itch12302019_SPY cache: --I1=32768,8,64 --D1=49152,12,64 --LL=6291456,12,64
+v0 run=0 ops=2249458 events=2249458 trades=0 checksum=b26702485beda571 orders_left=0 wall_ms=25596.4
+## v0
+I refs:        1,137,663,040
+I1  miss rate:          0.00%
+LLi miss rate:          0.00%
+D refs:          449,970,113  (287,955,961 rd   + 162,014,152 wr)
+D1  miss rate:           0.9% (        1.3%     +         0.2%  )
+LLd miss rate:           0.2% (        0.3%     +         0.0%  )
+LL refs:           4,172,878  (  3,883,469 rd   +     289,409 wr)
+LL misses:           851,481  (    846,122 rd   +       5,359 wr)
+LL miss rate:            0.1% (        0.1%     +         0.0%  )
+v1 run=0 ops=2249458 events=2249458 trades=0 checksum=b26702485beda571 orders_left=0 wall_ms=17111.6
+## v1
+I refs:        737,363,364
+I1  miss rate:        0.00%
+LLi miss rate:        0.00%
+D refs:        306,242,805  (206,951,353 rd   + 99,291,452 wr)
+D1  miss rate:         0.8% (        0.7%     +        0.9%  )
+LLd miss rate:         0.3% (        0.4%     +        0.0%  )
+LL refs:         2,336,649  (  1,457,931 rd   +    878,718 wr)
+LL misses:         858,926  (    846,231 rd   +     12,695 wr)
+LL miss rate:          0.1% (        0.1%     +        0.0%  )
+v2 run=0 ops=2249458 events=2249458 trades=0 checksum=b26702485beda571 orders_left=0 wall_ms=13077.2
+## v2
+I refs:        595,335,347
+I1  miss rate:        0.00%
+LLi miss rate:        0.00%
+D refs:        247,151,840  (171,002,781 rd   + 76,149,059 wr)
+D1  miss rate:         0.8% (        0.7%     +        0.9%  )
+LLd miss rate:         0.3% (        0.5%     +        0.0%  )
+LL refs:         1,947,710  (  1,247,346 rd   +    700,364 wr)
+LL misses:         856,656  (    845,666 rd   +     10,990 wr)
+LL miss rate:          0.1% (        0.1%     +        0.0%  )

@@ -1,0 +1,2000 @@
+ Percent |	Source code & Disassembly of book for mem_load_retired.l3_miss:u (925 samples, percent: local period)
+---------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3    Disassembly of section .text:
+         :
+         : 5    0000000000006780 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)>:
+         : 6    for (std::size_t i = 0; i < top && adds[locates[i]] > 0; ++i)
+         : 7    std::println("  {:<8} adds={}", conv.symbol_of_locate(locates[i]), adds[locates[i]]);
+         : 8    return 0;
+         : 9    }
+         :
+         : 11   auto cmd_replay(const Args& a) -> int {
+    0.00 :   6780:   push   %rbp
+    0.00 :   6781:   push   %r15
+    0.00 :   6783:   push   %r14
+    0.00 :   6785:   push   %r13
+    0.00 :   6787:   push   %r12
+    0.00 :   6789:   push   %rbx
+    0.00 :   678a:   sub    $0x368,%rsp
+    0.00 :   6791:   mov    %rdi,%r14
+         : 20   _LIBCPP_TEMPLATE_DATA_VIS static const size_type npos = -1;
+         :
+         : 22   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 basic_string()
+         : 23   _NOEXCEPT_(is_nothrow_default_constructible<allocator_type>::value)
+         : 24   #  if _LIBCPP_STD_VER >= 20 // TODO(LLVM 23): Remove this condition; this is a workaround for https://llvm.org/PR154567
+         : 25   : __rep_(__short())
+    0.00 :   6794:   vxorpd %xmm0,%xmm0,%xmm0
+    0.00 :   6798:   vmovapd %xmm0,0x230(%rsp)
+    0.00 :   67a1:   movq   $0x0,0x240(%rsp)
+         : 29   const auto w = load_or_die(a.str("workload"));
+    0.00 :   67ad:   lea    0x2cd12(%rip),%rdx        # 334c6 <_IO_stdin_used+0x14c6>
+    0.00 :   67b4:   lea    0xc0(%rsp),%rdi
+    0.00 :   67bc:   lea    0x230(%rsp),%r8
+    0.00 :   67c4:   mov    $0x8,%ecx
+    0.00 :   67c9:   mov    %r14,%rsi
+    0.00 :   67cc:   call   dfc0 <(anonymous namespace)::Args::str(std::__1::basic_string_view<char, std::__1::char_traits<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const>
+    0.00 :   67d1:   lea    0x250(%rsp),%rdi
+    0.00 :   67d9:   lea    0xc0(%rsp),%rsi
+    0.00 :   67e1:   call   e100 <(anonymous namespace)::load_or_die(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)>
+         : 39   }
+         : 40   #  endif // _LIBCPP_CXX03_LANG
+         :
+         : 42   inline _LIBCPP_CONSTEXPR_SINCE_CXX20 ~basic_string() {
+         : 43   __annotate_delete();
+         : 44   if (__is_long())
+    0.00 :   67e6:   testb  $0x1,0xc0(%rsp)
+    0.00 :   67ee:   je     6809 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x89>
+         : 47   __rep_.__l.__is_long_ = true;
+         : 48   }
+         :
+         : 50   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 size_type __get_long_cap() const _NOEXCEPT {
+         : 51   _LIBCPP_ASSERT_INTERNAL(__rep_.__l.__is_long_, "String has to be long when trying to get the long capacity");
+         : 52   return __rep_.__l.__cap_ * __endian_factor;
+    0.00 :   67f0:   mov    0xc0(%rsp),%rsi
+         : 54   __rep_.__l.__data_ = __p;
+         : 55   }
+         :
+         : 57   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 pointer __get_long_pointer() _NOEXCEPT {
+         : 58   _LIBCPP_ASSERT_INTERNAL(__rep_.__l.__is_long_, "String has to be long when trying to get the long pointer");
+         : 59   return _LIBCPP_ASAN_VOLATILE_WRAPPER(__rep_.__l.__data_);
+    0.00 :   67f8:   mov    0xd0(%rsp),%rdi
+         : 61   return __rep_.__l.__cap_ * __endian_factor;
+    0.00 :   6800:   and    $0xfffffffffffffffe,%rsi
+         : 63   #if _LIBCPP_HAS_ALIGNED_ALLOCATION
+         : 64   if (__is_overaligned_for_new(__align))
+         : 65   return __builtin_operator_delete(
+         : 66   __ptr _LIBCPP_ONLY_IF_SIZED_DEALLOCATION(, __size), static_cast<align_val_t>(__align));
+         : 67   #endif
+         : 68   return __builtin_operator_delete(__ptr _LIBCPP_ONLY_IF_SIZED_DEALLOCATION(, __size));
+    0.00 :   6804:   call   3530 <operator delete(void*, unsigned long)@plt>
+         : 70   __rep_.__s.__is_long_ = false;
+    0.00 :   6809:   movb   $0x4,0x218(%rsp)
+         : 72   for (size_t __i = 0; __i != __count; ++__i)
+         : 73   std::__assign_trivially_copyable(__dest[__i], __src[__i]);
+         : 74   }
+         : 75   }
+         : 76   } else if (__count > 0) {
+         : 77   ::__builtin_memmove(__dest, __src, (__count - 1) * sizeof(_Tp) + __datasizeof_v<_Tp>);
+    0.00 :   6811:   movw   $0x3076,0x219(%rsp)
+         : 79   using comparison_category = strong_ordering;
+         : 80   #endif
+         :
+         : 82   static inline _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX17 void
+         : 83   assign(char_type& __c1, const char_type& __c2) _NOEXCEPT {
+         : 84   __c1 = __c2;
+    0.00 :   681b:   movb   $0x0,0x21b(%rsp)
+         : 86   const std::string version = a.str("version", "v0");
+    0.00 :   6823:   lea    0x2cca5(%rip),%rdx        # 334cf <_IO_stdin_used+0x14cf>
+    0.00 :   682a:   lea    0x90(%rsp),%rdi
+    0.00 :   6832:   lea    0x218(%rsp),%r8
+    0.00 :   683a:   mov    $0x7,%ecx
+    0.00 :   683f:   mov    %r14,%rsi
+    0.00 :   6842:   call   dfc0 <(anonymous namespace)::Args::str(std::__1::basic_string_view<char, std::__1::char_traits<char> >, std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> >) const>
+         : 93   const auto repeat = a.num<int>("repeat", 1);
+    0.00 :   6847:   lea    0x2cc8c(%rip),%rsi        # 334da <_IO_stdin_used+0x14da>
+    0.00 :   684e:   mov    $0x6,%edx
+    0.00 :   6853:   mov    %r14,%rdi
+    0.00 :   6856:   mov    $0x1,%ecx
+    0.00 :   685b:   call   11480 <int (anonymous namespace)::Args::num<int>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, int) const>
+    0.00 :   6860:   mov    %eax,0x1c(%rsp)
+    0.00 :   6864:   lea    0x78(%rsp),%rdi
+         : 101  harness::PerfControl perf;  // no-op unless run under scripts/perf.sh
+    0.00 :   6869:   call   281b0 <lob::harness::PerfControl::PerfControl()>
+         : 103  return __rep_.__s.__is_long_;
+    0.00 :   686e:   movzbl 0x90(%rsp),%ecx
+    0.00 :   6876:   mov    %ecx,%eax
+         :
+         : 107  _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 pointer __get_pointer() _NOEXCEPT {
+         : 108  return __is_long() ? __get_long_pointer() : __get_short_pointer();
+         : 109  }
+         : 110  _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 const_pointer __get_pointer() const _NOEXCEPT {
+         : 111  return __is_long() ? __get_long_pointer() : __get_short_pointer();
+    0.00 :   6878:   lea    0x91(%rsp),%rdx
+         : 113  return __is_long() ? __get_long_size() : __get_short_size();
+    0.00 :   6880:   shr    $1,%ecx
+         : 115  return __is_long() ? __get_long_pointer() : __get_short_pointer();
+    0.00 :   6882:   test   $0x1,%al
+    0.00 :   6884:   cmovne 0xa0(%rsp),%rdx
+         : 118  return __is_long() ? __get_long_size() : __get_short_size();
+    0.00 :   688d:   cmovne 0x98(%rsp),%rcx
+    0.00 :   6896:   mov    %rcx,0x1f8(%rsp)
+         : 121  // This applies to the other sufficient overloads below for the other comparison operators.
+         : 122  template <class _CharT, class _Traits, int = 1>
+         : 123  _LIBCPP_CONSTEXPR_SINCE_CXX14 _LIBCPP_HIDE_FROM_ABI bool
+         : 124  operator==(basic_string_view<_CharT, _Traits> __lhs,
+         : 125  __type_identity_t<basic_string_view<_CharT, _Traits> > __rhs) _NOEXCEPT {
+         : 126  if (__lhs.size() != __rhs.size())
+    0.00 :   689e:   cmp    $0x2,%rcx
+    0.00 :   68a2:   jne    6d07 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x587>
+    0.00 :   68a8:   mov    %rdx,0x1f0(%rsp)
+         : 130  ++__rhs;
+         : 131  }
+         : 132  return 0;
+         : 133  #endif // _LIBCPP_COMPILER_CLANG_BASED
+         : 134  } else {
+         : 135  return __builtin_memcmp(__lhs, __rhs, __count);
+    0.00 :   68b0:   movzwl (%rdx),%ecx
+    0.00 :   68b3:   xor    %eax,%eax
+    0.00 :   68b5:   cmp    $0x3076,%ecx
+    0.00 :   68bb:   sete   0x38(%rsp)
+    0.00 :   68c0:   setne  %cl
+    0.00 :   68c3:   cmpl   $0x0,0x1c(%rsp)
+         : 142  if (B::name == name) {
+    0.00 :   68c8:   jle    6cde <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x55e>
+    0.00 :   68ce:   mov    %cl,%al
+    0.00 :   68d0:   test   %eax,%eax
+    0.00 :   68d2:   jne    6cde <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x55e>
+    0.00 :   68d8:   xor    %ebx,%ebx
+    0.00 :   68da:   vxorpd %xmm0,%xmm0,%xmm0
+    0.00 :   68de:   lea    0x78(%rsp),%r13
+    0.00 :   68e3:   jmp    692d <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1ad>
+    0.00 :   68e5:   data16 cs nopw 0x0(%rax,%rax,1)
+    0.00 :   68f0:   lea    0x8(%rbp),%r14
+    0.00 :   68f4:   mov    %rbp,%rdi
+    0.00 :   68f7:   add    $0x20,%rdi
+         : 155  _LIBCPP_HIDE_FROM_ABI value_compare& value_comp() _NOEXCEPT { return __value_comp_; }
+         : 156  _LIBCPP_HIDE_FROM_ABI const value_compare& value_comp() const _NOEXCEPT { return __value_comp_; }
+         :
+         : 158  public:
+         : 159  _LIBCPP_HIDE_FROM_ABI __node_pointer __root() const _NOEXCEPT {
+         : 160  return static_cast<__node_pointer>(__end_node()->__left_);
+    0.00 :   68fb:   mov    0x28(%rbp),%rsi
+         : 162  }
+         :
+         : 164  template <class _Tp, class _Compare, class _Allocator>
+         : 165  __tree<_Tp, _Compare, _Allocator>::~__tree() {
+         : 166  static_assert(is_copy_constructible<value_compare>::value, "Comparator must be copy-constructible.");
+         : 167  destroy(__root());
+    0.00 :   68ff:   call   21620 <std::__1::__tree<std::__1::__value_type<long, lob::v0::Book<lob::ChecksumSink>::Level>, std::__1::__map_value_compare<long, std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level>, std::__1::less<void>, true>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >::destroy(std::__1::__tree_node<std::__1::__value_type<long, lob::v0::Book<lob::ChecksumSink>::Level>, void*>*)>
+         : 169  return static_cast<__node_pointer>(__end_node()->__left_);
+    0.00 :   6904:   mov    0x10(%rbp),%rsi
+         : 171  destroy(__root());
+    0.00 :   6908:   mov    %r14,%rdi
+    0.00 :   690b:   call   216b0 <std::__1::__tree<std::__1::__value_type<long, lob::v0::Book<lob::ChecksumSink>::Level>, std::__1::__map_value_compare<long, std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level>, std::__1::greater<void>, true>, std::__1::allocator<std::__1::pair<long const, lob::v0::Book<lob::ChecksumSink>::Level> > >::destroy(std::__1::__tree_node<std::__1::__value_type<long, lob::v0::Book<lob::ChecksumSink>::Level>, void*>*)>
+         : 174  _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX23 default_delete(const default_delete<_Up>&) _NOEXCEPT {}
+         :
+         : 176  _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX23 void operator()(_Tp* __ptr) const _NOEXCEPT {
+         : 177  static_assert(sizeof(_Tp) >= 0, "cannot delete an incomplete type");
+         : 178  static_assert(!is_void<_Tp>::value, "cannot delete an incomplete type");
+         : 179  delete __ptr;
+    0.00 :   6910:   mov    $0x60,%esi
+    0.00 :   6915:   mov    %rbp,%rdi
+    0.00 :   6918:   call   3530 <operator delete(void*, unsigned long)@plt>
+         : 183  with_version(version, [&]<class B>() {
+         : 184  for (int r = 0; r < repeat; ++r) {
+    0.00 :   691d:   inc    %ebx
+    0.00 :   691f:   cmp    0x1c(%rsp),%ebx
+    0.00 :   6923:   vxorpd %xmm0,%xmm0,%xmm0
+    0.00 :   6927:   je     6cde <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x55e>
+         : 189  }
+         : 190  };
+         :
+         : 192  struct ChecksumSink {
+         : 193  std::uint64_t value = 0;
+         : 194  std::uint64_t events = 0;
+    0.00 :   692d:   vmovapd %xmm0,0x20(%rsp)
+    0.00 :   6933:   movq   $0x0,0x30(%rsp)
+         :
+         : 198  #if _LIBCPP_STD_VER >= 14
+         :
+         : 200  template <class _Tp, class... _Args, enable_if_t<!is_array<_Tp>::value, int> = 0>
+         : 201  inline _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX23 unique_ptr<_Tp> make_unique(_Args&&... __args) {
+         : 202  return unique_ptr<_Tp>(new _Tp(std::forward<_Args>(__args)...));
+    0.00 :   693c:   mov    $0x60,%edi
+    0.00 :   6941:   call   30f0 <operator new(unsigned long)@plt>
+    0.00 :   6946:   mov    %rax,%rbp
+         : 206  Side side;
+         : 207  Price price;
+         : 208  Qty qty;
+         : 209  };
+         :
+         : 211  explicit Book(Sink& sink) : sink_(sink) {}
+    0.00 :   6949:   lea    0x20(%rsp),%rax
+    0.00 :   694e:   mov    %rax,0x0(%rbp)
+         : 214  __tree<_Tp, _Compare, _Allocator>::__tree(const value_compare& __comp) _NOEXCEPT_(
+    0.00 :   6952:   lea    0x10(%rbp),%rax
+    0.00 :   6956:   vxorpd %xmm0,%xmm0,%xmm0
+         : 217  : __size_(0), __value_comp_(__comp) {
+    0.00 :   695a:   vmovupd %xmm0,0x10(%rbp)
+         : 219  __begin_node() = __end_node();
+    0.00 :   695f:   mov    %rax,0x8(%rbp)
+         : 221  : __size_(0), __value_comp_(__comp) {
+    0.00 :   6963:   vmovupd %xmm0,0x28(%rbp)
+         : 223  __tree<_Tp, _Compare, _Allocator>::__tree(const value_compare& __comp) _NOEXCEPT_(
+    0.00 :   6968:   lea    0x28(%rbp),%rax
+         : 225  __begin_node() = __end_node();
+    0.00 :   696c:   mov    %rax,0x20(%rbp)
+         : 227  return static_cast<__node_pointer>(pointer_traits<__node_base_pointer>::pointer_to(*this));
+         : 228  }
+         :
+         : 230  _LIBCPP_HIDE_FROM_ABI size_t __hash() const _NOEXCEPT { return static_cast<__node_type const&>(*this).__hash_; }
+         :
+         : 232  _LIBCPP_HIDE_FROM_ABI __hash_node_base() _NOEXCEPT : __next_(nullptr) {}
+    0.00 :   6970:   vxorpd %xmm0,%xmm0,%xmm0
+    0.00 :   6974:   vmovupd %ymm0,0x38(%rbp)
+         : 235  template <class _Tp, class _Hash, class _Equal, class _Alloc>
+         : 236  inline __hash_table<_Tp, _Hash, _Equal, _Alloc>::__hash_table() _NOEXCEPT_(
+         : 237  is_nothrow_default_constructible<__bucket_list>::value&& is_nothrow_default_constructible<__first_node>::value&&
+         : 238  is_nothrow_default_constructible<__node_allocator>::value&& is_nothrow_default_constructible<hasher>::value&&
+         : 239  is_nothrow_default_constructible<key_equal>::value)
+         : 240  : __size_(0), __max_load_factor_(1.0f) {}
+    0.00 :   6979:   movl   $0x3f800000,0x58(%rbp)
+         : 242  : __ptr_(__p),
+    0.00 :   6980:   mov    %rbp,0xa8(%rsp)
+         : 244  ChecksumSink sink;
+         : 245  auto book = std::make_unique<B>(sink);
+         : 246  const auto t0 = std::chrono::steady_clock::now();
+    0.00 :   6988:   vzeroupper
+    0.00 :   698b:   call   3390 <std::__1::chrono::steady_clock::now()@plt>
+    0.00 :   6990:   mov    %rax,0x68(%rsp)
+         : 250  };
+         :
+         : 252  class PerfControl {
+         : 253  public:
+         : 254  PerfControl();
+         : 255  void               enable() noexcept { send("enable\n"); }
+    0.00 :   6995:   mov    $0x7,%edx
+    0.00 :   699a:   mov    %r13,%r14
+    0.00 :   699d:   mov    %r13,%rdi
+    0.00 :   69a0:   lea    0x2cba3(%rip),%rsi        # 3354a <_IO_stdin_used+0x154a>
+    0.00 :   69a7:   call   28260 <lob::harness::PerfControl::send(std::__1::basic_string_view<char, std::__1::char_traits<char> >)>
+         : 261  perf.enable();
+         : 262  LOB_CG_START;
+    0.00 :   69ac:   movq   $0x43470000,0xc0(%rsp)
+    0.00 :   69b8:   movq   $0x0,0xc8(%rsp)
+    0.00 :   69c4:   movq   $0x0,0xd0(%rsp)
+    0.00 :   69d0:   movq   $0x0,0xd8(%rsp)
+    0.00 :   69dc:   movq   $0x0,0xe0(%rsp)
+    0.00 :   69e8:   movq   $0x0,0xe8(%rsp)
+    0.00 :   69f4:   lea    0xc0(%rsp),%rax
+    0.00 :   69fc:   xor    %edx,%edx
+    0.00 :   69fe:   rol    $0x3,%rdi
+    0.00 :   6a02:   rol    $0xd,%rdi
+    0.00 :   6a06:   rol    $0x3d,%rdi
+    0.00 :   6a0a:   rol    $0x33,%rdi
+    0.00 :   6a0e:   xchg   %rbx,%rbx
+    0.00 :   6a11:   mov    %rdx,0x40(%rsp)
+    0.00 :   6a16:   mov    0x40(%rsp),%rax
+         : 278  _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI value_type* data() _NOEXCEPT {
+         : 279  return std::__to_address(this->__begin_);
+         : 280  }
+         :
+         : 282  _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI const value_type* data() const _NOEXCEPT {
+         : 283  return std::__to_address(this->__begin_);
+    0.00 :   6a1b:   mov    0x350(%rsp),%r12
+         : 285  return static_cast<size_type>(this->__end_ - this->__begin_);
+    0.00 :   6a23:   mov    0x358(%rsp),%r13
+         : 287  };
+         :
+         : 289  template <class _Iter1>
+         : 290  _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR bool
+         : 291  operator==(const __wrap_iter<_Iter1>& __x, const __wrap_iter<_Iter1>& __y) _NOEXCEPT {
+         : 292  return __x.base() == __y.base();
+    0.00 :   6a2b:   mov    %r13,%r15
+    0.00 :   6a2e:   sub    %r12,%r15
+         : 295  std::unreachable();
+         : 296  }
+         :
+         : 298  template <class Book>
+         : 299  void replay(Book& book, std::span<const Op> ops) {
+         : 300  for (const Op& op : ops) {
+    0.00 :   6a31:   je     6ab0 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x330>
+    0.00 :   6a37:   add    $0x10,%r12
+    0.00 :   6a3b:   jmp    6a63 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x2e3>
+    0.00 :   6a3d:   nopl   (%rax)
+         : 305  book.modify(op.id, op.price, op.qty);
+    0.00 :   6a40:   mov    (%r12),%rdx
+    0.00 :   6a44:   mov    -0xc(%r12),%ecx
+    0.00 :   6a49:   mov    %rbp,%rdi
+    0.00 :   6a4c:   call   20000 <lob::v0::Book<lob::ChecksumSink>::modify(unsigned long, long, unsigned int)>
+    0.00 :   6a51:   lea    -0x10(%r12),%rax
+    0.00 :   6a56:   add    $0x18,%r12
+    0.00 :   6a5a:   add    $0x18,%rax
+    0.00 :   6a5e:   cmp    %r13,%rax
+         : 314  for (const Op& op : ops) {
+    0.00 :   6a61:   je     6ab0 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x330>
+         : 316  switch (op.type) {
+    0.00 :   6a63:   movzbl -0x10(%r12),%eax
+    0.00 :   6a69:   mov    -0x8(%r12),%rsi
+    0.00 :   6a6e:   cmp    $0x2,%eax
+    0.00 :   6a71:   je     6a40 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x2c0>
+    0.00 :   6a73:   cmp    $0x1,%eax
+    0.00 :   6a76:   jne    6a90 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x310>
+         : 323  book.cancel(op.id);
+    0.00 :   6a78:   mov    %rbp,%rdi
+    0.00 :   6a7b:   call   1fdf0 <lob::v0::Book<lob::ChecksumSink>::cancel(unsigned long)>
+    0.00 :   6a80:   jmp    6a51 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x2d1>
+    0.00 :   6a82:   data16 data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+         : 328  book.push(op.id, op.side, op.price, op.qty);
+    0.00 :   6a90:   movzbl -0xf(%r12),%edx
+    0.00 :   6a96:   mov    (%r12),%rcx
+    0.00 :   6a9a:   mov    -0xc(%r12),%r8d
+    0.00 :   6a9f:   mov    %rbp,%rdi
+    0.00 :   6aa2:   call   1fb80 <lob::v0::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)>
+    0.00 :   6aa7:   jmp    6a51 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x2d1>
+    0.00 :   6aa9:   nopl   0x0(%rax)
+         : 336  replay(*book, std::span<const Op>(w.ops));
+         : 337  LOB_CG_STOP;
+    0.00 :   6ab0:   movq   $0x43470001,0xc0(%rsp)
+    0.00 :   6abc:   movq   $0x0,0xc8(%rsp)
+    0.00 :   6ac8:   movq   $0x0,0xd0(%rsp)
+    0.00 :   6ad4:   movq   $0x0,0xd8(%rsp)
+    0.00 :   6ae0:   movq   $0x0,0xe0(%rsp)
+    0.00 :   6aec:   movq   $0x0,0xe8(%rsp)
+    0.00 :   6af8:   lea    0xc0(%rsp),%r12
+    0.00 :   6b00:   mov    %r12,%rax
+    0.00 :   6b03:   xor    %edx,%edx
+    0.00 :   6b05:   rol    $0x3,%rdi
+    0.00 :   6b09:   rol    $0xd,%rdi
+    0.00 :   6b0d:   rol    $0x3d,%rdi
+    0.00 :   6b11:   rol    $0x33,%rdi
+    0.00 :   6b15:   xchg   %rbx,%rbx
+    0.00 :   6b18:   mov    %rdx,0x40(%rsp)
+    0.00 :   6b1d:   mov    0x40(%rsp),%rax
+         : 354  void               disable() noexcept { send("disable\n"); }
+    0.00 :   6b22:   mov    $0x8,%edx
+    0.00 :   6b27:   mov    %r14,%r13
+    0.00 :   6b2a:   mov    %r14,%rdi
+    0.00 :   6b2d:   lea    0x2ca1e(%rip),%rsi        # 33552 <_IO_stdin_used+0x1552>
+    0.00 :   6b34:   call   28260 <lob::harness::PerfControl::send(std::__1::basic_string_view<char, std::__1::char_traits<char> >)>
+         : 360  perf.disable();
+         : 361  const auto t1 = std::chrono::steady_clock::now();
+    0.00 :   6b39:   call   3390 <std::__1::chrono::steady_clock::now()@plt>
+         : 363  return t;
+         : 364  }
+         :
+         : 366  template <class T>
+         : 367  inline void do_not_optimize(const T& value) noexcept {
+         : 368  asm volatile("" : : "r,m"(value) : "memory");
+    0.00 :   6b3e:   mov    0x20(%rsp),%rcx
+    0.00 :   6b43:   sar    $0x3,%r15
+    0.00 :   6b47:   movabs $0xaaaaaaaaaaaaaaab,%rcx
+    0.00 :   6b51:   imul   %rcx,%r15
+         : 373  _LIBCPP_HIDE_FROM_ABI size_type size() const _NOEXCEPT { return __size_; }
+    0.00 :   6b55:   mov    0x50(%rbp),%rcx
+         : 375  template <class _Rep1, class _Period1, class _Rep2, class _Period2>
+         : 376  inline _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR
+         : 377  typename common_type<duration<_Rep1, _Period1>, duration<_Rep2, _Period2> >::type
+         : 378  operator-(const duration<_Rep1, _Period1>& __lhs, const duration<_Rep2, _Period2>& __rhs) {
+         : 379  typedef typename common_type<duration<_Rep1, _Period1>, duration<_Rep2, _Period2> >::type _Cd;
+         : 380  return _Cd(_Cd(__lhs).count() - _Cd(__rhs).count());
+    0.00 :   6b59:   sub    0x68(%rsp),%rax
+         : 382  static_cast<typename _ToDuration::rep>(static_cast<_Ct>(__fd.count()) / static_cast<_Ct>(_Period::den)));
+    0.00 :   6b5e:   vcvtsi2sd %rax,%xmm15,%xmm0
+    0.00 :   6b63:   vdivsd 0x2b51d(%rip),%xmm0,%xmm0        # 32088 <_IO_stdin_used+0x88>
+         : 385  println(stdout);
+         : 386  }
+         :
+         : 388  template <class... _Args>
+         : 389  _LIBCPP_HIDE_FROM_ABI void println(format_string<_Args...> __fmt, _Args&&... __args) {
+         : 390  std::println(stdout, __fmt, std::forward<_Args>(__args)...);
+    0.00 :   6b6b:   mov    0x3846e(%rip),%rax        # 3efe0 <stdout@GLIBC_2.2.5>
+    0.00 :   6b72:   mov    (%rax),%r14
+         : 393  __types |= static_cast<uint64_t>(__arg.__type_) << __shift;
+         : 394  else
+         : 395  // Assigns the initial value.
+         : 396  __types = static_cast<uint64_t>(__arg.__type_);
+         : 397  __shift += __packed_arg_t_bits;
+         : 398  *__values++ = __arg.__value_;
+    0.00 :   6b75:   lea    0x2c95b(%rip),%rax        # 334d7 <_IO_stdin_used+0x14d7>
+    0.00 :   6b7c:   mov    %rax,0xc0(%rsp)
+    0.00 :   6b84:   movq   $0x2,0xc8(%rsp)
+         : 402  __basic_format_arg_value<_Context> __value_;
+         : 403  __format::__arg_t __type_;
+         :
+         : 405  _LIBCPP_HIDE_FROM_ABI explicit basic_format_arg(__format::__arg_t __type,
+         : 406  __basic_format_arg_value<_Context> __value) noexcept
+         : 407  : __value_(__value), __type_(__type) {}
+    0.00 :   6b90:   mov    %ebx,%eax
+    0.00 :   6b92:   mov    %rax,0xd0(%rsp)
+    0.00 :   6b9a:   movq   $0x0,0xd8(%rsp)
+    0.00 :   6ba6:   mov    %r15,0xe0(%rsp)
+    0.00 :   6bae:   movq   $0x0,0xe8(%rsp)
+         : 413  return basic_format_arg<_Context>{__arg, static_cast<unsigned long long>(__value)};
+    0.00 :   6bba:   mov    0x20(%rsp),%rax
+    0.00 :   6bbf:   mov    0x28(%rsp),%rdx
+         : 416  *__values++ = __arg.__value_;
+    0.00 :   6bc4:   mov    %rdx,0xf0(%rsp)
+    0.00 :   6bcc:   movq   $0x0,0xf8(%rsp)
+         : 419  return basic_format_arg<_Context>{__arg, static_cast<unsigned long long>(__value)};
+    0.00 :   6bd8:   mov    0x30(%rsp),%rdx
+         : 421  *__values++ = __arg.__value_;
+    0.00 :   6bdd:   mov    %rdx,0x100(%rsp)
+    0.00 :   6be5:   movq   $0x0,0x108(%rsp)
+    0.00 :   6bf1:   mov    %rax,0x110(%rsp)
+    0.00 :   6bf9:   movq   $0x0,0x118(%rsp)
+    0.00 :   6c05:   mov    %rcx,0x120(%rsp)
+    0.00 :   6c0d:   movq   $0x0,0x128(%rsp)
+    0.00 :   6c19:   movabs $0x51ce739c6d,%rax
+         : 429  __types |= static_cast<uint64_t>(__arg.__type_) << __shift;
+    0.00 :   6c23:   mov    %rax,0x140(%rsp)
+         : 431  *__values++ = __arg.__value_;
+    0.00 :   6c2b:   vmovsd %xmm0,0x130(%rsp)
+         : 433  return std::__is_posix_terminal(__stream);
+    0.00 :   6c34:   movq   $0x8,0x40(%rsp)
+    0.00 :   6c3d:   mov    %r12,0x48(%rsp)
+    0.00 :   6c42:   mov    %rax,0x50(%rsp)
+    0.00 :   6c47:   mov    %r14,%rdi
+    0.00 :   6c4a:   call   3490 <std::__1::__is_posix_terminal(_IO_FILE*)@plt>
+         : 439  if (__is_terminal)
+    0.00 :   6c4f:   test   %al,%al
+    0.00 :   6c51:   je     6c5b <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x4db>
+         : 442  std::fflush(__stream);
+    0.00 :   6c53:   mov    %r14,%rdi
+    0.00 :   6c56:   call   3560 <fflush@plt>
+         : 445  __print::__vprint_nonunicode(__stream, __fmt, __args, __write_nl);
+    0.00 :   6c5b:   mov    0x50(%rsp),%rax
+    0.00 :   6c60:   mov    %rax,0x10(%rsp)
+    0.00 :   6c65:   vmovupd 0x40(%rsp),%xmm0
+    0.00 :   6c6b:   vmovupd %xmm0,(%rsp)
+    0.00 :   6c70:   mov    $0x53,%edx
+    0.00 :   6c75:   mov    %r14,%rdi
+    0.00 :   6c78:   lea    0x2c877(%rip),%rsi        # 334f6 <_IO_stdin_used+0x14f6>
+    0.00 :   6c7f:   mov    $0x1,%ecx
+    0.00 :   6c84:   call   11ec0 <void std::__1::__print::__vprint_nonunicode[abi:ne210105]<void>(_IO_FILE*, std::__1::basic_string_view<char, std::__1::char_traits<char> >, std::__1::basic_format_args<std::__1::basic_format_context<std::__1::back_insert_iterator<std::__1::__format::__output_buffer<char> >, char> >, bool)>
+         : 455  #if defined(_LIBCPP_CXX03_LANG)
+         : 456  static_assert(is_copy_constructible<key_equal>::value, "Predicate must be copy-constructible.");
+         : 457  static_assert(is_copy_constructible<hasher>::value, "Hasher must be copy-constructible.");
+         : 458  #endif
+         :
+         : 460  __deallocate_node(__first_node_.__next_);
+    0.00 :   6c89:   mov    0x48(%rbp),%rdi
+         : 462  }
+         :
+         : 464  template <class _Tp, class _Hash, class _Equal, class _Alloc>
+         : 465  void __hash_table<_Tp, _Hash, _Equal, _Alloc>::__deallocate_node(__next_pointer __np) _NOEXCEPT {
+         : 466  __node_allocator& __na = __node_alloc();
+         : 467  while (__np != nullptr) {
+    0.00 :   6c8d:   test   %rdi,%rdi
+    0.00 :   6c90:   je     6cb5 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x535>
+    0.00 :   6c92:   data16 data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+         : 471  __next_pointer __next    = __np->__next_;
+    0.00 :   6ca0:   mov    (%rdi),%r14
+    0.00 :   6ca3:   mov    $0x30,%esi
+    0.00 :   6ca8:   call   3530 <operator delete(void*, unsigned long)@plt>
+    0.00 :   6cad:   mov    %r14,%rdi
+         : 476  while (__np != nullptr) {
+    0.00 :   6cb0:   test   %r14,%r14
+    0.00 :   6cb3:   jne    6ca0 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x520>
+    0.00 :   6cb5:   lea    0x38(%rbp),%rax
+         : 480  pointer __tmp = __ptr_;
+    0.00 :   6cb9:   mov    (%rax),%rdi
+         : 482  __ptr_        = nullptr;
+    0.00 :   6cbc:   movq   $0x0,(%rax)
+         : 484  if (__tmp)
+    0.00 :   6cc3:   test   %rdi,%rdi
+    0.00 :   6cc6:   je     68f0 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x170>
+         : 487  _LIBCPP_HIDE_FROM_ABI void operator()(pointer __p) _NOEXCEPT { __alloc_traits::deallocate(__alloc(), __p, size()); }
+    0.00 :   6ccc:   mov    0x40(%rbp),%rsi
+         : 489  [[__maybe_unused__]] size_t __size = static_cast<size_t>(__n) * sizeof(_Tp);
+    0.00 :   6cd0:   shl    $0x3,%rsi
+         : 491  return __builtin_operator_delete(__ptr _LIBCPP_ONLY_IF_SIZED_DEALLOCATION(, __size));
+    0.00 :   6cd4:   call   3530 <operator delete(void*, unsigned long)@plt>
+    0.00 :   6cd9:   jmp    68f0 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x170>
+    0.00 :   6cde:   mov    0x1f0(%rsp),%rdx
+    0.00 :   6ce6:   cmpw   $0x3176,(%rdx)
+         : 496  if (B::name == name) {
+    0.00 :   6ceb:   je     6e46 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x6c6>
+    0.00 :   6cf1:   cmpw   $0x3276,(%rdx)
+    0.00 :   6cf6:   je     7573 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xdf3>
+         : 500  if (!found) throw std::invalid_argument(std::format("unknown version '{}'", name));
+    0.00 :   6cfc:   cmpb   $0x0,0x38(%rsp)
+    0.00 :   6d01:   jne    7c70 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x14f0>
+    0.00 :   6d07:   mov    $0x10,%edi
+    0.00 :   6d0c:   mov    %rdx,%rbx
+    0.00 :   6d0f:   call   3200 <__cxa_allocate_exception@plt>
+    0.00 :   6d14:   mov    %rax,%r14
+         : 507  __types = static_cast<uint64_t>(__arg.__type_);
+    0.00 :   6d17:   movq   $0xd,0x50(%rsp)
+         : 509  *__values++ = __arg.__value_;
+    0.00 :   6d20:   mov    %rbx,0x40(%rsp)
+    0.00 :   6d25:   mov    0x1f8(%rsp),%rax
+    0.00 :   6d2d:   mov    %rax,0x48(%rsp)
+         :
+         : 514  [[nodiscard]] _LIBCPP_HIDE_FROM_ABI __allocating_buffer() : __allocating_buffer{nullptr} {}
+         :
+         : 516  [[nodiscard]]
+         : 517  _LIBCPP_HIDE_FROM_ABI explicit __allocating_buffer(__max_output_size* __max_output_size)
+         : 518  : __output_buffer<_CharT>{__small_buffer_, __buffer_size_, __prepare_write, __max_output_size} {}
+    0.00 :   6d32:   lea    0xe8(%rsp),%r15
+         : 520  : __ptr_(__ptr), __capacity_(__capacity), __prepare_write_(__function), __max_output_size_(__max_output_size) {}
+    0.00 :   6d3a:   mov    %r15,0xc0(%rsp)
+    0.00 :   6d42:   movq   $0x100,0xc8(%rsp)
+         : 523  size_t __size_{0};
+    0.00 :   6d4e:   movq   $0x0,0xd0(%rsp)
+         : 525  : __ptr_(__ptr), __capacity_(__capacity), __prepare_write_(__function), __max_output_size_(__max_output_size) {}
+    0.00 :   6d5a:   lea    0xb63f(%rip),%rax        # 123a0 <std::__1::__format::__allocating_buffer<char>::__prepare_write[abi:ne210105](std::__1::__format::__output_buffer<char>&, unsigned long)>
+    0.00 :   6d61:   mov    %rax,0xd8(%rsp)
+    0.00 :   6d69:   movq   $0x0,0xe0(%rsp)
+         : 529  // Since allocating is expensive the class has a small internal buffer. When
+         : 530  // its capacity is exceeded a dynamic buffer will be allocated.
+         : 531  static constexpr size_t __buffer_size_ = 256;
+         : 532  _CharT __small_buffer_[__buffer_size_];
+         :
+         : 534  _CharT* __ptr_{__small_buffer_};
+    0.00 :   6d75:   mov    %r15,0x1e8(%rsp)
+         : 536  // The function is _LIBCPP_ALWAYS_INLINE since the compiler is bad at inlining
+         : 537  // https://reviews.llvm.org/D110499#inline-1180704
+         : 538  // TODO FMT Evaluate whether we want to file a Clang bug report regarding this.
+         : 539  template <output_iterator<const char&> _OutIt>
+         : 540  _LIBCPP_ALWAYS_INLINE _LIBCPP_HIDE_FROM_ABI _OutIt vformat_to(_OutIt __out_it, string_view __fmt, format_args __args) {
+         : 541  return std::__vformat_to(std::move(__out_it), __fmt, __args);
+    0.00 :   6d7d:   movq   $0x1,0x20(%rsp)
+    0.00 :   6d86:   lea    0x40(%rsp),%rax
+    0.00 :   6d8b:   mov    %rax,0x28(%rsp)
+    0.00 :   6d90:   movq   $0xd,0x30(%rsp)
+    0.00 :   6d99:   mov    0x30(%rsp),%rax
+    0.00 :   6d9e:   mov    %rax,0x10(%rsp)
+    0.00 :   6da3:   vmovupd 0x20(%rsp),%xmm0
+    0.00 :   6da9:   vmovupd %xmm0,(%rsp)
+    0.00 :   6dae:   lea    0x2c72c(%rip),%rsi        # 334e1 <_IO_stdin_used+0x14e1>
+    0.00 :   6db5:   lea    0xc0(%rsp),%rdi
+    0.00 :   6dbd:   mov    $0x14,%edx
+    0.00 :   6dc2:   call   12460 <std::__1::back_insert_iterator<std::__1::__format::__output_buffer<char> > std::__1::__vformat_to[abi:ne210105]<std::__1::back_insert_iterator<std::__1::__format::__output_buffer<char> >, char, std::__1::back_insert_iterator<std::__1::__format::__output_buffer<char> > >(std::__1::back_insert_iterator<std::__1::__format::__output_buffer<char> >, std::__1::basic_string_view<char, std::__1::char_traits<char> >, std::__1::basic_format_args<std::__1::basic_format_context<std::__1::back_insert_iterator<std::__1::__format::__output_buffer<char> >, char> >) requires output_iterator<std::__1::back_insert_iterator<std::__1::__format::__output_buffer<char> >, char const&>>
+         : 554  [[nodiscard]] _LIBCPP_HIDE_FROM_ABI size_t __size() const { return __size_; }
+    0.00 :   6dc7:   mov    0xd0(%rsp),%rax
+         : 556  [[nodiscard]] _LIBCPP_HIDE_FROM_ABI basic_string_view<_CharT> __view() { return {__ptr_, this->__size()}; }
+    0.00 :   6dcf:   mov    0x1e8(%rsp),%rcx
+         : 558  auto __result = __format::__try_constant_folding(__fmt, __args);
+         : 559  if (__result.has_value())
+         : 560  return *std::move(__result);
+         : 561  __format::__allocating_buffer<char> __buffer;
+         : 562  std::vformat_to(__buffer.__make_output_iterator(), __fmt, __args);
+         : 563  return string{__buffer.__view()};
+    0.00 :   6dd7:   mov    %rcx,0x20(%rsp)
+    0.00 :   6ddc:   mov    %rax,0x28(%rsp)
+    0.00 :   6de1:   lea    0xa8(%rsp),%rdi
+    0.00 :   6de9:   lea    0x20(%rsp),%rsi
+    0.00 :   6dee:   call   12310 <_ZNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEC2B8ne210105INS_17basic_string_viewIcS2_EETnNS_9enable_ifIXaasr33__can_be_converted_to_string_viewIcS2_T_EE5valuentsr7is_sameIu14__remove_cvrefISA_ES5_EE5valueEiE4typeELi0EEERKSA_>
+         : 569  if (__ptr_ != __small_buffer_)
+    0.00 :   6df3:   mov    0x1e8(%rsp),%rdi
+    0.00 :   6dfb:   cmp    %r15,%rdi
+    0.00 :   6dfe:   je     6e0d <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x68d>
+         : 573  [[nodiscard]] _LIBCPP_HIDE_FROM_ABI size_t __capacity() const { return __capacity_; }
+    0.00 :   6e00:   mov    0xc8(%rsp),%rsi
+    0.00 :   6e08:   call   3530 <operator delete(void*, unsigned long)@plt>
+    0.00 :   6e0d:   mov    $0x1,%bpl
+    0.00 :   6e10:   lea    0xa8(%rsp),%rsi
+         : 578  #  endif
+         : 579  };
+         :
+         : 581  class _LIBCPP_EXPORTED_FROM_ABI invalid_argument : public logic_error {
+         : 582  public:
+         : 583  _LIBCPP_HIDE_FROM_ABI explicit invalid_argument(const string& __s) : logic_error(__s) {}
+    0.00 :   6e18:   mov    %r14,%rdi
+    0.00 :   6e1b:   call   3140 <std::logic_error::logic_error(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&)@plt>
+    0.00 :   6e20:   mov    0x38101(%rip),%rax        # 3ef28 <vtable for std::invalid_argument@Base>
+    0.00 :   6e27:   add    $0x10,%rax
+    0.00 :   6e2b:   mov    %rax,(%r14)
+    0.00 :   6e2e:   xor    %ebp,%ebp
+    0.00 :   6e30:   mov    0x38199(%rip),%rsi        # 3efd0 <typeinfo for std::invalid_argument@Base>
+    0.00 :   6e37:   mov    0x380a2(%rip),%rdx        # 3eee0 <std::invalid_argument::~invalid_argument()@Base>
+    0.00 :   6e3e:   mov    %r14,%rdi
+    0.00 :   6e41:   call   3290 <__cxa_throw@plt>
+    0.00 :   6e46:   cmpl   $0x0,0x1c(%rsp)
+         : 595  for (int r = 0; r < repeat; ++r) {
+    0.00 :   6e4b:   jle    7c70 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x14f0>
+    0.00 :   6e51:   movabs $0x9e3779b97f4a7c15,%rbx
+    0.00 :   6e5b:   xor    %r12d,%r12d
+    0.00 :   6e5e:   vxorpd %xmm0,%xmm0,%xmm0
+    0.00 :   6e62:   jmp    6ea9 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x729>
+    0.00 :   6e64:   data16 data16 cs nopw 0x0(%rax,%rax,1)
+         : 602  return static_cast<__node_pointer>(__end_node()->__left_);
+    0.00 :   6e70:   mov    0x28(%r14),%rsi
+         : 604  destroy(__root());
+    0.00 :   6e74:   lea    0x20(%r14),%rdi
+    0.00 :   6e78:   call   217a0 <std::__1::__tree<std::__1::__value_type<long, lob::v1::Book<lob::ChecksumSink>::Level>, std::__1::__map_value_compare<long, std::__1::pair<long const, lob::v1::Book<lob::ChecksumSink>::Level>, std::__1::less<void>, true>, std::__1::allocator<std::__1::pair<long const, lob::v1::Book<lob::ChecksumSink>::Level> > >::destroy(std::__1::__tree_node<std::__1::__value_type<long, lob::v1::Book<lob::ChecksumSink>::Level>, void*>*)>
+         : 607  return static_cast<__node_pointer>(__end_node()->__left_);
+    0.00 :   6e7d:   mov    0x10(%r14),%rsi
+         : 609  destroy(__root());
+    0.00 :   6e81:   lea    0x8(%r14),%rdi
+    0.00 :   6e85:   call   21830 <std::__1::__tree<std::__1::__value_type<long, lob::v1::Book<lob::ChecksumSink>::Level>, std::__1::__map_value_compare<long, std::__1::pair<long const, lob::v1::Book<lob::ChecksumSink>::Level>, std::__1::greater<void>, true>, std::__1::allocator<std::__1::pair<long const, lob::v1::Book<lob::ChecksumSink>::Level> > >::destroy(std::__1::__tree_node<std::__1::__value_type<long, lob::v1::Book<lob::ChecksumSink>::Level>, void*>*)>
+         : 612  delete __ptr;
+    0.00 :   6e8a:   mov    $0x68,%esi
+    0.00 :   6e8f:   mov    %r14,%rdi
+    0.00 :   6e92:   call   3530 <operator delete(void*, unsigned long)@plt>
+    0.00 :   6e97:   inc    %r12d
+    0.00 :   6e9a:   cmp    0x1c(%rsp),%r12d
+    0.00 :   6e9f:   vxorpd %xmm0,%xmm0,%xmm0
+    0.00 :   6ea3:   je     755b <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xddb>
+    0.00 :   6ea9:   mov    %r12,0x80(%rsp)
+    0.00 :   6eb1:   vmovapd %xmm0,0x20(%rsp)
+    0.00 :   6eb7:   movq   $0x0,0x30(%rsp)
+         : 623  return unique_ptr<_Tp>(new _Tp(std::forward<_Args>(__args)...));
+    0.00 :   6ec0:   mov    $0x68,%edi
+    0.00 :   6ec5:   call   30f0 <operator new(unsigned long)@plt>
+    0.00 :   6eca:   mov    %rax,%r14
+         : 627  Side side;
+         : 628  Price price;
+         : 629  Qty qty;
+         : 630  };
+         :
+         : 632  explicit Book(Sink& sink) : sink_(sink) {}
+    0.00 :   6ecd:   lea    0x20(%rsp),%rax
+    0.00 :   6ed2:   mov    %rax,(%r14)
+         : 635  __tree<_Tp, _Compare, _Allocator>::__tree(const value_compare& __comp) _NOEXCEPT_(
+    0.00 :   6ed5:   lea    0x10(%r14),%rax
+    0.00 :   6ed9:   vxorpd %xmm0,%xmm0,%xmm0
+         : 638  : __size_(0), __value_comp_(__comp) {
+    0.00 :   6edd:   vmovupd %xmm0,0x10(%r14)
+         : 640  __begin_node() = __end_node();
+    0.00 :   6ee3:   mov    %rax,0x8(%r14)
+         : 642  __tree<_Tp, _Compare, _Allocator>::__tree(const value_compare& __comp) _NOEXCEPT_(
+    0.00 :   6ee7:   mov    %r14,%rax
+    0.00 :   6eea:   add    $0x28,%rax
+         : 645  : __size_(0), __value_comp_(__comp) {
+    0.00 :   6eee:   vmovupd %xmm0,0x28(%r14)
+    0.00 :   6ef4:   mov    %rax,0x88(%rsp)
+         : 648  __begin_node() = __end_node();
+    0.00 :   6efc:   mov    %rax,0x20(%r14)
+         : 650  rebind<unsigned char>;
+         :
+         : 652  table_arrays(
+         : 653  std::size_t gsi,std::size_t gsm,
+         : 654  group_type_pointer pg,value_type_pointer pe):
+         : 655  groups_size_index{gsi},groups_size_mask{gsm},groups_{pg},elements_{pe}{}
+    0.00 :   6f00:   movq   $0x3f,0x38(%r14)
+    0.00 :   6f08:   movq   $0x1,0x40(%r14)
+    0.00 :   6f10:   movq   $0x0,0x50(%r14)
+    0.00 :   6f18:   lea    0x2fe61(%rip),%rax        # 36d80 <boost::unordered::detail::foa::dummy_groups<boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, 2ul>()::storage>
+    0.00 :   6f1f:   mov    %rax,0x48(%r14)
+         : 661  table_core(
+         : 662  std::size_t n=default_bucket_count,const Hash& h_=Hash(),
+         : 663  const Pred& pred_=Pred(),const Allocator& al_=Allocator()):
+         : 664  hash_base{empty_init,h_},pred_base{empty_init,pred_},
+         : 665  allocator_base{empty_init,al_},arrays(new_arrays(n)),
+         : 666  size_ctrl{initial_max_load(),0}
+    0.00 :   6f23:   vmovupd %xmm0,0x58(%r14)
+         : 668  : __ptr_(__p),
+    0.00 :   6f29:   mov    %r14,0xa8(%rsp)
+         : 670  const auto t0 = std::chrono::steady_clock::now();
+    0.00 :   6f31:   call   3390 <std::__1::chrono::steady_clock::now()@plt>
+    0.00 :   6f36:   mov    %rax,0x210(%rsp)
+         : 673  void               enable() noexcept { send("enable\n"); }
+    0.00 :   6f3e:   mov    $0x7,%edx
+    0.00 :   6f43:   lea    0x78(%rsp),%rdi
+    0.00 :   6f48:   lea    0x2c5fb(%rip),%rsi        # 3354a <_IO_stdin_used+0x154a>
+    0.00 :   6f4f:   call   28260 <lob::harness::PerfControl::send(std::__1::basic_string_view<char, std::__1::char_traits<char> >)>
+         : 678  LOB_CG_START;
+    0.00 :   6f54:   movq   $0x43470000,0xc0(%rsp)
+    0.00 :   6f60:   movq   $0x0,0xc8(%rsp)
+    0.00 :   6f6c:   movq   $0x0,0xd0(%rsp)
+    0.00 :   6f78:   movq   $0x0,0xd8(%rsp)
+    0.00 :   6f84:   movq   $0x0,0xe0(%rsp)
+    0.00 :   6f90:   movq   $0x0,0xe8(%rsp)
+    0.00 :   6f9c:   lea    0xc0(%rsp),%rax
+    0.00 :   6fa4:   xor    %edx,%edx
+    0.00 :   6fa6:   rol    $0x3,%rdi
+    0.00 :   6faa:   rol    $0xd,%rdi
+    0.00 :   6fae:   rol    $0x3d,%rdi
+    0.00 :   6fb2:   rol    $0x33,%rdi
+    0.00 :   6fb6:   xchg   %rbx,%rbx
+    0.00 :   6fb9:   mov    %rdx,0x40(%rsp)
+    0.00 :   6fbe:   mov    0x40(%rsp),%rax
+         : 694  return std::__to_address(this->__begin_);
+    0.00 :   6fc3:   mov    0x350(%rsp),%r12
+         : 696  return static_cast<size_type>(this->__end_ - this->__begin_);
+    0.00 :   6fcb:   mov    0x358(%rsp),%r13
+    0.00 :   6fd3:   mov    %r13,%rax
+    0.00 :   6fd6:   sub    %r12,%rax
+    0.00 :   6fd9:   mov    %rax,0x208(%rsp)
+         : 701  for (const Op& op : ops) {
+    0.00 :   6fe1:   je     733b <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xbbb>
+    0.00 :   6fe7:   mov    %r13,0x70(%rsp)
+    0.00 :   6fec:   mov    %r14,0x200(%rsp)
+    0.00 :   6ff4:   jmp    7022 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x8a2>
+    0.00 :   6ff6:   cs nopw 0x0(%rax,%rax,1)
+         : 707  book.modify(op.id, op.price, op.qty);
+    0.00 :   7000:   mov    0x10(%r12),%rdx
+    0.00 :   7005:   mov    0x4(%r12),%ecx
+    0.00 :   700a:   mov    %r14,%rdi
+    0.00 :   700d:   mov    %rbp,%rsi
+    0.00 :   7010:   call   21c70 <lob::v1::Book<lob::ChecksumSink>::modify(unsigned long, long, unsigned int)>
+         : 713  ++__i_;
+    0.00 :   7015:   add    $0x18,%r12
+         : 715  return __x.base() == __y.base();
+    0.00 :   7019:   cmp    %r13,%r12
+         : 717  for (const Op& op : ops) {
+    0.00 :   701c:   je     733b <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xbbb>
+         : 719  switch (op.type) {
+    0.00 :   7022:   movzbl (%r12),%eax
+    0.00 :   7027:   mov    0x8(%r12),%rbp
+    0.00 :   702c:   cmp    $0x2,%eax
+    0.00 :   702f:   je     7000 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x880>
+    0.00 :   7031:   cmp    $0x1,%eax
+    0.00 :   7034:   jne    7120 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x9a0>
+         :
+         : 727  #elif defined(__SIZEOF_INT128__)
+         :
+         : 729  inline boost::uint64_t mulx64( boost::uint64_t x, boost::uint64_t y )
+         : 730  {
+         : 731  __uint128_t r = (__uint128_t)x * y;
+    0.00 :   703a:   mov    %rbp,%rdx
+    0.00 :   703d:   mulx   %rbx,%rcx,%rax
+         : 734  return (boost::uint64_t)r ^ (boost::uint64_t)( r >> 64 );
+    0.00 :   7042:   xor    %rcx,%rax
+         : 736  }
+         :
+         : 738  static inline std::size_t position_for(
+         : 739  std::size_t hash,const arrays_type& arrays_)
+         : 740  {
+         : 741  return size_policy::position(hash,arrays_.groups_size_index);
+    0.00 :   7045:   movzbl 0x38(%r14),%ecx
+         : 743  return hash>>size_index_;
+    0.00 :   704a:   shrx   %rcx,%rax,%rcx
+    0.00 :   704f:   mov    0x48(%r14),%rdx
+    0.00 :   7053:   movzbl %al,%esi
+    0.00 :   7056:   lea    0x2fd43(%rip),%rdi        # 36da0 <boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>::match_word(unsigned long)::word>
+    0.00 :   705d:   vpbroadcastd (%rdi,%rsi,4),%xmm0
+    0.00 :   7063:   mov    0x50(%r14),%rsi
+    0.00 :   7067:   and    $0x7,%eax
+    0.00 :   706a:   mov    0x40(%r14),%rdi
+    0.00 :   706e:   xor    %r8d,%r8d
+         : 753  auto pg=arrays.groups()+pos;
+    0.00 :   7071:   mov    %rcx,%r15
+    0.00 :   7074:   shl    $0x4,%r15
+         : 756  return _mm_load_si128(reinterpret_cast<const __m128i*>(m));
+    0.00 :   7078:   vmovdqa (%rdx,%r15,1),%xmm1
+         : 758  _mm_cmpeq_epi8(load_metadata(),_mm_set1_epi32(match_word(hash))))&0x7FFF;
+    0.00 :   707e:   vpcmpeqb %xmm0,%xmm1,%k0
+         : 760  return _mm_movemask_epi8(
+    0.00 :   7084:   kmovd  %k0,%r9d
+         : 762  if(mask){
+    0.00 :   7088:   and    $0x7fff,%r9w
+    0.00 :   708e:   je     70d0 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x950>
+    0.00 :   7090:   add    %rdx,%r15
+         : 766  _mm_cmpeq_epi8(load_metadata(),_mm_set1_epi32(match_word(hash))))&0x7FFF;
+    0.00 :   7093:   movzwl %r9w,%r10d
+         : 768  auto p=elements+pos*N;
+    0.00 :   7097:   imul   $0x1e0,%rcx,%r11
+    0.00 :   709e:   lea    (%rsi,%r11,1),%r9
+         : 771  BOOST_UNORDERED_PREFETCH_ELEMENTS(p,N);
+    0.00 :   70a2:   prefetcht0 (%rsi,%r11,1)
+         : 773  return (unsigned int)__builtin_ctz((unsigned int)x);
+    0.00 :   70a7:   tzcnt  %r10d,%r11d
+    0.00 :   70ac:   mov    %r11,0x38(%rsp)
+         : 776  if(BOOST_LIKELY(bool(pred()(x,key_from(p[n]))))){
+    0.00 :   70b1:   shl    $0x5,%r11d
+         : 778  template <class _Tp>
+         : 779  #endif
+         : 780  struct equal_to : __binary_function<_Tp, _Tp, bool> {
+         : 781  typedef bool __result_type; // used by valarray
+         : 782  _LIBCPP_CONSTEXPR_SINCE_CXX14 _LIBCPP_HIDE_FROM_ABI bool operator()(const _Tp& __x, const _Tp& __y) const {
+         : 783  return __x == __y;
+    0.00 :   70b5:   cmp    (%r9,%r11,1),%rbp
+    0.00 :   70b9:   je     7140 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x9c0>
+         : 786  }while(mask);
+    0.00 :   70bf:   blsr   %r10d,%r10d
+    0.00 :   70c4:   jne    70a7 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x927>
+    0.00 :   70c6:   cs nopw 0x0(%rax,%rax,1)
+    0.00 :   70d0:   vpextrb $0xf,%xmm1,%r9d
+         : 791  return !(overflow()&shift[hash%8]);
+    0.00 :   70d6:   lea    0x300c3(%rip),%r10        # 371a0 <boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>::is_not_overflowed(unsigned long) const::shift>
+    0.00 :   70dd:   test   %r9b,(%rax,%r10,1)
+         : 794  if(BOOST_LIKELY(pg->is_not_overflowed(hash))){
+    0.00 :   70e1:   je     70f7 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x977>
+         : 796  pos=(pos+step)&mask;
+    0.00 :   70e3:   lea    0x1(%r8,%rcx,1),%rcx
+         : 798  step+=1;
+    0.00 :   70e8:   inc    %r8
+         : 800  pos=(pos+step)&mask;
+    0.00 :   70eb:   and    %rdi,%rcx
+         : 802  return step<=mask;
+    0.00 :   70ee:   cmp    %rdi,%r8
+         : 804  }
+    0.00 :   70f1:   jbe    7071 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x8f1>
+         : 806  };
+         : 807  using Index = boost::unordered_flat_map<OrderId, Loc>;
+         :
+         : 809  [[noreturn]] static void fail(const std::string& what) { throw std::logic_error("v1 invariant: " + what); }
+         :
+         : 811  void reject(OrderId id, OpType op, RejectReason reason) { sink_.on(Rejected{id, op, reason}); }
+    0.00 :   70f7:   mov    (%r14),%rax
+         : 813  }
+         :
+         : 815  private:
+         : 816  template <class... T>
+         : 817  void mix(T... xs) noexcept {
+         : 818  ++events;
+    0.00 :   70fa:   incq   0x8(%rax)
+         : 820  ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.00 :   70fe:   mov    (%rax),%rcx
+    0.00 :   7101:   xor    $0x5,%rcx
+    0.00 :   7105:   imul   %rbx,%rcx
+    0.00 :   7109:   xor    %rbp,%rcx
+    0.00 :   710c:   mov    $0x3,%edx
+    0.00 :   7111:   mov    $0x1,%ebp
+         : 827  if (it == index_.end()) return reject(id, OpType::Cancel, RejectReason::UnknownId);
+    0.00 :   7116:   jmp    7319 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xb99>
+    0.00 :   711b:   nopl   0x0(%rax,%rax,1)
+         : 830  book.push(op.id, op.side, op.price, op.qty);
+    0.00 :   7120:   movzbl 0x1(%r12),%edx
+    0.00 :   7126:   mov    0x10(%r12),%rcx
+    0.00 :   712b:   mov    0x4(%r12),%r8d
+    0.00 :   7130:   mov    %r14,%rdi
+    0.00 :   7133:   mov    %rbp,%rsi
+    0.00 :   7136:   call   218c0 <lob::v1::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)>
+    0.00 :   713b:   jmp    7015 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x895>
+    0.00 :   7140:   add    %r11,%r9
+         :
+         : 840  _LIBCPP_CONSTEXPR_SINCE_CXX26 _LIBCPP_HIDE_FROM_ABI reference operator*() const {
+         : 841  return __ptr_->__as_node()->__get_value();
+         : 842  }
+         : 843  _LIBCPP_CONSTEXPR_SINCE_CXX26 _LIBCPP_HIDE_FROM_ABI pointer operator->() const {
+         : 844  return pointer_traits<pointer>::pointer_to(__ptr_->__as_node()->__get_value());
+    0.00 :   7143:   mov    0x18(%r9),%rdi
+         : 846  const Qty remaining = it->second.order->qty;
+    0.00 :   7147:   mov    0x18(%rdi),%eax
+    0.00 :   714a:   mov    %rax,0x68(%rsp)
+         : 849  index_.emplace(id, Loc{side, price, std::prev(level.orders.end())});
+         : 850  sink_.on(Rested{id, side, price, qty});
+         : 851  }
+         :
+         : 853  void erase(typename Index::iterator it) {
+         : 854  const Loc& loc = it->second;
+    0.00 :   714f:   lea    0x8(%r9),%rax
+         : 856  auto remove_from = [&](auto& levels) {
+    0.00 :   7153:   mov    %rax,0xc0(%rsp)
+         : 858  Level& level = level_it->second;
+         : 859  level.total_qty -= loc.order->qty;
+         : 860  level.orders.erase(loc.order);
+         : 861  if (level.orders.empty()) levels.erase(level_it);
+         : 862  };
+         : 863  if (loc.side == Side::Buy)
+    0.00 :   715b:   cmpb   $0x0,0x8(%r9)
+    0.00 :   7160:   je     72a7 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xb27>
+    0.00 :   7166:   mov    0x88(%rsp),%rdx
+         : 867  return static_cast<__node_pointer>(__end_node()->__left_);
+    0.00 :   716e:   mov    (%rdx),%rcx
+         :
+         : 870  template <class _Tp, class _Compare, class _Allocator>
+         : 871  template <class _Key>
+         : 872  typename __tree<_Tp, _Compare, _Allocator>::iterator
+         : 873  __tree<_Tp, _Compare, _Allocator>::__lower_bound(const _Key& __v, __node_pointer __root, __end_node_pointer __result) {
+         : 874  while (__root != nullptr) {
+    0.00 :   7171:   test   %rcx,%rcx
+    0.00 :   7174:   je     71a4 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xa24>
+    0.00 :   7176:   mov    0x10(%r9),%rax
+    0.00 :   717a:   mov    %rdx,%r13
+    0.00 :   717d:   mov    %rdx,%rsi
+         : 880  struct less<void> {
+         : 881  template <class _T1, class _T2>
+         : 882  _LIBCPP_CONSTEXPR_SINCE_CXX14 _LIBCPP_HIDE_FROM_ABI auto operator()(_T1&& __t, _T2&& __u) const
+         : 883  noexcept(noexcept(std::forward<_T1>(__t) < std::forward<_T2>(__u))) //
+         : 884  -> decltype(std::forward<_T1>(__t) < std::forward<_T2>(__u)) {
+         : 885  return std::forward<_T1>(__t) < std::forward<_T2>(__u);
+    0.00 :   7180:   xor    %edx,%edx
+    0.00 :   7182:   cmp    %rax,0x20(%rcx)
+    0.00 :   7186:   setl   %dl
+         : 889  if (!value_comp()(__root->__value_, __v)) {
+    0.00 :   7189:   cmovge %rcx,%r13
+    0.00 :   718d:   mov    (%rcx,%rdx,8),%rcx
+         : 892  while (__root != nullptr) {
+    0.00 :   7191:   test   %rcx,%rcx
+    0.00 :   7194:   jne    7180 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xa00>
+         : 895  return __x.__ptr_ == __y.__ptr_;
+    0.00 :   7196:   cmp    %rsi,%r13
+    0.00 :   7199:   mov    %rsi,%rdx
+         : 898  if (__p != end() && !value_comp()(__v, *__p))
+    0.00 :   719c:   je     71a4 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xa24>
+    0.00 :   719e:   cmp    0x20(%r13),%rax
+    0.00 :   71a2:   jge    71a7 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xa27>
+    0.00 :   71a4:   mov    %rdx,%r13
+         :
+         : 904  // Unlink nodes [__f, __l]
+         : 905  template <class _Tp, class _Alloc>
+         : 906  _LIBCPP_CONSTEXPR_SINCE_CXX26 inline void
+         : 907  __list_imp<_Tp, _Alloc>::__unlink_nodes(__base_pointer __f, __base_pointer __l) _NOEXCEPT {
+         : 908  __f->__prev_->__next_ = __l->__next_;
+    0.00 :   71a7:   mov    (%rdi),%rax
+         :
+         : 911  template <class _Tp, class _Alloc>
+         : 912  _LIBCPP_CONSTEXPR_SINCE_CXX26 typename list<_Tp, _Alloc>::iterator list<_Tp, _Alloc>::erase(const_iterator __p) {
+         : 913  _LIBCPP_ASSERT_VALID_ELEMENT_ACCESS(__p != end(), "list::erase(iterator) called with a non-dereferenceable iterator");
+         : 914  __base_pointer __n = __p.__ptr_;
+         : 915  __base_pointer __r = __n->__next_;
+    0.00 :   71aa:   mov    0x8(%rdi),%rcx
+         : 917  __f->__prev_->__next_ = __l->__next_;
+    0.00 :   71ae:   mov    %rcx,0x8(%rax)
+         : 919  __l->__next_->__prev_ = __f->__prev_;
+    0.00 :   71b2:   mov    %rax,(%rcx)
+         : 921  __base::__unlink_nodes(__n, __n);
+         : 922  --this->__size_;
+    0.00 :   71b5:   vmovdqu 0x38(%r13),%xmm0
+         : 924  level.total_qty -= loc.order->qty;
+    0.00 :   71bb:   vpmovsxbq 0x2b2e4(%rip),%xmm1        # 324a8 <_IO_stdin_used+0x4a8>
+    0.00 :   71c4:   vpinsrq $0x1,0x68(%rsp),%xmm1,%xmm1
+    0.00 :   71cc:   vpsubq %xmm1,%xmm0,%xmm0
+    0.00 :   71d0:   vmovdqu %xmm0,0x38(%r13)
+    0.00 :   71d6:   mov    $0x20,%esi
+    0.00 :   71db:   call   3530 <operator delete(void*, unsigned long)@plt>
+         : 931  _LIBCPP_CONSTEXPR_SINCE_CXX26 _LIBCPP_HIDE_FROM_ABI bool empty() const _NOEXCEPT { return __size_ == 0; }
+    0.00 :   71e0:   cmpq   $0x0,0x38(%r13)
+         : 933  if (level.orders.empty()) levels.erase(level_it);
+    0.00 :   71e5:   jne    72b8 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xb38>
+         : 935  if (__x->__right_ != nullptr)
+    0.00 :   71eb:   mov    0x8(%r13),%rcx
+    0.00 :   71ef:   mov    %r13,%rax
+    0.00 :   71f2:   test   %rcx,%rcx
+    0.00 :   71f5:   je     7210 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xa90>
+    0.00 :   71f7:   nopw   0x0(%rax,%rax,1)
+    0.00 :   7200:   mov    %rcx,%rax
+         : 942  while (__x->__left_ != nullptr)
+    0.00 :   7203:   mov    (%rcx),%rcx
+    0.00 :   7206:   test   %rcx,%rcx
+    0.00 :   7209:   jne    7200 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xa80>
+    0.00 :   720b:   jmp    721c <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xa9c>
+    0.00 :   720d:   nopl   (%rax)
+    0.00 :   7210:   mov    %rax,%rcx
+         : 949  return __x == __x->__parent_->__left_;
+    0.00 :   7213:   mov    0x10(%rax),%rax
+    0.00 :   7217:   cmp    (%rax),%rcx
+         : 952  while (!std::__tree_is_left_child(__x))
+    0.00 :   721a:   jne    7210 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xa90>
+         : 954  if (__begin_node() == __ptr)
+    0.00 :   721c:   lea    0x20(%r14),%rcx
+    0.00 :   7220:   cmp    %r13,(%rcx)
+    0.00 :   7223:   jne    722c <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xaac>
+         : 958  __begin_node() = __r.__ptr_;
+    0.00 :   7225:   lea    0x20(%r14),%rcx
+    0.00 :   7229:   mov    %rax,(%rcx)
+         : 961  --size();
+    0.00 :   722c:   decq   0x30(%r14)
+         : 963  std::__tree_remove(__end_node()->__left_, static_cast<__node_base_pointer>(__ptr));
+    0.00 :   7230:   mov    0x28(%r14),%rdi
+    0.00 :   7234:   mov    %r13,%rsi
+    0.00 :   7237:   call   1eaa0 <void std::__1::__tree_remove[abi:ne210105]<std::__1::__tree_node_base<void*>*>(std::__1::__tree_node_base<void*>*, std::__1::__tree_node_base<void*>*)>
+    0.00 :   723c:   cmpq   $0x0,0x38(%r13)
+         : 968  if (!empty()) {
+    0.00 :   7241:   je     7286 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xb06>
+    0.00 :   7243:   lea    0x28(%r13),%r14
+         : 971  __unlink_nodes(__f, __l->__prev_);
+    0.00 :   7247:   mov    0x28(%r13),%rax
+         : 973  __base_pointer __f = __end_.__next_;
+    0.00 :   724b:   mov    0x30(%r13),%rdi
+         : 975  __f->__prev_->__next_ = __l->__next_;
+    0.00 :   724f:   mov    0x8(%rax),%rax
+    0.00 :   7253:   mov    (%rdi),%rcx
+    0.00 :   7256:   mov    %rax,0x8(%rcx)
+         : 979  __l->__next_->__prev_ = __f->__prev_;
+    0.00 :   725a:   mov    %rcx,(%rax)
+         : 981  __size_ = 0;
+    0.00 :   725d:   movq   $0x0,0x38(%r13)
+         : 983  while (__f != __l) {
+    0.00 :   7265:   cmp    %r14,%rdi
+    0.00 :   7268:   je     7286 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xb06>
+    0.00 :   726a:   nopw   0x0(%rax,%rax,1)
+         : 987  __f                 = __f->__next_;
+    0.00 :   7270:   mov    0x8(%rdi),%rbx
+    0.00 :   7274:   mov    $0x20,%esi
+    0.00 :   7279:   call   3530 <operator delete(void*, unsigned long)@plt>
+    0.00 :   727e:   mov    %rbx,%rdi
+         : 992  while (__f != __l) {
+    0.00 :   7281:   cmp    %r14,%rbx
+    0.00 :   7284:   jne    7270 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xaf0>
+    0.00 :   7286:   mov    $0x48,%esi
+    0.00 :   728b:   mov    %r13,%rdi
+    0.00 :   728e:   call   3530 <operator delete(void*, unsigned long)@plt>
+    0.00 :   7293:   movabs $0x9e3779b97f4a7c15,%rbx
+    0.00 :   729d:   mov    0x200(%rsp),%r14
+    0.00 :   72a5:   jmp    72b8 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xb38>
+         : 1001 remove_from(bids_);
+    0.00 :   72a7:   lea    0xc0(%rsp),%rdi
+    0.00 :   72af:   lea    0x8(%r14),%rsi
+    0.00 :   72b3:   call   23340 <auto lob::v1::Book<lob::ChecksumSink>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v1::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v1::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v1::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v1::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v1::Book<lob::ChecksumSink>::Level> > >&) const>
+    0.00 :   72b8:   add    0x38(%rsp),%r15
+    0.00 :   72bd:   movzbl (%r15),%eax
+         : 1007 return m[pos];
+    0.00 :   72c1:   mov    %r15,%rcx
+    0.00 :   72c4:   or     $0xf,%rcx
+         : 1010 return !(overflow()&shift[hash%8]);
+    0.00 :   72c8:   and    $0x7,%eax
+    0.00 :   72cb:   lea    0x2fece(%rip),%rdx        # 371a0 <boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>::is_not_overflowed(unsigned long) const::shift>
+    0.00 :   72d2:   movzbl (%rax,%rdx,1),%eax
+    0.00 :   72d6:   and    (%rcx),%al
+         : 1015 {
+         : 1016 /* If this slot potentially caused overflow, we decrease the maximum load
+         : 1017 * so that average probe length won't increase unboundedly in repeated
+         : 1018 * insert/erase cycles (drift).
+         : 1019 */
+         : 1020 size_ctrl.ml-=group_type::maybe_caused_overflow(pc);
+    0.00 :   72d8:   neg    %al
+    0.00 :   72da:   mov    $0x0,%eax
+    0.00 :   72df:   sbb    %rax,%rax
+         :
+         : 1025 template<typename Integral>
+         : 1026 struct plain_integral
+         : 1027 {
+         : 1028 operator Integral()const{return n;}
+         : 1029 void operator=(Integral m){n=m;}
+    0.00 :   72e2:   movb   $0x0,(%r15)
+    0.00 :   72e6:   vpmovsxbq 0x2b1bb(%rip),%xmm0        # 324aa <_IO_stdin_used+0x4aa>
+    0.00 :   72ef:   vpinsrq $0x0,%rax,%xmm0,%xmm0
+    0.00 :   72f5:   vpaddq 0x58(%r14),%xmm0,%xmm0
+    0.00 :   72fb:   vmovdqu %xmm0,0x58(%r14)
+         : 1035 sink_.on(Cancelled{id, remaining});
+    0.00 :   7301:   mov    (%r14),%rax
+         : 1037 ++events;
+    0.00 :   7304:   incq   0x8(%rax)
+         : 1039 ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.00 :   7308:   mov    (%rax),%rcx
+    0.00 :   730b:   xor    $0x3,%rcx
+    0.00 :   730f:   mov    0x70(%rsp),%r13
+    0.00 :   7314:   mov    0x68(%rsp),%rdx
+    0.00 :   7319:   imul   %rbx,%rcx
+    0.00 :   731d:   xor    %rbp,%rcx
+    0.00 :   7320:   imul   %rbx,%rcx
+    0.00 :   7324:   xor    %rdx,%rcx
+    0.00 :   7327:   imul   %rbx,%rcx
+    0.00 :   732b:   mov    %rcx,(%rax)
+         : 1050 ++__i_;
+    0.00 :   732e:   add    $0x18,%r12
+         : 1052 return __x.base() == __y.base();
+    0.00 :   7332:   cmp    %r13,%r12
+         : 1054 for (const Op& op : ops) {
+    0.00 :   7335:   jne    7022 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x8a2>
+         : 1056 LOB_CG_STOP;
+    0.00 :   733b:   movq   $0x43470001,0xc0(%rsp)
+    0.00 :   7347:   movq   $0x0,0xc8(%rsp)
+    0.00 :   7353:   movq   $0x0,0xd0(%rsp)
+    0.00 :   735f:   movq   $0x0,0xd8(%rsp)
+    0.00 :   736b:   movq   $0x0,0xe0(%rsp)
+    0.00 :   7377:   movq   $0x0,0xe8(%rsp)
+    0.00 :   7383:   lea    0xc0(%rsp),%rbx
+    0.00 :   738b:   mov    %rbx,%rax
+    0.00 :   738e:   xor    %edx,%edx
+    0.00 :   7390:   rol    $0x3,%rdi
+    0.00 :   7394:   rol    $0xd,%rdi
+    0.00 :   7398:   rol    $0x3d,%rdi
+    0.00 :   739c:   rol    $0x33,%rdi
+    0.00 :   73a0:   xchg   %rbx,%rbx
+    0.00 :   73a3:   mov    %rdx,0x40(%rsp)
+    0.00 :   73a8:   mov    0x40(%rsp),%rax
+         : 1073 void               disable() noexcept { send("disable\n"); }
+    0.00 :   73ad:   mov    $0x8,%edx
+    0.00 :   73b2:   lea    0x78(%rsp),%rdi
+    0.00 :   73b7:   lea    0x2c194(%rip),%rsi        # 33552 <_IO_stdin_used+0x1552>
+    0.00 :   73be:   call   28260 <lob::harness::PerfControl::send(std::__1::basic_string_view<char, std::__1::char_traits<char> >)>
+         : 1078 const auto t1 = std::chrono::steady_clock::now();
+    0.00 :   73c3:   call   3390 <std::__1::chrono::steady_clock::now()@plt>
+    0.00 :   73c8:   mov    0x20(%rsp),%rcx
+    0.00 :   73cd:   mov    0x208(%rsp),%rdx
+    0.00 :   73d5:   sar    $0x3,%rdx
+    0.00 :   73d9:   movabs $0xaaaaaaaaaaaaaaab,%rcx
+    0.00 :   73e3:   imul   %rcx,%rdx
+         : 1085 std::size_t size()const noexcept{return size_ctrl.size;}
+    0.00 :   73e7:   mov    0x60(%r14),%rcx
+         : 1087 return _Cd(_Cd(__lhs).count() - _Cd(__rhs).count());
+    0.00 :   73eb:   sub    0x210(%rsp),%rax
+         : 1089 static_cast<typename _ToDuration::rep>(static_cast<_Ct>(__fd.count()) / static_cast<_Ct>(_Period::den)));
+    0.00 :   73f3:   vcvtsi2sd %rax,%xmm15,%xmm0
+    0.00 :   73f8:   vdivsd 0x2ac88(%rip),%xmm0,%xmm0        # 32088 <_IO_stdin_used+0x88>
+         : 1092 std::println(stdout, __fmt, std::forward<_Args>(__args)...);
+    0.00 :   7400:   mov    0x37bd9(%rip),%rax        # 3efe0 <stdout@GLIBC_2.2.5>
+    0.00 :   7407:   mov    (%rax),%r15
+    0.00 :   740a:   lea    0x2c14a(%rip),%rax        # 3355b <_IO_stdin_used+0x155b>
+    0.00 :   7411:   mov    %rax,0xc0(%rsp)
+    0.00 :   7419:   movq   $0x2,0xc8(%rsp)
+    0.00 :   7425:   mov    0x80(%rsp),%r12
+    0.00 :   742d:   mov    %r12d,%eax
+    0.00 :   7430:   mov    %rax,0xd0(%rsp)
+    0.00 :   7438:   movq   $0x0,0xd8(%rsp)
+    0.00 :   7444:   mov    %rdx,0xe0(%rsp)
+    0.00 :   744c:   movq   $0x0,0xe8(%rsp)
+         : 1104 return basic_format_arg<_Context>{__arg, static_cast<unsigned long long>(__value)};
+    0.00 :   7458:   mov    0x20(%rsp),%rax
+    0.00 :   745d:   mov    0x28(%rsp),%rdx
+         : 1107 *__values++ = __arg.__value_;
+    0.00 :   7462:   mov    %rdx,0xf0(%rsp)
+    0.00 :   746a:   movq   $0x0,0xf8(%rsp)
+         : 1110 return basic_format_arg<_Context>{__arg, static_cast<unsigned long long>(__value)};
+    0.00 :   7476:   mov    0x30(%rsp),%rdx
+         : 1112 *__values++ = __arg.__value_;
+    0.00 :   747b:   mov    %rdx,0x100(%rsp)
+    0.00 :   7483:   movq   $0x0,0x108(%rsp)
+    0.00 :   748f:   mov    %rax,0x110(%rsp)
+    0.00 :   7497:   movq   $0x0,0x118(%rsp)
+    0.00 :   74a3:   mov    %rcx,0x120(%rsp)
+    0.00 :   74ab:   movq   $0x0,0x128(%rsp)
+    0.00 :   74b7:   movabs $0x51ce739c6d,%rax
+         : 1120 __types |= static_cast<uint64_t>(__arg.__type_) << __shift;
+    0.00 :   74c1:   mov    %rax,0x140(%rsp)
+         : 1122 *__values++ = __arg.__value_;
+    0.00 :   74c9:   vmovsd %xmm0,0x130(%rsp)
+         : 1124 return std::__is_posix_terminal(__stream);
+    0.00 :   74d2:   movq   $0x8,0x40(%rsp)
+    0.00 :   74db:   mov    %rbx,0x48(%rsp)
+    0.00 :   74e0:   mov    %rax,0x50(%rsp)
+    0.00 :   74e5:   mov    %r15,%rdi
+    0.00 :   74e8:   call   3490 <std::__1::__is_posix_terminal(_IO_FILE*)@plt>
+         : 1130 if (__is_terminal)
+    0.00 :   74ed:   test   %al,%al
+    0.00 :   74ef:   je     74f9 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xd79>
+         : 1133 std::fflush(__stream);
+    0.00 :   74f1:   mov    %r15,%rdi
+    0.00 :   74f4:   call   3560 <fflush@plt>
+         : 1136 __print::__vprint_nonunicode(__stream, __fmt, __args, __write_nl);
+    0.00 :   74f9:   mov    0x50(%rsp),%rax
+    0.00 :   74fe:   mov    %rax,0x10(%rsp)
+    0.00 :   7503:   vmovupd 0x40(%rsp),%xmm0
+    0.00 :   7509:   vmovupd %xmm0,(%rsp)
+    0.00 :   750e:   mov    $0x53,%edx
+    0.00 :   7513:   mov    %r15,%rdi
+    0.00 :   7516:   lea    0x2bfd9(%rip),%rsi        # 334f6 <_IO_stdin_used+0x14f6>
+    0.00 :   751d:   mov    $0x1,%ecx
+    0.00 :   7522:   call   11ec0 <void std::__1::__print::__vprint_nonunicode[abi:ne210105]<void>(_IO_FILE*, std::__1::basic_string_view<char, std::__1::char_traits<char> >, std::__1::basic_format_args<std::__1::basic_format_context<std::__1::back_insert_iterator<std::__1::__format::__output_buffer<char> >, char> >, bool)>
+         : 1146 value_type* elements()const noexcept{return boost::to_address(elements_);}
+    0.00 :   7527:   mov    0x50(%r14),%rdi
+         : 1148 if(arrays.elements()){
+    0.00 :   752b:   test   %rdi,%rdi
+    0.00 :   752e:   movabs $0x9e3779b97f4a7c15,%rbx
+    0.00 :   7538:   je     6e70 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x6f0>
+         : 1152 sizeof(value_type)*(groups_size*N-1)+
+    0.00 :   753e:   imul   $0x1f0,0x40(%r14),%rsi
+    0.00 :   7546:   add    $0x1f0,%rsi
+         : 1155 [[__maybe_unused__]] size_t __size = static_cast<size_t>(__n) * sizeof(_Tp);
+    0.00 :   754d:   and    $0xffffffffffffffe0,%rsi
+         : 1157 return __builtin_operator_delete(__ptr _LIBCPP_ONLY_IF_SIZED_DEALLOCATION(, __size));
+    0.00 :   7551:   call   3530 <operator delete(void*, unsigned long)@plt>
+    0.00 :   7556:   jmp    6e70 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x6f0>
+    0.00 :   755b:   movb   $0x1,0x38(%rsp)
+    0.00 :   7560:   mov    0x1f0(%rsp),%rdx
+    0.00 :   7568:   cmpw   $0x3276,(%rdx)
+         : 1163 if (B::name == name) {
+    0.00 :   756d:   jne    6cfc <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x57c>
+    0.00 :   7573:   cmpl   $0x0,0x1c(%rsp)
+         : 1166 for (int r = 0; r < repeat; ++r) {
+    0.00 :   7578:   jle    7c70 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x14f0>
+    0.00 :   757e:   movabs $0x9e3779b97f4a7c15,%r13
+    0.00 :   7588:   movq   $0x0,0x70(%rsp)
+    0.00 :   7591:   vxorpd %xmm0,%xmm0,%xmm0
+    0.00 :   7595:   jmp    75e1 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xe61>
+    0.00 :   7597:   nopw   0x0(%rax,%rax,1)
+         : 1173 return static_cast<__node_pointer>(__end_node()->__left_);
+    0.00 :   75a0:   mov    0x28(%r14),%rsi
+         : 1175 destroy(__root());
+    0.00 :   75a4:   lea    0x20(%r14),%rdi
+    0.00 :   75a8:   call   235c0 <std::__1::__tree<std::__1::__value_type<long, lob::v2::Book<lob::ChecksumSink>::Level>, std::__1::__map_value_compare<long, std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level>, std::__1::less<void>, true>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >::destroy(std::__1::__tree_node<std::__1::__value_type<long, lob::v2::Book<lob::ChecksumSink>::Level>, void*>*)>
+         : 1178 return static_cast<__node_pointer>(__end_node()->__left_);
+    0.00 :   75ad:   mov    0x10(%r14),%rsi
+         : 1180 destroy(__root());
+    0.00 :   75b1:   lea    0x8(%r14),%rdi
+    0.00 :   75b5:   call   23600 <std::__1::__tree<std::__1::__value_type<long, lob::v2::Book<lob::ChecksumSink>::Level>, std::__1::__map_value_compare<long, std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level>, std::__1::greater<void>, true>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >::destroy(std::__1::__tree_node<std::__1::__value_type<long, lob::v2::Book<lob::ChecksumSink>::Level>, void*>*)>
+         : 1183 delete __ptr;
+    0.00 :   75ba:   mov    $0x88,%esi
+    0.00 :   75bf:   mov    %r14,%rdi
+    0.00 :   75c2:   call   3530 <operator delete(void*, unsigned long)@plt>
+    0.00 :   75c7:   mov    0x70(%rsp),%rax
+    0.00 :   75cc:   inc    %eax
+    0.00 :   75ce:   mov    %rax,0x70(%rsp)
+    0.00 :   75d3:   cmp    0x1c(%rsp),%eax
+    0.00 :   75d7:   vxorpd %xmm0,%xmm0,%xmm0
+    0.00 :   75db:   je     7c70 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x14f0>
+         : 1193 std::uint64_t events = 0;
+    0.00 :   75e1:   vmovapd %xmm0,0x20(%rsp)
+    0.00 :   75e7:   movq   $0x0,0x30(%rsp)
+         : 1196 return unique_ptr<_Tp>(new _Tp(std::forward<_Args>(__args)...));
+    0.00 :   75f0:   mov    $0x88,%edi
+    0.00 :   75f5:   call   30f0 <operator new(unsigned long)@plt>
+    0.00 :   75fa:   mov    %rax,%r14
+         : 1200 Side side;
+         : 1201 Price price;
+         : 1202 Qty qty;
+         : 1203 };
+         :
+         : 1205 explicit Book(Sink& sink) : sink_(sink) {}
+    0.00 :   75fd:   lea    0x20(%rsp),%rax
+    0.00 :   7602:   mov    %rax,(%r14)
+         : 1208 __tree<_Tp, _Compare, _Allocator>::__tree(const value_compare& __comp) _NOEXCEPT_(
+    0.00 :   7605:   lea    0x10(%r14),%rax
+    0.00 :   7609:   vpxor  %xmm1,%xmm1,%xmm1
+         : 1211 : __size_(0), __value_comp_(__comp) {
+    0.00 :   760d:   vmovdqu %xmm1,0x10(%r14)
+         : 1213 __begin_node() = __end_node();
+    0.00 :   7613:   mov    %rax,0x8(%r14)
+         : 1215 __tree<_Tp, _Compare, _Allocator>::__tree(const value_compare& __comp) _NOEXCEPT_(
+    0.00 :   7617:   lea    0x28(%r14),%rax
+         : 1217 : __size_(0), __value_comp_(__comp) {
+    0.00 :   761b:   vxorpd %xmm0,%xmm0,%xmm0
+    0.00 :   761f:   vmovupd %ymm0,0x28(%r14)
+         : 1220 __begin_node() = __end_node();
+    0.00 :   7625:   mov    %rax,0x20(%r14)
+         :
+         : 1223 _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI bool __invariants() const;
+         :
+         : 1225 private:
+         : 1226 pointer __begin_ = nullptr;
+         : 1227 pointer __end_   = nullptr;
+    0.00 :   7629:   movq   $0x0,0x48(%r14)
+         :
+         : 1230 Sink& sink_;
+         : 1231 Bids bids_;
+         : 1232 Asks asks_;
+         : 1233 std::vector<OrderNode> nodes_;
+         : 1234 std::uint32_t free_head_ = kNil;
+    0.00 :   7631:   movl   $0xffffffff,0x50(%r14)
+         : 1236 groups_size_index{gsi},groups_size_mask{gsm},groups_{pg},elements_{pe}{}
+    0.00 :   7639:   movq   $0x3f,0x58(%r14)
+    0.00 :   7641:   movq   $0x1,0x60(%r14)
+    0.00 :   7649:   movq   $0x0,0x70(%r14)
+    0.00 :   7651:   lea    0x2f728(%rip),%rax        # 36d80 <boost::unordered::detail::foa::dummy_groups<boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, 2ul>()::storage>
+    0.00 :   7658:   mov    %rax,0x68(%r14)
+         : 1242 size_ctrl{initial_max_load(),0}
+    0.00 :   765c:   vmovdqu %xmm1,0x78(%r14)
+         : 1244 : __ptr_(__p),
+    0.00 :   7662:   mov    %r14,0xa8(%rsp)
+         : 1246 const auto t0 = std::chrono::steady_clock::now();
+    0.00 :   766a:   vzeroupper
+    0.00 :   766d:   call   3390 <std::__1::chrono::steady_clock::now()@plt>
+    0.00 :   7672:   mov    %rax,0x88(%rsp)
+         : 1250 void               enable() noexcept { send("enable\n"); }
+    0.00 :   767a:   mov    $0x7,%edx
+    0.00 :   767f:   lea    0x78(%rsp),%rdi
+    0.00 :   7684:   lea    0x2bebf(%rip),%rsi        # 3354a <_IO_stdin_used+0x154a>
+    0.00 :   768b:   call   28260 <lob::harness::PerfControl::send(std::__1::basic_string_view<char, std::__1::char_traits<char> >)>
+         : 1255 LOB_CG_START;
+    0.00 :   7690:   movq   $0x43470000,0xc0(%rsp)
+    0.00 :   769c:   movq   $0x0,0xc8(%rsp)
+    0.00 :   76a8:   movq   $0x0,0xd0(%rsp)
+    0.00 :   76b4:   movq   $0x0,0xd8(%rsp)
+    0.00 :   76c0:   movq   $0x0,0xe0(%rsp)
+    0.00 :   76cc:   movq   $0x0,0xe8(%rsp)
+    0.00 :   76d8:   lea    0xc0(%rsp),%rax
+    0.00 :   76e0:   xor    %edx,%edx
+    0.00 :   76e2:   rol    $0x3,%rdi
+    0.00 :   76e6:   rol    $0xd,%rdi
+    0.00 :   76ea:   rol    $0x3d,%rdi
+    0.00 :   76ee:   rol    $0x33,%rdi
+    0.00 :   76f2:   xchg   %rbx,%rbx
+    0.00 :   76f5:   mov    %rdx,0x40(%rsp)
+    0.00 :   76fa:   mov    0x40(%rsp),%rax
+         : 1271 return std::__to_address(this->__begin_);
+    0.00 :   76ff:   mov    0x350(%rsp),%r15
+         : 1273 return static_cast<size_type>(this->__end_ - this->__begin_);
+    0.00 :   7707:   mov    0x358(%rsp),%rax
+    0.00 :   770f:   mov    %rax,0x68(%rsp)
+    0.00 :   7714:   sub    %r15,%rax
+    0.00 :   7717:   mov    %rax,0x80(%rsp)
+    0.00 :   771f:   jne    7752 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xfd2>
+    0.00 :   7721:   jmp    7a3f <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x12bf>
+    0.00 :   7726:   cs nopw 0x0(%rax,%rax,1)
+         : 1281 book.modify(op.id, op.price, op.qty);
+    0.11 :   7730:   mov    0x10(%r15),%rdx
+    0.00 :   7734:   mov    0x4(%r15),%ecx
+    0.00 :   7738:   mov    %r14,%rdi
+    0.00 :   773b:   mov    %rbp,%rsi
+    0.00 :   773e:   call   23a00 <lob::v2::Book<lob::ChecksumSink>::modify(unsigned long, long, unsigned int)>
+         : 1287 ++__i_;
+    0.00 :   7743:   add    $0x18,%r15
+         : 1289 return __x.base() == __y.base();
+    0.43 :   7747:   cmp    0x68(%rsp),%r15
+         : 1291 for (const Op& op : ops) {
+    0.00 :   774c:   je     7a3f <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x12bf>
+         : 1293 switch (op.type) {
+    0.00 :   7752:   movzbl (%r15),%eax
+    0.11 :   7756:   mov    0x8(%r15),%rbp
+    0.00 :   775a:   cmp    $0x2,%eax
+    0.00 :   775d:   je     7730 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xfb0>
+    0.00 :   775f:   cmp    $0x1,%eax
+    0.00 :   7762:   jne    7850 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x10d0>
+         : 1300 __uint128_t r = (__uint128_t)x * y;
+    0.11 :   7768:   mov    %rbp,%rdx
+    0.00 :   776b:   mulx   %r13,%rcx,%rax
+         : 1303 return (boost::uint64_t)r ^ (boost::uint64_t)( r >> 64 );
+    0.32 :   7770:   xor    %rcx,%rax
+         : 1305 return size_policy::position(hash,arrays_.groups_size_index);
+    0.00 :   7773:   movzbl 0x58(%r14),%ecx
+         : 1307 return hash>>size_index_;
+    0.00 :   7778:   shrx   %rcx,%rax,%rcx
+    0.00 :   777d:   mov    0x68(%r14),%rdx
+    0.11 :   7781:   movzbl %al,%esi
+    0.00 :   7784:   lea    0x2f615(%rip),%rdi        # 36da0 <boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>::match_word(unsigned long)::word>
+    0.11 :   778b:   vpbroadcastd (%rdi,%rsi,4),%xmm0
+    0.65 :   7791:   mov    0x70(%r14),%rsi
+    0.00 :   7795:   and    $0x7,%eax
+    0.00 :   7798:   mov    0x60(%r14),%rdi
+    0.00 :   779c:   xor    %r8d,%r8d
+         : 1317 auto pg=arrays.groups()+pos;
+    0.00 :   779f:   mov    %rcx,%r12
+    0.00 :   77a2:   shl    $0x4,%r12
+         : 1320 return _mm_load_si128(reinterpret_cast<const __m128i*>(m));
+    0.00 :   77a6:   vmovdqa (%rdx,%r12,1),%xmm1
+         : 1322 _mm_cmpeq_epi8(load_metadata(),_mm_set1_epi32(match_word(hash))))&0x7FFF;
+    0.43 :   77ac:   vpcmpeqb %xmm0,%xmm1,%k0
+         : 1324 return _mm_movemask_epi8(
+    1.08 :   77b2:   kmovd  %k0,%r9d
+         : 1326 if(mask){
+    0.65 :   77b6:   and    $0x7fff,%r9w
+    0.00 :   77bc:   je     7800 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1080>
+    0.32 :   77be:   add    %rdx,%r12
+         : 1330 _mm_cmpeq_epi8(load_metadata(),_mm_set1_epi32(match_word(hash))))&0x7FFF;
+    0.00 :   77c1:   movzwl %r9w,%r10d
+         : 1332 auto p=elements+pos*N;
+    0.43 :   77c5:   imul   $0x1e0,%rcx,%r11
+    0.00 :   77cc:   lea    (%rsi,%r11,1),%r9
+         : 1335 BOOST_UNORDERED_PREFETCH_ELEMENTS(p,N);
+    0.00 :   77d0:   prefetcht0 (%rsi,%r11,1)
+         : 1337 return (unsigned int)__builtin_ctz((unsigned int)x);
+    0.54 :   77d5:   tzcnt  %r10d,%ebx
+         : 1339 if(BOOST_LIKELY(bool(pred()(x,key_from(p[n]))))){
+    0.86 :   77da:   mov    %ebx,%r11d
+    0.22 :   77dd:   shl    $0x5,%r11d
+         : 1342 return __x == __y;
+    0.22 :   77e1:   cmp    (%r9,%r11,1),%rbp
+    0.00 :   77e5:   je     7870 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x10f0>
+         : 1345 }while(mask);
+    0.97 :   77eb:   blsr   %r10d,%r10d
+    0.11 :   77f0:   jne    77d5 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1055>
+    0.00 :   77f2:   data16 data16 data16 data16 cs nopw 0x0(%rax,%rax,1)
+    0.22 :   7800:   vpextrb $0xf,%xmm1,%r9d
+         : 1350 return !(overflow()&shift[hash%8]);
+    1.08 :   7806:   lea    0x2f993(%rip),%r10        # 371a0 <boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>::is_not_overflowed(unsigned long) const::shift>
+    0.00 :   780d:   test   %r9b,(%rax,%r10,1)
+         : 1353 if(BOOST_LIKELY(pg->is_not_overflowed(hash))){
+    0.00 :   7811:   je     7827 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x10a7>
+         : 1355 pos=(pos+step)&mask;
+    0.22 :   7813:   lea    0x1(%r8,%rcx,1),%rcx
+         : 1357 step+=1;
+    0.00 :   7818:   inc    %r8
+         : 1359 pos=(pos+step)&mask;
+    0.00 :   781b:   and    %rdi,%rcx
+         : 1361 return step<=mask;
+    0.00 :   781e:   cmp    %rdi,%r8
+         : 1363 }
+    0.00 :   7821:   jbe    779f <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x101f>
+         : 1365 void reject(OrderId id, OpType op, RejectReason reason) { sink_.on(Rejected{id, op, reason}); }
+    0.00 :   7827:   mov    (%r14),%rax
+         : 1367 ++events;
+    0.00 :   782a:   incq   0x8(%rax)
+         : 1369 ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.00 :   782e:   mov    (%rax),%rcx
+    0.00 :   7831:   xor    $0x5,%rcx
+    0.00 :   7835:   imul   %r13,%rcx
+    0.00 :   7839:   xor    %rbp,%rcx
+    0.00 :   783c:   mov    $0x3,%edx
+    0.00 :   7841:   mov    $0x1,%ebp
+         : 1376 if (it == index_.end()) return reject(id, OpType::Cancel, RejectReason::UnknownId);
+    0.00 :   7846:   jmp    7a1b <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x129b>
+    0.00 :   784b:   nopl   0x0(%rax,%rax,1)
+         : 1379 book.push(op.id, op.side, op.price, op.qty);
+    0.11 :   7850:   movzbl 0x1(%r15),%edx
+    0.00 :   7855:   mov    0x10(%r15),%rcx
+    0.22 :   7859:   mov    0x4(%r15),%r8d
+    0.00 :   785d:   mov    %r14,%rdi
+    0.00 :   7860:   mov    %rbp,%rsi
+    0.00 :   7863:   call   23640 <lob::v2::Book<lob::ChecksumSink>::push(unsigned long, lob::Side, long, unsigned int)>
+    0.22 :   7868:   jmp    7743 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xfc3>
+    0.00 :   786d:   nopl   (%rax)
+    4.65 :   7870:   add    %r11,%r9
+         : 1389 const Qty remaining = nodes_[it->second.node].qty;
+    0.00 :   7873:   mov    0x18(%r9),%eax
+         : 1391 return this->__begin_[__n];
+    0.43 :   7877:   mov    0x38(%r14),%rcx
+    0.00 :   787b:   lea    (%rax,%rax,2),%rdx
+    0.43 :   787f:   mov    0x8(%rcx,%rdx,8),%esi
+   19.14 :   7883:   mov    %rsi,0x38(%rsp)
+         : 1396 const Loc& loc = it->second;
+    1.51 :   7888:   lea    0x8(%r9),%rsi
+         : 1398 auto remove_from = [&](auto& levels) {
+    0.00 :   788c:   mov    %rsi,0xc0(%rsp)
+    0.00 :   7894:   mov    %r14,0xc8(%rsp)
+         : 1401 if (loc.side == Side::Buy)
+    0.00 :   789c:   cmpb   $0x0,0x8(%r9)
+    0.32 :   78a1:   je     7923 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x11a3>
+    0.00 :   78a7:   lea    0x28(%r14),%r8
+         : 1405 return static_cast<__node_pointer>(__end_node()->__left_);
+    0.11 :   78ab:   mov    (%r8),%rdi
+         : 1407 while (__root != nullptr) {
+    0.11 :   78ae:   test   %rdi,%rdi
+    0.00 :   78b1:   je     78e7 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1167>
+    0.11 :   78b3:   mov    0x10(%r9),%rsi
+    0.00 :   78b7:   mov    %r8,%r13
+    0.00 :   78ba:   mov    %rdi,%r8
+    0.00 :   78bd:   nopl   (%rax)
+         : 1414 return std::forward<_T1>(__t) < std::forward<_T2>(__u);
+    2.59 :   78c0:   xor    %r9d,%r9d
+    0.11 :   78c3:   cmp    %rsi,0x20(%r8)
+   23.46 :   78c7:   setl   %r9b
+         : 1418 if (!value_comp()(__root->__value_, __v)) {
+    2.27 :   78cb:   cmovge %r8,%r13
+    1.51 :   78cf:   mov    (%r8,%r9,8),%r8
+         : 1421 while (__root != nullptr) {
+   14.49 :   78d3:   test   %r8,%r8
+    0.00 :   78d6:   jne    78c0 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1140>
+    2.05 :   78d8:   lea    0x28(%r14),%r8
+         : 1425 return __x.__ptr_ == __y.__ptr_;
+    0.54 :   78dc:   cmp    %r8,%r13
+         : 1427 if (__p != end() && !value_comp()(__v, *__p))
+    0.00 :   78df:   je     78e7 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1167>
+    0.32 :   78e1:   cmp    0x20(%r13),%rsi
+    0.00 :   78e5:   jge    78ea <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x116a>
+    0.00 :   78e7:   mov    %r8,%r13
+    0.76 :   78ea:   lea    (%rcx,%rdx,8),%rdx
+    0.11 :   78ee:   mov    0x38(%rsp),%rsi
+         : 1434 level.total_qty -= nodes_[loc.node].qty;
+    0.32 :   78f3:   sub    %rsi,0x30(%r13)
+    2.05 :   78f7:   mov    0xc(%rdx),%r8d
+         : 1437 if (n.prev != kNil)
+    0.11 :   78fb:   mov    0x10(%rdx),%esi
+    0.11 :   78fe:   mov    $0xffffffff,%r9d
+    0.11 :   7904:   cmp    %r9,%rsi
+    0.00 :   7907:   je     7936 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x11b6>
+    0.54 :   7909:   lea    (%rsi,%rsi,2),%r9
+         : 1443 nodes_[n.prev].next = n.next;
+    0.32 :   790d:   mov    %r8d,0xc(%rcx,%r9,8)
+         : 1445 if (n.next != kNil)
+    1.41 :   7912:   cmp    $0xffffffff,%r8d
+    0.00 :   7916:   je     7940 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x11c0>
+    0.65 :   7918:   lea    (%r8,%r8,2),%r8
+         : 1449 nodes_[n.next].prev = n.prev;
+    0.43 :   791c:   mov    %esi,0x10(%rcx,%r8,8)
+    1.30 :   7921:   jmp    7944 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x11c4>
+         : 1452 remove_from(bids_);
+    0.00 :   7923:   lea    0xc0(%rsp),%rdi
+    0.32 :   792b:   lea    0x8(%r14),%rsi
+    0.11 :   792f:   call   25360 <auto lob::v2::Book<lob::ChecksumSink>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&) const>
+    0.00 :   7934:   jmp    79b5 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1235>
+         : 1457 level.head = n.next;
+    0.43 :   7936:   mov    %r8d,0x28(%r13)
+         : 1459 if (n.next != kNil)
+    0.43 :   793a:   cmp    $0xffffffff,%r8d
+    0.00 :   793e:   jne    7918 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1198>
+         : 1462 level.tail = n.prev;
+    0.00 :   7940:   mov    %esi,0x2c(%r13)
+         : 1464 --level.count;
+    0.22 :   7944:   decl   0x38(%r13)
+         : 1466 nodes_[i].next = free_head_;
+    0.97 :   7948:   mov    0x50(%r14),%ecx
+    0.11 :   794c:   mov    %ecx,0xc(%rdx)
+         : 1469 free_head_ = i;
+    0.11 :   794f:   mov    %eax,0x50(%r14)
+         : 1471 if (level.head == kNil) levels.erase(level_it);
+    0.00 :   7953:   cmpl   $0xffffffff,0x28(%r13)
+    0.00 :   7958:   jne    79b5 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1235>
+         : 1474 if (__x->__right_ != nullptr)
+    0.00 :   795a:   mov    0x8(%r13),%rcx
+    0.00 :   795e:   mov    %r13,%rax
+    0.00 :   7961:   test   %rcx,%rcx
+    0.00 :   7964:   je     7980 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1200>
+    0.00 :   7966:   cs nopw 0x0(%rax,%rax,1)
+    0.00 :   7970:   mov    %rcx,%rax
+         : 1481 while (__x->__left_ != nullptr)
+    0.11 :   7973:   mov    (%rcx),%rcx
+    0.22 :   7976:   test   %rcx,%rcx
+    0.00 :   7979:   jne    7970 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x11f0>
+    0.00 :   797b:   jmp    798c <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x120c>
+    0.00 :   797d:   nopl   (%rax)
+    0.11 :   7980:   mov    %rax,%rcx
+         : 1488 return __x == __x->__parent_->__left_;
+    0.00 :   7983:   mov    0x10(%rax),%rax
+    0.00 :   7987:   cmp    (%rax),%rcx
+         : 1491 while (!std::__tree_is_left_child(__x))
+    0.00 :   798a:   jne    7980 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1200>
+         : 1493 if (__begin_node() == __ptr)
+    0.43 :   798c:   lea    0x20(%r14),%rcx
+    0.00 :   7990:   cmp    %r13,(%rcx)
+    0.00 :   7993:   jne    799c <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x121c>
+         : 1497 __begin_node() = __r.__ptr_;
+    0.00 :   7995:   lea    0x20(%r14),%rcx
+    0.00 :   7999:   mov    %rax,(%rcx)
+         : 1500 --size();
+    0.00 :   799c:   decq   0x30(%r14)
+         : 1502 std::__tree_remove(__end_node()->__left_, static_cast<__node_base_pointer>(__ptr));
+    0.00 :   79a0:   mov    %r13,%rsi
+    0.00 :   79a3:   call   1eaa0 <void std::__1::__tree_remove[abi:ne210105]<std::__1::__tree_node_base<void*>*>(std::__1::__tree_node_base<void*>*, std::__1::__tree_node_base<void*>*)>
+    0.00 :   79a8:   mov    $0x40,%esi
+    0.00 :   79ad:   mov    %r13,%rdi
+    0.00 :   79b0:   call   3530 <operator delete(void*, unsigned long)@plt>
+    0.32 :   79b5:   add    %rbx,%r12
+    0.00 :   79b8:   movzbl (%r12),%eax
+         : 1510 return m[pos];
+    0.22 :   79bd:   mov    %r12,%rcx
+    0.11 :   79c0:   or     $0xf,%rcx
+         : 1513 return !(overflow()&shift[hash%8]);
+    0.22 :   79c4:   and    $0x7,%eax
+    0.11 :   79c7:   lea    0x2f7d2(%rip),%rdx        # 371a0 <boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>::is_not_overflowed(unsigned long) const::shift>
+    0.11 :   79ce:   movzbl (%rax,%rdx,1),%eax
+    0.65 :   79d2:   and    (%rcx),%al
+         : 1518 size_ctrl.ml-=group_type::maybe_caused_overflow(pc);
+    0.32 :   79d4:   neg    %al
+    0.00 :   79d6:   mov    $0x0,%eax
+    0.11 :   79db:   sbb    %rax,%rax
+    0.11 :   79de:   movb   $0x0,(%r12)
+    0.00 :   79e3:   vpmovsxbq 0x2aabe(%rip),%xmm0        # 324aa <_IO_stdin_used+0x4aa>
+    0.00 :   79ec:   vpinsrq $0x0,%rax,%xmm0,%xmm0
+    0.76 :   79f2:   vpaddq 0x78(%r14),%xmm0,%xmm0
+    0.32 :   79f8:   vmovdqu %xmm0,0x78(%r14)
+         : 1527 sink_.on(Cancelled{id, remaining});
+    0.00 :   79fe:   mov    (%r14),%rax
+         : 1529 ++events;
+    0.00 :   7a01:   incq   0x8(%rax)
+         : 1531 ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.11 :   7a05:   mov    (%rax),%rcx
+    0.00 :   7a08:   xor    $0x3,%rcx
+    0.00 :   7a0c:   movabs $0x9e3779b97f4a7c15,%r13
+    0.43 :   7a16:   mov    0x38(%rsp),%rdx
+    0.11 :   7a1b:   imul   %r13,%rcx
+    0.00 :   7a1f:   xor    %rbp,%rcx
+    0.11 :   7a22:   imul   %r13,%rcx
+    0.00 :   7a26:   xor    %rdx,%rcx
+    0.00 :   7a29:   imul   %r13,%rcx
+    0.11 :   7a2d:   mov    %rcx,(%rax)
+         : 1542 ++__i_;
+    0.00 :   7a30:   add    $0x18,%r15
+         : 1544 return __x.base() == __y.base();
+    0.00 :   7a34:   cmp    0x68(%rsp),%r15
+         : 1546 for (const Op& op : ops) {
+    0.00 :   7a39:   jne    7752 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xfd2>
+         : 1548 LOB_CG_STOP;
+    0.00 :   7a3f:   movq   $0x43470001,0xc0(%rsp)
+    0.00 :   7a4b:   movq   $0x0,0xc8(%rsp)
+    0.00 :   7a57:   movq   $0x0,0xd0(%rsp)
+    0.00 :   7a63:   movq   $0x0,0xd8(%rsp)
+    0.00 :   7a6f:   movq   $0x0,0xe0(%rsp)
+    0.00 :   7a7b:   movq   $0x0,0xe8(%rsp)
+    0.00 :   7a87:   lea    0xc0(%rsp),%rbx
+    0.00 :   7a8f:   mov    %rbx,%rax
+    0.00 :   7a92:   xor    %edx,%edx
+    0.00 :   7a94:   rol    $0x3,%rdi
+    0.00 :   7a98:   rol    $0xd,%rdi
+    0.00 :   7a9c:   rol    $0x3d,%rdi
+    0.00 :   7aa0:   rol    $0x33,%rdi
+    0.00 :   7aa4:   xchg   %rbx,%rbx
+    0.00 :   7aa7:   mov    %rdx,0x40(%rsp)
+    0.00 :   7aac:   mov    0x40(%rsp),%rax
+         : 1565 void               disable() noexcept { send("disable\n"); }
+    0.00 :   7ab1:   mov    $0x8,%edx
+    0.00 :   7ab6:   lea    0x78(%rsp),%rdi
+    0.00 :   7abb:   lea    0x2ba90(%rip),%rsi        # 33552 <_IO_stdin_used+0x1552>
+    0.00 :   7ac2:   call   28260 <lob::harness::PerfControl::send(std::__1::basic_string_view<char, std::__1::char_traits<char> >)>
+         : 1570 const auto t1 = std::chrono::steady_clock::now();
+    0.00 :   7ac7:   call   3390 <std::__1::chrono::steady_clock::now()@plt>
+    0.00 :   7acc:   mov    0x20(%rsp),%rcx
+    0.00 :   7ad1:   mov    0x80(%rsp),%rdx
+         : 1574 return static_cast<size_type>(this->__end_ - this->__begin_);
+    0.00 :   7ad9:   sar    $0x3,%rdx
+    0.00 :   7add:   movabs $0xaaaaaaaaaaaaaaab,%rcx
+    0.00 :   7ae7:   imul   %rcx,%rdx
+         : 1578 std::size_t size()const noexcept{return size_ctrl.size;}
+    0.00 :   7aeb:   mov    0x80(%r14),%rcx
+         : 1580 return _Cd(_Cd(__lhs).count() - _Cd(__rhs).count());
+    0.00 :   7af2:   sub    0x88(%rsp),%rax
+         : 1582 static_cast<typename _ToDuration::rep>(static_cast<_Ct>(__fd.count()) / static_cast<_Ct>(_Period::den)));
+    0.00 :   7afa:   vcvtsi2sd %rax,%xmm15,%xmm0
+    0.00 :   7aff:   vdivsd 0x2a581(%rip),%xmm0,%xmm0        # 32088 <_IO_stdin_used+0x88>
+         : 1585 std::println(stdout, __fmt, std::forward<_Args>(__args)...);
+    0.00 :   7b07:   mov    0x374d2(%rip),%rax        # 3efe0 <stdout@GLIBC_2.2.5>
+    0.00 :   7b0e:   mov    (%rax),%r15
+    0.00 :   7b11:   lea    0x2ba46(%rip),%rax        # 3355e <_IO_stdin_used+0x155e>
+    0.00 :   7b18:   mov    %rax,0xc0(%rsp)
+    0.00 :   7b20:   movq   $0x2,0xc8(%rsp)
+    0.00 :   7b2c:   mov    0x70(%rsp),%eax
+    0.00 :   7b30:   mov    %rax,0xd0(%rsp)
+    0.00 :   7b38:   movq   $0x0,0xd8(%rsp)
+    0.00 :   7b44:   mov    %rdx,0xe0(%rsp)
+    0.00 :   7b4c:   movq   $0x0,0xe8(%rsp)
+         : 1596 return basic_format_arg<_Context>{__arg, static_cast<unsigned long long>(__value)};
+    0.00 :   7b58:   mov    0x20(%rsp),%rax
+    0.00 :   7b5d:   mov    0x28(%rsp),%rdx
+         : 1599 *__values++ = __arg.__value_;
+    0.00 :   7b62:   mov    %rdx,0xf0(%rsp)
+    0.00 :   7b6a:   movq   $0x0,0xf8(%rsp)
+         : 1602 return basic_format_arg<_Context>{__arg, static_cast<unsigned long long>(__value)};
+    0.00 :   7b76:   mov    0x30(%rsp),%rdx
+         : 1604 *__values++ = __arg.__value_;
+    0.00 :   7b7b:   mov    %rdx,0x100(%rsp)
+    0.00 :   7b83:   movq   $0x0,0x108(%rsp)
+    0.00 :   7b8f:   mov    %rax,0x110(%rsp)
+    0.00 :   7b97:   movq   $0x0,0x118(%rsp)
+    0.00 :   7ba3:   mov    %rcx,0x120(%rsp)
+    0.00 :   7bab:   movq   $0x0,0x128(%rsp)
+    0.00 :   7bb7:   movabs $0x51ce739c6d,%rax
+         : 1612 __types |= static_cast<uint64_t>(__arg.__type_) << __shift;
+    0.00 :   7bc1:   mov    %rax,0x140(%rsp)
+         : 1614 *__values++ = __arg.__value_;
+    0.00 :   7bc9:   vmovsd %xmm0,0x130(%rsp)
+         : 1616 return std::__is_posix_terminal(__stream);
+    0.00 :   7bd2:   movq   $0x8,0x40(%rsp)
+    0.00 :   7bdb:   mov    %rbx,0x48(%rsp)
+    0.00 :   7be0:   mov    %rax,0x50(%rsp)
+    0.00 :   7be5:   mov    %r15,%rdi
+    0.00 :   7be8:   call   3490 <std::__1::__is_posix_terminal(_IO_FILE*)@plt>
+         : 1622 if (__is_terminal)
+    0.00 :   7bed:   test   %al,%al
+    0.00 :   7bef:   je     7bf9 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1479>
+         : 1625 std::fflush(__stream);
+    0.00 :   7bf1:   mov    %r15,%rdi
+    0.00 :   7bf4:   call   3560 <fflush@plt>
+         : 1628 __print::__vprint_nonunicode(__stream, __fmt, __args, __write_nl);
+    0.00 :   7bf9:   mov    0x50(%rsp),%rax
+    0.00 :   7bfe:   mov    %rax,0x10(%rsp)
+    0.00 :   7c03:   vmovupd 0x40(%rsp),%xmm0
+    0.00 :   7c09:   vmovupd %xmm0,(%rsp)
+    0.00 :   7c0e:   mov    $0x53,%edx
+    0.00 :   7c13:   mov    %r15,%rdi
+    0.00 :   7c16:   lea    0x2b8d9(%rip),%rsi        # 334f6 <_IO_stdin_used+0x14f6>
+    0.00 :   7c1d:   mov    $0x1,%ecx
+    0.00 :   7c22:   call   11ec0 <void std::__1::__print::__vprint_nonunicode[abi:ne210105]<void>(_IO_FILE*, std::__1::basic_string_view<char, std::__1::char_traits<char> >, std::__1::basic_format_args<std::__1::basic_format_context<std::__1::back_insert_iterator<std::__1::__format::__output_buffer<char> >, char> >, bool)>
+         : 1638 value_type* elements()const noexcept{return boost::to_address(elements_);}
+    0.00 :   7c27:   mov    0x70(%r14),%rdi
+         : 1640 if(arrays.elements()){
+    0.00 :   7c2b:   test   %rdi,%rdi
+    0.00 :   7c2e:   je     7c48 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x14c8>
+         : 1643 sizeof(value_type)*(groups_size*N-1)+
+    0.00 :   7c30:   imul   $0x1f0,0x60(%r14),%rsi
+    0.00 :   7c38:   add    $0x1f0,%rsi
+         : 1646 [[__maybe_unused__]] size_t __size = static_cast<size_t>(__n) * sizeof(_Tp);
+    0.00 :   7c3f:   and    $0xffffffffffffffe0,%rsi
+         : 1648 return __builtin_operator_delete(__ptr _LIBCPP_ONLY_IF_SIZED_DEALLOCATION(, __size));
+    0.00 :   7c43:   call   3530 <operator delete(void*, unsigned long)@plt>
+    0.00 :   7c48:   mov    %r14,%rax
+    0.00 :   7c4b:   add    $0x38,%rax
+         : 1652 if (__vec_.__begin_ != nullptr) {
+    0.00 :   7c4f:   mov    (%rax),%rdi
+    0.00 :   7c52:   test   %rdi,%rdi
+    0.00 :   7c55:   je     75a0 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xe20>
+         :
+         : 1657 _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI void __base_destruct_at_end(pointer __new_last) _NOEXCEPT {
+         : 1658 pointer __soon_to_be_end = this->__end_;
+         : 1659 while (__new_last != __soon_to_be_end)
+         : 1660 __alloc_traits::destroy(this->__alloc_, std::__to_address(--__soon_to_be_end));
+         : 1661 this->__end_ = __new_last;
+    0.00 :   7c5b:   mov    %rdi,0x40(%r14)
+         : 1663 return static_cast<size_type>(this->__cap_ - this->__begin_);
+    0.00 :   7c5f:   mov    0x48(%r14),%rsi
+    0.00 :   7c63:   sub    %rdi,%rsi
+    0.00 :   7c66:   call   3530 <operator delete(void*, unsigned long)@plt>
+    0.00 :   7c6b:   jmp    75a0 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0xe20>
+         : 1668 if (__is_long())
+    0.00 :   7c70:   testb  $0x1,0x90(%rsp)
+    0.00 :   7c78:   je     7c93 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1513>
+         : 1671 return __rep_.__l.__cap_ * __endian_factor;
+    0.00 :   7c7a:   mov    0x90(%rsp),%rsi
+         : 1673 return _LIBCPP_ASAN_VOLATILE_WRAPPER(__rep_.__l.__data_);
+    0.00 :   7c82:   mov    0xa0(%rsp),%rdi
+         : 1675 return __rep_.__l.__cap_ * __endian_factor;
+    0.00 :   7c8a:   and    $0xfffffffffffffffe,%rsi
+    0.00 :   7c8e:   call   3530 <operator delete(void*, unsigned long)@plt>
+         : 1678 if (__vec_.__begin_ != nullptr) {
+    0.00 :   7c93:   mov    0x350(%rsp),%rdi
+    0.00 :   7c9b:   test   %rdi,%rdi
+    0.00 :   7c9e:   je     7cb0 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1530>
+         : 1682 return static_cast<size_type>(this->__cap_ - this->__begin_);
+    0.00 :   7ca0:   mov    0x360(%rsp),%rsi
+    0.00 :   7ca8:   sub    %rdi,%rsi
+    0.00 :   7cab:   call   3530 <operator delete(void*, unsigned long)@plt>
+         : 1686 w.ops.size(), sink.events, sink.trades, sink.value, book->order_count(),
+         : 1687 std::chrono::duration<double, std::milli>(t1 - t0).count());
+         : 1688 }
+         : 1689 });
+         : 1690 return 0;
+         : 1691 }
+    0.00 :   7cb0:   add    $0x368,%rsp
+    0.00 :   7cb7:   pop    %rbx
+    0.00 :   7cb8:   pop    %r12
+    0.00 :   7cba:   pop    %r13
+    0.00 :   7cbc:   pop    %r14
+    0.00 :   7cbe:   pop    %r15
+    0.00 :   7cc0:   pop    %rbp
+    0.00 :   7cc1:   ret
+    0.00 :   7cc2:   mov    %rax,%rbx
+         : 1701 if (__is_long())
+    0.00 :   7cc5:   testb  $0x1,0xa8(%rsp)
+    0.00 :   7ccd:   jne    7cf8 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1578>
+         : 1704 if (!found) throw std::invalid_argument(std::format("unknown version '{}'", name));
+    0.00 :   7ccf:   test   %bpl,%bpl
+    0.00 :   7cd2:   jne    7d37 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x15b7>
+    0.00 :   7cd4:   testb  $0x1,0x90(%rsp)
+    0.00 :   7cdc:   jne    7e1c <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x169c>
+         : 1709 if (__vec_.__begin_ != nullptr) {
+    0.00 :   7ce2:   mov    0x350(%rsp),%rdi
+    0.00 :   7cea:   test   %rdi,%rdi
+    0.00 :   7ced:   jne    7e42 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x16c2>
+    0.00 :   7cf3:   jmp    7e52 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x16d2>
+         : 1714 return __rep_.__l.__cap_ * __endian_factor;
+    0.00 :   7cf8:   mov    0xa8(%rsp),%rsi
+         : 1716 return _LIBCPP_ASAN_VOLATILE_WRAPPER(__rep_.__l.__data_);
+    0.00 :   7d00:   mov    0xb8(%rsp),%rdi
+         : 1718 return __rep_.__l.__cap_ * __endian_factor;
+    0.00 :   7d08:   and    $0xfffffffffffffffe,%rsi
+    0.00 :   7d0c:   call   3530 <operator delete(void*, unsigned long)@plt>
+    0.00 :   7d11:   test   %bpl,%bpl
+    0.00 :   7d14:   je     7cd4 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1554>
+    0.00 :   7d16:   jmp    7d37 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x15b7>
+    0.00 :   7d18:   jmp    7d1a <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x159a>
+    0.00 :   7d1a:   mov    %rax,%rbx
+         : 1726 if (__ptr_ != __small_buffer_)
+    0.00 :   7d1d:   mov    0x1e8(%rsp),%rdi
+    0.00 :   7d25:   cmp    %r15,%rdi
+    0.00 :   7d28:   je     7d37 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x15b7>
+         : 1730 [[nodiscard]] _LIBCPP_HIDE_FROM_ABI size_t __capacity() const { return __capacity_; }
+    0.00 :   7d2a:   mov    0xc8(%rsp),%rsi
+    0.00 :   7d32:   call   3530 <operator delete(void*, unsigned long)@plt>
+    0.00 :   7d37:   mov    %r14,%rdi
+    0.00 :   7d3a:   call   3030 <__cxa_free_exception@plt>
+         : 1735 if (__is_long())
+    0.00 :   7d3f:   testb  $0x1,0x90(%rsp)
+    0.00 :   7d47:   je     7ce2 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1562>
+    0.00 :   7d49:   jmp    7e1c <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x169c>
+    0.00 :   7d4e:   jmp    7da5 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1625>
+    0.00 :   7d50:   jmp    7da5 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1625>
+    0.00 :   7d52:   mov    %rax,%rbx
+    0.00 :   7d55:   mov    0x350(%rsp),%rdi
+    0.00 :   7d5d:   test   %rdi,%rdi
+    0.00 :   7d60:   jne    7e42 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x16c2>
+    0.00 :   7d66:   jmp    7e52 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x16d2>
+    0.00 :   7d6b:   mov    %rax,%rbx
+    0.00 :   7d6e:   testb  $0x1,0xc0(%rsp)
+    0.00 :   7d76:   je     7e52 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x16d2>
+         : 1749 return __rep_.__l.__cap_ * __endian_factor;
+    0.00 :   7d7c:   mov    0xc0(%rsp),%rsi
+         : 1751 return _LIBCPP_ASAN_VOLATILE_WRAPPER(__rep_.__l.__data_);
+    0.00 :   7d84:   mov    0xd0(%rsp),%rdi
+         : 1753 return __rep_.__l.__cap_ * __endian_factor;
+    0.00 :   7d8c:   and    $0xfffffffffffffffe,%rsi
+    0.00 :   7d90:   jmp    7e4d <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x16cd>
+    0.00 :   7d95:   mov    %rax,%rdi
+    0.00 :   7d98:   call   3520 <_Unwind_Resume@plt>
+    0.00 :   7d9d:   jmp    7da5 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1625>
+    0.00 :   7d9f:   jmp    7da5 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1625>
+    0.00 :   7da1:   jmp    7dba <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x163a>
+    0.00 :   7da3:   jmp    7ddc <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x165c>
+    0.00 :   7da5:   mov    %rax,%rbx
+         : 1763 if (__is_long())
+    0.00 :   7da8:   testb  $0x1,0x90(%rsp)
+    0.00 :   7db0:   je     7ce2 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1562>
+    0.00 :   7db6:   jmp    7e1c <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x169c>
+    0.00 :   7db8:   jmp    7dfc <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x167c>
+    0.00 :   7dba:   mov    %rax,%rbx
+    0.00 :   7dbd:   lea    0xa8(%rsp),%rdi
+         : 1770 _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX23 ~unique_ptr() { reset(); }
+    0.00 :   7dc5:   xor    %esi,%esi
+    0.00 :   7dc7:   call   25560 <std::__1::unique_ptr<lob::v2::Book<lob::ChecksumSink>, std::__1::default_delete<lob::v2::Book<lob::ChecksumSink> > >::reset[abi:ne210105](lob::v2::Book<lob::ChecksumSink>*)>
+    0.00 :   7dcc:   testb  $0x1,0x90(%rsp)
+    0.00 :   7dd4:   je     7ce2 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1562>
+    0.00 :   7dda:   jmp    7e1c <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x169c>
+    0.00 :   7ddc:   mov    %rax,%rbx
+    0.00 :   7ddf:   lea    0xa8(%rsp),%rdi
+         : 1778 }
+    0.00 :   7de7:   call   21740 <std::__1::unique_ptr<lob::v1::Book<lob::ChecksumSink>, std::__1::default_delete<lob::v1::Book<lob::ChecksumSink> > >::~unique_ptr[abi:ne210105]()>
+    0.00 :   7dec:   testb  $0x1,0x90(%rsp)
+    0.00 :   7df4:   je     7ce2 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1562>
+    0.00 :   7dfa:   jmp    7e1c <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x169c>
+    0.00 :   7dfc:   mov    %rax,%rbx
+    0.00 :   7dff:   lea    0xa8(%rsp),%rdi
+    0.00 :   7e07:   xor    %esi,%esi
+    0.00 :   7e09:   call   21590 <std::__1::unique_ptr<lob::v0::Book<lob::ChecksumSink>, std::__1::default_delete<lob::v0::Book<lob::ChecksumSink> > >::reset[abi:ne210105](lob::v0::Book<lob::ChecksumSink>*)>
+    0.00 :   7e0e:   testb  $0x1,0x90(%rsp)
+    0.00 :   7e16:   je     7ce2 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x1562>
+         : 1789 return __rep_.__l.__cap_ * __endian_factor;
+    0.00 :   7e1c:   mov    0x90(%rsp),%rsi
+         : 1791 return _LIBCPP_ASAN_VOLATILE_WRAPPER(__rep_.__l.__data_);
+    0.00 :   7e24:   mov    0xa0(%rsp),%rdi
+         : 1793 return __rep_.__l.__cap_ * __endian_factor;
+    0.00 :   7e2c:   and    $0xfffffffffffffffe,%rsi
+    0.00 :   7e30:   call   3530 <operator delete(void*, unsigned long)@plt>
+    0.00 :   7e35:   mov    0x350(%rsp),%rdi
+    0.00 :   7e3d:   test   %rdi,%rdi
+    0.00 :   7e40:   je     7e52 <(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)+0x16d2>
+         : 1799 return static_cast<size_type>(this->__cap_ - this->__begin_);
+    0.00 :   7e42:   mov    0x360(%rsp),%rsi
+    0.00 :   7e4a:   sub    %rdi,%rsi
+    0.00 :   7e4d:   call   3530 <operator delete(void*, unsigned long)@plt>
+    0.00 :   7e52:   mov    %rbx,%rdi
+    0.00 :   7e55:   call   3520 <_Unwind_Resume@plt>
+ Percent |	Source code & Disassembly of book for mem_load_retired.l3_miss:u (751 samples, percent: local period)
+---------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     0000000000025360 <auto lob::v2::Book<lob::ChecksumSink>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&) const>:
+         : 6     sink_.on(Rested{id, side, price, qty});
+         : 7     }
+         :
+         : 9     void erase(typename Index::iterator it) {
+         : 10    const Loc& loc = it->second;
+         : 11    auto remove_from = [&](auto& levels) {
+    0.80 :   25360:  push   %rbx
+         : 13    auto level_it = levels.find(loc.price);
+    0.00 :   25361:  mov    (%rdi),%rcx
+    0.13 :   25364:  mov    0x8(%rdi),%rax
+         : 16    public:
+         : 17    _LIBCPP_HIDE_FROM_ABI __end_node_pointer __end_node() _NOEXCEPT {
+         : 18    return pointer_traits<__end_node_pointer>::pointer_to(__end_node_);
+         : 19    }
+         : 20    _LIBCPP_HIDE_FROM_ABI __end_node_pointer __end_node() const _NOEXCEPT {
+         : 21    return pointer_traits<__end_node_pointer>::pointer_to(const_cast<__end_node_t&>(__end_node_));
+    0.00 :   25368:  lea    0x8(%rsi),%rdx
+         : 23    _LIBCPP_HIDE_FROM_ABI value_compare& value_comp() _NOEXCEPT { return __value_comp_; }
+         : 24    _LIBCPP_HIDE_FROM_ABI const value_compare& value_comp() const _NOEXCEPT { return __value_comp_; }
+         :
+         : 26    public:
+         : 27    _LIBCPP_HIDE_FROM_ABI __node_pointer __root() const _NOEXCEPT {
+         : 28    return static_cast<__node_pointer>(__end_node()->__left_);
+    0.00 :   2536c:  mov    0x8(%rsi),%rdi
+         :
+         : 31    template <class _Tp, class _Compare, class _Allocator>
+         : 32    template <class _Key>
+         : 33    typename __tree<_Tp, _Compare, _Allocator>::iterator
+         : 34    __tree<_Tp, _Compare, _Allocator>::__lower_bound(const _Key& __v, __node_pointer __root, __end_node_pointer __result) {
+         : 35    while (__root != nullptr) {
+    0.00 :   25370:  test   %rdi,%rdi
+    0.00 :   25373:  je     253a3 <auto lob::v2::Book<lob::ChecksumSink>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&) const+0x43>
+    0.00 :   25375:  mov    0x8(%rcx),%r8
+    0.13 :   25379:  mov    %rdx,%rbx
+    0.27 :   2537c:  mov    %rdi,%r9
+    0.00 :   2537f:  nop
+         : 42    struct greater<void> {
+         : 43    template <class _T1, class _T2>
+         : 44    _LIBCPP_CONSTEXPR_SINCE_CXX14 _LIBCPP_HIDE_FROM_ABI auto operator()(_T1&& __t, _T2&& __u) const
+         : 45    noexcept(noexcept(std::forward<_T1>(__t) > std::forward<_T2>(__u))) //
+         : 46    -> decltype(std::forward<_T1>(__t) > std::forward<_T2>(__u)) {
+         : 47    return std::forward<_T1>(__t) > std::forward<_T2>(__u);
+    3.60 :   25380:  xor    %r10d,%r10d
+    0.27 :   25383:  cmp    %r8,0x20(%r9)
+   48.07 :   25387:  setg   %r10b
+         : 51    if (!value_comp()(__root->__value_, __v)) {
+    4.13 :   2538b:  cmovle %r9,%rbx
+    1.86 :   2538f:  mov    (%r9,%r10,8),%r9
+         : 54    while (__root != nullptr) {
+   26.10 :   25393:  test   %r9,%r9
+    0.00 :   25396:  jne    25380 <auto lob::v2::Book<lob::ChecksumSink>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&) const+0x20>
+         : 57    return __x.__ptr_ == __y.__ptr_;
+    1.33 :   25398:  cmp    %rdx,%rbx
+         : 59    if (__p != end() && !value_comp()(__v, *__p))
+    0.00 :   2539b:  je     253a3 <auto lob::v2::Book<lob::ChecksumSink>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&) const+0x43>
+    1.46 :   2539d:  cmp    0x20(%rbx),%r8
+    0.00 :   253a1:  jle    253a6 <auto lob::v2::Book<lob::ChecksumSink>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&) const+0x46>
+    0.00 :   253a3:  mov    %rdx,%rbx
+         : 64    Level& level = level_it->second;
+         : 65    level.total_qty -= nodes_[loc.node].qty;
+    0.93 :   253a6:  mov    0x10(%rcx),%ecx
+         : 67    //
+         : 68    // element access
+         : 69    //
+         : 70    _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI reference operator[](size_type __n) _NOEXCEPT {
+         : 71    _LIBCPP_ASSERT_VALID_ELEMENT_ACCESS(__n < size(), "vector[] index out of bounds");
+         : 72    return this->__begin_[__n];
+    0.00 :   253a9:  mov    0x38(%rax),%rdx
+    0.13 :   253ad:  lea    (%rcx,%rcx,2),%r10
+    0.00 :   253b1:  mov    0x8(%rdx,%r10,8),%r8d
+    1.46 :   253b6:  sub    %r8,0x30(%rbx)
+    2.00 :   253ba:  mov    0xc(%rdx,%r10,8),%r9d
+         : 78    if (n.prev != kNil)
+    0.00 :   253bf:  mov    0x10(%rdx,%r10,8),%r8d
+    0.40 :   253c4:  mov    $0xffffffff,%r11d
+    0.13 :   253ca:  cmp    %r11,%r8
+    0.00 :   253cd:  je     253ed <auto lob::v2::Book<lob::ChecksumSink>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&) const+0x8d>
+    1.07 :   253cf:  lea    (%r8,%r8,2),%r11
+         : 84    nodes_[n.prev].next = n.next;
+    0.13 :   253d3:  mov    %r9d,0xc(%rdx,%r11,8)
+    1.20 :   253d8:  lea    (%rdx,%r10,8),%r10
+         : 87    if (n.next != kNil)
+    0.00 :   253dc:  cmp    $0xffffffff,%r9d
+    0.00 :   253e0:  je     253fb <auto lob::v2::Book<lob::ChecksumSink>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&) const+0x9b>
+    0.40 :   253e2:  lea    (%r9,%r9,2),%r9
+         : 91    nodes_[n.next].prev = n.prev;
+    0.13 :   253e6:  mov    %r8d,0x10(%rdx,%r9,8)
+    0.80 :   253eb:  jmp    253ff <auto lob::v2::Book<lob::ChecksumSink>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&) const+0x9f>
+         : 94    level.head = n.next;
+    1.73 :   253ed:  mov    %r9d,0x28(%rbx)
+    0.00 :   253f1:  lea    (%rdx,%r10,8),%r10
+         : 97    if (n.next != kNil)
+    0.00 :   253f5:  cmp    $0xffffffff,%r9d
+    0.00 :   253f9:  jne    253e2 <auto lob::v2::Book<lob::ChecksumSink>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&) const+0x82>
+         : 100   level.tail = n.prev;
+    0.13 :   253fb:  mov    %r8d,0x2c(%rbx)
+         : 102   --level.count;
+    0.13 :   253ff:  decl   0x38(%rbx)
+         : 104   nodes_[i].next = free_head_;
+    0.13 :   25402:  mov    0x50(%rax),%edx
+    0.00 :   25405:  mov    %edx,0xc(%r10)
+         : 107   free_head_ = i;
+    0.00 :   25409:  mov    %ecx,0x50(%rax)
+         : 109   unlink(level, loc.node);
+         : 110   free_node(loc.node);
+         : 111   if (level.head == kNil) levels.erase(level_it);
+    0.00 :   2540c:  cmpl   $0xffffffff,0x28(%rbx)
+    0.00 :   25410:  je     25414 <auto lob::v2::Book<lob::ChecksumSink>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&) const+0xb4>
+         : 114   };
+    0.00 :   25412:  pop    %rbx
+    0.00 :   25413:  ret
+         : 117   if (__x->__right_ != nullptr)
+    0.13 :   25414:  mov    0x8(%rbx),%rcx
+    0.00 :   25418:  test   %rcx,%rcx
+    0.00 :   2541b:  je     2542d <auto lob::v2::Book<lob::ChecksumSink>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&) const+0xcd>
+    0.00 :   2541d:  nopl   (%rax)
+    0.13 :   25420:  mov    %rcx,%rax
+         : 123   while (__x->__left_ != nullptr)
+    0.13 :   25423:  mov    (%rcx),%rcx
+    0.40 :   25426:  test   %rcx,%rcx
+    0.00 :   25429:  jne    25420 <auto lob::v2::Book<lob::ChecksumSink>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&) const+0xc0>
+    0.00 :   2542b:  jmp    2543c <auto lob::v2::Book<lob::ChecksumSink>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&) const+0xdc>
+    0.00 :   2542d:  mov    %rbx,%rax
+    0.00 :   25430:  mov    %rax,%rcx
+         : 130   return __x == __x->__parent_->__left_;
+    0.00 :   25433:  mov    0x10(%rax),%rax
+    0.00 :   25437:  cmp    (%rax),%rcx
+         : 133   while (!std::__tree_is_left_child(__x))
+    0.00 :   2543a:  jne    25430 <auto lob::v2::Book<lob::ChecksumSink>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&) const+0xd0>
+         : 135   if (__begin_node() == __ptr)
+    0.13 :   2543c:  cmp    %rbx,(%rsi)
+    0.00 :   2543f:  jne    25444 <auto lob::v2::Book<lob::ChecksumSink>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v2::Book<lob::ChecksumSink>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&) const+0xe4>
+         : 138   __begin_node() = __r.__ptr_;
+    0.00 :   25441:  mov    %rax,(%rsi)
+         : 140   --size();
+    0.00 :   25444:  decq   0x10(%rsi)
+         : 142   std::__tree_remove(__end_node()->__left_, static_cast<__node_base_pointer>(__ptr));
+    0.00 :   25448:  mov    %rbx,%rsi
+    0.00 :   2544b:  call   1eaa0 <void std::__1::__tree_remove[abi:ne210105]<std::__1::__tree_node_base<void*>*>(std::__1::__tree_node_base<void*>*, std::__1::__tree_node_base<void*>*)>
+         : 145   #if _LIBCPP_HAS_ALIGNED_ALLOCATION
+         : 146   if (__is_overaligned_for_new(__align))
+         : 147   return __builtin_operator_delete(
+         : 148   __ptr _LIBCPP_ONLY_IF_SIZED_DEALLOCATION(, __size), static_cast<align_val_t>(__align));
+         : 149   #endif
+         : 150   return __builtin_operator_delete(__ptr _LIBCPP_ONLY_IF_SIZED_DEALLOCATION(, __size));
+    0.00 :   25450:  mov    $0x40,%esi
+    0.00 :   25455:  mov    %rbx,%rdi
+    0.00 :   25458:  pop    %rbx
+    0.00 :   25459:  jmp    3530 <operator delete(void*, unsigned long)@plt>
+ Percent |	Source code & Disassembly of book for mem_load_retired.l3_miss:u (740 samples, percent: local period)
+---------------------------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     00000000000244b0 <void lob::v2::Book<lob::ChecksumSink>::rest<std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > > >(std::__1::map<long, lob::v2::Book<lob::ChecksumSink>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v2::Book<lob::ChecksumSink>::Level> > >&, unsigned long, lob::Side, long, unsigned int)>:
+         : 6     }
+         : 7     return qty;
+         : 8     }
+         :
+         : 10    template <class Levels>
+         : 11    void rest(Levels& levels, OrderId id, Side side, Price price, Qty qty) {
+    0.00 :   244b0:  push   %rbp
+    0.00 :   244b1:  push   %r15
+    0.00 :   244b3:  push   %r14
+    0.00 :   244b5:  push   %r13
+    0.14 :   244b7:  push   %r12
+    0.00 :   244b9:  push   %rbx
+    0.00 :   244ba:  sub    $0x68,%rsp
+    0.41 :   244be:  mov    %r8,%rbx
+    0.00 :   244c1:  mov    %ecx,0x14(%rsp)
+    0.00 :   244c5:  mov    %rsi,%r15
+    0.00 :   244c8:  mov    %rdi,%r14
+    0.00 :   244cb:  mov    %rdx,0x30(%rsp)
+    0.00 :   244d0:  mov    %rdx,0x18(%rsp)
+         : 25    const std::uint32_t i = alloc_node(id, qty);  // may grow nodes_: take references after
+    0.00 :   244d5:  mov    %rdx,%rsi
+    0.54 :   244d8:  mov    %r9d,0x20(%rsp)
+    0.14 :   244dd:  mov    %r9d,%edx
+    0.00 :   244e0:  call   24bb0 <lob::v2::Book<lob::ChecksumSink>::alloc_node(unsigned long, unsigned int)>
+    0.00 :   244e5:  mov    %eax,%r13d
+         : 31    _LIBCPP_HIDE_FROM_ABI value_compare& value_comp() _NOEXCEPT { return __value_comp_; }
+         : 32    _LIBCPP_HIDE_FROM_ABI const value_compare& value_comp() const _NOEXCEPT { return __value_comp_; }
+         :

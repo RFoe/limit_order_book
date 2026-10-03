@@ -1,0 +1,34 @@
+# cachegrind 20261004-0359_9f38b37_vm workload=syn_aggressive_s42 cache: --I1=32768,8,64 --D1=49152,12,64 --LL=6291456,12,64
+v0 run=0 ops=1000000 events=1165281 trades=298543 checksum=638d2d0c88607797 orders_left=1253 wall_ms=11405.5
+## v0
+I refs:        473,034,952
+I1  miss rate:        0.00%
+LLi miss rate:        0.00%
+D refs:        192,267,731  (119,281,128 rd   + 72,986,603 wr)
+D1  miss rate:         1.8% (        2.2%     +        1.1%  )
+LLd miss rate:         0.2% (        0.3%     +        0.0%  )
+LL refs:         3,389,958  (  2,590,684 rd   +    799,274 wr)
+LL misses:         379,438  (    375,433 rd   +      4,005 wr)
+LL miss rate:          0.1% (        0.1%     +        0.0%  )
+v1 run=0 ops=1000000 events=1165281 trades=298543 checksum=638d2d0c88607797 orders_left=1253 wall_ms=7768.6
+## v1
+I refs:        304,579,752
+I1  miss rate:        0.00%
+LLi miss rate:        0.00%
+D refs:        131,667,648  (85,115,813 rd   + 46,551,835 wr)
+D1  miss rate:         1.7% (       1.6%     +        2.0%  )
+LLd miss rate:         0.3% (       0.4%     +        0.0%  )
+LL refs:         2,230,840  ( 1,322,840 rd   +    908,000 wr)
+LL misses:         379,563  (   375,350 rd   +      4,213 wr)
+LL miss rate:          0.1% (       0.1%     +        0.0%  )
+v2 run=0 ops=1000000 events=1165281 trades=298543 checksum=638d2d0c88607797 orders_left=1253 wall_ms=5618.4
+## v2
+I refs:        239,982,130
+I1  miss rate:        0.00%
+LLi miss rate:        0.00%
+D refs:        105,299,080  (68,532,095 rd   + 36,766,985 wr)
+D1  miss rate:         2.1% (       1.8%     +        2.8%  )
+LLd miss rate:         0.4% (       0.5%     +        0.0%  )
+LL refs:         2,230,176  ( 1,217,820 rd   +  1,012,356 wr)
+LL misses:         380,295  (   375,381 rd   +      4,914 wr)
+LL miss rate:          0.1% (       0.1%     +        0.0%  )
