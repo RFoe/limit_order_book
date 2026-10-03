@@ -33,6 +33,7 @@ endif ()
 
 find_package (Catch2 CONFIG REQUIRED)
 find_package (benchmark CONFIG REQUIRED)
+find_package (boost_unordered CONFIG REQUIRED)
 
 # ---- shared compile/link options -------------------------------------------
 add_library (lob_options INTERFACE)
@@ -68,7 +69,7 @@ list (FILTER __LIB_SOURCES__ EXCLUDE REGEX ".*/main\\.cxx$")
 
 add_library (lob_core STATIC ${__LIB_SOURCES__})
 target_include_directories (lob_core PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
-target_link_libraries (lob_core PUBLIC lob_options)
+target_link_libraries (lob_core PUBLIC lob_options Boost::unordered)
 
 # ---- CLI: gen / info / itch2ops / validate / replay / latency --------------
 add_executable (${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/source/main.cxx)

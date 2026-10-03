@@ -5,6 +5,7 @@
 // Never delete or rewrite an old version: add include/lob/vN/ and append it here.
 
 #include <lob/v0/book.hpp>
+#include <lob/v1/book.hpp>
 
 #include <string_view>
 #include <tuple>
@@ -17,7 +18,7 @@ struct VersionList {
   using with_sink = std::tuple<Books<Sink>...>;
 };
 
-using Versions = VersionList<v0::Book>;
+using Versions = VersionList<v0::Book, v1::Book>;
 
 // Calls f.template operator()<Book>() for each Book in the tuple type.
 template <class Tuple, class F>
