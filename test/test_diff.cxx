@@ -7,6 +7,7 @@
 #include "diff_runner.hpp"
 
 #include <lob/v0/book.hpp>
+#include <lob/v3/book.hpp>
 #include <lob/versions.hpp>
 #include <lob/workload/generator.hpp>
 
@@ -115,3 +116,50 @@ TEST_CASE("differential framework catches a mutant and shrinks it", "[diff][meta
   CHECK(minimal.front().type == OpType::Push);
   CHECK(minimal.back().type == OpType::Modify);
 }
+
+// v3 keeps two level stores (tick grid + fallback std::map). With the default
+// 2^16-slot window and tick 1 every synthetic price lands on the grid, so the
+// generic test above never touches the fallback. Here a tiny window and a
+// coarser tick force both stores to be live at the same time, including best
+// prices that alternate between them during matching.
+TEST_CASE("v3 grid + fallback map match v0", "[diff][v3]") {
+  struct Variant {
+    const char* label;
+    Price tick;
+    bool small_window;  // 2^6 slots instead of 2^16
+  };
+  const Variant variants[] = {
+      {"window 2^6, tick 1", 1, true},
+      {"window 2^6, tick 2", 2, true},
+      {"window 2^6, tick 3", 3, true},
+      {"window 2^16, tick 2", 2, false},
+  };
+  const auto seeds = env_u64_list("LOB_DIFF_SEEDS", {1, 2, 3, 4, 5, 6});
+  const auto n_ops = env_u64_list("LOB_DIFF_OPS", {20'000}).front();
+  for (const auto& v : variants) {
+    for (const auto seed : seeds) {
+      const auto ops = workload::generate(params_for(seed, n_ops));
+      const BookConfig cfg{.tick = v.tick};
+      if (v.tick > 1) {  // sanity: a large share of prices really is off the grid
+        std::size_t priced = 0, off = 0;
+        for (const Op& op : ops)
+          if (op.type != OpType::Cancel) {
+            ++priced;
+            off += op.price % v.tick != 0 ? 1 : 0;
+          }
+        REQUIRE(off * 4 > priced);
+      }
+      auto check = [&]<class Cand>() {
+        if (auto f = testing::run_diff<Ref, Cand>(ops, cfg)) {
+          const auto minimal = testing::shrink<Ref, Cand>(ops, cfg);
+          FAIL(v.label << "\n" << testing::report(seed, *f, minimal, testing::run_diff<Ref, Cand>(minimal, cfg)));
+        }
+      };
+      if (v.small_window)
+        check.template operator()<v3::BookT<RecordingSink, 6>>();
+      else
+        check.template operator()<v3::BookT<RecordingSink, 16>>();
+    }
+  }
+}
+
