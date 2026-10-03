@@ -1,0 +1,20 @@
+category                                                        cycles%     Ir%   D1mr%   D1mw%
+index: boost flat_map (probe/insert/erase, slot copy)             42.8%   33.5%   42.2%   81.9%
+node pool + level list                                            13.5%   13.7%    2.6%   15.7%
+book.hpp:0 (no line info)                                          7.4%    3.7%    0.0%    0.0%
+grid: hierarchical bitmap                                          7.1%    3.5%    0.2%    0.0%
+grid: slot_of / price_of / level_of                                6.1%    7.4%    0.0%    0.0%
+match (incl. add)                                                  5.6%   10.8%    0.0%    0.0%
+erase                                                              4.8%    2.0%    1.4%    0.0%
+rest                                                               3.7%    9.5%    2.2%    0.0%
+event sink (ChecksumSink)                                          2.6%    5.9%    0.0%    0.0%
+replay loop / dispatch                                             2.4%    4.3%   32.8%    0.0%
+public op body (push/cancel/modify, inline index lookups)          1.4%    1.8%    6.1%    0.0%
+other: wrap_iter.h                                                 0.5%    0.9%    0.0%    0.0%
+other: operations.h                                                0.5%    0.3%   11.8%    0.0%
+other: ??                                                          0.5%    0.0%    0.0%    0.0%
+other: map                                                         0.3%    0.5%    0.0%    0.0%
+other: countl.h                                                    0.2%    0.6%    0.0%    0.0%
+other: countr.h                                                    0.1%    0.6%    0.0%    0.0%
+other: allocate.h                                                  0.1%    0.5%    0.0%    0.0%
+(cachegrind totals: Ir / D1mr / D1mw)                                  340,148,355 1,839,353 1,217,929
