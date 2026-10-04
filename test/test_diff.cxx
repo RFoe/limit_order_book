@@ -15,6 +15,7 @@
 #include <lob/v4/book.hpp>
 #include <lob/v5/book.hpp>
 #include <lob/v7/book.hpp>
+#include <lob/v8/book.hpp>
 #include <lob/versions.hpp>
 #include <lob/workload/generator.hpp>
 
@@ -181,11 +182,13 @@ TEST_CASE("grid + fallback map match v0 (v3 and later)", "[diff][grid]") {
         check.template operator()<v4::BookT<RecordingSink, 6>>();
         check.template operator()<v5::BookT<RecordingSink, 6>>();
         check.template operator()<v7::BookT<RecordingSink, 6>>();
+        check.template operator()<v8::BookT<RecordingSink, 6>>();
       } else {
         check.template operator()<v3::BookT<RecordingSink, 16>>();
         check.template operator()<v4::BookT<RecordingSink, 16>>();
         check.template operator()<v5::BookT<RecordingSink, 16>>();
         check.template operator()<v7::BookT<RecordingSink, 16>>();
+        check.template operator()<v8::BookT<RecordingSink, 16>>();
       }
     }
   }
