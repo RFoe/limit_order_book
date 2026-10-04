@@ -53,6 +53,7 @@
 cmake --preset debug && cmake --build --preset debug && ctest --preset debug   # 全量测试(~1min)
 cmake --preset release && cmake --build --preset release
 LOB_DIFF_SEEDS=1,2,3 LOB_DIFF_OPS=200000 build/release/test_book "[diff]"     # 加大差分测试
+LOB_DIFF_VERSIONS=v7 ctest --preset debug                                       # 只验证新版本（见"正确性"）
 
 scripts/env_check.sh                 # 环境快照(只读) -> results/env_*.txt，含 PMU 是否可用
 scripts/env_tune.sh apply|restore    # sudo: perf_event_paranoid / governor / turbo ...(重启后需重新 apply)
@@ -99,6 +100,7 @@ scripts/  见上         docs/experiments.md 实验日志         results/ 测�
 - 差分测试使用多个随机 seed，失败时打印 seed，并尽量给出最短复现序列。
 - 不变量（debug 构建中每一步都检查）：best bid < best ask；每档 total_qty 等于队列中订单数量之和；索引中的订单数等于簿上的订单数。
 - 差分测试没通过的版本，不做性能测量。
+- 验证新版本 vN 时只测 vN：`LOB_DIFF_VERSIONS=vN`（debug ctest 和加大的差分测试都带上），没有改动的旧版本跳过。改了共享代码（types、events、replay/harness、generator、book_config、hier_bitmap、diff_runner 等）时不设这个变量，跑全部版本。
 
 ## Workload
 

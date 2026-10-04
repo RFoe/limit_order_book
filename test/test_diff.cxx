@@ -3,6 +3,10 @@
 // shrinks them to a short reproduction.
 //
 // Env overrides: LOB_DIFF_SEEDS=1,2,3  LOB_DIFF_OPS=50000
+//                LOB_DIFF_VERSIONS=v7[,v8]  only these versions (unset or "all":
+//                every version). Validating a new vN only needs vN: older versions
+//                did not change. Run all after touching shared code (types,
+//                events, harness, generator, book_config, hier_bitmap, ...).
 
 #include "diff_runner.hpp"
 
@@ -27,6 +31,18 @@ namespace {
 
 using namespace lob;
 using Ref = v0::Book<RecordingSink>;
+
+// is version `name` selected by LOB_DIFF_VERSIONS (comma list; unset/"all" = every version)
+auto selected(std::string_view name) -> bool {
+  const char* env = std::getenv("LOB_DIFF_VERSIONS");
+  if (env == nullptr || std::string_view(env).empty() || std::string_view(env) == "all") return true;
+  for (std::string_view s = env; !s.empty();) {
+    const auto comma = s.find(',');
+    if (s.substr(0, comma) == name) return true;
+    s = comma == std::string_view::npos ? std::string_view{} : s.substr(comma + 1);
+  }
+  return false;
+}
 
 auto env_u64_list(const char* name, std::vector<std::uint64_t> def) -> std::vector<std::uint64_t> {
   const char* env = std::getenv(name);
@@ -94,6 +110,7 @@ class MutantReduceLosesPriority : public v0::Book<Sink> {
 
 TEMPLATE_LIST_TEST_CASE("version matches v0 on random workloads", "[diff]",
                         Versions::with_sink<RecordingSink>) {
+  if (!selected(TestType::name)) SKIP("version not selected by LOB_DIFF_VERSIONS");
   const auto seeds = env_u64_list("LOB_DIFF_SEEDS", {1, 2, 3, 4, 5, 6});
   const auto n_ops = env_u64_list("LOB_DIFF_OPS", {20'000}).front();
   for (const auto seed : seeds) {
@@ -125,7 +142,7 @@ TEST_CASE("differential framework catches a mutant and shrinks it", "[diff][meta
 // generic test above never touches the fallback. Here a tiny window and a
 // coarser tick force both stores to be live at the same time, including best
 // prices that alternate between them during matching.
-TEST_CASE("v3/v4/v5/v7 grid + fallback map match v0", "[diff][v3]") {
+TEST_CASE("grid + fallback map match v0 (v3 and later)", "[diff][grid]") {
   struct Variant {
     const char* label;
     Price tick;
@@ -153,6 +170,7 @@ TEST_CASE("v3/v4/v5/v7 grid + fallback map match v0", "[diff][v3]") {
         REQUIRE(off * 4 > priced);
       }
       auto check = [&]<class Cand>() {
+        if (!selected(Cand::name)) return;
         if (auto f = testing::run_diff<Ref, Cand>(ops, cfg)) {
           const auto minimal = testing::shrink<Ref, Cand>(ops, cfg);
           FAIL(v.label << "\n" << testing::report(seed, *f, minimal, testing::run_diff<Ref, Cand>(minimal, cfg)));
@@ -179,6 +197,7 @@ TEST_CASE("v3/v4/v5/v7 grid + fallback map match v0", "[diff][v3]") {
 // puts many of them out of range, including ids that alternate between the two
 // indexes and ids far below/above the anchor.
 TEST_CASE("v5 compact + wide order index match v0", "[diff][v5]") {
+  if (!selected("v5")) SKIP("v5 not selected by LOB_DIFF_VERSIONS");
   struct Remap {
     const char* label;
     OrderId (*f)(OrderId);
