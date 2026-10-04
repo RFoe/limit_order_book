@@ -1,0 +1,30 @@
+data/itch12302019_AAPL.ops         index ops   2404859  cycles/op  35.37  instr/op  61.35  IPC 1.73  br-miss/op 0.461  L1d-miss/op 1.695
+data/itch12302019_QQQ.ops          index ops   3704316  cycles/op  27.42  instr/op  55.45  IPC 2.02  br-miss/op 0.352  L1d-miss/op 1.222
+syn:2000                           index ops   2398000  cycles/op  17.56  instr/op  54.86  IPC 3.12  br-miss/op 0.007  L1d-miss/op 1.235
+syn:27000                          index ops   2373000  cycles/op  21.64  instr/op  55.47  IPC 2.56  br-miss/op 0.002  L1d-miss/op 2.278
+rnd:27000                          index ops   2385393  cycles/op  26.30  instr/op  55.11  IPC 2.10  br-miss/op 0.332  L1d-miss/op 2.230
+data/itch12302019_AAPL.ops [entry 16B] index ops   2404859  cycles/op  47.06  instr/op  64.53  IPC 1.37  br-miss/op 0.464  L1d-miss/op 1.619
+data/itch12302019_QQQ.ops [entry 16B] index ops   3704316  cycles/op  33.84  instr/op  58.65  IPC 1.73  br-miss/op 0.350  L1d-miss/op 1.146
+syn:2000 [entry 16B]               index ops   2398000  cycles/op  20.62  instr/op  58.19  IPC 2.82  br-miss/op 0.008  L1d-miss/op 1.027
+syn:27000 [entry 16B]              index ops   2373000  cycles/op  24.42  instr/op  58.78  IPC 2.41  br-miss/op 0.002  L1d-miss/op 2.074
+rnd:27000 [entry 16B]              index ops   2385393  cycles/op  27.63  instr/op  58.43  IPC 2.11  br-miss/op 0.333  L1d-miss/op 2.024
+data/itch12302019_AAPL.ops [compact 8B] index ops   2404859  cycles/op  35.31  instr/op  61.28  IPC 1.74  br-miss/op 0.456  L1d-miss/op 1.444
+data/itch12302019_QQQ.ops [compact 8B] index ops   3704316  cycles/op  27.83  instr/op  55.90  IPC 2.01  br-miss/op 0.349  L1d-miss/op 1.007
+syn:2000 [compact 8B]              index ops   2398000  cycles/op  14.45  instr/op  55.51  IPC 3.84  br-miss/op 0.007  L1d-miss/op 0.695
+syn:27000 [compact 8B]             index ops   2373000  cycles/op  19.02  instr/op  56.03  IPC 2.95  br-miss/op 0.002  L1d-miss/op 1.930
+rnd:27000 [compact 8B]             index ops   2385393  cycles/op  25.78  instr/op  55.72  IPC 2.16  br-miss/op 0.332  L1d-miss/op 1.759
+data/itch12302019_AAPL.ops         index ops   2404859  cycles/op  36.83  instr/op  61.35  IPC 1.67  br-miss/op 0.463  L1d-miss/op 1.718
+data/itch12302019_QQQ.ops          index ops   3704316  cycles/op  28.69  instr/op  55.45  IPC 1.93  br-miss/op 0.353  L1d-miss/op 1.229
+syn:2000                           index ops   2398000  cycles/op  18.35  instr/op  54.86  IPC 2.99  br-miss/op 0.007  L1d-miss/op 1.245
+syn:27000                          index ops   2373000  cycles/op  21.18  instr/op  55.47  IPC 2.62  br-miss/op 0.002  L1d-miss/op 2.264
+rnd:27000                          index ops   2385393  cycles/op  26.47  instr/op  55.11  IPC 2.08  br-miss/op 0.332  L1d-miss/op 2.181
+data/itch12302019_AAPL.ops [entry 16B] index ops   2404859  cycles/op  36.22  instr/op  64.53  IPC 1.78  br-miss/op 0.458  L1d-miss/op 1.554
+data/itch12302019_QQQ.ops [entry 16B] index ops   3704316  cycles/op  27.38  instr/op  58.65  IPC 2.14  br-miss/op 0.349  L1d-miss/op 1.075
+syn:2000 [entry 16B]               index ops   2398000  cycles/op  17.65  instr/op  58.19  IPC 3.30  br-miss/op 0.007  L1d-miss/op 0.963
+syn:27000 [entry 16B]              index ops   2373000  cycles/op  21.83  instr/op  58.78  IPC 2.69  br-miss/op 0.002  L1d-miss/op 2.071
+rnd:27000 [entry 16B]              index ops   2385393  cycles/op  26.77  instr/op  58.43  IPC 2.18  br-miss/op 0.333  L1d-miss/op 2.036
+data/itch12302019_AAPL.ops [compact 8B] index ops   2404859  cycles/op  34.73  instr/op  61.28  IPC 1.76  br-miss/op 0.456  L1d-miss/op 1.453
+data/itch12302019_QQQ.ops [compact 8B] index ops   3704316  cycles/op  26.41  instr/op  55.90  IPC 2.12  br-miss/op 0.348  L1d-miss/op 0.989
+syn:2000 [compact 8B]              index ops   2398000  cycles/op  14.22  instr/op  55.51  IPC 3.90  br-miss/op 0.007  L1d-miss/op 0.635
+syn:27000 [compact 8B]             index ops   2373000  cycles/op  19.08  instr/op  56.03  IPC 2.94  br-miss/op 0.002  L1d-miss/op 1.933
+rnd:27000 [compact 8B]             index ops   2385393  cycles/op  25.77  instr/op  55.72  IPC 2.16  br-miss/op 0.332  L1d-miss/op 1.772

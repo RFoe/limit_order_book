@@ -14,8 +14,10 @@
 #include <lob/workload/format.hpp>
 
 #include <boost/unordered/unordered_flat_map.hpp>
+#include <boost/unordered/unordered_flat_set.hpp>
 
 #include <algorithm>
+#include <type_traits>
 #include <cstdlib>
 #include <cstdint>
 #include <print>
@@ -112,6 +114,30 @@ struct Compact {
     static void touch(std::uint32_t &v) { v ^= 1; }
 };
 
+// Mid: 16-byte element holding the key: {price, 32-bit key, node | side << 31}
+// in a flat_set with transparent lookup by key (the proposed v6 layout).
+struct Entry16 {
+    Price         price;
+    std::uint32_t key;
+    std::uint32_t node_side;
+};
+static_assert(sizeof(Entry16) == 16);
+struct Entry16Hash {
+    using is_transparent = void;
+    auto operator()(std::uint32_t k) const noexcept { return boost::hash<std::uint32_t>{}(k); }
+    auto operator()(const Entry16 &e) const noexcept { return boost::hash<std::uint32_t>{}(e.key); }
+};
+struct Entry16Eq {
+    using is_transparent = void;
+    static auto k(std::uint32_t x) { return x; }
+    static auto k(const Entry16 &e) { return e.key; }
+    template <class A, class B> auto operator()(const A &a, const B &b) const noexcept { return k(a) == k(b); }
+};
+struct Mid {
+    using Map = boost::unordered_flat_set<Entry16, Entry16Hash, Entry16Eq>;
+    static auto key(OrderId id, OrderId base) { return static_cast<std::uint32_t>(id - base); }
+};
+
 template <class L>
 auto run(const std::vector<IxOp> &t, OrderId base, harness::PerfGroup &g, harness::PerfControl &ctl) -> Result {
     typename L::Map m;
@@ -138,16 +164,27 @@ auto run(const std::vector<IxOp> &t, OrderId base, harness::PerfGroup &g, harnes
             break;
         }
 #else
-            m.emplace(L::key(o.id, base), L::value(o));
+            if constexpr (std::is_same_v<L, Mid>)
+                m.insert(Entry16{o.price, L::key(o.id, base), o.node});
+            else
+                m.emplace(L::key(o.id, base), L::value(o));
             break;
 #endif
         case Kind::FindErase: {
             auto it = m.find(L::key(o.id, base));
-            sink += L::node(it->second);
+            if constexpr (std::is_same_v<L, Mid>)
+                sink += it->node_side & 0x7FFF'FFFFu;
+            else
+                sink += L::node(it->second);
             m.erase(it);
             break;
         }
-        case Kind::FindUpdate: L::touch(m.find(L::key(o.id, base))->second); break;
+        case Kind::FindUpdate:
+            if constexpr (std::is_same_v<L, Mid>)
+                sink += m.find(L::key(o.id, base))->node_side; // v6 never mutates the entry (reduce edits the node)
+            else
+                L::touch(m.find(L::key(o.id, base))->second);
+            break;
         }
     }
     g.stop();
@@ -213,12 +250,13 @@ int main(int argc, char **argv) {
     OrderId base = ~OrderId{0}, top = 0;
     for (const IxOp &o : t) { base = std::min(base, o.id); top = std::max(top, o.id); }
     const bool compact = std::getenv("LOB_IX_COMPACT") != nullptr;
-    if (compact && top - base > 0xFFFFFFFFull) { std::println("id span exceeds 32 bits"); return 1; }
+    const bool mid     = std::getenv("LOB_IX_MID") != nullptr; // 16-byte entry incl. key (v6 layout)
+    if ((compact || mid) && top - base > 0xFFFFFFFFull) { std::println("id span exceeds 32 bits"); return 1; }
     harness::PerfGroup   g(harness::default_counters());
     harness::PerfControl ctl;
     std::vector<Result>  rs;
     for (int r = 0; r <= rounds; ++r) {
-        auto x = compact ? run<Compact>(t, base, g, ctl) : run<Wide>(t, base, g, ctl);
+        auto x = mid ? run<Mid>(t, base, g, ctl) : compact ? run<Compact>(t, base, g, ctl) : run<Wide>(t, base, g, ctl);
         if (r > 0) rs.push_back(x);
     }
     auto med = [&](auto f) {
@@ -228,6 +266,7 @@ int main(int argc, char **argv) {
         return v[v.size() / 2];
     };
     if (compact) what += " [compact 8B]";
+    if (mid) what += " [entry 16B]";
     if (const char *e = std::getenv("LOB_IX_MAXLOAD")) what += std::string(" [maxload ") + e + "]";
     std::println("{:<34} index ops {:>9}  cycles/op {:6.2f}  instr/op {:6.2f}  IPC {:4.2f}  br-miss/op {:5.3f}  "
                  "L1d-miss/op {:5.3f}",
