@@ -396,7 +396,7 @@ class BookT {
 
   // slot: this order's index entry (just reserved by push, or kept by modify)
   [[gnu::always_inline]] void add(OrderId id, Side side, Price price, Qty qty, typename Index::iterator slot) {
-    if (!may_cross(side, price)) [[likely]] return rest(id, side, price, qty, slot);
+    if (!may_cross(side, price)) [[likely]] return rest(id, side, price, qty, slot->second);
     if (side == Side::Buy)
       qty = match<Side::Buy>(id, price, qty);
     else
@@ -405,7 +405,7 @@ class BookT {
       index_.erase(slot);  // fully filled: never rests
       return;
     }
-    rest(id, side, price, qty, slot);
+    rest(id, side, price, qty, slot->second);
   }
 
   // Consume opposite levels best-first; the best level is the better of the
@@ -461,7 +461,11 @@ class BookT {
     return qty;
   }
 
-  void rest(OrderId id, Side side, Price price, Qty qty, typename Index::iterator slot) {
+  // loc: the order's index value. Not the iterator: a 16-byte table_iterator is
+  // the 7th integer argument, passed on the stack, and clang assembled it from
+  // two 8-byte stores then copied it with one 16-byte load, a store-forwarding
+  // stall right before the call (33% of push's cycle samples on AAPL).
+  void rest(OrderId id, Side side, Price price, Qty qty, Loc& loc) {
     const std::uint32_t i = alloc_node(id, qty);  // may grow nodes_: take references after
     if (!anchored_ && static_cast<std::uint64_t>(price) % static_cast<std::uint64_t>(tick_) == 0) anchor(price);
     const std::uint32_t s = slot_of(price);
@@ -475,7 +479,7 @@ class BookT {
     }
     push_back(*level, i);
     level->total_qty += qty;
-    slot->second = Loc{.price = price, .node = i, .side = side};
+    loc = Loc{.price = price, .node = i, .side = side};
     sink_.on(Rested{id, side, price, qty});
   }
 
