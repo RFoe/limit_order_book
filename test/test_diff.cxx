@@ -9,6 +9,7 @@
 #include <lob/v0/book.hpp>
 #include <lob/v3/book.hpp>
 #include <lob/v4/book.hpp>
+#include <lob/v5/book.hpp>
 #include <lob/versions.hpp>
 #include <lob/workload/generator.hpp>
 
@@ -123,7 +124,7 @@ TEST_CASE("differential framework catches a mutant and shrinks it", "[diff][meta
 // generic test above never touches the fallback. Here a tiny window and a
 // coarser tick force both stores to be live at the same time, including best
 // prices that alternate between them during matching.
-TEST_CASE("v3/v4 grid + fallback map match v0", "[diff][v3]") {
+TEST_CASE("v3/v4/v5 grid + fallback map match v0", "[diff][v3]") {
   struct Variant {
     const char* label;
     Price tick;
@@ -159,9 +160,41 @@ TEST_CASE("v3/v4 grid + fallback map match v0", "[diff][v3]") {
       if (v.small_window) {
         check.template operator()<v3::BookT<RecordingSink, 6>>();
         check.template operator()<v4::BookT<RecordingSink, 6>>();
+        check.template operator()<v5::BookT<RecordingSink, 6>>();
       } else {
         check.template operator()<v3::BookT<RecordingSink, 16>>();
         check.template operator()<v4::BookT<RecordingSink, 16>>();
+        check.template operator()<v5::BookT<RecordingSink, 16>>();
+      }
+    }
+  }
+}
+
+// v5 keeps two order indexes: 32-bit keys (id - base) and a 64-bit fallback for
+// ids outside [base, base + 2^32). Generated ids are small and dense, so the
+// generic test only exercises the compact one. Remapping the ids (injectively)
+// puts many of them out of range, including ids that alternate between the two
+// indexes and ids far below/above the anchor.
+TEST_CASE("v5 compact + wide order index match v0", "[diff][v5]") {
+  struct Remap {
+    const char* label;
+    OrderId (*f)(OrderId);
+  };
+  const Remap remaps[] = {
+      {"even ids + 2^33", [](OrderId id) -> OrderId { return id % 2 == 0 ? id + (OrderId{1} << 33) : id; }},
+      {"id << 31", [](OrderId id) -> OrderId { return id << 31; }},
+      {"2^62 - id * 2^20", [](OrderId id) -> OrderId { return (OrderId{1} << 62) - (id << 20); }},
+  };
+  const auto seeds = env_u64_list("LOB_DIFF_SEEDS", {1, 2, 3, 4, 5, 6});
+  const auto n_ops = env_u64_list("LOB_DIFF_OPS", {20'000}).front();
+  for (const auto& r : remaps) {
+    for (const auto seed : seeds) {
+      auto ops = workload::generate(params_for(seed, n_ops));
+      for (Op& op : ops) op.id = r.f(op.id);
+      using Cand = v5::Book<RecordingSink>;
+      if (auto f = testing::run_diff<Ref, Cand>(ops)) {
+        const auto minimal = testing::shrink<Ref, Cand>(ops);
+        FAIL(r.label << "\n" << testing::report(seed, *f, minimal, testing::run_diff<Ref, Cand>(minimal)));
       }
     }
   }
