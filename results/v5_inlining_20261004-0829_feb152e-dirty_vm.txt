@@ -1,0 +1,45 @@
+# v5 inlining sensitivity (vm, CPU 3). Working tree = feb152e + experimental edits:
+#  v5: id encoded once per op, hot/cold split of the wide index, always_inline on helpers and push/cancel/modify
+#  harness: [[gnu::flatten]] on lob::replay (forces every call in the loop to inline, for v4 and v5 alike)
+# book counters, v4/v5 interleaved, 7 rounds
+## itch12302019_AAPL
+skipped event: LL-load-misses (No such device or address)
+per-op medians over 7 rounds (user space, replay region only); min running ratio 1.000
+v4:
+  cycles                111.275 /op   spread 3.5%
+  instructions          209.352 /op   spread 0.0%
+  branches               27.158 /op   spread 0.0%
+  branch-misses           1.358 /op   spread 0.3%
+  L1d-load-misses         2.885 /op   spread 2.3%
+  dTLB-load-misses        0.012 /op   spread 9.8%
+  IPC                     1.881
+v5:
+  cycles                114.970 /op   spread 9.4%
+  instructions          219.531 /op   spread 0.0%
+  branches               29.868 /op   spread 0.0%
+  branch-misses           1.355 /op   spread 0.8%
+  L1d-load-misses         2.503 /op   spread 5.6%
+  dTLB-load-misses        0.011 /op   spread 19.3%
+  IPC                     1.909
+## syn_default_s42
+skipped event: LL-load-misses (No such device or address)
+per-op medians over 7 rounds (user space, replay region only); min running ratio 1.000
+v4:
+  cycles                 79.996 /op   spread 3.7%
+  instructions          203.079 /op   spread 0.0%
+  branches               27.053 /op   spread 0.0%
+  branch-misses           0.844 /op   spread 0.5%
+  L1d-load-misses         3.288 /op   spread 1.6%
+  dTLB-load-misses        0.005 /op   spread 5.7%
+  IPC                     2.539
+v5:
+  cycles                 83.934 /op   spread 4.4%
+  instructions          213.157 /op   spread 0.0%
+  branches               29.611 /op   spread 0.0%
+  branch-misses           0.838 /op   spread 0.2%
+  L1d-load-misses         2.588 /op   spread 9.1%
+  dTLB-load-misses        0.005 /op   spread 18.2%
+  IPC                     2.540
+
+# instructions/op of v5 on AAPL for the variants tried without flatten (same session, book counters):
+#  committed feb152e 226.7 | encode-once + always_inline cancel_in/modify_in 252.0 | encode-once 234.0 | + hot/cold split 233.4 | + always_inline helpers 238.0 | + always_inline push/cancel/modify 234.2 ; v4 209.4
