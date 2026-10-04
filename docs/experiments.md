@@ -1207,3 +1207,20 @@ TopDown（W=5）：AAPL 的 Bad Speculation **26.1% → 19.2%**，Retiring 46.0%
   1. **让 push 不读桶**：用一个很小的占用数组（每桶 1 字节记录空位，AAPL 约 8KB，可以常驻 L1）挑选空位，再配合 id 单调性做判重捷径（push 的 id 99.4% 严格递增，比见过的最大 id 还大时一定不重复），这样 push 只写桶，写未命中进入 store buffer，有望把 push 的尾延迟拿回来，同时保留 cancel 的单行查找。
   2. **节点回到 24B**（方案 B：节点存网格槽位，不在网格上的价格放进冷数组），看 syn_deep 和 AAPL 的节点未命中。
 - **基线**：后续以 v15 为基础（ITCH 上吞吐最优），但每个版本都要同时报告尾延迟。
+
+## [2026-10-05] 分析：AVX-512 对 v15 有没有帮助
+
+- **现状**：release 构建是 `-march=native`（Ice Lake，支持 AVX-512）。v15 的索引比较在源码里写的是 AVX2（`_mm256_cmpeq_epi32` + `_mm256_movemask_ps`），clang 已经自动改写成 AVX-512VL：`vpcmpeqd (mem),%ymm,%k0` + `kmovd`（比较结果直接写进掩码寄存器，内存操作数折叠进比较）。热循环里没有 512 位的 zmm 指令（Ice Lake 客户端默认偏好 256 位）。
+- **测量**：同一份代码另编一个 `-march=x86-64-v3`（只有 AVX2，无任何 AVX-512 指令）的 release，v15 的 `book counters` 两个二进制交替 5 次 × 5 轮（`results/avx512_*_v15.txt`）：
+
+  | | AAPL | QQQ |
+  |---|---:|---:|
+  | instructions（native 相对 AVX2） | −1.6%（约 −2.5 条/op） | −1.6% |
+  | cycles | −3.6%（native 的波动范围约 4%） | −2.7%（约 5%） |
+  | branch-miss、L1d 未命中 | 不变 | 不变 |
+
+- **结论**：AVX-512 目前带来的是编译器层面每 op 约 2 到 3 条指令的节省，cycles 的差别和噪声同一量级。显式改写成 AVX-512 也没有多少空间：
+  - v15 在 AAPL 上约 62 周期/op：Retiring 约 52%（约 155 条有依赖的标量控制逻辑：链表、bitmap、选择），Bad Speculation 约 19%（op 类型的 switch，由输入决定），Backend 约 22%（桶、节点、价位的 cache 未命中）。更宽的向量指令对这三类都没有直接作用。
+  - 索引的 SIMD 比较本来就只有约 2 条指令/次。512 位的桶要么把 value 挪到另一行（一次操作碰两行），要么做成 128B 的两行桶；在 1/2 的负载下溢出本来就很少，更大的桶没有收益。
+  - 跨 op 的向量化（一次计算多个 id 的哈希、gather 多个桶）需要前瞻后续 op，等于改测量接口，已约定不做。
+  - 工程代价：valgrind 不支持 AVX-512，profile 构建只能是 AVX2，显式的 AVX-512 代码要同时保留 AVX2 版本；512 位的重运算在 Ice Lake 上可能触发降频（VM 里无法测量频率）。

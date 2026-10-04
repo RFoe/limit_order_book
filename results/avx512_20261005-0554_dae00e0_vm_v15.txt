@@ -1,0 +1,181 @@
+# v15, book counters --rounds 5, 5 alternations of build/release (-march=native, AVX-512) and build/rel-v3 (-march=x86-64-v3, AVX2 only); per-op medians over all rounds
+## itch12302019_AAPL_release_1.csv
+# workload=data/itch12302019_AAPL.ops rounds=5 min_running_ratio=1.000
+version,event,per_op_median,spread
+v15,cycles,62.7188,0.0560
+v15,instructions,154.9359,0.0000
+v15,branches,16.1095,0.0000
+v15,branch-misses,0.4601,0.0011
+v15,L1d-load-misses,1.4550,0.0496
+v15,dTLB-load-misses,0.0092,1.6989
+## itch12302019_AAPL_release_2.csv
+# workload=data/itch12302019_AAPL.ops rounds=5 min_running_ratio=1.000
+version,event,per_op_median,spread
+v15,cycles,61.6691,0.0121
+v15,instructions,154.9359,0.0000
+v15,branches,16.1095,0.0000
+v15,branch-misses,0.4594,0.0023
+v15,L1d-load-misses,1.4481,0.0406
+v15,dTLB-load-misses,0.0093,1.5155
+## itch12302019_AAPL_release_3.csv
+# workload=data/itch12302019_AAPL.ops rounds=5 min_running_ratio=1.000
+version,event,per_op_median,spread
+v15,cycles,61.8306,0.0460
+v15,instructions,154.9359,0.0000
+v15,branches,16.1095,0.0000
+v15,branch-misses,0.4595,0.0038
+v15,L1d-load-misses,1.4472,0.0133
+v15,dTLB-load-misses,0.0089,0.2991
+## itch12302019_AAPL_release_4.csv
+# workload=data/itch12302019_AAPL.ops rounds=5 min_running_ratio=1.000
+version,event,per_op_median,spread
+v15,cycles,64.2092,0.0659
+v15,instructions,154.9359,0.0000
+v15,branches,16.1095,0.0000
+v15,branch-misses,0.4596,0.0036
+v15,L1d-load-misses,1.5119,0.0425
+v15,dTLB-load-misses,0.0226,0.6508
+## itch12302019_AAPL_release_5.csv
+# workload=data/itch12302019_AAPL.ops rounds=5 min_running_ratio=1.000
+version,event,per_op_median,spread
+v15,cycles,62.9390,0.1026
+v15,instructions,154.9359,0.0000
+v15,branches,16.1095,0.0000
+v15,branch-misses,0.4596,0.0041
+v15,L1d-load-misses,1.4597,0.0580
+v15,dTLB-load-misses,0.0090,1.7057
+## itch12302019_AAPL_rel-v3_1.csv
+# workload=data/itch12302019_AAPL.ops rounds=5 min_running_ratio=1.000
+version,event,per_op_median,spread
+v15,cycles,65.7031,0.0205
+v15,instructions,157.4306,0.0000
+v15,branches,16.1095,0.0000
+v15,branch-misses,0.4575,0.0014
+v15,L1d-load-misses,1.4804,0.0423
+v15,dTLB-load-misses,0.0162,0.9745
+## itch12302019_AAPL_rel-v3_2.csv
+# workload=data/itch12302019_AAPL.ops rounds=5 min_running_ratio=1.000
+version,event,per_op_median,spread
+v15,cycles,64.0723,0.0338
+v15,instructions,157.4306,0.0000
+v15,branches,16.1095,0.0000
+v15,branch-misses,0.4576,0.0022
+v15,L1d-load-misses,1.4538,0.0448
+v15,dTLB-load-misses,0.0091,1.6044
+## itch12302019_AAPL_rel-v3_3.csv
+# workload=data/itch12302019_AAPL.ops rounds=5 min_running_ratio=1.000
+version,event,per_op_median,spread
+v15,cycles,63.7171,0.1154
+v15,instructions,157.4306,0.0000
+v15,branches,16.1095,0.0000
+v15,branch-misses,0.4588,0.0027
+v15,L1d-load-misses,1.4882,0.0415
+v15,dTLB-load-misses,0.0114,1.0975
+## itch12302019_AAPL_rel-v3_4.csv
+# workload=data/itch12302019_AAPL.ops rounds=5 min_running_ratio=1.000
+version,event,per_op_median,spread
+v15,cycles,68.4479,0.0164
+v15,instructions,157.4306,0.0000
+v15,branches,16.1095,0.0000
+v15,branch-misses,0.4588,0.0024
+v15,L1d-load-misses,1.5231,0.0030
+v15,dTLB-load-misses,0.0252,0.0219
+## itch12302019_AAPL_rel-v3_5.csv
+# workload=data/itch12302019_AAPL.ops rounds=5 min_running_ratio=1.000
+version,event,per_op_median,spread
+v15,cycles,65.0812,0.0552
+v15,instructions,157.4306,0.0000
+v15,branches,16.1095,0.0000
+v15,branch-misses,0.4585,0.0023
+v15,L1d-load-misses,1.5172,0.0058
+v15,dTLB-load-misses,0.0239,0.0802
+## itch12302019_QQQ_release_1.csv
+# workload=data/itch12302019_QQQ.ops rounds=5 min_running_ratio=1.000
+version,event,per_op_median,spread
+v15,cycles,55.9365,0.0298
+v15,instructions,154.0349,0.0000
+v15,branches,16.0133,0.0000
+v15,branch-misses,0.4740,0.0036
+v15,L1d-load-misses,1.2582,0.0291
+v15,dTLB-load-misses,0.0117,0.5817
+## itch12302019_QQQ_release_2.csv
+# workload=data/itch12302019_QQQ.ops rounds=5 min_running_ratio=1.000
+version,event,per_op_median,spread
+v15,cycles,57.6423,0.0566
+v15,instructions,154.0349,0.0000
+v15,branches,16.0133,0.0000
+v15,branch-misses,0.4743,0.0042
+v15,L1d-load-misses,1.2434,0.0378
+v15,dTLB-load-misses,0.0061,1.1194
+## itch12302019_QQQ_release_3.csv
+# workload=data/itch12302019_QQQ.ops rounds=5 min_running_ratio=1.000
+version,event,per_op_median,spread
+v15,cycles,58.5684,0.2160
+v15,instructions,154.0349,0.0000
+v15,branches,16.0133,0.0000
+v15,branch-misses,0.4743,0.0021
+v15,L1d-load-misses,1.2532,0.0329
+v15,dTLB-load-misses,0.0082,0.6110
+## itch12302019_QQQ_release_4.csv
+# workload=data/itch12302019_QQQ.ops rounds=5 min_running_ratio=1.000
+version,event,per_op_median,spread
+v15,cycles,57.0174,0.5206
+v15,instructions,154.0349,0.0000
+v15,branches,16.0133,0.0000
+v15,branch-misses,0.4742,0.0079
+v15,L1d-load-misses,1.2344,0.0696
+v15,dTLB-load-misses,0.0053,0.6103
+## itch12302019_QQQ_release_5.csv
+# workload=data/itch12302019_QQQ.ops rounds=5 min_running_ratio=1.000
+version,event,per_op_median,spread
+v15,cycles,56.1253,0.0162
+v15,instructions,154.0349,0.0000
+v15,branches,16.0133,0.0000
+v15,branch-misses,0.4737,0.0019
+v15,L1d-load-misses,1.2239,0.0056
+v15,dTLB-load-misses,0.0051,0.0903
+## itch12302019_QQQ_rel-v3_1.csv
+# workload=data/itch12302019_QQQ.ops rounds=5 min_running_ratio=1.000
+version,event,per_op_median,spread
+v15,cycles,58.5979,0.0346
+v15,instructions,156.5267,0.0000
+v15,branches,16.0133,0.0000
+v15,branch-misses,0.4735,0.0017
+v15,L1d-load-misses,1.2653,0.0197
+v15,dTLB-load-misses,0.0120,0.4154
+## itch12302019_QQQ_rel-v3_2.csv
+# workload=data/itch12302019_QQQ.ops rounds=5 min_running_ratio=1.000
+version,event,per_op_median,spread
+v15,cycles,57.7905,0.0283
+v15,instructions,156.5267,0.0000
+v15,branches,16.0133,0.0000
+v15,branch-misses,0.4738,0.0027
+v15,L1d-load-misses,1.2643,0.0218
+v15,dTLB-load-misses,0.0119,0.3716
+## itch12302019_QQQ_rel-v3_3.csv
+# workload=data/itch12302019_QQQ.ops rounds=5 min_running_ratio=1.000
+version,event,per_op_median,spread
+v15,cycles,59.2706,0.0441
+v15,instructions,156.5267,0.0000
+v15,branches,16.0133,0.0000
+v15,branch-misses,0.4745,0.0044
+v15,L1d-load-misses,1.2406,0.0328
+v15,dTLB-load-misses,0.0056,1.0898
+## itch12302019_QQQ_rel-v3_4.csv
+# workload=data/itch12302019_QQQ.ops rounds=5 min_running_ratio=1.000
+version,event,per_op_median,spread
+v15,cycles,58.0671,0.0586
+v15,instructions,156.5267,0.0000
+v15,branches,16.0133,0.0000
+v15,branch-misses,0.4729,0.0030
+v15,L1d-load-misses,1.2434,0.0174
+v15,dTLB-load-misses,0.0070,0.3959
+## itch12302019_QQQ_rel-v3_5.csv
+# workload=data/itch12302019_QQQ.ops rounds=5 min_running_ratio=1.000
+version,event,per_op_median,spread
+v15,cycles,60.7214,0.0828
+v15,instructions,156.5267,0.0000
+v15,branches,16.0133,0.0000
+v15,branch-misses,0.4703,0.0046
+v15,L1d-load-misses,1.2413,0.0174
+v15,dTLB-load-misses,0.0053,0.1588
