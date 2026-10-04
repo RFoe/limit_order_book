@@ -1,0 +1,26 @@
+# Events disabled
+# Events enabled
+# Events disabled
+# Events disabled
+# Events enabled
+# Events disabled
+# Events disabled
+# Events enabled
+# Events disabled
+# Events disabled
+# Events enabled
+# Events disabled
+# Events disabled
+# Events enabled
+# Events disabled
+# 133994495,,cpu_clk_unhalted.thread:u,7.72%,114050524,100.00,,
+# 599846830,,topdown.slots:u,1.43%,114050524,100.00,,
+# 398568632,,uops_issued.any:u,1.64%,114050524,100.00,,
+# 278108294,,uops_retired.slots:u,0.01%,114050524,100.00,,
+# 39398099,,idq_uops_not_delivered.core:u,12.88%,114050524,100.00,,
+# 6320655,,int_misc.recovery_cycles:u,0.36%,114050524,100.00,,
+pipeline width W = 5 (slots/cycles = 4.477)
+Frontend_Bound     6.6%
+Bad_Speculation   25.4%
+Retiring          46.4%
+Backend_Bound     21.7%

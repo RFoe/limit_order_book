@@ -1076,3 +1076,36 @@ cachegrind：Ir +10.8% 到 +12.4%，D1 未命中不变。TopDown：AAPL 的 Bad 
 
 - **能保留原意的做法是"只预取、不分支"**：在 switch 之前只计算 op.id 的哈希，并 `prefetch` 对应的 group（不做 SIMD 匹配，不判断结果）。这样不会引入新的、和类型相关的分支，类型的预测失败仍然由很早就能判定的 switch 承担，同时 group 的读取已经发出。boost::unordered_flat_map 不公开 group 地址和哈希位置，要做这件事需要依赖 boost 的内部实现，或者换成自己的哈希表。
 - **基线**：后续版本以 v12 为基础；v13 保留在版本列表中，作为这次失败的记录。
+
+## [2026-10-05] v14: 借助 boost 内部实现，在类型分支之前只算 hash 并预取 group（基于 v12）（无效：在噪声范围内）
+
+- **假设**（v13 失败后的修正）：在 switch 之前只做不产生分支的部分：`hash_for(op.id)`、`position_for(hash)`、预取 `groups() + pos0`；分支之后各条路径从这个 hash 和 pos0 开始探测，不再重复计算。这样不会引入与类型相关的新分支（v13 的问题），switch 判定期间 group 的读取已经在进行；push 和 cancel 也省掉一次哈希（mulx）和位置计算。
+- **boost 内部**（1.89，`boost/unordered/detail/foa/`）：`unordered_flat_map::try_emplace` 就是 `table::emplace_impl`：`hash_for` → `position_for` → `find(k, pos0, hash)`，未找到时 `unchecked_emplace_at(pos0, hash, try_emplace_args_t{}, k)`（满了才走 `unchecked_emplace_with_rehash`）。`find(x, pos0, hash)` 返回 `table_locator {pg, n, p}`；`erase(pg, n, p)` 和 map 的 `erase(iterator)` 走同一个 `recover_slot`（size 减一，anti-drift 调整 ml）。`table_core` 的这些成员都是 public，只有两道门：`unordered_flat_map::table_` 是私有成员，用 explicit instantiation 的访问技巧打开（显式实例化的模板实参不做访问检查，`Expose<TableTag, &OrderIndex::table_>` 定义一个返回成员指针的 friend）；`foa::table` 私有继承 `table_core`，用 C 风格转换打开（C 风格转换允许转到不可访问的基类）。为此把 `Loc` 和索引类型移到命名空间作用域，使 `unordered_flat_map<OrderId, Loc>` 成为一个具体类型。`static_assert(is_base_of)` 会在 boost 布局变化时报错。
+- **改动**：commit `f1c11a2`，基于 v12。push = `find(id, pos0, hash)` + `unchecked_emplace_at(pos0, hash, …)`（与 boost 的 try_emplace 步骤相同）；cancel = `find(id, pos0, hash)` + 通过 locator `erase(pg, n, p)`；modify（冷路径）自己探测。
+- **正确性**（`LOB_DIFF_VERSIONS=v14`）：debug ctest 46 项通过，差分测试 30 个 seed × 20 万 op 一致，6 个 workload 的 checksum 一致，热路径仍然全部内联。
+- **环境**：vm，绑核 CPU 3，结果文件标记为 `f1c11a2`。
+
+### 结果（v12 → v14）
+
+cachegrind：Ir **+1.7%**，数据写 **+11%**，D1 未命中不变。按文件看（AAPL，每 op）：boost `core.hpp` **−9.6 条**、`table.hpp` −1.5 条（hash 和位置只算一次、不再构造迭代器）；book.hpp **+12.9 条**，其中没有源码行归属的指令（寄存器溢出和重新加载）从 8.8 条涨到 18.7 条，预取那一行约 3 条。分支模拟：预测失败的分布和 v12 完全相同（switch 0.477 次/op，boost 各行不变），**没有出现 v13 那样的转移**。
+
+| workload | cycles（counters） | instructions | branch-miss | Google Benchmark |
+|---|---:|---:|---:|---:|
+| itch AAPL | 75.0 → 74.0（−1.4%，spread 5% / 5%） | +1.4% | +1.1% | −1.9%（CV 2.4% / 3.4%） |
+| itch QQQ | +2.7%（spread 1% / 6%） | +1.4% | +1.5% | −0.7% |
+| itch SPY | +0.5% | +1.4% | +1.4% | +0.3% |
+| 合成负载 | +0.2% 到 +2.0% | +1.4% 到 +1.6% | +7% 到 +9% | +0.1% 到 +1.5% |
+
+TopDown（W=5）：Backend Bound AAPL 21.7% → 20.2%、QQQ 14.6% → 13.1%（都 −1.5 个百分点），Retiring 相应上升 1.1 到 1.2 个百分点。延迟（AAPL、QQQ）的 p50 和 p99 都在 ±2% 以内。
+
+### 解释
+
+- **省下的指令被寄存器溢出抵消了**：hash 和 pos0 要从 switch 之前一直保持活跃，到各条路径里的探测才用掉。在已经完全内联的长热路径上，这增加了寄存器压力，编译器把一些值放到栈上（数据写 +11%）。boost 内部少的约 11 条/op，基本被 book.hpp 多出的约 13 条/op（其中约 10 条是溢出和重新加载）抵消。
+- **预取有一点效果，但很小**：Backend Bound −1.5 个百分点，和 L1d 未命中数不变是一致的：预取不减少未命中，只是让它提前开始。提前的量很有限：预取和随后的探测在同一个 op 内，中间只隔着一次 switch（它依赖 `op.type`，通常很快判定）。而且和 v13 事先注明的风险一样，switch 预测错误时，错误路径同样会对同一个 id 探测同一个 group，这个"预取"本来就在发生。
+- **合成负载上 branch-miss +7% 到 +9%**（ITCH 上 +1% 左右），原因没有确认；cycles 的影响在 +2% 以内。
+- **结论**：单个 op 之内能提前的访存时间太短，提前取 group 拿不到可测的收益；真正能隐藏 L1/L2 未命中延迟的是跨 op 的前瞻预取（处理第 i 条时预取第 i+D 条），但这需要 book 能看到后面的 op，按约定不改测量接口，这次不做。
+
+### 意外与遗留问题
+
+- **依赖 boost 内部实现的代价**：没有换来收益，却把代码绑在了 boost 1.89 的内部布局上（`static_assert` 能在布局变化时报错，但修复需要重新读源码）。后续版本以 **v12** 为基础；v14 保留在版本列表中作为记录。
+- **还可以做的消融**：只把预取提前，各条路径仍然用公开接口自己计算 hash（不跨 switch 保持 hash 和 pos0），可以把"预取的效果"和"寄存器压力的代价"分开测量。
