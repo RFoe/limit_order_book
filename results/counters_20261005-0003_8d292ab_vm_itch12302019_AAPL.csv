@@ -1,0 +1,14 @@
+# workload=data/itch12302019_AAPL.ops rounds=9 min_running_ratio=1.000
+version,event,per_op_median,spread
+v10,cycles,92.4879,0.5444
+v10,instructions,199.6287,0.0000
+v10,branches,19.9356,0.0001
+v10,branch-misses,0.6823,0.0191
+v10,L1d-load-misses,3.0892,0.2052
+v10,dTLB-load-misses,0.0095,0.6745
+v11,cycles,88.1623,0.5908
+v11,instructions,194.1347,0.0000
+v11,branches,17.4180,0.0001
+v11,branch-misses,0.6861,0.0080
+v11,L1d-load-misses,3.1141,0.2006
+v11,dTLB-load-misses,0.0093,0.6149

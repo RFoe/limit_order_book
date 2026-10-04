@@ -1,0 +1,25 @@
+# cachegrind 20261005-0004_8d292ab_vm workload=syn_deep_s42 cache: --I1=32768,8,64 --D1=49152,12,64 --LL=6291456,12,64
+v10 run=0 ops=1000000 events=1055426 trades=64437 checksum=f9c618d198c0bcb3 orders_left=17565 tick=1 wall_ms=4000.3
+  v10 grid: 65536 slots x 24 B + 2 x 3-level bitmap = 2097152 B mapped, pages=hugetlb huge_backed=2097152 B, tick=1 base=67221 fallback_levels=0
+## v10
+I refs:        206,032,121
+I1  miss rate:        0.00%
+LLi miss rate:        0.00%
+D refs:         82,381,528  (54,376,186 rd   + 28,005,342 wr)
+D1  miss rate:         4.9% (       4.4%     +        5.9%  )
+LLd miss rate:         0.5% (       0.7%     +        0.1%  )
+LL refs:         4,044,724  ( 2,404,424 rd   +  1,640,300 wr)
+LL misses:         415,451  (   375,546 rd   +     39,905 wr)
+LL miss rate:          0.1% (       0.1%     +        0.1%  )
+v11 run=0 ops=1000000 events=1055426 trades=64437 checksum=f9c618d198c0bcb3 orders_left=17565 tick=1 wall_ms=3895.3
+  v11 grid: 65536 slots x 24 B + 2 x 3-level bitmap = 2097152 B mapped, pages=hugetlb huge_backed=2097152 B, tick=1 base=67221 fallback_levels=0
+## v11
+I refs:        200,233,955
+I1  miss rate:        0.00%
+LLi miss rate:        0.00%
+D refs:         84,521,711  (55,955,867 rd   + 28,565,844 wr)
+D1  miss rate:         4.8% (       4.3%     +        5.7%  )
+LLd miss rate:         0.5% (       0.7%     +        0.1%  )
+LL refs:         4,044,747  ( 2,404,400 rd   +  1,640,347 wr)
+LL misses:         415,454  (   375,544 rd   +     39,910 wr)
+LL miss rate:          0.1% (       0.1%     +        0.1%  )

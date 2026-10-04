@@ -1,0 +1,14 @@
+# workload=data/syn_default_s42.ops rounds=9 min_running_ratio=1.000
+version,event,per_op_median,spread
+v10,cycles,77.4913,0.4598
+v10,instructions,198.9379,0.0000
+v10,branches,20.0544,0.0000
+v10,branch-misses,0.5776,0.0107
+v10,L1d-load-misses,3.3106,0.1314
+v10,dTLB-load-misses,0.0032,0.5923
+v11,cycles,73.7918,0.4806
+v11,instructions,193.6127,0.0000
+v11,branches,17.4866,0.0000
+v11,branch-misses,0.5807,0.0048
+v11,L1d-load-misses,3.3494,0.1347
+v11,dTLB-load-misses,0.0032,0.2837

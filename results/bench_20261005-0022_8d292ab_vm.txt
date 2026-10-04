@@ -1,0 +1,27 @@
+----------------------------------------------------------------------------------------------
+Benchmark                                    Time             CPU   Iterations UserCounters...
+----------------------------------------------------------------------------------------------
+replay/itch12302019_SPY/v11_mean           130 ms          129 ms           40 items_per_second=17.3841M/s ns_per_op=57.5526ns
+replay/itch12302019_SPY/v11_median         129 ms          129 ms           40 items_per_second=17.5043M/s ns_per_op=57.129ns
+replay/itch12302019_SPY/v11_stddev        2.99 ms         2.98 ms           40 items_per_second=386.547k/s ns_per_op=1.32643ns
+replay/itch12302019_SPY/v11_cv            2.31 %          2.30 %            40 items_per_second=2.22% ns_per_op=2.30%
+replay/itch12302019_QQQ/v11_mean           147 ms          147 ms           40 items_per_second=16.9354M/s ns_per_op=59.0709ns
+replay/itch12302019_QQQ/v11_median         146 ms          146 ms           40 items_per_second=16.9649M/s ns_per_op=58.9451ns
+replay/itch12302019_QQQ/v11_stddev        2.97 ms         2.97 ms           40 items_per_second=332.873k/s ns_per_op=1.19443ns
+replay/itch12302019_QQQ/v11_cv            2.03 %          2.02 %            40 items_per_second=1.97% ns_per_op=2.02%
+replay/itch12302019_AAPL/v11_mean          122 ms          122 ms           40 items_per_second=13.2155M/s ns_per_op=75.7078ns
+replay/itch12302019_AAPL/v11_median        121 ms          121 ms           40 items_per_second=13.2712M/s ns_per_op=75.3513ns
+replay/itch12302019_AAPL/v11_stddev       2.92 ms         2.91 ms           40 items_per_second=295.28k/s ns_per_op=1.80845ns
+replay/itch12302019_AAPL/v11_cv           2.40 %          2.39 %            40 items_per_second=2.23% ns_per_op=2.39%
+replay/itch12302019_AAPL/v10_mean          128 ms          128 ms           40 items_per_second=12.6218M/s ns_per_op=79.2801ns
+replay/itch12302019_AAPL/v10_median        127 ms          127 ms           40 items_per_second=12.7195M/s ns_per_op=78.6196ns
+replay/itch12302019_AAPL/v10_stddev       3.38 ms         3.38 ms           40 items_per_second=322.051k/s ns_per_op=2.09792ns
+replay/itch12302019_AAPL/v10_cv           2.65 %          2.65 %            40 items_per_second=2.55% ns_per_op=2.65%
+replay/itch12302019_QQQ/v10_mean           153 ms          153 ms           40 items_per_second=16.2744M/s ns_per_op=61.5186ns
+replay/itch12302019_QQQ/v10_median         151 ms          151 ms           40 items_per_second=16.4609M/s ns_per_op=60.7502ns
+replay/itch12302019_QQQ/v10_stddev        5.51 ms         5.51 ms           40 items_per_second=544.117k/s ns_per_op=2.21981ns
+replay/itch12302019_QQQ/v10_cv            3.60 %          3.61 %            40 items_per_second=3.34% ns_per_op=3.61%
+replay/itch12302019_SPY/v10_mean           134 ms          134 ms           40 items_per_second=16.8414M/s ns_per_op=59.3856ns
+replay/itch12302019_SPY/v10_median         134 ms          134 ms           40 items_per_second=16.8492M/s ns_per_op=59.35ns
+replay/itch12302019_SPY/v10_stddev        1.59 ms         1.58 ms           40 items_per_second=199.26k/s ns_per_op=703.378ps
+replay/itch12302019_SPY/v10_cv            1.19 %          1.18 %            40 items_per_second=1.18% ns_per_op=1.18%
