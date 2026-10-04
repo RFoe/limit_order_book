@@ -10,6 +10,7 @@
 #include <lob/v3/book.hpp>
 #include <lob/v4/book.hpp>
 #include <lob/v5/book.hpp>
+#include <lob/v7/book.hpp>
 #include <lob/versions.hpp>
 #include <lob/workload/generator.hpp>
 
@@ -124,7 +125,7 @@ TEST_CASE("differential framework catches a mutant and shrinks it", "[diff][meta
 // generic test above never touches the fallback. Here a tiny window and a
 // coarser tick force both stores to be live at the same time, including best
 // prices that alternate between them during matching.
-TEST_CASE("v3/v4/v5 grid + fallback map match v0", "[diff][v3]") {
+TEST_CASE("v3/v4/v5/v7 grid + fallback map match v0", "[diff][v3]") {
   struct Variant {
     const char* label;
     Price tick;
@@ -161,10 +162,12 @@ TEST_CASE("v3/v4/v5 grid + fallback map match v0", "[diff][v3]") {
         check.template operator()<v3::BookT<RecordingSink, 6>>();
         check.template operator()<v4::BookT<RecordingSink, 6>>();
         check.template operator()<v5::BookT<RecordingSink, 6>>();
+        check.template operator()<v7::BookT<RecordingSink, 6>>();
       } else {
         check.template operator()<v3::BookT<RecordingSink, 16>>();
         check.template operator()<v4::BookT<RecordingSink, 16>>();
         check.template operator()<v5::BookT<RecordingSink, 16>>();
+        check.template operator()<v7::BookT<RecordingSink, 16>>();
       }
     }
   }
