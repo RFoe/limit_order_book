@@ -669,3 +669,42 @@ Google Benchmark（`results/bench_20261004-0831_feb152e_vm.json`，v0/v4/v5 交�
 - **结论**：16 字节 entry 的 L1d 未命中只降了 5–9%（约为 8 字节方案的一半），却多了 3.2 条指令（透明查找要从元素中取 key 来比较，插入要拷贝 16 字节的 element），cycles 在 −1.7% 到 +3% 之间，落在噪声范围内。在索引层面就没有收益；到订单簿层面，还要叠加 key 编码、取出 side、兜底冷路径，以及可能的内联结构变化（v5 的教训）。按"可行且理论上有收益才实现"的条件，**不建立 v6**。
 - **累计的教训**：索引槽位从 32 → 24 字节（v4）、24 → 16 字节（本节）、24 → 8 字节（v5），三次尝试都没有在订单簿层面变快。v3 之后，索引的访存只占它自身成本的一小部分（见"flat_map 索引那 43% 的 cycles 具体卡在哪"一节），继续压缩槽位已经没有收益空间。
 
+## [2026-10-04] v7: 每个 key 每次操作只探测一次（push 用 try_emplace，改价复用槽位）（无效）
+
+- **假设**：v4 的 push 先 `contains(id)` 判重，挂单时再 `emplace(id)`，同一个 key 要哈希和探测两次；改价时 find 之后先 erase，再 emplace。消融实验 A（去掉 contains）测到的上限是指令 −6.5%、cycles −1% 到 −3%。
+- **改动**：commit `d842ea3`，基于 v4。push 开头用 `try_emplace(id)` 占位（同时完成判重），挂单时通过迭代器写入 Loc，完全成交时用迭代器删除；改价复用 find 到的槽位（只把订单从价位上摘掉，不删除索引条目，之后重新写入）。match 只会删除其他 key，boost flat_map 的 erase 不移动元素，所以迭代器在 match 前后一直有效。
+- **流程改进**（commit `c4206b6`）：差分测试支持 `LOB_DIFF_VERSIONS=vN`，验证新版本时只测这个版本，没有改动的旧版本跳过（ctest 显示为 Skipped）；改动共享代码时不设这个变量，跑全部版本。规则已写入 CLAUDE.MD。
+- **正确性**（`LOB_DIFF_VERSIONS=v7`）：debug ctest 38 项通过（其中 7 项跳过）。差分测试 30 个 seed × 20 万 op 一致（v7 的通用对比和网格 + 兜底 map 测试）。6 个 workload 的 checksum 一致。
+- **环境**：vm，绑核 CPU 3，结果文件标记为 `c4206b6`（v7 的代码与 `d842ea3` 相同）。
+
+### 结果（v4 → v7）
+
+cachegrind（profile 构建）：Ir AAPL +0.5%、SPY/QQQ +1.0%、syn_default/syn_deep +1.3%、**syn_aggressive +4.9%**（D1 写未命中 +18.2%）。其他 workload 的 D1 读写未命中基本不变。heaptrack 的分配次数和峰值不变。
+
+硬件计数器（`book counters`，v0/v4/v7 交替运行，9 轮）：
+
+| workload | cycles v4 → v7 | instructions | branch-miss | L1d 未命中 |
+|---|---:|---:|---:|---:|
+| itch AAPL | 114.1 → 113.1（−0.9%，spread 5.9%） | −0.7% | −2.4% | +5.9% |
+| itch QQQ | 92.4 → 90.7（−1.8%） | −0.2% | −1.2% | +3.7% |
+| syn_default | 79.5 → 79.6（+0.2%，spread 59% / 22%） | +0.0% | −0.9% | +1.2% |
+| syn_aggressive | 92.7 → 95.3（+2.8%） | **+3.9%** | −0.3% | +6.0% |
+| syn_deep | 97.8 → 102.5（+4.9%，spread 6% / 10%） | −0.8% | −1.1% | +4.2% |
+
+`perf.sh stat`（走 `book replay` 路径）：AAPL 的 instructions +0.3%、L2 未命中 −6.8%，cycles +13.9%（指令和未命中都没有对应的变化，推测是噪声）；syn_default 的 cycles −2.7%、instructions +1.1%。
+
+Google Benchmark（`results/bench_20261004-1544_c4206b6_vm.json`，v0/v4/v7 交替运行；这一轮 CV 偏高，为 4–21%）：v4 → v7 在 AAPL −0.2%、QQQ −0.2%、syn_default +0.4%、syn_aggressive +1.1%、syn_deep +4.9%，**全部在 CV 范围内**。延迟：AAPL 的 p50 和 p99 基本相同（192/452 → 192/448）。
+
+### 解释
+
+- **省下的探测确实省下了**（cachegrind 按文件对比，AAPL）：boost `core.hpp` 少了 1790 万条、mulx 少了 318 万条，合计约每次 push 少 13 条指令，正好对应少了一次哈希和一次探测。
+- **但被内联变化抵消了**：v4 的 push 里只有一个很小的 `contains`，整体内联在回放循环里，插入的代码在 `rest` 里；v7 把 `try_emplace`（包括插入路径）挪进了 push，push 超过了内联阈值，变成独立函数（profile 中自身占 33%）。`book.hpp` 多出约 1710 万条指令（函数调用开销、寄存器溢出），基本吃掉了全部节省。
+- **完全成交的订单反而更贵**：v4 对这类订单只做一次 `contains`（失败查找），v7 要先插入占位、再删除。syn_aggressive 有 25% 的穿价单，所以那里指令 +3.9%、D1 写未命中 +18%。
+- **预测与实测**：消融 A 测出来的上限（指令 −6.5%）是在"push 结构不变、只去掉一次查找"的条件下得到的，真正的实现改变了函数结构和内联，上限没有兑现，cycles 在噪声范围内。
+
+### 意外与遗留问题
+
+- **这是第三次（v5、v7，以及 v5 的几次修正尝试）"索引层面省下了，但被代码生成的变化吃掉"**。消融实验能给出某项成本的上限，但实现另一种写法时，函数大小和内联决策也跟着变了，这部分不在消融的测量范围内。今后对热路径函数做结构性改动时，应当同时检查内联结构（看 `nm` 中的符号，或者 cachegrind 的按函数统计）。
+- **测量口径**：用户此前决定不给 harness 加 `[[gnu::flatten]]`，所以这些内联差异按实际编译结果计入。
+- **syn_default 上 latency 的 p50 下降了 6%**（180 → 169），但同一组 v4 出现了 680 万 cycles 的离群值，噪声较大，不据此下结论。
+

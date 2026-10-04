@@ -1,0 +1,20 @@
+# workload=data/itch12302019_QQQ.ops rounds=9 min_running_ratio=1.000
+version,event,per_op_median,spread
+v0,cycles,323.6554,0.0644
+v0,instructions,520.5775,0.0000
+v0,branches,104.6419,0.0000
+v0,branch-misses,2.2459,0.0049
+v0,L1d-load-misses,2.7551,0.1026
+v0,dTLB-load-misses,0.0495,1.2501
+v4,cycles,92.3758,0.1075
+v4,instructions,198.4055,0.0000
+v4,branches,26.0715,0.0000
+v4,branch-misses,1.0056,0.0026
+v4,L1d-load-misses,1.8837,0.0688
+v4,dTLB-load-misses,0.0065,0.9063
+v7,cycles,90.6957,0.0397
+v7,instructions,198.0253,0.0000
+v7,branches,25.7690,0.0000
+v7,branch-misses,0.9932,0.0020
+v7,L1d-load-misses,1.9529,0.0179
+v7,dTLB-load-misses,0.0065,0.1091
