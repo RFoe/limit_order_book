@@ -996,3 +996,45 @@ TopDown（W=5）：四项的变化都在 3 个百分点以内，和噪声同一�
 
 - **标准库函数也会影响内联**：`std::rotr` 和 `__builtin_rotateright64` 生成的机器码相同（都是一条 `ror`），但内联器估价时看到的 IR 不同，前者让 erase 超过了阈值。v10 的 erase 代价 515 本来就只比阈值低 10，任何小改动都可能把它推过去。之后每个版本都要继续用 remark 检查。
 - **测量噪声**：这一轮暴露出宿主机噪声可以大到让 9 轮 counters 完全不可用。小幅度的优化（< 5%）需要更多轮次，或者在噪声较小的时段重跑；最终数字还是要放到裸金属上测。
+
+## [2026-10-05] v12: 由 book 自己负责 op 分派，并把整条热路径内联（基于 v11）（有效）
+
+- **假设**（来自 v11 之后的 uiCA / cachegrind 分析）：v11 的 push 路径上有 3 层非内联调用（push → rest → alloc_node）。用 `tools/static_path` 从 callgrind 提取出的 236 条指令里，有 36 条压栈/出栈和 15 条栈访问，另外还有 3 对 call/ret；cancel 路径是内联的，只有 4 条栈访问。折合每 op 约 28 条指令（占 194 条的 14%）。cancel 能内联也只是因为 `book replay` 的外层函数允许 525 的阈值（v10 的分析）。预期：指令约 −14%；这部分大多是独立的栈存取，不在关键路径上，按 Retiring 的占比估计 cycles 约 −7% 到 −9%。
+- **harness 改动**（commit `1424f25`，单独提交）：`lob::apply` 增加一个带约束的重载，book 提供 `apply(op)` 时调用它；这个重载是 `always_inline`，这样 book 自己钉住的内联能一直到达 harness 的循环。没有 `apply()` 的 book 仍然走原来那个通用的 switch，代码逐字节没变。所有 harness（replay、counters、bench、latency、生成器、差分测试）都经过 `lob::apply`。验证：v0–v11 在 AAPL 上的 cachegrind Ir 与最近一次记录相同（v1、v2 比 10-04 凌晨的记录多 0.3%，但在不含这个改动的 HEAD 上也一样，是更早的变化造成的）。
+- **改动**（commit `c030767`，基于 v11）：`apply`（book 自己的 switch）、push、add、rest、alloc_node、cancel、erase 全部 `always_inline`；冷路径显式 `noinline`：match（只有可能穿价的 push 才进入）、modify（ITCH 上占 1%）、兜底 map 的取价位和摘除、锚定（里面有一次 div）。没有算法上的改动。
+- **结构验证**：profile 构建下，cachegrind 的函数分布中只剩 `replay<v12>`（95.8%）、boost 的 rehash 和 modify；release 的两个二进制（`book` 包含 replay、counters、latency，以及 `benchmark_book`）里都没有任何热路径函数的独立符号。**这是第一次在所有 harness（包括 latency harness 的 `measure_once`）里代码布局一致**。
+- **正确性**（`LOB_DIFF_VERSIONS=v12`）：debug ctest 44 项通过，差分测试 30 个 seed × 20 万 op 一致，6 个 workload 的 checksum 与 v0 一致。
+- **流程改进**（commit `1bd1982`）：改共享代码时也不再跑全部版本的 debug 测试（耗时以小时计）；对旧版本用确定性结果确认没有影响（release checksum 与 v0 一致，cachegrind Ir 与记录相同）。规则已写入 CLAUDE.MD。
+- **环境**：vm，绑核 CPU 3，结果文件标记为 `c030767`。这一轮宿主机噪声小（counters 的 spread 多数 ≤ 5%）。
+
+### 结果（v11 → v12）
+
+cachegrind（profile 构建）：Ir **−12.6% 到 −14.3%**（AAPL 319.5M → 275.7M），数据读 −11% 到 −12%，**数据写 −31% 到 −36%**（压栈和栈溢出消失）；D1 未命中、I1 未命中都不变（热循环变大了，但仍然放得进 I-cache）。分支模拟：预测失败不变（AAPL 1.191M → 1.191M）。heaptrack 不变。
+
+硬件计数器（`book counters`，v11/v12 交替运行，9 轮）：
+
+| workload | cycles v11 → v12 | instructions | branches | branch-miss |
+|---|---:|---:|---:|---:|
+| itch AAPL | 84.7 → 75.2（**−11.2%**，spread 4% / 11%） | −13.5% | −16.7% | +0.2% |
+| itch QQQ | 68.0 → 57.9（**−14.9%**，spread 2% / 9%） | −14.0% | −17.7% | +0.2% |
+| itch SPY | 66.4 → 56.1（**−15.5%**，spread 2% / 2%） | −14.1% | −17.7% | +0.7% |
+| syn_default | 74.4 → 64.1（−13.8%） | −13.7% | −17.1% | −1.2% |
+| syn_aggressive | 94.7 → 83.9（−11.3%） | −12.6% | −16.5% | −1.0% |
+| syn_deep | 97.1 → 81.9（−15.7%） | −13.8% | −17.2% | −1.6% |
+
+Google Benchmark（`results/bench_20261005-0141_c030767_vm.json`，v11/v12 交替，20 次重复）：AAPL 122.3 → 108.2 ms（**−11.6%**，CV 2.7% / 1.7%）、QQQ −15.3%（CV 3.0% / 2.3%）、SPY −15.3%（CV 3.0% / 2.2%）；合成负载 −10.1% 到 −16.5%。
+
+TopDown（W=5）：四项的占比基本不变（AAPL：Retiring 47.7% → 45.9%，Bad Speculation 25.2% → 26.2%，Backend 20.6% → 22.0%），说明各部分的周期数大致按比例下降。
+
+延迟（latency harness，cycles）：AAPL 整体 p50/p99 163/382 → 161/383，push_rest 的 p50 167 → 163，**cancel 的 p50 153 → 159（+4%）**；QQQ 的 cancel p50 138 → 151（+9%）；syn_default 的 push_rest p50 164 → 148。
+
+### 解释
+
+- **省下的就是调用边界上的指令**：每 op 少约 26 条指令（AAPL 194 → 168），和静态路径里数出来的约 28 条相符；分支少 2.9 个/op（call/ret 和函数入口处的检查），数据写少三分之一。
+- **cycles 的降幅比预估大**（预估 −7% 到 −9%，实测 −11% 到 −16%）：除了压栈出栈本身，函数之间传参和保存寄存器造成的额外依赖也没有了，编译器可以把 push 和 rest 的代码放在一起调度。cycles 降幅和指令降幅接近 1:1，说明这部分工作原来也在占用发射带宽（v11 的分析显示，主路径受发射宽度限制）。
+- **单 op 的延迟基本不变，cancel 反而略高**：latency harness 每个 op 前后都有 `lfence`，测的是单个 op 从开始到结束的时间。省掉的压栈出栈大多是独立的 store，在流水线里和其他工作并行，不在单个 op 的关键路径上，所以吞吐量提升，单 op 延迟变化不大。cancel 的 p50 +4% 到 +9% 的原因没有确认。在 v11 里，latency harness 中的 cancel 是独立函数（阈值 250），v12 是内联的，代码布局（循环体变大、对齐）不同。
+
+### 意外与遗留问题
+
+- **吞吐量和单 op 延迟可以朝不同方向变化**：这次是第一次出现吞吐量 −11% 到 −15%、而 p50 延迟基本不变的情况。HFT 更关心哪一个要看场景：tick-to-trade 关心单条消息的延迟，消息突发时关心吞吐量。之后两者都要报告。
+- **下一步**（v13，按 v11 之后的分析）：把 push 和 cancel 共有的"哈希 + 读 group"提到类型分支之前，让 switch 的预测失败（0.47 次/op，占剩余预测失败的 64%）和 group 的 L1 未命中重叠。现在 book 自己负责分派，这一步可以完全在版本代码里完成。
