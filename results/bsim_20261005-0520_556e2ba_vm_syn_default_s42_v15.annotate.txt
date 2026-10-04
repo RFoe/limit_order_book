@@ -1,0 +1,407 @@
+--------------------------------------------------------------------------------
+-- Metadata
+--------------------------------------------------------------------------------
+Invocation:       /usr/bin/cg_annotate --show=Ir,Bc,Bcm,Bi,Bim --sort=Bcm results/bsim_20261005-0520_556e2ba_vm_syn_default_s42_v15.out
+Command:          build/profile/book replay --workload data/syn_default_s42.ops --version v15
+Events recorded:  Ir Bc Bcm Bi Bim
+Events shown:     Ir Bc Bcm Bi Bim
+Event sort order: Bcm
+Threshold:        0.1%
+Annotation:       on
+
+--------------------------------------------------------------------------------
+-- Summary
+--------------------------------------------------------------------------------
+Ir__________________ Bc_________________ Bcm_____________ Bi_________ Bim________ 
+
+168,138,556 (100.0%) 14,165,252 (100.0%) 585,108 (100.0%) 80 (100.0%) 38 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+-- File:function summary
+--------------------------------------------------------------------------------
+  Ir_______________________ Bc______________________ Bcm___________________ Bi____________ Bim___________  file:function
+
+< 76,411,932 (45.4%, 45.4%) 6,580,895 (46.5%, 46.5%) 584,191 (99.8%, 99.8%) 0 (0.0%, 0.0%) 0 (0.0%, 0.0%)  /home/wang/sources/cxx/book/include/lob/v15/book.hpp:
+  67,677,508 (40.3%)        5,827,370 (41.1%)        520,812 (89.0%)        0              0                 void lob::replay<lob::v15::BookT<lob::ChecksumSink, 16u> >(lob::v15::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)
+   4,269,674  (2.5%)          338,869  (2.4%)         35,232  (6.0%)        0              0                 lob::v15::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+   1,699,051  (1.0%)          186,483  (1.3%)         14,369  (2.5%)        0              0                 unsigned int lob::v15::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)
+   1,704,692  (1.0%)          183,963  (1.3%)         13,777  (2.4%)        0              0                 unsigned int lob::v15::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)
+
+--------------------------------------------------------------------------------
+-- Function:file summary
+--------------------------------------------------------------------------------
+  Ir________________________ Bc_______________________ Bcm___________________ Bi____________ Bim___________  function:file
+
+> 152,492,005 (90.7%, 90.7%) 13,093,171 (92.4%, 92.4%) 520,867 (89.0%, 89.0%) 0 (0.0%, 0.0%) 0 (0.0%, 0.0%)  void lob::replay<lob::v15::BookT<lob::ChecksumSink, 16u> >(lob::v15::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>):
+   67,677,508 (40.3%)         5,827,370 (41.1%)        520,812 (89.0%)        0              0                 /home/wang/sources/cxx/book/include/lob/v15/book.hpp
+
+>   7,651,628  (4.6%, 95.2%)    477,861  (3.4%, 95.8%)  35,248  (6.0%, 95.0%) 0 (0.0%, 0.0%) 0 (0.0%, 0.0%)  lob::v15::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int):
+    4,269,674  (2.5%)           338,869  (2.4%)         35,232  (6.0%)        0              0                 /home/wang/sources/cxx/book/include/lob/v15/book.hpp
+
+>   3,262,128  (1.9%, 97.2%)    235,959  (1.7%, 97.5%)  14,377  (2.5%, 97.5%) 0 (0.0%, 0.0%) 0 (0.0%, 0.0%)  unsigned int lob::v15::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int):
+    1,699,051  (1.0%)           186,483  (1.3%)         14,369  (2.5%)        0              0                 /home/wang/sources/cxx/book/include/lob/v15/book.hpp
+
+>   3,230,646  (1.9%, 99.1%)    232,638  (1.6%, 99.1%)  13,785  (2.4%, 99.9%) 0 (0.0%, 0.0%) 0 (0.0%, 0.0%)  unsigned int lob::v15::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int):
+    1,704,692  (1.0%)           183,963  (1.3%)         13,777  (2.4%)        0              0                 /home/wang/sources/cxx/book/include/lob/v15/book.hpp
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /home/wang/sources/cxx/book/include/lob/v15/book.hpp
+--------------------------------------------------------------------------------
+Ir______________ Bc_______________ Bcm____________ Bi Bim 
+
+3,711,870 (2.2%)    22,104  (0.2%)       0          0   0  <unknown (line 0)>
+
+-- line 142 ----------------------------------------
+        .                .               .          .   .      auto* words = reinterpret_cast<std::uint64_t*>(grid_ + kSlots);  // zero-filled by the kernel
+        .                .               .          .   .      bid_bits_ = Bitmap(words);
+        .                .               .          .   .      ask_bits_ = Bitmap(words + Bitmap::kTotalWords);
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    // the book's own per-op dispatch (see lob::apply); everything on the push and
+        .                .               .          .   .    // cancel paths is always_inline into it, so the harness loop has no calls
+        .                .               .          .   .    [[gnu::always_inline]] void apply(const Op& op) {
+4,888,730 (2.9%) 1,944,365 (13.7%) 481,696 (82.3%)  0   0      switch (op.type) {
+        .                .               .          .   .        case OpType::Push:
+2,524,430 (1.5%)         0               0          0   0          return push(op.id, op.side, op.price, op.qty);
+        .                .               .          .   .        case OpType::Cancel:
+        .                .               .          .   .          return cancel(op.id);
+        .                .               .          .   .        case OpType::Modify:
+  333,810 (0.2%)         0               0          0   0          return modify(op.id, op.price, op.qty);
+        .                .               .          .   .      }
+        .                .               .          .   .      std::unreachable();
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    [[gnu::always_inline]] void push(OrderId id, Side side, Price price, Qty qty) {
+  504,886 (0.3%)   504,886  (3.6%)       0          0   0      if (qty == 0) return reject(id, OpType::Push, RejectReason::InvalidQty);
+1,009,772 (0.6%)   504,886  (3.6%)       0          0   0      if (price <= 0) return reject(id, OpType::Push, RejectReason::InvalidPrice);
+        .                .               .          .   .      const auto [slot, inserted] = index_.try_insert(id);  // the only probe for this id
+        .                .               .          .   .      if (!inserted) return reject(id, OpType::Push, RejectReason::DuplicateId);
+        .                .               .          .   .      add(id, side, price, qty, slot);
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    [[gnu::always_inline]] void cancel(OrderId id) {
+        .                .               .          .   .      const auto it = index_.find(id);
+        .                .               .          .   .      if (!it) return reject(id, OpType::Cancel, RejectReason::UnknownId);
+  878,958 (0.5%)         0               0          0   0      const Qty remaining = nodes_[*it.value].qty;
+        .                .               .          .   .      erase(it);
+  439,479 (0.3%)         0               0          0   0      sink_.on(Cancelled{id, remaining});
+        .                .               .          .   .    }
+        .                .               .          .   .  
+  556,350 (0.3%)         0               0          0   0    [[gnu::noinline]] void modify(OrderId id, Price price, Qty qty) {  // 1% of ITCH ops
+        .                .               .          .   .      const auto it = index_.find(id);
+        .                .               .          .   .      if (!it) return reject(id, OpType::Modify, RejectReason::UnknownId);
+  111,270 (0.1%)    55,635  (0.4%)       0          0   0      if (qty == 0) return reject(id, OpType::Modify, RejectReason::InvalidQty);
+  111,270 (0.1%)    55,635  (0.4%)       0          0   0      if (price <= 0) return reject(id, OpType::Modify, RejectReason::InvalidPrice);
+        .                .               .          .   .  
+  166,905 (0.1%)         0               0          0   0      const Loc loc = loc_of(*it.value);
+        .                .               .          .   .      OrderNode& node = nodes_[loc.node];
+  222,540 (0.1%)    55,635  (0.4%)  25,705  (4.4%)  0   0      if (price == loc.price && qty <= node.qty) {  // reduce: keep priority
+   67,062 (0.0%)         0               0          0   0        level_of(loc).total_qty -= node.qty - qty;
+   33,531 (0.0%)         0               0          0   0        node.qty = qty;
+   33,531 (0.0%)         0               0          0   0        sink_.on(Reduced{id, qty});
+   33,531 (0.0%)         0               0          0   0        return;
+        .                .               .          .   .      }
+        .                .               .          .   .      const Side side = loc.side;
+        .                .               .          .   .      const Qty old_qty = node.qty;
+  110,520 (0.1%)         0               0          0   0      remove_from_level(loc);  // keep the index slot: add() refills or erases it
+   22,104 (0.0%)         0               0          0   0      sink_.on(Cancelled{id, old_qty});
+        .                .               .          .   .      add(id, side, price, qty, it);
+  500,715 (0.3%)         0               0          0   0    }
+        .                .               .          .   .  
+        .                .               .          .   .    [[nodiscard]] auto best_bid() const -> std::optional<Price> {
+        .                .               .          .   .      std::optional<Price> best;
+        .                .               .          .   .      if (!bid_bits_.empty()) best = price_of(bid_bits_.min() ^ kMirror);
+        .                .               .          .   .      if (!bids_.empty() && (!best || bids_.begin()->first > *best)) best = bids_.begin()->first;
+        .                .               .          .   .      return best;
+        .                .               .          .   .    }
+        .                .               .          .   .    [[nodiscard]] auto best_ask() const -> std::optional<Price> {
+-- line 204 ----------------------------------------
+-- line 307 ----------------------------------------
+        .                .               .          .   .  
+        .                .               .          .   .   private:
+        .                .               .          .   .    static constexpr std::uint32_t kNil = std::numeric_limits<std::uint32_t>::max();
+        .                .               .          .   .    static constexpr std::uint32_t kNoSlot = std::numeric_limits<std::uint32_t>::max();
+        .                .               .          .   .    static constexpr std::uint32_t kSlots = std::uint32_t{1} << WindowBits;
+        .                .               .          .   .    using Bitmap = v3::HierBitmap<WindowBits>;
+        .                .               .          .   .    // bid bitmap bit = slot ^ kMirror (= kSlots - 1 - slot): best bid is min() like best ask
+        .                .               .          .   .    static constexpr std::uint32_t kMirror = kSlots - 1;
+2,795,875 (1.7%)         0               0          0   0    static constexpr auto mirror(Side side) -> std::uint32_t { return side == Side::Buy ? kMirror : 0; }
+        .                .               .          .   .  
+        .                .               .          .   .    struct OrderNode {
+        .                .               .          .   .      OrderId id;
+        .                .               .          .   .      Price price;  // v15: price and side moved here from the index value
+        .                .               .          .   .      Qty qty;
+        .                .               .          .   .      std::uint32_t next;  // level list: towards the tail; free list: next free node
+        .                .               .          .   .      std::uint32_t prev;  // level list only
+        .                .               .          .   .      Side side;
+-- line 323 ----------------------------------------
+-- line 337 ----------------------------------------
+        .                .               .          .   .    struct Loc {  // where an order rests; built from its node (no longer stored in the index)
+        .                .               .          .   .      Price price;
+        .                .               .          .   .      std::uint32_t node;
+        .                .               .          .   .      Side side;
+        .                .               .          .   .    };
+        .                .               .          .   .    using Index = OrderIndex;
+        .                .               .          .   .    using Handle = Index::Handle;
+        .                .               .          .   .  
+2,475,570 (1.5%)         0               0          0   0    [[nodiscard]] auto loc_of(std::uint32_t i) const -> Loc { return {nodes_[i].price, i, nodes_[i].side}; }
+        .                .               .          .   .  
+        .                .               .          .   .    [[noreturn]] static void fail(const std::string& what) { throw std::logic_error("v15 invariant: " + what); }
+        .                .               .          .   .  
+        .                .               .          .   .    void reject(OrderId id, OpType op, RejectReason reason) { sink_.on(Rejected{id, op, reason}); }
+        .                .               .          .   .  
+        .                .               .          .   .    // ---- price grid ---------------------------------------------------------------
+        .                .               .          .   .    [[nodiscard]] auto slot_of(Price price) const -> std::uint32_t {
+  990,230 (0.6%)   495,115  (3.5%)       0          0   0      if (!anchored_) return kNoSlot;
+        .                .               .          .   .      // price on the grid <=> price - base is a multiple of tick in [0, kSlots * tick)
+        .                .               .          .   .      // <=> quotient < kSlots (a negative difference wraps to a huge unsigned value,
+        .                .               .          .   .      // which ExactDiv also maps to >= 2^64 / tick)
+        .                .               .          .   .      const std::uint64_t s =
+1,520,849 (0.9%)         0               0          0   0          slot_div_.quotient(static_cast<std::uint64_t>(price) - static_cast<std::uint64_t>(base_));
+1,993,859 (1.2%)   935,581  (6.6%)       0          0   0      return s < kSlots ? static_cast<std::uint32_t>(s) : kNoSlot;
+        .                .               .          .   .    }
+1,115,754 (0.7%)         0               0          0   0    [[nodiscard]] auto price_of(std::uint32_t slot) const -> Price { return base_ + static_cast<Price>(slot) * tick_; }
+        .                .               .          .   .  
+        .                .               .          .   .    void anchor(Price price) {  // centre the window on the first on-grid resting price
+        3 (0.0%)         0               0          0   0      base_ = price - static_cast<Price>(kSlots / 2) * tick_;
+        1 (0.0%)         0               0          0   0      anchored_ = true;
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    // Best fallback-map price seen by a taker of each side, sign-normalised like
+        .                .               .          .   .    // may_cross(): [Buy] = lowest ask, [Sell] = -highest bid; kNoMapLevel when the
+        .                .               .          .   .    // map is empty. Refreshed on every (cold) change of the maps.
+        .                .               .          .   .    static constexpr Price kNoMapLevel = std::numeric_limits<Price>::max();
+        .                .               .          .   .    void refresh_map_best() {
+        .                .               .          .   .      taker_map_best_[0] = asks_.empty() ? kNoMapLevel : asks_.begin()->first;
+        .                .               .          .   .      taker_map_best_[1] = bids_.empty() ? kNoMapLevel : -bids_.begin()->first;
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    auto level_of(const Loc& loc) -> Level& {
+   67,062 (0.0%)    33,531  (0.2%)       0          0   0      if (const std::uint32_t s = slot_of(loc.price); s != kNoSlot) return grid_[s];
+        .                .               .          .   .      return loc.side == Side::Buy ? bids_.find(loc.price)->second : asks_.find(loc.price)->second;
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    // ---- node pool ----------------------------------------------------------------
+        .                .               .          .   .    [[gnu::always_inline]] auto alloc_node(OrderId id, Qty qty, Price price, Side side) -> std::uint32_t {
+1,951,436 (1.2%)         0               0          0   0      std::uint32_t i = free_head_;
+  496,102 (0.3%)   496,102  (3.5%)       7  (0.0%)  0   0      if (i != kNil) {
+1,976,400 (1.2%)         0               0          0   0        free_head_ = nodes_[i].next;
+  494,100 (0.3%)         0               0          0   0      } else {
+        .                .               .          .   .        if (nodes_.size() == kNil) throw std::length_error("v15: order pool exhausted");
+        .                .               .          .   .        i = static_cast<std::uint32_t>(nodes_.size());
+        .                .               .          .   .        nodes_.emplace_back();
+        .                .               .          .   .      }
+2,482,512 (1.5%)         0               0          0   0      nodes_[i] = OrderNode{id, price, qty, kNil, kNil, side};
+        .                .               .          .   .      return i;
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    void free_node(std::uint32_t i) {
+  988,600 (0.6%)         0               0          0   0      nodes_[i].next = free_head_;
+  549,121 (0.3%)         0               0          0   0      free_head_ = i;
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    // ---- level list ---------------------------------------------------------------
+        .                .               .          .   .    // The link to patch is either a neighbour node's field or the Level's
+        .                .               .          .   .    // head/tail. Select its address branch-free (clang turns an unpredictable
+        .                .               .          .   .    // ternary into cmov), then store unconditionally. kNil indexes are replaced
+        .                .               .          .   .    // by 0 before forming the node address so no out-of-range pointer is formed
+        .                .               .          .   .    // (the pool is never empty here: node i exists).
+        .                .               .          .   .    void push_back(Level& level, std::uint32_t i) {
+1,471,820 (0.9%)         0               0          0   0      const std::uint32_t tail = level.tail;
+        .                .               .          .   .      const bool has_tail = __builtin_unpredictable(tail != kNil);
+2,496,996 (1.5%)         0               0          0   0      std::uint32_t* link = has_tail ? &nodes_[has_tail ? tail : 0].next : &level.head;
+  496,102 (0.3%)         0               0          0   0      *link = i;
+  496,102 (0.3%)         0               0          0   0      nodes_[i].prev = tail;
+  496,102 (0.3%)         0               0          0   0      nodes_[i].next = kNil;
+  496,102 (0.3%)         0               0          0   0      level.tail = i;
+  496,102 (0.3%)         0               0          0   0      ++level.count;
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    void unlink(Level& level, std::uint32_t i) {
+        .                .               .          .   .      const OrderNode& n = nodes_[i];
+  988,600 (0.6%)         0               0          0   0      const std::uint32_t prev = n.prev;
+  988,600 (0.6%)         0               0          0   0      const std::uint32_t next = n.next;
+        .                .               .          .   .      const bool has_prev = __builtin_unpredictable(prev != kNil);
+        .                .               .          .   .      const bool has_next = __builtin_unpredictable(next != kNil);
+2,471,500 (1.5%)         0               0          0   0      std::uint32_t* to_next = has_prev ? &nodes_[has_prev ? prev : 0].next : &level.head;
+2,471,500 (1.5%)         0               0          0   0      std::uint32_t* to_prev = has_next ? &nodes_[has_next ? next : 0].prev : &level.tail;
+  494,300 (0.3%)         0               0          0   0      *to_next = next;
+  494,300 (0.3%)         0               0          0   0      *to_prev = prev;
+  494,300 (0.3%)         0               0          0   0      --level.count;
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    // false => match() would consume nothing (no opposite level at or through the
+        .                .               .          .   .    // limit). Prices are normalised by the taker's sign (sell side negated) so
+        .                .               .          .   .    // "crosses" is `best <= limit` for both sides; the only data-dependent branch
+        .                .               .          .   .    // left is "opposite grid empty", which is rare.
+        .                .               .          .   .    [[nodiscard]] auto may_cross(Side side, Price limit) const -> bool {
+   55,635 (0.0%)         0               0          0   0      const auto t = static_cast<std::uint32_t>(side);          // Buy = 0, Sell = 1
+1,580,970 (0.9%)         0               0          0   0      const Price sign = 1 - 2 * static_cast<Price>(t);
+1,580,967 (0.9%)         0               0          0   0      const std::uint32_t opp_mirror = kMirror & (0U - t);       // bids are mirrored
+3,125,434 (1.9%)         0               0          0   0      const Bitmap& opp = __builtin_unpredictable(t != 0) ? bid_bits_ : ask_bits_;
+  526,990 (0.3%)         0               0          0   0      Price best = taker_map_best_[t];  // already normalised; sentinel when the map is empty
+   22,104 (0.0%)    22,104  (0.2%)       0          0   0      if (!opp.empty()) [[likely]]
+2,107,956 (1.3%)         0               0          0   0        best = std::min(best, sign * price_of(opp.min() ^ opp_mirror));
+1,558,866 (0.9%)         0               0          0   0      return best <= sign * limit;
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    // slot: this order's index entry (just reserved by push, or kept by modify)
+        .                .               .          .   .    [[gnu::always_inline]] void add(OrderId id, Side side, Price price, Qty qty, const Handle& slot) {
+  526,990 (0.3%)   526,990  (3.7%)  33,285  (5.7%)  0   0      if (!may_cross(side, price)) [[likely]] return rest(id, side, price, qty, slot);
+   30,888 (0.0%)    30,888  (0.2%)  15,326  (2.6%)  0   0      if (side == Side::Buy)
+   28,306 (0.0%)         0               0          0   0        qty = match<Side::Buy>(id, price, qty);
+        .                .               .          .   .      else
+   27,852 (0.0%)         0               0          0   0        qty = match<Side::Sell>(id, price, qty);
+   61,776 (0.0%)    30,888  (0.2%)      12  (0.0%)  0   0      if (qty == 0) {
+        .                .               .          .   .        index_.erase(slot);  // fully filled: never rests
+        .                .               .          .   .        return;
+        .                .               .          .   .      }
+        .                .               .          .   .      rest(id, side, price, qty, slot);
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    // Consume opposite levels best-first; the best level is the better of the
+        .                .               .          .   .    // grid's (bitmap min/max) and the fallback map's first entry.
+        .                .               .          .   .    template <Side TakerSide>
+  216,216 (0.1%)         0               0          0   0    [[gnu::noinline]] auto match(OrderId taker, Price limit, Qty qty) -> Qty {  // only pushes that may cross
+        .                .               .          .   .      constexpr bool buy = TakerSide == Side::Buy;
+        .                .               .          .   .      Bitmap& opp_bits = buy ? ask_bits_ : bid_bits_;
+        .                .               .          .   .      constexpr std::uint32_t opp_mirror = buy ? 0 : kMirror;
+        .                .               .          .   .      auto& opp_map = [this]() -> auto& {
+        .                .               .          .   .        if constexpr (buy)
+        .                .               .          .   .          return asks_;
+        .                .               .          .   .        else
+        .                .               .          .   .          return bids_;
+        .                .               .          .   .      }();
+   61,776 (0.0%)    30,888  (0.2%)       0          0   0      while (qty > 0) {
+        .                .               .          .   .        const bool have_grid = !opp_bits.empty();
+        .                .               .          .   .        const bool have_map = !opp_map.empty();
+   92,664 (0.1%)    30,888  (0.2%)       0          0   0        if (!have_grid && !have_map) break;
+        .                .               .          .   .        std::uint32_t slot = kNoSlot;
+        .                .               .          .   .        Price price{};
+   30,888 (0.0%)    30,888  (0.2%)       0          0   0        if (have_grid) {
+   15,310 (0.0%)         0               0          0   0          slot = opp_bits.min() ^ opp_mirror;  // best bid = max slot = min mirrored bit
+        .                .               .          .   .          price = price_of(slot);
+        .                .               .          .   .        }
+        .                .               .          .   .        const bool use_map =
+   30,888 (0.0%)    30,888  (0.2%)       8  (0.0%)  0   0            have_map && (!have_grid || (buy ? opp_map.begin()->first < price : opp_map.begin()->first > price));
+        .                .               .          .   .        if (use_map) price = opp_map.begin()->first;
+   61,776 (0.0%)    30,888  (0.2%)       4  (0.0%)  0   0        if (buy ? price > limit : price < limit) break;
+  308,880 (0.2%)         0               0          0   0        Level& level = use_map ? opp_map.begin()->second : grid_[slot];
+  308,530 (0.2%)   123,412  (0.9%)   2,182  (0.4%)  0   0        while (qty > 0 && level.head != kNil) {
+        .                .               .          .   .          const std::uint32_t head = level.head;
+        .                .               .          .   .          OrderNode& maker = nodes_[head];
+  246,824 (0.1%)         0               0          0   0          const Qty fill = std::min(qty, maker.qty);
+  123,412 (0.1%)         0               0          0   0          sink_.on(Trade{taker, maker.id, price, fill});
+        .                .               .          .   .          qty -= fill;
+  185,118 (0.1%)         0               0          0   0          maker.qty -= fill;
+   61,706 (0.0%)         0               0          0   0          level.total_qty -= fill;
+   61,706 (0.0%)    61,706  (0.4%)  25,936  (4.4%)  0   0          if (maker.qty == 0) {
+        .                .               .          .   .            index_.erase(index_.find(maker.id));
+        .                .               .          .   .            unlink(level, head);
+        .                .               .          .   .            free_node(head);
+        .                .               .          .   .          }
+        .                .               .          .   .        }
+   61,776 (0.0%)    30,888  (0.2%)      16  (0.0%)  0   0        if (level.head == kNil) {
+        .                .               .          .   .          if (use_map) {
+        .                .               .          .   .            opp_map.erase(opp_map.begin());
+        .                .               .          .   .            refresh_map_best();
+        .                .               .          .   .          } else
+        .                .               .          .   .            opp_bits.clear(slot ^ opp_mirror);
+        .                .               .          .   .        }
+        .                .               .          .   .      }
+  308,880 (0.2%)         0               0          0   0      return qty;
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    // slot: the order's index entry, by reference (v10: a 16-byte iterator passed
+        .                .               .          .   .    // by value went through the stack and caused a store-forwarding stall)
+        .                .               .          .   .    [[gnu::always_inline]] void rest(OrderId id, Side side, Price price, Qty qty, const Handle& slot) {
+        .                .               .          .   .      const std::uint32_t i = alloc_node(id, qty, price, side);  // may grow nodes_: take references after
+  992,210 (0.6%)   496,102  (3.5%)      13  (0.0%)  0   0      if (!anchored_) anchor_if_on_tick(price);
+        .                .               .          .   .      const std::uint32_t s = slot_of(price);
+        .                .               .          .   .      Level* level = nullptr;
+        .                .               .          .   .      if (s != kNoSlot) {
+1,488,306 (0.9%)         0               0          0   0        level = &grid_[s];
+  496,102 (0.3%)         0               0          0   0        (side == Side::Buy ? bid_bits_ : ask_bits_).set(s ^ mirror(side));  // idempotent: no "was it empty" branch
+        .                .               .          .   .      } else {
+        .                .               .          .   .        level = off_grid_level(side, price);
+        .                .               .          .   .      }
+        .                .               .          .   .      push_back(*level, i);
+  512,588 (0.3%)         0               0          0   0      level->total_qty += qty;
+  992,204 (0.6%)         0               0          0   0      *slot.value = i;
+  496,102 (0.3%)         0               0          0   0      sink_.on(Rested{id, side, price, qty});
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    [[gnu::always_inline]] void erase(const Handle& it) {
+  878,958 (0.5%)         0               0          0   0      const Loc loc = loc_of(*it.value);
+        .                .               .          .   .      if (const std::uint32_t s = slot_of(loc.price); s != kNoSlot) {
+1,318,437 (0.8%)         0               0          0   0        Level& level = grid_[s];
+  878,958 (0.5%)         0               0          0   0        level.total_qty -= nodes_[loc.node].qty;
+        .                .               .          .   .        unlink(level, loc.node);
+  439,479 (0.3%)         0               0          0   0        free_node(loc.node);
+        .                .               .          .   .        // "did the level become empty" is unpredictable once unlink is branch-free
+        .                .               .          .   .        // (it used to be inferable from unlink's prev/next branches)
+3,076,353 (1.8%)         0               0          0   0        (loc.side == Side::Buy ? bid_bits_ : ask_bits_).clear_if(s ^ mirror(loc.side), level.head == kNil);
+        .                .               .          .   .      } else {
+        .                .               .          .   .        unlink_off_grid(loc);
+        .                .               .          .   .      }
+        .                .               .          .   .      index_.erase(it);
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    // modify's half of erase(): unlink the order from its level (grid or fallback
+        .                .               .          .   .    // map) and free its node, keeping the index slot. erase() keeps v9's own copy
+        .                .               .          .   .    // of this code so the cancel path is what v9 inlines.
+        .                .               .          .   .    void remove_from_level(const Loc& loc) {  // inlined into modify only
+   22,104 (0.0%)         0               0          0   0      if (const std::uint32_t s = slot_of(loc.price); s != kNoSlot) {
+   66,312 (0.0%)         0               0          0   0        Level& level = grid_[s];
+   66,312 (0.0%)         0               0          0   0        level.total_qty -= nodes_[loc.node].qty;
+        .                .               .          .   .        unlink(level, loc.node);
+   22,104 (0.0%)         0               0          0   0        free_node(loc.node);
+        .                .               .          .   .        // "did the level become empty" is unpredictable once unlink is branch-free
+        .                .               .          .   .        // (it used to be inferable from unlink's prev/next branches)
+  176,832 (0.1%)         0               0          0   0        (loc.side == Side::Buy ? bid_bits_ : ask_bits_).clear_if(s ^ mirror(loc.side), level.head == kNil);
+        .                .               .          .   .      } else {
+        .                .               .          .   .        unlink_off_grid(loc);
+        .                .               .          .   .      }
+   66,312 (0.0%)         0               0          0   0    }
+        .                .               .          .   .  
+        .                .               .          .   .    // ---- cold paths (out of line on purpose) --------------------------------------
+        .                .               .          .   .    [[gnu::noinline]] auto off_grid_level(Side side, Price price) -> Level* {
+        .                .               .          .   .      Level* level = side == Side::Buy ? &bids_[price] : &asks_[price];
+        .                .               .          .   .      refresh_map_best();
+        .                .               .          .   .      return level;
+        .                .               .          .   .    }
+        .                .               .          .   .  
+-- line 571 ----------------------------------------
+-- line 584 ----------------------------------------
+        .                .               .          .   .      };
+        .                .               .          .   .      if (loc.side == Side::Buy)
+        .                .               .          .   .        remove_from(bids_);
+        .                .               .          .   .      else
+        .                .               .          .   .        remove_from(asks_);
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    [[gnu::noinline]] void anchor_if_on_tick(Price price) {
+       10 (0.0%)         2  (0.0%)       1  (0.0%)  0   0      if (static_cast<std::uint64_t>(price) % static_cast<std::uint64_t>(tick_) == 0) anchor(price);
+        1 (0.0%)         0               0          0   0    }
+        .                .               .          .   .  
+        .                .               .          .   .    Sink& sink_;
+        .                .               .          .   .    mem::HugeBuffer buf_;  // grid_ + both bitmaps
+        .                .               .          .   .    Level* grid_ = nullptr;
+        .                .               .          .   .    Bitmap bid_bits_;
+        .                .               .          .   .    Bitmap ask_bits_;
+        .                .               .          .   .    Price tick_;
+        .                .               .          .   .    v11::ExactDiv slot_div_;  // division by tick_ for slot_of()
+-- line 601 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Annotation summary
+--------------------------------------------------------------------------------
+Ir________________ Bc_______________ Bcm____________ Bi________ Bim_______ 
+
+72,700,062 (43.2%) 6,558,791 (46.3%) 584,191 (99.8%)  0          0            annotated: files known & above threshold & readable, line numbers known
+ 3,711,870  (2.2%)    22,104  (0.2%)       0          0          0            annotated: files known & above threshold & readable, line numbers unknown
+         0                 0               0          0          0          unannotated: files known & above threshold & two or more non-identical
+         0                 0               0          0          0          unannotated: files known & above threshold & unreadable 
+91,726,127 (54.6%) 7,584,343 (53.5%)     911  (0.2%)  2  (2.5%)  2  (5.3%)  unannotated: files known & below threshold
+       497  (0.0%)        14  (0.0%)       6  (0.0%) 78 (97.5%) 36 (94.7%)  unannotated: files unknown
+

@@ -1,0 +1,11 @@
+==93375== Cachegrind, a high-precision tracing profiler
+==93375== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
+==93375== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==93375== Command: build/profile/book replay --workload data/syn_default_s42.ops --version v15
+==93375== 
+==93375== 
+==93375== I refs:        164,939,853
+==93375== 
+==93375== Branches:       14,198,049  (14,197,969 cond + 80 ind)
+==93375== Mispredicts:       585,184  (   585,146 cond + 38 ind)
+==93375== Mispred rate:          4.1% (       4.1%     + 47.5%   )
