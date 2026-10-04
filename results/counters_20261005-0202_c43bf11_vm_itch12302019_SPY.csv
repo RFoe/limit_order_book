@@ -1,0 +1,14 @@
+# workload=data/itch12302019_SPY.ops rounds=9 min_running_ratio=1.000
+version,event,per_op_median,spread
+v12,cycles,57.5290,0.5728
+v12,instructions,159.3018,0.0000
+v12,branches,13.6426,0.0000
+v12,branch-misses,0.5147,0.0167
+v12,L1d-load-misses,1.2763,0.4368
+v12,dTLB-load-misses,0.0041,1.0705
+v13,cycles,72.7922,0.0405
+v13,instructions,175.0685,0.0000
+v13,branches,16.1738,0.0000
+v13,branch-misses,0.6027,0.0034
+v13,L1d-load-misses,1.3192,0.0504
+v13,dTLB-load-misses,0.0037,0.8217

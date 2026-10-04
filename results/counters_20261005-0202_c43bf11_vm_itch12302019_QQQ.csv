@@ -1,0 +1,14 @@
+# workload=data/itch12302019_QQQ.ops rounds=9 min_running_ratio=1.000
+version,event,per_op_median,spread
+v12,cycles,58.4063,0.0879
+v12,instructions,159.3416,0.0000
+v12,branches,13.6583,0.0000
+v12,branch-misses,0.5172,0.0026
+v12,L1d-load-misses,1.9650,0.0383
+v12,dTLB-load-misses,0.0045,0.9824
+v13,cycles,74.7177,0.0778
+v13,instructions,175.1139,0.0000
+v13,branches,16.1886,0.0000
+v13,branch-misses,0.6045,0.0107
+v13,L1d-load-misses,1.9844,0.0353
+v13,dTLB-load-misses,0.0053,1.0953
