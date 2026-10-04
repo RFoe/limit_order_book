@@ -1,0 +1,37 @@
+# cachegrind 20261005-0613_7f3f864_vm workload=itch12302019_QQQ cache: --I1=32768,8,64 --D1=49152,12,64 --LL=6291456,12,64
+v12 run=0 ops=2483220 events=2483220 trades=0 checksum=804a1538e77acfb2 orders_left=0 tick=100 wall_ms=5581.1
+  v12 grid: 65536 slots x 24 B + 2 x 3-level bitmap = 2097152 B mapped, pages=hugetlb huge_backed=2097152 B, tick=100 base=-1138300 fallback_levels=0
+## v12
+I refs:        402,435,565
+I1  miss rate:        0.00%
+LLi miss rate:        0.00%
+D refs:        155,952,984  (114,687,725 rd   + 41,265,259 wr)
+D1  miss rate:         1.9% (        1.5%     +        3.2%  )
+LLd miss rate:         0.6% (        0.8%     +        0.1%  )
+LL refs:         3,023,834  (  1,709,798 rd   +  1,314,036 wr)
+LL misses:         975,791  (    947,429 rd   +     28,362 wr)
+LL miss rate:          0.2% (        0.2%     +        0.1%  )
+v15 run=0 ops=2483220 events=2483220 trades=0 checksum=804a1538e77acfb2 orders_left=0 tick=100 wall_ms=4641.3
+  v15 grid: 65536 slots x 24 B + 2 x 3-level bitmap = 2097152 B mapped, pages=hugetlb huge_backed=2097152 B, tick=100 base=-1138300 fallback_levels=0
+## v15
+I refs:        389,200,404
+I1  miss rate:        0.00%
+LLi miss rate:        0.00%
+D refs:        135,919,493  (97,008,562 rd   + 38,910,931 wr)
+D1  miss rate:         1.7% (       2.3%     +        0.3%  )
+LLd miss rate:         0.7% (       1.0%     +        0.0%  )
+LL refs:         2,312,727  ( 2,214,377 rd   +     98,350 wr)
+LL misses:         960,388  (   941,207 rd   +     19,181 wr)
+LL miss rate:          0.2% (       0.2%     +        0.0%  )
+v16 run=0 ops=2483220 events=2483220 trades=0 checksum=804a1538e77acfb2 orders_left=0 tick=100 wall_ms=5078.6
+  v16 grid: 65536 slots x 24 B + 2 x 3-level bitmap = 2097152 B mapped, pages=hugetlb huge_backed=2097152 B, tick=100 base=-1138300 fallback_levels=0
+## v16
+I refs:        396,654,559
+I1  miss rate:        0.00%
+LLi miss rate:        0.00%
+D refs:        146,974,949  (101,947,854 rd   + 45,027,095 wr)
+D1  miss rate:         1.6% (        1.2%     +        2.6%  )
+LLd miss rate:         0.7% (        0.9%     +        0.0%  )
+LL refs:         2,363,003  (  1,174,945 rd   +  1,188,058 wr)
+LL misses:         960,460  (    941,022 rd   +     19,438 wr)
+LL miss rate:          0.2% (        0.2%     +        0.0%  )

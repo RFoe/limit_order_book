@@ -1,0 +1,1093 @@
+--------------------------------------------------------------------------------
+-- Metadata
+--------------------------------------------------------------------------------
+Invocation:       /usr/bin/cg_annotate /home/wang/sources/cxx/book/results/cachegrind_20261005-0613_7f3f864_vm_itch12302019_QQQ_v16.out
+I1 cache:         32768 B, 64 B, 8-way associative
+D1 cache:         49152 B, 64 B, 12-way associative
+LL cache:         6291456 B, 64 B, 12-way associative
+Command:          /home/wang/sources/cxx/book/build/profile/book replay --workload data/itch12302019_QQQ.ops --version v16
+Events recorded:  Ir I1mr ILmr Dr D1mr DLmr Dw D1mw DLmw
+Events shown:     Ir I1mr ILmr Dr D1mr DLmr Dw D1mw DLmw
+Event sort order: Ir I1mr ILmr Dr D1mr DLmr Dw D1mw DLmw
+Threshold:        0.1%
+Annotation:       on
+
+--------------------------------------------------------------------------------
+-- Summary
+--------------------------------------------------------------------------------
+Ir__________________ I1mr________ ILmr________ Dr__________________ D1mr______________ DLmr____________ Dw_________________ D1mw______________ DLmw___________ 
+
+396,654,559 (100.0%) 355 (100.0%) 342 (100.0%) 101,947,854 (100.0%) 1,174,590 (100.0%) 940,680 (100.0%) 45,027,095 (100.0%) 1,188,058 (100.0%) 19,438 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+-- File:function summary
+--------------------------------------------------------------------------------
+  Ir_________________________ I1mr_____________ ILmr_____________ Dr________________________ D1mr____________________ DLmr___________________ Dw________________________ D1mw____________________ DLmw________________  file:function
+
+< 188,411,878 (47.5%,  47.5%) 33  (9.3%,  9.3%) 29  (8.5%,  8.5%) 53,319,126 (52.3%,  52.3%) 1,046,579 (89.1%, 89.1%) 937,242 (99.6%,  99.6%) 29,740,241 (66.0%,  66.0%)    87,290  (7.3%,  7.3%)   893  (4.6%,  4.6%)  /home/wang/sources/cxx/book/include/lob/v16/book.hpp:
+  186,030,900 (46.9%)         15  (4.2%)        13  (3.8%)        52,662,233 (51.7%)         1,045,795 (89.0%)        937,233 (99.6%)         29,329,607 (65.1%)            86,760  (7.3%)          893  (4.6%)           void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)
+    2,379,624  (0.6%)          7  (2.0%)         5  (1.5%)           656,448  (0.6%)               778  (0.1%)              6  (0.0%)            410,280  (0.9%)               527  (0.0%)            0                   lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+
+< 107,781,404 (27.2%,  74.7%) 44 (12.4%, 21.7%) 44 (12.9%, 21.3%) 19,793,557 (19.4%,  71.7%)   117,204 (10.0%, 99.1%)       8  (0.0%,  99.6%)  9,817,234 (21.8%,  87.9%) 1,087,843 (91.6%, 98.9%) 5,888 (30.3%, 34.9%)  /home/wang/sources/cxx/book/include/lob/v16/order_index.hpp:
+  106,404,432 (26.8%)         17  (4.8%)        17  (5.0%)        19,576,273 (19.2%)           112,181  (9.6%)              8  (0.0%)          9,761,486 (21.7%)         1,074,116 (90.4%)          256  (1.3%)           void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)
+      985,032  (0.2%)          2  (0.6%)         2  (0.6%)           123,156  (0.1%)             1,090  (0.1%)              0                          0                         0                    0                   lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+
+<  32,985,635  (8.3%,  83.0%)  2  (0.6%, 22.3%)  2  (0.6%, 21.9%) 10,995,174 (10.8%,  82.5%)     2,172  (0.2%, 99.3%)     168  (0.0%,  99.7%)  2,444,836  (5.4%,  93.3%)        15  (0.0%, 98.9%)     2  (0.0%, 34.9%)  /home/wang/sources/cxx/book/include/lob/v3/hier_bitmap.hpp:void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)
+
+<  30,937,680  (7.8%,  90.8%)  3  (0.8%, 23.1%)  3  (0.9%, 22.8%)  7,408,632  (7.3%,  89.8%)         9  (0.0%, 99.3%)       2  (0.0%,  99.7%)  2,483,220  (5.5%,  98.8%)         0  (0.0%, 98.9%)     0  (0.0%, 34.9%)  /home/wang/sources/cxx/book/include/lob/events.hpp:
+   30,527,400  (7.7%)          2  (0.6%)         2  (0.6%)         7,326,576  (7.2%)                 9  (0.0%)              2  (0.0%)          2,442,192  (5.4%)                 0                    0                   void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)
+      410,280  (0.1%)          1  (0.3%)         1  (0.3%)            82,056  (0.1%)                 0                      0                     41,028  (0.1%)                 0                    0                   lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+
+<   9,989,492  (2.5%,  93.3%)  7  (2.0%, 25.1%)  7  (2.0%, 24.9%)  1,288,698  (1.3%,  91.0%)         1  (0.0%, 99.3%)       1  (0.0%,  99.7%)     17,739  (0.0%,  98.8%)         0  (0.0%, 98.9%)     0  (0.0%, 34.9%)  /usr/include/c++/v1/__vector/vector.h:
+    9,866,338  (2.5%)          5  (1.4%)         5  (1.5%)         1,247,652  (1.2%)                 0                      0                     17,739  (0.0%)                 0                    0                   void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)
+
+<   9,877,712  (2.5%,  95.8%)  1  (0.3%, 25.4%)  1  (0.3%, 25.1%)  2,442,190  (2.4%,  93.4%)        43  (0.0%, 99.3%)       3  (0.0%,  99.7%)          0  (0.0%,  98.8%)         0  (0.0%, 98.9%)     0  (0.0%, 34.9%)  /usr/include/c++/v1/__bit/countr.h:
+    9,768,764  (2.5%)          0                 0                 2,442,190  (2.4%)                43  (0.0%)              3  (0.0%)                  0                         0                    0                   void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)
+
+<   7,449,660  (1.9%,  97.7%)  0  (0.0%, 25.4%)  0  (0.0%, 25.1%)  4,966,440  (4.9%,  98.3%)         0  (0.0%, 99.3%)       0  (0.0%,  99.7%)          0  (0.0%,  98.8%)         0  (0.0%, 98.9%)     0  (0.0%, 34.9%)  /home/wang/sources/cxx/book/include/lob/v11/exact_div.hpp:
+    7,326,576  (1.8%)          0                 0                 4,884,384  (4.8%)                 0                      0                          0                         0                    0                   void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)
+
+<   4,966,441  (1.3%,  98.9%)  1  (0.3%, 25.6%)  1  (0.3%, 25.4%)          0  (0.0%,  98.3%)         0  (0.0%, 99.3%)       0  (0.0%,  99.7%)          0  (0.0%,  98.8%)         0  (0.0%, 98.9%)     0  (0.0%, 34.9%)  /usr/include/c++/v1/__iterator/wrap_iter.h:void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)
+
+<   2,483,244  (0.6%,  99.6%)  3  (0.8%, 26.5%)  3  (0.9%, 26.3%)          7  (0.0%,  98.3%)         1  (0.0%, 99.3%)       1  (0.0%,  99.7%)          7  (0.0%,  98.8%)         2  (0.0%, 98.9%)     2  (0.0%, 34.9%)  /home/wang/sources/cxx/book/include/lob/replay.hpp:void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)
+
+<   1,221,168  (0.3%,  99.9%)  1  (0.3%, 26.8%)  1  (0.3%, 26.6%)  1,221,108  (1.2%,  99.5%)         0  (0.0%, 99.3%)       0  (0.0%,  99.7%)         24  (0.0%,  98.8%)         0  (0.0%, 98.9%)     0  (0.0%, 34.9%)  /usr/include/c++/v1/__memory/unique_ptr.h:
+    1,221,096  (0.3%)          1  (0.3%)         1  (0.3%)         1,221,096  (1.2%)                 0                      0                          0                         0                    0                   void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)
+
+<     509,590  (0.1%, 100.0%) 15  (4.2%, 31.0%) 13  (3.8%, 30.4%)    508,281  (0.5%, 100.0%)     7,878  (0.7%, 99.9%)   3,097  (0.3%, 100.0%)    508,239  (1.1%, 100.0%)     8,192  (0.7%, 99.6%) 8,179 (42.1%, 77.0%)  ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S:__memcpy_avx_unaligned_erms
+
+--------------------------------------------------------------------------------
+-- Function:file summary
+--------------------------------------------------------------------------------
+  Ir________________________ I1mr_____________ ILmr_____________ Dr________________________ D1mr____________________ DLmr___________________ Dw_______________________ D1mw____________________ DLmw________________  function:file
+
+> 391,598,892 (98.7%, 98.7%) 47 (13.2%, 13.2%) 45 (13.2%, 13.2%) 100,355,674 (98.4%, 98.4%) 1,160,209 (98.8%, 98.8%) 937,417 (99.7%,  99.7%) 44,004,803 (97.7%, 97.7%) 1,165,343 (98.1%, 98.1%) 5,578 (28.7%, 28.7%)  void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>):
+  186,030,900 (46.9%)        15  (4.2%)        13  (3.8%)         52,662,233 (51.7%)        1,045,795 (89.0%)        937,233 (99.6%)         29,329,607 (65.1%)           86,760  (7.3%)          893  (4.6%)           /home/wang/sources/cxx/book/include/lob/v16/book.hpp
+  106,404,432 (26.8%)        17  (4.8%)        17  (5.0%)         19,576,273 (19.2%)          112,181  (9.6%)              8  (0.0%)          9,761,486 (21.7%)        1,074,116 (90.4%)          256  (1.3%)           /home/wang/sources/cxx/book/include/lob/v16/order_index.hpp
+   32,985,635  (8.3%)         2  (0.6%)         2  (0.6%)         10,995,174 (10.8%)            2,172  (0.2%)            168  (0.0%)          2,444,836  (5.4%)               15  (0.0%)            2  (0.0%)           /home/wang/sources/cxx/book/include/lob/v3/hier_bitmap.hpp
+   30,527,400  (7.7%)         2  (0.6%)         2  (0.6%)          7,326,576  (7.2%)                9  (0.0%)              2  (0.0%)          2,442,192  (5.4%)                0                    0                   /home/wang/sources/cxx/book/include/lob/events.hpp
+    9,866,338  (2.5%)         5  (1.4%)         5  (1.5%)          1,247,652  (1.2%)                0                      0                     17,739  (0.0%)                0                    0                   /usr/include/c++/v1/__vector/vector.h
+    9,768,764  (2.5%)         0                 0                  2,442,190  (2.4%)               43  (0.0%)              3  (0.0%)                  0                        0                    0                   /usr/include/c++/v1/__bit/countr.h
+    7,326,576  (1.8%)         0                 0                  4,884,384  (4.8%)                0                      0                          0                        0                    0                   /home/wang/sources/cxx/book/include/lob/v11/exact_div.hpp
+    4,966,441  (1.3%)         1  (0.3%)         1  (0.3%)                  0                        0                      0                          0                        0                    0                   /usr/include/c++/v1/__iterator/wrap_iter.h
+    2,483,244  (0.6%)         3  (0.8%)         3  (0.9%)                  7  (0.0%)                1  (0.0%)              1  (0.0%)                  7  (0.0%)                2  (0.0%)            2  (0.0%)           /home/wang/sources/cxx/book/include/lob/replay.hpp
+    1,221,096  (0.3%)         1  (0.3%)         1  (0.3%)          1,221,096  (1.2%)                0                      0                          0                        0                    0                   /usr/include/c++/v1/__memory/unique_ptr.h
+
+>   4,103,160  (1.0%, 99.8%) 11  (3.1%, 16.3%)  9  (2.6%, 15.8%)     984,744  (1.0%, 99.4%)     1,868  (0.2%, 98.9%)       6  (0.0%,  99.7%)    451,308  (1.0%, 98.7%)       527  (0.0%, 98.1%)     0  (0.0%, 28.7%)  lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int):
+    2,379,624  (0.6%)         7  (2.0%)         5  (1.5%)            656,448  (0.6%)              778  (0.1%)              6  (0.0%)            410,280  (0.9%)              527  (0.0%)            0                   /home/wang/sources/cxx/book/include/lob/v16/book.hpp
+      985,032  (0.2%)         2  (0.6%)         2  (0.6%)            123,156  (0.1%)            1,090  (0.1%)              0                          0                        0                    0                   /home/wang/sources/cxx/book/include/lob/v16/order_index.hpp
+      410,280  (0.1%)         1  (0.3%)         1  (0.3%)             82,056  (0.1%)                0                      0                     41,028  (0.1%)                0                    0                   /home/wang/sources/cxx/book/include/lob/events.hpp
+
+>     509,590  (0.1%, 99.9%) 15  (4.2%, 20.6%) 13  (3.8%, 19.6%)     508,281  (0.5%, 99.9%)     7,878  (0.7%, 99.6%)   3,097  (0.3%, 100.0%)    508,239  (1.1%, 99.9%)     8,192  (0.7%, 98.8%) 8,179 (42.1%, 70.8%)  __memcpy_avx_unaligned_erms:./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S
+
+--------------------------------------------------------------------------------
+-- Annotated source file: ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- ./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /home/wang/sources/cxx/book/include/lob/events.hpp
+--------------------------------------------------------------------------------
+Ir_______________ I1mr____ ILmr____ Dr______________ D1mr____ DLmr____ Dw______________ D1mw DLmw 
+
+ 2,442,192 (0.6%) 1 (0.3%) 1 (0.3%)         0        0        0        1,221,096 (2.7%)    0    0  <unknown (line 0)>
+
+-- line 84 ----------------------------------------
+         .        .        .                .        .        .                .           .    .    void on(const Reduced& e) noexcept { mix(4, e.id, e.new_qty); }
+         .        .        .                .        .        .                .           .    .    void on(const Rejected& e) noexcept {
+         .        .        .                .        .        .                .           .    .      mix(5, e.id, static_cast<std::uint64_t>(e.op), static_cast<std::uint64_t>(e.reason));
+         .        .        .                .        .        .                .           .    .    }
+         .        .        .                .        .        .                .           .    .  
+         .        .        .                .        .        .                .           .    .   private:
+         .        .        .                .        .        .                .           .    .    template <class... T>
+         .        .        .                .        .        .                .           .    .    void mix(T... xs) noexcept {
+ 2,483,220 (0.6%) 0        0        2,483,220 (2.4%) 9 (0.0%) 2 (0.0%)         0           0    0      ++events;
+26,012,268 (6.6%) 2 (0.6%) 2 (0.6%) 4,925,412 (4.8%) 0        0        1,262,124 (2.8%)    0    0      ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+         .        .        .                .        .        .                .           .    .    }
+         .        .        .                .        .        .                .           .    .  };
+         .        .        .                .        .        .                .           .    .  
+         .        .        .                .        .        .                .           .    .  static_assert(EventSink<RecordingSink> && EventSink<ChecksumSink>);
+         .        .        .                .        .        .                .           .    .  
+         .        .        .                .        .        .                .           .    .  auto to_string(Side s) -> std::string;
+         .        .        .                .        .        .                .           .    .  auto to_string(const Op& op) -> std::string;
+         .        .        .                .        .        .                .           .    .  auto to_string(const Event& e) -> std::string;
+-- line 101 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /home/wang/sources/cxx/book/include/lob/replay.hpp
+--------------------------------------------------------------------------------
+Ir______________ I1mr____ ILmr____ Dr______ D1mr____ DLmr____ Dw______ D1mw____ DLmw____ 
+
+        7 (0.0%) 0        0        0        0        0        1 (0.0%) 1 (0.0%) 1 (0.0%)  <unknown (line 0)>
+
+-- line 44 ----------------------------------------
+        .        .        .        .        .        .        .        .        .         concept DispatchesOps = requires(Book& book, const Op& op) { book.apply(op); };
+        .        .        .        .        .        .        .        .        .         
+        .        .        .        .        .        .        .        .        .         template <DispatchesOps Book>
+        .        .        .        .        .        .        .        .        .         [[gnu::always_inline]] inline void apply(Book& book, const Op& op) {
+        .        .        .        .        .        .        .        .        .           book.apply(op);
+        .        .        .        .        .        .        .        .        .         }
+        .        .        .        .        .        .        .        .        .         
+        .        .        .        .        .        .        .        .        .         template <class Book>
+        7 (0.0%) 1 (0.3%) 1 (0.3%) 0        0        0        6 (0.0%) 1 (0.0%) 1 (0.0%)  void replay(Book& book, std::span<const Op> ops) {
+2,483,221 (0.6%) 0        0        0        0        0        0        0        0           for (const Op& op : ops) {
+        .        .        .        .        .        .        .        .        .             apply(book, op);
+        .        .        .        .        .        .        .        .        .             if constexpr (kCheckInvariants) book.check_invariants();
+        .        .        .        .        .        .        .        .        .           }
+        9 (0.0%) 2 (0.6%) 2 (0.6%) 7 (0.0%) 1 (0.0%) 1 (0.0%) 0        0        0         }
+        .        .        .        .        .        .        .        .        .         
+        .        .        .        .        .        .        .        .        .         }  // namespace lob
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /home/wang/sources/cxx/book/include/lob/v11/exact_div.hpp
+--------------------------------------------------------------------------------
+Ir______________ I1mr ILmr Dr______________ D1mr DLmr Dw D1mw DLmw 
+
+-- line 29 ----------------------------------------
+        .           .    .         .           .    .  .    .    .      inv_ = inv;
+        .           .    .         .           .    .  .    .    .    }
+        .           .    .         .           .    .  .    .    .  
+        .           .    .         .           .    .  .    .    .    // x / d if x is a multiple of d, otherwise some value >= ceil(2^64 / d)
+        .           .    .         .           .    .  .    .    .    [[nodiscard]] auto quotient(std::uint64_t x) const noexcept -> std::uint64_t {
+        .           .    .         .           .    .  .    .    .      // the builtin is one funnel shift; std::rotr takes an int count and keeps its
+        .           .    .         .           .    .  .    .    .      // "% 64 / zero / negative" handling in the IR the inliner prices, which pushed
+        .           .    .         .           .    .  .    .    .      // v11's erase() (cost 565) over the threshold v10's (515) stayed under
+7,449,660 (1.9%)    0    0 4,966,440 (4.9%)    0    0  0    0    0      return __builtin_rotateright64(x * inv_, shift_);
+        .           .    .         .           .    .  .    .    .    }
+        .           .    .         .           .    .  .    .    .  
+        .           .    .         .           .    .  .    .    .   private:
+        .           .    .         .           .    .  .    .    .    std::uint64_t inv_ = 1;
+        .           .    .         .           .    .  .    .    .    unsigned shift_ = 0;
+        .           .    .         .           .    .  .    .    .  };
+        .           .    .         .           .    .  .    .    .  
+        .           .    .         .           .    .  .    .    .  }  // namespace lob::v11
+-- line 45 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /home/wang/sources/cxx/book/include/lob/v16/book.hpp
+--------------------------------------------------------------------------------
+Ir_______________ I1mr____ ILmr____ Dr______________ D1mr___________ DLmr___________ Dw_______________ D1mw_________ DLmw______ 
+
+12,498,222 (3.2%) 2 (0.6%) 2 (0.6%) 6,228,581 (6.1%) 310,402 (26.4%) 310,402 (33.0%) 3,663,288  (8.1%)      0          0         <unknown (line 0)>
+
+-- line 150 ----------------------------------------
+         .        .        .                .              .               .                 .              .          .             auto* words = reinterpret_cast<std::uint64_t*>(grid_ + kSlots);  // zero-filled by the kernel
+         .        .        .                .              .               .                 .              .          .             bid_bits_ = Bitmap(words);
+         .        .        .                .              .               .                 .              .          .             ask_bits_ = Bitmap(words + Bitmap::kTotalWords);
+         .        .        .                .              .               .                 .              .          .           }
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           // the book's own per-op dispatch (see lob::apply); everything on the push and
+         .        .        .                .              .               .                 .              .          .           // cancel paths is always_inline into it, so the harness loop has no calls
+         .        .        .                .              .               .                 .              .          .           [[gnu::always_inline]] void apply(const Op& op) {
+12,334,044 (3.1%) 1 (0.3%) 1 (0.3%) 2,483,220 (2.4%) 463,721 (39.5%) 463,714 (49.3%)         0              0          0             switch (op.type) {
+         .        .        .                .              .               .                 .              .          .               case OpType::Push:
+ 6,105,480 (1.5%) 2 (0.6%) 2 (0.6%) 3,663,288 (3.6%) 151,956 (12.9%) 151,956 (16.2%)         0              0          0                 return push(op.id, op.side, op.price, op.qty);
+         .        .        .                .              .               .                 .              .          .               case OpType::Cancel:
+         .        .        .                .              .               .                 .              .          .                 return cancel(op.id);
+         .        .        .                .              .               .                 .              .          .               case OpType::Modify:
+   246,168 (0.1%) 2 (0.6%) 0           82,056 (0.1%)   5,136  (0.4%)   5,136  (0.5%)    41,028  (0.1%)    161 (0.0%)   0                 return modify(op.id, op.price, op.qty);
+         .        .        .                .              .               .                 .              .          .             }
+         .        .        .                .              .               .                 .              .          .             std::unreachable();
+         .        .        .                .              .               .                 .              .          .           }
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           [[gnu::always_inline]] void push(OrderId id, Side side, Price price, Qty qty) {
+ 1,221,096 (0.3%) 0        0                0              0               0                 0              0          0             if (qty == 0) return reject(id, OpType::Push, RejectReason::InvalidQty);
+ 3,663,288 (0.9%) 0        0                0              0               0                 0              0          0             if (price <= 0) return reject(id, OpType::Push, RejectReason::InvalidPrice);
+ 1,221,096 (0.3%) 0        0                0              0               0         1,221,096  (2.7%)      0          0             bool inserted = false;
+         .        .        .                .              .               .                 .              .          .             const Handle slot = index_.try_insert(id, inserted);  // the only probe for this id
+    14,572 (0.0%) 1 (0.3%) 1 (0.3%)         0              0               0                 0              0          0             if (!inserted) return reject(id, OpType::Push, RejectReason::DuplicateId);
+         .        .        .                .              .               .                 .              .          .             add(id, side, price, qty, slot);
+         .        .        .                .              .               .                 .              .          .           }
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           [[gnu::always_inline]] void cancel(OrderId id) {
+         .        .        .                .              .               .                 .              .          .             const auto it = index_.find(id);
+         .        .        .                .              .               .                 .              .          .             if (!it) return reject(id, OpType::Cancel, RejectReason::UnknownId);
+ 2,442,192 (0.6%) 0        0        2,442,192 (2.4%)  35,007  (3.0%)     328  (0.0%)         0              0          0             const Qty remaining = nodes_[*it.value].qty;
+         .        .        .                .              .               .                 .              .          .             erase(it, id);
+ 1,221,096 (0.3%) 0        0        1,221,096 (1.2%)       0               0                 0              0          0             sink_.on(Cancelled{id, remaining});
+         .        .        .                .              .               .                 .              .          .           }
+         .        .        .                .              .               .                 .              .          .         
+   451,308 (0.1%) 1 (0.3%) 1 (0.3%)         0              0               0           246,168  (0.5%)      0          0           [[gnu::noinline]] void modify(OrderId id, Price price, Qty qty) {  // 1% of ITCH ops
+         .        .        .                .              .               .                 .              .          .             const auto it = index_.find(id);
+         .        .        .                .              .               .                 .              .          .             if (!it) return reject(id, OpType::Modify, RejectReason::UnknownId);
+    82,056 (0.0%) 0        0                0              0               0                 0              0          0             if (qty == 0) return reject(id, OpType::Modify, RejectReason::InvalidQty);
+    82,056 (0.0%) 0        0                0              0               0                 0              0          0             if (price <= 0) return reject(id, OpType::Modify, RejectReason::InvalidPrice);
+         .        .        .                .              .               .                 .              .          .         
+   123,084 (0.0%) 0        0           41,028 (0.0%)       0               0            82,056  (0.2%)    213 (0.0%)   0             const Loc loc = loc_of(*it.value);
+         .        .        .                .              .               .                 .              .          .             OrderNode& node = nodes_[loc.node];
+   164,112 (0.0%) 0        0                0              0               0                 0              0          0             if (price == loc.price && qty <= node.qty) {  // reduce: keep priority
+    82,056 (0.0%) 1 (0.3%) 1 (0.3%)    41,028 (0.0%)      25  (0.0%)       1  (0.0%)         0              0          0               level_of(loc).total_qty -= node.qty - qty;
+    41,028 (0.0%) 0        0                0              0               0            41,028  (0.1%)      0          0               node.qty = qty;
+    41,028 (0.0%) 0        0           41,028 (0.0%)       0               0                 0              0          0               sink_.on(Reduced{id, qty});
+    41,028 (0.0%) 0        0                0              0               0                 0              0          0               return;
+         .        .        .                .              .               .                 .              .          .             }
+         .        .        .                .              .               .                 .              .          .             const Side side = loc.side;
+         .        .        .                .              .               .                 .              .          .             const Qty old_qty = node.qty;
+         .        .        .                .              .               .                 .              .          .             remove_from_level(loc);  // keep the index slot: add() refills or erases it
+         .        .        .                .              .               .                 .              .          .             sink_.on(Cancelled{id, old_qty});
+         .        .        .                .              .               .                 .              .          .             add(id, side, price, qty, it);
+   369,252 (0.1%) 1 (0.3%) 1 (0.3%)   287,196 (0.3%)       0               0                 0              0          0           }
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           [[nodiscard]] auto best_bid() const -> std::optional<Price> {
+         .        .        .                .              .               .                 .              .          .             std::optional<Price> best;
+         .        .        .                .              .               .                 .              .          .             if (!bid_bits_.empty()) best = price_of(bid_bits_.min() ^ kMirror);
+         .        .        .                .              .               .                 .              .          .             if (!bids_.empty() && (!best || bids_.begin()->first > *best)) best = bids_.begin()->first;
+         .        .        .                .              .               .                 .              .          .             return best;
+         .        .        .                .              .               .                 .              .          .           }
+         .        .        .                .              .               .                 .              .          .           [[nodiscard]] auto best_ask() const -> std::optional<Price> {
+-- line 213 ----------------------------------------
+-- line 316 ----------------------------------------
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .          private:
+         .        .        .                .              .               .                 .              .          .           static constexpr std::uint32_t kNil = std::numeric_limits<std::uint32_t>::max();
+         .        .        .                .              .               .                 .              .          .           static constexpr std::uint32_t kNoSlot = std::numeric_limits<std::uint32_t>::max();
+         .        .        .                .              .               .                 .              .          .           static constexpr std::uint32_t kSlots = std::uint32_t{1} << WindowBits;
+         .        .        .                .              .               .                 .              .          .           using Bitmap = v3::HierBitmap<WindowBits>;
+         .        .        .                .              .               .                 .              .          .           // bid bitmap bit = slot ^ kMirror (= kSlots - 1 - slot): best bid is min() like best ask
+         .        .        .                .              .               .                 .              .          .           static constexpr std::uint32_t kMirror = kSlots - 1;
+ 7,326,480 (1.8%) 1 (0.3%) 1 (0.3%)         0              0               0                 0              0          0           static constexpr auto mirror(Side side) -> std::uint32_t { return side == Side::Buy ? kMirror : 0; }
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           struct OrderNode {
+         .        .        .                .              .               .                 .              .          .             OrderId id;
+         .        .        .                .              .               .                 .              .          .             Price price;  // v15: price and side moved here from the index value
+         .        .        .                .              .               .                 .              .          .             Qty qty;
+         .        .        .                .              .               .                 .              .          .             std::uint32_t next;  // level list: towards the tail; free list: next free node
+         .        .        .                .              .               .                 .              .          .             std::uint32_t prev;  // level list only
+         .        .        .                .              .               .                 .              .          .             Side side;
+         .        .        .                .              .               .                 .              .          .           };
+         .        .        .                .              .               .                 .              .          .           static_assert(sizeof(OrderNode) == 32);
+         .        .        .                .              .               .                 .              .          .           static_assert(sizeof(OrderNode) <= std::hardware_destructive_interference_size / 2,
+         .        .        .                .              .               .                 .              .          .                         "keep several order nodes per cache line");
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           struct Level {
+        12 (0.0%) 1 (0.3%) 1 (0.3%)         0              0               0                12  (0.0%)      0          0             std::uint32_t head = kNil;
+         .        .        .                .              .               .                 .              .          .             std::uint32_t tail = kNil;
+        24 (0.0%) 0        0                0              0               0                12  (0.0%)      0          0             std::uint64_t total_qty = 0;
+         .        .        .                .              .               .                 .              .          .             std::uint32_t count = 0;
+         .        .        .                .              .               .                 .              .          .           };
+         .        .        .                .              .               .                 .              .          .           using Bids = std::map<Price, Level, std::greater<>>;
+         .        .        .                .              .               .                 .              .          .           using Asks = std::map<Price, Level, std::less<>>;
+         .        .        .                .              .               .                 .              .          .           struct Loc {  // where an order rests; built from its node (no longer stored in the index)
+         .        .        .                .              .               .                 .              .          .             Price price;
+         .        .        .                .              .               .                 .              .          .             std::uint32_t node;
+         .        .        .                .              .               .                 .              .          .             Side side;
+         .        .        .                .              .               .                 .              .          .           };
+         .        .        .                .              .               .                 .              .          .           using Index = OrderIndex;
+         .        .        .                .              .               .                 .              .          .           using Handle = Index::Handle;
+         .        .        .                .              .               .                 .              .          .         
+ 6,351,648 (1.6%) 4 (1.1%) 2 (0.6%) 2,524,248 (2.5%)  42,923  (3.7%)     219  (0.0%)    41,028  (0.1%)    314 (0.0%)   0           [[nodiscard]] auto loc_of(std::uint32_t i) const -> Loc { return {nodes_[i].price, i, nodes_[i].side}; }
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           [[noreturn]] static void fail(const std::string& what) { throw std::logic_error("v16 invariant: " + what); }
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           void reject(OrderId id, OpType op, RejectReason reason) { sink_.on(Rejected{id, op, reason}); }
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           // ---- price grid ---------------------------------------------------------------
+         .        .        .                .              .               .                 .              .          .           [[nodiscard]] auto slot_of(Price price) const -> std::uint32_t {
+ 2,524,250 (0.6%) 0        0        1,262,125 (1.2%)       0               0                 0              0          0             if (!anchored_) return kNoSlot;
+         .        .        .                .              .               .                 .              .          .             // price on the grid <=> price - base is a multiple of tick in [0, kSlots * tick)
+         .        .        .                .              .               .                 .              .          .             // <=> quotient < kSlots (a negative difference wraps to a huge unsigned value,
+         .        .        .                .              .               .                 .              .          .             // which ExactDiv also maps to >= 2^64 / tick)
+         .        .        .                .              .               .                 .              .          .             const std::uint64_t s =
+ 3,745,344 (0.9%) 1 (0.3%) 1 (0.3%) 2,483,220 (2.4%)       0               0                 0              0          0                 slot_div_.quotient(static_cast<std::uint64_t>(price) - static_cast<std::uint64_t>(base_));
+ 5,007,468 (1.3%) 0        0                0              0               0                 0              0          0             return s < kSlots ? static_cast<std::uint32_t>(s) : kNoSlot;
+         .        .        .                .              .               .                 .              .          .           }
+ 2,442,190 (0.6%) 0        0        2,442,190 (2.4%)       0               0                 0              0          0           [[nodiscard]] auto price_of(std::uint32_t slot) const -> Price { return base_ + static_cast<Price>(slot) * tick_; }
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           void anchor(Price price) {  // centre the window on the first on-grid resting price
+         3 (0.0%) 1 (0.3%) 1 (0.3%)         0              0               0                 1  (0.0%)      0          0             base_ = price - static_cast<Price>(kSlots / 2) * tick_;
+         1 (0.0%) 0        0                0              0               0                 1  (0.0%)      0          0             anchored_ = true;
+         .        .        .                .              .               .                 .              .          .           }
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           // Best fallback-map price seen by a taker of each side, sign-normalised like
+         .        .        .                .              .               .                 .              .          .           // may_cross(): [Buy] = lowest ask, [Sell] = -highest bid; kNoMapLevel when the
+         .        .        .                .              .               .                 .              .          .           // map is empty. Refreshed on every (cold) change of the maps.
+         .        .        .                .              .               .                 .              .          .           static constexpr Price kNoMapLevel = std::numeric_limits<Price>::max();
+         .        .        .                .              .               .                 .              .          .           void refresh_map_best() {
+        79 (0.0%) 0        0               23 (0.0%)       3  (0.0%)       1  (0.0%)        28  (0.0%)      0          0             taker_map_best_[0] = asks_.empty() ? kNoMapLevel : asks_.begin()->first;
+        80 (0.0%) 0        0               24 (0.0%)       2  (0.0%)       1  (0.0%)        28  (0.0%)      0          0             taker_map_best_[1] = bids_.empty() ? kNoMapLevel : -bids_.begin()->first;
+         .        .        .                .              .               .                 .              .          .           }
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           auto level_of(const Loc& loc) -> Level& {
+    82,056 (0.0%) 0        0                0              0               0                 0              0          0             if (const std::uint32_t s = slot_of(loc.price); s != kNoSlot) return grid_[s];
+         .        .        .                .              .               .                 .              .          .             return loc.side == Side::Buy ? bids_.find(loc.price)->second : asks_.find(loc.price)->second;
+         .        .        .                .              .               .                 .              .          .           }
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           // ---- node pool ----------------------------------------------------------------
+         .        .        .                .              .               .                 .              .          .           [[gnu::always_inline]] auto alloc_node(OrderId id, Qty qty, Price price, Side side) -> std::uint32_t {
+ 3,663,288 (0.9%) 0        0        1,221,096 (1.2%)       0               0                 0              0          0             std::uint32_t i = free_head_;
+ 1,221,096 (0.3%) 0        0                0              0               0                 0              0          0             if (i != kNil) {
+ 4,848,996 (1.2%) 0        0        1,212,249 (1.2%)  10,561  (0.9%)     257  (0.0%) 2,424,498  (5.4%)      0          0               free_head_ = nodes_[i].next;
+ 1,212,249 (0.3%) 0        0                0              0               0                 0              0          0             } else {
+    26,541 (0.0%) 0        0                0              0               0                 0              0          0               if (nodes_.size() == kNil) throw std::length_error("v16: order pool exhausted");
+         .        .        .                .              .               .                 .              .          .               i = static_cast<std::uint32_t>(nodes_.size());
+         .        .        .                .              .               .                 .              .          .               nodes_.emplace_back();
+         .        .        .                .              .               .                 .              .          .             }
+ 7,344,270 (1.9%) 0        0        1,221,096 (1.2%)       0               0         6,105,480 (13.6%)  5,129 (0.4%) 117 (0.6%)      nodes_[i] = OrderNode{id, price, qty, kNil, kNil, side};
+         .        .        .                .              .               .                 .              .          .             return i;
+         .        .        .                .              .               .                 .              .          .           }
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           void free_node(std::uint32_t i) {
+ 2,442,192 (0.6%) 0        0        1,221,096 (1.2%)       0               0         1,221,096  (2.7%)      0          0             nodes_[i].next = free_head_;
+ 1,221,096 (0.3%) 0        0                0              0               0         1,221,096  (2.7%)      0          0             free_head_ = i;
+         .        .        .                .              .               .                 .              .          .           }
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           // ---- level list ---------------------------------------------------------------
+         .        .        .                .              .               .                 .              .          .           // The link to patch is either a neighbour node's field or the Level's
+         .        .        .                .              .               .                 .              .          .           // head/tail. Select its address branch-free (clang turns an unpredictable
+         .        .        .                .              .               .                 .              .          .           // ternary into cmov), then store unconditionally. kNil indexes are replaced
+         .        .        .                .              .               .                 .              .          .           // by 0 before forming the node address so no out-of-range pointer is formed
+         .        .        .                .              .               .                 .              .          .           // (the pool is never empty here: node i exists).
+         .        .        .                .              .               .                 .              .          .           void push_back(Level& level, std::uint32_t i) {
+ 3,663,288 (0.9%) 0        0        1,221,096 (1.2%)  12,625  (1.1%)   2,887  (0.3%)         0              0          0             const std::uint32_t tail = level.tail;
+         .        .        .                .              .               .                 .              .          .             const bool has_tail = __builtin_unpredictable(tail != kNil);
+ 6,105,480 (1.5%) 0        0        1,221,096 (1.2%)       0               0                 0              0          0             std::uint32_t* link = has_tail ? &nodes_[has_tail ? tail : 0].next : &level.head;
+ 1,221,096 (0.3%) 0        0                0              0               0         1,221,096  (2.7%) 18,476 (1.6%) 338 (1.7%)      *link = i;
+ 1,221,096 (0.3%) 0        0                0              0               0         1,221,096  (2.7%)      0          0             nodes_[i].prev = tail;
+ 1,221,096 (0.3%) 1 (0.3%) 1 (0.3%)         0              0               0         1,221,096  (2.7%)      0          0             nodes_[i].next = kNil;
+ 1,221,096 (0.3%) 0        0                0              0               0         1,221,096  (2.7%)      0          0             level.tail = i;
+ 2,442,192 (0.6%) 0        0        2,442,192 (2.4%)   3,778  (0.3%)     610  (0.1%)         0              0          0             ++level.count;
+         .        .        .                .              .               .                 .              .          .           }
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           void unlink(Level& level, std::uint32_t i) {
+         .        .        .                .              .               .                 .              .          .             const OrderNode& n = nodes_[i];
+ 2,442,192 (0.6%) 0        0        1,221,096 (1.2%)       0               0                 0              0          0             const std::uint32_t prev = n.prev;
+ 2,442,192 (0.6%) 0        0        1,221,096 (1.2%)       0               0                 0              0          0             const std::uint32_t next = n.next;
+         .        .        .                .              .               .                 .              .          .             const bool has_prev = __builtin_unpredictable(prev != kNil);
+         .        .        .                .              .               .                 .              .          .             const bool has_next = __builtin_unpredictable(next != kNil);
+ 6,105,480 (1.5%) 2 (0.6%) 2 (0.6%)         0              0               0                 0              0          0             std::uint32_t* to_next = has_prev ? &nodes_[has_prev ? prev : 0].next : &level.head;
+ 6,105,480 (1.5%) 1 (0.3%) 1 (0.3%)         0              0               0                 0              0          0             std::uint32_t* to_prev = has_next ? &nodes_[has_next ? next : 0].prev : &level.tail;
+ 1,221,096 (0.3%) 0        0                0              0               0         1,221,096  (2.7%) 41,796 (3.5%) 279 (1.4%)      *to_next = next;
+ 2,442,176 (0.6%) 0        0        1,221,080 (1.2%)       0               0         1,221,096  (2.7%) 21,194 (1.8%) 159 (0.8%)      *to_prev = prev;
+ 1,221,096 (0.3%) 0        0        1,221,096 (1.2%)     955  (0.1%)     141  (0.0%)         0              0          0             --level.count;
+         .        .        .                .              .               .                 .              .          .           }
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           // false => match() would consume nothing (no opposite level at or through the
+         .        .        .                .              .               .                 .              .          .           // limit). Prices are normalised by the taker's sign (sell side negated) so
+         .        .        .                .              .               .                 .              .          .           // "crosses" is `best <= limit` for both sides; the only data-dependent branch
+         .        .        .                .              .               .                 .              .          .           // left is "opposite grid empty", which is rare.
+         .        .        .                .              .               .                 .              .          .           [[nodiscard]] auto may_cross(Side side, Price limit) const -> bool {
+    41,028 (0.0%) 0        0                0              0               0                 0              0          0             const auto t = static_cast<std::uint32_t>(side);          // Buy = 0, Sell = 1
+ 3,663,288 (0.9%) 0        0                0              0               0                 0              0          0             const Price sign = 1 - 2 * static_cast<Price>(t);
+ 3,663,285 (0.9%) 0        0                0              0               0                 0              0          0             const std::uint32_t opp_mirror = kMirror & (0U - t);       // bids are mirrored
+ 7,326,528 (1.8%) 0        0                0              0               0                 0              0          0             const Bitmap& opp = __builtin_unpredictable(t != 0) ? bid_bits_ : ask_bits_;
+ 1,221,096 (0.3%) 0        0        1,221,096 (1.2%)      13  (0.0%)       2  (0.0%)         0              0          0             Price best = taker_map_best_[t];  // already normalised; sentinel when the map is empty
+         .        .        .                .              .               .                 .              .          .             if (!opp.empty()) [[likely]]
+ 4,884,380 (1.2%) 0        0                0              0               0                 0              0          0               best = std::min(best, sign * price_of(opp.min() ^ opp_mirror));
+ 4,884,384 (1.2%) 1 (0.3%) 1 (0.3%)         0              0               0         2,442,192  (5.4%)      0          0             return best <= sign * limit;
+         .        .        .                .              .               .                 .              .          .           }
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           // slot: this order's index entry (just reserved by push, or kept by modify)
+         .        .        .                .              .               .                 .              .          .           [[gnu::always_inline]] void add(OrderId id, Side side, Price price, Qty qty, const Handle& slot) {
+ 1,221,096 (0.3%) 0        0                0              0               0                 0              0          0             if (!may_cross(side, price)) [[likely]] return rest(id, side, price, qty, slot);
+         .        .        .                .              .               .                 .              .          .             if (side == Side::Buy)
+         .        .        .                .              .               .                 .              .          .               qty = match<Side::Buy>(id, price, qty);
+         .        .        .                .              .               .                 .              .          .             else
+         .        .        .                .              .               .                 .              .          .               qty = match<Side::Sell>(id, price, qty);
+         .        .        .                .              .               .                 .              .          .             if (qty == 0) {
+         .        .        .                .              .               .                 .              .          .               index_.erase(slot, id);  // fully filled: never rests
+         .        .        .                .              .               .                 .              .          .               return;
+         .        .        .                .              .               .                 .              .          .             }
+-- line 465 ----------------------------------------
+-- line 518 ----------------------------------------
+         .        .        .                .              .               .                 .              .          .             }
+         .        .        .                .              .               .                 .              .          .             return qty;
+         .        .        .                .              .               .                 .              .          .           }
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           // slot: the order's index entry, by reference (v10: a 16-byte iterator passed
+         .        .        .                .              .               .                 .              .          .           // by value went through the stack and caused a store-forwarding stall)
+         .        .        .                .              .               .                 .              .          .           [[gnu::always_inline]] void rest(OrderId id, Side side, Price price, Qty qty, const Handle& slot) {
+         .        .        .                .              .               .                 .              .          .             const std::uint32_t i = alloc_node(id, qty, price, side);  // may grow nodes_: take references after
+ 2,442,197 (0.6%) 0        0        1,221,096 (1.2%)       4  (0.0%)       1  (0.0%)         1  (0.0%)      0          0             if (!anchored_) anchor_if_on_tick(price);
+         .        .        .                .              .               .                 .              .          .             const std::uint32_t s = slot_of(price);
+         .        .        .                .              .               .                 .              .          .             Level* level = nullptr;
+         .        .        .                .              .               .                 .              .          .             if (s != kNoSlot) {
+ 3,663,240 (0.9%) 0        0        1,221,080 (1.2%)       0               0                 0              0          0               level = &grid_[s];
+ 1,221,080 (0.3%) 0        0                0              0               0                 0              0          0               (side == Side::Buy ? bid_bits_ : ask_bits_).set(s ^ mirror(side));  // idempotent: no "was it empty" branch
+         .        .        .                .              .               .                 .              .          .             } else {
+       112 (0.0%) 0        0               16 (0.0%)       0               0                16  (0.0%)      1 (0.0%)   0               level = off_grid_level(side, price);
+         .        .        .                .              .               .                 .              .          .             }
+         .        .        .                .              .               .                 .              .          .             push_back(*level, i);
+ 2,442,192 (0.6%) 0        0        2,442,192 (2.4%)       0               0                 0              0          0             level->total_qty += qty;
+ 1,221,096 (0.3%) 0        0                0              0               0         1,221,096  (2.7%)      4 (0.0%)   0             *slot.value = i;
+ 1,221,096 (0.3%) 0        0        1,221,096 (1.2%)       9  (0.0%)       2  (0.0%)         0              0          0             sink_.on(Rested{id, side, price, qty});
+         .        .        .                .              .               .                 .              .          .           }
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           [[gnu::always_inline]] void erase(const Handle& it, OrderId id) {
+ 2,442,192 (0.6%) 0        0                0              0               0         2,442,192  (5.4%)      0          0             const Loc loc = loc_of(*it.value);
+         .        .        .                .              .               .                 .              .          .             if (const std::uint32_t s = slot_of(loc.price); s != kNoSlot) {
+ 3,663,240 (0.9%) 1 (0.3%) 1 (0.3%) 1,221,080 (1.2%)       0               0                 0              0          0               Level& level = grid_[s];
+ 2,442,160 (0.6%) 0        0        2,442,160 (2.4%)   9,299  (0.8%)   1,563  (0.2%)         0              0          0               level.total_qty -= nodes_[loc.node].qty;
+         .        .        .                .              .               .                 .              .          .               unlink(level, loc.node);
+ 1,221,080 (0.3%) 0        0        1,221,080 (1.2%)       0               0                 0              0          0               free_node(loc.node);
+         .        .        .                .              .               .                 .              .          .               // "did the level become empty" is unpredictable once unlink is branch-free
+         .        .        .                .              .               .                 .              .          .               // (it used to be inferable from unlink's prev/next branches)
+ 8,547,560 (2.2%) 1 (0.3%) 1 (0.3%) 1,221,080 (1.2%)     159  (0.0%)      20  (0.0%)         0              0          0               (loc.side == Side::Buy ? bid_bits_ : ask_bits_).clear_if(s ^ mirror(loc.side), level.head == kNil);
+         .        .        .                .              .               .                 .              .          .             } else {
+        64 (0.0%) 0        0                0              0               0                16  (0.0%)      2 (0.0%)   0               unlink_off_grid(loc);
+         .        .        .                .              .               .                 .              .          .             }
+         .        .        .                .              .               .                 .              .          .             index_.erase(it, id);
+         .        .        .                .              .               .                 .              .          .           }
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           // modify's half of erase(): unlink the order from its level (grid or fallback
+         .        .        .                .              .               .                 .              .          .           // map) and free its node, keeping the index slot. erase() keeps v9's own copy
+         .        .        .                .              .               .                 .              .          .           // of this code so the cancel path is what v9 inlines.
+         .        .        .                .              .               .                 .              .          .           void remove_from_level(const Loc& loc) {  // inlined into modify only
+-- line 560 ----------------------------------------
+-- line 567 ----------------------------------------
+         .        .        .                .              .               .                 .              .          .               // (it used to be inferable from unlink's prev/next branches)
+         .        .        .                .              .               .                 .              .          .               (loc.side == Side::Buy ? bid_bits_ : ask_bits_).clear_if(s ^ mirror(loc.side), level.head == kNil);
+         .        .        .                .              .               .                 .              .          .             } else {
+         .        .        .                .              .               .                 .              .          .               unlink_off_grid(loc);
+         .        .        .                .              .               .                 .              .          .             }
+         .        .        .                .              .               .                 .              .          .           }
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           // ---- cold paths (out of line on purpose) --------------------------------------
+       144 (0.0%) 0        0                0              0               0               112  (0.0%)      0          0           [[gnu::noinline]] auto off_grid_level(Side side, Price price) -> Level* {
+        72 (0.0%) 2 (0.6%) 2 (0.6%)        12 (0.0%)       0               0                 0              0          0             Level* level = side == Side::Buy ? &bids_[price] : &asks_[price];
+         .        .        .                .              .               .                 .              .          .             refresh_map_best();
+       144 (0.0%) 0        0              112 (0.0%)       0               0                 0              0          0             return level;
+         .        .        .                .              .               .                 .              .          .           }
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           // unlink an order resting on a fallback-map level and free its node
+        32 (0.0%) 1 (0.3%) 1 (0.3%)         0              0               0                 0              0          0           [[gnu::noinline]] void unlink_off_grid(const Loc& loc) {
+        80 (0.0%) 3 (0.8%) 3 (0.9%)         0              0               0                80  (0.0%)      0          0             auto remove_from = [&](auto& levels) {
+        16 (0.0%) 0        0               16 (0.0%)       0               0                 0              0          0               auto level_it = levels.find(loc.price);
+        16 (0.0%) 0        0                0              0               0                 0              0          0               Level& level = level_it->second;
+        48 (0.0%) 0        0               48 (0.0%)       1  (0.0%)       1  (0.0%)         0              0          0               level.total_qty -= nodes_[loc.node].qty;
+         .        .        .                .              .               .                 .              .          .               unlink(level, loc.node);
+        16 (0.0%) 0        0               16 (0.0%)       0               0                 0              0          0               free_node(loc.node);
+        32 (0.0%) 0        0               16 (0.0%)       0               0                 0              0          0               if (level.head == kNil) {
+         .        .        .                .              .               .                 .              .          .                 levels.erase(level_it);
+         .        .        .                .              .               .                 .              .          .                 refresh_map_best();
+         .        .        .                .              .               .                 .              .          .               }
+        64 (0.0%) 0        0               64 (0.0%)       0               0                 0              0          0             };
+        32 (0.0%) 0        0               16 (0.0%)       0               0                 0              0          0             if (loc.side == Side::Buy)
+        20 (0.0%) 0        0                0              0               0                 5  (0.0%)      0          0               remove_from(bids_);
+         .        .        .                .              .               .                 .              .          .             else
+        44 (0.0%) 0        0                0              0               0                11  (0.0%)      0          0               remove_from(asks_);
+        32 (0.0%) 0        0               16 (0.0%)       0               0                 0              0          0           }
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           [[gnu::noinline]] void anchor_if_on_tick(Price price) {
+        10 (0.0%) 1 (0.3%) 1 (0.3%)         1 (0.0%)       0               0                 0              0          0             if (static_cast<std::uint64_t>(price) % static_cast<std::uint64_t>(tick_) == 0) anchor(price);
+         1 (0.0%) 0        0                1 (0.0%)       0               0                 0              0          0           }
+         .        .        .                .              .               .                 .              .          .         
+         .        .        .                .              .               .                 .              .          .           Sink& sink_;
+         .        .        .                .              .               .                 .              .          .           mem::HugeBuffer buf_;  // grid_ + both bitmaps
+         .        .        .                .              .               .                 .              .          .           Level* grid_ = nullptr;
+         .        .        .                .              .               .                 .              .          .           Bitmap bid_bits_;
+         .        .        .                .              .               .                 .              .          .           Bitmap ask_bits_;
+         .        .        .                .              .               .                 .              .          .           Price tick_;
+         .        .        .                .              .               .                 .              .          .           v11::ExactDiv slot_div_;  // division by tick_ for slot_of()
+-- line 610 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /home/wang/sources/cxx/book/include/lob/v16/order_index.hpp
+--------------------------------------------------------------------------------
+Ir______________ I1mr____ ILmr____ Dr______________ D1mr__________ DLmr____ Dw______________ D1mw_____________ DLmw_________ 
+
+9,962,556 (2.5%) 5 (1.4%) 5 (1.5%) 3,729,675 (3.7%)       8 (0.0%) 1 (0.0%) 3,663,288 (8.1%)         0             0          <unknown (line 0)>
+
+-- line 64 ----------------------------------------
+        .        .        .                .              .        .                .                .             .          
+        .        .        .                .              .        .                .                .             .            OrderIndex() { alloc(kInitialBuckets); }
+        .        .        .                .              .        .                .                .             .          
+        .        .        .                .              .        .                .                .             .            [[nodiscard]] auto size() const noexcept -> std::size_t { return size_ + fallback_.size(); }
+        .        .        .                .              .        .                .                .             .          
+        .        .        .                .              .        .                .                .             .            // the hot operations are always_inline: they sit on the book's pinned hot
+        .        .        .                .              .        .                .                .             .            // path (v12), and left to the heuristics try_insert / erase stayed calls
+        .        .        .                .              .        .                .                .             .            [[gnu::always_inline]] [[nodiscard]] auto find(Id id) -> Handle {
+3,745,344 (0.9%) 0        0                0              0        0                0                0             0              if (id >= kEmpty) [[unlikely]]
+        .        .        .                .              .        .                .                .             .                return find_fallback(id);
+        .        .        .                .              .        .                .                .             .              const auto k = static_cast<std::uint32_t>(id);
+        .        .        .                .              .        .                .                .             .              const std::size_t b = home(k);
+    1,880 (0.0%) 0        0                0              0        0                0                0             0              for (std::size_t j = b;; j = (j + 1) & mask_) {
+2,526,128 (0.6%) 0        0                0              0        0                0                0             0                if (const unsigned m = lanes_equal(j, k)) return handle(b, j, static_cast<unsigned>(std::countr_zero(m)));
+    1,880 (0.0%) 0        0              940 (0.0%)       0        0                0                0             0                if (bk_[j].key[kCounter] == 0) return {};
+        .        .        .                .              .        .                .                .             .              }
+3,786,372 (1.0%) 0        0                0              0        0                0                0             0            }
+        .        .        .                .              .        .                .                .             .            [[nodiscard]] auto find(Id id) const -> const std::uint32_t* {
+        .        .        .                .              .        .                .                .             .              return const_cast<OrderIndex*>(this)->find(id).value;
+        .        .        .                .              .        .                .                .             .            }
+        .        .        .                .              .        .                .                .             .          
+        .        .        .                .              .        .                .                .             .            // the entry for id, inserting one (value unset) if absent
+        .        .        .                .              .        .                .                .             .            [[gnu::always_inline]] auto try_insert(Id id, bool& inserted) -> Handle {
+3,663,288 (0.9%) 0        0        1,221,096 (1.2%)       5 (0.0%) 2 (0.0%)         0                0             0              if (id >= next_new_ && id < kEmpty) [[likely]] {  // never inserted: no duplicate check, no load
+2,427,620 (0.6%) 1 (0.3%) 1 (0.3%)         0              0        0        1,213,810 (2.7%)         0             0                next_new_ = id + 1;
+3,641,430 (0.9%) 0        0        2,427,620 (2.4%)       0        0                0                0             0                if (size_ >= limit_) [[unlikely]]
+        .        .        .                .              .        .                .                .             .                  grow();
+        .        .        .                .              .        .                .                .             .                const auto k = static_cast<std::uint32_t>(id);
+        .        .        .                .              .        .                .                .             .                const std::size_t b = home(k);
+        .        .        .                .              .        .                .                .             .                const auto [j, slot] = place(b, k);
+1,213,810 (0.3%) 0        0        1,213,810 (1.2%)       0        0                0                0             0                ++size_;
+1,213,810 (0.3%) 0        0                0              0        0        1,213,810 (2.7%)         0             0                inserted = true;
+        .        .        .                .              .        .                .                .             .                return handle(b, j, slot);
+        .        .        .                .              .        .                .                .             .              }
+   14,572 (0.0%) 1 (0.3%) 1 (0.3%)         0              0        0                0                0             0              if (id >= kEmpty) [[unlikely]]
+        .        .        .                .              .        .                .                .             .                return insert_fallback(id, inserted);
+   21,858 (0.0%) 0        0           14,572 (0.0%)       0        0                0                0             0              if (size_ >= limit_) [[unlikely]]
+       16 (0.0%) 1 (0.3%) 1 (0.3%)         0              0        0                4 (0.0%)         2  (0.0%)     0                grow();
+        .        .        .                .              .        .                .                .             .              const auto k = static_cast<std::uint32_t>(id);
+        .        .        .                .              .        .                .                .             .              const std::size_t b = home(k);
+       94 (0.0%) 0        0                0              0        0                0                0             0              for (std::size_t j = b;; j = (j + 1) & mask_) {  // already present?
+   14,666 (0.0%) 0        0                0              0        0                0                0             0                if (const unsigned m = lanes_equal(j, k)) {
+        .        .        .                .              .        .                .                .             .                  inserted = false;
+        .        .        .                .              .        .                .                .             .                  return handle(b, j, static_cast<unsigned>(std::countr_zero(m)));
+        .        .        .                .              .        .                .                .             .                }
+   14,666 (0.0%) 0        0            7,333 (0.0%)       0        0                0                0             0                if (bk_[j].key[kCounter] == 0) break;
+        .        .        .                .              .        .                .                .             .              }
+        .        .        .                .              .        .                .                .             .              const auto [j, slot] = place(b, k);
+   14,572 (0.0%) 0        0            7,286 (0.0%)       0        0                0                0             0              ++size_;
+    7,286 (0.0%) 0        0                0              0        0            7,286 (0.0%)         4  (0.0%)     0              inserted = true;
+        .        .        .                .              .        .                .                .             .              return handle(b, j, slot);
+        .        .        .                .              .        .                .                .             .            }
+        .        .        .                .              .        .                .                .             .          
+        .        .        .                .              .        .                .                .             .            // id: the entry's key (only the fallback map needs it)
+        .        .        .                .              .        .                .                .             .            [[gnu::always_inline]] void erase(const Handle& h, Id id) {
+6,105,480 (1.5%) 2 (0.6%) 2 (0.6%) 1,221,096 (1.2%)       0        0                0                0             0              if (h.bucket == kFallback) [[unlikely]] {
+        .        .        .                .              .        .                .                .             .                fallback_.erase(id);
+        .        .        .                .              .        .                .                .             .                return;
+        .        .        .                .              .        .                .                .             .              }
+8,547,672 (2.2%) 0        0        1,221,096 (1.2%)       0        0                0                0             0              const auto slot = static_cast<unsigned>(h.value - bk_[h.bucket].node);
+3,663,288 (0.9%) 0        0                0              0        0        1,221,096 (2.7%)         0             0              bk_[h.bucket].key[slot] = kEmpty;
+4,884,384 (1.2%) 0        0        1,221,096 (1.2%)   1,247 (0.1%) 0                0                0             0              occ_[h.bucket] &= static_cast<std::uint8_t>(~(1u << slot));
+2,448,604 (0.6%) 0        0              916 (0.0%)       0        0                0                0             0              for (std::size_t i = h.home; i != h.bucket; i = (i + 1) & mask_) --bk_[i].key[kCounter];
+2,442,192 (0.6%) 1 (0.3%) 1 (0.3%) 1,221,096 (1.2%)       0        0                0                0             0              --size_;
+        .        .        .                .              .        .                .                .             .            }
+        .        .        .                .              .        .                .                .             .          
+        .        .        .                .              .        .                .                .             .            // memory touched by the table (for book memory_info)
+        .        .        .                .              .        .                .                .             .            [[nodiscard]] auto bytes() const noexcept -> std::size_t { return nb_ * (sizeof(Bucket) + 1); }
+        .        .        .                .              .        .                .                .             .          
+        .        .        .                .              .        .                .                .             .           private:
+        .        .        .                .              .        .                .                .             .            struct alignas(64) Bucket {
+        .        .        .                .              .        .                .                .             .              std::uint32_t key[8];
+-- line 135 ----------------------------------------
+-- line 136 ----------------------------------------
+        .        .        .                .              .        .                .                .             .              std::uint32_t node[8];
+        .        .        .                .              .        .                .                .             .            };
+        .        .        .                .              .        .                .                .             .            static_assert(sizeof(Bucket) == 64);
+        .        .        .                .              .        .                .                .             .            static constexpr std::uint32_t kEmpty = ~std::uint32_t{0};
+        .        .        .                .              .        .                .                .             .            static constexpr unsigned kSlots = 7, kCounter = 7, kSlotLanes = 0x7F;
+        .        .        .                .              .        .                .                .             .            static constexpr std::size_t kInitialBuckets = 256;
+        .        .        .                .              .        .                .                .             .          
+        .        .        .                .              .        .                .                .             .            [[nodiscard]] auto home(std::uint32_t k) const -> std::size_t {
+9,986,640 (2.5%) 3 (0.8%) 3 (0.9%) 2,496,660 (2.4%)       3 (0.0%) 0                0                0             0              return static_cast<std::size_t>((std::uint64_t{k} * 0x9E3779B97F4A7C15ull) >> shift_);  // Fibonacci hashing
+        .        .        .                .              .        .                .                .             .            }
+        .        .        .                .              .        .                .                .             .            [[nodiscard]] auto handle(std::size_t b, std::size_t j, unsigned slot) -> Handle {
+8,637,014 (2.2%) 3 (0.8%) 3 (0.9%)     7,286 (0.0%)       0        0                0                0             0              return {&bk_[j].node[slot], static_cast<std::uint32_t>(j), static_cast<std::uint32_t>(b)};
+        .        .        .                .              .        .                .                .             .            }
+        .        .        .                .              .        .                .                .             .            // bit s set when key[s] == v, for the 7 slot lanes
+        .        .        .                .              .        .                .                .             .            [[nodiscard]] auto lanes_equal(std::size_t j, std::uint32_t v) const -> unsigned {
+        .        .        .                .              .        .                .                .             .          #if defined(__AVX2__)
+6,343,712 (1.6%) 2 (0.6%) 2 (0.6%)         0              0        0                0                0             0              const __m256i keys = _mm256_load_si256(reinterpret_cast<const __m256i*>(bk_[j].key));
+        .        .        .                .              .        .                .                .             .              const __m256i eq = _mm256_cmpeq_epi32(keys, _mm256_set1_epi32(static_cast<int>(v)));
+3,810,204 (1.0%) 0        0        1,270,397 (1.2%) 100,835 (8.6%) 0                0                0             0              return static_cast<unsigned>(_mm256_movemask_ps(_mm256_castsi256_ps(eq))) & kSlotLanes;
+        .        .        .                .              .        .                .                .             .          #else
+        .        .        .                .              .        .                .                .             .              unsigned m = 0;
+        .        .        .                .              .        .                .                .             .              for (unsigned s = 0; s < kSlots; ++s) m |= unsigned{bk_[j].key[s] == v} << s;
+        .        .        .                .              .        .                .                .             .              return m;
+        .        .        .                .              .        .                .                .             .          #endif
+        .        .        .                .              .        .                .                .             .            }
+        .        .        .                .              .        .                .                .             .            struct Placed {
+        .        .        .                .              .        .                .                .             .              std::size_t bucket;
+        .        .        .                .              .        .                .                .             .              unsigned slot;
+        .        .        .                .              .        .                .                .             .            };
+        .        .        .                .              .        .                .                .             .            // free slot from the occupancy byte: the bucket line is only written
+        .        .        .                .              .        .                .                .             .            [[gnu::always_inline]] auto place(std::size_t b, std::uint32_t k) -> Placed {
+    2,146 (0.0%) 0        0                0              0        0                0                0             0              for (std::size_t j = b;; j = (j + 1) & mask_) {
+1,235,609 (0.3%) 2 (0.6%) 2 (0.6%) 1,235,609 (1.2%)  10,530 (0.9%) 5 (0.0%)         0                0             0                const unsigned occupied = occ_[j];
+7,398,068 (1.9%) 9 (2.5%) 9 (2.6%)         0              0        0                0                0             0                if (const unsigned free = ~occupied & kSlotLanes) {
+        .        .        .                .              .        .                .                .             .                  const auto slot = static_cast<unsigned>(std::countr_zero(free));
+4,938,144 (1.2%) 2 (0.6%) 2 (0.6%)         0              0        0        1,234,536 (2.7%)         0             0                  occ_[j] = static_cast<std::uint8_t>(occupied | (1u << slot));
+4,924,704 (1.2%) 2 (0.6%) 2 (0.6%) 1,234,536 (1.2%)       0        0        1,234,536 (2.7%) 1,080,155 (90.9%)   256  (1.3%)          bk_[j].key[slot] = k;
+        .        .        .                .              .        .                .                .             .                  return {j, slot};
+        .        .        .                .              .        .                .                .             .                }
+    3,219 (0.0%) 0        0            1,073 (0.0%)     767 (0.1%) 0                0                0             0                ++bk_[j].key[kCounter];  // passing a full bucket (read-modify-write, rare)
+        .        .        .                .              .        .                .                .             .              }
+        .        .        .                .              .        .                .                .             .            }
+       20 (0.0%) 1 (0.3%) 1 (0.3%)         0              0        0               12 (0.0%)         0             0            void alloc(std::size_t nb) {
+        4 (0.0%) 0        0                0              0        0                4 (0.0%)         0             0              nb_ = nb;
+       16 (0.0%) 1 (0.3%) 1 (0.3%)         0              0        0                4 (0.0%)         0             0              limit_ = nb * kSlots / 2;  // max load 1/2
+        8 (0.0%) 0        0                0              0        0                4 (0.0%)         0             0              mask_ = nb - 1;
+        8 (0.0%) 0        0                0              0        0                4 (0.0%)         0             0              shift_ = 64 - static_cast<unsigned>(std::countr_zero(nb));
+       16 (0.0%) 0        0                0              0        0                4 (0.0%)         0             0              mem_.reset(static_cast<Bucket*>(::operator new(nb * sizeof(Bucket), std::align_val_t{64})));
+        4 (0.0%) 1 (0.3%) 1 (0.3%)         0              0        0                4 (0.0%)         0             0              bk_ = mem_.get();
+        .        .        .                .              .        .                .                .             .              occ_ = std::make_unique<std::uint8_t[]>(nb);  // zeroed: all slots free
+    3,888 (0.0%) 2 (0.6%) 2 (0.6%)         0              0        0                0                0             0              for (std::size_t i = 0; i < nb; ++i) {
+    7,680 (0.0%) 0        0                0              0        0            7,680 (0.0%)     7,680  (0.6%) 5,632 (29.0%)        for (auto& x : bk_[i].key) x = kEmpty;
+    7,680 (0.0%) 2 (0.6%) 2 (0.6%)         0              0        0            7,680 (0.0%)         0             0                bk_[i].key[kCounter] = 0;
+        .        .        .                .              .        .                .                .             .              }
+       20 (0.0%) 0        0               16 (0.0%)       3 (0.0%) 0                0                0             0            }
+       32 (0.0%) 1 (0.3%) 1 (0.3%)         0              0        0               28 (0.0%)         0             0            [[gnu::noinline]] void grow() {
+        .        .        .                .              .        .                .                .             .              auto old = std::move(mem_);
+        4 (0.0%) 0        0                4 (0.0%)       0        0                0                0             0              const std::size_t old_nb = nb_;
+        8 (0.0%) 0        0                0              0        0                4 (0.0%)         2  (0.0%)     0              alloc(nb_ * 2);
+   11,528 (0.0%) 0        0                0              0        0                0                0             0              for (std::size_t i = 0; i < old_nb; ++i)
+        .        .        .                .              .        .                .                .             .                for (unsigned s = 0; s < kSlots; ++s)
+   80,640 (0.0%) 1 (0.3%) 1 (0.3%)    26,880 (0.0%)   3,802 (0.3%) 0                0                0             0                  if (const std::uint32_t k = old.get()[i].key[s]; k != kEmpty) {
+        .        .        .                .              .        .                .                .             .                    const auto [j, slot] = place(home(k), k);
+   26,880 (0.0%) 0        0           13,440 (0.0%)       0        0           13,440 (0.0%)         0             0                    bk_[j].node[slot] = old.get()[i].node[s];
+        .        .        .                .              .        .                .                .             .                  }
+        .        .        .                .              .        .                .                .             .            }
+        .        .        .                .              .        .                .                .             .            [[gnu::noinline]] auto find_fallback(Id id) -> Handle {
+        .        .        .                .              .        .                .                .             .              const auto it = fallback_.find(id);
+        .        .        .                .              .        .                .                .             .              if (it == fallback_.end()) return {};
+        .        .        .                .              .        .                .                .             .              return {&it->second, kFallback, 0};
+        .        .        .                .              .        .                .                .             .            }
+        .        .        .                .              .        .                .                .             .            [[gnu::noinline]] auto insert_fallback(Id id, bool& inserted) -> Handle {
+        .        .        .                .              .        .                .                .             .              const auto r = fallback_.try_emplace(id, 0u);
+        .        .        .                .              .        .                .                .             .              inserted = r.second;
+        .        .        .                .              .        .                .                .             .              return {&r.first->second, kFallback, 0};
+        .        .        .                .              .        .                .                .             .            }
+        .        .        .                .              .        .                .                .             .          
+        .        .        .                .              .        .                .                .             .            struct Free {
+       40 (0.0%) 1 (0.3%) 1 (0.3%)        24 (0.0%)       4 (0.0%) 0                0                0             0              void operator()(Bucket* p) const { ::operator delete(p, std::align_val_t{64}); }
+        .        .        .                .              .        .                .                .             .            };
+        .        .        .                .              .        .                .                .             .            std::unique_ptr<Bucket, Free> mem_;
+        .        .        .                .              .        .                .                .             .            Bucket* bk_ = nullptr;
+        .        .        .                .              .        .                .                .             .            std::unique_ptr<std::uint8_t[]> occ_;  // per bucket: bit s = slot s in use
+        .        .        .                .              .        .                .                .             .            std::size_t nb_ = 0, limit_ = 0, mask_ = 0, size_ = 0;
+        .        .        .                .              .        .                .                .             .            Id next_new_ = 0;  // ids >= next_new_ were never inserted
+        .        .        .                .              .        .                .                .             .            unsigned shift_ = 0;
+        .        .        .                .              .        .                .                .             .            boost::unordered_flat_map<Id, std::uint32_t> fallback_;  // ids outside the 32-bit window
+-- line 222 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /home/wang/sources/cxx/book/include/lob/v3/hier_bitmap.hpp
+--------------------------------------------------------------------------------
+Ir______________ I1mr____ ILmr____ Dr______________ D1mr________ DLmr______ Dw______________ D1mw_____ DLmw____ 
+
+3,664,613 (0.9%) 0        0        2,442,160 (2.4%)     0          0                0         0        0         <unknown (line 0)>
+
+-- line 40 ----------------------------------------
+        .        .        .                .            .          .                .         .        .             static constexpr std::size_t kSize       = std::size_t{1} << Bits;
+        .        .        .                .            .          .                .         .        .             static constexpr std::size_t kTotalWords = kOffset[kLevels - 1] + 1;
+        .        .        .                .            .          .                .         .        .             static constexpr unsigned    kDepth      = kLevels;
+        .        .        .                .            .          .                .         .        .         
+        .        .        .                .            .          .                .         .        .             HierBitmap() = default;
+        .        .        .                .            .          .                .         .        .             explicit HierBitmap(std::uint64_t *words) noexcept : w_(words) {}
+        .        .        .                .            .          .                .         .        .         
+        .        .        .                .            .          .                .         .        .             [[nodiscard]] auto empty() const noexcept -> bool {
+4,884,384 (1.2%) 1 (0.3%) 1 (0.3%) 2,442,192 (2.4%)    38 (0.0%)   4 (0.0%)         0         0        0                 return w_[kOffset[kLevels - 1]] == 0;
+        .        .        .                .            .          .                .         .        .             }
+        .        .        .                .            .          .                .         .        .         
+        .        .        .                .            .          .                .         .        .             [[nodiscard]] auto test(std::uint32_t i) const noexcept -> bool {
+        .        .        .                .            .          .                .         .        .                 return (w_[i >> 6] >> (i & 63)) & 1U;
+        .        .        .                .            .          .                .         .        .             }
+        .        .        .                .            .          .                .         .        .         
+        .        .        .                .            .          .                .         .        .             void set(std::uint32_t i) noexcept {
+        .        .        .                .            .          .                .         .        .                 for (unsigned l = 0; l < kLevels; ++l) {
+2,443,498 (0.6%) 0        0                0            0          0                0         0        0                     std::uint64_t &word      = w_[kOffset[l] + (i >> 6)];
+3,667,254 (0.9%) 0        0        1,222,418 (1.2%)   613 (0.1%) 117 (0.0%)         0         0        0                     const bool     was_empty = word == 0;
+3,667,359 (0.9%) 1 (0.3%) 1 (0.3%) 2,444,871 (2.4%)     2 (0.0%)   1 (0.0%) 2,444,836 (5.4%) 15 (0.0%) 2 (0.0%)              word |= std::uint64_t{1} << (i & 63);
+        .        .        .                .            .          .                .         .        .                     if (!was_empty) return;
+        .        .        .                .            .          .                .         .        .                     i >>= 6;
+        .        .        .                .            .          .                .         .        .                 }
+        .        .        .                .            .          .                .         .        .             }
+        .        .        .                .            .          .                .         .        .         
+        .        .        .                .            .          .                .         .        .             void clear(std::uint32_t i) noexcept {
+        .        .        .                .            .          .                .         .        .                 for (unsigned l = 0; l < kLevels; ++l) {
+        .        .        .                .            .          .                .         .        .                     std::uint64_t &word = w_[kOffset[l] + (i >> 6)];
+-- line 67 ----------------------------------------
+-- line 70 ----------------------------------------
+        .        .        .                .            .          .                .         .        .                     i >>= 6;
+        .        .        .                .            .          .                .         .        .                 }
+        .        .        .                .            .          .                .         .        .             }
+        .        .        .                .            .          .                .         .        .         
+        .        .        .                .            .          .                .         .        .             // clear slot i only if `cond`, without branching on cond: the leaf update is
+        .        .        .                .            .          .                .         .        .             // a masked and-not; propagation upward happens only when the whole 64-slot
+        .        .        .                .            .          .                .         .        .             // word became empty (when !cond the leaf keeps bit i and stays non-zero)
+        .        .        .                .            .          .                .         .        .             void clear_if(std::uint32_t i, bool cond) noexcept {
+3,663,240 (0.9%) 0        0        1,221,080 (1.2%)     0          0                0         0        0                 std::uint64_t &leaf = w_[i >> 6];
+3,663,240 (0.9%) 0        0        1,221,080 (1.2%) 1,513 (0.1%)  46 (0.0%)         0         0        0                 leaf &= ~(std::uint64_t{cond} << (i & 63));
+1,221,080 (0.3%) 0        0                0            0          0                0         0        0                 if (leaf != 0) return;
+        .        .        .                .            .          .                .         .        .                 i >>= 6;
+        .        .        .                .            .          .                .         .        .                 for (unsigned l = 1; l < kLevels; ++l) {
+    1,338 (0.0%) 0        0                0            0          0                0         0        0                     std::uint64_t &word = w_[kOffset[l] + (i >> 6)];
+    4,154 (0.0%) 0        0            1,373 (0.0%)     6 (0.0%)   0                0         0        0                     word &= ~(std::uint64_t{1} << (i & 63));
+        .        .        .                .            .          .                .         .        .                     if (word != 0) return;
+        .        .        .                .            .          .                .         .        .                     i >>= 6;
+        .        .        .                .            .          .                .         .        .                 }
+        .        .        .                .            .          .                .         .        .             }
+        .        .        .                .            .          .                .         .        .         
+        .        .        .                .            .          .                .         .        .             // lowest set slot; precondition: !empty()
+        .        .        .                .            .          .                .         .        .             [[nodiscard]] auto min() const noexcept -> std::uint32_t {
+        .        .        .                .            .          .                .         .        .                 std::uint32_t i = 0;
+        .        .        .                .            .          .                .         .        .                 for (unsigned l = kLevels; l-- > 0;) {
+        .        .        .                .            .          .                .         .        .                     const std::uint64_t word = w_[kOffset[l] + i];
+6,105,475 (1.5%) 0        0                0            0          0                0         0        0                     i = (i << 6) | static_cast<std::uint32_t>(std::countr_zero(word));
+        .        .        .                .            .          .                .         .        .                 }
+        .        .        .                .            .          .                .         .        .                 return i;
+        .        .        .                .            .          .                .         .        .             }
+        .        .        .                .            .          .                .         .        .         
+        .        .        .                .            .          .                .         .        .             // highest set slot; precondition: !empty()
+        .        .        .                .            .          .                .         .        .             [[nodiscard]] auto max() const noexcept -> std::uint32_t {
+        .        .        .                .            .          .                .         .        .                 std::uint32_t i = 0;
+        .        .        .                .            .          .                .         .        .                 for (unsigned l = kLevels; l-- > 0;) {
+-- line 103 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /usr/include/c++/v1/__bit/countr.h
+--------------------------------------------------------------------------------
+Ir______________ I1mr____ ILmr____ Dr______________ D1mr_____ DLmr____ Dw D1mw DLmw 
+
+-- line 20 ----------------------------------------
+        .        .        .                .         .        .         .    .    .  _LIBCPP_PUSH_MACROS
+        .        .        .                .         .        .         .    .    .  #include <__undef_macros>
+        .        .        .                .         .        .         .    .    .  
+        .        .        .                .         .        .         .    .    .  _LIBCPP_BEGIN_NAMESPACE_STD
+        .        .        .                .         .        .         .    .    .  
+        .        .        .                .         .        .         .    .    .  template <class _Tp>
+        .        .        .                .         .        .         .    .    .  [[__nodiscard__]] _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR int __countr_zero(_Tp __t) _NOEXCEPT {
+        .        .        .                .         .        .         .    .    .    static_assert(__is_unsigned_integer_v<_Tp>, "__countr_zero only works with unsigned types");
+9,877,712 (2.5%) 1 (0.3%) 1 (0.3%) 2,442,190 (2.4%) 43 (0.0%) 3 (0.0%)  0    0    0    return __builtin_ctzg(__t, numeric_limits<_Tp>::digits);
+        .        .        .                .         .        .         .    .    .  }
+        .        .        .                .         .        .         .    .    .  
+        .        .        .                .         .        .         .    .    .  #if _LIBCPP_STD_VER >= 20
+        .        .        .                .         .        .         .    .    .  
+        .        .        .                .         .        .         .    .    .  template <__unsigned_integer _Tp>
+        .        .        .                .         .        .         .    .    .  [[nodiscard]] _LIBCPP_HIDE_FROM_ABI constexpr int countr_zero(_Tp __t) noexcept {
+        .        .        .                .         .        .         .    .    .    return std::__countr_zero(__t);
+        .        .        .                .         .        .         .    .    .  }
+-- line 36 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /usr/include/c++/v1/__iterator/wrap_iter.h
+--------------------------------------------------------------------------------
+Ir______________ I1mr____ ILmr____ Dr D1mr DLmr Dw D1mw DLmw 
+
+-- line 57 ----------------------------------------
+        .        .        .         .    .    .  .    .    .                       int> = 0>
+        .        .        .         .    .    .  .    .    .    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX14 __wrap_iter(const __wrap_iter<_OtherIter>& __u) _NOEXCEPT
+        .        .        .         .    .    .  .    .    .        : __i_(__u.__i_) {}
+        .        .        .         .    .    .  .    .    .    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX14 reference operator*() const _NOEXCEPT { return *__i_; }
+        .        .        .         .    .    .  .    .    .    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX14 pointer operator->() const _NOEXCEPT {
+        .        .        .         .    .    .  .    .    .      return std::__to_address(__i_);
+        .        .        .         .    .    .  .    .    .    }
+        .        .        .         .    .    .  .    .    .    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX14 __wrap_iter& operator++() _NOEXCEPT {
+2,483,220 (0.6%) 0        0         0    0    0  0    0    0      ++__i_;
+        .        .        .         .    .    .  .    .    .      return *this;
+        .        .        .         .    .    .  .    .    .    }
+        .        .        .         .    .    .  .    .    .    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX14 __wrap_iter operator++(int) _NOEXCEPT {
+        .        .        .         .    .    .  .    .    .      __wrap_iter __tmp(*this);
+        .        .        .         .    .    .  .    .    .      ++(*this);
+        .        .        .         .    .    .  .    .    .      return __tmp;
+        .        .        .         .    .    .  .    .    .    }
+        .        .        .         .    .    .  .    .    .  
+-- line 73 ----------------------------------------
+-- line 117 ----------------------------------------
+        .        .        .         .    .    .  .    .    .    friend class span;
+        .        .        .         .    .    .  .    .    .    template <class _Tp, size_t _Size>
+        .        .        .         .    .    .  .    .    .    friend struct array;
+        .        .        .         .    .    .  .    .    .  };
+        .        .        .         .    .    .  .    .    .  
+        .        .        .         .    .    .  .    .    .  template <class _Iter1>
+        .        .        .         .    .    .  .    .    .  _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR bool
+        .        .        .         .    .    .  .    .    .  operator==(const __wrap_iter<_Iter1>& __x, const __wrap_iter<_Iter1>& __y) _NOEXCEPT {
+2,483,221 (0.6%) 1 (0.3%) 1 (0.3%)  0    0    0  0    0    0    return __x.base() == __y.base();
+        .        .        .         .    .    .  .    .    .  }
+        .        .        .         .    .    .  .    .    .  
+        .        .        .         .    .    .  .    .    .  template <class _Iter1, class _Iter2>
+        .        .        .         .    .    .  .    .    .  _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR bool
+        .        .        .         .    .    .  .    .    .  operator==(const __wrap_iter<_Iter1>& __x, const __wrap_iter<_Iter2>& __y) _NOEXCEPT {
+        .        .        .         .    .    .  .    .    .    return __x.base() == __y.base();
+        .        .        .         .    .    .  .    .    .  }
+        .        .        .         .    .    .  .    .    .  
+-- line 133 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /usr/include/c++/v1/__memory/unique_ptr.h
+--------------------------------------------------------------------------------
+Ir______________ I1mr____ ILmr____ Dr______________ D1mr DLmr Dw______ D1mw DLmw 
+
+-- line 83 ----------------------------------------
+        .        .        .                .           .    . .           .    .    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR default_delete() _NOEXCEPT = default;
+        .        .        .                .           .    . .           .    .  
+        .        .        .                .           .    . .           .    .    template <class _Up, __enable_if_t<is_convertible<_Up (*)[], _Tp (*)[]>::value, int> = 0>
+        .        .        .                .           .    . .           .    .    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX23 default_delete(const default_delete<_Up[]>&) _NOEXCEPT {}
+        .        .        .                .           .    . .           .    .  
+        .        .        .                .           .    . .           .    .    template <class _Up, __enable_if_t<is_convertible<_Up (*)[], _Tp (*)[]>::value, int> = 0>
+        .        .        .                .           .    . .           .    .    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX23 void operator()(_Up* __ptr) const _NOEXCEPT {
+        .        .        .                .           .    . .           .    .      static_assert(sizeof(_Up) >= 0, "cannot delete an incomplete type");
+        4 (0.0%) 0        0                0           0    0 4 (0.0%)    0    0      delete[] __ptr;
+        .        .        .                .           .    . .           .    .    }
+        .        .        .                .           .    . .           .    .  };
+        .        .        .                .           .    . .           .    .  
+        .        .        .                .           .    . .           .    .  template <class _Deleter>
+        .        .        .                .           .    . .           .    .  inline const bool __is_default_deleter_v = false;
+        .        .        .                .           .    . .           .    .  
+        .        .        .                .           .    . .           .    .  template <class _Tp>
+        .        .        .                .           .    . .           .    .  inline const bool __is_default_deleter_v<default_delete<_Tp> > = true;
+-- line 99 ----------------------------------------
+-- line 273 ----------------------------------------
+        .        .        .                .           .    . .           .    .    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX23 const deleter_type& get_deleter() const _NOEXCEPT {
+        .        .        .                .           .    . .           .    .      return __deleter_;
+        .        .        .                .           .    . .           .    .    }
+        .        .        .                .           .    . .           .    .    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX23 explicit operator bool() const _NOEXCEPT {
+        .        .        .                .           .    . .           .    .      return __ptr_ != nullptr;
+        .        .        .                .           .    . .           .    .    }
+        .        .        .                .           .    . .           .    .  
+        .        .        .                .           .    . .           .    .    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX23 pointer release() _NOEXCEPT {
+        4 (0.0%) 0        0                4 (0.0%)    0    0 0           0    0      pointer __t = __ptr_;
+        4 (0.0%) 0        0                0           0    0 4 (0.0%)    0    0      __ptr_      = pointer();
+        .        .        .                .           .    . .           .    .      return __t;
+        .        .        .                .           .    . .           .    .    }
+        .        .        .                .           .    . .           .    .  
+        .        .        .                .           .    . .           .    .    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX23 void reset(pointer __p = pointer()) _NOEXCEPT {
+        4 (0.0%) 0        0                4 (0.0%)    0    0 0           0    0      pointer __tmp = __ptr_;
+        4 (0.0%) 0        0                0           0    0 4 (0.0%)    0    0      __ptr_        = __p;
+        8 (0.0%) 0        0                0           0    0 0           0    0      if (__tmp)
+        .        .        .                .           .    . .           .    .        __deleter_(__tmp);
+        .        .        .                .           .    . .           .    .    }
+        .        .        .                .           .    . .           .    .  
+        .        .        .                .           .    . .           .    .    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX23 void swap(unique_ptr& __u) _NOEXCEPT {
+        .        .        .                .           .    . .           .    .      using std::swap;
+        .        .        .                .           .    . .           .    .      swap(__ptr_, __u.__ptr_);
+        .        .        .                .           .    . .           .    .      swap(__deleter_, __u.__deleter_);
+        .        .        .                .           .    . .           .    .    }
+-- line 297 ----------------------------------------
+-- line 575 ----------------------------------------
+        .        .        .                .           .    . .           .    .    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX23 unique_ptr& operator=(nullptr_t) _NOEXCEPT {
+        .        .        .                .           .    . .           .    .      reset();
+        .        .        .                .           .    . .           .    .      return *this;
+        .        .        .                .           .    . .           .    .    }
+        .        .        .                .           .    . .           .    .  
+        .        .        .                .           .    . .           .    .    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX23 __add_lvalue_reference_t<_Tp> operator[](size_t __i) const {
+        .        .        .                .           .    . .           .    .      _LIBCPP_ASSERT_VALID_ELEMENT_ACCESS(__checker_.__in_bounds<deleter_type>(std::__to_address(__ptr_), __i),
+        .        .        .                .           .    . .           .    .                                          "unique_ptr<T[]>::operator[](index): index out of range");
+1,221,096 (0.3%) 1 (0.3%) 1 (0.3%) 1,221,096 (1.2%)    0    0 0           0    0      return __ptr_[__i];
+        .        .        .                .           .    . .           .    .    }
+        .        .        .                .           .    . .           .    .    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX23 pointer get() const _NOEXCEPT { return __ptr_; }
+        .        .        .                .           .    . .           .    .  
+        .        .        .                .           .    . .           .    .    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX23 deleter_type& get_deleter() _NOEXCEPT { return __deleter_; }
+        .        .        .                .           .    . .           .    .  
+        .        .        .                .           .    . .           .    .    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX23 const deleter_type& get_deleter() const _NOEXCEPT {
+        .        .        .                .           .    . .           .    .      return __deleter_;
+        .        .        .                .           .    . .           .    .    }
+-- line 591 ----------------------------------------
+-- line 598 ----------------------------------------
+        .        .        .                .           .    . .           .    .      __ptr_      = pointer();
+        .        .        .                .           .    . .           .    .      // The deleter and the optional bounds-checker are left unchanged. The bounds-checker
+        .        .        .                .           .    . .           .    .      // will be reinitialized appropriately when/if the unique_ptr gets assigned-to or reset.
+        .        .        .                .           .    . .           .    .      return __t;
+        .        .        .                .           .    . .           .    .    }
+        .        .        .                .           .    . .           .    .  
+        .        .        .                .           .    . .           .    .    template <class _Pp, __enable_if_t<_CheckArrayPointerConversion<_Pp>::value, int> = 0>
+        .        .        .                .           .    . .           .    .    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX23 void reset(_Pp __ptr) _NOEXCEPT {
+        4 (0.0%) 0        0                4 (0.0%)    0    0 0           0    0      pointer __tmp = __ptr_;
+        4 (0.0%) 0        0                0           0    0 4 (0.0%)    0    0      __ptr_        = __ptr;
+        .        .        .                .           .    . .           .    .      __checker_    = _BoundsChecker();
+        8 (0.0%) 0        0                0           0    0 0           0    0      if (__tmp)
+        .        .        .                .           .    . .           .    .        __deleter_(__tmp);
+        .        .        .                .           .    . .           .    .    }
+        .        .        .                .           .    . .           .    .  
+        .        .        .                .           .    . .           .    .    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX23 void reset(nullptr_t = nullptr) _NOEXCEPT {
+        .        .        .                .           .    . .           .    .      pointer __tmp = __ptr_;
+        .        .        .                .           .    . .           .    .      __ptr_        = nullptr;
+        .        .        .                .           .    . .           .    .      __checker_    = _BoundsChecker();
+        .        .        .                .           .    . .           .    .      if (__tmp)
+-- line 617 ----------------------------------------
+-- line 757 ----------------------------------------
+        .        .        .                .           .    . .           .    .  template <class _Tp, class... _Args, enable_if_t<!is_array<_Tp>::value, int> = 0>
+        .        .        .                .           .    . .           .    .  inline _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX23 unique_ptr<_Tp> make_unique(_Args&&... __args) {
+        .        .        .                .           .    . .           .    .    return unique_ptr<_Tp>(new _Tp(std::forward<_Args>(__args)...));
+        .        .        .                .           .    . .           .    .  }
+        .        .        .                .           .    . .           .    .  
+        .        .        .                .           .    . .           .    .  template <class _Tp, enable_if_t<__is_unbounded_array_v<_Tp>, int> = 0>
+        .        .        .                .           .    . .           .    .  inline _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX23 unique_ptr<_Tp> make_unique(size_t __n) {
+        .        .        .                .           .    . .           .    .    typedef __remove_extent_t<_Tp> _Up;
+       28 (0.0%) 0        0                0           0    0 8 (0.0%)    0    0    return unique_ptr<_Tp>(__private_constructor_tag(), new _Up[__n](), __n);
+        .        .        .                .           .    . .           .    .  }
+        .        .        .                .           .    . .           .    .  
+        .        .        .                .           .    . .           .    .  template <class _Tp, class... _Args, enable_if_t<__is_bounded_array_v<_Tp>, int> = 0>
+        .        .        .                .           .    . .           .    .  void make_unique(_Args&&...) = delete;
+        .        .        .                .           .    . .           .    .  
+        .        .        .                .           .    . .           .    .  #endif // _LIBCPP_STD_VER >= 14
+        .        .        .                .           .    . .           .    .  
+        .        .        .                .           .    . .           .    .  #if _LIBCPP_STD_VER >= 20
+-- line 773 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /usr/include/c++/v1/__vector/vector.h
+--------------------------------------------------------------------------------
+Ir______________ I1mr____ ILmr____ Dr______________ D1mr____ DLmr____ Dw__________ D1mw DLmw 
+
+   17,754 (0.0%) 1 (0.3%) 1 (0.3%)        15 (0.0%) 0        0           45 (0.0%)    0    0  <unknown (line 0)>
+
+-- line 380 ----------------------------------------
+        .        .        .                .        .        .            .           .    .      return rbegin();
+        .        .        .                .        .        .            .           .    .    }
+        .        .        .                .        .        .            .           .    .    _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI const_reverse_iterator crend() const _NOEXCEPT { return rend(); }
+        .        .        .                .        .        .            .           .    .  
+        .        .        .                .        .        .            .           .    .    //
+        .        .        .                .        .        .            .           .    .    // [vector.capacity], capacity
+        .        .        .                .        .        .            .           .    .    //
+        .        .        .                .        .        .            .           .    .    _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI size_type size() const _NOEXCEPT {
+   26,546 (0.0%) 1 (0.3%) 1 (0.3%)     8,848 (0.0%) 0        0            0           0    0      return static_cast<size_type>(this->__end_ - this->__begin_);
+        .        .        .                .        .        .            .           .    .    }
+        .        .        .                .        .        .            .           .    .    _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI size_type capacity() const _NOEXCEPT {
+       15 (0.0%) 0        0                0        0        0            0           0    0      return static_cast<size_type>(this->__cap_ - this->__begin_);
+        .        .        .                .        .        .            .           .    .    }
+        .        .        .                .        .        .            .           .    .    [[__nodiscard__]] _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI bool empty() const _NOEXCEPT {
+        .        .        .                .        .        .            .           .    .      return this->__begin_ == this->__end_;
+        .        .        .                .        .        .            .           .    .    }
+        .        .        .                .        .        .            .           .    .    _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI size_type max_size() const _NOEXCEPT {
+        .        .        .                .        .        .            .           .    .      return std::min<size_type>(__alloc_traits::max_size(this->__alloc_), numeric_limits<difference_type>::max());
+        .        .        .                .        .        .            .           .    .    }
+        .        .        .                .        .        .            .           .    .    _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI void reserve(size_type __n);
+        .        .        .                .        .        .            .           .    .    _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI void shrink_to_fit() _NOEXCEPT;
+        .        .        .                .        .        .            .           .    .  
+        .        .        .                .        .        .            .           .    .    //
+        .        .        .                .        .        .            .           .    .    // element access
+        .        .        .                .        .        .            .           .    .    //
+        .        .        .                .        .        .            .           .    .    _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI reference operator[](size_type __n) _NOEXCEPT {
+        .        .        .                .        .        .            .           .    .      _LIBCPP_ASSERT_VALID_ELEMENT_ACCESS(__n < size(), "vector[] index out of bounds");
+9,759,953 (2.5%) 3 (0.8%) 3 (0.9%) 1,229,959 (1.2%) 0        0            0           0    0      return this->__begin_[__n];
+        .        .        .                .        .        .            .           .    .    }
+        .        .        .                .        .        .            .           .    .    _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI const_reference operator[](size_type __n) const _NOEXCEPT {
+        .        .        .                .        .        .            .           .    .      _LIBCPP_ASSERT_VALID_ELEMENT_ACCESS(__n < size(), "vector[] index out of bounds");
+  123,084 (0.0%) 0        0           41,028 (0.0%) 0        0            0           0    0      return this->__begin_[__n];
+        .        .        .                .        .        .            .           .    .    }
+        .        .        .                .        .        .            .           .    .    _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI reference at(size_type __n) {
+        .        .        .                .        .        .            .           .    .      if (__n >= size())
+        .        .        .                .        .        .            .           .    .        this->__throw_out_of_range();
+        .        .        .                .        .        .            .           .    .      return this->__begin_[__n];
+        .        .        .                .        .        .            .           .    .    }
+        .        .        .                .        .        .            .           .    .    _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI const_reference at(size_type __n) const {
+        .        .        .                .        .        .            .           .    .      if (__n >= size())
+-- line 419 ----------------------------------------
+-- line 441 ----------------------------------------
+        .        .        .                .        .        .            .           .    .    //
+        .        .        .                .        .        .            .           .    .    // [vector.data], data access
+        .        .        .                .        .        .            .           .    .    //
+        .        .        .                .        .        .            .           .    .    _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI value_type* data() _NOEXCEPT {
+        .        .        .                .        .        .            .           .    .      return std::__to_address(this->__begin_);
+        .        .        .                .        .        .            .           .    .    }
+        .        .        .                .        .        .            .           .    .  
+        .        .        .                .        .        .            .           .    .    _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI const value_type* data() const _NOEXCEPT {
+        1 (0.0%) 0        0                1 (0.0%) 1 (0.0%) 1 (0.0%)     0           0    0      return std::__to_address(this->__begin_);
+        .        .        .                .        .        .            .           .    .    }
+        .        .        .                .        .        .            .           .    .  
+        .        .        .                .        .        .            .           .    .    //
+        .        .        .                .        .        .            .           .    .    // [vector.modifiers], modifiers
+        .        .        .                .        .        .            .           .    .    //
+        .        .        .                .        .        .            .           .    .    _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI void push_back(const_reference __x) { emplace_back(__x); }
+        .        .        .                .        .        .            .           .    .  
+        .        .        .                .        .        .            .           .    .    _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI void push_back(value_type&& __x) { emplace_back(std::move(__x)); }
+-- line 457 ----------------------------------------
+-- line 467 ----------------------------------------
+        .        .        .                .        .        .            .           .    .  #endif
+        .        .        .                .        .        .            .           .    .  
+        .        .        .                .        .        .            .           .    .    template <class... _Args>
+        .        .        .                .        .        .            .           .    .    _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI void __emplace_back_assume_capacity(_Args&&... __args) {
+        .        .        .                .        .        .            .           .    .      _LIBCPP_ASSERT_INTERNAL(
+        .        .        .                .        .        .            .           .    .          size() < capacity(), "We assume that we have enough space to insert an element at the end of the vector");
+        .        .        .                .        .        .            .           .    .      _ConstructTransaction __tx(*this, 1);
+        .        .        .                .        .        .            .           .    .      __alloc_traits::construct(this->__alloc_, std::__to_address(__tx.__pos_), std::forward<_Args>(__args)...);
+    8,832 (0.0%) 0        0                0        0        0            0           0    0      ++__tx.__pos_;
+        .        .        .                .        .        .            .           .    .    }
+        .        .        .                .        .        .            .           .    .  
+        .        .        .                .        .        .            .           .    .  #if _LIBCPP_STD_VER >= 23
+        .        .        .                .        .        .            .           .    .    template <_ContainerCompatibleRange<_Tp> _Range>
+        .        .        .                .        .        .            .           .    .    _LIBCPP_HIDE_FROM_ABI constexpr void append_range(_Range&& __range) {
+        .        .        .                .        .        .            .           .    .      insert_range(end(), std::forward<_Range>(__range));
+        .        .        .                .        .        .            .           .    .    }
+        .        .        .                .        .        .            .           .    .  #endif
+-- line 483 ----------------------------------------
+-- line 836 ----------------------------------------
+        .        .        .                .        .        .            .           .    .  
+        .        .        .                .        .        .            .           .    .  // __swap_out_circular_buffer relocates the objects in [__begin_, __end_) into the front of __v and swaps the buffers of
+        .        .        .                .        .        .            .           .    .  // *this and __v. It is assumed that __v provides space for exactly (__end_ - __begin_) objects in the front. This
+        .        .        .                .        .        .            .           .    .  // function has a strong exception guarantee.
+        .        .        .                .        .        .            .           .    .  template <class _Tp, class _Allocator>
+        .        .        .                .        .        .            .           .    .  _LIBCPP_CONSTEXPR_SINCE_CXX20 void
+        .        .        .                .        .        .            .           .    .  vector<_Tp, _Allocator>::__swap_out_circular_buffer(__split_buffer<value_type, allocator_type&>& __v) {
+        .        .        .                .        .        .            .           .    .    __annotate_delete();
+       30 (0.0%) 0        0                0        0        0            0           0    0    auto __new_begin = __v.__begin_ - (__end_ - __begin_);
+        .        .        .                .        .        .            .           .    .    std::__uninitialized_allocator_relocate(
+        .        .        .                .        .        .            .           .    .        this->__alloc_, std::__to_address(__begin_), std::__to_address(__end_), std::__to_address(__new_begin));
+        .        .        .                .        .        .            .           .    .    __v.__begin_ = __new_begin;
+        .        .        .                .        .        .            .           .    .    __end_       = __begin_; // All the objects have been destroyed by relocating them.
+        .        .        .                .        .        .            .           .    .    std::swap(this->__begin_, __v.__begin_);
+        .        .        .                .        .        .            .           .    .    std::swap(this->__end_, __v.__end_);
+        .        .        .                .        .        .            .           .    .    std::swap(this->__cap_, __v.__cap_);
+        .        .        .                .        .        .            .           .    .    __v.__first_ = __v.__begin_;
+-- line 852 ----------------------------------------
+-- line 894 ----------------------------------------
+        .        .        .                .        .        .            .           .    .    }
+        .        .        .                .        .        .            .           .    .  }
+        .        .        .                .        .        .            .           .    .  
+        .        .        .                .        .        .            .           .    .  //  Precondition:  __new_size > capacity()
+        .        .        .                .        .        .            .           .    .  template <class _Tp, class _Allocator>
+        .        .        .                .        .        .            .           .    .  _LIBCPP_CONSTEXPR_SINCE_CXX20 inline _LIBCPP_HIDE_FROM_ABI typename vector<_Tp, _Allocator>::size_type
+        .        .        .                .        .        .            .           .    .  vector<_Tp, _Allocator>::__recommend(size_type __new_size) const {
+        .        .        .                .        .        .            .           .    .    const size_type __ms = max_size();
+       45 (0.0%) 0        0                0        0        0            0           0    0    if (__new_size > __ms)
+        .        .        .                .        .        .            .           .    .      this->__throw_length_error();
+        .        .        .                .        .        .            .           .    .    const size_type __cap = capacity();
+      120 (0.0%) 0        0                0        0        0            0           0    0    if (__cap >= __ms / 2)
+        .        .        .                .        .        .            .           .    .      return __ms;
+        .        .        .                .        .        .            .           .    .    return std::max<size_type>(2 * __cap, __new_size);
+        .        .        .                .        .        .            .           .    .  }
+        .        .        .                .        .        .            .           .    .  
+        .        .        .                .        .        .            .           .    .  //  Default constructs __n objects starting at __end_
+        .        .        .                .        .        .            .           .    .  //  throws if construction throws
+        .        .        .                .        .        .            .           .    .  //  Precondition:  __n > 0
+        .        .        .                .        .        .            .           .    .  //  Precondition:  size() + __n <= capacity()
+-- line 913 ----------------------------------------
+-- line 1120 ----------------------------------------
+        .        .        .                .        .        .            .           .    .  #endif // _LIBCPP_HAS_EXCEPTIONS
+        .        .        .                .        .        .            .           .    .    }
+        .        .        .                .        .        .            .           .    .  }
+        .        .        .                .        .        .            .           .    .  
+        .        .        .                .        .        .            .           .    .  template <class _Tp, class _Allocator>
+        .        .        .                .        .        .            .           .    .  template <class... _Args>
+        .        .        .                .        .        .            .           .    .  _LIBCPP_CONSTEXPR_SINCE_CXX20 typename vector<_Tp, _Allocator>::pointer
+        .        .        .                .        .        .            .           .    .  vector<_Tp, _Allocator>::__emplace_back_slow_path(_Args&&... __args) {
+       15 (0.0%) 1 (0.3%) 1 (0.3%)         0        0        0            0           0    0    __split_buffer<value_type, allocator_type&> __v(__recommend(size() + 1), size(), this->__alloc_);
+        .        .        .                .        .        .            .           .    .    //    __v.emplace_back(std::forward<_Args>(__args)...);
+        .        .        .                .        .        .            .           .    .    __alloc_traits::construct(this->__alloc_, std::__to_address(__v.__end_), std::forward<_Args>(__args)...);
+       30 (0.0%) 1 (0.3%) 1 (0.3%)         0        0        0            0           0    0    __v.__end_++;
+        .        .        .                .        .        .            .           .    .    __swap_out_circular_buffer(__v);
+        .        .        .                .        .        .            .           .    .    return this->__end_;
+        .        .        .                .        .        .            .           .    .  }
+        .        .        .                .        .        .            .           .    .  
+        .        .        .                .        .        .            .           .    .  template <class _Tp, class _Allocator>
+        .        .        .                .        .        .            .           .    .  template <class... _Args>
+        .        .        .                .        .        .            .           .    .  _LIBCPP_CONSTEXPR_SINCE_CXX20 inline
+        .        .        .                .        .        .            .           .    .  #if _LIBCPP_STD_VER >= 17
+        .        .        .                .        .        .            .           .    .      typename vector<_Tp, _Allocator>::reference
+        .        .        .                .        .        .            .           .    .  #else
+        .        .        .                .        .        .            .           .    .      void
+        .        .        .                .        .        .            .           .    .  #endif
+        .        .        .                .        .        .            .           .    .      vector<_Tp, _Allocator>::emplace_back(_Args&&... __args) {
+        .        .        .                .        .        .            .           .    .    pointer __end = this->__end_;
+   35,388 (0.0%) 0        0            8,847 (0.0%) 0        0        8,847 (0.0%)    0    0    if (__end < this->__cap_) {
+        .        .        .                .        .        .            .           .    .      __emplace_back_assume_capacity(std::forward<_Args>(__args)...);
+        .        .        .                .        .        .            .           .    .      ++__end;
+    8,832 (0.0%) 0        0                0        0        0            0           0    0    } else {
+        .        .        .                .        .        .            .           .    .      __end = __emplace_back_slow_path(std::forward<_Args>(__args)...);
+        .        .        .                .        .        .            .           .    .    }
+    8,847 (0.0%) 0        0                0        0        0        8,847 (0.0%)    0    0    this->__end_ = __end;
+        .        .        .                .        .        .            .           .    .  #if _LIBCPP_STD_VER >= 17
+        .        .        .                .        .        .            .           .    .    return *(__end - 1);
+        .        .        .                .        .        .            .           .    .  #endif
+        .        .        .                .        .        .            .           .    .  }
+        .        .        .                .        .        .            .           .    .  
+        .        .        .                .        .        .            .           .    .  template <class _Tp, class _Allocator>
+        .        .        .                .        .        .            .           .    .  _LIBCPP_CONSTEXPR_SINCE_CXX20 inline _LIBCPP_HIDE_FROM_ABI typename vector<_Tp, _Allocator>::iterator
+        .        .        .                .        .        .            .           .    .  vector<_Tp, _Allocator>::erase(const_iterator __position) {
+-- line 1160 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Annotation summary
+--------------------------------------------------------------------------------
+Ir_________________ I1mr_______ ILmr_______ Dr________________ D1mr___________ DLmr___________ Dw________________ D1mw_____________ DLmw_________ 
+
+367,518,970 (92.7%)  86 (24.2%)  82 (24.0%) 89,034,501 (87.3%) 855,599 (72.8%) 627,022 (66.7%) 35,955,583 (79.9%) 1,175,149 (98.9%) 6,784 (34.9%)    annotated: files known & above threshold & readable, line numbers known
+ 28,585,344  (7.2%)   9  (2.5%)   9  (2.6%) 12,400,431 (12.2%) 310,410 (26.4%) 310,403 (33.0%)  8,547,718 (19.0%)         1  (0.0%)     1  (0.0%)    annotated: files known & above threshold & readable, line numbers unknown
+          0           0           0                  0               0               0                  0                 0             0          unannotated: files known & above threshold & two or more non-identical
+    509,590  (0.1%)  15  (4.2%)  13  (3.8%)    508,281  (0.5%)   7,878  (0.7%)   3,097  (0.3%)    508,239  (1.1%)     8,192  (0.7%) 8,179 (42.1%)  unannotated: files known & above threshold & unreadable 
+     39,378  (0.0%) 226 (63.7%) 219 (64.0%)      4,269  (0.0%)     599  (0.1%)     143  (0.0%)     15,343  (0.0%)     4,714  (0.4%) 4,474 (23.0%)  unannotated: files known & below threshold
+      1,277  (0.0%)  19  (5.4%)  19  (5.6%)        372  (0.0%)     104  (0.0%)      15  (0.0%)        212  (0.0%)         2  (0.0%)     0          unannotated: files unknown
+

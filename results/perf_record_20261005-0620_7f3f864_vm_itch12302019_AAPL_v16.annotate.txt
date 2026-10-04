@@ -1,0 +1,2000 @@
+ Percent |	Source code & Disassembly of book for cycles:u (1512 samples, percent: local period)
+----------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     0000000000059d70 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)>:
+         : 6     [[gnu::always_inline]] inline void apply(Book& book, const Op& op) {
+         : 7     book.apply(op);
+         : 8     }
+         :
+         : 10    template <class Book>
+         : 11    void replay(Book& book, std::span<const Op> ops) {
+    0.00 :   59d70:  push   %rbp
+    0.00 :   59d71:  push   %r15
+    0.00 :   59d73:  push   %r14
+    0.00 :   59d75:  push   %r13
+    0.00 :   59d77:  push   %r12
+    0.00 :   59d79:  push   %rbx
+    0.00 :   59d7a:  sub    $0x68,%rsp
+         : 19    };
+         :
+         : 21    template <class _Iter1>
+         : 22    _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR bool
+         : 23    operator==(const __wrap_iter<_Iter1>& __x, const __wrap_iter<_Iter1>& __y) _NOEXCEPT {
+         : 24    return __x.base() == __y.base();
+    0.00 :   59d7e:  test   %rdx,%rdx
+         : 26    for (const Op& op : ops) {
+    0.00 :   59d81:  je     5ad6d <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xffd>
+    0.00 :   59d87:  mov    %rsi,%rbx
+    0.00 :   59d8a:  mov    %rdi,%r14
+    0.00 :   59d8d:  lea    (%rdx,%rdx,2),%rax
+    0.00 :   59d91:  lea    (%rsi,%rax,8),%r13
+    0.00 :   59d95:  movabs $0x9e3779b97f4a7c15,%rbp
+    0.00 :   59d9f:  mov    %r13,0x30(%rsp)
+    0.00 :   59da4:  jmp    59dd2 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x62>
+    0.00 :   59da6:  cs nopw 0x0(%rax,%rax,1)
+         : 36    case OpType::Push:
+         : 37    return push(op.id, op.side, op.price, op.qty);
+         : 38    case OpType::Cancel:
+         : 39    return cancel(op.id);
+         : 40    case OpType::Modify:
+         : 41    return modify(op.id, op.price, op.qty);
+    0.00 :   59db0:  mov    0x10(%rbx),%rdx
+    0.06 :   59db4:  mov    0x4(%rbx),%ecx
+    0.00 :   59db7:  mov    %r14,%rdi
+    0.00 :   59dba:  mov    %r10,%rsi
+    0.06 :   59dbd:  vzeroupper
+    0.00 :   59dc0:  call   5bc50 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)>
+         : 48    ++__i_;
+    0.14 :   59dc5:  add    $0x18,%rbx
+         : 50    return __x.base() == __y.base();
+    0.69 :   59dc9:  cmp    %r13,%rbx
+    0.00 :   59dcc:  je     5ad6d <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xffd>
+         : 53    switch (op.type) {
+    0.07 :   59dd2:  movzbl (%rbx),%eax
+    0.36 :   59dd5:  mov    0x8(%rbx),%r10
+    0.73 :   59dd9:  cmp    $0x2,%eax
+    0.00 :   59ddc:  je     59db0 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x40>
+    0.37 :   59dde:  cmp    $0x1,%eax
+    0.00 :   59de1:  jne    59ff0 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x280>
+         : 60    [[nodiscard]] auto size() const noexcept -> std::size_t { return size_ + fallback_.size(); }
+         :
+         : 62    // the hot operations are always_inline: they sit on the book's pinned hot
+         : 63    // path (v12), and left to the heuristics try_insert / erase stayed calls
+         : 64    [[gnu::always_inline]] [[nodiscard]] auto find(Id id) -> Handle {
+         : 65    if (id >= kEmpty) [[unlikely]]
+    0.34 :   59de7:  mov    $0xfffffffe,%eax
+    0.00 :   59dec:  cmp    %rax,%r10
+    0.00 :   59def:  ja     5a5d6 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x866>
+         : 69    static constexpr std::uint32_t kEmpty = ~std::uint32_t{0};
+         : 70    static constexpr unsigned kSlots = 7, kCounter = 7, kSlotLanes = 0x7F;
+         : 71    static constexpr std::size_t kInitialBuckets = 256;
+         :
+         : 73    [[nodiscard]] auto home(std::uint32_t k) const -> std::size_t {
+         : 74    return static_cast<std::size_t>((std::uint64_t{k} * 0x9E3779B97F4A7C15ull) >> shift_);  // Fibonacci hashing
+    0.32 :   59df5:  mov    %r10,%rax
+    0.21 :   59df8:  imul   %rbp,%rax
+    0.13 :   59dfc:  movzbl 0x100(%r14),%ecx
+    0.00 :   59e04:  shrx   %rcx,%rax,%r15
+    0.07 :   59e09:  mov    0xc8(%r14),%rax
+    0.00 :   59e10:  vpbroadcastd %r10d,%ymm0
+         : 81    return {&bk_[j].node[slot], static_cast<std::uint32_t>(j), static_cast<std::uint32_t>(b)};
+         : 82    }
+         : 83    // bit s set when key[s] == v, for the 7 slot lanes
+         : 84    [[nodiscard]] auto lanes_equal(std::size_t j, std::uint32_t v) const -> unsigned {
+         : 85    #if defined(__AVX2__)
+         : 86    const __m256i keys = _mm256_load_si256(reinterpret_cast<const __m256i*>(bk_[j].key));
+    0.35 :   59e16:  mov    %r15,%rcx
+    0.19 :   59e19:  shl    $0x6,%rcx
+         : 89    const __m256i eq = _mm256_cmpeq_epi32(keys, _mm256_set1_epi32(static_cast<int>(v)));
+    0.27 :   59e1d:  vpcmpeqd (%rax,%rcx,1),%ymm0,%k0
+         : 91    return static_cast<unsigned>(_mm256_movemask_ps(_mm256_castsi256_ps(eq))) & kSlotLanes;
+    3.27 :   59e24:  kmovd  %k0,%esi
+    0.47 :   59e28:  mov    %r15,%rcx
+         : 94    if (const unsigned m = lanes_equal(j, k)) return handle(b, j, static_cast<unsigned>(std::countr_zero(m)));
+    0.07 :   59e2b:  and    $0x7f,%sil
+    0.00 :   59e2f:  jne    59e70 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x100>
+    0.00 :   59e31:  mov    0xe8(%r14),%rdx
+    0.12 :   59e38:  mov    %r15,%rcx
+    0.00 :   59e3b:  nopl   0x0(%rax,%rax,1)
+         : 100   const __m256i keys = _mm256_load_si256(reinterpret_cast<const __m256i*>(bk_[j].key));
+    0.06 :   59e40:  mov    %rcx,%rsi
+    0.06 :   59e43:  shl    $0x6,%rsi
+         : 103   if (bk_[j].key[kCounter] == 0) return {};
+    0.00 :   59e47:  cmpl   $0x0,0x1c(%rax,%rsi,1)
+    0.08 :   59e4c:  je     5a605 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x895>
+         : 106   for (std::size_t j = b;; j = (j + 1) & mask_) {
+    0.06 :   59e52:  inc    %rcx
+    0.00 :   59e55:  and    %rdx,%rcx
+         : 109   const __m256i keys = _mm256_load_si256(reinterpret_cast<const __m256i*>(bk_[j].key));
+    0.00 :   59e58:  mov    %rcx,%rsi
+    0.00 :   59e5b:  shl    $0x6,%rsi
+         : 112   const __m256i eq = _mm256_cmpeq_epi32(keys, _mm256_set1_epi32(static_cast<int>(v)));
+    0.00 :   59e5f:  vpcmpeqd (%rax,%rsi,1),%ymm0,%k0
+         : 114   return static_cast<unsigned>(_mm256_movemask_ps(_mm256_castsi256_ps(eq))) & kSlotLanes;
+    0.07 :   59e66:  kmovd  %k0,%esi
+         : 116   if (const unsigned m = lanes_equal(j, k)) return handle(b, j, static_cast<unsigned>(std::countr_zero(m)));
+    0.00 :   59e6a:  and    $0x7f,%sil
+    0.00 :   59e6e:  je     59e40 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xd0>
+         : 119   const __m256i keys = _mm256_load_si256(reinterpret_cast<const __m256i*>(bk_[j].key));
+    0.20 :   59e70:  mov    %rcx,%rdx
+    0.06 :   59e73:  shl    $0x6,%rdx
+    0.00 :   59e77:  add    %rdx,%rax
+         : 123   _LIBCPP_BEGIN_NAMESPACE_STD
+         :
+         : 125   template <class _Tp>
+         : 126   [[__nodiscard__]] _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR int __countr_zero(_Tp __t) _NOEXCEPT {
+         : 127   static_assert(__is_unsigned_integer_v<_Tp>, "__countr_zero only works with unsigned types");
+         : 128   return __builtin_ctzg(__t, numeric_limits<_Tp>::digits);
+    0.43 :   59e7a:  movzbl %sil,%edx
+    0.57 :   59e7e:  tzcnt  %edx,%edx
+         : 131   return {&bk_[j].node[slot], static_cast<std::uint32_t>(j), static_cast<std::uint32_t>(b)};
+    0.54 :   59e82:  lea    0x20(%rax,%rdx,4),%r12
+         : 133   }
+    0.68 :   59e87:  mov    %r15d,%ebp
+    0.00 :   59e8a:  shl    $0x20,%r15
+    0.00 :   59e8e:  or     %rcx,%r15
+    0.00 :   59e91:  mov    %r10,0x8(%rsp)
+         : 138   }
+         :
+         : 140   [[gnu::always_inline]] void cancel(OrderId id) {
+         : 141   const auto it = index_.find(id);
+         : 142   if (!it) return reject(id, OpType::Cancel, RejectReason::UnknownId);
+         : 143   const Qty remaining = nodes_[*it.value].qty;
+    0.35 :   59e96:  mov    (%r12),%ecx
+         : 145   //
+         : 146   // element access
+         : 147   //
+         : 148   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI reference operator[](size_type __n) _NOEXCEPT {
+         : 149   _LIBCPP_ASSERT_VALID_ELEMENT_ACCESS(__n < size(), "vector[] index out of bounds");
+         : 150   return this->__begin_[__n];
+    2.39 :   59e9a:  mov    0xa0(%r14),%rax
+    0.06 :   59ea1:  mov    %rcx,%r8
+    0.66 :   59ea4:  shl    $0x5,%r8
+    0.93 :   59ea8:  mov    0x10(%rax,%r8,1),%edx
+    6.75 :   59ead:  mov    %rdx,0x20(%rsp)
+         : 156   Side side;
+         : 157   };
+         : 158   using Index = OrderIndex;
+         : 159   using Handle = Index::Handle;
+         :
+         : 161   [[nodiscard]] auto loc_of(std::uint32_t i) const -> Loc { return {nodes_[i].price, i, nodes_[i].side}; }
+    1.41 :   59eb2:  mov    0x8(%rax,%r8,1),%rdx
+    1.38 :   59eb7:  movzbl 0x1c(%rax,%r8,1),%esi
+    0.07 :   59ebd:  mov    %rsi,%rdi
+    0.28 :   59ec0:  shl    $0x20,%rdi
+    0.68 :   59ec4:  or     %rcx,%rdi
+         : 167   *slot.value = i;
+         : 168   sink_.on(Rested{id, side, price, qty});
+         : 169   }
+         :
+         : 171   [[gnu::always_inline]] void erase(const Handle& it, OrderId id) {
+         : 172   const Loc loc = loc_of(*it.value);
+    0.68 :   59ec7:  mov    %rdx,0x40(%rsp)
+    0.21 :   59ecc:  mov    %rdi,0x48(%rsp)
+         : 175   if (!anchored_) return kNoSlot;
+    1.52 :   59ed1:  cmpb   $0x1,0x58(%r14)
+    0.00 :   59ed6:  jne    5a1e0 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x470>
+         : 178   slot_div_.quotient(static_cast<std::uint64_t>(price) - static_cast<std::uint64_t>(base_));
+    0.06 :   59edc:  sub    0x50(%r14),%rdx
+         : 180   // x / d if x is a multiple of d, otherwise some value >= ceil(2^64 / d)
+         : 181   [[nodiscard]] auto quotient(std::uint64_t x) const noexcept -> std::uint64_t {
+         : 182   // the builtin is one funnel shift; std::rotr takes an int count and keeps its
+         : 183   // "% 64 / zero / negative" handling in the IR the inliner prices, which pushed
+         : 184   // v11's erase() (cost 565) over the threshold v10's (515) stayed under
+         : 185   return __builtin_rotateright64(x * inv_, shift_);
+    0.00 :   59ee0:  imul   0x40(%r14),%rdx
+    0.68 :   59ee5:  movzbl 0x48(%r14),%ecx
+    0.00 :   59eea:  ror    %cl,%rdx
+         : 189   return s < kSlots ? static_cast<std::uint32_t>(s) : kNoSlot;
+    0.59 :   59eed:  cmp    $0xffff,%rdx
+    0.00 :   59ef4:  ja     5a1e0 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x470>
+         : 192   if (const std::uint32_t s = slot_of(loc.price); s != kNoSlot) {
+         : 193   Level& level = grid_[s];
+    0.37 :   59efa:  mov    0x20(%r14),%rcx
+    0.00 :   59efe:  lea    (%rdx,%rdx,2),%rdi
+         : 196   level.total_qty -= nodes_[loc.node].qty;
+    0.00 :   59f02:  mov    0x10(%rax,%r8,1),%r9d
+    0.21 :   59f07:  sub    %r9,0x8(%rcx,%rdi,8)
+         : 199   Level& level = grid_[s];
+    8.91 :   59f0c:  lea    (%rcx,%rdi,8),%r9
+         : 201   const std::uint32_t next = n.next;
+    0.00 :   59f10:  mov    0x14(%rax,%r8,1),%r10d
+         : 203   const std::uint32_t prev = n.prev;
+    0.00 :   59f15:  mov    0x18(%rax,%r8,1),%r8d
+         : 205   std::uint32_t* to_next = has_prev ? &nodes_[has_prev ? prev : 0].next : &level.head;
+    0.20 :   59f1a:  mov    %r8,%r11
+    0.14 :   59f1d:  shl    $0x5,%r11
+    0.07 :   59f21:  mov    $0xffffffff,%r13d
+         : 209   const std::uint32_t prev = n.prev;
+    0.00 :   59f27:  cmp    %r13,%r8
+         : 211   std::uint32_t* to_next = has_prev ? &nodes_[has_prev ? prev : 0].next : &level.head;
+    0.00 :   59f2a:  lea    0x14(%rax,%r11,1),%r11
+    0.70 :   59f2f:  cmove  %r9,%r11
+         : 214   std::uint32_t* to_prev = has_next ? &nodes_[has_next ? next : 0].prev : &level.tail;
+    0.00 :   59f33:  mov    %r10,%r9
+    0.06 :   59f36:  shl    $0x5,%r9
+         : 217   const std::uint32_t next = n.next;
+    0.00 :   59f3a:  cmp    %r13,%r10
+         : 219   std::uint32_t* to_prev = has_next ? &nodes_[has_next ? next : 0].prev : &level.tail;
+    0.07 :   59f3d:  lea    0x18(%rax,%r9,1),%r9
+    0.13 :   59f42:  lea    0x4(%rcx,%rdi,8),%r13
+    0.00 :   59f47:  cmovne %r9,%r13
+         : 223   *to_next = next;
+    0.00 :   59f4b:  mov    %r10d,(%r11)
+         : 225   *to_prev = prev;
+    2.10 :   59f4e:  mov    %r8d,0x0(%r13)
+    1.07 :   59f52:  mov    0x30(%rsp),%r13
+         : 228   --level.count;
+    0.00 :   59f57:  decl   0x10(%rcx,%rdi,8)
+         : 230   unlink(level, loc.node);
+         : 231   free_node(loc.node);
+    0.63 :   59f5b:  mov    0x48(%rsp),%r8d
+         : 233   nodes_[i].next = free_head_;
+    0.14 :   59f60:  mov    0xb8(%r14),%r9d
+    0.06 :   59f67:  mov    %r8,%r10
+    0.52 :   59f6a:  shl    $0x5,%r10
+    0.28 :   59f6e:  mov    %r9d,0x14(%rax,%r10,1)
+         : 238   free_head_ = i;
+    0.97 :   59f73:  mov    %r8d,0xb8(%r14)
+         : 240   // "did the level become empty" is unpredictable once unlink is branch-free
+         : 241   // (it used to be inferable from unlink's prev/next branches)
+         : 242   (loc.side == Side::Buy ? bid_bits_ : ask_bits_).clear_if(s ^ mirror(loc.side), level.head == kNil);
+    0.00 :   59f7a:  xor    %r8d,%r8d
+    0.12 :   59f7d:  test   %sil,%sil
+    0.00 :   59f80:  setne  %r8b
+         : 246   static constexpr auto mirror(Side side) -> std::uint32_t { return side == Side::Buy ? kMirror : 0; }
+    0.00 :   59f84:  mov    $0x0,%eax
+    0.00 :   59f89:  mov    $0xffff,%esi
+    0.54 :   59f8e:  cmove  %esi,%eax
+         : 250   (loc.side == Side::Buy ? bid_bits_ : ask_bits_).clear_if(s ^ mirror(loc.side), level.head == kNil);
+    0.08 :   59f91:  xor    %edx,%eax
+    0.44 :   59f93:  xor    %esi,%esi
+    0.00 :   59f95:  cmpl   $0xffffffff,(%rcx,%rdi,8)
+    0.53 :   59f99:  sete   %sil
+         :
+         : 256   // clear slot i only if `cond`, without branching on cond: the leaf update is
+         : 257   // a masked and-not; propagation upward happens only when the whole 64-slot
+         : 258   // word became empty (when !cond the leaf keeps bit i and stays non-zero)
+         : 259   void clear_if(std::uint32_t i, bool cond) noexcept {
+         : 260   std::uint64_t &leaf = w_[i >> 6];
+    0.13 :   59f9d:  mov    0x28(%r14,%r8,8),%rdx
+    0.00 :   59fa2:  mov    %eax,%ecx
+    0.30 :   59fa4:  shr    $0x6,%ecx
+         : 264   leaf &= ~(std::uint64_t{cond} << (i & 63));
+    0.14 :   59fa7:  shlx   %rax,%rsi,%rsi
+    0.33 :   59fac:  not    %rsi
+    0.13 :   59faf:  and    %rsi,(%rdx,%rcx,8)
+         : 268   if (leaf != 0) return;
+    1.41 :   59fb3:  jne    5a1f0 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x480>
+         : 270   i >>= 6;
+         : 271   for (unsigned l = 1; l < kLevels; ++l) {
+         : 272   std::uint64_t &word = w_[kOffset[l] + (i >> 6)];
+    0.00 :   59fb9:  shr    $0xc,%eax
+         : 274   word &= ~(std::uint64_t{1} << (i & 63));
+    0.00 :   59fbc:  mov    $0xfffffffffffffffe,%rsi
+    0.06 :   59fc3:  rol    %cl,%rsi
+    0.00 :   59fc6:  and    %rsi,0x2000(%rdx,%rax,8)
+    0.00 :   59fce:  jne    5a1f0 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x480>
+    0.00 :   59fd4:  mov    $0xfffffffffffffffe,%rsi
+    0.00 :   59fdb:  mov    %eax,%ecx
+    0.00 :   59fdd:  rol    %cl,%rsi
+    0.00 :   59fe0:  and    %rsi,0x2080(%rdx)
+    0.00 :   59fe7:  jmp    5a1f0 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x480>
+    0.00 :   59fec:  nopl   0x0(%rax)
+         : 285   return push(op.id, op.side, op.price, op.qty);
+    0.32 :   59ff0:  mov    0x4(%rbx),%r15d
+    0.13 :   59ff4:  test   %r15,%r15
+         : 288   if (qty == 0) return reject(id, OpType::Push, RejectReason::InvalidQty);
+    0.00 :   59ff7:  je     5a2aa <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x53a>
+         : 290   return push(op.id, op.side, op.price, op.qty);
+    0.41 :   59ffd:  mov    0x10(%rbx),%r11
+         : 292   if (price <= 0) return reject(id, OpType::Push, RejectReason::InvalidPrice);
+    0.33 :   5a001:  test   %r11,%r11
+    0.00 :   5a004:  jle    5a2d5 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x565>
+         : 295   return push(op.id, op.side, op.price, op.qty);
+    0.07 :   5a00a:  movzbl 0x1(%rbx),%r9d
+         : 297   bool inserted = false;
+    0.00 :   5a00f:  movb   $0x0,0x40(%rsp)
+    0.00 :   5a014:  mov    $0xfffffffe,%eax
+    0.06 :   5a019:  cmp    %rax,%r10
+    0.18 :   5a01c:  mov    %r9b,0x18(%rsp)
+    0.00 :   5a021:  mov    %r15,0x20(%rsp)
+         : 303   if (id >= next_new_ && id < kEmpty) [[likely]] {  // never inserted: no duplicate check, no load
+    0.41 :   5a026:  ja     5a740 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x9d0>
+    0.06 :   5a02c:  cmp    0xf8(%r14),%r10
+    0.00 :   5a033:  jb     5a740 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x9d0>
+         : 307   next_new_ = id + 1;
+    0.08 :   5a039:  lea    0x1(%r10),%rax
+    0.00 :   5a03d:  mov    %rax,0xf8(%r14)
+         : 310   if (size_ >= limit_) [[unlikely]]
+    0.05 :   5a044:  mov    0xf0(%r14),%rax
+    0.00 :   5a04b:  cmp    0xe0(%r14),%rax
+    0.00 :   5a052:  jae    5a8ad <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xb3d>
+         : 314   return static_cast<std::size_t>((std::uint64_t{k} * 0x9E3779B97F4A7C15ull) >> shift_);  // Fibonacci hashing
+    0.12 :   5a058:  mov    %r10,%rax
+    0.00 :   5a05b:  imul   %rbp,%rax
+    0.24 :   5a05f:  movzbl 0x100(%r14),%ecx
+    0.18 :   5a067:  shrx   %rcx,%rax,%r12
+    0.13 :   5a06c:  mov    0xd0(%r14),%rsi
+         : 320   unsigned slot;
+         : 321   };
+         : 322   // free slot from the occupancy byte: the bucket line is only written
+         : 323   [[gnu::always_inline]] auto place(std::size_t b, std::uint32_t k) -> Placed {
+         : 324   for (std::size_t j = b;; j = (j + 1) & mask_) {
+         : 325   const unsigned occupied = occ_[j];
+    0.00 :   5a073:  movzbl (%rsi,%r12,1),%edi
+         : 327   if (const unsigned free = ~occupied & kSlotLanes) {
+    1.33 :   5a078:  mov    %edi,%ecx
+    0.23 :   5a07a:  and    $0x7f,%cl
+    0.48 :   5a07d:  mov    %r12,%rdx
+    0.06 :   5a080:  cmp    $0x7f,%cl
+    0.00 :   5a083:  jne    5a0c0 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x350>
+    0.00 :   5a085:  mov    0xc8(%r14),%r8
+    0.07 :   5a08c:  mov    0xe8(%r14),%r9
+    0.00 :   5a093:  mov    %r12,%rdx
+    0.00 :   5a096:  cs nopw 0x0(%rax,%rax,1)
+         : 337   const auto slot = static_cast<unsigned>(std::countr_zero(free));
+         : 338   occ_[j] = static_cast<std::uint8_t>(occupied | (1u << slot));
+         : 339   bk_[j].key[slot] = k;
+         : 340   return {j, slot};
+         : 341   }
+         : 342   ++bk_[j].key[kCounter];  // passing a full bucket (read-modify-write, rare)
+    0.00 :   5a0a0:  mov    %rdx,%rcx
+    0.00 :   5a0a3:  shl    $0x6,%rcx
+    0.00 :   5a0a7:  incl   0x1c(%r8,%rcx,1)
+         : 346   for (std::size_t j = b;; j = (j + 1) & mask_) {
+    0.63 :   5a0ac:  inc    %rdx
+    0.00 :   5a0af:  and    %r9,%rdx
+         : 349   const unsigned occupied = occ_[j];
+    0.00 :   5a0b2:  movzbl (%rsi,%rdx,1),%edi
+         : 351   if (const unsigned free = ~occupied & kSlotLanes) {
+    0.00 :   5a0b6:  mov    %edi,%ecx
+    0.00 :   5a0b8:  and    $0x7f,%cl
+    0.00 :   5a0bb:  cmp    $0x7f,%cl
+    0.00 :   5a0be:  je     5a0a0 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x330>
+    0.28 :   5a0c0:  xor    $0x7f,%cl
+    0.14 :   5a0c3:  movzbl %cl,%ecx
+    0.26 :   5a0c6:  tzcnt  %ecx,%ecx
+         : 359   occ_[j] = static_cast<std::uint8_t>(occupied | (1u << slot));
+    0.34 :   5a0ca:  mov    $0x1,%r8b
+    0.00 :   5a0cd:  shl    %cl,%r8b
+    0.33 :   5a0d0:  or     %dil,%r8b
+    0.06 :   5a0d3:  mov    %r8b,(%rsi,%rdx,1)
+         : 364   bk_[j].key[slot] = k;
+    0.32 :   5a0d7:  mov    %rdx,%rsi
+    0.26 :   5a0da:  shl    $0x6,%rsi
+    0.15 :   5a0de:  add    0xc8(%r14),%rsi
+    0.00 :   5a0e5:  mov    %r10d,(%rsi,%rcx,4)
+         : 369   ++size_;
+    3.14 :   5a0e9:  incq   0xf0(%r14)
+         : 371   inserted = true;
+    0.19 :   5a0f0:  movb   $0x1,0x40(%rsp)
+         : 373   return {&bk_[j].node[slot], static_cast<std::uint32_t>(j), static_cast<std::uint32_t>(b)};
+    0.15 :   5a0f5:  lea    0x20(%rsi,%rcx,4),%rax
+    0.00 :   5a0fa:  shl    $0x20,%r12
+    0.00 :   5a0fe:  mov    %edx,%edx
+    0.00 :   5a100:  or     %r12,%rdx
+    0.62 :   5a103:  movzbl 0x18(%rsp),%r9d
+    0.07 :   5a109:  mov    %rdx,0x10(%rsp)
+    0.06 :   5a10e:  mov    %rax,0x50(%rsp)
+         : 381   return push(op.id, op.side, op.price, op.qty);
+    0.00 :   5a113:  movzbl %r9b,%r12d
+         : 383   const Price sign = 1 - 2 * static_cast<Price>(t);
+    0.14 :   5a117:  lea    (%r12,%r12,1),%ecx
+    0.00 :   5a11b:  mov    $0x1,%eax
+    0.00 :   5a120:  sub    %rcx,%rax
+         : 387   const Bitmap& opp = __builtin_unpredictable(t != 0) ? bid_bits_ : ask_bits_;
+    0.00 :   5a123:  xor    %edx,%edx
+    0.54 :   5a125:  test   %r12b,%r12b
+    0.20 :   5a128:  sete   %dl
+         : 391   Price best = taker_map_best_[t];  // already normalised; sentinel when the map is empty
+    0.25 :   5a12b:  mov    0x90(%r14,%r12,8),%rcx
+         : 393   return w_[kOffset[kLevels - 1]] == 0;
+    0.11 :   5a133:  mov    0x28(%r14,%rdx,8),%rdx
+    0.19 :   5a138:  mov    0x2080(%rdx),%rsi
+    0.13 :   5a13f:  test   %rsi,%rsi
+    0.00 :   5a142:  je     5a185 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x415>
+         : 398   const std::uint32_t opp_mirror = kMirror & (0U - t);       // bids are mirrored
+    0.07 :   5a144:  mov    %r12d,%edi
+    0.00 :   5a147:  neg    %edi
+    0.19 :   5a149:  tzcnt  %rsi,%rsi
+    0.13 :   5a14e:  tzcnt  0x2000(%rdx,%rsi,8),%r8
+         : 403   // lowest set slot; precondition: !empty()
+         : 404   [[nodiscard]] auto min() const noexcept -> std::uint32_t {
+         : 405   std::uint32_t i = 0;
+         : 406   for (unsigned l = kLevels; l-- > 0;) {
+         : 407   const std::uint64_t word = w_[kOffset[l] + i];
+         : 408   i = (i << 6) | static_cast<std::uint32_t>(std::countr_zero(word));
+    1.40 :   5a158:  shl    $0x6,%esi
+    0.26 :   5a15b:  or     %esi,%r8d
+    0.46 :   5a15e:  tzcnt  (%rdx,%r8,8),%rdx
+    4.48 :   5a164:  movzwl %di,%esi
+    0.07 :   5a167:  mov    %r8d,%edi
+    0.05 :   5a16a:  shl    $0x6,%edi
+    0.13 :   5a16d:  or     %edi,%edx
+         : 416   best = std::min(best, sign * price_of(opp.min() ^ opp_mirror));
+    0.62 :   5a16f:  xor    %esi,%edx
+         : 418   [[nodiscard]] auto price_of(std::uint32_t slot) const -> Price { return base_ + static_cast<Price>(slot) * tick_; }
+    0.65 :   5a171:  imul   0x38(%r14),%rdx
+    1.77 :   5a176:  add    0x50(%r14),%rdx
+         : 421   best = std::min(best, sign * price_of(opp.min() ^ opp_mirror));
+    0.75 :   5a17a:  imul   %rax,%rdx
+    1.82 :   5a17e:  cmp    %rcx,%rdx
+    0.67 :   5a181:  cmovl  %rdx,%rcx
+         : 425   return best <= sign * limit;
+    0.75 :   5a185:  imul   %r11,%rax
+    0.00 :   5a189:  cmp    %rax,%rcx
+    1.11 :   5a18c:  mov    %r10,0x8(%rsp)
+    0.12 :   5a191:  mov    %r12,0x28(%rsp)
+         : 430   if (!may_cross(side, price)) [[likely]] return rest(id, side, price, qty, slot);
+    0.06 :   5a196:  jle    5a886 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xb16>
+         : 432   std::uint32_t i = free_head_;
+    1.03 :   5a19c:  mov    0xb8(%r14),%r15d
+    0.07 :   5a1a3:  mov    0xa0(%r14),%r12
+    0.00 :   5a1aa:  mov    $0xffffffff,%eax
+    0.00 :   5a1af:  cmp    %rax,%r15
+         : 437   if (i != kNil) {
+    0.00 :   5a1b2:  je     5a301 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x591>
+    0.00 :   5a1b8:  mov    %r15,%rax
+    0.00 :   5a1bb:  shl    $0x5,%rax
+         : 441   free_head_ = nodes_[i].next;
+    0.07 :   5a1bf:  mov    0x14(%r12,%rax,1),%eax
+    0.45 :   5a1c4:  mov    %eax,0xb8(%r14)
+    1.03 :   5a1cb:  mov    %r15d,%eax
+    0.00 :   5a1ce:  mov    %rax,0x10(%rsp)
+         : 446   } else {
+    0.00 :   5a1d3:  jmp    5a43b <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x6cb>
+    0.00 :   5a1d8:  nopl   0x0(%rax,%rax,1)
+         : 449   } else {
+         : 450   unlink_off_grid(loc);
+    0.00 :   5a1e0:  mov    %r14,%rdi
+    0.00 :   5a1e3:  lea    0x40(%rsp),%rsi
+    0.00 :   5a1e8:  vzeroupper
+    0.00 :   5a1eb:  call   5dee0 <lob::v16::BookT<lob::ChecksumSink, 16u>::unlink_off_grid(lob::v16::BookT<lob::ChecksumSink, 16u>::Loc const&)>
+         : 455   if (h.bucket == kFallback) [[unlikely]] {
+    0.15 :   5a1f0:  mov    %r15d,%eax
+    0.00 :   5a1f3:  mov    $0xffffffff,%ecx
+    0.00 :   5a1f8:  cmp    %rcx,%rax
+    0.14 :   5a1fb:  mov    0x8(%rsp),%rdx
+    0.00 :   5a200:  je     5a63c <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x8cc>
+         : 461   const auto slot = static_cast<unsigned>(h.value - bk_[h.bucket].node);
+    0.06 :   5a206:  mov    %rax,%rcx
+    0.13 :   5a209:  shl    $0x6,%rcx
+    0.27 :   5a20d:  add    0xc8(%r14),%rcx
+    0.13 :   5a214:  sub    %rcx,%r12
+    0.22 :   5a217:  add    $0xffffffffffffffe0,%r12
+    0.06 :   5a21b:  mov    %r12d,%edi
+    0.07 :   5a21e:  shr    $0x2,%edi
+         : 469   bk_[h.bucket].key[slot] = kEmpty;
+    0.00 :   5a221:  movabs $0x3fffffffc,%rsi
+    0.00 :   5a22b:  and    %rsi,%r12
+    0.00 :   5a22e:  movl   $0xffffffff,(%r12,%rcx,1)
+         : 473   occ_[h.bucket] &= static_cast<std::uint8_t>(~(1u << slot));
+    0.42 :   5a236:  mov    $0x1,%ecx
+    0.00 :   5a23b:  shlx   %edi,%ecx,%ecx
+         : 476   }
+         :
+         : 478   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX23 __add_lvalue_reference_t<_Tp> operator[](size_t __i) const {
+         : 479   _LIBCPP_ASSERT_VALID_ELEMENT_ACCESS(__checker_.__in_bounds<deleter_type>(std::__to_address(__ptr_), __i),
+         : 480   "unique_ptr<T[]>::operator[](index): index out of range");
+         : 481   return __ptr_[__i];
+    0.07 :   5a240:  mov    0xd0(%r14),%rsi
+    0.05 :   5a247:  not    %cl
+    0.29 :   5a249:  and    %cl,(%rsi,%rax,1)
+         : 485   for (std::size_t i = h.home; i != h.bucket; i = (i + 1) & mask_) --bk_[i].key[kCounter];
+    0.48 :   5a24c:  cmp    %eax,%ebp
+    0.00 :   5a24e:  je     5a276 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x506>
+    0.06 :   5a250:  mov    0xc8(%r14),%rcx
+    0.00 :   5a257:  mov    0xe8(%r14),%rdi
+    0.00 :   5a25e:  xchg   %ax,%ax
+    0.00 :   5a260:  mov    %rbp,%rsi
+    0.00 :   5a263:  shl    $0x6,%rsi
+    0.00 :   5a267:  decl   0x1c(%rcx,%rsi,1)
+    0.00 :   5a26b:  inc    %rbp
+    0.00 :   5a26e:  and    %rdi,%rbp
+    0.00 :   5a271:  cmp    %rax,%rbp
+    0.00 :   5a274:  jne    5a260 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x4f0>
+         : 498   --size_;
+    0.32 :   5a276:  decq   0xf0(%r14)
+    0.21 :   5a27d:  movabs $0x9e3779b97f4a7c15,%rbp
+         : 501   sink_.on(Cancelled{id, remaining});
+    0.19 :   5a287:  mov    (%r14),%rax
+         : 503   }
+         :
+         : 505   private:
+         : 506   template <class... T>
+         : 507   void mix(T... xs) noexcept {
+         : 508   ++events;
+    0.13 :   5a28a:  incq   0x8(%rax)
+         : 510   ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.92 :   5a28e:  mov    (%rax),%rcx
+    0.00 :   5a291:  xor    $0x3,%rcx
+    0.13 :   5a295:  imul   %rbp,%rcx
+    0.00 :   5a299:  xor    %rdx,%rcx
+    0.18 :   5a29c:  imul   %rbp,%rcx
+    0.06 :   5a2a0:  xor    0x20(%rsp),%rcx
+    0.08 :   5a2a5:  jmp    5a630 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x8c0>
+         : 518   void reject(OrderId id, OpType op, RejectReason reason) { sink_.on(Rejected{id, op, reason}); }
+    0.00 :   5a2aa:  mov    (%r14),%rax
+         : 520   ++events;
+    0.00 :   5a2ad:  incq   0x8(%rax)
+         : 522   ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.00 :   5a2b1:  mov    (%rax),%rcx
+    0.00 :   5a2b4:  xor    $0x5,%rcx
+    0.00 :   5a2b8:  imul   %rbp,%rcx
+    0.00 :   5a2bc:  xor    %r10,%rcx
+    0.00 :   5a2bf:  movabs $0x604a5ce3addef82d,%rdx
+    0.00 :   5a2c9:  imul   %rdx,%rcx
+    0.00 :   5a2cd:  mov    %rcx,(%rax)
+         : 530   if (price <= 0) return reject(id, OpType::Push, RejectReason::InvalidPrice);
+    0.00 :   5a2d0:  jmp    59dc5 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x55>
+         : 532   void reject(OrderId id, OpType op, RejectReason reason) { sink_.on(Rejected{id, op, reason}); }
+    0.00 :   5a2d5:  mov    (%r14),%rax
+         : 534   ++events;
+    0.00 :   5a2d8:  incq   0x8(%rax)
+         : 536   ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.00 :   5a2dc:  mov    (%rax),%rcx
+    0.00 :   5a2df:  xor    $0x5,%rcx
+    0.00 :   5a2e3:  imul   %rbp,%rcx
+    0.00 :   5a2e7:  xor    %r10,%rcx
+    0.00 :   5a2ea:  movabs $0xdf442d22ce4859b9,%rdx
+    0.00 :   5a2f4:  imul   %rdx,%rcx
+    0.00 :   5a2f8:  xor    $0x1,%rcx
+    0.00 :   5a2fc:  jmp    5a630 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x8c0>
+         : 545   return static_cast<size_type>(this->__end_ - this->__begin_);
+    0.00 :   5a301:  mov    0xa8(%r14),%rbp
+    0.00 :   5a308:  mov    %rbp,%r13
+    0.07 :   5a30b:  sub    %r12,%r13
+         : 549   if (nodes_.size() == kNil) throw std::length_error("v16: order pool exhausted");
+    0.00 :   5a30e:  movabs $0x1fffffffe0,%rax
+    0.00 :   5a318:  cmp    %rax,%r13
+    0.00 :   5a31b:  je     5ad7f <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x100f>
+    0.00 :   5a321:  mov    %r13,%rdx
+    0.00 :   5a324:  sar    $0x5,%rdx
+         : 555   #else
+         : 556   void
+         : 557   #endif
+         : 558   vector<_Tp, _Allocator>::emplace_back(_Args&&... __args) {
+         : 559   pointer __end = this->__end_;
+         : 560   if (__end < this->__cap_) {
+    0.00 :   5a328:  mov    0xb0(%r14),%rsi
+    0.00 :   5a32f:  cmp    %rsi,%rbp
+    0.00 :   5a332:  mov    %rdx,0x10(%rsp)
+    0.05 :   5a337:  jae    5a34b <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x5db>
+         : 565   #if _LIBCPP_STD_VER >= 20
+         :
+         : 567   template <class _Tp, class... _Args, class = decltype(::new(std::declval<void*>()) _Tp(std::declval<_Args>()...))>
+         : 568   _LIBCPP_HIDE_FROM_ABI constexpr _Tp* construct_at(_Tp* __location, _Args&&... __args) {
+         : 569   _LIBCPP_ASSERT_NON_NULL(__location != nullptr, "null pointer given to construct_at");
+         : 570   return ::new (static_cast<void*>(__location)) _Tp(std::forward<_Args>(__args)...);
+    0.00 :   5a339:  vpxor  %xmm0,%xmm0,%xmm0
+    0.00 :   5a33d:  vmovdqu %ymm0,0x0(%rbp)
+         : 573   ++__tx.__pos_;
+    0.05 :   5a342:  add    $0x20,%rbp
+         : 575   __emplace_back_assume_capacity(std::forward<_Args>(__args)...);
+         : 576   ++__end;
+         : 577   } else {
+    0.00 :   5a346:  jmp    5a420 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x6b0>
+         : 579   __split_buffer<value_type, allocator_type&> __v(__recommend(size() + 1), size(), this->__alloc_);
+    0.00 :   5a34b:  lea    0x1(%rdx),%rax
+         : 581   if (__new_size > __ms)
+    0.00 :   5a34f:  mov    %rax,%rcx
+    0.00 :   5a352:  shr    $0x3b,%rcx
+    0.00 :   5a356:  jne    5adbc <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x104c>
+    0.00 :   5a35c:  mov    %r11,0x38(%rsp)
+         : 586   return static_cast<size_type>(this->__cap_ - this->__begin_);
+    0.00 :   5a361:  sub    %r12,%rsi
+         : 588   if (__cap >= __ms / 2)
+    0.00 :   5a364:  mov    %rsi,%r15
+    0.00 :   5a367:  sar    $0x4,%r15
+    0.00 :   5a36b:  cmp    %rax,%r15
+    0.00 :   5a36e:  cmovbe %rax,%r15
+    0.00 :   5a372:  movabs $0x7fffffffffffffe0,%rax
+    0.00 :   5a37c:  mov    %rsi,0x58(%rsp)
+    0.00 :   5a381:  cmp    %rax,%rsi
+    0.00 :   5a384:  movabs $0x7ffffffffffffff,%rax
+    0.00 :   5a38e:  cmovae %rax,%r15
+         : 598   template <class _Up>
+         : 599   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 allocator(const allocator<_Up>&) _NOEXCEPT {}
+         :
+         : 601   [[__nodiscard__]] _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 _Tp* allocate(size_t __n) {
+         : 602   static_assert(sizeof(_Tp) >= 0, "cannot allocate memory for an incomplete type");
+         : 603   if (__n > allocator_traits<allocator>::max_size(*this))
+    0.00 :   5a392:  cmp    %rax,%r15
+    0.00 :   5a395:  ja     5adb4 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x1044>
+         : 606   }
+         :
+         : 608   template <class _Tp>
+         : 609   inline _LIBCPP_HIDE_FROM_ABI _LIBCPP_NO_CFI _Tp*
+         : 610   __libcpp_allocate(__element_count __n, [[__maybe_unused__]] size_t __align = _LIBCPP_ALIGNOF(_Tp)) {
+         : 611   size_t __size = static_cast<size_t>(__n) * sizeof(_Tp);
+    0.00 :   5a39b:  shl    $0x5,%r15
+         : 613   #if _LIBCPP_HAS_ALIGNED_ALLOCATION
+         : 614   if (__is_overaligned_for_new(__align))
+         : 615   return static_cast<_Tp*>(__builtin_operator_new(__size, static_cast<align_val_t>(__align)));
+         : 616   #endif
+         :
+         : 618   return static_cast<_Tp*>(__builtin_operator_new(__size));
+    0.00 :   5a39f:  mov    %r15,%rdi
+    0.00 :   5a3a2:  vzeroupper
+    0.00 :   5a3a5:  call   4100 <operator new(unsigned long)@plt>
+         : 622   } else {
+         : 623   auto __allocation = std::__allocate_at_least(__alloc_, __cap);
+         : 624   __first_          = __allocation.ptr;
+         : 625   __cap             = __allocation.count;
+         : 626   }
+         : 627   __begin_ = __end_ = __first_ + __start;
+    0.00 :   5a3aa:  lea    (%rax,%r13,1),%rdi
+         : 629   __cap_            = __first_ + __cap;
+    0.00 :   5a3ae:  add    %rax,%r15
+    0.00 :   5a3b1:  vpxor  %xmm0,%xmm0,%xmm0
+    0.00 :   5a3b5:  vmovdqu %ymm0,(%rax,%r13,1)
+         : 633   __v.__end_++;
+    0.00 :   5a3bb:  lea    0x20(%rax,%r13,1),%rbp
+    0.00 :   5a3c0:  mov    0x10(%rsp),%rax
+         : 636   auto __new_begin = __v.__begin_ - (__end_ - __begin_);
+    0.00 :   5a3c5:  shl    $0x5,%rax
+    0.00 :   5a3c9:  sub    %rax,%rdi
+    0.00 :   5a3cc:  mov    %rdi,0x60(%rsp)
+         : 640   }
+         : 641   __guard.__complete();
+         : 642   std::__allocator_destroy(__alloc, __first, __last);
+         : 643   } else {
+         : 644   // Casting to void* to suppress clang complaining that this is technically UB.
+         : 645   __builtin_memcpy(static_cast<void*>(std::__to_address(__result)),
+    0.00 :   5a3d1:  mov    %r12,%rsi
+    0.00 :   5a3d4:  mov    %r13,%rdx
+    0.00 :   5a3d7:  vzeroupper
+    0.00 :   5a3da:  call   45d0 <memcpy@plt>
+    0.00 :   5a3df:  mov    0x60(%rsp),%rax
+         :
+         : 652   template <class _Tp>
+         : 653   inline _LIBCPP_HIDE_FROM_ABI __swap_result_t<_Tp> _LIBCPP_CONSTEXPR_SINCE_CXX20 swap(_Tp& __x, _Tp& __y)
+         : 654   _NOEXCEPT_(is_nothrow_move_constructible<_Tp>::value&& is_nothrow_move_assignable<_Tp>::value) {
+         : 655   _Tp __t(std::move(__x));
+         : 656   __x = std::move(__y);
+    0.00 :   5a3e4:  mov    %rax,0xa0(%r14)
+    0.00 :   5a3eb:  mov    %rbp,0xa8(%r14)
+    0.00 :   5a3f2:  mov    %r15,0xb0(%r14)
+         : 660   }
+         :
+         : 662   template <class _Tp, class _Allocator>
+         : 663   _LIBCPP_CONSTEXPR_SINCE_CXX20 __split_buffer<_Tp, _Allocator>::~__split_buffer() {
+         : 664   clear();
+         : 665   if (__first_)
+    0.00 :   5a3f9:  test   %r12,%r12
+    0.00 :   5a3fc:  je     5a40b <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x69b>
+         : 668   #if _LIBCPP_HAS_ALIGNED_ALLOCATION
+         : 669   if (__is_overaligned_for_new(__align))
+         : 670   return __builtin_operator_delete(
+         : 671   __ptr _LIBCPP_ONLY_IF_SIZED_DEALLOCATION(, __size), static_cast<align_val_t>(__align));
+         : 672   #endif
+         : 673   return __builtin_operator_delete(__ptr _LIBCPP_ONLY_IF_SIZED_DEALLOCATION(, __size));
+    0.00 :   5a3fe:  mov    %r12,%rdi
+    0.00 :   5a401:  mov    0x58(%rsp),%rsi
+    0.00 :   5a406:  call   45c0 <operator delete(void*, unsigned long)@plt>
+    0.00 :   5a40b:  mov    0x8(%rsp),%r10
+    0.00 :   5a410:  mov    0x38(%rsp),%r11
+    0.00 :   5a415:  movzbl 0x18(%rsp),%r9d
+    0.00 :   5a41b:  mov    0x10(%rsp),%rdx
+         : 681   __end = __emplace_back_slow_path(std::forward<_Args>(__args)...);
+         : 682   }
+         : 683   this->__end_ = __end;
+    0.00 :   5a420:  mov    %rbp,0xa8(%r14)
+         : 685   return this->__begin_[__n];
+    0.00 :   5a427:  mov    0xa0(%r14),%r12
+         : 687   nodes_[i] = OrderNode{id, price, qty, kNil, kNil, side};
+    0.00 :   5a42e:  mov    %edx,%r15d
+    0.00 :   5a431:  movabs $0x9e3779b97f4a7c15,%rbp
+    0.00 :   5a43b:  shl    $0x5,%r15
+    0.06 :   5a43f:  mov    %r10,(%r12,%r15,1)
+    0.00 :   5a443:  mov    %r11,0x8(%r12,%r15,1)
+    0.08 :   5a448:  mov    0x20(%rsp),%rax
+    0.00 :   5a44d:  mov    %eax,0x10(%r12,%r15,1)
+    0.84 :   5a452:  movq   $0xffffffffffffffff,0x14(%r12,%r15,1)
+    0.12 :   5a45b:  mov    %r9b,0x1c(%r12,%r15,1)
+         : 697   if (!anchored_) anchor_if_on_tick(price);
+    0.00 :   5a460:  cmpb   $0x0,0x58(%r14)
+    0.00 :   5a465:  jne    5a48c <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x71c>
+    0.00 :   5a467:  mov    %r14,%rdi
+    0.00 :   5a46a:  mov    %r11,%rsi
+    0.00 :   5a46d:  mov    %r11,%r12
+    0.00 :   5a470:  vzeroupper
+    0.00 :   5a473:  call   5db10 <lob::v16::BookT<lob::ChecksumSink, 16u>::anchor_if_on_tick(long)>
+    0.00 :   5a478:  movzbl 0x18(%rsp),%r9d
+    0.00 :   5a47e:  mov    %r12,%r11
+         : 707   if (!anchored_) return kNoSlot;
+    0.00 :   5a481:  cmpb   $0x1,0x58(%r14)
+    0.00 :   5a486:  jne    5a527 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x7b7>
+         : 710   slot_div_.quotient(static_cast<std::uint64_t>(price) - static_cast<std::uint64_t>(base_));
+    0.10 :   5a48c:  mov    %r11,%rdx
+    0.06 :   5a48f:  sub    0x50(%r14),%rdx
+    0.00 :   5a493:  imul   0x40(%r14),%rdx
+    0.07 :   5a498:  movzbl 0x48(%r14),%ecx
+    0.67 :   5a49d:  ror    %cl,%rdx
+         : 716   return s < kSlots ? static_cast<std::uint32_t>(s) : kNoSlot;
+    0.00 :   5a4a0:  cmp    $0xffff,%rdx
+    0.00 :   5a4a7:  ja     5a527 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x7b7>
+         : 719   level = &grid_[s];
+    0.00 :   5a4a9:  lea    (%rdx,%rdx,2),%rax
+    0.07 :   5a4ad:  shl    $0x3,%rax
+    0.00 :   5a4b1:  add    0x20(%r14),%rax
+         : 723   const Bitmap& opp = __builtin_unpredictable(t != 0) ? bid_bits_ : ask_bits_;
+    0.00 :   5a4b5:  xor    %esi,%esi
+    0.00 :   5a4b7:  test   %r9b,%r9b
+    0.78 :   5a4ba:  setne  %sil
+         : 727   static constexpr auto mirror(Side side) -> std::uint32_t { return side == Side::Buy ? kMirror : 0; }
+    0.00 :   5a4be:  mov    $0x0,%ecx
+    0.06 :   5a4c3:  mov    $0xffff,%edi
+    0.00 :   5a4c8:  cmove  %edi,%ecx
+         : 731   (side == Side::Buy ? bid_bits_ : ask_bits_).set(s ^ mirror(side));  // idempotent: no "was it empty" branch
+    0.05 :   5a4cb:  xor    %edx,%ecx
+    0.00 :   5a4cd:  mov    0x28(%r14,%rsi,8),%rdx
+         : 734   std::uint64_t &word      = w_[kOffset[l] + (i >> 6)];
+    0.07 :   5a4d2:  mov    %ecx,%esi
+    0.00 :   5a4d4:  shr    $0x6,%esi
+         : 737   const bool     was_empty = word == 0;
+    0.49 :   5a4d7:  mov    (%rdx,%rsi,8),%rdi
+         : 739   word |= std::uint64_t{1} << (i & 63);
+    0.27 :   5a4db:  mov    %rdi,%r8
+    0.00 :   5a4de:  bts    %rcx,%r8
+    0.06 :   5a4e2:  mov    %r8,(%rdx,%rsi,8)
+         : 743   const bool     was_empty = word == 0;
+    0.21 :   5a4e6:  test   %rdi,%rdi
+    0.00 :   5a4e9:  jne    5a51b <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x7ab>
+         : 746   std::uint64_t &word      = w_[kOffset[l] + (i >> 6)];
+    0.00 :   5a4eb:  shr    $0xc,%ecx
+         : 748   const bool     was_empty = word == 0;
+    0.07 :   5a4ee:  mov    0x2000(%rdx,%rcx,8),%rdi
+         : 750   word |= std::uint64_t{1} << (i & 63);
+    0.00 :   5a4f6:  mov    %rdi,%r8
+    0.00 :   5a4f9:  bts    %rsi,%r8
+    0.00 :   5a4fd:  mov    %r8,0x2000(%rdx,%rcx,8)
+         : 754   const bool     was_empty = word == 0;
+    0.00 :   5a505:  test   %rdi,%rdi
+    0.00 :   5a508:  jne    5a51b <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x7ab>
+         : 757   word |= std::uint64_t{1} << (i & 63);
+    0.00 :   5a50a:  mov    $0x1,%esi
+    0.00 :   5a50f:  shlx   %rcx,%rsi,%rcx
+    0.00 :   5a514:  or     %rcx,0x2080(%rdx)
+    0.00 :   5a51b:  mov    0x8(%rsp),%r13
+    0.00 :   5a520:  mov    0x28(%rsp),%rdi
+    0.00 :   5a525:  jmp    5a54b <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x7db>
+         : 764   level = off_grid_level(side, price);
+    0.00 :   5a527:  mov    %r14,%rdi
+    0.00 :   5a52a:  mov    0x28(%rsp),%r13
+    0.00 :   5a52f:  mov    %r13d,%esi
+    0.00 :   5a532:  mov    %r11,%rdx
+    0.00 :   5a535:  mov    %r11,%r12
+    0.00 :   5a538:  vzeroupper
+    0.00 :   5a53b:  call   5db50 <lob::v16::BookT<lob::ChecksumSink, 16u>::off_grid_level(lob::Side, long)>
+    0.00 :   5a540:  mov    %r12,%r11
+    0.00 :   5a543:  mov    %r13,%rdi
+    0.00 :   5a546:  mov    0x8(%rsp),%r13
+    0.93 :   5a54b:  mov    0x10(%rsp),%r8
+         : 776   const std::uint32_t tail = level.tail;
+    0.00 :   5a550:  mov    0x4(%rax),%ecx
+         : 778   std::uint32_t* link = has_tail ? &nodes_[has_tail ? tail : 0].next : &level.head;
+    0.81 :   5a553:  mov    %rcx,%rdx
+    0.00 :   5a556:  shl    $0x5,%rdx
+         : 781   const std::uint32_t tail = level.tail;
+    0.11 :   5a55a:  mov    $0xffffffff,%esi
+    0.00 :   5a55f:  cmp    %rsi,%rcx
+         : 784   std::uint32_t* link = has_tail ? &nodes_[has_tail ? tail : 0].next : &level.head;
+    0.13 :   5a562:  mov    0xa0(%r14),%rsi
+    0.07 :   5a569:  lea    0x14(%rsi,%rdx,1),%rdx
+    0.88 :   5a56e:  cmove  %rax,%rdx
+         : 788   *link = i;
+    0.00 :   5a572:  mov    %r8d,(%rdx)
+         : 790   nodes_[i].prev = tail;
+    0.27 :   5a575:  mov    %ecx,0x18(%rsi,%r15,1)
+         : 792   nodes_[i].next = kNil;
+    0.00 :   5a57a:  movl   $0xffffffff,0x14(%rsi,%r15,1)
+         : 794   level.tail = i;
+    0.07 :   5a583:  mov    %r8d,0x4(%rax)
+         : 796   ++level.count;
+    0.00 :   5a587:  incl   0x10(%rax)
+    0.96 :   5a58a:  mov    0x20(%rsp),%rdx
+         : 799   level->total_qty += qty;
+    0.00 :   5a58f:  add    %rdx,0x8(%rax)
+    0.00 :   5a593:  mov    0x50(%rsp),%rax
+         : 802   *slot.value = i;
+    0.00 :   5a598:  mov    %r8d,(%rax)
+         : 804   sink_.on(Rested{id, side, price, qty});
+    0.00 :   5a59b:  mov    (%r14),%rax
+         : 806   ++events;
+    0.15 :   5a59e:  incq   0x8(%rax)
+         : 808   ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.73 :   5a5a2:  mov    (%rax),%rcx
+    0.14 :   5a5a5:  xor    $0x2,%rcx
+    0.00 :   5a5a9:  imul   %rbp,%rcx
+    0.06 :   5a5ad:  xor    %r13,%rcx
+    0.00 :   5a5b0:  imul   %rbp,%rcx
+    0.00 :   5a5b4:  xor    %rdi,%rcx
+    0.00 :   5a5b7:  imul   %rbp,%rcx
+    0.62 :   5a5bb:  xor    %r11,%rcx
+    0.12 :   5a5be:  imul   %rbp,%rcx
+    0.13 :   5a5c2:  xor    %rdx,%rcx
+    0.06 :   5a5c5:  imul   %rbp,%rcx
+    0.39 :   5a5c9:  mov    %rcx,(%rax)
+    0.06 :   5a5cc:  mov    0x30(%rsp),%r13
+    0.00 :   5a5d1:  jmp    59dc5 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x55>
+         : 823   return find_fallback(id);
+    0.00 :   5a5d6:  lea    0xc0(%r14),%rdi
+    0.00 :   5a5dd:  mov    %r10,%rsi
+    0.00 :   5a5e0:  mov    %r10,%r15
+    0.00 :   5a5e3:  vzeroupper
+    0.00 :   5a5e6:  call   5de00 <lob::v16::OrderIndex::find_fallback(unsigned long)>
+    0.00 :   5a5eb:  mov    %r15,%r10
+         : 830   explicit operator bool() const noexcept { return value != nullptr; }
+    0.00 :   5a5ee:  test   %rax,%rax
+         : 832   if (!it) return reject(id, OpType::Cancel, RejectReason::UnknownId);
+    0.00 :   5a5f1:  je     5a605 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x895>
+    0.00 :   5a5f3:  mov    %rax,%r12
+    0.00 :   5a5f6:  mov    %rdx,%r15
+    0.00 :   5a5f9:  mov    %rdx,%rbp
+    0.00 :   5a5fc:  shr    $0x20,%rbp
+    0.00 :   5a600:  jmp    59e91 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x121>
+         : 839   void reject(OrderId id, OpType op, RejectReason reason) { sink_.on(Rejected{id, op, reason}); }
+    0.00 :   5a605:  mov    (%r14),%rax
+         : 841   ++events;
+    0.00 :   5a608:  incq   0x8(%rax)
+         : 843   ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.00 :   5a60c:  mov    (%rax),%rcx
+    0.00 :   5a60f:  xor    $0x5,%rcx
+    0.00 :   5a613:  imul   %rbp,%rcx
+    0.00 :   5a617:  xor    %r10,%rcx
+    0.00 :   5a61a:  imul   %rbp,%rcx
+    0.00 :   5a61e:  xor    $0x1,%rcx
+    0.00 :   5a622:  imul   %rbp,%rcx
+    0.00 :   5a626:  xor    $0x3,%rcx
+    0.00 :   5a62a:  nopw   0x0(%rax,%rax,1)
+    0.30 :   5a630:  imul   %rbp,%rcx
+    0.73 :   5a634:  mov    %rcx,(%rax)
+         : 855   if (price <= 0) return reject(id, OpType::Push, RejectReason::InvalidPrice);
+    0.12 :   5a637:  jmp    59dc5 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x55>
+    0.00 :   5a63c:  movabs $0x9e3779b97f4a7c15,%rbp
+         :
+         : 859   #elif defined(__SIZEOF_INT128__)
+         :
+         : 861   inline boost::uint64_t mulx64( boost::uint64_t x, boost::uint64_t y )
+         : 862   {
+         : 863   __uint128_t r = (__uint128_t)x * y;
+    0.00 :   5a646:  mulx   %rbp,%rcx,%rax
+         : 865   return (boost::uint64_t)r ^ (boost::uint64_t)( r >> 64 );
+    0.00 :   5a64b:  xor    %rcx,%rax
+         : 867   }
+         :
+         : 869   static inline std::size_t position_for(
+         : 870   std::size_t hash,const arrays_type& arrays_)
+         : 871   {
+         : 872   return size_policy::position(hash,arrays_.groups_size_index);
+    0.00 :   5a64e:  movzbl 0x108(%r14),%ecx
+         : 874   return hash>>size_index_;
+    0.00 :   5a656:  shrx   %rcx,%rax,%rcx
+    0.00 :   5a65b:  mov    0x118(%r14),%r8
+    0.00 :   5a662:  movzbl %al,%esi
+    0.00 :   5a665:  lea    0x1f244(%rip),%rdi        # 798b0 <boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>::match_word(unsigned long)::word>
+    0.00 :   5a66c:  vpbroadcastd (%rdi,%rsi,4),%xmm0
+    0.00 :   5a672:  mov    0x120(%r14),%rsi
+    0.00 :   5a679:  and    $0x7,%eax
+    0.00 :   5a67c:  mov    0x110(%r14),%r12
+    0.00 :   5a683:  xor    %edi,%edi
+         : 884   auto pg=arrays.groups()+pos;
+    0.00 :   5a685:  mov    %rcx,%r9
+    0.00 :   5a688:  shl    $0x4,%r9
+         : 887   return _mm_load_si128(reinterpret_cast<const __m128i*>(m));
+    0.00 :   5a68c:  vmovdqa (%r8,%r9,1),%xmm1
+         : 889   _mm_cmpeq_epi8(load_metadata(),_mm_set1_epi32(match_word(hash))))&0x7FFF;
+    0.00 :   5a692:  vpcmpeqb %xmm0,%xmm1,%k0
+         : 891   return _mm_movemask_epi8(
+    0.00 :   5a698:  kmovd  %k0,%r10d
+         : 893   if(mask){
+    0.00 :   5a69c:  and    $0x7fff,%r10w
+    0.00 :   5a6a2:  je     5a70b <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x99b>
+    0.00 :   5a6a4:  add    %r8,%r9
+         : 897   _mm_cmpeq_epi8(load_metadata(),_mm_set1_epi32(match_word(hash))))&0x7FFF;
+    0.00 :   5a6a7:  movzwl %r10w,%edx
+         : 899   auto p=elements+pos*N;
+    0.00 :   5a6ab:  imul   $0xf0,%rcx,%r10
+    0.00 :   5a6b2:  lea    (%rsi,%r10,1),%r11
+    0.00 :   5a6b6:  mov    %r11,0x18(%rsp)
+         : 903   BOOST_UNORDERED_PREFETCH_ELEMENTS(p,N);
+    0.00 :   5a6bb:  prefetcht0 (%rsi,%r10,1)
+    0.00 :   5a6c0:  mov    %r8,0x10(%rsp)
+    0.00 :   5a6c5:  mov    %rcx,%r8
+    0.00 :   5a6c8:  mov    %rsi,%r11
+    0.00 :   5a6cb:  mov    %rdi,%rsi
+    0.00 :   5a6ce:  mov    %r12,%rdi
+    0.00 :   5a6d1:  mov    %edx,%ecx
+         : 911   return (unsigned int)__builtin_ctz((unsigned int)x);
+    0.00 :   5a6d3:  tzcnt  %edx,%r10d
+         : 913   if(BOOST_LIKELY(bool(pred()(x,key_from(p[n]))))){
+    0.00 :   5a6d8:  mov    %r10d,%r12d
+    0.00 :   5a6db:  shl    $0x4,%r12d
+    0.00 :   5a6df:  mov    0x8(%rsp),%rdx
+    0.00 :   5a6e4:  mov    0x18(%rsp),%r15
+         : 918   template <class _Tp>
+         : 919   #endif
+         : 920   struct equal_to : __binary_function<_Tp, _Tp, bool> {
+         : 921   typedef bool __result_type; // used by valarray
+         : 922   _LIBCPP_CONSTEXPR_SINCE_CXX14 _LIBCPP_HIDE_FROM_ABI bool operator()(const _Tp& __x, const _Tp& __y) const {
+         : 923   return __x == __y;
+    0.00 :   5a6e9:  cmp    (%r15,%r12,1),%rdx
+    0.00 :   5a6ed:  je     5a82f <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xabf>
+         : 926   }while(mask);
+    0.00 :   5a6f3:  blsr   %ecx,%edx
+    0.00 :   5a6f8:  mov    %rdi,%r12
+    0.00 :   5a6fb:  mov    %rsi,%rdi
+    0.00 :   5a6fe:  mov    %r11,%rsi
+    0.00 :   5a701:  mov    %r8,%rcx
+    0.00 :   5a704:  mov    0x10(%rsp),%r8
+    0.00 :   5a709:  jne    5a6c5 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x955>
+    0.00 :   5a70b:  vpextrb $0xf,%xmm1,%r9d
+         : 935   return !(overflow()&shift[hash%8]);
+    0.00 :   5a711:  lea    0x1f598(%rip),%r10        # 79cb0 <boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>::is_not_overflowed(unsigned long) const::shift>
+    0.00 :   5a718:  test   %r9b,(%rax,%r10,1)
+    0.00 :   5a71c:  mov    0x8(%rsp),%rdx
+         : 939   if(BOOST_LIKELY(pg->is_not_overflowed(hash))){
+    0.00 :   5a721:  je     5a287 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x517>
+         : 941   pos=(pos+step)&mask;
+    0.00 :   5a727:  lea    0x1(%rdi,%rcx,1),%rcx
+         : 943   step+=1;
+    0.00 :   5a72c:  inc    %rdi
+         : 945   pos=(pos+step)&mask;
+    0.00 :   5a72f:  and    %r12,%rcx
+         : 947   return step<=mask;
+    0.00 :   5a732:  cmp    %r12,%rdi
+         : 949   }
+    0.00 :   5a735:  jbe    5a685 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x915>
+    0.00 :   5a73b:  jmp    5a287 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x517>
+         : 952   if (id >= kEmpty) [[unlikely]]
+    0.00 :   5a740:  cmp    %rax,%r10
+    0.00 :   5a743:  ja     5abc8 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xe58>
+         : 955   if (size_ >= limit_) [[unlikely]]
+    0.00 :   5a749:  mov    0xf0(%r14),%rax
+    0.00 :   5a750:  cmp    0xe0(%r14),%rax
+    0.00 :   5a757:  jae    5ac09 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xe99>
+         : 959   return static_cast<std::size_t>((std::uint64_t{k} * 0x9E3779B97F4A7C15ull) >> shift_);  // Fibonacci hashing
+    0.00 :   5a75d:  mov    %r10,%rax
+    0.00 :   5a760:  imul   %rbp,%rax
+    0.00 :   5a764:  movzbl 0x100(%r14),%ecx
+    0.00 :   5a76c:  shrx   %rcx,%rax,%r12
+    0.00 :   5a771:  mov    0xc8(%r14),%rcx
+    0.00 :   5a778:  vpbroadcastd %r10d,%ymm0
+         : 966   const __m256i keys = _mm256_load_si256(reinterpret_cast<const __m256i*>(bk_[j].key));
+    0.00 :   5a77e:  mov    %r12,%rdx
+    0.00 :   5a781:  shl    $0x6,%rdx
+         : 969   const __m256i eq = _mm256_cmpeq_epi32(keys, _mm256_set1_epi32(static_cast<int>(v)));
+    0.00 :   5a785:  vpcmpeqd (%rcx,%rdx,1),%ymm0,%k0
+         : 971   return static_cast<unsigned>(_mm256_movemask_ps(_mm256_castsi256_ps(eq))) & kSlotLanes;
+    0.34 :   5a78c:  kmovd  %k0,%edi
+    0.10 :   5a790:  mov    %r12,%rdx
+         : 974   if (const unsigned m = lanes_equal(j, k)) {
+    0.07 :   5a793:  and    $0x7f,%dil
+    0.00 :   5a797:  jne    5a7d3 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xa63>
+    0.06 :   5a799:  mov    0xe8(%r14),%rsi
+    0.00 :   5a7a0:  mov    %r12,%rdx
+         : 979   const __m256i keys = _mm256_load_si256(reinterpret_cast<const __m256i*>(bk_[j].key));
+    0.00 :   5a7a3:  mov    %rdx,%rdi
+    0.00 :   5a7a6:  shl    $0x6,%rdi
+         : 982   if (bk_[j].key[kCounter] == 0) break;
+    0.00 :   5a7aa:  cmpl   $0x0,0x1c(%rcx,%rdi,1)
+    0.00 :   5a7af:  je     5a8d2 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xb62>
+         : 985   for (std::size_t j = b;; j = (j + 1) & mask_) {  // already present?
+    0.00 :   5a7b5:  inc    %rdx
+    0.00 :   5a7b8:  and    %rsi,%rdx
+         : 988   const __m256i keys = _mm256_load_si256(reinterpret_cast<const __m256i*>(bk_[j].key));
+    0.00 :   5a7bb:  mov    %rdx,%rdi
+    0.00 :   5a7be:  shl    $0x6,%rdi
+         : 991   const __m256i eq = _mm256_cmpeq_epi32(keys, _mm256_set1_epi32(static_cast<int>(v)));
+    0.00 :   5a7c2:  vpcmpeqd (%rcx,%rdi,1),%ymm0,%k0
+         : 993   return static_cast<unsigned>(_mm256_movemask_ps(_mm256_castsi256_ps(eq))) & kSlotLanes;
+    0.00 :   5a7c9:  kmovd  %k0,%edi
+         : 995   if (const unsigned m = lanes_equal(j, k)) {
+    0.00 :   5a7cd:  and    $0x7f,%dil
+    0.00 :   5a7d1:  je     5a7a3 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xa33>
+         : 998   const __m256i keys = _mm256_load_si256(reinterpret_cast<const __m256i*>(bk_[j].key));
+    0.00 :   5a7d3:  mov    %rdx,%rsi
+    0.00 :   5a7d6:  shl    $0x6,%rsi
+    0.00 :   5a7da:  add    %rsi,%rcx
+         : 1002  inserted = false;
+    0.00 :   5a7dd:  movb   $0x0,0x40(%rsp)
+    0.00 :   5a7e2:  movzbl %dil,%esi
+    0.00 :   5a7e6:  tzcnt  %esi,%esi
+         : 1006  return {&bk_[j].node[slot], static_cast<std::uint32_t>(j), static_cast<std::uint32_t>(b)};
+    0.00 :   5a7ea:  lea    0x20(%rcx,%rsi,4),%rax
+    0.00 :   5a7ef:  xor    %esi,%esi
+    0.00 :   5a7f1:  shl    $0x20,%r12
+    0.00 :   5a7f5:  mov    %edx,%edx
+    0.00 :   5a7f7:  or     %r12,%rdx
+         : 1012  if (!inserted) return reject(id, OpType::Push, RejectReason::DuplicateId);
+    0.00 :   5a7fa:  test   %sil,%sil
+    0.00 :   5a7fd:  jne    5a109 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x399>
+         : 1015  void reject(OrderId id, OpType op, RejectReason reason) { sink_.on(Rejected{id, op, reason}); }
+    0.00 :   5a803:  mov    (%r14),%rax
+         : 1017  ++events;
+    0.00 :   5a806:  incq   0x8(%rax)
+         : 1019  ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.00 :   5a80a:  mov    (%rax),%rcx
+    0.00 :   5a80d:  xor    $0x5,%rcx
+    0.00 :   5a811:  imul   %rbp,%rcx
+    0.00 :   5a815:  xor    %r10,%rcx
+    0.00 :   5a818:  movabs $0xdf442d22ce4859b9,%rdx
+    0.00 :   5a822:  imul   %rdx,%rcx
+    0.00 :   5a826:  xor    $0x2,%rcx
+    0.00 :   5a82a:  jmp    5a630 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x8c0>
+         : 1028  template<typename> friend class table_erase_return_type;
+         : 1029  template<typename,typename,typename,typename> friend class table;
+         :
+         : 1031  table_iterator(group_type* pg,std::size_t n,const table_element_type* ptet):
+         : 1032  pc_{to_pointer<char_pointer>(
+         : 1033  reinterpret_cast<unsigned char*>(const_cast<group_type*>(pg))+n)},
+    0.00 :   5a82f:  lea    (%r9,%r10,1),%rax
+    0.00 :   5a833:  movzbl (%r9,%r10,1),%ecx
+         : 1036  return m[pos];
+    0.00 :   5a838:  or     $0xf,%rax
+         : 1038  return !(overflow()&shift[hash%8]);
+    0.00 :   5a83c:  and    $0x7,%ecx
+    0.00 :   5a83f:  lea    0x1f46a(%rip),%rdx        # 79cb0 <boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>::is_not_overflowed(unsigned long) const::shift>
+    0.00 :   5a846:  movzbl (%rcx,%rdx,1),%ecx
+    0.00 :   5a84a:  and    (%rax),%cl
+         : 1043  {
+         : 1044  /* If this slot potentially caused overflow, we decrease the maximum load
+         : 1045  * so that average probe length won't increase unboundedly in repeated
+         : 1046  * insert/erase cycles (drift).
+         : 1047  */
+         : 1048  size_ctrl.ml-=group_type::maybe_caused_overflow(pc);
+    0.00 :   5a84c:  neg    %cl
+    0.00 :   5a84e:  mov    $0x0,%eax
+    0.00 :   5a853:  sbb    %rax,%rax
+         : 1052  void operator=(Integral m){n=m;}
+    0.00 :   5a856:  movb   $0x0,(%r9,%r10,1)
+    0.00 :   5a85b:  vpmovsxbq 0x19d4a(%rip),%xmm0        # 745ae <_IO_stdin_used+0x5ae>
+    0.00 :   5a864:  vpinsrq $0x0,%rax,%xmm0,%xmm0
+    0.00 :   5a86a:  vpaddq 0x128(%r14),%xmm0,%xmm0
+    0.00 :   5a873:  vmovdqu %xmm0,0x128(%r14)
+    0.00 :   5a87c:  mov    0x8(%rsp),%rdx
+    0.00 :   5a881:  jmp    5a287 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x517>
+         : 1060  const Bitmap& opp = __builtin_unpredictable(t != 0) ? bid_bits_ : ask_bits_;
+    0.00 :   5a886:  test   %r9b,%r9b
+    0.00 :   5a889:  mov    %r11,0x38(%rsp)
+    0.00 :   5a88e:  mov    %r14,%rdi
+    0.00 :   5a891:  mov    %r10,%rsi
+    0.00 :   5a894:  mov    %r11,%rdx
+    0.00 :   5a897:  mov    %r15d,%ecx
+         : 1067  if (side == Side::Buy)
+    0.00 :   5a89a:  je     5a95c <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xbec>
+         : 1069  qty = match<Side::Sell>(id, price, qty);
+    0.00 :   5a8a0:  vzeroupper
+    0.00 :   5a8a3:  call   5d460 <unsigned int lob::v16::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)>
+    0.00 :   5a8a8:  jmp    5a964 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xbf4>
+         : 1073  grow();
+    0.00 :   5a8ad:  lea    0xc0(%r14),%rdi
+    0.00 :   5a8b4:  mov    %r10,%r15
+    0.00 :   5a8b7:  mov    %r11,%r12
+    0.00 :   5a8ba:  vzeroupper
+    0.00 :   5a8bd:  call   5c700 <lob::v16::OrderIndex::grow()>
+    0.00 :   5a8c2:  mov    %r12,%r11
+    0.00 :   5a8c5:  mov    %r15,%r10
+    0.00 :   5a8c8:  mov    0x20(%rsp),%r15
+    0.00 :   5a8cd:  jmp    5a058 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x2e8>
+    0.00 :   5a8d2:  mov    0xd0(%r14),%rdi
+         : 1084  const unsigned occupied = occ_[j];
+    0.00 :   5a8d9:  movzbl (%rdi,%r12,1),%r8d
+         : 1086  if (const unsigned free = ~occupied & kSlotLanes) {
+    0.00 :   5a8de:  mov    %r8d,%r9d
+    0.00 :   5a8e1:  and    $0x7f,%r9b
+    0.00 :   5a8e5:  mov    %r12,%rdx
+    0.00 :   5a8e8:  cmp    $0x7f,%r9b
+    0.00 :   5a8ec:  jne    5a912 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xba2>
+         : 1092  ++bk_[j].key[kCounter];  // passing a full bucket (read-modify-write, rare)
+    0.00 :   5a8ee:  mov    %rdx,%r8
+    0.00 :   5a8f1:  shl    $0x6,%r8
+    0.00 :   5a8f5:  incl   0x1c(%rcx,%r8,1)
+         : 1096  for (std::size_t j = b;; j = (j + 1) & mask_) {
+    0.00 :   5a8fa:  inc    %rdx
+    0.00 :   5a8fd:  and    %rsi,%rdx
+         : 1099  const unsigned occupied = occ_[j];
+    0.00 :   5a900:  movzbl (%rdi,%rdx,1),%r8d
+         : 1101  if (const unsigned free = ~occupied & kSlotLanes) {
+    0.00 :   5a905:  mov    %r8d,%r9d
+    0.00 :   5a908:  and    $0x7f,%r9b
+    0.00 :   5a90c:  cmp    $0x7f,%r9b
+    0.00 :   5a910:  je     5a8ee <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xb7e>
+    0.00 :   5a912:  xor    $0x7f,%r9b
+    0.00 :   5a916:  movzbl %r9b,%ecx
+    0.00 :   5a91a:  tzcnt  %ecx,%ecx
+         : 1109  occ_[j] = static_cast<std::uint8_t>(occupied | (1u << slot));
+    0.06 :   5a91e:  mov    $0x1,%r9b
+    0.00 :   5a921:  shl    %cl,%r9b
+    0.00 :   5a924:  mov    $0x1,%sil
+    0.00 :   5a927:  or     %r8b,%r9b
+    0.00 :   5a92a:  mov    %r9b,(%rdi,%rdx,1)
+         : 1115  bk_[j].key[slot] = k;
+    0.00 :   5a92e:  mov    %rdx,%rdi
+    0.04 :   5a931:  shl    $0x6,%rdi
+    0.00 :   5a935:  add    0xc8(%r14),%rdi
+    0.00 :   5a93c:  mov    %r10d,(%rdi,%rcx,4)
+         : 1120  ++size_;
+    0.00 :   5a940:  incq   0xf0(%r14)
+         : 1122  inserted = true;
+    0.00 :   5a947:  movb   $0x1,0x40(%rsp)
+         : 1124  return {&bk_[j].node[slot], static_cast<std::uint32_t>(j), static_cast<std::uint32_t>(b)};
+    0.00 :   5a94c:  lea    0x20(%rdi,%rcx,4),%rax
+    0.00 :   5a951:  movzbl 0x18(%rsp),%r9d
+    0.00 :   5a957:  jmp    5a7f1 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xa81>
+         : 1128  qty = match<Side::Buy>(id, price, qty);
+    0.00 :   5a95c:  vzeroupper
+    0.00 :   5a95f:  call   5cda0 <unsigned int lob::v16::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)>
+         : 1131  if (qty == 0) {
+    0.00 :   5a964:  test   %eax,%eax
+    0.00 :   5a966:  mov    0x10(%rsp),%r8
+    0.00 :   5a96b:  je     5a9ac <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xc3c>
+         : 1135  std::uint32_t i = free_head_;
+    0.00 :   5a96d:  mov    0xb8(%r14),%ebp
+    0.00 :   5a974:  mov    0xa0(%r14),%rdi
+    0.00 :   5a97b:  mov    $0xffffffff,%ecx
+    0.00 :   5a980:  cmp    %rcx,%rbp
+    0.00 :   5a983:  mov    0x8(%rsp),%r15
+    0.00 :   5a988:  mov    %eax,0x20(%rsp)
+         : 1142  if (i != kNil) {
+    0.00 :   5a98c:  je     5aa3f <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xccf>
+    0.00 :   5a992:  mov    %rbp,%rcx
+    0.00 :   5a995:  shl    $0x5,%rcx
+         : 1146  free_head_ = nodes_[i].next;
+    0.00 :   5a999:  mov    0x14(%rdi,%rcx,1),%ecx
+    0.00 :   5a99d:  mov    %ecx,0xb8(%r14)
+    0.00 :   5a9a4:  mov    %ebp,%r13d
+         : 1150  } else {
+    0.00 :   5a9a7:  jmp    5aa7f <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xd0f>
+         : 1152  if (h.bucket == kFallback) [[unlikely]] {
+    0.00 :   5a9ac:  mov    %r8d,%eax
+    0.00 :   5a9af:  mov    $0xffffffff,%ecx
+    0.00 :   5a9b4:  cmp    %rcx,%rax
+    0.00 :   5a9b7:  je     5ac34 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xec4>
+         : 1157  const auto slot = static_cast<unsigned>(h.value - bk_[h.bucket].node);
+    0.00 :   5a9bd:  mov    %rax,%rcx
+    0.00 :   5a9c0:  shl    $0x6,%rcx
+    0.00 :   5a9c4:  add    0xc8(%r14),%rcx
+    0.00 :   5a9cb:  mov    0x50(%rsp),%rdi
+    0.00 :   5a9d0:  sub    %rcx,%rdi
+    0.00 :   5a9d3:  add    $0xffffffffffffffe0,%rdi
+    0.00 :   5a9d7:  mov    %edi,%edx
+    0.00 :   5a9d9:  shr    $0x2,%edx
+         : 1166  bk_[h.bucket].key[slot] = kEmpty;
+    0.00 :   5a9dc:  movabs $0x3fffffffc,%rsi
+    0.00 :   5a9e6:  and    %rsi,%rdi
+    0.00 :   5a9e9:  movl   $0xffffffff,(%rdi,%rcx,1)
+         : 1170  occ_[h.bucket] &= static_cast<std::uint8_t>(~(1u << slot));
+    0.00 :   5a9f0:  mov    $0x1,%ecx
+    0.00 :   5a9f5:  shlx   %edx,%ecx,%ecx
+    0.00 :   5a9fa:  mov    0xd0(%r14),%rdx
+    0.00 :   5aa01:  not    %cl
+    0.00 :   5aa03:  and    %cl,(%rdx,%rax,1)
+         : 1176  for (std::size_t i = h.home; i != h.bucket; i = (i + 1) & mask_) --bk_[i].key[kCounter];
+    0.00 :   5aa06:  shr    $0x20,%r8
+    0.00 :   5aa0a:  cmp    %rax,%r8
+    0.00 :   5aa0d:  je     5aa33 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xcc3>
+    0.00 :   5aa0f:  mov    0xc8(%r14),%rcx
+    0.00 :   5aa16:  mov    0xe8(%r14),%rdx
+    0.00 :   5aa1d:  mov    %r8,%rsi
+    0.00 :   5aa20:  shl    $0x6,%rsi
+    0.00 :   5aa24:  decl   0x1c(%rcx,%rsi,1)
+    0.00 :   5aa28:  inc    %r8
+    0.00 :   5aa2b:  and    %rdx,%r8
+    0.00 :   5aa2e:  cmp    %rax,%r8
+    0.00 :   5aa31:  jne    5aa1d <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xcad>
+         : 1189  --size_;
+    0.00 :   5aa33:  decq   0xf0(%r14)
+         : 1191  }
+    0.00 :   5aa3a:  jmp    59dc5 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x55>
+         : 1193  return static_cast<size_type>(this->__end_ - this->__begin_);
+    0.00 :   5aa3f:  mov    0xa8(%r14),%r13
+    0.00 :   5aa46:  sub    %rdi,%r13
+         : 1196  if (nodes_.size() == kNil) throw std::length_error("v16: order pool exhausted");
+    0.00 :   5aa49:  movabs $0x1fffffffe0,%rax
+    0.00 :   5aa53:  cmp    %rax,%r13
+    0.00 :   5aa56:  je     5adc4 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x1054>
+    0.00 :   5aa5c:  shr    $0x5,%r13
+    0.00 :   5aa60:  lea    0xa0(%r14),%r12
+         : 1202  nodes_.emplace_back();
+    0.00 :   5aa67:  mov    %r12,%rdi
+    0.00 :   5aa6a:  call   5dce0 <lob::v16::BookT<lob::ChecksumSink, 16u>::OrderNode& std::__1::vector<lob::v16::BookT<lob::ChecksumSink, 16u>::OrderNode, std::__1::allocator<lob::v16::BookT<lob::ChecksumSink, 16u>::OrderNode> >::emplace_back<>()>
+         : 1205  return this->__begin_[__n];
+    0.00 :   5aa6f:  mov    (%r12),%rdi
+         : 1207  nodes_[i] = OrderNode{id, price, qty, kNil, kNil, side};
+    0.00 :   5aa73:  mov    %r13d,%ebp
+    0.00 :   5aa76:  mov    0x28(%rsp),%r12
+    0.00 :   5aa7b:  mov    0x20(%rsp),%eax
+    0.00 :   5aa7f:  shl    $0x5,%rbp
+    0.00 :   5aa83:  mov    %r15,(%rdi,%rbp,1)
+    0.00 :   5aa87:  mov    0x38(%rsp),%rdx
+    0.00 :   5aa8c:  mov    %rdx,0x8(%rdi,%rbp,1)
+    0.00 :   5aa91:  mov    %eax,0x10(%rdi,%rbp,1)
+    0.00 :   5aa95:  movq   $0xffffffffffffffff,0x14(%rdi,%rbp,1)
+    0.00 :   5aa9e:  movzbl 0x18(%rsp),%esi
+    0.00 :   5aaa3:  mov    %sil,0x1c(%rdi,%rbp,1)
+         : 1219  if (!anchored_) anchor_if_on_tick(price);
+    0.00 :   5aaa8:  cmpb   $0x0,0x58(%r14)
+    0.00 :   5aaad:  jne    5aacc <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xd5c>
+    0.00 :   5aaaf:  mov    %r14,%rdi
+    0.00 :   5aab2:  mov    %rdx,%rsi
+    0.00 :   5aab5:  mov    %rdx,%r15
+    0.00 :   5aab8:  call   5db10 <lob::v16::BookT<lob::ChecksumSink, 16u>::anchor_if_on_tick(long)>
+    0.00 :   5aabd:  movzbl 0x18(%rsp),%esi
+    0.00 :   5aac2:  mov    %r15,%rdx
+         : 1228  if (!anchored_) return kNoSlot;
+    0.00 :   5aac5:  cmpb   $0x1,0x58(%r14)
+    0.00 :   5aaca:  jne    5ab1f <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xdaf>
+         : 1231  slot_div_.quotient(static_cast<std::uint64_t>(price) - static_cast<std::uint64_t>(base_));
+    0.00 :   5aacc:  mov    %rdx,%rax
+    0.00 :   5aacf:  sub    0x50(%r14),%rax
+    0.00 :   5aad3:  imul   0x40(%r14),%rax
+    0.00 :   5aad8:  movzbl 0x48(%r14),%ecx
+    0.00 :   5aadd:  ror    %cl,%rax
+         : 1237  return s < kSlots ? static_cast<std::uint32_t>(s) : kNoSlot;
+    0.00 :   5aae0:  cmp    $0xffff,%rax
+    0.00 :   5aae6:  ja     5ab1f <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xdaf>
+         : 1240  level = &grid_[s];
+    0.00 :   5aae8:  lea    (%rax,%rax,2),%r12
+    0.00 :   5aaec:  shl    $0x3,%r12
+    0.00 :   5aaf0:  add    0x20(%r14),%r12
+         : 1244  const Bitmap& opp = __builtin_unpredictable(t != 0) ? bid_bits_ : ask_bits_;
+    0.00 :   5aaf4:  xor    %ecx,%ecx
+    0.00 :   5aaf6:  test   %sil,%sil
+    0.00 :   5aaf9:  setne  %cl
+         : 1248  (side == Side::Buy ? bid_bits_ : ask_bits_).set(s ^ mirror(side));  // idempotent: no "was it empty" branch
+    0.00 :   5aafc:  lea    0x28(%r14,%rcx,8),%rdi
+         : 1250  static constexpr auto mirror(Side side) -> std::uint32_t { return side == Side::Buy ? kMirror : 0; }
+    0.00 :   5ab01:  mov    $0x0,%esi
+    0.00 :   5ab06:  mov    $0xffff,%ecx
+    0.00 :   5ab0b:  cmove  %ecx,%esi
+         : 1254  (side == Side::Buy ? bid_bits_ : ask_bits_).set(s ^ mirror(side));  // idempotent: no "was it empty" branch
+    0.00 :   5ab0e:  xor    %eax,%esi
+    0.00 :   5ab10:  mov    %rdx,%r15
+    0.00 :   5ab13:  call   34e80 <lob::v3::HierBitmap<16u>::set(unsigned int)>
+    0.00 :   5ab18:  mov    0x28(%rsp),%rsi
+         : 1259  } else {
+    0.00 :   5ab1d:  jmp    5ab33 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xdc3>
+         : 1261  level = off_grid_level(side, price);
+    0.00 :   5ab1f:  mov    %r14,%rdi
+    0.00 :   5ab22:  mov    %r12d,%esi
+    0.00 :   5ab25:  mov    %rdx,%r15
+    0.00 :   5ab28:  call   5db50 <lob::v16::BookT<lob::ChecksumSink, 16u>::off_grid_level(lob::Side, long)>
+    0.00 :   5ab2d:  mov    %r12,%rsi
+    0.00 :   5ab30:  mov    %rax,%r12
+         : 1268  const std::uint32_t tail = level.tail;
+    0.00 :   5ab33:  mov    0x4(%r12),%eax
+         : 1270  std::uint32_t* link = has_tail ? &nodes_[has_tail ? tail : 0].next : &level.head;
+    0.00 :   5ab38:  mov    %rax,%rcx
+    0.00 :   5ab3b:  shl    $0x5,%rcx
+         : 1273  const std::uint32_t tail = level.tail;
+    0.00 :   5ab3f:  mov    $0xffffffff,%edx
+    0.00 :   5ab44:  cmp    %rdx,%rax
+         : 1276  std::uint32_t* link = has_tail ? &nodes_[has_tail ? tail : 0].next : &level.head;
+    0.00 :   5ab47:  mov    0xa0(%r14),%rdx
+    0.00 :   5ab4e:  lea    0x14(%rdx,%rcx,1),%rcx
+    0.00 :   5ab53:  cmove  %r12,%rcx
+         : 1280  *link = i;
+    0.00 :   5ab57:  mov    %r13d,(%rcx)
+         : 1282  nodes_[i].prev = tail;
+    0.00 :   5ab5a:  mov    %eax,0x18(%rdx,%rbp,1)
+         : 1284  nodes_[i].next = kNil;
+    0.00 :   5ab5e:  movl   $0xffffffff,0x14(%rdx,%rbp,1)
+         : 1286  level.tail = i;
+    0.00 :   5ab66:  mov    %r13d,0x4(%r12)
+         : 1288  ++level.count;
+    0.00 :   5ab6b:  incl   0x10(%r12)
+         : 1290  level->total_qty += qty;
+    0.00 :   5ab70:  mov    0x20(%rsp),%eax
+    0.00 :   5ab74:  add    %rax,0x8(%r12)
+    0.00 :   5ab79:  mov    0x50(%rsp),%rcx
+         : 1294  *slot.value = i;
+    0.00 :   5ab7e:  mov    %r13d,(%rcx)
+         : 1296  sink_.on(Rested{id, side, price, qty});
+    0.00 :   5ab81:  mov    (%r14),%rcx
+         : 1298  ++events;
+    0.00 :   5ab84:  incq   0x8(%rcx)
+         : 1300  ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.00 :   5ab88:  mov    (%rcx),%rdx
+    0.00 :   5ab8b:  xor    $0x2,%rdx
+    0.00 :   5ab8f:  movabs $0x9e3779b97f4a7c15,%rbp
+    0.00 :   5ab99:  imul   %rbp,%rdx
+    0.00 :   5ab9d:  xor    0x8(%rsp),%rdx
+    0.00 :   5aba2:  imul   %rbp,%rdx
+    0.00 :   5aba6:  xor    %rsi,%rdx
+    0.00 :   5aba9:  imul   %rbp,%rdx
+    0.00 :   5abad:  xor    %r15,%rdx
+    0.00 :   5abb0:  imul   %rbp,%rdx
+    0.00 :   5abb4:  xor    %rax,%rdx
+    0.00 :   5abb7:  imul   %rbp,%rdx
+    0.00 :   5abbb:  mov    %rdx,(%rcx)
+    0.00 :   5abbe:  mov    0x30(%rsp),%r13
+    0.00 :   5abc3:  jmp    59dc5 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x55>
+         : 1316  return insert_fallback(id, inserted);
+    0.00 :   5abc8:  lea    0xc0(%r14),%rdi
+    0.00 :   5abcf:  mov    %r10,%rsi
+    0.00 :   5abd2:  lea    0x40(%rsp),%rdx
+    0.00 :   5abd7:  mov    %r10,%r15
+    0.00 :   5abda:  mov    %r11,%r12
+    0.00 :   5abdd:  vzeroupper
+    0.00 :   5abe0:  call   5cbb0 <lob::v16::OrderIndex::insert_fallback(unsigned long, bool&)>
+    0.00 :   5abe5:  movzbl 0x18(%rsp),%r9d
+    0.00 :   5abeb:  mov    %r12,%r11
+    0.00 :   5abee:  mov    %r15,%r10
+    0.00 :   5abf1:  mov    0x20(%rsp),%r15
+         : 1328  if (!inserted) return reject(id, OpType::Push, RejectReason::DuplicateId);
+    0.00 :   5abf6:  movzbl 0x40(%rsp),%esi
+    0.00 :   5abfb:  test   %sil,%sil
+    0.00 :   5abfe:  jne    5a109 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x399>
+    0.00 :   5ac04:  jmp    5a803 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xa93>
+         : 1333  grow();
+    0.00 :   5ac09:  lea    0xc0(%r14),%rdi
+    0.00 :   5ac10:  mov    %r10,%r15
+    0.00 :   5ac13:  mov    %r11,%r12
+    0.00 :   5ac16:  vzeroupper
+    0.00 :   5ac19:  call   5c700 <lob::v16::OrderIndex::grow()>
+    0.00 :   5ac1e:  movzbl 0x18(%rsp),%r9d
+    0.00 :   5ac24:  mov    %r12,%r11
+    0.00 :   5ac27:  mov    %r15,%r10
+    0.00 :   5ac2a:  mov    0x20(%rsp),%r15
+    0.00 :   5ac2f:  jmp    5a75d <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x9ed>
+    0.00 :   5ac34:  mov    0x8(%rsp),%rdx
+         : 1345  __uint128_t r = (__uint128_t)x * y;
+    0.00 :   5ac39:  mulx   %rbp,%rcx,%rax
+         : 1347  return (boost::uint64_t)r ^ (boost::uint64_t)( r >> 64 );
+    0.00 :   5ac3e:  xor    %rcx,%rax
+         : 1349  return size_policy::position(hash,arrays_.groups_size_index);
+    0.00 :   5ac41:  movzbl 0x108(%r14),%ecx
+         : 1351  return hash>>size_index_;
+    0.00 :   5ac49:  shrx   %rcx,%rax,%rcx
+    0.00 :   5ac4e:  mov    0x118(%r14),%rdx
+    0.00 :   5ac55:  movzbl %al,%esi
+    0.00 :   5ac58:  lea    0x1ec51(%rip),%rdi        # 798b0 <boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>::match_word(unsigned long)::word>
+    0.00 :   5ac5f:  vpbroadcastd (%rdi,%rsi,4),%xmm0
+    0.00 :   5ac65:  mov    0x120(%r14),%rsi
+    0.00 :   5ac6c:  and    $0x7,%eax
+    0.00 :   5ac6f:  mov    0x110(%r14),%rdi
+    0.00 :   5ac76:  xor    %r8d,%r8d
+         : 1361  auto pg=arrays.groups()+pos;
+    0.00 :   5ac79:  mov    %rcx,%r9
+    0.00 :   5ac7c:  shl    $0x4,%r9
+         : 1364  return _mm_load_si128(reinterpret_cast<const __m128i*>(m));
+    0.00 :   5ac80:  vmovdqa (%rdx,%r9,1),%xmm1
+         : 1366  _mm_cmpeq_epi8(load_metadata(),_mm_set1_epi32(match_word(hash))))&0x7FFF;
+    0.00 :   5ac86:  vpcmpeqb %xmm0,%xmm1,%k0
+         : 1368  return _mm_movemask_epi8(
+    0.00 :   5ac8c:  kmovd  %k0,%r10d
+         : 1370  if(mask){
+    0.00 :   5ac90:  and    $0x7fff,%r10w
+    0.00 :   5ac96:  je     5accd <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xf5d>
+    0.00 :   5ac98:  add    %rdx,%r9
+         : 1374  _mm_cmpeq_epi8(load_metadata(),_mm_set1_epi32(match_word(hash))))&0x7FFF;
+    0.00 :   5ac9b:  movzwl %r10w,%r11d
+         : 1376  auto p=elements+pos*N;
+    0.00 :   5ac9f:  imul   $0xf0,%rcx,%r10
+    0.00 :   5aca6:  lea    (%rsi,%r10,1),%r15
+         : 1379  BOOST_UNORDERED_PREFETCH_ELEMENTS(p,N);
+    0.00 :   5acaa:  prefetcht0 (%rsi,%r10,1)
+         : 1381  return (unsigned int)__builtin_ctz((unsigned int)x);
+    0.00 :   5acaf:  tzcnt  %r11d,%r10d
+         : 1383  if(BOOST_LIKELY(bool(pred()(x,key_from(p[n]))))){
+    0.00 :   5acb4:  mov    %r10d,%r12d
+    0.00 :   5acb7:  shl    $0x4,%r12d
+    0.00 :   5acbb:  mov    0x8(%rsp),%r13
+    0.00 :   5acc0:  cmp    (%r15,%r12,1),%r13
+    0.00 :   5acc4:  je     5ad0c <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xf9c>
+         : 1389  }while(mask);
+    0.00 :   5acc6:  blsr   %r11d,%r11d
+    0.00 :   5accb:  jne    5acaf <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xf3f>
+    0.00 :   5accd:  vpextrb $0xf,%xmm1,%r9d
+         : 1393  return !(overflow()&shift[hash%8]);
+    0.00 :   5acd3:  lea    0x1efd6(%rip),%r10        # 79cb0 <boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>::is_not_overflowed(unsigned long) const::shift>
+    0.00 :   5acda:  test   %r9b,(%rax,%r10,1)
+    0.00 :   5acde:  mov    0x30(%rsp),%r13
+    0.00 :   5ace3:  movabs $0x9e3779b97f4a7c15,%rbp
+         : 1398  if(BOOST_LIKELY(pg->is_not_overflowed(hash))){
+    0.00 :   5aced:  je     59dc5 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x55>
+         : 1400  pos=(pos+step)&mask;
+    0.00 :   5acf3:  lea    0x1(%r8,%rcx,1),%rcx
+         : 1402  step+=1;
+    0.00 :   5acf8:  inc    %r8
+         : 1404  pos=(pos+step)&mask;
+    0.00 :   5acfb:  and    %rdi,%rcx
+         : 1406  return step<=mask;
+    0.00 :   5acfe:  cmp    %rdi,%r8
+         : 1408  }
+    0.00 :   5ad01:  jbe    5ac79 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0xf09>
+    0.00 :   5ad07:  jmp    59dc5 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x55>
+         : 1411  reinterpret_cast<unsigned char*>(const_cast<group_type*>(pg))+n)},
+    0.00 :   5ad0c:  lea    (%r9,%r10,1),%rax
+    0.00 :   5ad10:  movzbl (%r9,%r10,1),%ecx
+         : 1414  return m[pos];
+    0.00 :   5ad15:  or     $0xf,%rax
+         : 1416  return !(overflow()&shift[hash%8]);
+    0.00 :   5ad19:  and    $0x7,%ecx
+    0.00 :   5ad1c:  lea    0x1ef8d(%rip),%rdx        # 79cb0 <boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>::is_not_overflowed(unsigned long) const::shift>
+    0.00 :   5ad23:  movzbl (%rcx,%rdx,1),%ecx
+    0.00 :   5ad27:  and    (%rax),%cl
+         : 1421  size_ctrl.ml-=group_type::maybe_caused_overflow(pc);
+    0.00 :   5ad29:  neg    %cl
+    0.00 :   5ad2b:  mov    $0x0,%eax
+    0.00 :   5ad30:  sbb    %rax,%rax
+         : 1425  void operator=(Integral m){n=m;}
+    0.00 :   5ad33:  movb   $0x0,(%r9,%r10,1)
+    0.00 :   5ad38:  vpmovsxbq 0x1986d(%rip),%xmm0        # 745ae <_IO_stdin_used+0x5ae>
+    0.00 :   5ad41:  vpinsrq $0x0,%rax,%xmm0,%xmm0
+    0.00 :   5ad47:  vpaddq 0x128(%r14),%xmm0,%xmm0
+    0.00 :   5ad50:  vmovdqu %xmm0,0x128(%r14)
+    0.00 :   5ad59:  mov    0x30(%rsp),%r13
+    0.00 :   5ad5e:  movabs $0x9e3779b97f4a7c15,%rbp
+         : 1433  !std::is_convertible<Key,const_iterator>::value, std::size_t>::type
+         : 1434  {
+         : 1435  auto it=find(x);
+         : 1436  if(it!=end()){
+         : 1437  erase(it);
+         : 1438  return 1;
+    0.00 :   5ad68:  jmp    59dc5 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x55>
+         : 1440  apply(book, op);
+         : 1441  if constexpr (kCheckInvariants) book.check_invariants();
+         : 1442  }
+         : 1443  }
+    0.00 :   5ad6d:  add    $0x68,%rsp
+    0.00 :   5ad71:  pop    %rbx
+    0.00 :   5ad72:  pop    %r12
+    0.00 :   5ad74:  pop    %r13
+    0.00 :   5ad76:  pop    %r14
+    0.00 :   5ad78:  pop    %r15
+    0.00 :   5ad7a:  pop    %rbp
+    0.00 :   5ad7b:  vzeroupper
+    0.00 :   5ad7e:  ret
+         : 1453  if (nodes_.size() == kNil) throw std::length_error("v16: order pool exhausted");
+    0.00 :   5ad7f:  mov    $0x10,%edi
+    0.00 :   5ad84:  vzeroupper
+    0.00 :   5ad87:  call   4230 <__cxa_allocate_exception@plt>
+    0.00 :   5ad8c:  mov    %rax,%rbx
+    0.00 :   5ad8f:  lea    0x1b231(%rip),%rsi        # 75fc7 <_IO_stdin_used+0x1fc7>
+    0.00 :   5ad96:  mov    %rax,%rdi
+    0.00 :   5ad99:  call   21060 <std::length_error::length_error[abi:ne210105](char const*)>
+    0.00 :   5ad9e:  mov    0x2d183(%rip),%rsi        # 87f28 <typeinfo for std::length_error@Base>
+    0.00 :   5ada5:  mov    0x2d1ec(%rip),%rdx        # 87f98 <std::length_error::~length_error()@Base>
+    0.00 :   5adac:  mov    %rbx,%rdi
+    0.00 :   5adaf:  call   42d0 <__cxa_throw@plt>
+         : 1465  std::__throw_bad_array_new_length();
+    0.00 :   5adb4:  vzeroupper
+    0.00 :   5adb7:  call   1fba0 <std::__throw_bad_array_new_length[abi:ne210105]()>
+         : 1468  this->__throw_length_error();
+    0.00 :   5adbc:  vzeroupper
+    0.00 :   5adbf:  call   5ddf0 <std::__1::vector<lob::v16::BookT<lob::ChecksumSink, 16u>::OrderNode, std::__1::allocator<lob::v16::BookT<lob::ChecksumSink, 16u>::OrderNode> >::__throw_length_error[abi:ne210105]()>
+    0.00 :   5adc4:  mov    $0x10,%edi
+    0.00 :   5adc9:  call   4230 <__cxa_allocate_exception@plt>
+    0.00 :   5adce:  mov    %rax,%rbx
+    0.00 :   5add1:  lea    0x1b1ef(%rip),%rsi        # 75fc7 <_IO_stdin_used+0x1fc7>
+    0.00 :   5add8:  mov    %rax,%rdi
+    0.00 :   5addb:  call   21060 <std::length_error::length_error[abi:ne210105](char const*)>
+    0.00 :   5ade0:  jmp    5ad9e <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x102e>
+    0.00 :   5ade2:  jmp    5ade4 <void lob::replay<lob::v16::BookT<lob::ChecksumSink, 16u> >(lob::v16::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)+0x1074>
+    0.00 :   5ade4:  mov    %rax,%r14
+    0.00 :   5ade7:  mov    %rbx,%rdi
+    0.00 :   5adea:  call   4030 <__cxa_free_exception@plt>
+    0.00 :   5adef:  mov    %r14,%rdi
+    0.00 :   5adf2:  call   45b0 <_Unwind_Resume@plt>
+ Percent |	Source code & Disassembly of book for cycles:u (13 samples, percent: local period)
+--------------------------------------------------------------------------------------------------
+         :
+         :
+         :
+         : 3     Disassembly of section .text:
+         :
+         : 5     000000000005bc50 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)>:
+         : 6     const Qty remaining = nodes_[*it.value].qty;
+         : 7     erase(it, id);
+         : 8     sink_.on(Cancelled{id, remaining});
+         : 9     }
+         :
+         : 11    [[gnu::noinline]] void modify(OrderId id, Price price, Qty qty) {  // 1% of ITCH ops
+    8.37 :   5bc50:  push   %rbp
+    0.00 :   5bc51:  push   %r15
+    0.00 :   5bc53:  push   %r14
+    8.64 :   5bc55:  push   %r13
+    0.00 :   5bc57:  push   %r12
+    0.00 :   5bc59:  push   %rbx
+    0.00 :   5bc5a:  sub    $0x58,%rsp
+    0.00 :   5bc5e:  mov    %ecx,%ebp
+    0.00 :   5bc60:  mov    %rdi,%rbx
+    0.00 :   5bc63:  movabs $0x9e3779b97f4a7c15,%r13
+    0.00 :   5bc6d:  mov    $0xfffffffe,%eax
+         : 23    [[nodiscard]] auto size() const noexcept -> std::size_t { return size_ + fallback_.size(); }
+         :
+         : 25    // the hot operations are always_inline: they sit on the book's pinned hot
+         : 26    // path (v12), and left to the heuristics try_insert / erase stayed calls
+         : 27    [[gnu::always_inline]] [[nodiscard]] auto find(Id id) -> Handle {
+         : 28    if (id >= kEmpty) [[unlikely]]
+    0.00 :   5bc72:  cmp    %rax,%rsi
+    0.00 :   5bc75:  ja     5c289 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x639>
+         : 31    static constexpr std::uint32_t kEmpty = ~std::uint32_t{0};
+         : 32    static constexpr unsigned kSlots = 7, kCounter = 7, kSlotLanes = 0x7F;
+         : 33    static constexpr std::size_t kInitialBuckets = 256;
+         :
+         : 35    [[nodiscard]] auto home(std::uint32_t k) const -> std::size_t {
+         : 36    return static_cast<std::size_t>((std::uint64_t{k} * 0x9E3779B97F4A7C15ull) >> shift_);  // Fibonacci hashing
+    0.00 :   5bc7b:  mov    %rsi,%rax
+    0.00 :   5bc7e:  imul   %r13,%rax
+    0.00 :   5bc82:  movzbl 0x100(%rbx),%ecx
+    0.00 :   5bc89:  shrx   %rcx,%rax,%r15
+    0.00 :   5bc8e:  mov    0xc8(%rbx),%rax
+    0.00 :   5bc95:  vpbroadcastd %esi,%ymm0
+         : 43    return {&bk_[j].node[slot], static_cast<std::uint32_t>(j), static_cast<std::uint32_t>(b)};
+         : 44    }
+         : 45    // bit s set when key[s] == v, for the 7 slot lanes
+         : 46    [[nodiscard]] auto lanes_equal(std::size_t j, std::uint32_t v) const -> unsigned {
+         : 47    #if defined(__AVX2__)
+         : 48    const __m256i keys = _mm256_load_si256(reinterpret_cast<const __m256i*>(bk_[j].key));
+    0.00 :   5bc9b:  mov    %r15,%rcx
+    0.00 :   5bc9e:  shl    $0x6,%rcx
+         : 51    const __m256i eq = _mm256_cmpeq_epi32(keys, _mm256_set1_epi32(static_cast<int>(v)));
+    0.00 :   5bca2:  vpcmpeqd (%rax,%rcx,1),%ymm0,%k0
+         : 53    return static_cast<unsigned>(_mm256_movemask_ps(_mm256_castsi256_ps(eq))) & kSlotLanes;
+   22.15 :   5bca9:  kmovd  %k0,%r8d
+    0.00 :   5bcad:  mov    %r15,%rcx
+         : 56    if (const unsigned m = lanes_equal(j, k)) return handle(b, j, static_cast<unsigned>(std::countr_zero(m)));
+    0.00 :   5bcb0:  and    $0x7f,%r8b
+    0.00 :   5bcb4:  jne    5bcf1 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0xa1>
+    0.00 :   5bcb6:  mov    0xe8(%rbx),%rdi
+    0.00 :   5bcbd:  mov    %r15,%rcx
+         : 61    const __m256i keys = _mm256_load_si256(reinterpret_cast<const __m256i*>(bk_[j].key));
+    0.00 :   5bcc0:  mov    %rcx,%r8
+    0.00 :   5bcc3:  shl    $0x6,%r8
+         : 64    if (bk_[j].key[kCounter] == 0) return {};
+    0.00 :   5bcc7:  cmpl   $0x0,0x1c(%rax,%r8,1)
+    0.00 :   5bccd:  je     5c2e8 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x698>
+         : 67    for (std::size_t j = b;; j = (j + 1) & mask_) {
+    0.00 :   5bcd3:  inc    %rcx
+    0.00 :   5bcd6:  and    %rdi,%rcx
+         : 70    const __m256i keys = _mm256_load_si256(reinterpret_cast<const __m256i*>(bk_[j].key));
+    0.00 :   5bcd9:  mov    %rcx,%r8
+    0.00 :   5bcdc:  shl    $0x6,%r8
+         : 73    const __m256i eq = _mm256_cmpeq_epi32(keys, _mm256_set1_epi32(static_cast<int>(v)));
+    0.00 :   5bce0:  vpcmpeqd (%rax,%r8,1),%ymm0,%k0
+         : 75    return static_cast<unsigned>(_mm256_movemask_ps(_mm256_castsi256_ps(eq))) & kSlotLanes;
+    0.00 :   5bce7:  kmovd  %k0,%r8d
+         : 77    if (const unsigned m = lanes_equal(j, k)) return handle(b, j, static_cast<unsigned>(std::countr_zero(m)));
+    0.00 :   5bceb:  and    $0x7f,%r8b
+    0.00 :   5bcef:  je     5bcc0 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x70>
+         : 80    const __m256i keys = _mm256_load_si256(reinterpret_cast<const __m256i*>(bk_[j].key));
+    0.00 :   5bcf1:  mov    %rcx,%rdi
+    0.00 :   5bcf4:  shl    $0x6,%rdi
+    0.00 :   5bcf8:  add    %rdi,%rax
+         : 84    _LIBCPP_BEGIN_NAMESPACE_STD
+         :
+         : 86    template <class _Tp>
+         : 87    [[__nodiscard__]] _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR int __countr_zero(_Tp __t) _NOEXCEPT {
+         : 88    static_assert(__is_unsigned_integer_v<_Tp>, "__countr_zero only works with unsigned types");
+         : 89    return __builtin_ctzg(__t, numeric_limits<_Tp>::digits);
+    0.00 :   5bcfb:  movzbl %r8b,%edi
+    0.00 :   5bcff:  tzcnt  %edi,%edi
+         : 92    return {&bk_[j].node[slot], static_cast<std::uint32_t>(j), static_cast<std::uint32_t>(b)};
+    9.11 :   5bd03:  lea    0x20(%rax,%rdi,4),%rax
+         : 94    }
+    0.00 :   5bd08:  mov    %r15d,%r14d
+    0.00 :   5bd0b:  shl    $0x20,%r15
+    0.00 :   5bd0f:  or     %rcx,%r15
+         : 98    const auto it = index_.find(id);
+         : 99    if (!it) return reject(id, OpType::Modify, RejectReason::UnknownId);
+         : 100   if (qty == 0) return reject(id, OpType::Modify, RejectReason::InvalidQty);
+    0.00 :   5bd12:  test   %ebp,%ebp
+    0.00 :   5bd14:  je     5c2b8 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x668>
+         : 103   if (price <= 0) return reject(id, OpType::Modify, RejectReason::InvalidPrice);
+    6.23 :   5bd1a:  test   %rdx,%rdx
+    0.00 :   5bd1d:  jle    5bdb6 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x166>
+         :
+         : 107   const Loc loc = loc_of(*it.value);
+    0.00 :   5bd23:  mov    (%rax),%edi
+         : 109   _LIBCPP_ASSERT_VALID_ELEMENT_ACCESS(__n < size(), "vector[] index out of bounds");
+         : 110   return this->__begin_[__n];
+         : 111   }
+         : 112   _LIBCPP_CONSTEXPR_SINCE_CXX20 _LIBCPP_HIDE_FROM_ABI const_reference operator[](size_type __n) const _NOEXCEPT {
+         : 113   _LIBCPP_ASSERT_VALID_ELEMENT_ACCESS(__n < size(), "vector[] index out of bounds");
+         : 114   return this->__begin_[__n];
+    0.00 :   5bd25:  mov    0xa0(%rbx),%r10
+    0.00 :   5bd2c:  mov    %rdi,%rcx
+    0.00 :   5bd2f:  shl    $0x5,%rcx
+         : 118   Side side;
+         : 119   };
+         : 120   using Index = OrderIndex;
+         : 121   using Handle = Index::Handle;
+         :
+         : 123   [[nodiscard]] auto loc_of(std::uint32_t i) const -> Loc { return {nodes_[i].price, i, nodes_[i].side}; }
+    0.00 :   5bd33:  mov    0x8(%r10,%rcx,1),%r8
+    8.85 :   5bd38:  movzbl 0x1c(%r10,%rcx,1),%r9d
+    6.56 :   5bd3e:  mov    %r9b,0xf(%rsp)
+         : 127   // false => match() would consume nothing (no opposite level at or through the
+         : 128   // limit). Prices are normalised by the taker's sign (sell side negated) so
+         : 129   // "crosses" is `best <= limit` for both sides; the only data-dependent branch
+         : 130   // left is "opposite grid empty", which is rare.
+         : 131   [[nodiscard]] auto may_cross(Side side, Price limit) const -> bool {
+         : 132   const auto t = static_cast<std::uint32_t>(side);          // Buy = 0, Sell = 1
+    0.00 :   5bd43:  movzbl %r9b,%r11d
+         : 134   [[nodiscard]] auto loc_of(std::uint32_t i) const -> Loc { return {nodes_[i].price, i, nodes_[i].side}; }
+    0.00 :   5bd47:  mov    %r11,%r9
+    0.00 :   5bd4a:  shl    $0x20,%r9
+    0.00 :   5bd4e:  or     %rdi,%r9
+         : 138   const Loc loc = loc_of(*it.value);
+    0.00 :   5bd51:  mov    %r8,0x48(%rsp)
+    0.00 :   5bd56:  mov    %r9,0x50(%rsp)
+   16.36 :   5bd5b:  mov    0x10(%r10,%rcx,1),%r12d
+         : 142   if (price == loc.price && qty <= node.qty) {  // reduce: keep priority
+    0.00 :   5bd60:  cmp    %r8,%rdx
+    0.00 :   5bd63:  jne    5bde0 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x190>
+    0.00 :   5bd65:  cmp    %ebp,%r12d
+    0.00 :   5bd68:  jb     5bde0 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x190>
+    0.00 :   5bd6a:  add    %rcx,%r10
+         : 148   level_of(loc).total_qty -= node.qty - qty;
+    0.00 :   5bd6d:  sub    %ebp,%r12d
+         : 150   if (!anchored_) return kNoSlot;
+    0.00 :   5bd70:  cmpb   $0x1,0x58(%rbx)
+    0.00 :   5bd74:  jne    5bef0 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x2a0>
+         : 153   slot_div_.quotient(static_cast<std::uint64_t>(price) - static_cast<std::uint64_t>(base_));
+    0.00 :   5bd7a:  mov    %rdx,%rdi
+    0.00 :   5bd7d:  sub    0x50(%rbx),%rdi
+         : 156   // x / d if x is a multiple of d, otherwise some value >= ceil(2^64 / d)
+         : 157   [[nodiscard]] auto quotient(std::uint64_t x) const noexcept -> std::uint64_t {
+         : 158   // the builtin is one funnel shift; std::rotr takes an int count and keeps its
+         : 159   // "% 64 / zero / negative" handling in the IR the inliner prices, which pushed
+         : 160   // v11's erase() (cost 565) over the threshold v10's (515) stayed under
+         : 161   return __builtin_rotateright64(x * inv_, shift_);
+    0.00 :   5bd81:  imul   0x40(%rbx),%rdi
+    0.00 :   5bd86:  movzbl 0x48(%rbx),%ecx
+    0.00 :   5bd8a:  ror    %cl,%rdi
+         : 165   return s < kSlots ? static_cast<std::uint32_t>(s) : kNoSlot;
+    0.00 :   5bd8d:  cmp    $0x10000,%rdi
+    0.00 :   5bd94:  mov    $0xffffffff,%ecx
+    0.00 :   5bd99:  cmovb  %edi,%ecx
+         : 169   if (const std::uint32_t s = slot_of(loc.price); s != kNoSlot) return grid_[s];
+    6.80 :   5bd9c:  cmp    $0xffffffff,%ecx
+    0.00 :   5bd9f:  je     5bef0 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x2a0>
+    0.00 :   5bda5:  lea    (%rcx,%rcx,2),%rcx
+    0.00 :   5bda9:  shl    $0x3,%rcx
+    0.00 :   5bdad:  add    0x20(%rbx),%rcx
+    0.00 :   5bdb1:  jmp    5bfda <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x38a>
+         : 176   void reject(OrderId id, OpType op, RejectReason reason) { sink_.on(Rejected{id, op, reason}); }
+    0.00 :   5bdb6:  mov    (%rbx),%rax
+         : 178   }
+         :
+         : 180   private:
+         : 181   template <class... T>
+         : 182   void mix(T... xs) noexcept {
+         : 183   ++events;
+    0.00 :   5bdb9:  incq   0x8(%rax)
+         : 185   ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.00 :   5bdbd:  mov    (%rax),%rcx
+    0.00 :   5bdc0:  xor    $0x5,%rcx
+    0.00 :   5bdc4:  imul   %r13,%rcx
+    0.00 :   5bdc8:  xor    %rsi,%rcx
+    0.00 :   5bdcb:  imul   %r13,%rcx
+    0.00 :   5bdcf:  xor    $0x2,%rcx
+    0.00 :   5bdd3:  imul   %r13,%rcx
+    0.00 :   5bdd7:  xor    $0x1,%rcx
+    0.00 :   5bddb:  jmp    5c30d <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x6bd>
+    0.00 :   5bde0:  mov    %rax,0x28(%rsp)
+    0.00 :   5bde5:  mov    %rdx,0x18(%rsp)
+    0.00 :   5bdea:  lea    0x48(%rsp),%rax
+         : 198   remove_from_level(loc);  // keep the index slot: add() refills or erases it
+    0.00 :   5bdef:  mov    %rbx,%rdi
+    0.00 :   5bdf2:  mov    %rsi,0x10(%rsp)
+    0.00 :   5bdf7:  mov    %rax,%rsi
+    0.00 :   5bdfa:  mov    %r11,0x20(%rsp)
+    0.00 :   5bdff:  vzeroupper
+    0.00 :   5be02:  call   5e230 <lob::v16::BookT<lob::ChecksumSink, 16u>::remove_from_level(lob::v16::BookT<lob::ChecksumSink, 16u>::Loc const&)>
+    0.00 :   5be07:  mov    0x20(%rsp),%r10
+    0.00 :   5be0c:  mov    0x10(%rsp),%rax
+         : 207   sink_.on(Cancelled{id, old_qty});
+    0.00 :   5be11:  mov    (%rbx),%rcx
+         : 209   ++events;
+    0.00 :   5be14:  incq   0x8(%rcx)
+         : 211   ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.00 :   5be18:  mov    (%rcx),%rdx
+    0.00 :   5be1b:  xor    $0x3,%rdx
+    0.00 :   5be1f:  imul   %r13,%rdx
+    0.00 :   5be23:  xor    %rax,%rdx
+    0.00 :   5be26:  imul   %r13,%rdx
+    0.00 :   5be2a:  xor    %r12,%rdx
+    0.00 :   5be2d:  imul   %r13,%rdx
+    0.00 :   5be31:  mov    %rdx,(%rcx)
+         : 220   const Price sign = 1 - 2 * static_cast<Price>(t);
+    0.00 :   5be34:  lea    (%r10,%r10,1),%edx
+    0.00 :   5be38:  mov    $0x1,%ecx
+    0.00 :   5be3d:  sub    %rdx,%rcx
+         : 224   const std::uint32_t opp_mirror = kMirror & (0U - t);       // bids are mirrored
+         : 225   const Bitmap& opp = __builtin_unpredictable(t != 0) ? bid_bits_ : ask_bits_;
+    0.00 :   5be40:  xor    %esi,%esi
+    0.00 :   5be42:  cmpb   $0x0,0xf(%rsp)
+    0.00 :   5be47:  sete   %sil
+         : 229   Price best = taker_map_best_[t];  // already normalised; sentinel when the map is empty
+    0.00 :   5be4b:  mov    0x90(%rbx,%r10,8),%rdx
+         :
+         : 232   HierBitmap() = default;
+         : 233   explicit HierBitmap(std::uint64_t *words) noexcept : w_(words) {}
+         :
+         : 235   [[nodiscard]] auto empty() const noexcept -> bool {
+         : 236   return w_[kOffset[kLevels - 1]] == 0;
+    0.00 :   5be53:  mov    0x28(%rbx,%rsi,8),%rsi
+    0.00 :   5be58:  mov    0x2080(%rsi),%rdi
+    0.00 :   5be5f:  test   %rdi,%rdi
+         : 240   if (!opp.empty()) [[likely]]
+    0.00 :   5be62:  je     5bea9 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x259>
+         : 242   const std::uint32_t opp_mirror = kMirror & (0U - t);       // bids are mirrored
+    0.00 :   5be64:  mov    %r10d,%r8d
+    0.00 :   5be67:  neg    %r8d
+    0.00 :   5be6a:  tzcnt  %rdi,%rdi
+    0.00 :   5be6f:  tzcnt  0x2000(%rsi,%rdi,8),%r9
+         : 247   // lowest set slot; precondition: !empty()
+         : 248   [[nodiscard]] auto min() const noexcept -> std::uint32_t {
+         : 249   std::uint32_t i = 0;
+         : 250   for (unsigned l = kLevels; l-- > 0;) {
+         : 251   const std::uint64_t word = w_[kOffset[l] + i];
+         : 252   i = (i << 6) | static_cast<std::uint32_t>(std::countr_zero(word));
+    0.00 :   5be79:  shl    $0x6,%edi
+    0.00 :   5be7c:  or     %edi,%r9d
+    0.00 :   5be7f:  tzcnt  (%rsi,%r9,8),%rsi
+    0.00 :   5be85:  movzwl %r8w,%edi
+    0.00 :   5be89:  mov    %r9d,%r8d
+    0.00 :   5be8c:  shl    $0x6,%r8d
+    0.00 :   5be90:  or     %r8d,%esi
+         : 260   best = std::min(best, sign * price_of(opp.min() ^ opp_mirror));
+    0.00 :   5be93:  xor    %edi,%esi
+         : 262   [[nodiscard]] auto price_of(std::uint32_t slot) const -> Price { return base_ + static_cast<Price>(slot) * tick_; }
+    0.00 :   5be95:  imul   0x38(%rbx),%rsi
+    0.00 :   5be9a:  add    0x50(%rbx),%rsi
+         : 265   best = std::min(best, sign * price_of(opp.min() ^ opp_mirror));
+    0.00 :   5be9e:  imul   %rcx,%rsi
+    0.00 :   5bea2:  cmp    %rdx,%rsi
+    0.00 :   5bea5:  cmovl  %rsi,%rdx
+    0.00 :   5bea9:  mov    0x18(%rsp),%rsi
+         : 270   return best <= sign * limit;
+    0.00 :   5beae:  imul   %rsi,%rcx
+    0.00 :   5beb2:  cmp    %rcx,%rdx
+         : 273   }
+         :
+         : 275   // slot: this order's index entry (just reserved by push, or kept by modify)
+         : 276   [[gnu::always_inline]] void add(OrderId id, Side side, Price price, Qty qty, const Handle& slot) {
+         : 277   if (!may_cross(side, price)) [[likely]] return rest(id, side, price, qty, slot);
+    0.00 :   5beb5:  jle    5c326 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x6d6>
+         : 279   std::uint32_t i = free_head_;
+    0.00 :   5bebb:  mov    0xb8(%rbx),%r14d
+    0.00 :   5bec2:  mov    $0xffffffff,%ecx
+    0.00 :   5bec7:  cmp    %rcx,%r14
+         : 283   if (i != kNil) {
+    0.00 :   5beca:  je     5bf50 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x300>
+         : 285   return this->__begin_[__n];
+    0.00 :   5bed0:  mov    0xa0(%rbx),%rcx
+    0.00 :   5bed7:  mov    %r14,%rdx
+    0.00 :   5beda:  shl    $0x5,%rdx
+         : 289   free_head_ = nodes_[i].next;
+    0.00 :   5bede:  mov    0x14(%rcx,%rdx,1),%edx
+    0.00 :   5bee2:  mov    %edx,0xb8(%rbx)
+    0.00 :   5bee8:  mov    %r14d,%r12d
+         : 293   } else {
+    0.00 :   5beeb:  jmp    5c0f6 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x4a6>
+         : 295   return loc.side == Side::Buy ? bids_.find(loc.price)->second : asks_.find(loc.price)->second;
+    0.00 :   5bef0:  cmpb   $0x0,0xf(%rsp)
+    0.00 :   5bef5:  je     5bfa0 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x350>
+         : 298   public:
+         : 299   _LIBCPP_HIDE_FROM_ABI __end_node_pointer __end_node() _NOEXCEPT {
+         : 300   return pointer_traits<__end_node_pointer>::pointer_to(__end_node_);
+         : 301   }
+         : 302   _LIBCPP_HIDE_FROM_ABI __end_node_pointer __end_node() const _NOEXCEPT {
+         : 303   return pointer_traits<__end_node_pointer>::pointer_to(const_cast<__end_node_t&>(__end_node_));
+    0.00 :   5befb:  lea    0x80(%rbx),%rdi
+         : 305   _LIBCPP_HIDE_FROM_ABI value_compare& value_comp() _NOEXCEPT { return __value_comp_; }
+         : 306   _LIBCPP_HIDE_FROM_ABI const value_compare& value_comp() const _NOEXCEPT { return __value_comp_; }
+         :
+         : 308   public:
+         : 309   _LIBCPP_HIDE_FROM_ABI __node_pointer __root() const _NOEXCEPT {
+         : 310   return static_cast<__node_pointer>(__end_node()->__left_);
+    0.00 :   5bf02:  mov    0x80(%rbx),%r8
+         :
+         : 313   template <class _Tp, class _Compare, class _Allocator>
+         : 314   template <class _Key>
+         : 315   typename __tree<_Tp, _Compare, _Allocator>::iterator
+         : 316   __tree<_Tp, _Compare, _Allocator>::__lower_bound(const _Key& __v, __node_pointer __root, __end_node_pointer __result) {
+         : 317   while (__root != nullptr) {
+    0.00 :   5bf09:  test   %r8,%r8
+    0.00 :   5bf0c:  je     5bfd3 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x383>
+    0.00 :   5bf12:  mov    %rdi,%rcx
+    0.00 :   5bf15:  data16 cs nopw 0x0(%rax,%rax,1)
+         : 322   struct less<void> {
+         : 323   template <class _T1, class _T2>
+         : 324   _LIBCPP_CONSTEXPR_SINCE_CXX14 _LIBCPP_HIDE_FROM_ABI auto operator()(_T1&& __t, _T2&& __u) const
+         : 325   noexcept(noexcept(std::forward<_T1>(__t) < std::forward<_T2>(__u))) //
+         : 326   -> decltype(std::forward<_T1>(__t) < std::forward<_T2>(__u)) {
+         : 327   return std::forward<_T1>(__t) < std::forward<_T2>(__u);
+    0.00 :   5bf20:  xor    %r9d,%r9d
+    0.00 :   5bf23:  cmp    %rdx,0x20(%r8)
+    0.00 :   5bf27:  setl   %r9b
+         : 331   if (!value_comp()(__root->__value_, __v)) {
+    0.00 :   5bf2b:  cmovge %r8,%rcx
+    0.00 :   5bf2f:  mov    (%r8,%r9,8),%r8
+         : 334   while (__root != nullptr) {
+    0.00 :   5bf33:  test   %r8,%r8
+    0.00 :   5bf36:  jne    5bf20 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x2d0>
+         : 337   return __x.__ptr_ == __y.__ptr_;
+    0.00 :   5bf38:  cmp    %rdi,%rcx
+         : 339   if (__p != end() && !value_comp()(__v, *__p))
+    0.00 :   5bf3b:  je     5bfd3 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x383>
+    0.00 :   5bf41:  cmp    0x20(%rcx),%rdx
+    0.00 :   5bf45:  jl     5bfd3 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x383>
+    0.00 :   5bf4b:  jmp    5bfd6 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x386>
+         : 344   return static_cast<size_type>(this->__end_ - this->__begin_);
+    0.00 :   5bf50:  mov    0xa0(%rbx),%rdx
+    0.00 :   5bf57:  mov    0xa8(%rbx),%r14
+    0.00 :   5bf5e:  mov    %r14,%r15
+    0.00 :   5bf61:  sub    %rdx,%r15
+    0.00 :   5bf64:  movabs $0x1fffffffe0,%rcx
+         : 350   if (nodes_.size() == kNil) throw std::length_error("v16: order pool exhausted");
+    0.00 :   5bf6e:  cmp    %rcx,%r15
+    0.00 :   5bf71:  je     5c57e <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x92e>
+    0.00 :   5bf77:  mov    %r15,%r12
+    0.00 :   5bf7a:  sar    $0x5,%r12
+         : 355   #else
+         : 356   void
+         : 357   #endif
+         : 358   vector<_Tp, _Allocator>::emplace_back(_Args&&... __args) {
+         : 359   pointer __end = this->__end_;
+         : 360   if (__end < this->__cap_) {
+    0.00 :   5bf7e:  mov    0xb0(%rbx),%rdi
+    0.00 :   5bf85:  cmp    %rdi,%r14
+    0.00 :   5bf88:  jae    5c00c <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x3bc>
+         : 364   #if _LIBCPP_STD_VER >= 20
+         :
+         : 366   template <class _Tp, class... _Args, class = decltype(::new(std::declval<void*>()) _Tp(std::declval<_Args>()...))>
+         : 367   _LIBCPP_HIDE_FROM_ABI constexpr _Tp* construct_at(_Tp* __location, _Args&&... __args) {
+         : 368   _LIBCPP_ASSERT_NON_NULL(__location != nullptr, "null pointer given to construct_at");
+         : 369   return ::new (static_cast<void*>(__location)) _Tp(std::forward<_Args>(__args)...);
+    0.00 :   5bf8e:  vpxor  %xmm0,%xmm0,%xmm0
+    0.00 :   5bf92:  vmovdqu %ymm0,(%r14)
+         : 372   ++__tx.__pos_;
+    0.00 :   5bf97:  add    $0x20,%r14
+         : 374   __emplace_back_assume_capacity(std::forward<_Args>(__args)...);
+         : 375   ++__end;
+         : 376   } else {
+    0.00 :   5bf9b:  jmp    5c0e5 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x495>
+         : 378   return pointer_traits<__end_node_pointer>::pointer_to(const_cast<__end_node_t&>(__end_node_));
+    0.00 :   5bfa0:  lea    0x68(%rbx),%rdi
+         : 380   return static_cast<__node_pointer>(__end_node()->__left_);
+    0.00 :   5bfa4:  mov    0x68(%rbx),%r8
+         : 382   while (__root != nullptr) {
+    0.00 :   5bfa8:  test   %r8,%r8
+    0.00 :   5bfab:  je     5bfd3 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x383>
+    0.00 :   5bfad:  mov    %rdi,%rcx
+         : 386   struct greater<void> {
+         : 387   template <class _T1, class _T2>
+         : 388   _LIBCPP_CONSTEXPR_SINCE_CXX14 _LIBCPP_HIDE_FROM_ABI auto operator()(_T1&& __t, _T2&& __u) const
+         : 389   noexcept(noexcept(std::forward<_T1>(__t) > std::forward<_T2>(__u))) //
+         : 390   -> decltype(std::forward<_T1>(__t) > std::forward<_T2>(__u)) {
+         : 391   return std::forward<_T1>(__t) > std::forward<_T2>(__u);
+    0.00 :   5bfb0:  xor    %r9d,%r9d
+    0.00 :   5bfb3:  cmp    %rdx,0x20(%r8)
+    0.00 :   5bfb7:  setg   %r9b
+         : 395   if (!value_comp()(__root->__value_, __v)) {
+    0.00 :   5bfbb:  cmovle %r8,%rcx
+    0.00 :   5bfbf:  mov    (%r8,%r9,8),%r8
+         : 398   while (__root != nullptr) {
+    0.00 :   5bfc3:  test   %r8,%r8
+    0.00 :   5bfc6:  jne    5bfb0 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x360>
+         : 401   return __x.__ptr_ == __y.__ptr_;
+    0.00 :   5bfc8:  cmp    %rdi,%rcx
+         : 403   if (__p != end() && !value_comp()(__v, *__p))
+    0.00 :   5bfcb:  je     5bfd3 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x383>
+    0.00 :   5bfcd:  cmp    0x20(%rcx),%rdx
+    0.00 :   5bfd1:  jle    5bfd6 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x386>
+    0.00 :   5bfd3:  mov    %rdi,%rcx
+         : 408   return loc.side == Side::Buy ? bids_.find(loc.price)->second : asks_.find(loc.price)->second;
+    0.00 :   5bfd6:  add    $0x28,%rcx
+         : 410   level_of(loc).total_qty -= node.qty - qty;
+    0.00 :   5bfda:  sub    %r12,0x8(%rcx)
+         : 412   node.qty = qty;
+    0.00 :   5bfde:  mov    %ebp,0x10(%r10)
+         : 414   sink_.on(Reduced{id, qty});
+    0.00 :   5bfe2:  mov    (%rbx),%rax
+         : 416   ++events;
+    0.00 :   5bfe5:  incq   0x8(%rax)
+         : 418   ((value = (value ^ static_cast<std::uint64_t>(xs)) * 0x9E3779B97F4A7C15ULL), ...);
+    0.00 :   5bfe9:  mov    (%rax),%rcx
+    0.00 :   5bfec:  xor    $0x4,%rcx
+    0.00 :   5bff0:  imul   %r13,%rcx
+    0.00 :   5bff4:  xor    %rsi,%rcx
+    0.00 :   5bff7:  imul   %r13,%rcx
+    0.00 :   5bffb:  mov    %ebp,%edx
+    0.00 :   5bffd:  xor    %rcx,%rdx
+    0.00 :   5c000:  imul   %r13,%rdx
+    0.00 :   5c004:  mov    %rdx,(%rax)
+         : 428   return;
+    0.00 :   5c007:  jmp    5c314 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x6c4>
+         : 430   __split_buffer<value_type, allocator_type&> __v(__recommend(size() + 1), size(), this->__alloc_);
+    0.00 :   5c00c:  lea    0x1(%r12),%rax
+         : 432   if (__new_size > __ms)
+    0.00 :   5c011:  mov    %rax,%rcx
+    0.00 :   5c014:  shr    $0x3b,%rcx
+    0.00 :   5c018:  jne    5c5b0 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x960>
+    0.00 :   5c01e:  movabs $0x7ffffffffffffff,%rcx
+         : 437   return static_cast<size_type>(this->__cap_ - this->__begin_);
+    0.00 :   5c028:  sub    %rdx,%rdi
+         : 439   if (__cap >= __ms / 2)
+    0.00 :   5c02b:  mov    %rdi,%r13
+    0.00 :   5c02e:  sar    $0x4,%r13
+    0.00 :   5c032:  cmp    %rax,%r13
+    0.00 :   5c035:  cmovbe %rax,%r13
+    0.00 :   5c039:  movabs $0x7fffffffffffffe0,%rax
+    0.00 :   5c043:  mov    %rdi,0x38(%rsp)
+    0.00 :   5c048:  cmp    %rax,%rdi
+    0.00 :   5c04b:  cmovae %rcx,%r13
+         : 448   template <class _Up>
+         : 449   _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 allocator(const allocator<_Up>&) _NOEXCEPT {}
+         :
+         : 451   [[__nodiscard__]] _LIBCPP_HIDE_FROM_ABI _LIBCPP_CONSTEXPR_SINCE_CXX20 _Tp* allocate(size_t __n) {
+         : 452   static_assert(sizeof(_Tp) >= 0, "cannot allocate memory for an incomplete type");
+         : 453   if (__n > allocator_traits<allocator>::max_size(*this))
+    0.00 :   5c04f:  cmp    %rcx,%r13
+    0.00 :   5c052:  mov    %rdx,0x30(%rsp)
+    0.00 :   5c057:  ja     5c5b5 <lob::v16::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)+0x965>
+         : 457   }
+         :
+         : 459   template <class _Tp>
+         : 460   inline _LIBCPP_HIDE_FROM_ABI _LIBCPP_NO_CFI _Tp*
+         : 461   __libcpp_allocate(__element_count __n, [[__maybe_unused__]] size_t __align = _LIBCPP_ALIGNOF(_Tp)) {
+         : 462   size_t __size = static_cast<size_t>(__n) * sizeof(_Tp);
+    0.00 :   5c05d:  shl    $0x5,%r13
+         : 464   #if _LIBCPP_HAS_ALIGNED_ALLOCATION
+         : 465   if (__is_overaligned_for_new(__align))
+         : 466   return static_cast<_Tp*>(__builtin_operator_new(__size, static_cast<align_val_t>(__align)));
+         : 467   #endif
+         :
+         : 469   return static_cast<_Tp*>(__builtin_operator_new(__size));
+    0.00 :   5c061:  mov    %r13,%rdi
+    0.00 :   5c064:  call   4100 <operator new(unsigned long)@plt>
+         : 472   } else {
+         : 473   auto __allocation = std::__allocate_at_least(__alloc_, __cap);
+         : 474   __first_          = __allocation.ptr;
+         : 475   __cap             = __allocation.count;
+         : 476   }
+         : 477   __begin_ = __end_ = __first_ + __start;
+    0.00 :   5c069:  lea    (%rax,%r15,1),%rdi
+         : 479   __cap_            = __first_ + __cap;
+    0.00 :   5c06d:  add    %rax,%r13
+    0.00 :   5c070:  vpxor  %xmm0,%xmm0,%xmm0
+    0.00 :   5c074:  vmovdqu %ymm0,(%rax,%r15,1)
+         : 483   __v.__end_++;
+    0.00 :   5c07a:  lea    0x20(%rax,%r15,1),%r14
+         : 485   auto __new_begin = __v.__begin_ - (__end_ - __begin_);
+    0.00 :   5c07f:  mov    %r12,%rax
+    0.00 :   5c082:  shl    $0x5,%rax
+    0.00 :   5c086:  sub    %rax,%rdi
+    0.00 :   5c089:  mov    %rdi,0x40(%rsp)
+    0.00 :   5c08e:  mov    0x30(%rsp),%rsi
+         : 491   }
+         : 492   __guard.__complete();
+         : 493   std::__allocator_destroy(__alloc, __first, __last);
+         : 494   } else {
+         : 495   // Casting to void* to suppress clang complaining that this is technically UB.
+         : 496   __builtin_memcpy(static_cast<void*>(std::__to_address(__result)),
+    0.00 :   5c093:  mov    %r15,%rdx
+    0.00 :   5c096:  vzeroupper
+    0.00 :   5c099:  call   45d0 <memcpy@plt>
+    0.00 :   5c09e:  mov    0x40(%rsp),%rax
+         :
+         : 502   template <class _Tp>
+         : 503   inline _LIBCPP_HIDE_FROM_ABI __swap_result_t<_Tp> _LIBCPP_CONSTEXPR_SINCE_CXX20 swap(_Tp& __x, _Tp& __y)
+         : 504   _NOEXCEPT_(is_nothrow_move_constructible<_Tp>::value&& is_nothrow_move_assignable<_Tp>::value) {
+         : 505   _Tp __t(std::move(__x));
+         : 506   __x = std::move(__y);
+    0.00 :   5c0a3:  mov    %rax,0xa0(%rbx)
+    0.00 :   5c0aa:  mov    %r14,0xa8(%rbx)
+    0.00 :   5c0b1:  mov    %r13,0xb0(%rbx)
+    0.00 :   5c0b8:  mov    0x30(%rsp),%rdi
+         : 511   }

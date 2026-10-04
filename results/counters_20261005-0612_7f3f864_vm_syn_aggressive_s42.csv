@@ -1,0 +1,20 @@
+# workload=data/syn_aggressive_s42.ops rounds=9 min_running_ratio=1.000
+version,event,per_op_median,spread
+v12,cycles,84.5176,0.0324
+v12,instructions,195.8011,0.0000
+v12,branches,17.5460,0.0000
+v12,branch-misses,0.8276,0.0025
+v12,L1d-load-misses,2.9300,0.0291
+v12,dTLB-load-misses,0.0041,0.7881
+v15,cycles,84.8721,0.0208
+v15,instructions,187.7708,0.0000
+v15,branches,20.7426,0.0000
+v15,branch-misses,0.8228,0.0033
+v15,L1d-load-misses,3.0250,0.0153
+v15,dTLB-load-misses,0.0041,0.8298
+v16,cycles,86.2692,0.0276
+v16,instructions,191.5435,0.0000
+v16,branches,19.0896,0.0000
+v16,branch-misses,0.8216,0.0022
+v16,L1d-load-misses,2.5004,0.0221
+v16,dTLB-load-misses,0.0037,0.7254
