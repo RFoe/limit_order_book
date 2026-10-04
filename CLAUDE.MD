@@ -101,7 +101,7 @@ scripts/  见上         docs/experiments.md 实验日志         results/ 测�
 - 差分测试使用多个随机 seed，失败时打印 seed，并尽量给出最短复现序列。
 - 不变量（debug 构建中每一步都检查）：best bid < best ask；每档 total_qty 等于队列中订单数量之和；索引中的订单数等于簿上的订单数。
 - 差分测试没通过的版本，不做性能测量。
-- 验证新版本 vN 时只测 vN：`LOB_DIFF_VERSIONS=vN`（debug ctest 和加大的差分测试都带上），没有改动的旧版本跳过。改了共享代码（types、events、replay/harness、generator、book_config、hier_bitmap、diff_runner 等）时不设这个变量，跑全部版本。
+- 验证新版本 vN 时只测 vN：`LOB_DIFF_VERSIONS=vN`（debug ctest 和加大的差分测试都带上），没有改动的旧版本跳过。改了共享代码（types、events、replay/harness、generator、book_config、hier_bitmap、diff_runner 等）时，**也不跑全部版本的 debug 测试**（耗时以小时计，没有必要）：debug 和差分测试仍然只测被改动的版本；对旧版本用确定性的结果确认没有影响——release 构建下 6 个 workload 的 checksum 与 v0 一致，profile 构建下 cachegrind 的 Ir 和上一次记录相同。只有共享代码的改动会改变旧版本的语义时（例如 types、events 本身），才针对受影响的版本单独跑差分测试。
 
 ## Workload
 
