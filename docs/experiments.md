@@ -878,3 +878,71 @@ TopDown（W=5）：AAPL 的 Bad Speculation 26.2% → 23.7%，Retiring 47.8% →
 
 - **合成负载发现不了真实数据里的极端价格**：stub quote（$0.0001 / $199,999）让"对手方兜底 map 非空"在真实数据上几乎恒为真。之后凡是涉及兜底路径的优化，都要先在 ITCH 上用 branch-sim 验证快速路径确实命中。
 - **剩下的预测失败**（AAPL，0.846 次/op）：replay 的 `switch (op.type)` 0.47 次（由输入决定），boost 哈希表 0.37 次。我们自己的代码里已经没有明显的预测失败。下一步的方向转向指令数（哈希表约 70 条/op，`slot_of` 里的除法）和访存。
+
+## [2026-10-04] v10: 每个 key 只探测一次（try_emplace，基于 v9，控制内联结构）（无效：在噪声范围内）
+
+- **假设**：v7 的单次探测（push 用 `try_emplace` 判重并占位，改价复用槽位）在 cachegrind 里确实省下了约 13 条指令/push，但 push 不再内联，开销抵消了收益。这次基于 v9 重做，并控制内联结构不退化。预期：AAPL 的 Ir 约 −6%；branch-sim 显示 `contains` 那次未命中探测的 overflow 分支有预测失败，也可能减少。
+- **改动**：commit `3dc7c42`（结构）和 `37f85e8`（修复 store forwarding，见下），基于 v9。基线是 v9（比 v4 好）。
+
+### 1. 内联结构：v4–v9 的 push/cancel 能内联，原来是个偶然
+
+前几次尝试（push 强制 inline；插入路径放到 noinline 的 `push_new` 里；cancel、erase 也强制 inline）都让结构变差，cancel、erase 或者 `apply` 被拆成独立函数，Ir 比 v9 多 2%–4%。用 `-Rpass=inline -Rpass-missed=inline` 拿到 clang 的决策：
+
+| 调用点 | 阈值 | v9 的 push / cancel / erase 代价 | 结果 |
+|---|---:|---|---|
+| `replay` / `apply` / `measure_once` 里 | 250 | 400 / 355 / 515 | **都不内联** |
+| `book replay` 的版本分派 lambda、`cmd_counters`、bench 的函数里 | 525 | 同上 | 都内联 |
+
+v4–v9 之所以"push/cancel 内联在回放循环里"，是因为 `replay<vN>`（代价 185 < 250）先被整个内联进外层函数，在那里 clang 用 525 的阈值，再把 push、cancel、erase 内联进来。v10 的 push 一旦变小（代价 130），就会先被内联进 `apply`，`replay<v10>` 的代价涨到 315 > 250，不能内联进外层，cancel 和 erase 也就拿不到 525 的阈值。
+
+最终做法：**push 本身 `[[gnu::noinline]]`，把 add 强制内联进 push**。这样每次 push 是一次调用，再尾调用 rest，和 v9 的调用次数相同（v9 是内联的 push，加上一次对 add 的调用）。`replay<v10>` 回到小代价，cancel、erase 的内联和 v9 一样。已用 remark 确认 `book replay`、`counters` 和 bench 三处的结构一致。
+
+### 2. 第一次测量：store forwarding 失败（`3dc7c42`）
+
+cachegrind 的 Ir 在 ITCH 上 −4.6% 到 −4.9%，但硬件计数器显示 **AAPL cycles +14%**（指令 −1.8%），bench +2%。perf annotate（release，AAPL）：push 中 33% 的 cycle 样本落在调用 rest 之前的一段代码上：
+
+```
+mov     %rbp,0x28(%rsp)      ; 迭代器的两个指针分两次 8 字节写
+mov     %rbx,0x30(%rsp)
+vmovdqu 0x28(%rsp),%xmm0     ; 一次 16 字节读，横跨两次写：无法转发
+vmovdqu %xmm0,(%rsp)         ; ← 33%（没有 PEBS，样本 skid 到下一条）
+call    rest
+```
+
+boost 的 `table_iterator`（16 字节）是 rest 的第 7 个整数参数，只能经栈传递。clang 先分两次写把它拼起来，再用一次 16 字节读拷到参数区。在 Intel 上，一个 load 横跨两个更窄的 store 时不能 store-to-load 转发，要等 store 提交。cachegrind 只数指令，看不到这种停顿。**修复**（`37f85e8`）：rest 只需要写 Loc，改成传 `Loc&`，6 个参数全部放进寄存器。
+
+### 3. 修复后的结果（v9 → v10，`37f85e8`）
+
+- **正确性**（`LOB_DIFF_VERSIONS=v10`）：debug ctest 41 项通过，差分测试 30 个 seed × 20 万 op 一致，6 个 workload 的 checksum 和 v0 一致（修复前后各验证一次）。
+- **环境**：vm，绑核 CPU 3。
+
+cachegrind（profile 构建）：Ir 在 ITCH 上 **−5.4% 到 −5.6%**，syn_default 和 syn_deep −5.3%，syn_aggressive −2.4%；数据读 −11%（少了一次探测），数据写 +3% 到 +4%（push 成了真正的函数调用，要保存和恢复寄存器）；D1 未命中基本不变，只有 syn_aggressive 的 D1 写未命中 +18.5%（和 v7 一样：完全成交的 taker 要先插入再删除）。heaptrack 不变。
+
+硬件计数器（`book counters`，v9/v10 交替，9 轮）：
+
+| workload | cycles v9 → v10 | instructions | branch-miss | L1d 未命中 |
+|---|---:|---:|---:|---:|
+| itch AAPL | 87.3 → 87.9（+0.7%，spread 5% / 3%） | −2.5% | −0.9% | +5.4% |
+| itch QQQ | 70.5 → 69.4（−1.5%，spread 11% / 6%） | −2.1% | −0.2% | +3.5% |
+| itch SPY | 70.0 → 69.1（−1.3%，spread 12% / 5%） | −2.1% | −0.2% | +0.6% |
+| syn_default | −1.5%（spread 23% / 28%） | −2.0% | +0.7% | +0.9% |
+| syn_aggressive | +0.3% | +1.7% | −0.0% | +6.3% |
+| syn_deep | +1.0% | −2.0% | +1.1% | +3.7% |
+
+Google Benchmark（`results/bench_20261004-2306_37f85e8_vm.json`）：AAPL −0.3%、QQQ −3.1%、SPY −3.9%（CV 4% 到 8%），合成负载 −0.7% 到 +0.5%，**全部在 CV 范围内**。
+
+TopDown（W=5）：AAPL 和 QQQ 的四项变化都在 2 个百分点以内。
+
+延迟（latency harness，cycles）：**push_rest 的 p50 AAPL 192 → 172（−10%）、QQQ 188 → 167（−11%）、syn_default 184 → 165**；cancel 的 p50 +2% 到 +6%；整体 p50 AAPL 183 → 169。注意 latency harness（`measure_once`）里的阈值只有 250，v9 和 v10 的 push、cancel 在那里都是独立函数（v4–v9 也一直如此），所以这里对比的是"函数对函数"，和 counters、bench 测的代码布局不同。
+
+### 解释
+
+- **省下的是一次"热的"探测**：v9 的 `contains`（未命中探测）把 group 和槽位所在的 cache line 带进来，后面 `rest` 里的 `emplace` 再探测一次时全部命中 L1，分支也是同一个模式。所以第二次探测本来就便宜：指令约 5 条/op（release 下 −2.5%），没有 cache miss，硬件预测器能预测。按 IPC 约 2.3 算，上限约 2 个周期/op（2%），低于这台 VM 的测量分辨率（spread 3% 到 12%）。
+- **branch-sim 在这里不可信**：模拟器显示预测失败 −12%（1.361M → 1.193M，主要来自 boost 的探测循环），硬件只有 −0.9%。cachegrind 用的是简单预测器，boost 未命中探测里那些和历史相关的分支，真实的预测器能预测对。v8 时两者一致（−32% 对 −32%），这次不一致，说明 branch-sim 只适合用来找"真正随机"的分支。
+- **L1d 未命中 +3% 到 +6%（硬件）没有解释**：cachegrind 的模拟 D1 不变，这部分可能和硬件预取或时序有关，没有进一步确认。
+
+### 意外与遗留问题
+
+- **测量框架的内联结构依赖调用上下文**：同一个版本，在 `book replay` / counters / bench 里 push、cancel 是内联的，在 latency harness 里却不是；而且结构可能因为 push 变小这类"无关"改动而整体翻转。以后每个版本都要用 remark 确认被测上下文里的结构，不能只看 `nm`。
+- **cachegrind 看不到的停顿**：store forwarding 失败让 v10 在 Ir −4.9% 的情况下 cycles +14%。对比 cycles 和 instructions 的方向是否一致，是发现这类问题最便宜的办法。
+- **v10 是否保留**：吞吐量在噪声范围内，push 延迟 p50 改善约 10%，代码结构比 v9 多了两个内联属性。之后的版本可以基于 v9 或 v10，建议基于 v10（指令更少、push 延迟更低，结构已经用 remark 验证过）。

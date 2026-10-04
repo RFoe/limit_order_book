@@ -1,0 +1,1124 @@
+--------------------------------------------------------------------------------
+-- Metadata
+--------------------------------------------------------------------------------
+Invocation:       /usr/bin/cg_annotate --show=Ir,Bc,Bcm,Bi,Bim --sort=Bcm results/bsim_20261004-2245_3dc7c42_vm_syn_default_s42_v10.out
+Command:          build/profile/book replay --workload data/syn_default_s42.ops --version v10
+Events recorded:  Ir Bc Bcm Bi Bim
+Events shown:     Ir Bc Bcm Bi Bim
+Event sort order: Bcm
+Threshold:        0.1%
+Annotation:       on
+
+--------------------------------------------------------------------------------
+-- Summary
+--------------------------------------------------------------------------------
+Ir__________________ Bc_________________ Bcm_____________ Bi__________ Bim________ 
+
+204,649,700 (100.0%) 14,223,635 (100.0%) 606,132 (100.0%) 120 (100.0%) 43 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+-- File:function summary
+--------------------------------------------------------------------------------
+  Ir________________________ Bc______________________ Bcm____________________ Bi____________ Bim___________  file:function
+
+<  11,140,590  (5.4%,  5.4%) 2,944,366 (20.7%, 20.7%) 480,873 (79.3%,  79.3%) 0 (0.0%, 0.0%) 0 (0.0%, 0.0%)  /home/wang/sources/cxx/book/include/lob/replay.hpp:auto lob::for_each_type<std::__1::tuple<lob::v0::Book<lob::ChecksumSink>, lob::v1::Book<lob::ChecksumSink>, lob::v2::Book<lob::ChecksumSink>, lob::v3::BookT<lob::ChecksumSink, 16u>, lob::v4::BookT<lob::ChecksumSink, 16u>, lob::v5::BookT<lob::ChecksumSink, 16u>, lob::v7::BookT<lob::ChecksumSink, 16u>, lob::v8::BookT<lob::ChecksumSink, 16u>, lob::v9::BookT<lob::ChecksumSink, 16u>, lob::v10::BookT<lob::ChecksumSink, 16u> >, (anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}>((anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}&&)::{lambda<unsigned long... $N0>(std::__1::integer_sequence<unsigned long, ($N0)...>)#1}::operator()<0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul, 8ul, 9ul>(std::__1::integer_sequence<unsigned long, 0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul, 8ul, 9ul>) const
+
+< 107,384,503 (52.5%, 57.9%) 7,159,380 (50.3%, 71.0%) 108,939 (18.0%,  97.3%) 0 (0.0%, 0.0%) 0 (0.0%, 0.0%)  /home/wang/sources/cxx/book/include/lob/v10/book.hpp:
+   25,938,748 (12.7%)        2,070,084 (14.6%)         45,500  (7.5%)         0              0                 lob::v10::BookT<lob::ChecksumSink, 16u>::push(unsigned long, lob::Side, long, unsigned int)
+    3,584,380  (1.8%)          390,004  (2.7%)         35,172  (5.8%)         0              0                 lob::v10::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+    1,748,066  (0.9%)          186,483  (1.3%)         14,297  (2.4%)         0              0                 unsigned int lob::v10::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)
+    1,752,209  (0.9%)          183,963  (1.3%)         13,923  (2.3%)         0              0                 unsigned int lob::v10::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)
+
+<  43,001,029 (21.0%, 78.9%) 2,608,758 (18.3%, 89.4%)  16,034  (2.6%, 100.0%) 0 (0.0%, 0.0%) 0 (0.0%, 0.0%)  /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:
+   22,138,544 (10.8%)        1,534,027 (10.8%)         11,525  (1.9%)         0              0                 lob::v10::BookT<lob::ChecksumSink, 16u>::push(unsigned long, lob::Side, long, unsigned int)
+   17,602,145  (8.6%)          885,501  (6.2%)          3,318  (0.5%)         0              0                 auto lob::for_each_type<std::__1::tuple<lob::v0::Book<lob::ChecksumSink>, lob::v1::Book<lob::ChecksumSink>, lob::v2::Book<lob::ChecksumSink>, lob::v3::BookT<lob::ChecksumSink, 16u>, lob::v4::BookT<lob::ChecksumSink, 16u>, lob::v5::BookT<lob::ChecksumSink, 16u>, lob::v7::BookT<lob::ChecksumSink, 16u>, lob::v8::BookT<lob::ChecksumSink, 16u>, lob::v9::BookT<lob::ChecksumSink, 16u>, lob::v10::BookT<lob::ChecksumSink, 16u> >, (anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}>((anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}&&)::{lambda<unsigned long... $N0>(std::__1::integer_sequence<unsigned long, ($N0)...>)#1}::operator()<0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul, 8ul, 9ul>(std::__1::integer_sequence<unsigned long, 0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul, 8ul, 9ul>) const
+
+--------------------------------------------------------------------------------
+-- Function:file summary
+--------------------------------------------------------------------------------
+  Ir_______________________ Bc______________________ Bcm___________________ Bi____________ Bim___________  function:file
+
+> 68,980,676 (33.7%, 33.7%) 6,027,262 (42.4%, 42.4%) 484,202 (79.9%, 79.9%) 0 (0.0%, 0.0%) 0 (0.0%, 0.0%)  auto lob::for_each_type<std::__1::tuple<lob::v0::Book<lob::ChecksumSink>, lob::v1::Book<lob::ChecksumSink>, lob::v2::Book<lob::ChecksumSink>, lob::v3::BookT<lob::ChecksumSink, 16u>, lob::v4::BookT<lob::ChecksumSink, 16u>, lob::v5::BookT<lob::ChecksumSink, 16u>, lob::v7::BookT<lob::ChecksumSink, 16u>, lob::v8::BookT<lob::ChecksumSink, 16u>, lob::v9::BookT<lob::ChecksumSink, 16u>, lob::v10::BookT<lob::ChecksumSink, 16u> >, (anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}>((anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}&&)::{lambda<unsigned long... $N0>(std::__1::integer_sequence<unsigned long, ($N0)...>)#1}::operator()<0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul, 8ul, 9ul>(std::__1::integer_sequence<unsigned long, 0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul, 8ul, 9ul>) const:
+  11,140,590  (5.4%)        2,944,366 (20.7%)        480,873 (79.3%)        0              0                 /home/wang/sources/cxx/book/include/lob/replay.hpp
+  17,602,145  (8.6%)          885,501  (6.2%)          3,318  (0.5%)        0              0                 /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp
+
+> 59,219,057 (28.9%, 62.6%) 4,108,997 (28.9%, 71.3%)  57,034  (9.4%, 89.3%) 0 (0.0%, 0.0%) 0 (0.0%, 0.0%)  lob::v10::BookT<lob::ChecksumSink, 16u>::push(unsigned long, lob::Side, long, unsigned int):
+  25,938,748 (12.7%)        2,070,084 (14.6%)         45,500  (7.5%)        0              0                 /home/wang/sources/cxx/book/include/lob/v10/book.hpp
+  22,138,544 (10.8%)        1,534,027 (10.8%)         11,525  (1.9%)        0              0                 /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp
+
+>  6,341,110  (3.1%, 65.7%)   502,120  (3.5%, 74.8%)  35,622  (5.9%, 95.2%) 0 (0.0%, 0.0%) 0 (0.0%, 0.0%)  lob::v10::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int):
+   3,584,380  (1.8%)          390,004  (2.7%)         35,172  (5.8%)        0              0                 /home/wang/sources/cxx/book/include/lob/v10/book.hpp
+
+>  3,415,145  (1.7%, 67.4%)   219,649  (1.5%, 76.3%)  14,403  (2.4%, 97.5%) 0 (0.0%, 0.0%) 0 (0.0%, 0.0%)  unsigned int lob::v10::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int):
+   1,748,066  (0.9%)          186,483  (1.3%)         14,297  (2.4%)        0              0                 /home/wang/sources/cxx/book/include/lob/v10/book.hpp
+
+>  3,379,880  (1.7%, 69.1%)   216,571  (1.5%, 77.9%)  14,014  (2.3%, 99.9%) 0 (0.0%, 0.0%) 0 (0.0%, 0.0%)  unsigned int lob::v10::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int):
+   1,752,209  (0.9%)          183,963  (1.3%)         13,923  (2.3%)        0              0                 /home/wang/sources/cxx/book/include/lob/v10/book.hpp
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp
+--------------------------------------------------------------------------------
+Ir______________ Bc______________ Bcm_________ Bi Bim 
+
+9,179,275 (4.5%)         0            0         0   0  <unknown (line 0)>
+
+-- line 263 ----------------------------------------
+        .                .            .         .   .  
+        .                .            .         .   .    static inline void reset(unsigned char* pc)
+        .                .            .         .   .    {
+        .                .            .         .   .      *reinterpret_cast<slot_type*>(pc)=available_;
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    inline int match(std::size_t hash)const
+        .                .            .         .   .    {
+2,068,556 (1.0%)         0            0         0   0      return _mm_movemask_epi8(
+1,569,467 (0.8%)         0            0         0   0        _mm_cmpeq_epi8(load_metadata(),_mm_set1_epi32(match_word(hash))))&0x7FFF;
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    inline bool is_not_overflowed(std::size_t hash)const
+        .                .            .         .   .    {
+        .                .            .         .   .      static constexpr unsigned char shift[]={1,2,4,8,16,32,64,128};
+        .                .            .         .   .  
+3,025,230 (1.5%)         0            0         0   0      return !(overflow()&shift[hash%8]);
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    inline void mark_overflow(std::size_t hash)
+        .                .            .         .   .    {
+        .                .            .         .   .      overflow()|=static_cast<unsigned char>(1<<(hash%8));
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    static inline bool maybe_caused_overflow(unsigned char* pc)
+-- line 287 ----------------------------------------
+-- line 288 ----------------------------------------
+        .                .            .         .   .    {
+        .                .            .         .   .      std::size_t pos=reinterpret_cast<uintptr_t>(pc)%sizeof(group15);
+        .                .            .         .   .      group15    *pg=reinterpret_cast<group15*>(pc-pos);
+        .                .            .         .   .      return !pg->is_not_overflowed(*pc);
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    inline int match_available()const
+        .                .            .         .   .    {
+1,021,086 (0.5%)         0            0         0   0      return _mm_movemask_epi8(
+1,014,919 (0.5%)         0            0         0   0        _mm_cmpeq_epi8(load_metadata(),_mm_setzero_si128()))&0x7FFF;
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    inline bool is_occupied(std::size_t pos)const
+        .                .            .         .   .    {
+        .                .            .         .   .      BOOST_ASSERT(pos<N);
+        .                .            .         .   .      return at(pos)!=available_;
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    static inline bool is_occupied(unsigned char* pc)noexcept
+        .                .            .         .   .    {
+        .                .            .         .   .      return *reinterpret_cast<slot_type*>(pc)!=available_;
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    inline int match_occupied()const
+        .                .            .         .   .    {
+      510 (0.0%)         0            0         0   0      return (~match_available())&0x7FFF;
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .  private:
+        .                .            .         .   .    using slot_type=IntegralWrapper<unsigned char>;
+        .                .            .         .   .    BOOST_UNORDERED_STATIC_ASSERT(sizeof(slot_type)==1);
+        .                .            .         .   .  
+        .                .            .         .   .    static constexpr unsigned char available_=0,
+        .                .            .         .   .                                   sentinel_=1;
+-- line 321 ----------------------------------------
+-- line 328 ----------------------------------------
+        .                .            .         .   .       */
+        .                .            .         .   .  
+        .                .            .         .   .      return _mm_set_epi8(
+        .                .            .         .   .        (char)m[15],(char)m[14],(char)m[13],(char)m[12],
+        .                .            .         .   .        (char)m[11],(char)m[10],(char)m[ 9],(char)m[ 8],
+        .                .            .         .   .        (char)m[ 7],(char)m[ 6],(char)m[ 5],(char)m[ 4],
+        .                .            .         .   .        (char)m[ 3],(char)m[ 2],(char)m[ 1],(char)m[ 0]);
+        .                .            .         .   .  #else
+1,034,278 (0.5%)         0            0         0   0      return _mm_load_si128(reinterpret_cast<const __m128i*>(m));
+        .                .            .         .   .  #endif
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    inline static int match_word(std::size_t hash)
+        .                .            .         .   .    {
+        .                .            .         .   .      static constexpr boost::uint32_t word[]=
+        .                .            .         .   .      {
+        .                .            .         .   .        0x08080808u,0x09090909u,0x02020202u,0x03030303u,0x04040404u,0x05050505u,
+-- line 344 ----------------------------------------
+-- line 381 ----------------------------------------
+        .                .            .         .   .        0xDEDEDEDEu,0xDFDFDFDFu,0xE0E0E0E0u,0xE1E1E1E1u,0xE2E2E2E2u,0xE3E3E3E3u,
+        .                .            .         .   .        0xE4E4E4E4u,0xE5E5E5E5u,0xE6E6E6E6u,0xE7E7E7E7u,0xE8E8E8E8u,0xE9E9E9E9u,
+        .                .            .         .   .        0xEAEAEAEAu,0xEBEBEBEBu,0xECECECECu,0xEDEDEDEDu,0xEEEEEEEEu,0xEFEFEFEFu,
+        .                .            .         .   .        0xF0F0F0F0u,0xF1F1F1F1u,0xF2F2F2F2u,0xF3F3F3F3u,0xF4F4F4F4u,0xF5F5F5F5u,
+        .                .            .         .   .        0xF6F6F6F6u,0xF7F7F7F7u,0xF8F8F8F8u,0xF9F9F9F9u,0xFAFAFAFAu,0xFBFBFBFBu,
+        .                .            .         .   .        0xFCFCFCFCu,0xFDFDFDFDu,0xFEFEFEFEu,0xFFFFFFFFu,
+        .                .            .         .   .      };
+        .                .            .         .   .  
+   10,293 (0.0%)         0            0         0   0      return (int)word[narrow_cast<unsigned char>(hash)];
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    inline static unsigned char reduced_hash(std::size_t hash)
+        .                .            .         .   .    {
+        .                .            .         .   .      return narrow_cast<unsigned char>(match_word(hash));
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    inline slot_type& at(std::size_t pos)
+        .                .            .         .   .    {
+  504,877 (0.2%)         0            0         0   0      return m[pos];
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    inline const slot_type& at(std::size_t pos)const
+        .                .            .         .   .    {
+  973,451 (0.5%)         0            0         0   0      return m[pos];
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    inline slot_type& overflow()
+        .                .            .         .   .    {
+        .                .            .         .   .      return at(N);
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    inline const slot_type& overflow()const
+-- line 412 ----------------------------------------
+-- line 829 ----------------------------------------
+        .                .            .         .   .  struct pow2_size_policy
+        .                .            .         .   .  {
+        .                .            .         .   .    static inline std::size_t size_index(std::size_t n)
+        .                .            .         .   .    {
+        .                .            .         .   .      // TODO: min size is 2, see if we can bring it down to 1 without loss
+        .                .            .         .   .      // of performance
+        .                .            .         .   .  
+        .                .            .         .   .      return sizeof(std::size_t)*CHAR_BIT-
+       36 (0.0%)         0            0         0   0        (n<=2?1:((std::size_t)(boost::core::bit_width(n-1))));
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    static inline std::size_t size(std::size_t size_index_)
+        .                .            .         .   .    {
+       18 (0.0%)         0            0         0   0       return std::size_t(1)<<(sizeof(std::size_t)*CHAR_BIT-size_index_);  
+        .                .            .         .   .    }
+        .                .            .         .   .      
+        .                .            .         .   .    static constexpr std::size_t min_size(){return 2;}
+        .                .            .         .   .  
+        .                .            .         .   .    static inline std::size_t position(std::size_t hash,std::size_t size_index_)
+        .                .            .         .   .    {
+3,992,104 (2.0%)         0            0         0   0      return hash>>size_index_;
+        .                .            .         .   .    }
+        .                .            .         .   .  };
+        .                .            .         .   .  
+        .                .            .         .   .  /* size index of a group array for a given *element* capacity */
+        .                .            .         .   .  
+        .                .            .         .   .  template<typename Group,typename SizePolicy>
+        .                .            .         .   .  static inline std::size_t size_index_for(std::size_t n)
+        .                .            .         .   .  {
+        .                .            .         .   .    /* n/N+1 == ceil((n+1)/N) (extra +1 for the sentinel) */
+       18 (0.0%)         0            0         0   0    return SizePolicy::size_index(n/Group::N+1);
+        .                .            .         .   .  }
+        .                .            .         .   .  
+        .                .            .         .   .  /* Quadratic prober over a power-of-two range using triangular numbers.
+        .                .            .         .   .   * mask in next(mask) must be the range size minus one (and since size is 2^n,
+        .                .            .         .   .   * mask has exactly its n first bits set to 1).
+        .                .            .         .   .   */
+        .                .            .         .   .  
+        .                .            .         .   .  struct pow2_quadratic_prober
+-- line 867 ----------------------------------------
+-- line 873 ----------------------------------------
+        .                .            .         .   .  
+        .                .            .         .   .    /* next returns false when the whole array has been traversed, which ends
+        .                .            .         .   .     * probing (in practice, full-table probing will only happen with very small
+        .                .            .         .   .     * arrays).
+        .                .            .         .   .     */
+        .                .            .         .   .  
+        .                .            .         .   .    inline bool next(std::size_t mask)
+        .                .            .         .   .    {
+    1,561 (0.0%)         0            0         0   0      step+=1;
+    4,711 (0.0%)         0            0         0   0      pos=(pos+step)&mask;
+    1,561 (0.0%)         0            0         0   0      return step<=mask;
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .  private:
+        .                .            .         .   .    std::size_t pos,step=0;
+        .                .            .         .   .  };
+        .                .            .         .   .  
+        .                .            .         .   .  /* Mixing policies: no_mix is the identity function, and mulx_mix
+        .                .            .         .   .   * uses the mulx function from <boost/unordered/detail/mulx.hpp>.
+-- line 891 ----------------------------------------
+-- line 919 ----------------------------------------
+        .                .            .         .   .  
+        .                .            .         .   .  inline unsigned int unchecked_countr_zero(int x)
+        .                .            .         .   .  {
+        .                .            .         .   .  #if defined(BOOST_MSVC)
+        .                .            .         .   .    unsigned long r;
+        .                .            .         .   .    _BitScanForward(&r,(unsigned long)x);
+        .                .            .         .   .    return (unsigned int)r;
+        .                .            .         .   .  #elif defined(BOOST_GCC)||defined(BOOST_CLANG)
+2,103,243 (1.0%)         0            0         0   0    return (unsigned int)__builtin_ctz((unsigned int)x);
+        .                .            .         .   .  #else
+        .                .            .         .   .    BOOST_UNORDERED_ASSUME(x!=0);
+        .                .            .         .   .    return (unsigned int)boost::core::countr_zero((unsigned int)x);
+        .                .            .         .   .  #endif
+        .                .            .         .   .  }
+        .                .            .         .   .  
+        .                .            .         .   .  /* table_arrays controls allocation, initialization and deallocation of
+        .                .            .         .   .   * paired arrays of groups and element slots. Only one chunk of memory is
+-- line 935 ----------------------------------------
+-- line 1023 ----------------------------------------
+        .                .            .         .   .    // For natvis purposes
+        .                .            .         .   .    using char_pointer=
+        .                .            .         .   .      typename boost::pointer_traits<value_type_pointer>::template
+        .                .            .         .   .        rebind<unsigned char>;
+        .                .            .         .   .  
+        .                .            .         .   .    table_arrays(
+        .                .            .         .   .      std::size_t gsi,std::size_t gsm,
+        .                .            .         .   .      group_type_pointer pg,value_type_pointer pe):
+       36 (0.0%)         0            0         0   0      groups_size_index{gsi},groups_size_mask{gsm},groups_{pg},elements_{pe}{}
+        .                .            .         .   .  
+       27 (0.0%)         0            0         0   0    value_type* elements()const noexcept{return boost::to_address(elements_);}
+        8 (0.0%)         0            0         0   0    group_type* groups()const noexcept{return boost::to_address(groups_);}
+        .                .            .         .   .  
+        .                .            .         .   .    static void set_arrays(table_arrays& arrays,allocator_type al,std::size_t n)
+        .                .            .         .   .    {
+        .                .            .         .   .      return set_arrays(
+        .                .            .         .   .        arrays,al,n,std::is_same<group_type*,group_type_pointer>{});
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    static void set_arrays(
+-- line 1042 ----------------------------------------
+-- line 1043 ----------------------------------------
+        .                .            .         .   .      table_arrays& arrays,allocator_type al,std::size_t,
+        .                .            .         .   .      std::false_type /* always allocate */)
+        .                .            .         .   .    {
+        .                .            .         .   .      using storage_traits=boost::allocator_traits<allocator_type>;
+        .                .            .         .   .      auto groups_size_index=arrays.groups_size_index;
+        .                .            .         .   .      auto groups_size=size_policy::size(groups_size_index);
+        .                .            .         .   .  
+        .                .            .         .   .      auto sal=allocator_type(al);
+       18 (0.0%)         0            0         0   0      arrays.elements_=storage_traits::allocate(sal,buffer_size(groups_size));
+        .                .            .         .   .      
+        .                .            .         .   .      /* Align arrays.groups to sizeof(group_type). table_iterator critically
+        .                .            .         .   .        * depends on such alignment for its increment operation.
+        .                .            .         .   .        */
+        .                .            .         .   .  
+       36 (0.0%)         0            0         0   0      auto p=reinterpret_cast<unsigned char*>(arrays.elements()+groups_size*N-1);
+       27 (0.0%)         0            0         0   0      p+=(uintptr_t(sizeof(group_type))-
+        9 (0.0%)         0            0         0   0          reinterpret_cast<uintptr_t>(p))%sizeof(group_type);
+        .                .            .         .   .      arrays.groups_=
+        .                .            .         .   .        group_type_pointer_traits::pointer_to(*reinterpret_cast<group_type*>(p));
+        .                .            .         .   .  
+        .                .            .         .   .      initialize_groups(
+        .                .            .         .   .        arrays.groups(),groups_size,
+        .                .            .         .   .        is_trivially_default_constructible<group_type>{});
+        9 (0.0%)         0            0         0   0      arrays.groups()[groups_size-1].set_sentinel();
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    static void set_arrays(
+        .                .            .         .   .      table_arrays& arrays,allocator_type al,std::size_t n,
+        .                .            .         .   .      std::true_type /* optimize for n==0*/)
+        .                .            .         .   .    {
+       18 (0.0%)         9 (0.0%)     0         0   0      if(!n){
+        .                .            .         .   .        arrays.groups_=dummy_groups<group_type,size_policy::min_size()>();
+        .                .            .         .   .      }
+        .                .            .         .   .      else{
+        .                .            .         .   .        set_arrays(arrays,al,n,std::false_type{});
+        .                .            .         .   .      }
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    static table_arrays new_(allocator_type al,std::size_t n)
+        .                .            .         .   .    {
+        .                .            .         .   .      auto         groups_size_index=size_index_for<group_type,size_policy>(n);
+        .                .            .         .   .      auto         groups_size=size_policy::size(groups_size_index);
+        9 (0.0%)         0            0         0   0      table_arrays arrays{groups_size_index,groups_size-1,nullptr,nullptr};
+        .                .            .         .   .  
+        .                .            .         .   .      set_arrays(arrays,al,n);
+        .                .            .         .   .      return arrays;
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    static void delete_(allocator_type al,table_arrays& arrays)noexcept
+        .                .            .         .   .    {
+        .                .            .         .   .      using storage_traits=boost::allocator_traits<allocator_type>;
+        .                .            .         .   .  
+        .                .            .         .   .      auto sal=allocator_type(al);
+       18 (0.0%)         9 (0.0%)     1 (0.0%)  0   0      if(arrays.elements()){
+        .                .            .         .   .        storage_traits::deallocate(
+        .                .            .         .   .          sal,arrays.elements_,buffer_size(arrays.groups_size_mask+1));
+        .                .            .         .   .      }
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    /* combined space for elements and groups measured in sizeof(value_type)s */
+        .                .            .         .   .  
+        .                .            .         .   .    static std::size_t buffer_size(std::size_t groups_size)
+        .                .            .         .   .    {
+        .                .            .         .   .      auto buffer_bytes=
+        .                .            .         .   .        /* space for elements (we subtract 1 because of the sentinel) */
+       17 (0.0%)         0            0         0   0        sizeof(value_type)*(groups_size*N-1)+
+        .                .            .         .   .        /* space for groups + padding for group alignment */
+        .                .            .         .   .        sizeof(group_type)*(groups_size+1)-1;
+        .                .            .         .   .  
+        .                .            .         .   .      /* ceil(buffer_bytes/sizeof(value_type)) */
+       25 (0.0%)         0            0         0   0      return (buffer_bytes+sizeof(value_type)-1)/sizeof(value_type);
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    static void initialize_groups(
+        .                .            .         .   .      group_type* pg,std::size_t size,std::true_type /* memset */)
+        .                .            .         .   .    {
+        .                .            .         .   .      /* memset faster/not slower than manual, assumes all zeros is group_type's
+        .                .            .         .   .       * default layout.
+        .                .            .         .   .       * reinterpret_cast: GCC may complain about group_type not being trivially
+        .                .            .         .   .       * copy-assignable when we're relying on trivial copy constructibility.
+        .                .            .         .   .       */
+        .                .            .         .   .  
+       27 (0.0%)         0            0         0   0      std::memset(
+        9 (0.0%)         0            0         0   0        reinterpret_cast<unsigned char*>(pg),0,sizeof(group_type)*size);
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    static void initialize_groups(
+        .                .            .         .   .      group_type* pg,std::size_t size,std::false_type /* manual */)
+        .                .            .         .   .    {
+        .                .            .         .   .      while(size--!=0)::new (pg++) group_type();
+        .                .            .         .   .    }
+        .                .            .         .   .  
+-- line 1134 ----------------------------------------
+-- line 1555 ----------------------------------------
+        .                .            .         .   .      delete_arrays(arrays);
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    std::size_t initial_max_load()const
+        .                .            .         .   .    {
+        .                .            .         .   .      static constexpr std::size_t small_capacity=2*N-1;
+        .                .            .         .   .  
+        .                .            .         .   .      auto capacity_=capacity();
+      108 (0.0%)         9 (0.0%)     1 (0.0%)  0   0      if(capacity_<=small_capacity){
+        .                .            .         .   .        return capacity_; /* we allow 100% usage */
+        .                .            .         .   .      }
+        .                .            .         .   .      else{
+        .                .            .         .   .        return (std::size_t)(mlf*(float)(capacity_));
+        .                .            .         .   .      }
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    arrays_holder_type make_empty_arrays()const
+-- line 1571 ----------------------------------------
+-- line 1681 ----------------------------------------
+        .                .            .         .   .  
+        .                .            .         .   .  #if defined(BOOST_MSVC)
+        .                .            .         .   .  #pragma warning(pop) /* C4127 */
+        .                .            .         .   .  #endif
+        .                .            .         .   .  
+        .                .            .         .   .    allocator_type get_allocator()const noexcept{return al();}
+        .                .            .         .   .  
+        .                .            .         .   .    bool        empty()const noexcept{return size()==0;}
+        9 (0.0%)         0            0         0   0    std::size_t size()const noexcept{return size_ctrl.size;}
+        .                .            .         .   .    std::size_t max_size()const noexcept{return SIZE_MAX;}
+        .                .            .         .   .  
+        .                .            .         .   .    BOOST_FORCEINLINE
+        .                .            .         .   .    void erase(group_type* pg,unsigned int pos,element_type* p)noexcept
+        .                .            .         .   .    {
+        .                .            .         .   .      destroy_element(p);
+        .                .            .         .   .      recover_slot(pg,pos);
+        .                .            .         .   .    }
+-- line 1697 ----------------------------------------
+-- line 1719 ----------------------------------------
+        .                .            .         .   .    template<typename Key>
+        .                .            .         .   .    BOOST_FORCEINLINE locator find(
+        .                .            .         .   .      const Key& x,std::size_t pos0,std::size_t hash)const
+        .                .            .         .   .    {    
+        .                .            .         .   .      BOOST_UNORDERED_STATS_COUNTER(num_cmps);
+        .                .            .         .   .      prober pb(pos0);
+        .                .            .         .   .      do{
+        .                .            .         .   .        auto pos=pb.get();
+2,068,556 (1.0%)         0            0         0   0        auto pg=arrays.groups()+pos;
+        .                .            .         .   .        auto mask=pg->match(hash);
+1,034,278 (0.5%) 1,034,278 (7.3%) 9,942 (1.6%)  0   0        if(mask){
+        .                .            .         .   .          auto elements=arrays.elements();
+        .                .            .         .   .          BOOST_UNORDERED_ASSUME(elements!=nullptr);
+1,103,095 (0.5%)         0            0         0   0          auto p=elements+pos*N;
+  535,189 (0.3%)         0            0         0   0          BOOST_UNORDERED_PREFETCH_ELEMENTS(p,N);
+        .                .            .         .   .          do{
+        .                .            .         .   .            BOOST_UNORDERED_INCREMENT_STATS_COUNTER(num_cmps);
+        .                .            .         .   .            auto n=unchecked_countr_zero(mask);
+1,553,690 (0.8%)   539,036 (3.8%) 3,925 (0.6%)  0   0            if(BOOST_LIKELY(bool(pred()(x,key_from(p[n]))))){
+        .                .            .         .   .              BOOST_UNORDERED_ADD_STATS(
+        .                .            .         .   .                cstats.successful_lookup,(pb.length(),num_cmps));
+        .                .            .         .   .              return {pg,n,p+n};
+        .                .            .         .   .            }
+        .                .            .         .   .            mask&=mask-1;
+   22,410 (0.0%)    11,205 (0.1%)    26 (0.0%)  0   0          }while(mask);
+        .                .            .         .   .        }
+  506,447 (0.2%)   506,447 (3.6%) 1,572 (0.3%)  0   0        if(BOOST_LIKELY(pg->is_not_overflowed(hash))){
+        .                .            .         .   .          BOOST_UNORDERED_ADD_STATS(
+        .                .            .         .   .            cstats.unsuccessful_lookup,(pb.length(),num_cmps));
+        .                .            .         .   .          return {};
+        .                .            .         .   .        }
+    1,561 (0.0%)     1,561 (0.0%)     9 (0.0%)  0   0      }
+        .                .            .         .   .      while(BOOST_LIKELY(pb.next(arrays.groups_size_mask)));
+        .                .            .         .   .      BOOST_UNORDERED_ADD_STATS(
+        .                .            .         .   .        cstats.unsuccessful_lookup,(pb.length(),num_cmps));
+        .                .            .         .   .      return {};
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .  #if defined(BOOST_MSVC)
+        .                .            .         .   .  #pragma warning(pop) /* C4800 */
+-- line 1758 ----------------------------------------
+-- line 1803 ----------------------------------------
+        .                .            .         .   .      }
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    hasher hash_function()const{return h();}
+        .                .            .         .   .    key_equal key_eq()const{return pred();}
+        .                .            .         .   .  
+        .                .            .         .   .    std::size_t capacity()const noexcept
+        .                .            .         .   .    {
+       45 (0.0%)         0            0         0   0      return arrays.elements()?(arrays.groups_size_mask+1)*N-1:0;
+        .                .            .         .   .    }
+        .                .            .         .   .    
+        .                .            .         .   .    float load_factor()const noexcept
+        .                .            .         .   .    {
+        .                .            .         .   .      if(capacity()==0)return 0;
+        .                .            .         .   .      else             return float(size())/float(capacity());
+        .                .            .         .   .    }
+        .                .            .         .   .  
+-- line 1819 ----------------------------------------
+-- line 1947 ----------------------------------------
+        .                .            .         .   .    inline std::size_t position_for(std::size_t hash)const
+        .                .            .         .   .    {
+        .                .            .         .   .      return position_for(hash,arrays);
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    static inline std::size_t position_for(
+        .                .            .         .   .      std::size_t hash,const arrays_type& arrays_)
+        .                .            .         .   .    {
+1,005,133 (0.5%)         0            0         0   0      return size_policy::position(hash,arrays_.groups_size_index);
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    static inline int match_really_occupied(group_type* pg,group_type* last)
+        .                .            .         .   .    {
+        .                .            .         .   .      /* excluding the sentinel */
+    3,060 (0.0%)         0            0         0   0      return pg->match_occupied()&~(int(pg==last-1)<<(N-1));
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    template<typename... Args>
+        .                .            .         .   .    locator unchecked_emplace_at(
+        .                .            .         .   .      std::size_t pos0,std::size_t hash,Args&&... args)
+        .                .            .         .   .    {
+        .                .            .         .   .      auto res=nosize_unchecked_emplace_at(
+        .                .            .         .   .        arrays,pos0,hash,std::forward<Args>(args)...);
+  504,877 (0.2%)         0            0         0   0      ++size_ctrl.size;
+        .                .            .         .   .      return res;
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    BOOST_NOINLINE void unchecked_rehash_for_growth()
+        .                .            .         .   .    {
+        .                .            .         .   .      auto new_arrays_=new_arrays_for_growth();
+        .                .            .         .   .      unchecked_rehash(new_arrays_);
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    template<typename... Args>
+        .                .            .         .   .    BOOST_NOINLINE locator
+        .                .            .         .   .    unchecked_emplace_with_rehash(std::size_t hash,Args&&... args)
+       90 (0.0%)         0            0         0   0    {
+        .                .            .         .   .      auto    new_arrays_=new_arrays_for_growth();
+        .                .            .         .   .      locator it;
+        .                .            .         .   .      BOOST_TRY{
+        .                .            .         .   .        /* strong exception guarantee -> try insertion before rehash */
+       36 (0.0%)         0            0         0   0        it=nosize_unchecked_emplace_at(
+        .                .            .         .   .          new_arrays_,position_for(hash,new_arrays_),
+        .                .            .         .   .          hash,std::forward<Args>(args)...);
+        .                .            .         .   .      }
+        .                .            .         .   .      BOOST_CATCH(...){
+        .                .            .         .   .        delete_arrays(new_arrays_);
+        .                .            .         .   .        BOOST_RETHROW
+        .                .            .         .   .      }
+        .                .            .         .   .      BOOST_CATCH_END
+        .                .            .         .   .  
+        .                .            .         .   .      /* new_arrays_ lifetime taken care of by unchecked_rehash */
+       18 (0.0%)         0            0         0   0      unchecked_rehash(new_arrays_);
+        9 (0.0%)         0            0         0   0      ++size_ctrl.size;
+        .                .            .         .   .      return it;
+       81 (0.0%)         0            0         0   0    }
+        .                .            .         .   .  
+        .                .            .         .   .    void noshrink_reserve(std::size_t n)
+        .                .            .         .   .    {
+        .                .            .         .   .      /* used only on assignment after element clearance */
+        .                .            .         .   .      BOOST_ASSERT(empty());
+        .                .            .         .   .  
+        .                .            .         .   .      if(n){
+        .                .            .         .   .        n=std::size_t(std::ceil(float(n)/mlf)); /* elements -> slots */
+-- line 2010 ----------------------------------------
+-- line 2017 ----------------------------------------
+        .                .            .         .   .          size_ctrl.ml=initial_max_load();
+        .                .            .         .   .        }
+        .                .            .         .   .      }
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    template<typename F>
+        .                .            .         .   .    void for_all_elements(F f)const
+        .                .            .         .   .    {
+       45 (0.0%)         0            0         0   0      for_all_elements(arrays,f);
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    template<typename F>
+        .                .            .         .   .    static auto for_all_elements(const arrays_type& arrays_,F f)
+        .                .            .         .   .      ->decltype(f(nullptr),void())
+        .                .            .         .   .    {
+    5,133 (0.0%)         0            0         0   0      for_all_elements_while(arrays_,[&](element_type* p){f(p);return true;});
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    template<typename F>
+        .                .            .         .   .    static auto for_all_elements(const arrays_type& arrays_,F f)
+        .                .            .         .   .      ->decltype(f(nullptr,0,nullptr),void())
+        .                .            .         .   .    {
+        .                .            .         .   .      for_all_elements_while(
+        .                .            .         .   .        arrays_,[&](group_type* pg,unsigned int n,element_type* p)
+-- line 2040 ----------------------------------------
+-- line 2046 ----------------------------------------
+        .                .            .         .   .    {
+        .                .            .         .   .      return for_all_elements_while(arrays,f);
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    template<typename F>
+        .                .            .         .   .    static auto for_all_elements_while(const arrays_type& arrays_,F f)
+        .                .            .         .   .      ->decltype(f(nullptr),bool())
+        .                .            .         .   .    {
+        9 (0.0%)         0            0         0   0      return for_all_elements_while(
+        .                .            .         .   .        arrays_,[&](group_type*,unsigned int,element_type* p){return f(p);});
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    template<typename F>
+        .                .            .         .   .    static auto for_all_elements_while(const arrays_type& arrays_,F f)
+        .                .            .         .   .      ->decltype(f(nullptr,0,nullptr),bool())
+        .                .            .         .   .    {
+        .                .            .         .   .      auto p=arrays_.elements();
+       18 (0.0%)         9 (0.0%)     1 (0.0%)  0   0      if(p){
+      534 (0.0%)       510 (0.0%)     8 (0.0%)  0   0        for(auto pg=arrays_.groups(),last=pg+arrays_.groups_size_mask+1;
+    1,020 (0.0%)         0            0         0   0            pg!=last;++pg,p+=N){
+        .                .            .         .   .          auto mask=match_really_occupied(pg,last);
+   11,796 (0.0%)     5,643 (0.0%)   533 (0.1%)  0   0          while(mask){
+        .                .            .         .   .            auto n=unchecked_countr_zero(mask);
+   10,266 (0.0%)         0            0         0   0            if(!f(pg,n,p+n))return false;
+        .                .            .         .   .            mask&=mask-1;
+        .                .            .         .   .          }
+        .                .            .         .   .        }
+        .                .            .         .   .      }
+        .                .            .         .   .      return true;
+       18 (0.0%)         0            0         0   0    }
+        .                .            .         .   .  
+        .                .            .         .   .    arrays_type              arrays;
+        .                .            .         .   .    size_ctrl_type           size_ctrl;
+        .                .            .         .   .  
+        .                .            .         .   .  #if defined(BOOST_UNORDERED_ENABLE_STATS)
+        .                .            .         .   .    mutable cumulative_stats cstats;
+        .                .            .         .   .  #endif
+        .                .            .         .   .  
+-- line 2083 ----------------------------------------
+-- line 2124 ----------------------------------------
+        .                .            .         .   .       * capacity after a costly rehash. To avoid this, we jump to the next
+        .                .            .         .   .       * capacity level when the number of erased elements is <= 10% of total
+        .                .            .         .   .       * elements at full load, which is implemented by requesting additional
+        .                .            .         .   .       * F*size elements, with F = P * 10% / (1 - P * 10%), where P is the
+        .                .            .         .   .       * probability of an element having caused overflow; P has been measured as
+        .                .            .         .   .       * ~0.162 under ideal conditions, yielding F ~ 0.0165 ~ 1/61.
+        .                .            .         .   .       */
+        .                .            .         .   .      return new_arrays(std::size_t(
+      162 (0.0%)         9 (0.0%)     0         0   0        std::ceil(static_cast<float>(size()+size()/61+1)/mlf)));
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    void delete_arrays(arrays_type& arrays_)noexcept
+        .                .            .         .   .    {
+        .                .            .         .   .      arrays_type::delete_(typename arrays_type::allocator_type(al()),arrays_);
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    arrays_holder_type make_arrays(std::size_t n)const
+-- line 2140 ----------------------------------------
+-- line 2258 ----------------------------------------
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    void recover_slot(unsigned char* pc)
+        .                .            .         .   .    {
+        .                .            .         .   .      /* If this slot potentially caused overflow, we decrease the maximum load
+        .                .            .         .   .       * so that average probe length won't increase unboundedly in repeated
+        .                .            .         .   .       * insert/erase cycles (drift).
+        .                .            .         .   .       */
+3,527,206 (1.7%)         0            0         0   0      size_ctrl.ml-=group_type::maybe_caused_overflow(pc);
+        .                .            .         .   .      group_type::reset(pc);
+        .                .            .         .   .      --size_ctrl.size;
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    void recover_slot(group_type* pg,std::size_t pos)
+        .                .            .         .   .    {
+        .                .            .         .   .      recover_slot(reinterpret_cast<unsigned char*>(pg)+pos);
+        .                .            .         .   .    }
+-- line 2274 ----------------------------------------
+-- line 2280 ----------------------------------------
+        .                .            .         .   .  
+        .                .            .         .   .    BOOST_NOINLINE void unchecked_rehash(std::size_t n)
+        .                .            .         .   .    {
+        .                .            .         .   .      auto new_arrays_=new_arrays(n);
+        .                .            .         .   .      unchecked_rehash(new_arrays_);
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    BOOST_NOINLINE void unchecked_rehash(arrays_type& new_arrays_)
+       45 (0.0%)         0            0         0   0    {
+        9 (0.0%)         0            0         0   0      std::size_t num_destroyed=0;
+        .                .            .         .   .      BOOST_TRY{
+        .                .            .         .   .        for_all_elements([&,this](element_type* p){
+   10,266 (0.0%)         0            0         0   0          nosize_transfer_element(p,new_arrays_,num_destroyed);
+        .                .            .         .   .        });
+        .                .            .         .   .      }
+        .                .            .         .   .      BOOST_CATCH(...){
+        .                .            .         .   .        if(num_destroyed){
+        .                .            .         .   .          for_all_elements_while(
+        .                .            .         .   .            [&,this](group_type* pg,unsigned int n,element_type*){
+        .                .            .         .   .              recover_slot(pg,n);
+        .                .            .         .   .              return --num_destroyed!=0;
+-- line 2300 ----------------------------------------
+-- line 2312 ----------------------------------------
+        .                .            .         .   .      /* either all moved and destroyed or all copied */
+        .                .            .         .   .      BOOST_ASSERT(num_destroyed==size()||num_destroyed==0);
+        .                .            .         .   .      if(num_destroyed!=size()){
+        .                .            .         .   .        for_all_elements([this](element_type* p){
+        .                .            .         .   .          destroy_element(p);
+        .                .            .         .   .        });
+        .                .            .         .   .      }
+        .                .            .         .   .      delete_arrays(arrays);
+       18 (0.0%)         0            0         0   0      arrays=new_arrays_;
+        9 (0.0%)         0            0         0   0      size_ctrl.ml=initial_max_load();
+       45 (0.0%)         0            0         0   0    }
+        .                .            .         .   .  
+        .                .            .         .   .    template<typename Value>
+        .                .            .         .   .    void unchecked_insert(Value&& x)
+        .                .            .         .   .    {
+        .                .            .         .   .      auto hash=hash_for(key_from(x));
+        .                .            .         .   .      unchecked_emplace_at(position_for(hash),hash,std::forward<Value>(x));
+        .                .            .         .   .    }
+        .                .            .         .   .  
+-- line 2330 ----------------------------------------
+-- line 2342 ----------------------------------------
+        .                .            .         .   .  
+        .                .            .         .   .    void nosize_transfer_element(
+        .                .            .         .   .      element_type* p,std::size_t hash,const arrays_type& arrays_,
+        .                .            .         .   .      std::size_t& num_destroyed,std::true_type /* ->move */)
+        .                .            .         .   .    {
+        .                .            .         .   .      /* Destroy p even if an an exception is thrown in the middle of move
+        .                .            .         .   .       * construction, which could leave the source half-moved.
+        .                .            .         .   .       */
+    5,133 (0.0%)         0            0         0   0      ++num_destroyed;
+        .                .            .         .   .      destroy_element_on_exit d{this,p};
+        .                .            .         .   .      (void)d; /* unused var warning */
+        .                .            .         .   .      nosize_unchecked_emplace_at(
+        .                .            .         .   .        arrays_,position_for(hash,arrays_),hash,type_policy::move(*p));
+        .                .            .         .   .    }
+        .                .            .         .   .  
+        .                .            .         .   .    void nosize_transfer_element(
+        .                .            .         .   .      element_type* p,std::size_t hash,const arrays_type& arrays_,
+-- line 2358 ----------------------------------------
+-- line 2365 ----------------------------------------
+        .                .            .         .   .  
+        .                .            .         .   .    template<typename... Args>
+        .                .            .         .   .    locator nosize_unchecked_emplace_at(
+        .                .            .         .   .      const arrays_type& arrays_,std::size_t pos0,std::size_t hash,
+        .                .            .         .   .      Args&&... args)
+        .                .            .         .   .    {
+        .                .            .         .   .      for(prober pb(pos0);;pb.next(arrays_.groups_size_mask)){
+        .                .            .         .   .        auto pos=pb.get();
+2,040,114 (1.0%)         0            0         0   0        auto pg=arrays_.groups()+pos;
+        .                .            .         .   .        auto mask=pg->match_available();
+  510,061 (0.2%)   510,033 (3.6%)    16 (0.0%)  0   0        if(BOOST_LIKELY(mask!=0)){
+        .                .            .         .   .          auto n=unchecked_countr_zero(mask);
+2,034,943 (1.0%)         0            0         0   0          auto p=arrays_.elements()+pos*N+n;
+        .                .            .         .   .          construct_element(p,std::forward<Args>(args)...);
+        .                .            .         .   .          pg->set(n,hash);
+        .                .            .         .   .          BOOST_UNORDERED_ADD_STATS(cstats.insertion,(pb.length()));
+        .                .            .         .   .          return {pg,n,p};
+        .                .            .         .   .        }
+        .                .            .         .   .        else pg->mark_overflow(hash);
+        .                .            .         .   .      }
+        .                .            .         .   .    }
+-- line 2385 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /home/wang/sources/cxx/book/include/lob/replay.hpp
+--------------------------------------------------------------------------------
+Ir______________ Bc_______________ Bcm____________ Bi Bim 
+
+1,439,482 (0.7%)         0               0          0   0  <unknown (line 0)>
+
+-- line 13 ----------------------------------------
+        .                .               .          .   .  #ifdef LOB_CHECK_INVARIANTS
+        .                .               .          .   .  inline constexpr bool kCheckInvariants = true;
+        .                .               .          .   .  #else
+        .                .               .          .   .  inline constexpr bool kCheckInvariants = false;
+        .                .               .          .   .  #endif
+        .                .               .          .   .  
+        .                .               .          .   .  template <class Book>
+        .                .               .          .   .  inline void apply(Book& book, const Op& op) {
+4,888,730 (2.4%) 1,944,365 (13.7%) 480,868 (79.3%)  0   0    switch (op.type) {
+        .                .               .          .   .      case OpType::Push:
+3,534,202 (1.7%)         0               0          0   0        book.push(op.id, op.side, op.price, op.qty);
+        .                .               .          .   .        return;
+        .                .               .          .   .      case OpType::Cancel:
+        .                .               .          .   .        book.cancel(op.id);
+        .                .               .          .   .        return;
+        .                .               .          .   .      case OpType::Modify:
+  278,175 (0.1%)         0               0          0   0        book.modify(op.id, op.price, op.qty);
+        .                .               .          .   .        return;
+        .                .               .          .   .    }
+        .                .               .          .   .    std::unreachable();
+        .                .               .          .   .  }
+        .                .               .          .   .  
+        .                .               .          .   .  template <class Book>
+        .                .               .          .   .  void replay(Book& book, std::span<const Op> ops) {
+1,000,001 (0.5%) 1,000,001  (7.0%)       5  (0.0%)  0   0    for (const Op& op : ops) {
+        .                .               .          .   .      apply(book, op);
+        .                .               .          .   .      if constexpr (kCheckInvariants) book.check_invariants();
+        .                .               .          .   .    }
+        .                .               .          .   .  }
+        .                .               .          .   .  
+        .                .               .          .   .  }  // namespace lob
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /home/wang/sources/cxx/book/include/lob/v10/book.hpp
+--------------------------------------------------------------------------------
+Ir______________ Bc_______________ Bcm__________ Bi Bim 
+
+8,746,327 (4.3%)         0              0         0   0  <unknown (line 0)>
+
+-- line 107 ----------------------------------------
+        .                .              .         .   .    }
+        .                .              .         .   .  
+        .                .              .         .   .    // Out of line on purpose, with add() forced into it: per push one call that
+        .                .              .         .   .    // tail-calls rest(), the same number of calls as v9 (inlined push + call to
+        .                .              .         .   .    // add()). Leaving push small and inlinable made it inline into the replay
+        .                .              .         .   .    // harness's per-op dispatch, which pushed replay<v10> over the threshold for
+        .                .              .         .   .    // inlining into its caller; there clang inlines with a higher threshold, and
+        .                .              .         .   .    // that is where v4..v9 get cancel/erase inlined (clang -Rpass remarks).
+4,039,088 (2.0%)         0              0         0   0    [[gnu::noinline]] void push(OrderId id, Side side, Price price, Qty qty) {
+1,009,772 (0.5%)   504,886  (3.5%)      0         0   0      if (qty == 0) return reject(id, OpType::Push, RejectReason::InvalidQty);
+1,009,772 (0.5%)   504,886  (3.5%)      0         0   0      if (price <= 0) return reject(id, OpType::Push, RejectReason::InvalidPrice);
+  504,886 (0.2%)         0              0         0   0      auto [slot, inserted] = index_.try_emplace(id);  // the only probe for this id
+        .                .              .         .   .      if (!inserted) return reject(id, OpType::Push, RejectReason::DuplicateId);
+       18 (0.0%)         0              0         0   0      add(id, side, price, qty, slot);
+4,039,088 (2.0%)         0              0         0   0    }
+        .                .              .         .   .  
+        .                .              .         .   .    void cancel(OrderId id) {
+        .                .              .         .   .      auto it = index_.find(id);
+        .                .              .         .   .      if (it == index_.end()) return reject(id, OpType::Cancel, RejectReason::UnknownId);
+  878,958 (0.4%)         0              0         0   0      const Qty remaining = nodes_[it->second.node].qty;
+        .                .              .         .   .      erase(it);
+  439,479 (0.2%)         0              0         0   0      sink_.on(Cancelled{id, remaining});
+        .                .              .         .   .    }
+        .                .              .         .   .  
+  556,350 (0.3%)         0              0         0   0    void modify(OrderId id, Price price, Qty qty) {
+        .                .              .         .   .      auto it = index_.find(id);
+        .                .              .         .   .      if (it == index_.end()) return reject(id, OpType::Modify, RejectReason::UnknownId);
+  111,270 (0.1%)    55,635  (0.4%)      0         0   0      if (qty == 0) return reject(id, OpType::Modify, RejectReason::InvalidQty);
+  111,270 (0.1%)    55,635  (0.4%)      0         0   0      if (price <= 0) return reject(id, OpType::Modify, RejectReason::InvalidPrice);
+        .                .              .         .   .  
+        .                .              .         .   .      Loc& loc = it->second;
+   55,635 (0.0%)         0              0         0   0      OrderNode& node = nodes_[loc.node];
+  222,540 (0.1%)    55,635  (0.4%) 25,637 (4.2%)  0   0      if (price == loc.price && qty <= node.qty) {  // reduce: keep priority
+   67,062 (0.0%)         0              0         0   0        level_of(loc).total_qty -= node.qty - qty;
+   33,531 (0.0%)         0              0         0   0        node.qty = qty;
+   33,531 (0.0%)         0              0         0   0        sink_.on(Reduced{id, qty});
+        .                .              .         .   .        return;
+        .                .              .         .   .      }
+   88,416 (0.0%)         0              0         0   0      const Side side = loc.side;
+        .                .              .         .   .      const Qty old_qty = node.qty;
+   22,104 (0.0%)         0              0         0   0      remove_from_level(loc);  // keep the index slot: add() refills or erases it
+   22,104 (0.0%)         0              0         0   0      sink_.on(Cancelled{id, old_qty});
+        .                .              .         .   .      add(id, side, price, qty, it);
+  445,080 (0.2%)         0              0         0   0    }
+        .                .              .         .   .  
+        .                .              .         .   .    [[nodiscard]] auto best_bid() const -> std::optional<Price> {
+        .                .              .         .   .      std::optional<Price> best;
+        .                .              .         .   .      if (!bid_bits_.empty()) best = price_of(bid_bits_.min() ^ kMirror);
+        .                .              .         .   .      if (!bids_.empty() && (!best || bids_.begin()->first > *best)) best = bids_.begin()->first;
+        .                .              .         .   .      return best;
+        .                .              .         .   .    }
+        .                .              .         .   .    [[nodiscard]] auto best_ask() const -> std::optional<Price> {
+-- line 158 ----------------------------------------
+-- line 260 ----------------------------------------
+        .                .              .         .   .  
+        .                .              .         .   .   private:
+        .                .              .         .   .    static constexpr std::uint32_t kNil = std::numeric_limits<std::uint32_t>::max();
+        .                .              .         .   .    static constexpr std::uint32_t kNoSlot = std::numeric_limits<std::uint32_t>::max();
+        .                .              .         .   .    static constexpr std::uint32_t kSlots = std::uint32_t{1} << WindowBits;
+        .                .              .         .   .    using Bitmap = v3::HierBitmap<WindowBits>;
+        .                .              .         .   .    // bid bitmap bit = slot ^ kMirror (= kSlots - 1 - slot): best bid is min() like best ask
+        .                .              .         .   .    static constexpr std::uint32_t kMirror = kSlots - 1;
+1,836,643 (0.9%)         0              0         0   0    static constexpr auto mirror(Side side) -> std::uint32_t { return side == Side::Buy ? kMirror : 0; }
+        .                .              .         .   .  
+        .                .              .         .   .    struct OrderNode {
+        .                .              .         .   .      OrderId id;
+        .                .              .         .   .      Qty qty;
+        .                .              .         .   .      std::uint32_t next;  // level list: towards the tail; free list: next free node
+        .                .              .         .   .      std::uint32_t prev;  // level list only
+        .                .              .         .   .    };
+        .                .              .         .   .    static_assert(sizeof(OrderNode) == 24);
+-- line 276 ----------------------------------------
+-- line 295 ----------------------------------------
+        .                .              .         .   .    static_assert(sizeof(typename Index::value_type) == 24, "one flat_map slot");
+        .                .              .         .   .  
+        .                .              .         .   .    [[noreturn]] static void fail(const std::string& what) { throw std::logic_error("v10 invariant: " + what); }
+        .                .              .         .   .  
+        .                .              .         .   .    void reject(OrderId id, OpType op, RejectReason reason) { sink_.on(Rejected{id, op, reason}); }
+        .                .              .         .   .  
+        .                .              .         .   .    // ---- price grid ---------------------------------------------------------------
+        .                .              .         .   .    [[nodiscard]] auto slot_of(Price price) const -> std::uint32_t {
+  990,228 (0.5%)   495,114  (3.5%)      0         0   0      if (!anchored_) return kNoSlot;
+        .                .              .         .   .      const Price d = price - base_;
+2,512,065 (1.2%)   991,216  (7.0%)      0         0   0      if (d < 0) return kNoSlot;
+        .                .              .         .   .      const auto ud = static_cast<std::uint64_t>(d);
+  991,216 (0.5%)         0              0         0   0      const auto ut = static_cast<std::uint64_t>(tick_);
+9,845,098 (4.8%) 1,982,432 (13.9%)     22 (0.0%)  0   0      if (ud % ut != 0) return kNoSlot;
+        .                .              .         .   .      const std::uint64_t s = ud / ut;
+  100,593 (0.0%)         0              0         0   0      return s < kSlots ? static_cast<std::uint32_t>(s) : kNoSlot;
+        .                .              .         .   .    }
+1,115,754 (0.5%)         0              0         0   0    [[nodiscard]] auto price_of(std::uint32_t slot) const -> Price { return base_ + static_cast<Price>(slot) * tick_; }
+        .                .              .         .   .  
+        .                .              .         .   .    void anchor(Price price) {  // centre the window on the first on-grid resting price
+        4 (0.0%)         0              0         0   0      base_ = price - static_cast<Price>(kSlots / 2) * tick_;
+        1 (0.0%)         0              0         0   0      anchored_ = true;
+        .                .              .         .   .    }
+        .                .              .         .   .  
+        .                .              .         .   .    // Best fallback-map price seen by a taker of each side, sign-normalised like
+        .                .              .         .   .    // may_cross(): [Buy] = lowest ask, [Sell] = -highest bid; kNoMapLevel when the
+        .                .              .         .   .    // map is empty. Refreshed on every (cold) change of the maps.
+        .                .              .         .   .    static constexpr Price kNoMapLevel = std::numeric_limits<Price>::max();
+        .                .              .         .   .    void refresh_map_best() {
+        .                .              .         .   .      taker_map_best_[0] = asks_.empty() ? kNoMapLevel : asks_.begin()->first;
+        .                .              .         .   .      taker_map_best_[1] = bids_.empty() ? kNoMapLevel : -bids_.begin()->first;
+        .                .              .         .   .    }
+        .                .              .         .   .  
+        .                .              .         .   .    auto level_of(const Loc& loc) -> Level& {
+   67,062 (0.0%)    33,531  (0.2%)      0         0   0      if (const std::uint32_t s = slot_of(loc.price); s != kNoSlot) return grid_[s];
+        .                .              .         .   .      return loc.side == Side::Buy ? bids_.find(loc.price)->second : asks_.find(loc.price)->second;
+        .                .              .         .   .    }
+        .                .              .         .   .  
+        .                .              .         .   .    // ---- node pool ----------------------------------------------------------------
+3,472,714 (1.7%)         0              0         0   0    auto alloc_node(OrderId id, Qty qty) -> std::uint32_t {
+  992,204 (0.5%)         0              0         0   0      std::uint32_t i = free_head_;
+  496,102 (0.2%)   496,102  (3.5%)     15 (0.0%)  0   0      if (i != kNil) {
+1,482,300 (0.7%)         0              0         0   0        free_head_ = nodes_[i].next;
+  494,100 (0.2%)         0              0         0   0      } else {
+    4,004 (0.0%)     2,002  (0.0%)      0         0   0        if (nodes_.size() == kNil) throw std::length_error("v10: order pool exhausted");
+        .                .              .         .   .        i = static_cast<std::uint32_t>(nodes_.size());
+        .                .              .         .   .        nodes_.emplace_back();
+        .                .              .         .   .      }
+1,490,308 (0.7%)         0              0         0   0      nodes_[i] = OrderNode{id, qty, kNil, kNil};
+3,968,816 (1.9%)         0              0         0   0      return i;
+        .                .              .         .   .    }
+        .                .              .         .   .  
+        .                .              .         .   .    void free_node(std::uint32_t i) {
+  988,600 (0.5%)         0              0         0   0      nodes_[i].next = free_head_;
+  565,346 (0.3%)         0              0         0   0      free_head_ = i;
+        .                .              .         .   .    }
+        .                .              .         .   .  
+        .                .              .         .   .    // ---- level list ---------------------------------------------------------------
+        .                .              .         .   .    // The link to patch is either a neighbour node's field or the Level's
+        .                .              .         .   .    // head/tail. Select its address branch-free (clang turns an unpredictable
+        .                .              .         .   .    // ternary into cmov), then store unconditionally. kNil indexes are replaced
+        .                .              .         .   .    // by 0 before forming the node address so no out-of-range pointer is formed
+        .                .              .         .   .    // (the pool is never empty here: node i exists).
+        .                .              .         .   .    void push_back(Level& level, std::uint32_t i) {
+  992,204 (0.5%)         0              0         0   0      const std::uint32_t tail = level.tail;
+        .                .              .         .   .      const bool has_tail = __builtin_unpredictable(tail != kNil);
+1,984,408 (1.0%)         0              0         0   0      std::uint32_t* link = has_tail ? &nodes_[has_tail ? tail : 0].next : &level.head;
+  496,102 (0.2%)         0              0         0   0      *link = i;
+  992,204 (0.5%)         0              0         0   0      nodes_[i].prev = tail;
+  496,102 (0.2%)         0              0         0   0      nodes_[i].next = kNil;
+  496,102 (0.2%)         0              0         0   0      level.tail = i;
+  496,102 (0.2%)         0              0         0   0      ++level.count;
+        .                .              .         .   .    }
+        .                .              .         .   .  
+        .                .              .         .   .    void unlink(Level& level, std::uint32_t i) {
+        .                .              .         .   .      const OrderNode& n = nodes_[i];
+  988,600 (0.5%)         0              0         0   0      const std::uint32_t prev = n.prev;
+  988,600 (0.5%)         0              0         0   0      const std::uint32_t next = n.next;
+        .                .              .         .   .      const bool has_prev = __builtin_unpredictable(prev != kNil);
+        .                .              .         .   .      const bool has_next = __builtin_unpredictable(next != kNil);
+1,482,900 (0.7%)         0              0         0   0      std::uint32_t* to_next = has_prev ? &nodes_[has_prev ? prev : 0].next : &level.head;
+1,977,200 (1.0%)         0              0         0   0      std::uint32_t* to_prev = has_next ? &nodes_[has_next ? next : 0].prev : &level.tail;
+  494,300 (0.2%)         0              0         0   0      *to_next = next;
+  494,300 (0.2%)         0              0         0   0      *to_prev = prev;
+  494,300 (0.2%)         0              0         0   0      --level.count;
+        .                .              .         .   .    }
+        .                .              .         .   .  
+        .                .              .         .   .    // false => match() would consume nothing (no opposite level at or through the
+        .                .              .         .   .    // limit). Prices are normalised by the taker's sign (sell side negated) so
+        .                .              .         .   .    // "crosses" is `best <= limit` for both sides; the only data-dependent branch
+        .                .              .         .   .    // left is "opposite grid empty", which is rare.
+        .                .              .         .   .    [[nodiscard]] auto may_cross(Side side, Price limit) const -> bool {
+        .                .              .         .   .      const auto t = static_cast<std::uint32_t>(side);          // Buy = 0, Sell = 1
+1,580,970 (0.8%)         0              0         0   0      const Price sign = 1 - 2 * static_cast<Price>(t);
+1,580,967 (0.8%)         0              0         0   0      const std::uint32_t opp_mirror = kMirror & (0U - t);       // bids are mirrored
+1,545,546 (0.8%)         0              0         0   0      const Bitmap& opp = __builtin_unpredictable(t != 0) ? bid_bits_ : ask_bits_;
+1,031,876 (0.5%)         0              0         0   0      Price best = taker_map_best_[t];  // already normalised; sentinel when the map is empty
+  526,990 (0.3%)   526,990  (3.7%)  6,374 (1.1%)  0   0      if (!opp.empty()) [[likely]]
+2,107,956 (1.0%)         0              0         0   0        best = std::min(best, sign * price_of(opp.min() ^ opp_mirror));
+1,076,084 (0.5%)         0              0         0   0      return best <= sign * limit;
+        .                .              .         .   .    }
+        .                .              .         .   .  
+        .                .              .         .   .    // slot: this order's index entry (just reserved by push, or kept by modify)
+        .                .              .         .   .    [[gnu::always_inline]] void add(OrderId id, Side side, Price price, Qty qty, typename Index::iterator slot) {
+2,544,370 (1.2%)   526,990  (3.7%) 33,273 (5.5%)  0   0      if (!may_cross(side, price)) [[likely]] return rest(id, side, price, qty, slot);
+   30,888 (0.0%)    30,888  (0.2%) 15,360 (2.5%)  0   0      if (side == Side::Buy)
+   41,034 (0.0%)         0              0         0   0        qty = match<Side::Buy>(id, price, qty);
+        .                .              .         .   .      else
+   40,394 (0.0%)         0              0         0   0        qty = match<Side::Sell>(id, price, qty);
+   61,776 (0.0%)    30,888  (0.2%)     24 (0.0%)  0   0      if (qty == 0) {
+        .                .              .         .   .        index_.erase(slot);  // fully filled: never rests
+   30,888 (0.0%)         0              0         0   0        return;
+        .                .              .         .   .      }
+        .                .              .         .   .      rest(id, side, price, qty, slot);
+        .                .              .         .   .    }
+        .                .              .         .   .  
+        .                .              .         .   .    // Consume opposite levels best-first; the best level is the better of the
+        .                .              .         .   .    // grid's (bitmap min/max) and the fallback map's first entry.
+        .                .              .         .   .    template <Side TakerSide>
+  247,104 (0.1%)         0              0         0   0    auto match(OrderId taker, Price limit, Qty qty) -> Qty {
+        .                .              .         .   .      constexpr bool buy = TakerSide == Side::Buy;
+        .                .              .         .   .      Bitmap& opp_bits = buy ? ask_bits_ : bid_bits_;
+        .                .              .         .   .      constexpr std::uint32_t opp_mirror = buy ? 0 : kMirror;
+        .                .              .         .   .      auto& opp_map = [this]() -> auto& {
+        .                .              .         .   .        if constexpr (buy)
+        .                .              .         .   .          return asks_;
+        .                .              .         .   .        else
+        .                .              .         .   .          return bids_;
+        .                .              .         .   .      }();
+   61,776 (0.0%)    30,888  (0.2%)      0         0   0      while (qty > 0) {
+        .                .              .         .   .        const bool have_grid = !opp_bits.empty();
+        .                .              .         .   .        const bool have_map = !opp_map.empty();
+   92,664 (0.0%)    30,888  (0.2%)      0         0   0        if (!have_grid && !have_map) break;
+        .                .              .         .   .        std::uint32_t slot = kNoSlot;
+        .                .              .         .   .        Price price{};
+   30,888 (0.0%)    30,888  (0.2%)      0         0   0        if (have_grid) {
+   15,310 (0.0%)         0              0         0   0          slot = opp_bits.min() ^ opp_mirror;  // best bid = max slot = min mirrored bit
+        .                .              .         .   .          price = price_of(slot);
+        .                .              .         .   .        }
+        .                .              .         .   .        const bool use_map =
+   30,888 (0.0%)    30,888  (0.2%)      4 (0.0%)  0   0            have_map && (!have_grid || (buy ? opp_map.begin()->first < price : opp_map.begin()->first > price));
+        .                .              .         .   .        if (use_map) price = opp_map.begin()->first;
+   61,776 (0.0%)    30,888  (0.2%)      4 (0.0%)  0   0        if (buy ? price > limit : price < limit) break;
+  308,880 (0.2%)         0              0         0   0        Level& level = use_map ? opp_map.begin()->second : grid_[slot];
+  246,824 (0.1%)   123,412  (0.9%)  2,187 (0.4%)  0   0        while (qty > 0 && level.head != kNil) {
+        .                .              .         .   .          const std::uint32_t head = level.head;
+        .                .              .         .   .          OrderNode& maker = nodes_[head];
+  246,824 (0.1%)         0              0         0   0          const Qty fill = std::min(qty, maker.qty);
+        .                .              .         .   .          sink_.on(Trade{taker, maker.id, price, fill});
+        .                .              .         .   .          qty -= fill;
+  185,118 (0.1%)         0              0         0   0          maker.qty -= fill;
+   61,706 (0.0%)         0              0         0   0          level.total_qty -= fill;
+   61,706 (0.0%)    61,706  (0.4%) 26,001 (4.3%)  0   0          if (maker.qty == 0) {
+        .                .              .         .   .            index_.erase(maker.id);
+        .                .              .         .   .            unlink(level, head);
+        .                .              .         .   .            free_node(head);
+        .                .              .         .   .          }
+        .                .              .         .   .        }
+   61,776 (0.0%)    30,888  (0.2%)     24 (0.0%)  0   0        if (level.head == kNil) {
+        .                .              .         .   .          if (use_map) {
+        .                .              .         .   .            opp_map.erase(opp_map.begin());
+        .                .              .         .   .            refresh_map_best();
+        .                .              .         .   .          } else
+        .                .              .         .   .            opp_bits.clear(slot ^ opp_mirror);
+        .                .              .         .   .        }
+        .                .              .         .   .      }
+  277,992 (0.1%)         0              0         0   0      return qty;
+        .                .              .         .   .    }
+        .                .              .         .   .  
+5,953,224 (2.9%)         0              0         0   0    void rest(OrderId id, Side side, Price price, Qty qty, typename Index::iterator slot) {
+1,488,306 (0.7%)         0              0         0   0      const std::uint32_t i = alloc_node(id, qty);  // may grow nodes_: take references after
+  992,214 (0.5%)   496,104  (3.5%)     14 (0.0%)  0   0      if (!anchored_ && static_cast<std::uint64_t>(price) % static_cast<std::uint64_t>(tick_) == 0) anchor(price);
+        .                .              .         .   .      const std::uint32_t s = slot_of(price);
+        .                .              .         .   .      Level* level = nullptr;
+        .                .              .         .   .      if (s != kNoSlot) {
+1,488,306 (0.7%)         0              0         0   0        level = &grid_[s];
+2,480,510 (1.2%)         0              0         0   0        (side == Side::Buy ? bid_bits_ : ask_bits_).set(s ^ mirror(side));  // idempotent: no "was it empty" branch
+        .                .              .         .   .      } else {
+        .                .              .         .   .        level = side == Side::Buy ? &bids_[price] : &asks_[price];
+        .                .              .         .   .        refresh_map_best();
+        .                .              .         .   .      }
+        .                .              .         .   .      push_back(*level, i);
+  992,204 (0.5%)         0              0         0   0      level->total_qty += qty;
+1,488,306 (0.7%)         0              0         0   0      slot->second = Loc{.price = price, .node = i, .side = side};
+  496,102 (0.2%)         0              0         0   0      sink_.on(Rested{id, side, price, qty});
+3,968,816 (1.9%)         0              0         0   0    }
+        .                .              .         .   .  
+        .                .              .         .   .    void erase(typename Index::iterator it) {
+  439,479 (0.2%)         0              0         0   0      const Loc& loc = it->second;
+  439,479 (0.2%)         0              0         0   0      if (const std::uint32_t s = slot_of(loc.price); s != kNoSlot) {
+1,318,437 (0.6%)         0              0         0   0        Level& level = grid_[s];
+  439,479 (0.2%)         0              0         0   0        level.total_qty -= nodes_[loc.node].qty;
+        .                .              .         .   .        unlink(level, loc.node);
+  439,479 (0.2%)         0              0         0   0        free_node(loc.node);
+        .                .              .         .   .        // "did the level become empty" is unpredictable once unlink is branch-free
+        .                .              .         .   .        // (it used to be inferable from unlink's prev/next branches)
+3,076,353 (1.5%)         0              0         0   0        (loc.side == Side::Buy ? bid_bits_ : ask_bits_).clear_if(s ^ mirror(loc.side), level.head == kNil);
+        .                .              .         .   .      } else {
+        .                .              .         .   .        auto remove_from = [&](auto& levels) {
+        .                .              .         .   .          auto level_it = levels.find(loc.price);
+        .                .              .         .   .          Level& level = level_it->second;
+        .                .              .         .   .          level.total_qty -= nodes_[loc.node].qty;
+        .                .              .         .   .          unlink(level, loc.node);
+        .                .              .         .   .          free_node(loc.node);
+  439,479 (0.2%)         0              0         0   0          if (level.head == kNil) {
+        .                .              .         .   .            levels.erase(level_it);
+        .                .              .         .   .            refresh_map_best();
+        .                .              .         .   .          }
+        .                .              .         .   .        };
+        .                .              .         .   .        if (loc.side == Side::Buy)
+        .                .              .         .   .          remove_from(bids_);
+        .                .              .         .   .        else
+        .                .              .         .   .          remove_from(asks_);
+        .                .              .         .   .      }
+        .                .              .         .   .      index_.erase(it);
+        .                .              .         .   .    }
+        .                .              .         .   .  
+        .                .              .         .   .    // modify's half of erase(): unlink the order from its level (grid or fallback
+        .                .              .         .   .    // map) and free its node, keeping the index slot. erase() keeps v9's own copy
+        .                .              .         .   .    // of this code so the cancel path is what v9 inlines.
+   88,416 (0.0%)         0              0         0   0    void remove_from_level(const Loc& loc) {
+   22,104 (0.0%)         0              0         0   0      if (const std::uint32_t s = slot_of(loc.price); s != kNoSlot) {
+   66,312 (0.0%)         0              0         0   0        Level& level = grid_[s];
+   66,312 (0.0%)         0              0         0   0        level.total_qty -= nodes_[loc.node].qty;
+        .                .              .         .   .        unlink(level, loc.node);
+   22,104 (0.0%)         0              0         0   0        free_node(loc.node);
+        .                .              .         .   .        // "did the level become empty" is unpredictable once unlink is branch-free
+        .                .              .         .   .        // (it used to be inferable from unlink's prev/next branches)
+  176,832 (0.1%)         0              0         0   0        (loc.side == Side::Buy ? bid_bits_ : ask_bits_).clear_if(s ^ mirror(loc.side), level.head == kNil);
+        .                .              .         .   .      } else {
+        .                .              .         .   .        auto remove_from = [&](auto& levels) {
+        .                .              .         .   .          auto level_it = levels.find(loc.price);
+        .                .              .         .   .          Level& level = level_it->second;
+        .                .              .         .   .          level.total_qty -= nodes_[loc.node].qty;
+        .                .              .         .   .          unlink(level, loc.node);
+        .                .              .         .   .          free_node(loc.node);
+        .                .              .         .   .          if (level.head == kNil) {
+-- line 531 ----------------------------------------
+-- line 533 ----------------------------------------
+        .                .              .         .   .            refresh_map_best();
+        .                .              .         .   .          }
+        .                .              .         .   .        };
+        .                .              .         .   .        if (loc.side == Side::Buy)
+        .                .              .         .   .          remove_from(bids_);
+        .                .              .         .   .        else
+        .                .              .         .   .          remove_from(asks_);
+        .                .              .         .   .      }
+   88,416 (0.0%)         0              0         0   0    }
+        .                .              .         .   .  
+        .                .              .         .   .    Sink& sink_;
+        .                .              .         .   .    mem::HugeBuffer buf_;  // grid_ + both bitmaps
+        .                .              .         .   .    Level* grid_ = nullptr;
+        .                .              .         .   .    Bitmap bid_bits_;
+        .                .              .         .   .    Bitmap ask_bits_;
+        .                .              .         .   .    Price tick_;
+        .                .              .         .   .    Price base_ = 0;
+-- line 549 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Annotation summary
+--------------------------------------------------------------------------------
+Ir_________________ Bc________________ Bcm_____________ Bi__________ Bim________ 
+
+142,161,038 (69.5%) 12,712,504 (89.4%) 605,846 (100.0%)   0           0             annotated: files known & above threshold & readable, line numbers known
+ 19,365,084  (9.5%)          0               0            0           0             annotated: files known & above threshold & readable, line numbers unknown
+          0                  0               0            0           0           unannotated: files known & above threshold & two or more non-identical
+          0                  0               0            0           0           unannotated: files known & above threshold & unreadable 
+ 43,122,852 (21.1%)  1,511,110 (10.6%)     281   (0.0%)   0           0           unannotated: files known & below threshold
+        726  (0.0%)         21  (0.0%)       5   (0.0%) 120 (100.0%) 43 (100.0%)  unannotated: files unknown
+
