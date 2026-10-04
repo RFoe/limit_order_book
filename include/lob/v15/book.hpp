@@ -1,7 +1,7 @@
 #pragma once
 // v15: v12 with its own order index (v15/order_index.hpp) in place of
 // boost::unordered_flat_map<OrderId, Loc>: one 64-byte bucket per cache line
-// holding 7 x (u32 key = id - base, u32 node index) plus an exact overflow
+// holding 7 x (u32 key = id, u32 node index) plus an exact overflow
 // counter, all keys compared with one AVX2 instruction. Key and value share the
 // line and an insert writes the line its lookup just read; boost needed the
 // group's metadata line plus the element's line (and wrote that line on
@@ -161,7 +161,8 @@ class BookT {
   [[gnu::always_inline]] void push(OrderId id, Side side, Price price, Qty qty) {
     if (qty == 0) return reject(id, OpType::Push, RejectReason::InvalidQty);
     if (price <= 0) return reject(id, OpType::Push, RejectReason::InvalidPrice);
-    const auto [slot, inserted] = index_.try_insert(id);  // the only probe for this id
+    bool inserted = false;
+    const Handle slot = index_.try_insert(id, inserted);  // the only probe for this id
     if (!inserted) return reject(id, OpType::Push, RejectReason::DuplicateId);
     add(id, side, price, qty, slot);
   }
@@ -170,7 +171,7 @@ class BookT {
     const auto it = index_.find(id);
     if (!it) return reject(id, OpType::Cancel, RejectReason::UnknownId);
     const Qty remaining = nodes_[*it.value].qty;
-    erase(it);
+    erase(it, id);
     sink_.on(Cancelled{id, remaining});
   }
 
@@ -451,7 +452,7 @@ class BookT {
     else
       qty = match<Side::Sell>(id, price, qty);
     if (qty == 0) {
-      index_.erase(slot);  // fully filled: never rests
+      index_.erase(slot, id);  // fully filled: never rests
       return;
     }
     rest(id, side, price, qty, slot);
@@ -494,7 +495,7 @@ class BookT {
         maker.qty -= fill;
         level.total_qty -= fill;
         if (maker.qty == 0) {
-          index_.erase(index_.find(maker.id));
+          index_.erase(index_.find(maker.id), maker.id);
           unlink(level, head);
           free_node(head);
         }
@@ -529,7 +530,7 @@ class BookT {
     sink_.on(Rested{id, side, price, qty});
   }
 
-  [[gnu::always_inline]] void erase(const Handle& it) {
+  [[gnu::always_inline]] void erase(const Handle& it, OrderId id) {
     const Loc loc = loc_of(*it.value);
     if (const std::uint32_t s = slot_of(loc.price); s != kNoSlot) {
       Level& level = grid_[s];
@@ -542,7 +543,7 @@ class BookT {
     } else {
       unlink_off_grid(loc);
     }
-    index_.erase(it);
+    index_.erase(it, id);
   }
 
   // modify's half of erase(): unlink the order from its level (grid or fallback

@@ -1,6 +1,7 @@
 // v15 OrderIndex against std::unordered_map: random insert-if-absent / find /
-// erase / value updates, with ids around the first one (32-bit window, below
-// and above it), far away (fallback map), duplicates, and enough entries for
+// erase / value updates, with ids in the 32-bit key range (dense and small),
+// at its edge (2^32 - 2 is a key, 2^32 - 1 is the empty marker and must go to
+// the fallback map), >= 2^32 (fallback), duplicates, and enough entries for
 // growth and full buckets (overflow chains).
 
 #include <lob/v15/order_index.hpp>
@@ -17,15 +18,16 @@ TEST_CASE("OrderIndex matches std::unordered_map", "[v15][order_index]") {
   std::unordered_map<std::uint64_t, std::uint32_t> ref;
   std::vector<std::uint64_t> keys;  // ids ever inserted (some erased since)
   lob::workload::Rng rng(15);
-  const std::uint64_t first = 5'000'000'000ULL;
+  const std::uint64_t first = 3'000'000'000ULL;  // near the top of the 32-bit key range
   std::uint32_t next_value = 1;
 
   auto draw_id = [&]() -> std::uint64_t {
     const auto r = rng.uniform(100);
     if (r < 60) return first + rng.uniform(1'000'000);             // dense, inside the window
     if (r < 75) return first - rng.uniform(1'000'000);             // below the first id, still inside
-    if (r < 80) return rng.uniform(1'000'000);                     // far below: fallback
-    if (r < 85) return first + (1ULL << 33) + rng.uniform(1000);   // far above: fallback
+    if (r < 80) return rng.uniform(1'000'000);                     // small ids
+    if (r < 84) return (1ULL << 33) + rng.uniform(1000);           // >= 2^32: fallback
+    if (r < 85) return 0xFFFF'FFFEULL + rng.uniform(3);            // the 32-bit edge
     return keys.empty() ? first : keys[rng.uniform(keys.size())];  // an existing (or erased) id
   };
 
@@ -33,7 +35,8 @@ TEST_CASE("OrderIndex matches std::unordered_map", "[v15][order_index]") {
     const std::uint64_t id = draw_id();
     const auto op = rng.uniform(10);
     if (op < 5) {  // insert-if-absent
-      auto [h, inserted] = ix.try_insert(id);
+      bool inserted = false;
+      auto h = ix.try_insert(id, inserted);
       REQUIRE(static_cast<bool>(h));
       REQUIRE(inserted == !ref.contains(id));
       if (inserted) {
@@ -48,7 +51,7 @@ TEST_CASE("OrderIndex matches std::unordered_map", "[v15][order_index]") {
       REQUIRE(static_cast<bool>(h) == ref.contains(id));
       if (h) {
         REQUIRE(*h.value == ref.at(id));
-        ix.erase(h);
+        ix.erase(h, id);
         ref.erase(id);
       }
     } else {  // find + update
@@ -67,7 +70,7 @@ TEST_CASE("OrderIndex matches std::unordered_map", "[v15][order_index]") {
     REQUIRE(p != nullptr);
     REQUIRE(*p == v);
   }
-  for (const auto& [id, v] : ref) ix.erase(ix.find(id));
+  for (const auto& [id, v] : ref) ix.erase(ix.find(id), id);
   CHECK(ix.size() == 0);
   CHECK_FALSE(ix.find(first));
 }
