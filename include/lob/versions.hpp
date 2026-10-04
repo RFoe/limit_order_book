@@ -14,6 +14,7 @@
 #include <lob/v8/book.hpp>
 #include <lob/v9/book.hpp>
 #include <lob/v10/book.hpp>
+#include <lob/v11/book.hpp>
 
 #include <string_view>
 #include <tuple>
@@ -26,7 +27,7 @@ struct VersionList {
   using with_sink = std::tuple<Books<Sink>...>;
 };
 
-using Versions = VersionList<v0::Book, v1::Book, v2::Book, v3::Book, v4::Book, v5::Book, v7::Book, v8::Book, v9::Book, v10::Book>;
+using Versions = VersionList<v0::Book, v1::Book, v2::Book, v3::Book, v4::Book, v5::Book, v7::Book, v8::Book, v9::Book, v10::Book, v11::Book>;
 
 // Calls f.template operator()<Book>() for each Book in the tuple type.
 template <class Tuple, class F>
