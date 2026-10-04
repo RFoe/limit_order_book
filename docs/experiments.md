@@ -821,3 +821,60 @@ TopDown（`perf.sh topdown`，W 固定为 5）：AAPL 的 Bad Speculation 38.6% 
 - **合成负载和真实行情的队列形态不同**：v8 在合成负载上回退、在 ITCH 上有效，说明生成器产生的价位深度和撤单位置分布与 ITCH 差异很大。这影响的不只是 v8：之前所有版本在合成负载上的结论，都要考虑这个代表性问题。下一步可以统计撤单时所在价位的订单数和订单在队列中的位置（ITCH 和合成负载对比），必要时调整生成器参数。
 - **判断 v8 是否保留**：以 ITCH（真实行情）为准，v8 是有效的（−12% 到 −13%，超出 CV）。但如果目标场景的队列更深（类似合成负载），v4 更好。没有做按负载自适应的混合实现。
 - **perf.sh 的两个问题**（commit `a1d5773`）：(1) topdown 原来用 slots/cycles 实测的 W 并四舍五入，VM 里这个比值在 4.0 到 4.9 之间漂移，同一个版本两次运行的 Bad Speculation 差了约 2 个百分点，现在 W 固定为 5（`LOB_TOPDOWN_W` 可以覆盖），实测比值仍然打印出来；(2) record 的 annotate 用 `head -n 2000` 截断，在 pipefail 下 perf 收到 SIGPIPE，脚本在写完所有文件后以 141 退出，改用 `sed -n`。之前的 topdown 结果是用旧公式算的，W 取的是当次测量值。
+
+## [2026-10-04] v9: 不会穿价的 push 不再按 side 分派（基于 v8）（有效）
+
+- **假设**（来自 v8 之后的分析）：v8 在 AAPL 上剩下的预测失败里，`add` 中 `if (side == Side::Buy)`（选择 `match<Buy>` 还是 `match<Sell>`）占 19%，预测失败率 40.6%（连续 push 的方向是随机的）。ITCH 上几乎没有 push 会穿价（AAPL trades=0），所以只要能先无分支地判断"可能穿价"，绝大多数 push 都能跳过这个分派。预估：0.2 次预测失败/op，按 v8 实测的单次代价算，上限约 8 个周期/op；按每次 15–20 个周期保守估算，是 3–4 个周期/op。
+- **改动**：commit `8a446db`，基于 v8。
+  - `add()` 先调用 `may_cross(side, limit)`，返回 false 时直接 `rest`；可能穿价时才走 v8 原来的 `match<Side>` 分派。
+  - **按 side 选择不能有分支**：bid 的 bitmap 改成镜像存储（bit = slot ^ (kSlots − 1)），这样两侧的最优对手价都是 `min()`；价格按 taker 的符号归一化（卖方取负），"穿价"统一成 `best <= limit`；side 只用来选 bitmap 地址、镜像掩码和符号（cmov 和算术）。
+  - **兜底 map 的最优价缓存**：每个 taker side 缓存一个归一化后的 map 最优价，map 为空时用哨兵值；只在改动 map 的冷路径上刷新（rest 新建 map 价位、erase 删除 map 价位、match 吃空 map 价位）。`check_invariants` 校验缓存和 map 一致。
+- **第一个版本失败了，是在 ITCH 上才暴露的**：最初把"对手方 map 非空"当作"可能穿价"（保守，走慢路径）。branch-sim 显示预测失败不降反升（1.69M → 2.00M），push 几乎全部进入 match。用 Python 扫 AAPL 的 op 流后发现，**42 个远离市价的挂单**（买价 $0.0001，卖价 $1,000 和 $199,999，即 stub quote）整天挂在兜底 map 里，99.6% 的 push 发生时对手方 map 都非空。合成负载里没有这种价格，这个问题只能在真实数据上发现。改成缓存 map 的最优价之后解决。
+- **内联结构**：v8 的回放循环调用 `match`（独立函数）再调用 `rest`；v9 的回放循环调用 `add`（独立函数，0xd6 字节），`add` 尾调用 `rest`，AAPL 上 `match` 完全不执行（profile 里没有出现）。函数调用次数没有增加。
+- **正确性**（`LOB_DIFF_VERSIONS=v9`）：debug ctest 40 项通过。差分测试 30 个 seed × 20 万 op 一致（包括 6 位小窗口的网格 + 兜底 map 测试，其中有大量不在网格上的价格和穿价）。6 个 workload 的 checksum 和 v0 一致。
+- **环境**：vm，绑核 CPU 3，结果文件标记为 `8a446db`。
+
+### 结果（v8 → v9，以 ITCH 为准）
+
+cachegrind（profile 构建）：Ir 在 ITCH 上 **−3.5% 到 −3.7%**，syn_default 和 syn_deep −2.0%，syn_aggressive +1.0%（25% 的 push 会穿价，这部分要多做一次判断）。数据写 −8% 到 −9%（不再调用 match，函数调用和寄存器溢出都少了）。D1 未命中变化 ≤0.5%。heaptrack 不变（191 次分配，峰值 41.79M）。
+
+分支模拟（每 op 预测失败次数）：AAPL 1.052 → **0.846**，syn_default 0.864 → 0.624。v9/book.hpp 里每个源码行的预测失败都少于 5000 次；剩下的是 replay 的 `switch`（0.47 次/op）和 boost（0.37 次/op）。
+
+硬件计数器（`book counters`，v4/v8/v9 交替运行，9 轮，每 op 中位数）：
+
+| workload | cycles v8 → v9 | v9 / v4 | branch-miss v8 → v9 | instructions |
+|---|---:|---:|---:|---:|
+| itch AAPL | 95.0 → 86.7（**−8.7%**，spread 2% / 2%） | **−22.2%** | 0.908 → 0.689（−24%；v4 是 1.360） | −7.2% |
+| itch QQQ | 77.5 → 70.1（**−9.6%**） | −20.4% | 0.681 → 0.516（−24%） | −7.4% |
+| itch SPY | 80.9 → 75.0（**−7.2%**，spread 16% / 10%） | −20.5% | 0.695 → 0.515（−26%） | −7.5% |
+| syn_default | 91.3 → 83.4（−8.6%，spread 30% / 43%） | −4.2% | −30% | −5.9% |
+| syn_aggressive | 107.9 → 105.9（−1.8%） | +4.1% | −23% | −3.7% |
+| syn_deep | 109.6 → 100.0（−8.7%） | −0.4% | −30% | −5.9% |
+
+Google Benchmark（`results/bench_20261004-1818_8a446db_vm.json`，v4/v8/v9 交替，20 次重复，中位数）：
+
+| workload | v4 | v8 | v9 | v9 / v8 | v9 / v4 |
+|---|---:|---:|---:|---:|---:|
+| itch AAPL | 157.3 ms（CV 7.5%） | 134.9 ms（2.6%） | 125.3 ms（3.3%） | **−7.1%** | **−20.3%** |
+| itch QQQ | 190.0 ms（1.5%） | 169.3 ms（5.3%） | 153.6 ms（1.8%） | **−9.2%** | **−19.2%** |
+| itch SPY | 169.7 ms（18.6%） | 149.9 ms（1.8%） | 135.3 ms（1.4%） | **−9.7%** | −20.3% |
+| syn_default | 67.2 ms | 74.8 ms | 66.6 ms | −11.0% | −0.9% |
+| syn_aggressive | 80.1 ms | 85.7 ms | 83.4 ms | −2.6% | +4.1% |
+| syn_deep | 79.8 ms | 87.4 ms | 81.7 ms | −6.6% | +2.3% |
+
+TopDown（W=5）：AAPL 的 Bad Speculation 26.2% → 23.7%，Retiring 47.8% → 49.6%；syn_default 的 Bad Speculation 28.5% → 22.8%。
+
+延迟（cycles，含计时开销）：AAPL 整体 p50/p99 184/426 → **178/396**，push_rest 的 p50 203 → 188，cancel 159 → 153；syn_default 整体 p50 186 → 171。
+
+`perf.sh stat`（单次运行）：AAPL 的 branch-misses −25%、instructions −3.7%；cycles 在两组读数之间差了 20%（v8 一组是 195M，另一组是 159M），单次运行的噪声太大，以 counters 和 bench 为准。
+
+### 解释
+
+- **side 分派的预测失败被完全去掉**：AAPL 上每 op 少了 0.21 次预测失败（模拟，−20%；硬件 −24%）。另外，不穿价的 push 不再调用 match（函数调用、入口处的寄存器保存、match 里的循环和判断都省了），指令 −7%，数据写 −9%。所以 cycles 的降幅（−8.7%）高于"只算预测失败"的保守估计。
+- **这次合成负载也受益**：v8 去掉的是在合成负载上可预测的分支（深队列），v9 去掉的 side 分派在两类负载上都不可预测（push 的方向都是随机的）。syn_aggressive 有 25% 的 push 会穿价，这部分要多做一次 may_cross 判断，所以改善最小。
+- **累计**（v4 → v9，ITCH）：cycles −20% 到 −22%，branch-miss 减半（AAPL 1.36 → 0.69 次/op），指令 −1.4% 到 −1.9%。
+
+### 意外与遗留问题
+
+- **合成负载发现不了真实数据里的极端价格**：stub quote（$0.0001 / $199,999）让"对手方兜底 map 非空"在真实数据上几乎恒为真。之后凡是涉及兜底路径的优化，都要先在 ITCH 上用 branch-sim 验证快速路径确实命中。
+- **剩下的预测失败**（AAPL，0.846 次/op）：replay 的 `switch (op.type)` 0.47 次（由输入决定），boost 哈希表 0.37 次。我们自己的代码里已经没有明显的预测失败。下一步的方向转向指令数（哈希表约 70 条/op，`slot_of` 里的除法）和访存。
