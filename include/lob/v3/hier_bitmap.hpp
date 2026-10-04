@@ -71,6 +71,22 @@ template <unsigned Bits> class HierBitmap {
         }
     }
 
+    // clear slot i only if `cond`, without branching on cond: the leaf update is
+    // a masked and-not; propagation upward happens only when the whole 64-slot
+    // word became empty (when !cond the leaf keeps bit i and stays non-zero)
+    void clear_if(std::uint32_t i, bool cond) noexcept {
+        std::uint64_t &leaf = w_[i >> 6];
+        leaf &= ~(std::uint64_t{cond} << (i & 63));
+        if (leaf != 0) return;
+        i >>= 6;
+        for (unsigned l = 1; l < kLevels; ++l) {
+            std::uint64_t &word = w_[kOffset[l] + (i >> 6)];
+            word &= ~(std::uint64_t{1} << (i & 63));
+            if (word != 0) return;
+            i >>= 6;
+        }
+    }
+
     // lowest set slot; precondition: !empty()
     [[nodiscard]] auto min() const noexcept -> std::uint32_t {
         std::uint32_t i = 0;

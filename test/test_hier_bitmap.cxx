@@ -34,12 +34,17 @@ TEMPLATE_TEST_CASE("HierBitmap matches std::set", "[v3][bitmap]", BitsTag<6>, Bi
         const auto centre = static_cast<std::uint32_t>(rng.uniform(Bitmap::kSize));
         const auto i      = static_cast<std::uint32_t>(
             (centre + rng.uniform(64)) % Bitmap::kSize);
-        if (rng.bernoulli(0.5)) {
+        const auto r = rng.uniform(3);
+        if (r == 0) {
             bits.set(i);
             ref.insert(i);
-        } else {
+        } else if (r == 1) {
             bits.clear(i);
             ref.erase(i);
+        } else { // clear_if(i, cond) must equal clear(i) when cond, a no-op otherwise
+            const bool cond = rng.bernoulli(0.5);
+            bits.clear_if(i, cond);
+            if (cond) ref.erase(i);
         }
         REQUIRE(bits.empty() == ref.empty());
         REQUIRE(bits.test(i) == ref.contains(i));
