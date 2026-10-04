@@ -1,0 +1,25 @@
+# cachegrind 20261005-0747_477b99c_vm workload=itch12302019_SPY cache: --I1=32768,8,64 --D1=49152,12,64 --LL=6291456,12,64
+v17 run=0 ops=2249458 events=2249458 trades=0 checksum=b26702485beda571 orders_left=0 tick=100 wall_ms=4767.0
+  v17 grid: 65536 slots x 8 B + 2 x 3-level bitmap = 2097152 B mapped, pages=hugetlb huge_backed=2097152 B, tick=100 base=-44900 fallback_levels=0
+## v17
+I refs:        351,747,769
+I1  miss rate:        0.00%
+LLi miss rate:        0.00%
+D refs:        125,558,032  (85,163,325 rd   + 40,394,707 wr)
+D1  miss rate:         1.4% (       1.2%     +        2.0%  )
+LLd miss rate:         0.7% (       1.0%     +        0.0%  )
+LL refs:         1,811,932  ( 1,007,331 rd   +    804,601 wr)
+LL misses:         850,297  (   845,480 rd   +      4,817 wr)
+LL miss rate:          0.2% (       0.2%     +        0.0%  )
+v18 run=0 ops=2249458 events=2249458 trades=0 checksum=b26702485beda571 orders_left=0 tick=100 wall_ms=4257.9
+  v18 grid: 65536 slots x 8 B + 2 x 3-level bitmap = 2097152 B mapped, pages=hugetlb huge_backed=2097152 B, tick=100 base=-44900 fallback_levels=0
+## v18
+I refs:        356,171,166
+I1  miss rate:        0.00%
+LLi miss rate:        0.00%
+D refs:        114,456,242  (80,780,302 rd   + 33,675,940 wr)
+D1  miss rate:         1.6% (       1.2%     +        2.7%  )
+LLd miss rate:         0.7% (       1.0%     +        0.0%  )
+LL refs:         1,869,469  (   968,831 rd   +    900,638 wr)
+LL misses:         849,832  (   845,199 rd   +      4,633 wr)
+LL miss rate:          0.2% (       0.2%     +        0.0%  )

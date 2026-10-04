@@ -1,0 +1,21 @@
+==103603== Cachegrind, a high-precision tracing profiler
+==103603== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
+==103603== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==103603== Command: /home/wang/sources/cxx/book/build/profile/book replay --workload data/itch12302019_QQQ.ops --version v17
+==103603== 
+==103603== 
+==103603== I refs:        388,548,443
+==103603== I1  misses:            366
+==103603== LLi misses:            340
+==103603== I1  miss rate:        0.00%
+==103603== LLi miss rate:        0.00%
+==103603== 
+==103603== D refs:        139,402,228  (94,375,144 rd   + 45,027,084 wr)
+==103603== D1  misses:      2,341,601  ( 1,151,483 rd   +  1,190,118 wr)
+==103603== LLd misses:        957,426  (   937,287 rd   +     20,139 wr)
+==103603== D1  miss rate:         1.7% (       1.2%     +        2.6%  )
+==103603== LLd miss rate:         0.7% (       1.0%     +        0.0%  )
+==103603== 
+==103603== LL refs:         2,341,967  ( 1,151,849 rd   +  1,190,118 wr)
+==103603== LL misses:         957,766  (   937,627 rd   +     20,139 wr)
+==103603== LL miss rate:          0.2% (       0.2%     +        0.0%  )

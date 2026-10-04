@@ -1,0 +1,12 @@
+tsc: constant_tsc=true nonstop_tsc=true freq=1.1904 GHz timer_overhead=58 cycles
+ver    class            count     p50     p90     p99    p99.9   p99.99       max   (cycles, incl. timer overhead)
+v17    tail > all-p99 (386 cycles), share of tail (share of class): push_rest 29.3% (0.59%) cancel 68.7% (1.39%) modify 2.0% (1.84%)
+v17    all           11264029     155     186     386      827    50740   4676858
+v17    push_rest      5569984     155     175     330      709    50208   4676858
+v17    cancel         5569984     157     192     436      912    50567   2330285
+v17    modify          124061     145     182     479     1085    60863    259398
+v18    tail > all-p99 (410 cycles), share of tail (share of class): push_rest 43.2% (0.87%) cancel 54.8% (1.11%) modify 2.0% (1.79%)
+v18    all           11264029     157     194     410      891    56577    776880
+v18    push_rest      5569984     157     198     389      826    58071    776880
+v18    cancel         5569984     153     190     426      934    54719    639641
+v18    modify          124061     144     184     550     1362    59106    324605

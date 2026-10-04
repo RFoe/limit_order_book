@@ -1,0 +1,12 @@
+# workload=data/itch12302019_AAPL.ops rounds=5 tsc_ghz=1.1904 timer_overhead_cycles=58
+version,class,count,p50,p90,p99,p99.9,p99.99,max
+# v17    tail > all-p99 (327 cycles), share of tail (share of class): push_rest 28.1% (0.57%) cancel 69.9% (1.41%) modify 2.0% (1.82%)
+v17,all,8045735,155,181,327,661,37841,968304
+v17,push_rest,3978560,155,173,287,583,48183,968304
+v17,cancel,3978560,157,186,360,695,33327,287374
+v17,modify,88615,145,175,418,775,33401,268505
+# v18    tail > all-p99 (317 cycles), share of tail (share of class): push_rest 45.0% (0.91%) cancel 53.5% (1.08%) modify 1.5% (1.35%)
+v18,all,8045735,155,177,317,662,13427,770757
+v18,push_rest,3978560,157,170,310,622,12429,770757
+v18,cancel,3978560,153,180,324,682,14225,692127
+v18,modify,88615,143,164,409,800,5787,104053
