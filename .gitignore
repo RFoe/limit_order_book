@@ -11,3 +11,7 @@ data/
 perf.data*
 *.zst
 results/**/*.perf.data*
+
+# python bytecode
+__pycache__/
+*.pyc

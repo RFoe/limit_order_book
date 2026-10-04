@@ -1,0 +1,847 @@
+# static / simulated analysis of v4 on AAPL, profile build (x86-64-v3); vm
+# paths reconstructed with tools/static_path/extract.py from a callgrind profile; uiCA -arch ICL (with the VGPR->GPR patch); llvm-mca-23 -mcpu=icelake-client
+
+## cancel path
+# path from 0x16796: 102 instructions (jmp/call/ret dropped)
+.att_syntax
+1:
+    movq	%rbp, %rdx                                              # 0x16796 x795712
+    movabsq	$-0x61c8864680b583eb, %rax                           # 0x16799 x795712
+    mulxq	%rax, %rcx, %rax                                       # 0x167a3 x795712
+    xorq	%rcx, %rax                                              # 0x167a8 x795717
+    movzbl	0xa0(%r13), %ecx                                      # 0x167ab x795712
+    shrxq	%rcx, %rax, %rcx                                       # 0x167b3 x795712
+    movq	0xb0(%r13), %rdx                                        # 0x167b8 x795712
+    movzbl	%al, %esi                                             # 0x167bf x795712
+    leaq	0x35947(%rip), %rdi                                     # 0x167c2 x795712
+    vpbroadcastd	(%rdi,%rsi,4), %xmm0                            # 0x167c9 x795712
+    movq	0xb8(%r13), %rsi                                        # 0x167cf x795712
+    andl	$0x7, %eax                                              # 0x167d6 x795712
+    movq	0xa8(%r13), %rdi                                        # 0x167d9 x795712
+    xorl	%r8d, %r8d                                              # 0x167e0 x795712
+    movq	%rcx, %r12                                              # 0x167e3 x897517
+    shlq	$0x4, %r12                                              # 0x167e6 x897517
+    vmovdqa	(%rdx,%r12), %xmm1                                   # 0x167ea x897517
+    vpcmpeqb	%xmm0, %xmm1, %xmm2                                 # 0x167f0 x897517
+    vpmovmskb	%xmm2, %r9d                                        # 0x167f4 x897517
+    andl	$0x7fff, %r9d                                           # 0x167f8 x897522
+    je 1b   # cond: taken 95993/897517, path falls through       # 0x167ff x897522
+    addq	%rdx, %r12                                              # 0x16801 x801524
+    movzwl	%r9w, %r9d                                            # 0x16804 x801524
+    imulq	$0x168, %rcx, %r11                                     # 0x16808 x801524
+    leaq	(%rsi,%r11), %r10                                       # 0x1680f x801524
+    prefetcht0	(%rsi,%r11)                                       # 0x16813 x801529
+    xorl	%r15d, %r15d                                            # 0x16818 x829098
+    tzcntl	%r9d, %r15d                                           # 0x1681b x829098
+    leaq	(%r15,%r15,2), %r11                                     # 0x16820 x829140
+    cmpq	(%r10,%r11,8), %rbp                                     # 0x16824 x829140
+    je 1b   # cond: taken 795712/829098, path takes              # 0x16828 x829098
+    leaq	(%r10,%r11,8), %rdi                                     # 0x169a0 x795712
+    movl	0x10(%rdi), %ecx                                        # 0x169a4 x795712
+    movq	0x80(%r13), %r8                                         # 0x169a7 x795712
+    leaq	(%rcx,%rcx,2), %rax                                     # 0x169ae x795717
+    leaq	(%r8,%rax,8), %rsi                                      # 0x169b2 x795712
+    movl	0x8(%r8,%rax,8), %r14d                                  # 0x169b6 x795712
+    leaq	0x8(%rdi), %r9                                          # 0x169bb x795712
+    cmpb	$0x1, 0x48(%r13)                                        # 0x169bf x795717
+    jne 1b   # cond: taken 0/0, path falls through               # 0x169c4 x795712
+    movq	(%r9), %rax                                             # 0x169ca x795712
+    subq	0x40(%r13), %rax                                        # 0x169cd x795712
+    js 1b   # cond: taken 0/0, path falls through                # 0x169d1 x795712
+    movq	0x38(%r13), %r10                                        # 0x169d7 x795717
+    movq	%rax, %rdx                                              # 0x169db x795712
+    orq	%r10, %rdx                                               # 0x169de x795712
+    shrq	$0x20, %rdx                                             # 0x169e1 x795712
+    je 1b   # cond: taken 795712/795712, path takes              # 0x169e5 x795712
+    xorl	%edx, %edx                                              # 0x16a9b x795717
+    divl	%r10d                                                   # 0x16a9d x795717
+    testq	%rdx, %rdx                                             # 0x16aa0 x795712
+    jne 1b   # cond: taken 13/795712, path falls through         # 0x16aa3 x795717
+    cmpq	$0xffff, %rax                                           # 0x16aa5 x795699
+    ja 1b   # cond: taken 29/795699, path falls through          # 0x16aab x795699
+    movq	0x20(%r13), %rdx                                        # 0x16aad x795670
+    leaq	(%rax,%rax,2), %r9                                      # 0x16ab1 x795670
+    subq	%r14, 0x8(%rdx,%r9,8)                                   # 0x16ab5 x795670
+    leaq	(%rdx,%r9,8), %rdx                                      # 0x16aba x795670
+    movl	0xc(%rsi), %r10d                                        # 0x16abe x795670
+    movl	0x10(%rsi), %r9d                                        # 0x16ac2 x795670
+    movl	$0xffffffff, %r11d                                      # 0x16ac6 x795670
+    cmpq	%r11, %r9                                               # 0x16acc x795670
+    je 1b   # cond: taken 284632/795670, path falls through      # 0x16acf x795670
+    leaq	(%r9,%r9,2), %r11                                       # 0x16ad5 x511038
+    movl	%r10d, 0xc(%r8,%r11,8)                                  # 0x16ad9 x511038
+    cmpl	$-0x1, %r10d                                            # 0x16ade x511038
+    je 1b   # cond: taken 330339/511038, path takes              # 0x16ae2 x511038
+    movl	%r9d, 0x4(%rdx)                                         # 0x16ce3 x514430
+    decl	0x10(%rdx)                                              # 0x16ce7 x795670
+    movl	0x98(%r13), %r8d                                        # 0x16cea x795670
+    movl	%r8d, 0xc(%rsi)                                         # 0x16cf1 x795670
+    movl	%ecx, 0x98(%r13)                                        # 0x16cf5 x795670
+    cmpl	$-0x1, (%rdx)                                           # 0x16cfc x795670
+    jne 1b   # cond: taken 611579/795670, path takes             # 0x16cff x795670
+    addq	%r15, %r12                                              # 0x16c24 x795712
+    movzbl	(%r12), %eax                                          # 0x16c27 x795712
+    movq	%r12, %rcx                                              # 0x16c2c x795712
+    orq	$0xf, %rcx                                               # 0x16c2f x795713
+    andl	$0x7, %eax                                              # 0x16c33 x795712
+    leaq	0x358d3(%rip), %rdx                                     # 0x16c36 x795712
+    movzbl	(%rax,%rdx), %eax                                     # 0x16c3d x795712
+    andb	(%rcx), %al                                             # 0x16c41 x795712
+    negb	%al                                                     # 0x16c43 x795712
+    movl	$0x0, %eax                                              # 0x16c45 x795712
+    sbbq	%rax, %rax                                              # 0x16c4a x795712
+    movb	$0x0, (%r12)                                            # 0x16c4d x795712
+    vpbroadcastd	0x303e1(%rip), %xmm0                            # 0x16c52 x795712
+    vpinsrq	$0x0, %rax, %xmm0, %xmm0                             # 0x16c5b x795712
+    vpaddq	0xc0(%r13), %xmm0, %xmm0                              # 0x16c61 x795712
+    vmovdqu	%xmm0, 0xc0(%r13)                                    # 0x16c6a x795712
+    movq	(%r13), %rax                                            # 0x16c73 x795712
+    incq	0x8(%rax)                                               # 0x16c77 x795712
+    movq	(%rax), %rcx                                            # 0x16c7b x795712
+    xorq	$0x3, %rcx                                              # 0x16c7e x795712
+    movabsq	$-0x61c8864680b583eb, %rdx                           # 0x16c82 x795712
+    imulq	%rdx, %rcx                                             # 0x16c8c x795712
+    xorq	%rbp, %rcx                                              # 0x16c90 x795712
+    imulq	%rdx, %rcx                                             # 0x16c93 x795712
+    xorq	%r14, %rcx                                              # 0x16c97 x795712
+    imulq	%rdx, %rcx                                             # 0x16c9a x795712
+    movq	%rcx, (%rax)                                            # 0x16c9e x795712
+    addq	$0x18, %rbx                                             # 0x16772 x1609152
+
+### uiCA
+Throughput (in cycles per iteration): 33.80
+Bottleneck: unknown
+
+The following throughputs could be achieved if the given property were the only bottleneck:
+
+  - Predecoder: 29.88
+  - Decoder: 33.00
+  - Issue: 21.60
+  - Ports: 17.50
+  - Dependencies: 5.00
+
+M - Macro-fused with previous instruction
+
+┌───────────────────────┬────────┬───────┬───────────────────────────────────────────────────────────────────────────────────────────────┬───────┐
+│ MITE   MS   DSB   LSD │ Issued │ Exec. │ Port 0   Port 1   Port 2   Port 3   Port 4   Port 5   Port 6   Port 7   Port 8   Port 9   Div │ Notes │
+├───────────────────────┼────────┼───────┼───────────────────────────────────────────────────────────────────────────────────────────────┼───────┤
+│  1                    │   1    │   1   │  0.33                                         0.17     0.5                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R64_R64.htmlmov rdx, rbp]8;;
+│  1                    │   1    │   1   │  0.5                                          0.17     0.33                                   │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_I64.htmlmov rax, 0x9e3779b97f4a7c15]8;;
+│  2                    │   2    │   2   │            1                                   1                                              │       │ ]8;;https://www.uops.info/html-instr/MULX_R64_R64_R64.htmlmulx rax, rcx, rax]8;;
+│  1                    │   1    │   1   │  0.67                                         0.17     0.17                                   │       │ ]8;;https://www.uops.info/html-instr/XOR_31_R64_R64.htmlxor rax, rcx]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/MOVZX_R32_M8.htmlmovzx ecx, byte ptr [r13+0xa0]]8;;
+│  1                    │   1    │   1   │  0.83                                                  0.17                                   │       │ ]8;;https://www.uops.info/html-instr/SHRX_R64_R64_R64.htmlshrx rcx, rax, rcx]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov rdx, qword ptr [r13+0xb0]]8;;
+│  1                    │   1    │   1   │  0.33                                         0.33     0.33                                   │       │ ]8;;https://www.uops.info/html-instr/MOVZX_R32_R8l.htmlmovzx esi, al]8;;
+│  1                    │   1    │   1   │            1                                                                                  │       │ ]8;;https://www.uops.info/html-instr/LEA_R_D32_R64.htmllea rdi, ptr [rip+0x35947]]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/VPBROADCASTD_XMM_M32.htmlvpbroadcastd xmm0, dword ptr [rdi+rsi*4]]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov rsi, qword ptr [r13+0xb8]]8;;
+│  1                    │   1    │   1   │  0.33                                         0.33     0.33                                   │       │ ]8;;https://www.uops.info/html-instr/AND_R32_I8.htmland eax, 0x7]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov rdi, qword ptr [r13+0xa8]]8;;
+│  1                    │   1    │       │                                                                                               │       │ ]8;;https://www.uops.info/html-instr/XOR_31_R32_R32.htmlxor r8d, r8d]8;;
+│  1                    │   1    │   1   │  0.17                                                  0.83                                   │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R64_R64.htmlmov r12, rcx]8;;
+│  1                    │   1    │   1   │  0.17                                                  0.83                                   │       │ ]8;;https://www.uops.info/html-instr/SHL_R64_I8.htmlshl r12, 0x4]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/VMOVDQA_XMM_M128.htmlvmovdqa xmm1, xmmword ptr [rdx+r12*1]]8;;
+│  1                    │   1    │   1   │  0.33     0.67                                                                                │       │ ]8;;https://www.uops.info/html-instr/VPCMPEQB_XMM_XMM_XMM.htmlvpcmpeqb xmm2, xmm1, xmm0]8;;
+│  1                    │   1    │   1   │   1                                                                                           │       │ ]8;;https://www.uops.info/html-instr/VPMOVMSKB_R32_XMM.htmlvpmovmskb r9d, xmm2]8;;
+│  1                    │   1    │   1   │                                                         1                                     │       │ ]8;;https://www.uops.info/html-instr/AND_R32_I32.htmland r9d, 0x7fff]8;;
+│                       │        │       │                                                                                               │   M   │ ]8;;https://www.uops.info/html-instr/JZ_Rel8.htmljz 0xffffffffffffff97]8;;
+│  1                    │   1    │   1   │  0.33     0.17                                0.17     0.33                                   │       │ ]8;;https://www.uops.info/html-instr/ADD_01_R64_R64.htmladd r12, rdx]8;;
+│  1                    │   1    │   1   │  0.33                                         0.5      0.17                                   │       │ ]8;;https://www.uops.info/html-instr/MOVZX_R32_R16.htmlmovzx r9d, r9w]8;;
+│  1                    │   1    │   1   │            1                                                                                  │       │ ]8;;https://www.uops.info/html-instr/IMUL_R64_R64_I32.htmlimul r11, rcx, 0x168]8;;
+│  1                    │   1    │   1   │  0.33                                         0.33     0.33                                   │       │ ]8;;https://www.uops.info/html-instr/LEA_B_I_R64.htmllea r10, ptr [rsi+r11*1]]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/PREFETCHT0_M512.htmlprefetcht0 zmmword ptr [rsi+r11*1]]8;;
+│  1                    │   1    │       │                                                                                               │       │ ]8;;https://www.uops.info/html-instr/XOR_31_R32_R32.htmlxor r15d, r15d]8;;
+│  1                    │   1    │   1   │            1                                                                                  │       │ ]8;;https://www.uops.info/html-instr/TZCNT_R32_R32.htmltzcnt r15d, r9d]8;;
+│  1                    │   1    │   1   │           0.83                                0.17                                            │       │ ]8;;https://www.uops.info/html-instr/LEA_B_IS_R64.htmllea r11, ptr [r15+r15*2]]8;;
+│  1                    │   2    │   2   │  0.5                         1                         0.5                                    │       │ ]8;;https://www.uops.info/html-instr/CMP_R64_M64.htmlcmp rbp, qword ptr [r10+r11*8]]8;;
+│                       │        │       │                                                                                               │   M   │ ]8;;https://www.uops.info/html-instr/JZ_Rel32.htmljz 0xffffffffffffff6e]8;;
+│  1                    │   1    │   1   │           0.17                                0.83                                            │       │ ]8;;https://www.uops.info/html-instr/LEA_B_IS_R64.htmllea rdi, ptr [r10+r11*8]]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/MOV_R32_M32.htmlmov ecx, dword ptr [rdi+0x10]]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov r8, qword ptr [r13+0x80]]8;;
+│  1                    │   1    │   1   │           0.67                                0.33                                            │       │ ]8;;https://www.uops.info/html-instr/LEA_B_IS_R64.htmllea rax, ptr [rcx+rcx*2]]8;;
+│  1                    │   1    │   1   │                                                1                                              │       │ ]8;;https://www.uops.info/html-instr/LEA_B_IS_R64.htmllea rsi, ptr [r8+rax*8]]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/MOV_R32_M32.htmlmov r14d, dword ptr [r8+rax*8+0x8]]8;;
+│  1                    │   1    │   1   │  0.17                                         0.5      0.33                                   │       │ ]8;;https://www.uops.info/html-instr/LEA_B_D8_R64.htmllea r9, ptr [rdi+0x8]]8;;
+│  1                    │   1    │   2   │  0.33     0.17               1                0.5                                             │       │ ]8;;https://www.uops.info/html-instr/CMP_M8_I8.htmlcmp byte ptr [r13+0x48], 0x1]8;;
+│  1                    │   1    │   1   │  0.5                                                   0.5                                    │       │ ]8;;https://www.uops.info/html-instr/JNZ_Rel32.htmljnz 0xffffffffffffff44]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov rax, qword ptr [r9]]8;;
+│  1                    │   1    │   2   │  0.17     0.17               1                0.17     0.5                                    │       │ ]8;;https://www.uops.info/html-instr/SUB_R64_M64.htmlsub rax, qword ptr [r13+0x40]]8;;
+│  1                    │   1    │   1   │  0.5                                                   0.5                                    │       │ ]8;;https://www.uops.info/html-instr/JS_Rel32.htmljs 0xffffffffffffff37]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov r10, qword ptr [r13+0x38]]8;;
+│  1                    │   1    │   1   │  0.17                                         0.33     0.5                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R64_R64.htmlmov rdx, rax]8;;
+│  1                    │   1    │   1   │  0.33     0.33                                0.33                                            │       │ ]8;;https://www.uops.info/html-instr/OR_09_R64_R64.htmlor rdx, r10]8;;
+│  1                    │   1    │   1   │  0.5                                                   0.5                                    │       │ ]8;;https://www.uops.info/html-instr/SHR_R64_I8.htmlshr rdx, 0x20]8;;
+│  1                    │   1    │   1   │  0.83                                                  0.17                                   │       │ ]8;;https://www.uops.info/html-instr/JZ_Rel32.htmljz 0xffffffffffffff23]8;;
+│  1                    │   1    │       │                                                                                               │       │ ]8;;https://www.uops.info/html-instr/XOR_31_R32_R32.htmlxor edx, edx]8;;
+│  4                    │   4    │   4   │            3                                  0.83     0.17                                6  │       │ ]8;;https://www.uops.info/html-instr/DIV_R32.htmldiv r10d]8;;
+│  1                    │   1    │   1   │  0.33                                                  0.67                                   │       │ ]8;;https://www.uops.info/html-instr/TEST_R64_R64.htmltest rdx, rdx]8;;
+│                       │        │       │                                                                                               │   M   │ ]8;;https://www.uops.info/html-instr/JNZ_Rel32.htmljnz 0xffffffffffffff15]8;;
+│  1                    │   1    │   1   │  0.33                                                  0.67                                   │       │ ]8;;https://www.uops.info/html-instr/CMP_RAX_I32.htmlcmp rax, 0xffff]8;;
+│                       │        │       │                                                                                               │   M   │ ]8;;https://www.uops.info/html-instr/JNBE_Rel32.htmljnbe 0xffffffffffffff09]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov rdx, qword ptr [r13+0x20]]8;;
+│  1                    │   1    │   1   │                                                1                                              │       │ ]8;;https://www.uops.info/html-instr/LEA_B_IS_R64.htmllea r9, ptr [rax+rax*2]]8;;
+│  2                    │   3    │   4   │           0.33      1                 1       0.67               1                            │       │ ]8;;https://www.uops.info/html-instr/SUB_M64_R64.htmlsub qword ptr [rdx+r9*8+0x8], r14]8;;
+│  1                    │   1    │   1   │           0.67                                0.33                                            │       │ ]8;;https://www.uops.info/html-instr/LEA_B_IS_R64.htmllea rdx, ptr [rdx+r9*8]]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/MOV_R32_M32.htmlmov r10d, dword ptr [rsi+0xc]]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/MOV_R32_M32.htmlmov r9d, dword ptr [rsi+0x10]]8;;
+│  1                    │   1    │   1   │           0.5                                 0.5                                             │       │ ]8;;https://www.uops.info/html-instr/MOV_R32_I32.htmlmov r11d, 0xffffffff]8;;
+│  1                    │   1    │   1   │  0.5                                                   0.5                                    │       │ ]8;;https://www.uops.info/html-instr/CMP_39_R64_R64.htmlcmp r9, r11]8;;
+│                       │        │       │                                                                                               │   M   │ ]8;;https://www.uops.info/html-instr/JZ_Rel32.htmljz 0xfffffffffffffee1]8;;
+│  1                    │   1    │   1   │           0.5                                 0.5                                             │       │ ]8;;https://www.uops.info/html-instr/LEA_B_IS_R64.htmllea r11, ptr [r9+r9*2]]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/MOV_M32_R32.htmlmov dword ptr [r8+r11*8+0xc], r10d]8;;
+│  1                    │   1    │   1   │  0.5                                                   0.5                                    │       │ ]8;;https://www.uops.info/html-instr/CMP_R32_I8.htmlcmp r10d, 0xffffffff]8;;
+│                       │        │       │                                                                                               │   M   │ ]8;;https://www.uops.info/html-instr/JZ_Rel32.htmljz 0xfffffffffffffece]8;;
+│  1                    │   1    │   2   │                                       1                          1                            │       │ ]8;;https://www.uops.info/html-instr/MOV_M32_R32.htmlmov dword ptr [rdx+0x4], r9d]8;;
+│  3                    │   3    │   4   │  0.5      0.17               1                         0.33               1        1          │       │ ]8;;https://www.uops.info/html-instr/DEC_M32.htmldec dword ptr [rdx+0x10]]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/MOV_R32_M32.htmlmov r8d, dword ptr [r13+0x98]]8;;
+│  1                    │   1    │   2   │                                       1                          1                            │       │ ]8;;https://www.uops.info/html-instr/MOV_M32_R32.htmlmov dword ptr [rsi+0xc], r8d]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/MOV_M32_R32.htmlmov dword ptr [r13+0x98], ecx]8;;
+│  1                    │   1    │   2   │  0.5      0.17               1                         0.33                                   │       │ ]8;;https://www.uops.info/html-instr/CMP_M32_I8.htmlcmp dword ptr [rdx], 0xffffffff]8;;
+│  1                    │   1    │   1   │  0.67                                                  0.33                                   │       │ ]8;;https://www.uops.info/html-instr/JNZ_Rel32.htmljnz 0xfffffffffffffeac]8;;
+│  1                    │   1    │   1   │  0.5      0.17                                         0.33                                   │       │ ]8;;https://www.uops.info/html-instr/ADD_01_R64_R64.htmladd r12, r15]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/MOVZX_R32_M8.htmlmovzx eax, byte ptr [r12]]8;;
+│  1                    │   1    │   1   │  0.17     0.33                                0.17     0.33                                   │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R64_R64.htmlmov rcx, r12]8;;
+│  1                    │   1    │   1   │  0.17     0.33                                0.33     0.17                                   │       │ ]8;;https://www.uops.info/html-instr/OR_R64_I8.htmlor rcx, 0xf]8;;
+│  1                    │   1    │   1   │  0.67     0.33                                                                                │       │ ]8;;https://www.uops.info/html-instr/AND_R32_I8.htmland eax, 0x7]8;;
+│  1                    │   1    │   1   │            1                                                                                  │       │ ]8;;https://www.uops.info/html-instr/LEA_R_D32_R64.htmllea rdx, ptr [rip+0x358d3]]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/MOVZX_R32_M8.htmlmovzx eax, byte ptr [rax+rdx*1]]8;;
+│  1                    │   1    │   2   │                     1                         0.17     0.83                                   │       │ ]8;;https://www.uops.info/html-instr/AND_R8l_M8.htmland al, byte ptr [rcx]]8;;
+│  1                    │   1    │   1   │  0.17     0.17                                0.17     0.5                                    │       │ ]8;;https://www.uops.info/html-instr/NEG_R8l.htmlneg al]8;;
+│  1                    │   1    │   1   │  0.17     0.33                                0.17     0.33                                   │       │ ]8;;https://www.uops.info/html-instr/MOV_R32_I32.htmlmov eax, 0x0]8;;
+│  1                    │   1    │   1   │  0.33                                                  0.67                                   │       │ ]8;;https://www.uops.info/html-instr/SBB_19_R64_R64.htmlsbb rax, rax]8;;
+│  1                    │   1    │   2   │                                       1                          1                            │       │ ]8;;https://www.uops.info/html-instr/MOV_M8_0.htmlmov byte ptr [r12], 0x0]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/VPBROADCASTD_XMM_M32.htmlvpbroadcastd xmm0, dword ptr [rip+0x303e1]]8;;
+│  2                    │   2    │   2   │                                                2                                              │       │ ]8;;https://www.uops.info/html-instr/VPINSRQ_XMM_XMM_R64_I8.htmlvpinsrq xmm0, xmm0, rax, 0x0]8;;
+│  1                    │   1    │   2   │  0.17               1                         0.83                                            │       │ ]8;;https://www.uops.info/html-instr/VPADDQ_XMM_XMM_M128.htmlvpaddq xmm0, xmm0, xmmword ptr [r13+0xc0]]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/VMOVDQU_M128_XMM.htmlvmovdqu xmmword ptr [r13+0xc0], xmm0]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov rax, qword ptr [r13]]8;;
+│  3                    │   3    │   4   │  0.17     0.17      1                 1       0.5      0.17      1                            │       │ ]8;;https://www.uops.info/html-instr/INC_M64.htmlinc qword ptr [rax+0x8]]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov rcx, qword ptr [rax]]8;;
+│  1                    │   1    │   1   │  0.17     0.17                                0.5      0.17                                   │       │ ]8;;https://www.uops.info/html-instr/XOR_R64_I8.htmlxor rcx, 0x3]8;;
+│  1                    │   1    │   1   │  0.17     0.33                                0.17     0.33                                   │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_I64.htmlmov rdx, 0x9e3779b97f4a7c15]8;;
+│  1                    │   1    │   1   │            1                                                                                  │       │ ]8;;https://www.uops.info/html-instr/IMUL_R64_R64.htmlimul rcx, rdx]8;;
+│  1                    │   1    │   1   │  0.33     0.33                                0.17     0.17                                   │       │ ]8;;https://www.uops.info/html-instr/XOR_31_R64_R64.htmlxor rcx, rbp]8;;
+│  1                    │   1    │   1   │            1                                                                                  │       │ ]8;;https://www.uops.info/html-instr/IMUL_R64_R64.htmlimul rcx, rdx]8;;
+│  1                    │   1    │   1   │  0.33     0.17                                0.17     0.33                                   │       │ ]8;;https://www.uops.info/html-instr/XOR_31_R64_R64.htmlxor rcx, r14]8;;
+│  1                    │   1    │   1   │            1                                                                                  │       │ ]8;;https://www.uops.info/html-instr/IMUL_R64_R64.htmlimul rcx, rdx]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/MOV_M64_R64.htmlmov qword ptr [rax], rcx]8;;
+│  1                    │   1    │   1   │  0.17     0.5                                 0.17     0.17                                   │       │ ]8;;https://www.uops.info/html-instr/ADD_R64_I8.htmladd rbx, 0x18]8;;
+├───────────────────────┼────────┼───────┼───────────────────────────────────────────────────────────────────────────────────────────────┼───────┤
+│ 106                   │  108   │  120  │ 16.67    19.83      15       15       5      16.67    16.83      5        5        5       6  │       │ Total
+└───────────────────────┴────────┴───────┴───────────────────────────────────────────────────────────────────────────────────────────────┴───────┘
+
+### llvm-mca
+Iterations:        200
+Instructions:      20400
+Total Cycles:      9867
+Total uOps:        29800
+
+Dispatch Width:    6
+uOps Per Cycle:    3.02
+IPC:               2.07
+Block RThroughput: 24.8
+
+
+Instruction Info:
+
+## push path
+# path from 0x168a0: 262 instructions (jmp/call/ret dropped)
+.att_syntax
+1:
+    movl	0x4(%rbx), %ecx                                         # 0x168a0 x795712
+    testl	%ecx, %ecx                                             # 0x168a3 x795717
+    je 1b   # cond: taken 0/0, path falls through                # 0x168a5 x795712
+    movq	0x10(%rbx), %r14                                        # 0x168ab x795712
+    testq	%r14, %r14                                             # 0x168af x795712
+    jle 1b   # cond: taken 0/0, path falls through               # 0x168b2 x795712
+    movq	%rbp, %rdx                                              # 0x168b8 x795712
+    movabsq	$-0x61c8864680b583eb, %rax                           # 0x168bb x795712
+    mulxq	%rax, %rdx, %rax                                       # 0x168c5 x795712
+    movzbl	0x1(%rbx), %r15d                                      # 0x168ca x795720
+    xorq	%rdx, %rax                                              # 0x168cf x795712
+    movzbl	0xa0(%r13), %edx                                      # 0x168d2 x795712
+    shrxq	%rdx, %rax, %rdx                                       # 0x168da x795712
+    movq	0xb0(%r13), %rsi                                        # 0x168df x795712
+    movzbl	%al, %edi                                             # 0x168e6 x795715
+    leaq	0x35820(%rip), %r8                                      # 0x168e9 x795720
+    vpbroadcastd	(%r8,%rdi,4), %xmm0                             # 0x168f0 x795712
+    movq	0xb8(%r13), %rdi                                        # 0x168f6 x795712
+    andl	$0x7, %eax                                              # 0x168fd x795712
+    movq	0xa8(%r13), %r8                                         # 0x16900 x795712
+    xorl	%r9d, %r9d                                              # 0x16907 x795712
+    movq	%rdx, %r10                                              # 0x1690a x909153
+    shlq	$0x4, %r10                                              # 0x1690d x909148
+    vmovdqa	(%rsi,%r10), %xmm1                                   # 0x16911 x909153
+    vpcmpeqb	%xmm0, %xmm1, %xmm2                                 # 0x16917 x909148
+    vpmovmskb	%xmm2, %r10d                                       # 0x1691b x909153
+    andl	$0x7fff, %r10d                                          # 0x1691f x909148
+    je 1b   # cond: taken 871733/909148, path takes              # 0x16926 x909148
+    vpextrb	$0xf, %xmm1, %r10d                                   # 0x16960 x909151
+    leaq	0x35ba3(%rip), %r11                                     # 0x16966 x909148
+    testb	%r10b, (%rax,%r11)                                     # 0x1696d x909148
+    je 1b   # cond: taken 795712/909148, path takes              # 0x16971 x909148
+    testb	%r15b, %r15b                                           # 0x16984 x795712
+    je 1b   # cond: taken 400419/795712, path takes              # 0x16987 x795713
+    movq	%r13, %rdi                                              # 0x16ca6 x400419
+    movq	%rbp, %rsi                                              # 0x16ca9 x400419
+    movq	%r14, %rdx                                              # 0x16cac x400419
+    pushq	%rbp                                                   # 0x2fdc0 x400419
+    pushq	%r15                                                   # 0x2fdc1 x400419
+    pushq	%r14                                                   # 0x2fdc3 x400419
+    pushq	%r13                                                   # 0x2fdc5 x400419
+    pushq	%r12                                                   # 0x2fdc7 x400419
+    pushq	%rbx                                                   # 0x2fdc9 x400419
+    subq	$0x68, %rsp                                             # 0x2fdca x400419
+    movq	%rdx, 0x18(%rsp)                                        # 0x2fdce x400419
+    testl	%ecx, %ecx                                             # 0x2fdd3 x400419
+    je 1b   # cond: taken 0/0, path falls through                # 0x2fdd5 x400419
+    movl	%ecx, %ebx                                              # 0x2fddb x400419
+    movq	%rsi, %r14                                              # 0x2fddd x400419
+    movq	%rdi, %r12                                              # 0x2fde0 x400419
+    movabsq	$-0x61c8864680b583eb, %r15                           # 0x2fde3 x400419
+    vpcmpeqd	%xmm4, %xmm4, %xmm4                                 # 0x2fded x400419
+    vpbroadcastd	0x17242(%rip), %xmm5                            # 0x2fdf1 x400419
+    movq	%rsi, 0x10(%rsp)                                        # 0x2fdfa x400419
+    movq	%rdi, (%rsp)                                            # 0x2fdff x400419
+    movq	0x30(%r12), %rsi                                        # 0x2fe49 x400419
+    movq	0x78(%r12), %rax                                        # 0x2fe4e x400419
+    movq	0x2080(%rsi), %rcx                                      # 0x2fe53 x400419
+    movq	%rax, %rdx                                              # 0x2fe5a x400419
+    orq	%rcx, %rdx                                               # 0x2fe5d x400419
+    je 1b   # cond: taken 0/0, path falls through                # 0x2fe60 x400419
+    testq	%rcx, %rcx                                             # 0x2fe66 x400419
+    je 1b   # cond: taken 0/0, path falls through                # 0x2fe69 x400419
+    tzcntq	%rcx, %rcx                                            # 0x2fe6b x400419
+    xorl	%edx, %edx                                              # 0x2fe70 x400419
+    tzcntq	0x2000(%rsi,%rcx,8), %rdx                             # 0x2fe72 x400419
+    shll	$0x6, %ecx                                              # 0x2fe7c x400419
+    orl	%ecx, %edx                                               # 0x2fe7f x400419
+    xorl	%edi, %edi                                              # 0x2fe81 x400419
+    tzcntq	(%rsi,%rdx,8), %rdi                                   # 0x2fe83 x400419
+    movl	%edx, %ecx                                              # 0x2fe89 x400419
+    shll	$0x6, %ecx                                              # 0x2fe8b x400419
+    orl	%ecx, %edi                                               # 0x2fe8e x400421
+    movq	0x38(%r12), %r9                                         # 0x2fe90 x400421
+    imulq	%rdi, %r9                                              # 0x2fe95 x400419
+    addq	0x40(%r12), %r9                                         # 0x2fe99 x400419
+    testq	%rax, %rax                                             # 0x2fe9e x400421
+    je 1b   # cond: taken 1812/400419, path falls through        # 0x2fea1 x400421
+    movq	0x68(%r12), %rax                                        # 0x2fea3 x398607
+    movq	0x20(%rax), %rax                                        # 0x2fea8 x398607
+    cmpq	%r9, %rax                                               # 0x2feac x398607
+    setl	%dl                                                     # 0x2feaf x398609
+    cmovlq	%rax, %r9                                             # 0x2feb2 x398609
+    cmpq	0x18(%rsp), %r9                                         # 0x2feb6 x398609
+    jle 1b   # cond: taken 0/0, path falls through               # 0x2febb x398607
+    movl	%ebx, %eax                                              # 0x30286 x400419
+    addq	$0x68, %rsp                                             # 0x30288 x400419
+    popq	%rbx                                                    # 0x3028c x400419
+    popq	%r12                                                    # 0x3028d x400419
+    popq	%r13                                                    # 0x3028f x400419
+    popq	%r14                                                    # 0x30291 x400419
+    popq	%r15                                                    # 0x30293 x400419
+    popq	%rbp                                                    # 0x30295 x400419
+    testl	%eax, %eax                                             # 0x16cb4 x795712
+    je 1b   # cond: taken 0/0, path falls through                # 0x16cb6 x795712
+    movzbl	%r15b, %edx                                           # 0x16cbc x795712
+    movq	%r13, %rdi                                              # 0x16cc0 x795712
+    movq	%rbp, %rsi                                              # 0x16cc3 x795712
+    movq	%r14, %rcx                                              # 0x16cc6 x795712
+    movl	%eax, %r8d                                              # 0x16cc9 x795712
+    pushq	%rbp                                                   # 0x30790 x795712
+    pushq	%r15                                                   # 0x30791 x795712
+    pushq	%r14                                                   # 0x30793 x795712
+    pushq	%r13                                                   # 0x30795 x795712
+    pushq	%r12                                                   # 0x30797 x795712
+    pushq	%rbx                                                   # 0x30799 x795712
+    subq	$0x58, %rsp                                             # 0x3079a x795712
+    movl	%r8d, %r12d                                             # 0x3079e x795712
+    movq	%rcx, %rbx                                              # 0x307a1 x795712
+    movl	%edx, %r15d                                             # 0x307a4 x795712
+    movq	%rsi, %r13                                              # 0x307a7 x795712
+    movq	%rdi, %r14                                              # 0x307aa x795712
+    movq	%rsi, 0x28(%rsp)                                        # 0x307ad x795712
+    movl	%r8d, %edx                                              # 0x307b2 x795712
+    pushq	%rbp                                                   # 0x30cf0 x795712
+    pushq	%r15                                                   # 0x30cf1 x795712
+    pushq	%r14                                                   # 0x30cf3 x795712
+    pushq	%r13                                                   # 0x30cf5 x795712
+    pushq	%r12                                                   # 0x30cf7 x795712
+    pushq	%rbx                                                   # 0x30cf9 x795712
+    subq	$0x28, %rsp                                             # 0x30cfa x795712
+    movl	0x98(%rdi), %ecx                                        # 0x30cfe x795712
+    movl	$0xffffffff, %eax                                       # 0x30d04 x795712
+    cmpq	%rax, %rcx                                              # 0x30d09 x795712
+    je 1b   # cond: taken 27110/795712, path falls through       # 0x30d0c x795712
+    movq	0x80(%rdi), %r8                                         # 0x30d0e x768602
+    leaq	(%rcx,%rcx,2), %rax                                     # 0x30d15 x768602
+    movl	0xc(%r8,%rax,8), %eax                                   # 0x30d19 x768602
+    movl	%eax, 0x98(%rdi)                                        # 0x30d1e x768602
+    movl	%ecx, %eax                                              # 0x30d24 x768602
+    leaq	(%rcx,%rcx,2), %rcx                                     # 0x30e75 x795712
+    movq	%rsi, (%r8,%rcx,8)                                      # 0x30e79 x795712
+    movl	%edx, 0x8(%r8,%rcx,8)                                   # 0x30e7d x795712
+    movq	$-0x1, 0xc(%r8,%rcx,8)                                  # 0x30e82 x795712
+    addq	$0x28, %rsp                                             # 0x30e8b x795712
+    popq	%rbx                                                    # 0x30e8f x795712
+    popq	%r12                                                    # 0x30e90 x795712
+    popq	%r13                                                    # 0x30e92 x795712
+    popq	%r14                                                    # 0x30e94 x795712
+    popq	%r15                                                    # 0x30e96 x795712
+    popq	%rbp                                                    # 0x30e98 x795712
+    movl	%eax, %r8d                                              # 0x307ba x795712
+    cmpb	$0x0, 0x48(%r14)                                        # 0x307bd x795712
+    movl	%r15d, 0x10(%rsp)                                       # 0x307c2 x795712
+    movq	%r13, 0x20(%rsp)                                        # 0x307c7 x795712
+    jne 1b   # cond: taken 795711/795712, path takes             # 0x307cc x795712
+    movq	%rbx, %rax                                              # 0x30813 x795712
+    subq	0x40(%r14), %rax                                        # 0x30816 x795712
+    js 1b   # cond: taken 0/0, path falls through                # 0x3081a x795712
+    movq	0x38(%r14), %rcx                                        # 0x30820 x795712
+    movq	%rax, %rdx                                              # 0x30824 x795712
+    orq	%rcx, %rdx                                               # 0x30827 x795712
+    shrq	$0x20, %rdx                                             # 0x3082a x795712
+    je 1b   # cond: taken 795712/795712, path takes              # 0x3082e x795712
+    xorl	%edx, %edx                                              # 0x30840 x795712
+    divl	%ecx                                                    # 0x30842 x795712
+    testq	%rdx, %rdx                                             # 0x30844 x795712
+    jne 1b   # cond: taken 13/795712, path falls through         # 0x30847 x795712
+    cmpq	$0xffff, %rax                                           # 0x3084d x795699
+    ja 1b   # cond: taken 29/795699, path falls through          # 0x30853 x795699
+    movq	0x20(%r14), %rcx                                        # 0x30855 x795670
+    leaq	(%rax,%rax,2), %rdx                                     # 0x30859 x795670
+    leaq	(%rcx,%rdx,8), %rbp                                     # 0x3085d x795670
+    cmpl	$-0x1, (%rcx,%rdx,8)                                    # 0x30861 x795670
+    jne 1b   # cond: taken 611579/795670, path takes             # 0x30865 x795670
+    movl	0x4(%rbp), %eax                                         # 0x30a37 x795712
+    movl	%r8d, %edx                                              # 0x30a3a x795712
+    movq	0x80(%r14), %rcx                                        # 0x30a3d x795712
+    leaq	(%rdx,%rdx,2), %rdx                                     # 0x30a44 x795712
+    movl	%eax, 0x10(%rcx,%rdx,8)                                 # 0x30a48 x795712
+    movl	$0xffffffff, 0xc(%rcx,%rdx,8)                           # 0x30a4c x795712
+    movl	$0xffffffff, %edx                                       # 0x30a54 x795712
+    cmpq	%rdx, %rax                                              # 0x30a59 x795712
+    je 1b   # cond: taken 184120/795699, path falls through      # 0x30a5c x795712
+    leaq	(%rax,%rax,2), %rax                                     # 0x30a5e x611592
+    movl	%r8d, 0xc(%rcx,%rax,8)                                  # 0x30a62 x611592
+    movl	%r8d, 0x4(%rbp)                                         # 0x30a6d x795712
+    incl	0x10(%rbp)                                              # 0x30a71 x795712
+    movl	%r12d, %eax                                             # 0x30a74 x795712
+    movq	%rax, 0x18(%rsp)                                        # 0x30a77 x795712
+    addq	%rax, 0x8(%rbp)                                         # 0x30a7c x795712
+    leaq	0xa0(%r14), %rsi                                        # 0x30a80 x795712
+    movq	%rbx, 0x30(%rsp)                                        # 0x30a87 x795712
+    movabsq	$-0x61c8864680b583eb, %rax                           # 0x30a8c x795712
+    movq	%r13, %rdx                                              # 0x30a96 x795712
+    mulxq	%rax, %rax, %rcx                                       # 0x30a99 x795712
+    movl	%r8d, 0x38(%rsp)                                        # 0x30a9e x795712
+    movb	%r15b, 0x3c(%rsp)                                       # 0x30aa3 x795712
+    xorq	%rax, %rcx                                              # 0x30aa8 x795712
+    movzbl	0xa0(%r14), %eax                                      # 0x30aab x795712
+    shrxq	%rax, %rcx, %r9                                        # 0x30ab3 x795712
+    movq	0xb0(%r14), %rax                                        # 0x30ab8 x795712
+    movzbl	%cl, %edx                                             # 0x30abf x795712
+    leaq	0x1b647(%rip), %rdi                                     # 0x30ac2 x795712
+    movl	(%rdi,%rdx,4), %edx                                     # 0x30ac9 x795712
+    vmovd	%edx, %xmm0                                            # 0x30acc x795712
+    vpbroadcastd	%xmm0, %xmm0                                    # 0x30ad0 x795712
+    movq	0xb8(%r14), %r8                                         # 0x30ad5 x795712
+    movl	%ecx, %r10d                                             # 0x30adc x795712
+    andl	$0x7, %r10d                                             # 0x30adf x795712
+    movq	0xa8(%r14), %r11                                        # 0x30ae3 x795712
+    xorl	%r12d, %r12d                                            # 0x30aea x795712
+    movq	%r9, %rdi                                               # 0x30aed x795712
+    movq	%rdi, %r15                                              # 0x30af0 x909148
+    shlq	$0x4, %r15                                              # 0x30af3 x909148
+    vmovdqa	(%rax,%r15), %xmm1                                   # 0x30af7 x909148
+    vpcmpeqb	%xmm0, %xmm1, %xmm2                                 # 0x30afd x909149
+    vpmovmskb	%xmm2, %ebp                                        # 0x30b01 x909148
+    andl	$0x7fff, %ebp                                           # 0x30b05 x909148
+    je 1b   # cond: taken 871733/909148, path takes              # 0x30b0b x909148
+    vpextrb	$0xf, %xmm1, %ebp                                    # 0x30b80 x909148
+    leaq	0x1b983(%rip), %r15                                     # 0x30b86 x909148
+    testb	%bpl, (%r10,%r15)                                      # 0x30b8d x909148
+    je 1b   # cond: taken 795712/909148, path takes              # 0x30b91 x909148
+    movq	0xc8(%r14), %rdi                                        # 0x30ba8 x795712
+    cmpq	0xc0(%r14), %rdi                                        # 0x30baf x795712
+    jae 1b   # cond: taken 33/795712, path falls through         # 0x30bb6 x795712
+    movq	%r9, %rsi                                               # 0x30bbc x795679
+    shlq	$0x4, %rsi                                              # 0x30bbf x795679
+    vpxor	%xmm0, %xmm0, %xmm0                                    # 0x30bc3 x795679
+    vpcmpeqb	(%rax,%rsi), %xmm0, %xmm1                           # 0x30bc7 x795679
+    vpmovmskb	%xmm1, %r10d                                       # 0x30bcc x795679
+    andl	$0x7fff, %r10d                                          # 0x30bd0 x795679
+    je 1b   # cond: taken 85785/795679, path falls through       # 0x30bd7 x795679
+    movl	0x10(%rsp), %r15d                                       # 0x30bdd x709894
+    movq	0x20(%rsp), %r11                                        # 0x30be2 x709894
+    imulq	$0x168, %r9, %rcx                                      # 0x30be7 x795679
+    shlq	$0x4, %r9                                               # 0x30bee x795679
+    addq	%r9, %rax                                               # 0x30bf2 x795679
+    xorl	%esi, %esi                                              # 0x30bf5 x795679
+    tzcntl	%r10d, %esi                                           # 0x30bf7 x795679
+    addq	%rcx, %r8                                               # 0x30bfc x795679
+    leaq	(%rsi,%rsi,2), %rcx                                     # 0x30bff x795679
+    movq	%r11, (%r8,%rcx,8)                                      # 0x30c03 x795679
+    vmovdqu	0x30(%rsp), %xmm0                                    # 0x30c07 x795679
+    vmovdqu	%xmm0, 0x8(%r8,%rcx,8)                               # 0x30c0d x795679
+    movb	%dl, (%rsi,%rax)                                        # 0x30c14 x795679
+    incq	0xc8(%r14)                                              # 0x30c17 x795679
+    movq	(%r14), %rax                                            # 0x30c1e x795712
+    movq	(%rax), %rcx                                            # 0x30c21 x795712
+    xorq	$0x2, %rcx                                              # 0x30c24 x795712
+    movabsq	$-0x61c8864680b583eb, %rsi                           # 0x30c28 x795712
+    imulq	%rsi, %rcx                                             # 0x30c32 x795712
+    xorq	0x28(%rsp), %rcx                                        # 0x30c36 x795712
+    movzbl	%r15b, %edx                                           # 0x30c3b x795712
+    incq	0x8(%rax)                                               # 0x30c3f x795712
+    imulq	%rsi, %rcx                                             # 0x30c43 x795712
+    xorq	%rdx, %rcx                                              # 0x30c47 x795712
+    imulq	%rsi, %rcx                                             # 0x30c4a x795712
+    xorq	%rbx, %rcx                                              # 0x30c4e x795712
+    imulq	%rsi, %rcx                                             # 0x30c51 x795712
+    xorq	0x18(%rsp), %rcx                                        # 0x30c55 x795712
+    imulq	%rsi, %rcx                                             # 0x30c5a x795712
+    movq	%rcx, (%rax)                                            # 0x30c5e x795712
+    addq	$0x58, %rsp                                             # 0x30c61 x795712
+    popq	%rbx                                                    # 0x30c65 x795712
+    popq	%r12                                                    # 0x30c66 x795712
+    popq	%r13                                                    # 0x30c68 x795712
+    popq	%r14                                                    # 0x30c6a x795712
+    popq	%r15                                                    # 0x30c6c x795712
+    popq	%rbp                                                    # 0x30c6e x795712
+    addq	$0x18, %rbx                                             # 0x16772 x1609152
+
+### uiCA
+Throughput (in cycles per iteration): 84.00
+Bottleneck: unknown
+
+The following throughputs could be achieved if the given property were the only bottleneck:
+
+  - Predecoder: 77.25
+  - Decoder: 77.00
+  - Issue: 52.80
+  - Ports: 37.75
+  - Dependencies: 6.00
+
+M - Macro-fused with previous instruction
+
+┌───────────────────────┬────────┬───────┬───────────────────────────────────────────────────────────────────────────────────────────────┬───────┐
+│ MITE   MS   DSB   LSD │ Issued │ Exec. │ Port 0   Port 1   Port 2   Port 3   Port 4   Port 5   Port 6   Port 7   Port 8   Port 9   Div │ Notes │
+├───────────────────────┼────────┼───────┼───────────────────────────────────────────────────────────────────────────────────────────────┼───────┤
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/MOV_R32_M32.htmlmov ecx, dword ptr [rbx+0x4]]8;;
+│  1                    │   1    │   1   │  0.6                                                   0.4                                    │       │ ]8;;https://www.uops.info/html-instr/TEST_R32_R32.htmltest ecx, ecx]8;;
+│                       │        │       │                                                                                               │   M   │ ]8;;https://www.uops.info/html-instr/JZ_Rel8.htmljz 0xfffffffffffffffb]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov r14, qword ptr [rbx+0x10]]8;;
+│  1                    │   1    │   1   │  0.4                                                   0.6                                    │       │ ]8;;https://www.uops.info/html-instr/TEST_R64_R64.htmltest r14, r14]8;;
+│                       │        │       │                                                                                               │   M   │ ]8;;https://www.uops.info/html-instr/JLE_Rel8.htmljle 0xfffffffffffffff2]8;;
+│  1                    │   1    │   1   │                                               0.4      0.6                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R64_R64.htmlmov rdx, rbp]8;;
+│  1                    │   1    │   1   │  0.6                                          0.4                                             │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_I64.htmlmov rax, 0x9e3779b97f4a7c15]8;;
+│  2                    │   2    │   2   │            1                                   1                                              │       │ ]8;;https://www.uops.info/html-instr/MULX_R64_R64_R64.htmlmulx rax, rdx, rax]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/MOVZX_R32_M8.htmlmovzx r15d, byte ptr [rbx+0x1]]8;;
+│  1                    │   1    │   1   │  0.6                                          0.4                                             │       │ ]8;;https://www.uops.info/html-instr/XOR_31_R64_R64.htmlxor rax, rdx]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/MOVZX_R32_M8.htmlmovzx edx, byte ptr [r13+0xa0]]8;;
+│  1                    │   1    │   1   │  0.4                                                   0.6                                    │       │ ]8;;https://www.uops.info/html-instr/SHRX_R64_R64_R64.htmlshrx rdx, rax, rdx]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov rsi, qword ptr [r13+0xb0]]8;;
+│  1                    │   1    │   1   │                                               0.4      0.6                                    │       │ ]8;;https://www.uops.info/html-instr/MOVZX_R32_R8l.htmlmovzx edi, al]8;;
+│  1                    │   1    │   1   │            1                                                                                  │       │ ]8;;https://www.uops.info/html-instr/LEA_R_D32_R64.htmllea r8, ptr [rip+0x35820]]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/VPBROADCASTD_XMM_M32.htmlvpbroadcastd xmm0, dword ptr [r8+rdi*4]]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov rdi, qword ptr [r13+0xb8]]8;;
+│  1                    │   1    │   1   │  0.4                                          0.6                                             │       │ ]8;;https://www.uops.info/html-instr/AND_R32_I8.htmland eax, 0x7]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov r8, qword ptr [r13+0xa8]]8;;
+│  1                    │   1    │       │                                                                                               │       │ ]8;;https://www.uops.info/html-instr/XOR_31_R32_R32.htmlxor r9d, r9d]8;;
+│  1                    │   1    │   1   │  0.2                                          0.6      0.2                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R64_R64.htmlmov r10, rdx]8;;
+│  1                    │   1    │   1   │  0.6                                                   0.4                                    │       │ ]8;;https://www.uops.info/html-instr/SHL_R64_I8.htmlshl r10, 0x4]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/VMOVDQA_XMM_M128.htmlvmovdqa xmm1, xmmword ptr [rsi+r10*1]]8;;
+│  1                    │   1    │   1   │   1                                                                                           │       │ ]8;;https://www.uops.info/html-instr/VPCMPEQB_XMM_XMM_XMM.htmlvpcmpeqb xmm2, xmm1, xmm0]8;;
+│  1                    │   1    │   1   │   1                                                                                           │       │ ]8;;https://www.uops.info/html-instr/VPMOVMSKB_R32_XMM.htmlvpmovmskb r10d, xmm2]8;;
+│  1                    │   1    │   1   │  0.6                                                   0.4                                    │       │ ]8;;https://www.uops.info/html-instr/AND_R32_I32.htmland r10d, 0x7fff]8;;
+│                       │        │       │                                                                                               │   M   │ ]8;;https://www.uops.info/html-instr/JZ_Rel8.htmljz 0xffffffffffffff82]8;;
+│  2                    │   2    │   2   │   1                                            1                                              │       │ ]8;;https://www.uops.info/html-instr/VPEXTRB_R32_XMM_I8.htmlvpextrb r10d, xmm1, 0xf]8;;
+│  1                    │   1    │   1   │            1                                                                                  │       │ ]8;;https://www.uops.info/html-instr/LEA_R_D32_R64.htmllea r11, ptr [rip+0x35ba3]]8;;
+│  1                    │   2    │   2   │  0.4                         1                         0.6                                    │       │ ]8;;https://www.uops.info/html-instr/TEST_M8_R8l.htmltest byte ptr [rax+r11*1], r10b]8;;
+│                       │        │       │                                                                                               │   M   │ ]8;;https://www.uops.info/html-instr/JZ_Rel32.htmljz 0xffffffffffffff6f]8;;
+│  1                    │   1    │   1   │  0.2                                                   0.8                                    │       │ ]8;;https://www.uops.info/html-instr/TEST_R8l_R8l.htmltest r15b, r15b]8;;
+│                       │        │       │                                                                                               │   M   │ ]8;;https://www.uops.info/html-instr/JZ_Rel32.htmljz 0xffffffffffffff66]8;;
+│  1                    │   1    │   1   │                                               0.4      0.6                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R64_R64.htmlmov rdi, r13]8;;
+│  1                    │   1    │   1   │  0.2                                          0.4      0.4                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R64_R64.htmlmov rsi, rbp]8;;
+│  1                    │   1    │   1   │  0.4      0.4                                 0.2                                             │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R64_R64.htmlmov rdx, r14]8;;
+│  1                    │   1    │   2   │                                       1                          1                            │       │ ]8;;https://www.uops.info/html-instr/PUSH_R64.htmlpush rbp]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/PUSH_R64.htmlpush r15]8;;
+│  1                    │   1    │   2   │                                       1                          1                            │       │ ]8;;https://www.uops.info/html-instr/PUSH_R64.htmlpush r14]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/PUSH_R64.htmlpush r13]8;;
+│  1                    │   1    │   2   │                                       1                          1                            │       │ ]8;;https://www.uops.info/html-instr/PUSH_R64.htmlpush r12]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/PUSH_R64.htmlpush rbx]8;;
+│  1                    │   1    │   1   │           0.2                                 0.2      0.6                                    │       │ ]8;;https://www.uops.info/html-instr/SUB_R64_I8.htmlsub rsp, 0x68]8;;
+│  1                    │   1    │   2   │                                       1                          1                            │       │ ]8;;https://www.uops.info/html-instr/MOV_M64_R64.htmlmov qword ptr [rsp+0x18], rdx]8;;
+│  1                    │   1    │   1   │  0.2                                                   0.8                                    │       │ ]8;;https://www.uops.info/html-instr/TEST_R32_R32.htmltest ecx, ecx]8;;
+│                       │        │       │                                                                                               │   M   │ ]8;;https://www.uops.info/html-instr/JZ_Rel32.htmljz 0xffffffffffffff42]8;;
+│  1                    │   1    │   1   │           0.2                                 0.8                                             │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R32_R32.htmlmov ebx, ecx]8;;
+│  1                    │   1    │   1   │  0.2      0.6                                 0.2                                             │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R64_R64.htmlmov r14, rsi]8;;
+│  1                    │   1    │   1   │           0.2                                          0.8                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R64_R64.htmlmov r12, rdi]8;;
+│  1                    │   1    │   1   │  0.2      0.2                                 0.6                                             │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_I64.htmlmov r15, 0x9e3779b97f4a7c15]8;;
+│  1                    │   1    │   1   │  0.2      0.8                                                                                 │       │ ]8;;https://www.uops.info/html-instr/VPCMPEQD_XMM_XMM_XMM.htmlvpcmpeqd xmm4, xmm4, xmm4]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/VPBROADCASTD_XMM_M32.htmlvpbroadcastd xmm5, dword ptr [rip+0x17242]]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/MOV_M64_R64.htmlmov qword ptr [rsp+0x10], rsi]8;;
+│  1                    │   1    │   2   │                                       1                          1                            │       │ ]8;;https://www.uops.info/html-instr/MOV_M64_R64.htmlmov qword ptr [rsp], rdi]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov rsi, qword ptr [r12+0x30]]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov rax, qword ptr [r12+0x78]]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov rcx, qword ptr [rsi+0x2080]]8;;
+│  1                    │   1    │   1   │           0.8                                 0.2                                             │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R64_R64.htmlmov rdx, rax]8;;
+│  1                    │   1    │   1   │           0.4                                 0.2      0.4                                    │       │ ]8;;https://www.uops.info/html-instr/OR_09_R64_R64.htmlor rdx, rcx]8;;
+│  1                    │   1    │   1   │  0.6                                                   0.4                                    │       │ ]8;;https://www.uops.info/html-instr/JZ_Rel32.htmljz 0xfffffffffffffefd]8;;
+│  1                    │   1    │   1   │  0.4                                                   0.6                                    │       │ ]8;;https://www.uops.info/html-instr/TEST_R64_R64.htmltest rcx, rcx]8;;
+│                       │        │       │                                                                                               │   M   │ ]8;;https://www.uops.info/html-instr/JZ_Rel32.htmljz 0xfffffffffffffef4]8;;
+│  1                    │   1    │   1   │            1                                                                                  │       │ ]8;;https://www.uops.info/html-instr/TZCNT_R64_R64.htmltzcnt rcx, rcx]8;;
+│  1                    │   1    │       │                                                                                               │       │ ]8;;https://www.uops.info/html-instr/XOR_31_R32_R32.htmlxor edx, edx]8;;
+│  1                    │   2    │   2   │            1        1                                                                         │       │ ]8;;https://www.uops.info/html-instr/TZCNT_R64_M64.htmltzcnt rdx, qword ptr [rsi+rcx*8+0x2000]]8;;
+│  1                    │   1    │   1   │  0.6                                                   0.4                                    │       │ ]8;;https://www.uops.info/html-instr/SHL_R32_I8.htmlshl ecx, 0x6]8;;
+│  1                    │   1    │   1   │           0.2                                 0.4      0.4                                    │       │ ]8;;https://www.uops.info/html-instr/OR_09_R32_R32.htmlor edx, ecx]8;;
+│  1                    │   1    │       │                                                                                               │       │ ]8;;https://www.uops.info/html-instr/XOR_31_R32_R32.htmlxor edi, edi]8;;
+│  1                    │   2    │   2   │            1                 1                                                                │       │ ]8;;https://www.uops.info/html-instr/TZCNT_R64_M64.htmltzcnt rdi, qword ptr [rsi+rdx*8]]8;;
+│  1                    │   1    │   1   │  0.2                                          0.6      0.2                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R32_R32.htmlmov ecx, edx]8;;
+│  1                    │   1    │   1   │  0.2                                                   0.8                                    │       │ ]8;;https://www.uops.info/html-instr/SHL_R32_I8.htmlshl ecx, 0x6]8;;
+│  1                    │   1    │   1   │  0.2                                          0.4      0.4                                    │       │ ]8;;https://www.uops.info/html-instr/OR_09_R32_R32.htmlor edi, ecx]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov r9, qword ptr [r12+0x38]]8;;
+│  1                    │   1    │   1   │            1                                                                                  │       │ ]8;;https://www.uops.info/html-instr/IMUL_R64_R64.htmlimul r9, rdi]8;;
+│  1                    │   1    │   2   │                              1                0.8      0.2                                    │       │ ]8;;https://www.uops.info/html-instr/ADD_R64_M64.htmladd r9, qword ptr [r12+0x40]]8;;
+│  1                    │   1    │   1   │  0.2                                                   0.8                                    │       │ ]8;;https://www.uops.info/html-instr/TEST_R64_R64.htmltest rax, rax]8;;
+│                       │        │       │                                                                                               │   M   │ ]8;;https://www.uops.info/html-instr/JZ_Rel32.htmljz 0xfffffffffffffeb8]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov rax, qword ptr [r12+0x68]]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov rax, qword ptr [rax+0x20]]8;;
+│  1                    │   1    │   1   │                                                1                                              │       │ ]8;;https://www.uops.info/html-instr/CMP_39_R64_R64.htmlcmp rax, r9]8;;
+│  1                    │   1    │   1   │                                                         1                                     │       │ ]8;;https://www.uops.info/html-instr/SETL_R8l.htmlsetl dl]8;;
+│  1                    │   1    │   1   │  0.2                                                   0.8                                    │       │ ]8;;https://www.uops.info/html-instr/CMOVL_R64_R64.htmlcmovl r9, rax]8;;
+│  1                    │   1    │   2   │  0.8                1                                  0.2                                    │       │ ]8;;https://www.uops.info/html-instr/CMP_R64_M64.htmlcmp r9, qword ptr [rsp+0x18]]8;;
+│                       │        │       │                                                                                               │   M   │ ]8;;https://www.uops.info/html-instr/JLE_Rel32.htmljle 0xfffffffffffffe9a]8;;
+│  1                    │   1    │   1   │                                               0.8      0.2                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R32_R32.htmlmov eax, ebx]8;;
+│  1                    │   1    │   1   │  0.2      0.6                                 0.2                                             │       │ ]8;;https://www.uops.info/html-instr/ADD_R64_I8.htmladd rsp, 0x68]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/POP_R64.htmlpop rbx]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/POP_R64.htmlpop r12]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/POP_R64.htmlpop r13]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/POP_R64.htmlpop r14]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/POP_R64.htmlpop r15]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/POP_R64.htmlpop rbp]8;;
+│  1                    │   1    │   1   │  0.6                                                   0.4                                    │       │ ]8;;https://www.uops.info/html-instr/TEST_R32_R32.htmltest eax, eax]8;;
+│                       │        │       │                                                                                               │   M   │ ]8;;https://www.uops.info/html-instr/JZ_Rel32.htmljz 0xfffffffffffffe82]8;;
+│  1                    │   1    │   1   │           0.2                                 0.8                                             │       │ ]8;;https://www.uops.info/html-instr/MOVZX_R32_R8l.htmlmovzx edx, r15b]8;;
+│  1                    │   1    │   1   │  0.4      0.4                                          0.2                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R64_R64.htmlmov rdi, r13]8;;
+│  1                    │   1    │   1   │  0.4      0.4                                 0.2                                             │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R64_R64.htmlmov rsi, rbp]8;;
+│  1                    │   1    │   1   │  0.2                                                   0.8                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R64_R64.htmlmov rcx, r14]8;;
+│  1                    │   1    │   1   │           0.4                                 0.6                                             │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R32_R32.htmlmov r8d, eax]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/PUSH_R64.htmlpush rbp]8;;
+│  1                    │   1    │   2   │                                       1                          1                            │       │ ]8;;https://www.uops.info/html-instr/PUSH_R64.htmlpush r15]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/PUSH_R64.htmlpush r14]8;;
+│  1                    │   1    │   2   │                                       1                          1                            │       │ ]8;;https://www.uops.info/html-instr/PUSH_R64.htmlpush r13]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/PUSH_R64.htmlpush r12]8;;
+│  1                    │   1    │   2   │                                       1                          1                            │       │ ]8;;https://www.uops.info/html-instr/PUSH_R64.htmlpush rbx]8;;
+│  1                    │   1    │   1   │  0.2      0.2                                 0.4      0.2                                    │       │ ]8;;https://www.uops.info/html-instr/SUB_R64_I8.htmlsub rsp, 0x58]8;;
+│  1                    │   1    │   1   │  0.2      0.2                                 0.6                                             │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R32_R32.htmlmov r12d, r8d]8;;
+│  1                    │   1    │   1   │           0.4                                 0.4      0.2                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R64_R64.htmlmov rbx, rcx]8;;
+│  1                    │   1    │   1   │  0.4      0.4                                 0.2                                             │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R32_R32.htmlmov r15d, edx]8;;
+│  1                    │   1    │   1   │  0.2      0.2                                          0.6                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R64_R64.htmlmov r13, rsi]8;;
+│  1                    │   1    │   1   │  0.2      0.2                                 0.6                                             │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R64_R64.htmlmov r14, rdi]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/MOV_M64_R64.htmlmov qword ptr [rsp+0x28], rsi]8;;
+│  1                    │   1    │   1   │  0.8                                                   0.2                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R32_R32.htmlmov edx, r8d]8;;
+│  1                    │   1    │   2   │                                       1                          1                            │       │ ]8;;https://www.uops.info/html-instr/PUSH_R64.htmlpush rbp]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/PUSH_R64.htmlpush r15]8;;
+│  1                    │   1    │   2   │                                       1                          1                            │       │ ]8;;https://www.uops.info/html-instr/PUSH_R64.htmlpush r14]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/PUSH_R64.htmlpush r13]8;;
+│  1                    │   1    │   2   │                                       1                          1                            │       │ ]8;;https://www.uops.info/html-instr/PUSH_R64.htmlpush r12]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/PUSH_R64.htmlpush rbx]8;;
+│                       │   1    │   1   │  0.2      0.2                                 0.4      0.2                                    │       │ <Stack Sync Uop>
+│  1                    │   1    │   1   │  0.4      0.4                                 0.2                                             │       │ ]8;;https://www.uops.info/html-instr/SUB_R64_I8.htmlsub rsp, 0x28]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/MOV_R32_M32.htmlmov ecx, dword ptr [rdi+0x98]]8;;
+│  1                    │   1    │   1   │  0.2      0.4                                 0.4                                             │       │ ]8;;https://www.uops.info/html-instr/MOV_R32_I32.htmlmov eax, 0xffffffff]8;;
+│  1                    │   1    │   1   │   1                                                                                           │       │ ]8;;https://www.uops.info/html-instr/CMP_39_R64_R64.htmlcmp rcx, rax]8;;
+│                       │        │       │                                                                                               │   M   │ ]8;;https://www.uops.info/html-instr/JZ_Rel32.htmljz 0xfffffffffffffe2b]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov r8, qword ptr [rdi+0x80]]8;;
+│  1                    │   1    │   1   │           0.6                                 0.4                                             │       │ ]8;;https://www.uops.info/html-instr/LEA_B_IS_R64.htmllea rax, ptr [rcx+rcx*2]]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/MOV_R32_M32.htmlmov eax, dword ptr [r8+rax*8+0xc]]8;;
+│  1                    │   1    │   2   │                                       1                          1                            │       │ ]8;;https://www.uops.info/html-instr/MOV_M32_R32.htmlmov dword ptr [rdi+0x98], eax]8;;
+│  1                    │   1    │   1   │  0.4                                          0.2      0.4                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R32_R32.htmlmov eax, ecx]8;;
+│  1                    │   1    │   1   │           0.2                                 0.8                                             │       │ ]8;;https://www.uops.info/html-instr/LEA_B_IS_R64.htmllea rcx, ptr [rcx+rcx*2]]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/MOV_M64_R64.htmlmov qword ptr [r8+rcx*8], rsi]8;;
+│  1                    │   1    │   2   │                                       1                          1                            │       │ ]8;;https://www.uops.info/html-instr/MOV_M32_R32.htmlmov dword ptr [r8+rcx*8+0x8], edx]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/MOV_M64_I32.htmlmov qword ptr [r8+rcx*8+0xc], 0xffffffffffffffff]8;;
+│  1                    │   1    │   1   │  0.4                                          0.2      0.4                                    │       │ ]8;;https://www.uops.info/html-instr/ADD_R64_I8.htmladd rsp, 0x28]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/POP_R64.htmlpop rbx]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/POP_R64.htmlpop r12]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/POP_R64.htmlpop r13]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/POP_R64.htmlpop r14]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/POP_R64.htmlpop r15]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/POP_R64.htmlpop rbp]8;;
+│  1                    │   1    │   1   │  0.6                                                   0.4                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R32_R32.htmlmov r8d, eax]8;;
+│  1                    │   1    │   2   │           0.4       1                         0.4      0.2                                    │       │ ]8;;https://www.uops.info/html-instr/CMP_M8_0.htmlcmp byte ptr [r14+0x48], 0x0]8;;
+│                       │   1    │   1   │  0.6      0.2                                          0.2                                    │       │ <Stack Sync Uop>
+│  1                    │   1    │   2   │                                       1                          1                            │       │ ]8;;https://www.uops.info/html-instr/MOV_M32_R32.htmlmov dword ptr [rsp+0x10], r15d]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/MOV_M64_R64.htmlmov qword ptr [rsp+0x20], r13]8;;
+│  1                    │   1    │   1   │  0.4                                                   0.6                                    │       │ ]8;;https://www.uops.info/html-instr/JNZ_Rel32.htmljnz 0xfffffffffffffdd7]8;;
+│  1                    │   1    │   1   │  0.2      0.4                                          0.4                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R64_R64.htmlmov rax, rbx]8;;
+│  1                    │   1    │   2   │  0.6      0.4                1                                                                │       │ ]8;;https://www.uops.info/html-instr/SUB_R64_M64.htmlsub rax, qword ptr [r14+0x40]]8;;
+│  1                    │   1    │   1   │  0.4                                                   0.6                                    │       │ ]8;;https://www.uops.info/html-instr/JS_Rel32.htmljs 0xfffffffffffffdca]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov rcx, qword ptr [r14+0x38]]8;;
+│  1                    │   1    │   1   │  0.4      0.2                                 0.2      0.2                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R64_R64.htmlmov rdx, rax]8;;
+│  1                    │   1    │   1   │           0.4                                 0.4      0.2                                    │       │ ]8;;https://www.uops.info/html-instr/OR_09_R64_R64.htmlor rdx, rcx]8;;
+│  1                    │   1    │   1   │  0.8                                                   0.2                                    │       │ ]8;;https://www.uops.info/html-instr/SHR_R64_I8.htmlshr rdx, 0x20]8;;
+│  1                    │   1    │   1   │  0.4                                                   0.6                                    │       │ ]8;;https://www.uops.info/html-instr/JZ_Rel32.htmljz 0xfffffffffffffdb6]8;;
+│  1                    │   1    │       │                                                                                               │       │ ]8;;https://www.uops.info/html-instr/XOR_31_R32_R32.htmlxor edx, edx]8;;
+│  4                    │   4    │   4   │            3                                   1                                           6  │       │ ]8;;https://www.uops.info/html-instr/DIV_R32.htmldiv ecx]8;;
+│  1                    │   1    │   1   │  0.4                                                   0.6                                    │       │ ]8;;https://www.uops.info/html-instr/TEST_R64_R64.htmltest rdx, rdx]8;;
+│                       │        │       │                                                                                               │   M   │ ]8;;https://www.uops.info/html-instr/JNZ_Rel32.htmljnz 0xfffffffffffffda9]8;;
+│  1                    │   1    │   1   │  0.4                                                   0.6                                    │       │ ]8;;https://www.uops.info/html-instr/CMP_RAX_I32.htmlcmp rax, 0xffff]8;;
+│                       │        │       │                                                                                               │   M   │ ]8;;https://www.uops.info/html-instr/JNBE_Rel32.htmljnbe 0xfffffffffffffd9d]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov rcx, qword ptr [r14+0x20]]8;;
+│  1                    │   1    │   1   │                                                1                                              │       │ ]8;;https://www.uops.info/html-instr/LEA_B_IS_R64.htmllea rdx, ptr [rax+rax*2]]8;;
+│  1                    │   1    │   1   │            1                                                                                  │       │ ]8;;https://www.uops.info/html-instr/LEA_B_IS_R64.htmllea rbp, ptr [rcx+rdx*8]]8;;
+│  1                    │   2    │   2   │  0.2                1                         0.6      0.2                                    │       │ ]8;;https://www.uops.info/html-instr/CMP_M32_I8.htmlcmp dword ptr [rcx+rdx*8], 0xffffffff]8;;
+│  1                    │   1    │   1   │  0.6                                                   0.4                                    │       │ ]8;;https://www.uops.info/html-instr/JNZ_Rel32.htmljnz 0xfffffffffffffd87]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/MOV_R32_M32.htmlmov eax, dword ptr [rbp+0x4]]8;;
+│  1                    │   1    │   1   │                                               0.8      0.2                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R32_R32.htmlmov edx, r8d]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov rcx, qword ptr [r14+0x80]]8;;
+│  1                    │   1    │   1   │            1                                                                                  │       │ ]8;;https://www.uops.info/html-instr/LEA_B_IS_R64.htmllea rdx, ptr [rdx+rdx*2]]8;;
+│  1                    │   1    │   2   │                                       1                          1                            │       │ ]8;;https://www.uops.info/html-instr/MOV_M32_R32.htmlmov dword ptr [rcx+rdx*8+0x10], eax]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/MOV_M32_I32.htmlmov dword ptr [rcx+rdx*8+0xc], 0xffffffff]8;;
+│  1                    │   1    │   1   │  0.2                                          0.8                                             │       │ ]8;;https://www.uops.info/html-instr/MOV_R32_I32.htmlmov edx, 0xffffffff]8;;
+│  1                    │   1    │   1   │  0.6                                                   0.4                                    │       │ ]8;;https://www.uops.info/html-instr/CMP_39_R64_R64.htmlcmp rax, rdx]8;;
+│                       │        │       │                                                                                               │   M   │ ]8;;https://www.uops.info/html-instr/JZ_Rel32.htmljz 0xfffffffffffffd5c]8;;
+│  1                    │   1    │   1   │                                                1                                              │       │ ]8;;https://www.uops.info/html-instr/LEA_B_IS_R64.htmllea rax, ptr [rax+rax*2]]8;;
+│  1                    │   1    │   2   │                                       1                          1                            │       │ ]8;;https://www.uops.info/html-instr/MOV_M32_R32.htmlmov dword ptr [rcx+rax*8+0xc], r8d]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/MOV_M32_R32.htmlmov dword ptr [rbp+0x4], r8d]8;;
+│  3                    │   3    │   4   │  0.4                         1        1       0.2      0.4       1                            │       │ ]8;;https://www.uops.info/html-instr/INC_M32.htmlinc dword ptr [rbp+0x10]]8;;
+│  1                    │   1    │   1   │  0.2      0.4                                 0.4                                             │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R32_R32.htmlmov eax, r12d]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/MOV_M64_R64.htmlmov qword ptr [rsp+0x18], rax]8;;
+│  2                    │   2    │   4   │  0.4      0.2       1                 1                0.4       1                            │       │ ]8;;https://www.uops.info/html-instr/ADD_M64_R64.htmladd qword ptr [rbp+0x8], rax]8;;
+│  1                    │   1    │   1   │  0.2      0.4                                          0.4                                    │       │ ]8;;https://www.uops.info/html-instr/LEA_B_D32_R64.htmllea rsi, ptr [r14+0xa0]]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/MOV_M64_R64.htmlmov qword ptr [rsp+0x30], rbx]8;;
+│  1                    │   1    │   1   │  0.4                                                   0.6                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_I64.htmlmov rax, 0x9e3779b97f4a7c15]8;;
+│  1                    │   1    │   1   │  0.4      0.4                                          0.2                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R64_R64.htmlmov rdx, r13]8;;
+│  2                    │   2    │   2   │            1                                   1                                              │       │ ]8;;https://www.uops.info/html-instr/MULX_R64_R64_R64.htmlmulx rcx, rax, rax]8;;
+│  1                    │   1    │   2   │                                       1                          1                            │       │ ]8;;https://www.uops.info/html-instr/MOV_M32_R32.htmlmov dword ptr [rsp+0x38], r8d]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/MOV_M8_R8l.htmlmov byte ptr [rsp+0x3c], r15b]8;;
+│  1                    │   1    │   1   │  0.2      0.6                                          0.2                                    │       │ ]8;;https://www.uops.info/html-instr/XOR_31_R64_R64.htmlxor rcx, rax]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/MOVZX_R32_M8.htmlmovzx eax, byte ptr [r14+0xa0]]8;;
+│  1                    │   1    │   1   │  0.2                                                   0.8                                    │       │ ]8;;https://www.uops.info/html-instr/SHRX_R64_R64_R64.htmlshrx r9, rcx, rax]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov rax, qword ptr [r14+0xb0]]8;;
+│  1                    │   1    │   1   │           0.2                                 0.4      0.4                                    │       │ ]8;;https://www.uops.info/html-instr/MOVZX_R32_R8l.htmlmovzx edx, cl]8;;
+│  1                    │   1    │   1   │            1                                                                                  │       │ ]8;;https://www.uops.info/html-instr/LEA_R_D32_R64.htmllea rdi, ptr [rip+0x1b647]]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/MOV_R32_M32.htmlmov edx, dword ptr [rdi+rdx*4]]8;;
+│  1                    │   1    │   1   │                                                1                                              │       │ ]8;;https://www.uops.info/html-instr/VMOVD_XMM_R32.htmlvmovd xmm0, edx]8;;
+│  1                    │   1    │   1   │                                                1                                              │       │ ]8;;https://www.uops.info/html-instr/VPBROADCASTD_XMM_XMM.htmlvpbroadcastd xmm0, xmm0]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov r8, qword ptr [r14+0xb8]]8;;
+│  1                    │   1    │   1   │                                               0.8      0.2                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R32_R32.htmlmov r10d, ecx]8;;
+│  1                    │   1    │   1   │  0.4      0.2                                 0.2      0.2                                    │       │ ]8;;https://www.uops.info/html-instr/AND_R32_I8.htmland r10d, 0x7]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov r11, qword ptr [r14+0xa8]]8;;
+│  1                    │   1    │       │                                                                                               │       │ ]8;;https://www.uops.info/html-instr/XOR_31_R32_R32.htmlxor r12d, r12d]8;;
+│  1                    │   1    │   1   │  0.6                                          0.2      0.2                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R64_R64.htmlmov rdi, r9]8;;
+│  1                    │   1    │   1   │  0.4                                          0.4      0.2                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R64_R64.htmlmov r15, rdi]8;;
+│  1                    │   1    │   1   │  0.4                                                   0.6                                    │       │ ]8;;https://www.uops.info/html-instr/SHL_R64_I8.htmlshl r15, 0x4]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/VMOVDQA_XMM_M128.htmlvmovdqa xmm1, xmmword ptr [rax+r15*1]]8;;
+│  1                    │   1    │   1   │  0.4      0.6                                                                                 │       │ ]8;;https://www.uops.info/html-instr/VPCMPEQB_XMM_XMM_XMM.htmlvpcmpeqb xmm2, xmm1, xmm0]8;;
+│  1                    │   1    │   1   │   1                                                                                           │       │ ]8;;https://www.uops.info/html-instr/VPMOVMSKB_R32_XMM.htmlvpmovmskb ebp, xmm2]8;;
+│  1                    │   1    │   1   │  0.4                                                   0.6                                    │       │ ]8;;https://www.uops.info/html-instr/AND_R32_I32.htmland ebp, 0x7fff]8;;
+│                       │        │       │                                                                                               │   M   │ ]8;;https://www.uops.info/html-instr/JZ_Rel32.htmljz 0xfffffffffffffcaf]8;;
+│  2                    │   2    │   2   │   1       0.6                                 0.4                                             │       │ ]8;;https://www.uops.info/html-instr/VPEXTRB_R32_XMM_I8.htmlvpextrb ebp, xmm1, 0xf]8;;
+│  1                    │   1    │   1   │            1                                                                                  │       │ ]8;;https://www.uops.info/html-instr/LEA_R_D32_R64.htmllea r15, ptr [rip+0x1b983]]8;;
+│  1                    │   2    │   2   │  0.2                         1                         0.8                                    │       │ ]8;;https://www.uops.info/html-instr/TEST_M8_R8l.htmltest byte ptr [r10+r15*1], bpl]8;;
+│                       │        │       │                                                                                               │   M   │ ]8;;https://www.uops.info/html-instr/JZ_Rel32.htmljz 0xfffffffffffffc98]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov rdi, qword ptr [r14+0xc8]]8;;
+│  1                    │   1    │   2   │  0.2                         1                         0.8                                    │       │ ]8;;https://www.uops.info/html-instr/CMP_R64_M64.htmlcmp rdi, qword ptr [r14+0xc0]]8;;
+│                       │        │       │                                                                                               │   M   │ ]8;;https://www.uops.info/html-instr/JNB_Rel32.htmljnb 0xfffffffffffffc84]8;;
+│  1                    │   1    │   1   │           0.2                                 0.2      0.6                                    │       │ ]8;;https://www.uops.info/html-instr/MOV_89_R64_R64.htmlmov rsi, r9]8;;
+│  1                    │   1    │   1   │                                                         1                                     │       │ ]8;;https://www.uops.info/html-instr/SHL_R64_I8.htmlshl rsi, 0x4]8;;
+│  1                    │   1    │       │                                                                                               │       │ ]8;;https://www.uops.info/html-instr/VPXOR_XMM_XMM_XMM.htmlvpxor xmm0, xmm0, xmm0]8;;
+│  1                    │   2    │   2   │            1        1                                                                         │       │ ]8;;https://www.uops.info/html-instr/VPCMPEQB_XMM_XMM_M128.htmlvpcmpeqb xmm1, xmm0, xmmword ptr [rax+rsi*1]]8;;
+│  1                    │   1    │   1   │   1                                                                                           │       │ ]8;;https://www.uops.info/html-instr/VPMOVMSKB_R32_XMM.htmlvpmovmskb r10d, xmm1]8;;
+│  1                    │   1    │   1   │  0.2                                                   0.8                                    │       │ ]8;;https://www.uops.info/html-instr/AND_R32_I32.htmland r10d, 0x7fff]8;;
+│                       │        │       │                                                                                               │   M   │ ]8;;https://www.uops.info/html-instr/JZ_Rel32.htmljz 0xfffffffffffffc63]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/MOV_R32_M32.htmlmov r15d, dword ptr [rsp+0x10]]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov r11, qword ptr [rsp+0x20]]8;;
+│  1                    │   1    │   1   │            1                                                                                  │       │ ]8;;https://www.uops.info/html-instr/IMUL_R64_R64_I32.htmlimul rcx, r9, 0x168]8;;
+│  1                    │   1    │   1   │  0.4                                                   0.6                                    │       │ ]8;;https://www.uops.info/html-instr/SHL_R64_I8.htmlshl r9, 0x4]8;;
+│  1                    │   1    │   1   │            1                                                                                  │       │ ]8;;https://www.uops.info/html-instr/ADD_01_R64_R64.htmladd rax, r9]8;;
+│  1                    │   1    │       │                                                                                               │       │ ]8;;https://www.uops.info/html-instr/XOR_31_R32_R32.htmlxor esi, esi]8;;
+│  1                    │   1    │   1   │            1                                                                                  │       │ ]8;;https://www.uops.info/html-instr/TZCNT_R32_R32.htmltzcnt esi, r10d]8;;
+│  1                    │   1    │   1   │           0.8                                 0.2                                             │       │ ]8;;https://www.uops.info/html-instr/ADD_01_R64_R64.htmladd r8, rcx]8;;
+│  1                    │   1    │   1   │           0.8                                 0.2                                             │       │ ]8;;https://www.uops.info/html-instr/LEA_B_IS_R64.htmllea rcx, ptr [rsi+rsi*2]]8;;
+│  1                    │   1    │   2   │                                       1                          1                            │       │ ]8;;https://www.uops.info/html-instr/MOV_M64_R64.htmlmov qword ptr [r8+rcx*8], r11]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/VMOVDQU_XMM_M128.htmlvmovdqu xmm0, xmmword ptr [rsp+0x30]]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/VMOVDQU_M128_XMM.htmlvmovdqu xmmword ptr [r8+rcx*8+0x8], xmm0]8;;
+│  1                    │   1    │   2   │                                       1                          1                            │       │ ]8;;https://www.uops.info/html-instr/MOV_M8_R8l.htmlmov byte ptr [rsi+rax*1], dl]8;;
+│  3                    │   3    │   4   │                     1                         0.8      0.2                1        1          │       │ ]8;;https://www.uops.info/html-instr/INC_M64.htmlinc qword ptr [r14+0xc8]]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov rax, qword ptr [r14]]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_M64.htmlmov rcx, qword ptr [rax]]8;;
+│  1                    │   1    │   1   │                                               0.8      0.2                                    │       │ ]8;;https://www.uops.info/html-instr/XOR_R64_I8.htmlxor rcx, 0x2]8;;
+│  1                    │   1    │   1   │  0.4      0.4                                 0.2                                             │       │ ]8;;https://www.uops.info/html-instr/MOV_R64_I64.htmlmov rsi, 0x9e3779b97f4a7c15]8;;
+│  1                    │   1    │   1   │            1                                                                                  │       │ ]8;;https://www.uops.info/html-instr/IMUL_R64_R64.htmlimul rcx, rsi]8;;
+│  1                    │   1    │   2   │  0.2      0.4                1                0.2      0.2                                    │       │ ]8;;https://www.uops.info/html-instr/XOR_R64_M64.htmlxor rcx, qword ptr [rsp+0x28]]8;;
+│  1                    │   1    │   1   │  0.2      0.2                                 0.4      0.2                                    │       │ ]8;;https://www.uops.info/html-instr/MOVZX_R32_R8l.htmlmovzx edx, r15b]8;;
+│  3                    │   3    │   4   │                     1                 1       0.8      0.2       1                            │       │ ]8;;https://www.uops.info/html-instr/INC_M64.htmlinc qword ptr [rax+0x8]]8;;
+│  1                    │   1    │   1   │            1                                                                                  │       │ ]8;;https://www.uops.info/html-instr/IMUL_R64_R64.htmlimul rcx, rsi]8;;
+│  1                    │   1    │   1   │                                               0.8      0.2                                    │       │ ]8;;https://www.uops.info/html-instr/XOR_31_R64_R64.htmlxor rcx, rdx]8;;
+│  1                    │   1    │   1   │            1                                                                                  │       │ ]8;;https://www.uops.info/html-instr/IMUL_R64_R64.htmlimul rcx, rsi]8;;
+│  1                    │   1    │   1   │  0.4                                          0.4      0.2                                    │       │ ]8;;https://www.uops.info/html-instr/XOR_31_R64_R64.htmlxor rcx, rbx]8;;
+│  1                    │   1    │   1   │            1                                                                                  │       │ ]8;;https://www.uops.info/html-instr/IMUL_R64_R64.htmlimul rcx, rsi]8;;
+│  1                    │   1    │   2   │                              1                0.4      0.6                                    │       │ ]8;;https://www.uops.info/html-instr/XOR_R64_M64.htmlxor rcx, qword ptr [rsp+0x18]]8;;
+│  1                    │   1    │   1   │            1                                                                                  │       │ ]8;;https://www.uops.info/html-instr/IMUL_R64_R64.htmlimul rcx, rsi]8;;
+│  1                    │   1    │   2   │                                                                           1        1          │       │ ]8;;https://www.uops.info/html-instr/MOV_M64_R64.htmlmov qword ptr [rax], rcx]8;;
+│  1                    │   1    │   1   │  0.6                                                   0.4                                    │       │ ]8;;https://www.uops.info/html-instr/ADD_R64_I8.htmladd rsp, 0x58]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/POP_R64.htmlpop rbx]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/POP_R64.htmlpop r12]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/POP_R64.htmlpop r13]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/POP_R64.htmlpop r14]8;;
+│  1                    │   1    │   1   │                     1                                                                         │       │ ]8;;https://www.uops.info/html-instr/POP_R64.htmlpop r15]8;;
+│  1                    │   1    │   1   │                              1                                                                │       │ ]8;;https://www.uops.info/html-instr/POP_R64.htmlpop rbp]8;;
+│  1                    │   1    │   1   │                                               0.2      0.8                                    │       │ ]8;;https://www.uops.info/html-instr/ADD_R64_I8.htmladd rbx, 0x18]8;;
+├───────────────────────┼────────┼───────┼───────────────────────────────────────────────────────────────────────────────────────────────┼───────┤
+│ 258                   │  266   │  311  │  36.8     41.8      35       35       22      36.4      38       22       22       22      6  │       │ Total
+└───────────────────────┴────────┴───────┴───────────────────────────────────────────────────────────────────────────────────────────────┴───────┘
+
+### llvm-mca
+Iterations:        200
+Instructions:      52400
+Total Cycles:      20445
+Total uOps:        75000
+
+Dispatch Width:    6
+uOps Per Cycle:    3.67
+IPC:               2.56
+Block RThroughput: 62.5
+
+
+Instruction Info:
+
+## measured, same profile binary: book counters v4, 7 rounds
+skipped event: LL-load-misses (No such device or address)
+per-op medians over 7 rounds (user space, replay region only); min running ratio 1.000
+v4:
+  cycles                127.882 /op   spread 3.9%
+  instructions          212.661 /op   spread 0.0%
+  branches               27.158 /op   spread 0.0%
+  branch-misses           1.362 /op   spread 0.6%
+  L1d-load-misses         3.025 /op   spread 2.6%
+  dTLB-load-misses        0.018 /op   spread 18.0%
+  IPC                     1.663
+
+## cachegrind --branch-sim=yes (simulated predictor), mispredicts by source line
+conditional 33,095,945 mispredicted 2,511,943; indirect 433 mispredicted 157; per op 1.561
+   29.0%    728,290  /home/wang/sources/cxx/book/include/lob/replay.hpp:21  switch (op.type) {
+   12.9%    323,013  /home/wang/sources/cxx/book/include/lob/v4/book.hpp:312  if (side == Side::Buy)
+   11.9%    299,244  /home/wang/sources/cxx/book/include/lob/v4/book.hpp:300  if (n.prev != kNil)
+   11.8%    296,772  /home/wang/sources/cxx/book/include/lob/v4/book.hpp:304  if (n.next != kNil)
+   10.4%    260,612  /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:1745  if(BOOST_LIKELY(pg->is_not_overflowed(hash))){
+    8.9%    222,442  /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:1729  if(mask){
+    8.6%    216,251  /home/wang/sources/cxx/book/include/lob/v4/book.hpp:378  if (level->head == kNil) (side == Side::Buy ? bid_bits_ : ask_bits_).set(s);
+    3.2%     79,796  /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:2375  if(BOOST_LIKELY(mask!=0)){
+    1.4%     36,029  /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:1737  if(BOOST_LIKELY(bool(pred()(x,key_from(p[n]))))){
+    0.8%     21,115  /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:2067  while(mask){
+    0.5%     12,019  /home/wang/sources/cxx/book/include/lob/v4/book.hpp:395  if (level.head == kNil) (loc.side == Side::Buy ? bid_bits_ : ask_bits_).clear(s)
+    0.3%      8,447  /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:1743  }while(mask);
+    0.1%      2,692  /home/wang/sources/cxx/book/include/lob/v4/book.hpp:270  if (i != kNil) {
+    0.1%      1,895  /home/wang/sources/cxx/book/include/lob/v3/hier_bitmap.hpp:58  const bool     was_empty = word == 0;
+    0.1%      1,866  /home/wang/sources/cxx/book/include/lob/v3/hier_bitmap.hpp:0  
+    0.0%        176  ???:0  
+    0.0%         97  /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:1750  }
+    0.0%         88  /home/wang/sources/cxx/book/include/lob/v4/book.hpp:253  return s < kSlots ? static_cast<std::uint32_t>(s) : kNoSlot;
+    0.0%         45  ./malloc/./malloc/arena.c:153  
+    0.0%         34  /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:2064  for(auto pg=arrays_.groups(),last=pg+arrays_.groups_size_mask+1;

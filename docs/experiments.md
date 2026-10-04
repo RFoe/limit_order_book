@@ -708,3 +708,51 @@ Google Benchmark（`results/bench_20261004-1544_c4206b6_vm.json`，v0/v4/v7 交�
 - **测量口径**：用户此前决定不给 harness 加 `[[gnu::flatten]]`，所以这些内联差异按实际编译结果计入。
 - **syn_default 上 latency 的 p50 下降了 6%**（180 → 169），但同一组 v4 出现了 680 万 cycles 的离群值，噪声较大，不据此下结论。
 
+## [2026-10-04] 分析：没有 PEBS 时用 uiCA / llvm-mca / 分支模拟做静态分析（v4，AAPL）
+
+- **目的**：VM 里没有 PEBS 和 LBR，硬件采样无法把 stall 和分支预测失败精确归到具体指令。改用静态和模拟的方法：uiCA（Ice Lake 流水线模型）和 llvm-mca 分析端口压力、发射宽度、依赖链；cachegrind 的 `--branch-sim=yes` 用来定位哪些分支预测失败。
+- **工具**（`tools/static_path/`，用法见其中的 README）：`extract.py` 从 callgrind 的 per-instruction 和 jump 计数（`--dump-instr=yes --collect-jumps=yes`）出发，沿着多数方向还原出"典型执行路径"，输出直线化的汇编（去掉 jmp/call/ret，条件跳转保留为不跳转）。分析对象是 **profile 构建**（x86-64-v3）：release 构建里有 AVX-512 mask 指令（`kmovd`），valgrind 无法运行；同一个 profile 二进制也用硬件计数器实测，保证模型和测量针对的是同一份代码。
+- **uiCA 安装**：放在仓库之外（`~/git-repositories/uiCA`）。打了一处本地补丁：新版 XED 把 VEX 编码的 GPR 操作数命名为 `VGPR*`，uops.info 的数据用的是 `GPR*`，导致 mulx 和 shrx 被标为不支持；补丁让查找失败时回退到 `GPR` 名字。
+- **环境**：vm，绑核 CPU 3，profile 构建（v4 代码，commit `887d9de`）。输出：`results/static_20261004-1657_887d9de-dirty_vm_itch12302019_AAPL_v4.txt`，以及 `results/perf_record_20261004-1656_887d9de_vm_itch12302019_AAPL_v4.brmiss.report.txt`（release 构建，按 branch-misses 采样）。
+
+### 1. 典型路径的流水线模型
+
+| v4 路径（AAPL） | 指令数 | uiCA 吞吐 | 前端（predecoder / decoder） | 发射（5 宽） | 端口 | 依赖 | llvm-mca |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| cancel | 102 | 33.8 | 29.9 / 33.0 | 21.6 | 17.5 | 5.0 | 24.8 |
+| push（不成交，含调用 match 和 rest） | 262 | 84.0 | 77.3 / 77.0 | 52.8 | 37.8 | 6.0 | 62.5 |
+
+- **uiCA 给出的前端瓶颈是提取方式造成的**：路径被拼成了一段连续代码，末尾也不是回跳，uiCA 对这种非循环代码按 legacy 解码（MITE）来模拟；真实的热点代码约 1.5KB，能放进 uop cache。所以这里看后端的下限。
+- **AAPL 上 push 和 cancel 各占一半**，按此平均，理想情况（分支全部预测正确、访存全部命中 L1）下每个 op 约 37 个周期（受发射宽度限制），端口限制约 28 个周期，依赖链不是瓶颈（5–6 个周期）。
+- **实测**（同一个 profile 二进制，`book counters`）：112.7 和 127.9 cycles/op（两次运行，VM 波动），IPC 1.89，branch-miss 1.36 次/op。
+- **和 TopDown 对照**（v4，AAPL，release 构建）：Retiring 38.5% × 约 113 个周期 ≈ 43 个周期的有效工作，和模型的 37 个周期（只算了 push/cancel 的主路径）吻合；Bad Speculation 38.9%，约 44 个周期。
+
+**结论**：v4 在 AAPL 上**不是受端口、依赖链或计算量的限制**。主路径本身约 37 个周期就能执行完，多出来的约 76 个周期，大部分是分支预测失败（约 44 个周期），其余是访存（约 15 个周期）和前端（约 10 个周期）。
+
+### 2. 哪些分支预测失败（cachegrind 分支模拟，profile 构建）
+
+模拟出 1.561 次预测失败/op，硬件实测是 1.36 次/op（同一个二进制）。模拟的预测器更简单，所以略高，但量级一致。按源码行排序：
+
+| 占全部预测失败 | 位置 | 分支 |
+|---:|---|---|
+| 29.0% | replay.hpp:21 | `switch (op.type)`：push 和 cancel 随机交替 |
+| 12.9% | book.hpp:312 | `add` 里的 `if (side == Side::Buy)`：选择 match<Buy> 还是 match<Sell> |
+| 11.9% | book.hpp:300 | unlink 里的 `if (n.prev != kNil)`：订单是否在队首 |
+| 11.8% | book.hpp:304 | unlink 里的 `if (n.next != kNil)`：订单是否在队尾 |
+| 10.4% | boost core.hpp:1745 | `is_not_overflowed`：探测是否需要继续（AAPL 探测变长的直接体现） |
+| 8.9% | boost core.hpp:1729 | `if (mask)`：元数据匹配是否有候选 |
+| 8.6% | book.hpp:378 | `rest` 里的 `if (level->head == kNil) set(s)`：价位原来是否为空 |
+| 3.2% | boost core.hpp:2375 | 插入时 group 里是否有空位 |
+
+硬件的 branch-misses 采样（release 构建）分散在跳转目标处（排第一的 pair.h:446 只占 7.8%）。没有 PEBS 时，样本会落在预测失败那条分支之后的指令上，没法直接定位分支本身，这正是需要模拟器的原因。
+
+### 对优化方向的含义（v8 候选）
+
+- **能在我们自己的代码里消除的数据相关分支**：
+  - unlink 中判断 prev/next 是否为空的两个分支：合计 23.7%，约 0.37 次/op。可以用 cmov 选择要写的地址（`&nodes_[prev].next` 还是 `&level.head`），或者给每个价位加哨兵节点。
+  - `rest` 里"价位原来是否为空"的分支：8.6%，约 0.13 次/op。改成无条件调用 `set`，因为 `HierBitmap::set` 本身就是幂等的，内部的提前退出只取决于整个 64 位 word 是否为空，可预测得多。
+  - 这两项合计约 0.5 次预测失败/op。按每次 15–20 个周期估算，约 8–10 个周期/op（AAPL 上约 7%–9%）。代价是多出几条 cmov 和多做几次无条件的 set，可以先用 uiCA 在路径上评估。
+- **能消除但需要重构的**：`side` 分派（12.9%）。需要把 match 改成以 side 为数据的统一实现。
+- **消除不了的**：`switch (op.type)`（29%，来自输入本身），以及 boost 内部的分支（22.5%）。
+- **注意 v5 和 v7 的教训**：改动之后要检查热路径函数的内联结构有没有变。
+
