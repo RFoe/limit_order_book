@@ -5,7 +5,7 @@
 //   book validate  F                       replay through v0, count events
 //   book itch2ops  IN|- --symbols A,B [--out-dir D] [--tag T] [--top N]
 //   book replay    --workload F [--version v0] [--repeat N]
-//   book latency   --workload F [--versions v0,v1] [--rounds R] [--csv F]
+//   book latency   --workload F [--versions v0,v1] [--rounds R] [--csv F] [--dump PREFIX]
 //   book counters  --workload F [--versions v0,v1] [--rounds R] [--csv F]
 //   book versions
 //
@@ -16,6 +16,7 @@
 // `counters` reads hardware counters in-process (perf_event_open) around each
 // replay, versions interleaved round by round, and reports per-op medians.
 
+#include <array>
 #include <lob/book_config.hpp>
 #include <lob/events.hpp>
 #include <lob/harness/latency.hpp>
@@ -312,6 +313,9 @@ auto cmd_latency(const Args& a) -> int {
   const auto versions = vs == "all" ? version_names() : split(vs, ',');
   const auto rounds = a.num<int>("rounds", 5);
   const std::string csv = a.str("csv");
+  // --dump PREFIX: per-op cycles in op order, every measured round appended, to
+  // PREFIX_<version>.u32 (raw little-endian u32) for offline joins with op data
+  const std::string dump = a.str("dump");
 
   const auto tsc = harness::probe_tsc();
   std::println("tsc: constant_tsc={} nonstop_tsc={} freq={:.4f} GHz timer_overhead={} cycles", tsc.constant_tsc,
@@ -327,6 +331,10 @@ auto cmd_latency(const Args& a) -> int {
       harness::Samples s;
       with_version(versions[v], [&]<class B>() { harness::measure_once<B>(w.ops, cfg, s); });
       if (r == 0) continue;
+      if (!dump.empty()) {
+        std::ofstream f(dump + "_" + versions[v] + ".u32", r == 1 ? std::ios::binary : std::ios::binary | std::ios::app);
+        f.write(reinterpret_cast<const char*>(s.all.data()), static_cast<std::streamsize>(s.all.size() * 4));
+      }
       for (std::size_t c = 0; c < harness::kOpClasses; ++c)
         samples[v].by_class[c].insert(samples[v].by_class[c].end(), s.by_class[c].begin(), s.by_class[c].end());
       samples[v].all.insert(samples[v].all.end(), s.all.begin(), s.all.end());
@@ -352,6 +360,22 @@ auto cmd_latency(const Args& a) -> int {
         out << std::format("{},{},{},{},{},{},{},{},{}\n", versions[v], cls, p.count, p.p50, p.p90, p.p99, p.p999,
                            p.p9999, p.max);
     };
+    {  // who makes up the tail: ops slower than the overall p99, by class
+      const std::uint32_t p99 = harness::percentiles(samples[v].all).p99;  // copy: emit() consumes the samples
+      std::array<std::size_t, harness::kOpClasses> tail{};
+      std::size_t tail_total = 0;
+      for (std::size_t c = 0; c < harness::kOpClasses; ++c)
+        for (const std::uint32_t x : samples[v].by_class[c]) tail[c] += x > p99 ? 1 : 0;
+      for (const std::size_t t : tail) tail_total += t;
+      std::string line = std::format("{:<6} tail > all-p99 ({} cycles), share of tail (share of class):", versions[v], p99);
+      for (std::size_t c = 0; c < harness::kOpClasses; ++c)
+        if (!samples[v].by_class[c].empty())
+          line += std::format(" {} {:.1f}% ({:.2f}%)", harness::kOpClassNames[c],
+                              tail_total ? 100.0 * double(tail[c]) / double(tail_total) : 0.0,
+                              100.0 * double(tail[c]) / double(samples[v].by_class[c].size()));
+      std::println("{}", line);
+      if (out.is_open()) out << "# " << line << "\n";
+    }
     emit("all", samples[v].all);
     for (std::size_t c = 0; c < harness::kOpClasses; ++c) emit(harness::kOpClassNames[c], samples[v].by_class[c]);
   }
