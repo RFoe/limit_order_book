@@ -53,7 +53,7 @@ record)
         echo "# event=$event workload=$stem version=$version repeat=$repeat (replay region only)"
         "$PERF" report -i "$base.perf.data" --stdio --no-children --percent-limit 0.5 2>/dev/null
     } >"$base.report.txt"
-    "$PERF" annotate -i "$base.perf.data" --stdio 2>/dev/null | head -n 2000 >"$base.annotate.txt"
+    "$PERF" annotate -i "$base.perf.data" --stdio 2>/dev/null | sed -n 1,2000p >"$base.annotate.txt"
     lob_log "wrote $base.report.txt / .annotate.txt (raw: $base.perf.data, not committed)"
     ;;
 stat)
@@ -76,18 +76,20 @@ topdown)
     #   FE  = IDQ_UOPS_NOT_DELIVERED.CORE / SLOTS
     #   BS  = (UOPS_ISSUED.ANY - UOPS_RETIRED.SLOTS + W * INT_MISC.RECOVERY_CYCLES) / SLOTS
     #   RET = UOPS_RETIRED.SLOTS / SLOTS ;  BE = 1 - FE - BS - RET
-    # W (pipeline width) = SLOTS / CYCLES, measured. Approximate: not cross-checked
-    # against the hardware perf-metrics.
+    # W (pipeline width) is fixed (Ice Lake: 5; LOB_TOPDOWN_W overrides). It used
+    # to be measured as SLOTS / CYCLES, but in the VM that ratio drifts between ~4.0
+    # and ~4.9 run to run, and rounding it moved Bad_Speculation by ~2 points.
+    # The measured ratio is still printed. Approximate: not cross-checked against
+    # the hardware perf-metrics.
     evs="cpu_clk_unhalted.thread:u,topdown.slots:u,uops_issued.any:u,uops_retired.slots:u,idq_uops_not_delivered.core:u,int_misc.recovery_cycles:u"
     "$PERF" stat "${roi[@]}" -x, -r "$repeat" -e "$evs" -- "${cmd[@]}" 2>&1 >/dev/null |
-        awk -F, '
+        awk -F, -v w="${LOB_TOPDOWN_W:-5}" '
             $3 ~ /cpu_clk_unhalted.thread/ {cyc=$1} $3 ~ /topdown.slots/ {slots=$1}
             $3 ~ /uops_issued.any/ {iss=$1}        $3 ~ /uops_retired.slots/ {ret=$1}
             $3 ~ /idq_uops_not_delivered/ {fe=$1}  $3 ~ /recovery_cycles/ {rec=$1}
             {print "# " $0}
             END {
                 if (slots == 0 || cyc == 0) { print "topdown events not available"; exit 1 }
-                w = int(slots / cyc + 0.5)
                 FE = fe / slots; BS = (iss - ret + w * rec) / slots; RET = ret / slots; BE = 1 - FE - BS - RET
                 printf "pipeline width W = %d (slots/cycles = %.3f)\n", w, slots / cyc
                 printf "Frontend_Bound   %5.1f%%\nBad_Speculation  %5.1f%%\nRetiring         %5.1f%%\nBackend_Bound    %5.1f%%\n", 100*FE, 100*BS, 100*RET, 100*BE
