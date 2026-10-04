@@ -1,0 +1,320 @@
+--------------------------------------------------------------------------------
+-- Metadata
+--------------------------------------------------------------------------------
+Invocation:       /usr/bin/cg_annotate --show=Ir,Dr,Dw --sort=Ir results/cachegrind_20261004-1731_9c66918_vm_itch12302019_AAPL_diff_v4_v8.out
+Files compared:   results/cachegrind_20261004-1731_9c66918_vm_itch12302019_AAPL_v4.out; results/cachegrind_20261004-1731_9c66918_vm_itch12302019_AAPL_v8.out
+Command:          /home/wang/sources/cxx/book/build/profile/book replay --workload data/itch12302019_AAPL.ops --version v4; /home/wang/sources/cxx/book/build/profile/book replay --workload data/itch12302019_AAPL.ops --version v8
+Events recorded:  Ir I1mr ILmr Dr D1mr DLmr Dw D1mw DLmw
+Events shown:     Ir Dr Dw
+Event sort order: Ir
+Threshold:        0.1%
+Annotation:       on
+
+--------------------------------------------------------------------------------
+-- Summary
+--------------------------------------------------------------------------------
+Ir_________________ Dr________________ Dw________________ 
+
+20,331,088 (100.0%) 5,795,992 (100.0%) 2,738,902 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+-- File:function summary
+--------------------------------------------------------------------------------
+  Ir___________________________ Dr___________________________ Dw___________________________  file:function
+
+<  11,957,006   (58.8%,  58.8%)   2,630,539   (45.4%,  45.4%)     795,696   (29.1%,  29.1%)  /home/wang/sources/cxx/book/include/lob/vN/book.hpp:
+   57,096,023  (280.8%)          13,698,591  (236.3%)          14,322,918  (522.9%)            lob::v8::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+  -54,465,503 (-267.9%)         -13,086,970 (-225.8%)         -14,322,918 (-522.9%)            lob::v4::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+   20,661,402  (101.6%)           7,134,298  (123.1%)           7,930,010  (289.5%)            lob::v8::BookT<lob::ChecksumSink, 16u>::alloc_node(unsigned long, unsigned int)
+  -20,661,402 (-101.6%)          -7,134,298 (-123.1%)          -7,930,010 (-289.5%)            lob::v4::BookT<lob::ChecksumSink, 16u>::alloc_node(unsigned long, unsigned int)
+   16,812,162   (82.7%)           4,402,797   (76.0%)           3,603,771  (131.6%)            unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)
+  -16,812,162  (-82.7%)          -4,402,797  (-76.0%)          -3,603,771 (-131.6%)            unsigned int lob::v4::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)
+   16,597,849   (81.6%)           4,346,738   (75.0%)           3,557,637  (129.9%)            unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)
+  -16,597,849  (-81.6%)          -4,346,738  (-75.0%)          -3,557,637 (-129.9%)            unsigned int lob::v4::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)
+    9,326,375   (45.9%)           2,018,899   (34.8%)             795,670   (29.1%)            auto lob::for_each_type<std::__1::tuple<lob::v0::Book<lob::ChecksumSink>, lob::v1::Book<lob::ChecksumSink>, lob::v2::Book<lob::ChecksumSink>, lob::v3::BookT<lob::ChecksumSink, 16u>, lob::v4::BookT<lob::ChecksumSink, 16u>, lob::v5::BookT<lob::ChecksumSink, 16u>, lob::v7::BookT<lob::ChecksumSink, 16u>, lob::v8::BookT<lob::ChecksumSink, 16u> >, (anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}>((anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}&&)::{lambda<unsigned long... $N0>(std::__1::integer_sequence<unsigned long, ($N0)...>)#1}::operator()<0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>(std::__1::integer_sequence<unsigned long, 0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>) const
+    1,134,272    (5.6%)             283,568    (4.9%)             159,507    (5.8%)            lob::v8::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+   -1,134,272   (-5.6%)            -283,568   (-4.9%)            -159,507   (-5.8%)            lob::v4::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+
+<   9,171,854   (45.1%, 103.9%)   3,241,986   (55.9%, 101.3%)   1,223,158   (44.7%,  73.7%)  /home/wang/sources/cxx/book/include/lob/v3/hier_bitmap.hpp:
+    6,378,249   (31.4%)           2,392,521   (41.3%)           1,595,002   (58.2%)            lob::v8::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+    5,534,090   (27.2%)           1,185,878   (20.5%)                   0                      unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)
+   -5,534,090  (-27.2%)          -1,185,878  (-20.5%)                   0                      unsigned int lob::v4::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)
+    4,279,222   (21.0%)           1,407,249   (24.3%)                   0                      auto lob::for_each_type<std::__1::tuple<lob::v0::Book<lob::ChecksumSink>, lob::v1::Book<lob::ChecksumSink>, lob::v2::Book<lob::ChecksumSink>, lob::v3::BookT<lob::ChecksumSink, 16u>, lob::v4::BookT<lob::ChecksumSink, 16u>, lob::v5::BookT<lob::ChecksumSink, 16u>, lob::v7::BookT<lob::ChecksumSink, 16u>, lob::v8::BookT<lob::ChecksumSink, 16u> >, (anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}>((anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}&&)::{lambda<unsigned long... $N0>(std::__1::integer_sequence<unsigned long, ($N0)...>)#1}::operator()<0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>(std::__1::integer_sequence<unsigned long, 0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>) const
+    3,603,771   (17.7%)           1,201,257   (20.7%)                   0                      unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)
+   -3,603,771  (-17.7%)          -1,201,257  (-20.7%)                   0                      unsigned int lob::v4::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)
+   -1,485,617   (-7.3%)            -557,784   (-9.6%)            -371,844  (-13.6%)            lob::v4::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+
+<  -1,403,888   (-6.9%,  97.0%)    -795,712  (-13.7%,  87.6%)           0    (0.0%,  73.7%)  /usr/include/c++/v1/__vector/vector.h:
+    2,766,964   (13.6%)             877,042   (15.1%)              27,174    (1.0%)            lob::v8::BookT<lob::ChecksumSink, 16u>::alloc_node(unsigned long, unsigned int)
+   -2,766,964  (-13.6%)            -877,042  (-15.1%)             -27,174   (-1.0%)            lob::v4::BookT<lob::ChecksumSink, 16u>::alloc_node(unsigned long, unsigned int)
+   -2,203,016  (-10.8%)            -795,712  (-13.7%)                   0                      lob::v4::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+      795,712    (3.9%)                   0                             0                      lob::v8::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+       35,446    (0.2%)              17,723    (0.3%)                   0                      lob::v8::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+      -35,446   (-0.2%)             -17,723   (-0.3%)                   0                      lob::v4::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+
+<     606,135    (3.0%, 100.0%)     -76,498   (-1.3%,  86.3%)     720,048   (26.3%, 100.0%)  /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp:
+   38,156,443  (187.7%)           8,953,467  (154.5%)             795,712   (29.1%)            lob::v8::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+  -37,550,308 (-184.7%)          -9,029,965 (-155.8%)             -75,664   (-2.8%)            lob::v4::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+    6,856,430   (33.7%)           2,186,083   (37.7%)               4,402    (0.2%)            _ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v85BookTINS5_12ChecksumSinkELj16EE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_
+   -6,856,430  (-33.7%)          -2,186,083  (-37.7%)              -4,402   (-0.2%)            _ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v45BookTINS5_12ChecksumSinkELj16EE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_
+      596,913    (2.9%)             129,547    (2.2%)                   0                      lob::v8::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+     -596,913   (-2.9%)            -129,547   (-2.2%)                   0                      lob::v4::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+
+<          22    (0.0%, 100.0%)           0    (0.0%,  86.3%)           0    (0.0%, 100.0%)  /usr/include/c++/v1/__tree:
+      398,607    (2.0%)             398,607    (6.9%)                   0                      unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)
+     -398,607   (-2.0%)            -398,607   (-6.9%)                   0                      unsigned int lob::v4::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)
+      393,810    (1.9%)             393,810    (6.8%)                   0                      unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)
+     -393,810   (-1.9%)            -393,810   (-6.8%)                   0                      unsigned int lob::v4::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)
+
+<           0    (0.0%, 100.0%)           0    (0.0%,  86.3%)           0    (0.0%, 100.0%)  /usr/include/c++/v1/map:
+      800,838    (3.9%)             400,419    (6.9%)                   0                      unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)
+     -800,838   (-3.9%)            -400,419   (-6.9%)                   0                      unsigned int lob::v4::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)
+      790,585    (3.9%)             395,293    (6.8%)                   0                      unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)
+     -790,585   (-3.9%)            -395,293   (-6.8%)                   0                      unsigned int lob::v4::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)
+
+<           0    (0.0%, 100.0%)           0    (0.0%,  86.3%)           0    (0.0%, 100.0%)  /usr/include/c++/v1/__utility/pair.h:
+    2,387,066   (11.7%)             795,679   (13.7%)           1,591,387   (58.1%)            lob::v8::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+   -2,387,066  (-11.7%)            -795,679  (-13.7%)          -1,591,387  (-58.1%)            lob::v4::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+      955,556    (4.7%)             477,778    (8.2%)             477,778   (17.4%)            _ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v85BookTINS5_12ChecksumSinkELj16EE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_
+     -955,556   (-4.7%)            -477,778   (-8.2%)            -477,778  (-17.4%)            _ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v45BookTINS5_12ChecksumSinkELj16EE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_
+
+<           0    (0.0%, 100.0%)           0    (0.0%,  86.3%)           0    (0.0%, 100.0%)  /usr/include/c++/v1/__memory/construct_at.h:
+       81,330    (0.4%)                   0                        54,220    (2.0%)            lob::v8::BookT<lob::ChecksumSink, 16u>::alloc_node(unsigned long, unsigned int)
+      -81,330   (-0.4%)                   0                       -54,220   (-2.0%)            lob::v4::BookT<lob::ChecksumSink, 16u>::alloc_node(unsigned long, unsigned int)
+
+<           0    (0.0%, 100.0%)           0    (0.0%,  86.3%)           0    (0.0%, 100.0%)  /usr/include/c++/v1/__functional/operations.h:
+       76,708    (0.4%)              76,603    (1.3%)                   0                      lob::v8::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+      -76,708   (-0.4%)             -76,603   (-1.3%)                   0                      lob::v4::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+
+<           0    (0.0%, 100.0%)           0    (0.0%,  86.3%)           0    (0.0%, 100.0%)  /usr/include/c++/v1/__bit/countr.h:
+    2,002,095    (9.8%)             800,838   (13.8%)                   0                      unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)
+   -2,002,095   (-9.8%)            -800,838  (-13.8%)                   0                      unsigned int lob::v4::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)
+
+<           0    (0.0%, 100.0%)           0    (0.0%,  86.3%)           0    (0.0%, 100.0%)  /usr/include/c++/v1/__bit/countl.h:
+    1,976,460    (9.7%)             790,584   (13.6%)                   0                      unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)
+   -1,976,460   (-9.7%)            -790,584  (-13.6%)                   0                      unsigned int lob::v4::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)
+
+<           0    (0.0%, 100.0%)     795,712   (13.7%, 100.0%)           0    (0.0%, 100.0%)  /home/wang/sources/cxx/book/include/lob/events.hpp:
+   11,935,680   (58.7%)           3,978,560   (68.6%)             795,712   (29.1%)            lob::v8::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+  -11,935,680  (-58.7%)          -3,182,848  (-54.9%)            -795,712  (-29.1%)            lob::v4::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+      194,953    (1.0%)              70,892    (1.2%)              17,723    (0.6%)            lob::v8::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+     -194,953   (-1.0%)             -70,892   (-1.2%)             -17,723   (-0.6%)            lob::v4::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+
+<           0    (0.0%, 100.0%)           0    (0.0%, 100.0%)           0    (0.0%, 100.0%)  /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/mulx.hpp:
+    2,387,136   (11.7%)                   0                             0                      lob::v8::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+   -2,387,136  (-11.7%)                   0                             0                      lob::v4::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+      477,778    (2.3%)             238,889    (4.1%)                   0                      _ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v85BookTINS5_12ChecksumSinkELj16EE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_
+     -477,778   (-2.3%)            -238,889   (-4.1%)                   0                      _ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v45BookTINS5_12ChecksumSinkELj16EE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_
+       35,446    (0.2%)                   0                             0                      lob::v8::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+      -35,446   (-0.2%)                   0                             0                      lob::v4::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+
+<           0    (0.0%, 100.0%)           0    (0.0%, 100.0%)           0    (0.0%, 100.0%)  /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/table.hpp:
+    3,290,196   (16.2%)           1,698,673   (29.3%)             795,712   (29.1%)            lob::v8::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+   -3,290,196  (-16.2%)          -1,698,673  (-29.3%)            -795,712  (-29.1%)            lob::v4::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+      244,353    (1.2%)               5,464    (0.1%)             238,889    (8.7%)            _ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v85BookTINS5_12ChecksumSinkELj16EE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_
+     -244,353   (-1.2%)              -5,464   (-0.1%)            -238,889   (-8.7%)            _ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v45BookTINS5_12ChecksumSinkELj16EE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_
+
+--------------------------------------------------------------------------------
+-- Function:file summary
+--------------------------------------------------------------------------------
+  Ir____________________________ Dr___________________________ Dw___________________________  function:file
+
+>  122,504,617  (602.5%, 602.5%)  31,594,444  (545.1%, 545.1%)  19,896,623  (726.4%, 726.4%)  lob::v8::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int):
+    57,096,023  (280.8%)          13,698,591  (236.3%)          14,322,918  (522.9%)            /home/wang/sources/cxx/book/include/lob/vN/book.hpp
+    38,156,443  (187.7%)           8,953,467  (154.5%)             795,712   (29.1%)            /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp
+    11,935,680   (58.7%)           3,978,560   (68.6%)             795,712   (29.1%)            /home/wang/sources/cxx/book/include/lob/events.hpp
+     6,378,249   (31.4%)           2,392,521   (41.3%)           1,595,002   (58.2%)            /home/wang/sources/cxx/book/include/lob/v3/hier_bitmap.hpp
+     3,290,196   (16.2%)           1,698,673   (29.3%)             795,712   (29.1%)            /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/table.hpp
+     2,387,136   (11.7%)                   0                             0                      /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/mulx.hpp
+     2,387,066   (11.7%)             795,679   (13.7%)           1,591,387   (58.1%)            /usr/include/c++/v1/__utility/pair.h
+       795,712    (3.9%)                   0                             0                      /usr/include/c++/v1/__vector/vector.h
+        76,708    (0.4%)              76,603    (1.3%)                   0                      /usr/include/c++/v1/__functional/operations.h
+
+> -115,782,634 (-569.5%,  33.1%) -29,224,584 (-504.2%,  40.9%) -17,953,417 (-655.5%,  70.9%)  lob::v4::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int):
+   -54,465,503 (-267.9%)         -13,086,970 (-225.8%)         -14,322,918 (-522.9%)            /home/wang/sources/cxx/book/include/lob/vN/book.hpp
+   -37,550,308 (-184.7%)          -9,029,965 (-155.8%)             -75,664   (-2.8%)            /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp
+   -11,935,680  (-58.7%)          -3,182,848  (-54.9%)            -795,712  (-29.1%)            /home/wang/sources/cxx/book/include/lob/events.hpp
+    -3,290,196  (-16.2%)          -1,698,673  (-29.3%)            -795,712  (-29.1%)            /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/table.hpp
+    -2,387,136  (-11.7%)                   0                             0                      /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/mulx.hpp
+    -2,387,066  (-11.7%)            -795,679  (-13.7%)          -1,591,387  (-58.1%)            /usr/include/c++/v1/__utility/pair.h
+    -2,203,016  (-10.8%)            -795,712  (-13.7%)                   0                      /usr/include/c++/v1/__vector/vector.h
+    -1,485,617   (-7.3%)            -557,784   (-9.6%)            -371,844  (-13.6%)            /home/wang/sources/cxx/book/include/lob/v3/hier_bitmap.hpp
+       -76,708   (-0.4%)             -76,603   (-1.3%)                   0                      /usr/include/c++/v1/__functional/operations.h
+
+>   25,292,794  (124.4%, 157.5%)   7,112,303  (122.7%, 163.6%)   3,557,637  (129.9%, 200.8%)  unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int):
+    16,597,849   (81.6%)           4,346,738   (75.0%)           3,557,637  (129.9%)            /home/wang/sources/cxx/book/include/lob/vN/book.hpp
+     5,534,090   (27.2%)           1,185,878   (20.5%)                   0                      /home/wang/sources/cxx/book/include/lob/v3/hier_bitmap.hpp
+     1,976,460    (9.7%)             790,584   (13.6%)                   0                      /usr/include/c++/v1/__bit/countl.h
+       790,585    (3.9%)             395,293    (6.8%)                   0                      /usr/include/c++/v1/map
+       393,810    (1.9%)             393,810    (6.8%)                   0                      /usr/include/c++/v1/__tree
+
+>  -25,292,794 (-124.4%,  33.1%)  -7,112,303 (-122.7%,  40.9%)  -3,557,637 (-129.9%,  70.9%)  unsigned int lob::v4::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int):
+   -16,597,849  (-81.6%)          -4,346,738  (-75.0%)          -3,557,637 (-129.9%)            /home/wang/sources/cxx/book/include/lob/vN/book.hpp
+    -5,534,090  (-27.2%)          -1,185,878  (-20.5%)                   0                      /home/wang/sources/cxx/book/include/lob/v3/hier_bitmap.hpp
+    -1,976,460   (-9.7%)            -790,584  (-13.6%)                   0                      /usr/include/c++/v1/__bit/countl.h
+      -790,585   (-3.9%)            -395,293   (-6.8%)                   0                      /usr/include/c++/v1/map
+      -393,810   (-1.9%)            -393,810   (-6.8%)                   0                      /usr/include/c++/v1/__tree
+
+>   23,617,473  (116.2%, 149.2%)   7,203,918  (124.3%, 165.2%)   3,603,771  (131.6%, 202.5%)  unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int):
+    16,812,162   (82.7%)           4,402,797   (76.0%)           3,603,771  (131.6%)            /home/wang/sources/cxx/book/include/lob/vN/book.hpp
+     3,603,771   (17.7%)           1,201,257   (20.7%)                   0                      /home/wang/sources/cxx/book/include/lob/v3/hier_bitmap.hpp
+     2,002,095    (9.8%)             800,838   (13.8%)                   0                      /usr/include/c++/v1/__bit/countr.h
+       800,838    (3.9%)             400,419    (6.9%)                   0                      /usr/include/c++/v1/map
+       398,607    (2.0%)             398,607    (6.9%)                   0                      /usr/include/c++/v1/__tree
+
+>  -23,617,473 (-116.2%,  33.1%)  -7,203,918 (-124.3%,  40.9%)  -3,603,771 (-131.6%,  70.9%)  unsigned int lob::v4::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int):
+   -16,812,162  (-82.7%)          -4,402,797  (-76.0%)          -3,603,771 (-131.6%)            /home/wang/sources/cxx/book/include/lob/vN/book.hpp
+    -3,603,771  (-17.7%)          -1,201,257  (-20.7%)                   0                      /home/wang/sources/cxx/book/include/lob/v3/hier_bitmap.hpp
+    -2,002,095   (-9.8%)            -800,838  (-13.8%)                   0                      /usr/include/c++/v1/__bit/countr.h
+      -800,838   (-3.9%)            -400,419   (-6.9%)                   0                      /usr/include/c++/v1/map
+      -398,607   (-2.0%)            -398,607   (-6.9%)                   0                      /usr/include/c++/v1/__tree
+
+>   23,510,092  (115.6%, 148.7%)   8,011,419  (138.2%, 179.1%)   8,011,499  (292.5%, 363.5%)  lob::v8::BookT<lob::ChecksumSink, 16u>::alloc_node(unsigned long, unsigned int):
+    20,661,402  (101.6%)           7,134,298  (123.1%)           7,930,010  (289.5%)            /home/wang/sources/cxx/book/include/lob/vN/book.hpp
+     2,766,964   (13.6%)             877,042   (15.1%)              27,174    (1.0%)            /usr/include/c++/v1/__vector/vector.h
+        81,330    (0.4%)                   0                        54,220    (2.0%)            /usr/include/c++/v1/__memory/construct_at.h
+
+>  -23,510,092 (-115.6%,  33.1%)  -8,011,419 (-138.2%,  40.9%)  -8,011,499 (-292.5%,  70.9%)  lob::v4::BookT<lob::ChecksumSink, 16u>::alloc_node(unsigned long, unsigned int):
+   -20,661,402 (-101.6%)          -7,134,298 (-123.1%)          -7,930,010 (-289.5%)            /home/wang/sources/cxx/book/include/lob/vN/book.hpp
+    -2,766,964  (-13.6%)            -877,042  (-15.1%)             -27,174   (-1.0%)            /usr/include/c++/v1/__vector/vector.h
+       -81,330   (-0.4%)                   0                       -54,220   (-2.0%)            /usr/include/c++/v1/__memory/construct_at.h
+
+>   13,608,975   (66.9%, 100.0%)   3,426,106   (59.1%, 100.0%)     795,670   (29.1%, 100.0%)  auto lob::for_each_type<std::__1::tuple<lob::v0::Book<lob::ChecksumSink>, lob::v1::Book<lob::ChecksumSink>, lob::v2::Book<lob::ChecksumSink>, lob::v3::BookT<lob::ChecksumSink, 16u>, lob::v4::BookT<lob::ChecksumSink, 16u>, lob::v5::BookT<lob::ChecksumSink, 16u>, lob::v7::BookT<lob::ChecksumSink, 16u>, lob::v8::BookT<lob::ChecksumSink, 16u> >, (anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}>((anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}&&)::{lambda<unsigned long... $N0>(std::__1::integer_sequence<unsigned long, ($N0)...>)#1}::operator()<0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>(std::__1::integer_sequence<unsigned long, 0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>) const:
+     9,326,375   (45.9%)           2,018,899   (34.8%)             795,670   (29.1%)            /home/wang/sources/cxx/book/include/lob/vN/book.hpp
+     4,279,222   (21.0%)           1,407,249   (24.3%)                   0                      /home/wang/sources/cxx/book/include/lob/v3/hier_bitmap.hpp
+
+>    8,534,117   (42.0%, 142.0%)   2,908,214   (50.2%, 150.2%)     721,069   (26.3%, 126.3%)  _ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v85BookTINS5_12ChecksumSinkELj16EE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_:
+     6,856,430   (33.7%)           2,186,083   (37.7%)               4,402    (0.2%)            /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp
+       955,556    (4.7%)             477,778    (8.2%)             477,778   (17.4%)            /usr/include/c++/v1/__utility/pair.h
+       477,778    (2.3%)             238,889    (4.1%)                   0                      /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/mulx.hpp
+       244,353    (1.2%)               5,464    (0.1%)             238,889    (8.7%)            /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/table.hpp
+
+>   -8,534,117  (-42.0%, 100.0%)  -2,908,214  (-50.2%, 100.0%)    -721,069  (-26.3%, 100.0%)  _ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v45BookTINS5_12ChecksumSinkELj16EE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_:
+    -6,856,430  (-33.7%)          -2,186,083  (-37.7%)              -4,402   (-0.2%)            /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp
+      -955,556   (-4.7%)            -477,778   (-8.2%)            -477,778  (-17.4%)            /usr/include/c++/v1/__utility/pair.h
+      -477,778   (-2.3%)            -238,889   (-4.1%)                   0                      /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/mulx.hpp
+      -244,353   (-1.2%)              -5,464   (-0.1%)            -238,889   (-8.7%)            /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/table.hpp
+
+>    2,015,467    (9.9%, 109.9%)     520,167    (9.0%, 109.0%)     177,230    (6.5%, 106.5%)  lob::v8::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int):
+     1,134,272    (5.6%)             283,568    (4.9%)             159,507    (5.8%)            /home/wang/sources/cxx/book/include/lob/vN/book.hpp
+       596,913    (2.9%)             129,547    (2.2%)                   0                      /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp
+       194,953    (1.0%)              70,892    (1.2%)              17,723    (0.6%)            /home/wang/sources/cxx/book/include/lob/events.hpp
+        35,446    (0.2%)              17,723    (0.3%)                   0                      /usr/include/c++/v1/__vector/vector.h
+        35,446    (0.2%)                   0                             0                      /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/mulx.hpp
+
+>   -2,015,467   (-9.9%, 100.0%)    -520,167   (-9.0%, 100.0%)    -177,230   (-6.5%, 100.0%)  lob::v4::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int):
+    -1,134,272   (-5.6%)            -283,568   (-4.9%)            -159,507   (-5.8%)            /home/wang/sources/cxx/book/include/lob/vN/book.hpp
+      -596,913   (-2.9%)            -129,547   (-2.2%)                   0                      /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp
+      -194,953   (-1.0%)             -70,892   (-1.2%)             -17,723   (-0.6%)            /home/wang/sources/cxx/book/include/lob/events.hpp
+       -35,446   (-0.2%)             -17,723   (-0.3%)                   0                      /usr/include/c++/v1/__vector/vector.h
+       -35,446   (-0.2%)                   0                             0                      /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/mulx.hpp
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp
+--------------------------------------------------------------------------------
+Ir____________ Dr_____________ Dw_____________ 
+
+606,135 (3.0%) -76,498 (-1.3%) 720,048 (26.3%)  <unknown (line 0)>
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/table.hpp
+--------------------------------------------------------------------------------
+Ir Dr Dw 
+
+ 0  0  0  <unknown (line 0)>
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/mulx.hpp
+--------------------------------------------------------------------------------
+Ir Dr Dw 
+
+ 0  0  0  <unknown (line 0)>
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /home/wang/sources/cxx/book/include/lob/events.hpp
+--------------------------------------------------------------------------------
+Ir Dr_____________ Dw 
+
+ 0 795,712 (13.7%)  0  <unknown (line 0)>
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /home/wang/sources/cxx/book/include/lob/v3/hier_bitmap.hpp
+--------------------------------------------------------------------------------
+Ir_______________ Dr_______________ Dw_______________ 
+
+9,171,854 (45.1%) 3,241,986 (55.9%) 1,223,158 (44.7%)  <unknown (line 0)>
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /home/wang/sources/cxx/book/include/lob/vN/book.hpp
+--------------------------------------------------------------------------------
+Unannotated because one or more of these original files are unreadable:
+- /home/wang/sources/cxx/book/include/lob/vN/book.hpp
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /usr/include/c++/v1/__bit/countl.h
+--------------------------------------------------------------------------------
+Ir Dr Dw 
+
+ 0  0  0  <unknown (line 0)>
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /usr/include/c++/v1/__bit/countr.h
+--------------------------------------------------------------------------------
+Ir Dr Dw 
+
+ 0  0  0  <unknown (line 0)>
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /usr/include/c++/v1/__functional/operations.h
+--------------------------------------------------------------------------------
+Ir Dr Dw 
+
+ 0  0  0  <unknown (line 0)>
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /usr/include/c++/v1/__memory/construct_at.h
+--------------------------------------------------------------------------------
+Ir Dr Dw 
+
+ 0  0  0  <unknown (line 0)>
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /usr/include/c++/v1/__tree
+--------------------------------------------------------------------------------
+Ir_______ Dr Dw 
+
+22 (0.0%)  0  0  <unknown (line 0)>
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /usr/include/c++/v1/__utility/pair.h
+--------------------------------------------------------------------------------
+Ir Dr Dw 
+
+ 0  0  0  <unknown (line 0)>
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /usr/include/c++/v1/__vector/vector.h
+--------------------------------------------------------------------------------
+Ir________________ Dr_______________ Dw 
+
+-1,403,888 (-6.9%) -795,712 (-13.7%)  0  <unknown (line 0)>
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /usr/include/c++/v1/map
+--------------------------------------------------------------------------------
+Ir Dr Dw 
+
+ 0  0  0  <unknown (line 0)>
+
+--------------------------------------------------------------------------------
+-- Annotation summary
+--------------------------------------------------------------------------------
+Ir________________ Dr_______________ Dw_______________ 
+
+         0                 0                 0            annotated: files known & above threshold & readable, line numbers known
+ 8,374,123 (41.2%) 3,165,488 (54.6%) 1,943,206 (70.9%)    annotated: files known & above threshold & readable, line numbers unknown
+         0                 0                 0          unannotated: files known & above threshold & two or more non-identical
+11,957,006 (58.8%) 2,630,539 (45.4%)   795,696 (29.1%)  unannotated: files known & above threshold & unreadable 
+       -41 (-0.0%)       -35 (-0.0%)         0          unannotated: files known & below threshold
+         0                 0                 0          unannotated: files unknown
+

@@ -756,3 +756,68 @@ Google Benchmark（`results/bench_20261004-1544_c4206b6_vm.json`，v0/v4/v7 交�
 - **消除不了的**：`switch (op.type)`（29%，来自输入本身），以及 boost 内部的分支（22.5%）。
 - **注意 v5 和 v7 的教训**：改动之后要检查热路径函数的内联结构有没有变。
 
+
+## [2026-10-04] v8: 去掉分支模拟找出的数据相关分支（基于 v4）（ITCH 有效，合成负载回退）
+
+- **假设**（来自上一条静态分析）：v4 在 AAPL 上约 39% 的槽位浪费在 Bad Speculation 上。分支模拟显示，我们自己代码里的 unlink prev/next 判空（23.7%）和 `rest` 里"价位原来是否为空"（8.6%）是数据相关、无法预测的分支，合计约 0.5 次预测失败/op。按每次 15–20 个周期估算，可以省 8–10 个周期/op（AAPL 上 7%–9%），代价是多几条 cmov 和几次无条件的 bitmap 写入。
+- **改动**：
+  - commit `68ae886`（共享代码）：`HierBitmap::clear_if(i, cond)`，叶子上做一次带掩码的 and-not，只有整个 64 位 word 变空时才向上传播（`!cond` 时 bit i 还在，word 不可能变空）。`test_hier_bitmap` 把它作为第三种随机操作，和 `std::set` 对照。
+  - commit `9c66918`（v8，基于 v4）：unlink 和 push_back 不再按 `prev/next/tail == kNil` 分支，而是先选出要写的地址（`&nodes_[prev].next` 或 `&level.head`），再无条件写入（`__builtin_unpredictable`，编译成 cmov）；`rest` 无条件调用 `set(s)`（幂等，内部的提前退出只取决于 64 位 word 是否为空）；erase 用 `clear_if(s, level.head == kNil)`。
+  - **为什么 erase 也要改**：只改 unlink 和 rest 的中间版本里，branch-sim 显示 erase 里"价位是否变空"的分支预测失败从 12,019 次涨到 215,882 次（AAPL）。原来它和 unlink 的两个分支高度相关（订单独占价位时，三个分支一起跳），预测器能借用前两个分支的历史；unlink 改成无分支后，这个分支失去了可借用的历史，自己变得不可预测。改成 `clear_if` 后，预测失败从 1.175 次/op 降到 1.052 次/op。
+- **内联结构**（v5、v7 的教训）：release 构建里 v4 和 v8 的独立函数集合相同，大小基本不变（`rest` 0x54b → 0x51d，`erase` 0x1c7 → 0x1bc），push 和 cancel 仍然内联在回放循环里。perf record（v8，AAPL）的自身占比结构和 v4 相同。
+- **正确性**：改了共享头文件，所以 debug ctest 跑全部版本，39 项通过。`LOB_DIFF_VERSIONS=v8` 下差分测试 30 个 seed × 20 万 op 一致（通用对比和网格 + 兜底 map 测试）。6 个 workload 上 v0/v4/v8 的 checksum 一致。
+- **环境**：vm，绑核 CPU 3，结果文件标记为 `9c66918`。`a1d5773` 标记的文件（syn_default 的 branch-sim、topdown 重跑）与 `9c66918` 的 book 代码相同，区别只在 perf.sh 的修复（见下）。
+
+### 结果（v4 → v8）
+
+cachegrind（profile 构建）：Ir 在全部 6 个 workload 上 **+5.3% 到 +6.9%**（AAPL +6.0%），数据读 +6.3% 到 +7.9%，D1 读写未命中和 LL 未命中变化都 ≤0.2%。heaptrack 的分配次数（190 → 191）和峰值（41.79M）不变。
+
+分支模拟（profile 构建，每 op 预测失败次数）：
+
+| workload | v4 | v8 | 被去掉的分支在 v4 里的预测失败率 |
+|---|---:|---:|---|
+| itch AAPL | 1.543 | **1.052**（−32%） | unlink prev 37.6%、next 37.3%、rest 价位为空 27.2% |
+| syn_default | 0.875 | 0.864（−1%） | unlink prev/next 都是 1.7%；rest 的分支不在前列 |
+
+AAPL 上 book.hpp 的预测失败从 115 万次降到 33 万次，剩下的几乎全部是没有改动的 side 分派（32.3 万次）。replay.hpp 的 `switch` 多了 3 万次（+4%），boost 不变。
+
+硬件计数器（`book counters`，v0/v4/v8 交替运行，9 轮，每 op 中位数）：
+
+| workload | cycles v4 → v8 | instructions | branch-miss | L1d 未命中 |
+|---|---:|---:|---:|---:|
+| itch AAPL | 118.3 → 99.0（**−16.3%**，spread 12% / 28%） | +5.7% | **−32.3%**（1.36 → 0.92） | −1.4% |
+| itch QQQ | 92.3 → 80.6（**−12.7%**，spread 11% / 18%） | +6.5% | **−31.6%**（1.00 → 0.69） | −1.0% |
+| syn_default | 78.0 → 86.2（**+10.5%**，spread 3% / 5%） | +6.3% | −1.4% | +2.2% |
+| syn_aggressive | 92.2 → 101.8（+10.4%） | +4.8% | −1.2% | +3.5% |
+| syn_deep | 94.5 → 107.6（+13.9%，spread 57% / 19%） | +5.3% | −0.2% | −0.1% |
+
+硬件实测的 branch-miss 降幅（AAPL −32.3%）和分支模拟（−32%）一致。
+
+Google Benchmark（`results/bench_20261004-1734_9c66918_vm.json`，v0/v4/v8 交替，20 次重复，中位数）：
+
+| workload | v4 | v8 | v8 / v4 |
+|---|---:|---:|---:|
+| itch AAPL | 158.5 ms（CV 2.7%） | 137.4 ms（CV 2.9%） | **−13.3%** |
+| itch QQQ | 192.0 ms（CV 6.4%） | 169.1 ms（CV 5.8%） | **−11.9%** |
+| syn_default | 68.7 ms（CV 6.8%） | 73.0 ms（CV 3.9%） | +6.3% |
+| syn_aggressive | 81.2 ms（CV 2.4%） | 85.7 ms（CV 3.5%） | +5.6% |
+| syn_deep | 81.0 ms（CV 3.6%） | 86.8 ms（CV 4.6%） | +7.2% |
+
+TopDown（`perf.sh topdown`，W 固定为 5）：AAPL 的 Bad Speculation 38.6% → **26.1%**，Retiring 38.6% → 47.3%，Backend Bound 13.8% → 19.5%，`int_misc.recovery_cycles` −36%；syn_default 的 Bad Speculation 30.0% → 27.4%（另一次运行是 28.2% → 28.4%，在噪声范围内），Backend Bound 9.6% → 12.4%。
+
+延迟（cycles，含计时开销）：AAPL 整体 p50/p99 192/436 → 186/412，**cancel 的 p50 178 → 153（−14%）**；syn_default 整体 p50 175 → 181（+3%），p99 341 → 339。
+
+`perf.sh stat`（单次运行）：AAPL 的 branch-misses −32.6%；cycles 两组读数分别是 +4.7% 和 −5.0%，单次运行的噪声比差异还大，以 counters 和 bench 为准。AAPL 上 `stalls_mem_any` +19%、`stalls_l3_miss` +80%、L2 未命中 +18%，但 counters 里 L1d 未命中 −1.4%，单次运行，没有进一步确认。
+
+### 解释
+
+- **ITCH 上省下的确实来自分支**：去掉的 4 个分支在 AAPL 上的预测失败率是 27%–38%。原因是真实行情里价位很浅，被撤的订单经常独占价位，或者位于队首、队尾，prev/next 是否为空接近随机。branch-miss 每 op 少了 0.44 次，cycles 少了约 19 个（counters）或 13%（bench），Bad Speculation 少了 12 个百分点。
+- **比预估的收益大**：预估 8–10 个周期/op，实测 bench 是 −13%。按 counters 算，每少一次预测失败约省 40 个周期，高于预估时用的 15–20 个。可能的原因：一次预测失败的代价不只是流水线清空（错误路径上的取指和访存也被省掉了，Frontend Bound 也有下降）。counters 在 AAPL 上的 spread 有 12% / 28%，这个倍数只作参考，方向和量级以 bench（CV 3%）为准。
+- **合成负载上是纯成本**：生成器产生的价位队列更深，撤单大多落在队列中间，prev/next 基本都不为空，v4 的这几个分支只有 1.7% 的预测失败率，几乎没有可省的。v8 每 op 多出约 13 条指令（cachegrind：book.hpp 里的地址选择和 cmov，加上每次 rest 无条件 `set`、每次 erase 都执行 `clear_if`），而且把原来可以推测执行的控制依赖变成了数据依赖：store 的地址要等 prev/next 的 load 和 cmov 完成。所以 Backend Bound 上升，cycles 涨了约 10%。
+- **cmov 的经典取舍**：分支可预测时，推测执行让依赖链"免费"；只有当分支的预测失败率足够高时，cmov 才划算。同一份代码在两类负载上的结果方向相反，正好体现了这一点。
+
+### 意外与遗留问题
+
+- **合成负载和真实行情的队列形态不同**：v8 在合成负载上回退、在 ITCH 上有效，说明生成器产生的价位深度和撤单位置分布与 ITCH 差异很大。这影响的不只是 v8：之前所有版本在合成负载上的结论，都要考虑这个代表性问题。下一步可以统计撤单时所在价位的订单数和订单在队列中的位置（ITCH 和合成负载对比），必要时调整生成器参数。
+- **判断 v8 是否保留**：以 ITCH（真实行情）为准，v8 是有效的（−12% 到 −13%，超出 CV）。但如果目标场景的队列更深（类似合成负载），v4 更好。没有做按负载自适应的混合实现。
+- **perf.sh 的两个问题**（commit `a1d5773`）：(1) topdown 原来用 slots/cycles 实测的 W 并四舍五入，VM 里这个比值在 4.0 到 4.9 之间漂移，同一个版本两次运行的 Bad Speculation 差了约 2 个百分点，现在 W 固定为 5（`LOB_TOPDOWN_W` 可以覆盖），实测比值仍然打印出来；(2) record 的 annotate 用 `head -n 2000` 截断，在 pipefail 下 perf 收到 SIGPIPE，脚本在写完所有文件后以 141 退出，改用 `sed -n`。之前的 topdown 结果是用旧公式算的，W 取的是当次测量值。

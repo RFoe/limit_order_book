@@ -1,0 +1,1020 @@
+cmd: build/profile/book replay --workload data/syn_default_s42.ops --version v8
+events: Ir Bc Bcm Bi Bim
+fl=./malloc/./malloc/arena.c
+fn=free
+153 57 19 8 0 0
+fn=malloc
+153 40 20 4 0 0
+fl=./malloc/./malloc/malloc.c
+fn=_int_free
+1792 12 0 0 0 0
+3163 14 0 0 0 0
+3165 28 0 0 0 0
+3166 7 0 0 0 0
+3167 14 0 0 0 0
+4495 133 0 0 0 0
+4499 57 0 0 0 0
+4505 76 19 0 0 0
+4506 38 19 0 0 0
+4510 95 19 0 0 0
+4517 38 0 0 0 0
+4518 114 38 2 0 0
+4521 7 0 0 0 0
+4527 21 7 0 0 0
+4547 35 7 2 0 0
+4550 7 0 0 0 0
+4561 24 12 2 0 0
+4637 24 12 0 0 0
+4640 24 0 0 0 0
+4643 24 12 0 0 0
+4646 24 0 0 0 0
+4658 102 0 0 0 0
+fn=_int_free_maybe_consolidate
+4770 132 0 0 0 0
+4776 24 12 2 0 0
+4778 8 2 0 0 0
+4781 6 2 2 0 0
+4784 10 2 1 0 0
+4785 5 1 0 0 0
+4798 128 11 0 0 0
+fn=_int_free_merge_chunk
+1992 36 12 0 0 0
+4665 96 0 0 0 0
+4666 12 0 0 0 0
+4670 72 12 0 0 0
+4673 48 24 4 0 0
+4675 36 0 0 0 0
+4678 36 12 0 0 0
+4681 24 0 0 0 0
+4682 24 12 0 0 0
+4683 24 12 0 0 0
+4689 24 12 2 0 0
+4691 10 0 0 0 0
+4692 10 0 0 0 0
+4693 10 0 0 0 0
+4694 40 10 0 0 0
+4696 20 0 0 0 0
+4701 36 0 0 0 0
+4702 84 0 0 0 0
+4714 24 12 0 0 0
+4720 24 12 1 0 0
+4721 2 0 0 0 0
+4722 2 0 0 0 0
+4724 11 0 0 0 0
+4732 12 0 0 0 0
+4733 48 0 0 0 0
+4734 24 12 0 0 0
+4736 12 0 0 0 0
+4738 24 12 4 0 0
+4740 36 0 0 0 0
+4743 12 0 0 0 0
+4744 12 0 0 0 0
+4746 36 0 0 0 0
+4747 12 0 0 0 0
+fn=_int_malloc
+1326 40 20 0 0 0
+1345 120 20 0 0 0
+1794 20 0 0 0 0
+2008 4 1 0 0 0
+2552 6 0 0 0 0
+2553 1 0 0 0 0
+2564 2 1 1 0 0
+2589 4 0 0 0 0
+2590 2 0 0 0 0
+2599 12 3 0 0 0
+2605 3 1 0 0 0
+2608 3 1 1 0 0
+2669 3 0 0 0 0
+2677 2 1 0 0 0
+2678 3 0 0 0 0
+2691 3 1 0 0 0
+2693 1 0 0 0 0
+2699 5 0 0 0 0
+2707 2 1 1 0 0
+2709 4 0 0 0 0
+2710 3 1 0 0 0
+2711 1 0 0 0 0
+2712 1 0 0 0 0
+2715 2 1 0 0 0
+2744 7 1 0 0 0
+2746 2 0 0 0 0
+2752 8 2 0 0 0
+2753 6 0 0 0 0
+2921 3 1 0 0 0
+2922 1 0 0 0 0
+2926 1 0 0 0 0
+2930 5 1 1 0 0
+2932 1 0 0 0 0
+2933 1 0 0 0 0
+2934 1 0 0 0 0
+2935 7 0 0 0 0
+2936 2 0 0 0 0
+2938 1 0 0 0 0
+3846 220 0 0 0 0
+3887 40 20 0 0 0
+3914 40 20 5 0 0
+3916 8 0 0 0 0
+3919 2 0 0 0 0
+3921 4 2 2 0 0
+3930 6 0 0 0 0
+3977 36 18 2 0 0
+3979 28 0 0 0 0
+3980 12 0 0 0 0
+3982 18 6 4 0 0
+4039 180 36 13 0 0
+4040 42 14 0 0 0
+4058 60 0 0 0 0
+4059 60 0 0 0 0
+4060 60 20 0 0 0
+4069 22 0 0 0 0
+4070 137 31 7 0 0
+4072 11 0 0 0 0
+4073 22 0 0 0 0
+4074 11 0 0 0 0
+4076 22 11 0 0 0
+4077 33 11 0 0 0
+4079 11 0 0 0 0
+4080 44 11 0 0 0
+4082 44 11 1 0 0
+4084 22 11 0 0 0
+4085 22 11 0 0 0
+4087 22 11 0 0 0
+4098 44 11 0 0 0
+4127 11 0 0 0 0
+4128 11 0 0 0 0
+4132 22 11 0 0 0
+4161 24 11 0 0 0
+4169 173 28 8 0 0
+4170 33 0 0 0 0
+4171 11 0 0 0 0
+4174 22 11 8 0 0
+4218 44 0 0 0 0
+4221 77 0 0 0 0
+4222 11 0 0 0 0
+4223 11 0 0 0 0
+4224 11 0 0 0 0
+4225 11 0 0 0 0
+4230 22 0 0 0 0
+4231 22 11 8 0 0
+4240 44 11 8 0 0
+4246 22 11 0 0 0
+4257 60 20 4 0 0
+4259 56 0 0 0 0
+4262 42 14 10 0 0
+4263 24 3 3 0 0
+4266 2 0 0 0 0
+4267 12 2 0 0 0
+4273 4 2 2 0 0
+4278 6 0 0 0 0
+4279 6 0 0 0 0
+4282 8 2 0 0 0
+4291 2 0 0 0 0
+4295 8 0 0 0 0
+4296 4 2 0 0 0
+4299 2 0 0 0 0
+4300 2 0 0 0 0
+4301 2 0 0 0 0
+4302 4 2 0 0 0
+4304 4 0 0 0 0
+4307 16 0 0 0 0
+4309 6 0 0 0 0
+4310 2 0 0 0 0
+4313 2 0 0 0 0
+4330 18 0 0 0 0
+4331 36 0 0 0 0
+4332 36 0 0 0 0
+4333 36 0 0 0 0
+4334 108 0 0 0 0
+4339 72 18 0 0 0
+4343 104 36 10 0 0
+4346 72 18 0 0 0
+4443 18 0 0 0 0
+4444 36 0 0 0 0
+4446 36 18 1 0 0
+4449 54 18 8 0 0
+4451 17 0 0 0 0
+4452 34 0 0 0 0
+4453 17 0 0 0 0
+4454 136 0 0 0 0
+4456 34 0 0 0 0
+4459 38 0 0 0 0
+4460 60 0 0 0 0
+4461 20 0 0 0 0
+4466 4 1 1 0 0
+4482 1 0 0 0 0
+4487 240 20 0 0 0
+fn=alloc_perturb
+1985 60 20 0 0 0
+1987 20 0 0 0 0
+fn=free
+3359 133 0 0 0 0
+3363 38 19 0 0 0
+3371 38 0 0 0 0
+3373 19 0 0 0 0
+3375 57 19 0 0 0
+3392 57 19 0 0 0
+3398 57 0 0 0 0
+3401 19 0 0 0 0
+3402 114 0 0 0 0
+fn=malloc
+1326 42 21 0 0 0
+1345 105 21 0 0 0
+3178 2 0 0 0 0
+3182 2 1 0 0 0
+3186 4 0 0 0 0
+3190 2 0 0 0 0
+3191 1 0 0 0 0
+3294 168 0 0 0 0
+3301 42 21 0 0 0
+3311 42 0 0 0 0
+3313 84 21 0 0 0
+3316 42 21 4 0 0
+3318 21 7 4 0 0
+3326 40 20 4 0 0
+3328 80 0 0 0 0
+3329 100 20 0 0 0
+3354 126 0 0 0 0
+fn=systrim.constprop.0
+2957 6 0 0 0 0
+2966 3 0 0 0 0
+2968 1 0 0 0 0
+2969 2 1 0 0 0
+2970 1 0 0 0 0
+2974 3 1 0 0 0
+2975 1 0 0 0 0
+2978 5 0 0 0 0
+2980 2 1 0 0 0
+3020 6 0 0 0 0
+fn=unlink_chunk.isra.0
+1608 26 0 0 0 0
+1610 65 13 0 0 0
+1613 26 0 0 0 0
+1614 26 0 0 0 0
+1616 52 26 0 0 0
+1619 13 0 0 0 0
+1620 13 0 0 0 0
+1621 65 26 3 0 0
+1623 22 11 0 0 0
+1624 33 11 0 0 0
+1627 22 11 0 0 0
+1641 11 0 0 0 0
+1642 11 0 0 0 0
+1645 26 0 0 0 0
+fl=./malloc/./malloc/morecore.c
+fn=__glibc_morecore
+25 3 0 0 0 0
+26 2 1 0 0 0
+29 1 0 0 0 0
+30 2 1 0 0 0
+34 2 0 0 0 0
+fl=./misc/../sysdeps/unix/sysv/linux/brk.c
+fn=brk
+36 1 0 0 0 0
+37 2 0 0 0 0
+38 2 1 0 0 0
+44 1 0 0 0 0
+45 1 0 0 0 0
+fl=./misc/../sysdeps/unix/sysv/linux/brk_call.h
+fn=brk
+24 2 0 0 0 0
+fl=./misc/./misc/sbrk.c
+fn=sbrk
+37 8 0 0 0 0
+40 2 0 0 0 0
+43 2 1 1 0 0
+58 2 1 0 0 0
+62 2 1 0 0 0
+66 4 2 1 0 0
+74 3 1 0 0 0
+78 7 0 0 0 0
+fl=./string/../sysdeps/x86_64/multiarch/memmove-vec-unaligned-erms.S
+fn=__memcpy_avx_unaligned_erms
+255 12 0 0 0 0
+256 12 0 0 0 0
+262 12 0 0 0 0
+263 12 12 2 0 0
+265 10 0 0 0 0
+266 10 0 0 0 0
+267 10 10 4 0 0
+270 1 0 0 0 0
+271 1 0 0 0 0
+272 1 0 0 0 0
+275 2 0 0 0 0
+305 2 0 0 0 0
+306 2 2 1 0 0
+308 1 0 0 0 0
+309 1 1 0 0 0
+311 1 0 0 0 0
+315 1 1 0 0 0
+316 1 0 0 0 0
+317 1 1 1 0 0
+325 1 0 0 0 0
+342 1 0 0 0 0
+343 1 0 0 0 0
+344 1 0 0 0 0
+345 1 0 0 0 0
+347 1 0 0 0 0
+375 1 0 0 0 0
+376 1 0 0 0 0
+377 1 0 0 0 0
+378 1 0 0 0 0
+379 1 0 0 0 0
+380 1 0 0 0 0
+381 2 0 0 0 0
+386 9 0 0 0 0
+387 9 9 2 0 0
+392 7 0 0 0 0
+393 7 7 2 0 0
+395 2 0 0 0 0
+396 2 0 0 0 0
+397 2 2 1 0 0
+399 1 0 0 0 0
+400 1 0 0 0 0
+401 1 0 0 0 0
+402 1 0 0 0 0
+403 1 0 0 0 0
+404 1 0 0 0 0
+405 1 0 0 0 0
+406 1 0 0 0 0
+407 1 0 0 0 0
+408 1 0 0 0 0
+409 1 0 0 0 0
+410 1 0 0 0 0
+411 1 0 0 0 0
+412 1 0 0 0 0
+413 2 0 0 0 0
+417 5 0 0 0 0
+418 5 0 0 0 0
+422 5 0 0 0 0
+424 5 5 0 0 0
+428 5 0 0 0 0
+429 5 5 0 0 0
+440 5 0 0 0 0
+443 5 0 0 0 0
+445 5 0 0 0 0
+447 5 0 0 0 0
+451 5 0 0 0 0
+452 5 5 0 0 0
+461 5 0 0 0 0
+462 5 0 0 0 0
+464 5 0 0 0 0
+466 5 0 0 0 0
+467 5 0 0 0 0
+468 5 0 0 0 0
+471 5 0 0 0 0
+473 5 0 0 0 0
+475 5 0 0 0 0
+477 10 0 0 0 0
+483 88 0 0 0 0
+484 88 0 0 0 0
+485 88 0 0 0 0
+486 88 0 0 0 0
+487 88 0 0 0 0
+488 88 0 0 0 0
+489 88 0 0 0 0
+490 88 0 0 0 0
+491 88 0 0 0 0
+492 88 0 0 0 0
+493 88 0 0 0 0
+494 88 88 19 0 0
+496 5 0 0 0 0
+497 5 0 0 0 0
+498 5 0 0 0 0
+499 5 0 0 0 0
+501 5 0 0 0 0
+505 10 0 0 0 0
+563 2 0 0 0 0
+570 2 0 0 0 0
+571 2 2 1 0 0
+577 1 0 0 0 0
+580 1 0 0 0 0
+582 1 0 0 0 0
+585 1 0 0 0 0
+586 1 0 0 0 0
+588 1 0 0 0 0
+590 12273 12273 10 0 0
+592 1 0 0 0 0
+594 1 0 0 0 0
+596 2 0 0 0 0
+601 2 0 0 0 0
+602 2 0 0 0 0
+606 2 0 0 0 0
+608 2 2 0 0 0
+611 2 0 0 0 0
+615 2 0 0 0 0
+616 2 2 0 0 0
+620 2 0 0 0 0
+624 2 2 2 0 0
+648 1 0 0 0 0
+650 1 0 0 0 0
+652 1 0 0 0 0
+654 1 0 0 0 0
+657 1 0 0 0 0
+658 1 0 0 0 0
+660 24561 24561 8 0 0
+663 1 0 0 0 0
+665 1 0 0 0 0
+667 2 0 0 0 0
+fl=./string/../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+fn=__memset_avx2_unaligned_erms
+158 9 0 0 0 0
+159 18 0 0 0 0
+164 9 0 0 0 0
+165 9 9 0 0 0
+166 9 0 0 0 0
+167 9 0 0 0 0
+168 9 9 3 0 0
+170 2 0 0 0 0
+171 2 0 0 0 0
+172 4 0 0 0 0
+181 1 0 0 0 0
+182 1 0 0 0 0
+184 2 0 0 0 0
+237 7 0 0 0 0
+238 7 7 1 0 0
+244 5 0 0 0 0
+245 5 0 0 0 0
+257 5 0 0 0 0
+260 5 0 0 0 0
+261 5 5 1 0 0
+273 4 0 0 0 0
+274 4 0 0 0 0
+287 4 0 0 0 0
+288 4 0 0 0 0
+290 4 4 1 0 0
+293 3 0 0 0 0
+296 3 0 0 0 0
+299 25 0 0 0 0
+300 25 0 0 0 0
+301 25 0 0 0 0
+302 25 0 0 0 0
+303 25 0 0 0 0
+304 25 0 0 0 0
+305 28 25 16 0 0
+308 4 0 0 0 0
+309 4 0 0 0 0
+310 4 0 0 0 0
+311 4 0 0 0 0
+314 8 0 0 0 0
+325 2 0 0 0 0
+326 2 0 0 0 0
+327 2 0 0 0 0
+328 8194 8194 14 0 0
+329 2 0 0 0 0
+330 4 0 0 0 0
+fl=/home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/container_hash/hash.hpp
+fn=unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)
+0 16492 0 0 0 0
+538 16492 0 0 0 0
+fn=unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)
+0 16225 0 0 0 0
+538 16225 0 0 0 0
+fl=/home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp
+fn=_ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v85BookTINS5_12ChecksumSinkELj16EE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_
+0 5288 0 0 0 0
+296 11340 0 0 0 0
+297 5160 0 0 0 0
+313 510 0 0 0 0
+389 10320 0 0 0 0
+849 5160 0 0 0 0
+927 15480 0 0 0 0
+1033 9 0 0 0 0
+1034 8 0 0 0 0
+1955 5160 0 0 0 0
+1961 3060 0 0 0 0
+2032 5160 0 0 0 0
+2063 18 9 1 0 0
+2064 534 510 8 0 0
+2065 1020 0 0 0 0
+2067 11850 5670 537 0 0
+2069 10320 0 0 0 0
+2075 18 0 0 0 0
+2292 10320 0 0 0 0
+2350 5160 0 0 0 0
+2373 20640 0 0 0 0
+2375 5160 5160 0 0 0
+2377 15480 0 0 0 0
+fn=auto lob::for_each_type<std::__1::tuple<lob::v0::Book<lob::ChecksumSink>, lob::v1::Book<lob::ChecksumSink>, lob::v2::Book<lob::ChecksumSink>, lob::v3::BookT<lob::ChecksumSink, 16u>, lob::v4::BookT<lob::ChecksumSink, 16u>, lob::v5::BookT<lob::ChecksumSink, 16u>, lob::v7::BookT<lob::ChecksumSink, 16u>, lob::v8::BookT<lob::ChecksumSink, 16u> >, (anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}>((anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}&&)::{lambda<unsigned long... $N0>(std::__1::integer_sequence<unsigned long, ($N0)...>)#1}::operator()<0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>(std::__1::integer_sequence<unsigned long, 0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>) const
+0 2842017 0 0 0 0
+271 1891858 0 0 0 0
+272 1392766 0 0 0 0
+279 2770816 0 0 0 0
+336 945929 0 0 0 0
+404 878958 0 0 0 0
+849 6610555 0 0 0 0
+881 1564 0 0 0 0
+882 4692 0 0 0 0
+883 1564 0 0 0 0
+927 900200 0 0 0 0
+1727 1891858 0 0 0 0
+1729 945929 945929 7495 0 0
+1732 893674 0 0 0 0
+1733 446837 0 0 0 0
+1737 1342940 450100 3302 0 0
+1743 21242 10621 11 0 0
+1745 506450 506450 1574 0 0
+1750 1564 1564 9 0 0
+1955 944365 0 0 0 0
+2266 3076353 0 0 0 0
+fn=boost::unordered::detail::foa::table_core<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::table_arrays, boost::unordered::detail::foa::plain_size_control, boost::hash<unsigned long>, std::__1::equal_to<unsigned long>, std::__1::allocator<std::__1::pair<unsigned long const, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc> > >::unchecked_rehash(boost::unordered::detail::foa::table_arrays<std::__1::pair<unsigned long const, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::pow2_size_policy, std::__1::allocator<std::__1::pair<unsigned long const, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc> > >&)
+0 36 0 0 0 0
+1033 18 0 0 0 0
+1096 18 9 1 0 0
+1108 8 0 0 0 0
+1113 16 0 0 0 0
+1563 108 9 0 0 0
+1811 45 0 0 0 0
+2025 45 0 0 0 0
+2054 9 0 0 0 0
+2288 45 0 0 0 0
+2289 9 0 0 0 0
+2320 18 0 0 0 0
+2321 9 0 0 0 0
+2322 45 0 0 0 0
+fn=boost::unordered::detail::foa::table_locator<boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, std::__1::pair<unsigned long const, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc> > boost::unordered::detail::foa::table_core<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::table_arrays, boost::unordered::detail::foa::plain_size_control, boost::hash<unsigned long>, std::__1::equal_to<unsigned long>, std::__1::allocator<std::__1::pair<unsigned long const, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc> > >::unchecked_emplace_with_rehash<boost::unordered::detail::foa::try_emplace_args_t, unsigned long&, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc>(unsigned long, boost::unordered::detail::foa::try_emplace_args_t&&, unsigned long&, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc&&)
+0 162 0 0 0 0
+296 18 0 0 0 0
+297 18 0 0 0 0
+389 27 0 0 0 0
+837 36 0 0 0 0
+842 18 0 0 0 0
+849 9 0 0 0 0
+859 18 0 0 0 0
+927 18 0 0 0 0
+1031 36 0 0 0 0
+1051 18 0 0 0 0
+1057 36 0 0 0 0
+1058 27 0 0 0 0
+1059 9 0 0 0 0
+1066 9 0 0 0 0
+1073 18 9 0 0 0
+1085 9 0 0 0 0
+1108 9 0 0 0 0
+1113 9 0 0 0 0
+1125 27 0 0 0 0
+1126 9 0 0 0 0
+1689 9 0 0 0 0
+1983 90 0 0 0 0
+1988 36 0 0 0 0
+1999 18 0 0 0 0
+2000 9 0 0 0 0
+2002 81 0 0 0 0
+2132 162 9 0 0 0
+2373 18 0 0 0 0
+2375 9 9 0 0 0
+2377 36 0 0 0 0
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)
+279 88416 0 0 0 0
+404 44208 0 0 0 0
+2266 154728 0 0 0 0
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+0 391510 0 0 0 0
+271 111270 0 0 0 0
+272 111270 0 0 0 0
+336 55635 0 0 0 0
+849 389445 0 0 0 0
+927 112096 0 0 0 0
+1727 111270 0 0 0 0
+1729 55635 55635 0 0 0
+1732 111270 0 0 0 0
+1733 55635 0 0 0 0
+1737 168144 56048 434 0 0
+1743 826 413 7 0 0
+1955 55635 0 0 0 0
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+0 8033433 0 0 0 0
+271 995248 0 0 0 0
+272 504875 0 0 0 0
+279 995248 0 0 0 0
+296 992214 0 0 0 0
+297 992200 0 0 0 0
+336 497624 0 0 0 0
+849 496102 0 0 0 0
+881 1522 0 0 0 0
+882 4594 0 0 0 0
+883 1522 0 0 0 0
+927 1006692 0 0 0 0
+1727 995248 0 0 0 0
+1729 497624 497624 14633 0 0
+1732 14502 0 0 0 0
+1733 7251 0 0 0 0
+1737 14506 7253 0 0 0
+1743 14506 7253 2 0 0
+1745 497624 497624 1540 0 0
+1750 1522 1522 4 0 0
+1955 496102 0 0 0 0
+1970 496093 0 0 0 0
+2373 1984428 0 0 0 0
+2375 496135 496107 19 0 0
+2377 1488279 0 0 0 0
+fn=unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)
+0 114906 0 0 0 0
+271 32984 0 0 0 0
+272 32984 0 0 0 0
+279 65968 0 0 0 0
+336 16492 0 0 0 0
+404 16492 0 0 0 0
+849 148428 0 0 0 0
+927 33172 0 0 0 0
+1727 32984 0 0 0 0
+1729 16492 16492 0 0 0
+1732 49476 0 0 0 0
+1733 16492 0 0 0 0
+1737 49758 16586 104 0 0
+1743 188 94 6 0 0
+2266 115444 0 0 0 0
+fn=unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)
+0 113000 0 0 0 0
+271 32450 0 0 0 0
+272 32450 0 0 0 0
+279 64900 0 0 0 0
+336 16225 0 0 0 0
+404 16225 0 0 0 0
+849 146025 0 0 0 0
+927 32620 0 0 0 0
+1727 32450 0 0 0 0
+1729 16225 16225 0 0 0
+1732 48675 0 0 0 0
+1733 16225 0 0 0 0
+1737 48930 16310 106 0 0
+1743 170 85 4 0 0
+2266 113575 0 0 0 0
+fl=/home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/table.hpp
+fn=_ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v85BookTINS5_12ChecksumSinkELj16EE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_
+40 5160 0 0 0 0
+fn=auto lob::for_each_type<std::__1::tuple<lob::v0::Book<lob::ChecksumSink>, lob::v1::Book<lob::ChecksumSink>, lob::v2::Book<lob::ChecksumSink>, lob::v3::BookT<lob::ChecksumSink, 16u>, lob::v4::BookT<lob::ChecksumSink, 16u>, lob::v5::BookT<lob::ChecksumSink, 16u>, lob::v7::BookT<lob::ChecksumSink, 16u>, lob::v8::BookT<lob::ChecksumSink, 16u> >, (anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}>((anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}&&)::{lambda<unsigned long... $N0>(std::__1::integer_sequence<unsigned long, ($N0)...>)#1}::operator()<0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>(std::__1::integer_sequence<unsigned long, 0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>) const
+40 439479 0 0 0 0
+fn=boost::unordered::detail::foa::table_locator<boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, std::__1::pair<unsigned long const, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc> > boost::unordered::detail::foa::table_core<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::table_arrays, boost::unordered::detail::foa::plain_size_control, boost::hash<unsigned long>, std::__1::equal_to<unsigned long>, std::__1::allocator<std::__1::pair<unsigned long const, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc> > >::unchecked_emplace_with_rehash<boost::unordered::detail::foa::try_emplace_args_t, unsigned long&, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc>(unsigned long, boost::unordered::detail::foa::try_emplace_args_t&&, unsigned long&, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc&&)
+0 27 0 0 0 0
+40 18 0 0 0 0
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)
+40 22104 0 0 0 0
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+0 18 0 0 0 0
+40 496093 0 0 0 0
+46 14 0 0 0 0
+640 1488306 496102 9 0 0
+650 27 0 0 0 0
+fn=unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)
+0 16492 0 0 0 0
+40 16492 0 0 0 0
+140 16492 0 0 0 0
+fn=unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)
+0 16225 0 0 0 0
+40 16225 0 0 0 0
+140 16225 0 0 0 0
+fl=/home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/mulx.hpp
+fn=_ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v85BookTINS5_12ChecksumSinkELj16EE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_
+45 5160 0 0 0 0
+46 5160 0 0 0 0
+fn=auto lob::for_each_type<std::__1::tuple<lob::v0::Book<lob::ChecksumSink>, lob::v1::Book<lob::ChecksumSink>, lob::v2::Book<lob::ChecksumSink>, lob::v3::BookT<lob::ChecksumSink, 16u>, lob::v4::BookT<lob::ChecksumSink, 16u>, lob::v5::BookT<lob::ChecksumSink, 16u>, lob::v7::BookT<lob::ChecksumSink, 16u>, lob::v8::BookT<lob::ChecksumSink, 16u> >, (anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}>((anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}&&)::{lambda<unsigned long... $N0>(std::__1::integer_sequence<unsigned long, ($N0)...>)#1}::operator()<0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>(std::__1::integer_sequence<unsigned long, 0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>) const
+45 2833095 0 0 0 0
+46 944365 0 0 0 0
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+45 55635 0 0 0 0
+46 55635 0 0 0 0
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+45 992204 0 0 0 0
+46 496102 0 0 0 0
+fn=unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)
+0 16492 0 0 0 0
+45 16492 0 0 0 0
+46 16492 0 0 0 0
+fn=unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)
+0 16225 0 0 0 0
+45 16225 0 0 0 0
+46 16225 0 0 0 0
+fl=/home/wang/sources/cxx/book/include/lob/events.hpp
+fn=auto lob::for_each_type<std::__1::tuple<lob::v0::Book<lob::ChecksumSink>, lob::v1::Book<lob::ChecksumSink>, lob::v2::Book<lob::ChecksumSink>, lob::v3::BookT<lob::ChecksumSink, 16u>, lob::v4::BookT<lob::ChecksumSink, 16u>, lob::v5::BookT<lob::ChecksumSink, 16u>, lob::v7::BookT<lob::ChecksumSink, 16u>, lob::v8::BookT<lob::ChecksumSink, 16u> >, (anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}>((anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}&&)::{lambda<unsigned long... $N0>(std::__1::integer_sequence<unsigned long, ($N0)...>)#1}::operator()<0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>(std::__1::integer_sequence<unsigned long, 0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>) const
+0 3076353 0 0 0 0
+92 439479 0 0 0 0
+93 878958 0 0 0 0
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+0 55635 0 0 0 0
+92 55635 0 0 0 0
+93 500715 0 0 0 0
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+81 496102 0 0 0 0
+92 496102 0 0 0 0
+93 6449326 0 0 0 0
+fn=unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)
+92 93015 0 0 0 0
+93 372060 0 0 0 0
+fn=unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)
+92 92103 0 0 0 0
+93 368412 0 0 0 0
+fl=/home/wang/sources/cxx/book/include/lob/replay.hpp
+fn=auto lob::for_each_type<std::__1::tuple<lob::v0::Book<lob::ChecksumSink>, lob::v1::Book<lob::ChecksumSink>, lob::v2::Book<lob::ChecksumSink>, lob::v3::BookT<lob::ChecksumSink, 16u>, lob::v4::BookT<lob::ChecksumSink, 16u>, lob::v5::BookT<lob::ChecksumSink, 16u>, lob::v7::BookT<lob::ChecksumSink, 16u>, lob::v8::BookT<lob::ChecksumSink, 16u> >, (anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}>((anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}&&)::{lambda<unsigned long... $N0>(std::__1::integer_sequence<unsigned long, ($N0)...>)#1}::operator()<0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>(std::__1::integer_sequence<unsigned long, 0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>) const
+0 1000002 0 0 0 0
+21 4888730 1944365 480730 0 0
+23 1514658 0 0 0 0
+27 439479 0 0 0 0
+29 278175 0 0 0 0
+37 1000001 1000001 1 0 0
+fl=/home/wang/sources/cxx/book/include/lob/v3/hier_bitmap.hpp
+fn=auto lob::for_each_type<std::__1::tuple<lob::v0::Book<lob::ChecksumSink>, lob::v1::Book<lob::ChecksumSink>, lob::v2::Book<lob::ChecksumSink>, lob::v3::BookT<lob::ChecksumSink, 16u>, lob::v4::BookT<lob::ChecksumSink, 16u>, lob::v5::BookT<lob::ChecksumSink, 16u>, lob::v7::BookT<lob::ChecksumSink, 16u>, lob::v8::BookT<lob::ChecksumSink, 16u> >, (anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}>((anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}&&)::{lambda<unsigned long... $N0>(std::__1::integer_sequence<unsigned long, ($N0)...>)#1}::operator()<0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>(std::__1::integer_sequence<unsigned long, 0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>) const
+78 1318437 0 0 0 0
+79 1318437 0 0 0 0
+80 439479 439479 6 0 0
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)
+78 66312 0 0 0 0
+79 66312 0 0 0 0
+80 22104 22104 2 0 0
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+0 6 0 0 0 0
+57 992207 0 0 0 0
+58 1488315 496105 8 0 0
+59 1488321 0 0 0 0
+fn=unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)
+0 263796 0 0 0 0
+48 791390 0 0 0 0
+95 1318980 0 0 0 0
+fn=unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)
+0 263193 0 0 0 0
+48 789579 0 0 0 0
+105 2631930 0 0 0 0
+fl=/home/wang/sources/cxx/book/include/lob/v8/book.hpp
+fn=auto lob::for_each_type<std::__1::tuple<lob::v0::Book<lob::ChecksumSink>, lob::v1::Book<lob::ChecksumSink>, lob::v2::Book<lob::ChecksumSink>, lob::v3::BookT<lob::ChecksumSink, 16u>, lob::v4::BookT<lob::ChecksumSink, 16u>, lob::v5::BookT<lob::ChecksumSink, 16u>, lob::v7::BookT<lob::ChecksumSink, 16u>, lob::v8::BookT<lob::ChecksumSink, 16u> >, (anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}>((anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}&&)::{lambda<unsigned long... $N0>(std::__1::integer_sequence<unsigned long, ($N0)...>)#1}::operator()<0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>(std::__1::integer_sequence<unsigned long, 0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>) const
+0 2449627 0 0 0 0
+85 1009772 504886 1 0 0
+86 1009772 504886 0 0 0
+94 878958 0 0 0 0
+96 439479 0 0 0 0
+260 878958 439479 0 0 0
+262 878958 439479 13 0 0
+264 439479 0 0 0 0
+265 4394790 878958 7 0 0
+296 878958 0 0 0 0
+297 439479 0 0 0 0
+319 878958 0 0 0 0
+320 878958 0 0 0 0
+323 1318437 0 0 0 0
+324 1757916 0 0 0 0
+325 439479 0 0 0 0
+326 439479 0 0 0 0
+327 439479 0 0 0 0
+331 1009772 504886 252325 0 0
+332 1010616 0 0 0 0
+334 1008928 0 0 0 0
+335 1009772 504886 12 0 0
+336 3357312 0 0 0 0
+408 439479 0 0 0 0
+409 439479 0 0 0 0
+410 1318437 0 0 0 0
+411 439479 0 0 0 0
+413 439479 0 0 0 0
+416 2636874 0 0 0 0
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::alloc_node(unsigned long, unsigned int)
+0 496102 0 0 0 0
+282 3472714 0 0 0 0
+283 992204 0 0 0 0
+284 496102 496102 10 0 0
+285 1482300 0 0 0 0
+286 494100 0 0 0 0
+287 4004 2002 0 0 0
+291 1490308 0 0 0 0
+292 3968816 0 0 0 0
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)
+0 88416 0 0 0 0
+260 44208 22104 0 0 0
+262 44208 22104 0 0 0
+264 22104 0 0 0 0
+265 221040 44208 4 0 0
+296 44208 0 0 0 0
+297 22104 0 0 0 0
+319 44208 0 0 0 0
+320 44208 0 0 0 0
+323 66312 0 0 0 0
+324 88416 0 0 0 0
+325 22104 0 0 0 0
+326 22104 0 0 0 0
+327 22104 0 0 0 0
+407 132624 0 0 0 0
+408 22104 0 0 0 0
+409 22104 0 0 0 0
+410 66312 0 0 0 0
+411 66312 0 0 0 0
+413 22104 0 0 0 0
+416 132624 0 0 0 0
+432 110520 0 0 0 0
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+0 556350 0 0 0 0
+99 667620 0 0 0 0
+102 111270 55635 2273 0 0
+103 111270 55635 0 0 0
+106 55635 0 0 0 0
+107 222540 55635 25693 0 0
+108 67062 0 0 0 0
+109 33531 0 0 0 0
+110 33531 0 0 0 0
+111 33531 0 0 0 0
+113 22104 0 0 0 0
+115 22104 0 0 0 0
+116 22104 0 0 0 0
+118 313192 0 0 0 0
+260 67062 33531 259 0 0
+262 100593 33531 0 0 0
+264 33531 0 0 0 0
+265 301779 67062 4 0 0
+267 100593 0 0 0 0
+277 67062 33531 0 0 0
+331 44208 22104 11066 0 0
+332 11143 0 0 0 0
+334 10961 0 0 0 0
+335 46976 22104 13 0 0
+336 214318 0 0 0 0
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+0 2480608 0 0 0 0
+262 1488306 496102 0 0 0
+264 496102 0 0 0 0
+265 4961020 992204 9 0 0
+272 4 0 0 0 0
+273 1 0 0 0 0
+307 992204 0 0 0 0
+309 1984408 0 0 0 0
+310 496102 0 0 0 0
+311 992204 0 0 0 0
+312 496102 0 0 0 0
+313 496102 0 0 0 0
+314 496102 0 0 0 0
+390 6449326 0 0 0 0
+391 1488306 0 0 0 0
+392 1488316 496104 13 0 0
+396 1488306 0 0 0 0
+397 1488306 0 0 0 0
+402 992204 0 0 0 0
+403 1984408 0 0 0 0
+404 496102 0 0 0 0
+405 3968816 0 0 0 0
+fn=unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)
+0 2907214 0 0 0 0
+269 527592 0 0 0 0
+296 32984 0 0 0 0
+297 32984 0 0 0 0
+319 32984 0 0 0 0
+320 32984 0 0 0 0
+323 49476 0 0 0 0
+324 65968 0 0 0 0
+325 16492 0 0 0 0
+326 16492 0 0 0 0
+327 16492 0 0 0 0
+342 2110376 0 0 0 0
+351 527594 263797 0 0 0
+354 791391 263797 1 0 0
+357 263796 263796 0 0 0
+362 263796 263796 8 0 0
+364 775810 263796 16769 0 0
+365 155780 0 0 0 0
+366 124020 62010 1234 0 0
+369 124020 0 0 0 0
+372 93015 0 0 0 0
+373 31005 0 0 0 0
+374 31005 31005 13041 0 0
+380 31156 15578 12 0 0
+387 2374173 0 0 0 0
+fn=unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)
+0 2896856 0 0 0 0
+269 526386 0 0 0 0
+296 32450 0 0 0 0
+297 32450 0 0 0 0
+319 32450 0 0 0 0
+320 32450 0 0 0 0
+323 48675 0 0 0 0
+324 64900 0 0 0 0
+325 16225 0 0 0 0
+326 16225 0 0 0 0
+327 16225 0 0 0 0
+342 2105544 0 0 0 0
+351 526386 263193 0 0 0
+354 789579 263193 0 0 0
+357 263193 263193 0 0 0
+362 263193 263193 8 0 0
+364 774269 263193 16475 0 0
+365 153100 0 0 0 0
+366 122804 61402 954 0 0
+369 122804 0 0 0 0
+372 92103 0 0 0 0
+373 30701 0 0 0 0
+374 30701 30701 12952 0 0
+380 30620 15310 12 0 0
+387 2368737 0 0 0 0
+fl=/home/wang/sources/cxx/book/source/main.cxx
+fn=auto lob::for_each_type<std::__1::tuple<lob::v0::Book<lob::ChecksumSink>, lob::v1::Book<lob::ChecksumSink>, lob::v2::Book<lob::ChecksumSink>, lob::v3::BookT<lob::ChecksumSink, 16u>, lob::v4::BookT<lob::ChecksumSink, 16u>, lob::v5::BookT<lob::ChecksumSink, 16u>, lob::v7::BookT<lob::ChecksumSink, 16u>, lob::v8::BookT<lob::ChecksumSink, 16u> >, (anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}>((anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}&&)::{lambda<unsigned long... $N0>(std::__1::integer_sequence<unsigned long, ($N0)...>)#1}::operator()<0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>(std::__1::integer_sequence<unsigned long, 0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>) const
+0 1 0 0 0 0
+293 2 0 0 0 0
+294 1 0 0 0 0
+295 9 0 0 0 0
+fl=/usr/include/c++/v1/__algorithm/comp.h
+fn=unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)
+41 31005 0 0 0 0
+fn=unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)
+41 30701 0 0 0 0
+fl=/usr/include/c++/v1/__bit/countl.h
+fn=unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)
+28 1315965 0 0 0 0
+fl=/usr/include/c++/v1/__bit/countr.h
+fn=unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)
+28 1318980 0 0 0 0
+fl=/usr/include/c++/v1/__functional/operations.h
+fn=auto lob::for_each_type<std::__1::tuple<lob::v0::Book<lob::ChecksumSink>, lob::v1::Book<lob::ChecksumSink>, lob::v2::Book<lob::ChecksumSink>, lob::v3::BookT<lob::ChecksumSink, 16u>, lob::v4::BookT<lob::ChecksumSink, 16u>, lob::v5::BookT<lob::ChecksumSink, 16u>, lob::v7::BookT<lob::ChecksumSink, 16u>, lob::v8::BookT<lob::ChecksumSink, 16u> >, (anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}>((anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}&&)::{lambda<unsigned long... $N0>(std::__1::integer_sequence<unsigned long, ($N0)...>)#1}::operator()<0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>(std::__1::integer_sequence<unsigned long, 0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>) const
+300 450100 0 0 0 0
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+300 56048 0 0 0 0
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+300 14506 0 0 0 0
+fn=unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)
+300 16586 0 0 0 0
+fn=unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)
+300 16310 0 0 0 0
+fl=/usr/include/c++/v1/__iterator/wrap_iter.h
+fn=auto lob::for_each_type<std::__1::tuple<lob::v0::Book<lob::ChecksumSink>, lob::v1::Book<lob::ChecksumSink>, lob::v2::Book<lob::ChecksumSink>, lob::v3::BookT<lob::ChecksumSink, 16u>, lob::v4::BookT<lob::ChecksumSink, 16u>, lob::v5::BookT<lob::ChecksumSink, 16u>, lob::v7::BookT<lob::ChecksumSink, 16u>, lob::v8::BookT<lob::ChecksumSink, 16u> >, (anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}>((anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}&&)::{lambda<unsigned long... $N0>(std::__1::integer_sequence<unsigned long, ($N0)...>)#1}::operator()<0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>(std::__1::integer_sequence<unsigned long, 0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>) const
+65 1000000 0 0 0 0
+125 1000001 0 0 0 0
+fl=/usr/include/c++/v1/__math/rounding_functions.h
+fn=boost::unordered::detail::foa::table_locator<boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, std::__1::pair<unsigned long const, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc> > boost::unordered::detail::foa::table_core<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::table_arrays, boost::unordered::detail::foa::plain_size_control, boost::hash<unsigned long>, std::__1::equal_to<unsigned long>, std::__1::allocator<std::__1::pair<unsigned long const, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc> > >::unchecked_emplace_with_rehash<boost::unordered::detail::foa::try_emplace_args_t, unsigned long&, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc>(unsigned long, boost::unordered::detail::foa::try_emplace_args_t&&, unsigned long&, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc&&)
+29 9 0 0 0 0
+fl=/usr/include/c++/v1/__memory/allocator.h
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::alloc_node(unsigned long, unsigned int)
+100 24 12 0 0 0
+fl=/usr/include/c++/v1/__memory/construct_at.h
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::alloc_node(unsigned long, unsigned int)
+38 6006 0 0 0 0
+fl=/usr/include/c++/v1/__memory/uninitialized_algorithms.h
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::alloc_node(unsigned long, unsigned int)
+0 12 0 0 0 0
+638 48 0 0 0 0
+fl=/usr/include/c++/v1/__new/allocate.h
+fn=auto lob::for_each_type<std::__1::tuple<lob::v0::Book<lob::ChecksumSink>, lob::v1::Book<lob::ChecksumSink>, lob::v2::Book<lob::ChecksumSink>, lob::v3::BookT<lob::ChecksumSink, 16u>, lob::v4::BookT<lob::ChecksumSink, 16u>, lob::v5::BookT<lob::ChecksumSink, 16u>, lob::v7::BookT<lob::ChecksumSink, 16u>, lob::v8::BookT<lob::ChecksumSink, 16u> >, (anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}>((anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}&&)::{lambda<unsigned long... $N0>(std::__1::integer_sequence<unsigned long, ($N0)...>)#1}::operator()<0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>(std::__1::integer_sequence<unsigned long, 0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>) const
+0 878958 0 0 0 0
+fn=boost::unordered::detail::foa::table_core<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::table_arrays, boost::unordered::detail::foa::plain_size_control, boost::hash<unsigned long>, std::__1::equal_to<unsigned long>, std::__1::allocator<std::__1::pair<unsigned long const, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc> > >::unchecked_rehash(boost::unordered::detail::foa::table_arrays<std::__1::pair<unsigned long const, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::pow2_size_policy, std::__1::allocator<std::__1::pair<unsigned long const, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc> > >&)
+57 32 0 0 0 0
+63 8 0 0 0 0
+fn=boost::unordered::detail::foa::table_locator<boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, std::__1::pair<unsigned long const, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc> > boost::unordered::detail::foa::table_core<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::table_arrays, boost::unordered::detail::foa::plain_size_control, boost::hash<unsigned long>, std::__1::equal_to<unsigned long>, std::__1::allocator<std::__1::pair<unsigned long const, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc> > >::unchecked_emplace_with_rehash<boost::unordered::detail::foa::try_emplace_args_t, unsigned long&, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc>(unsigned long, boost::unordered::detail::foa::try_emplace_args_t&&, unsigned long&, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc&&)
+0 36 0 0 0 0
+37 45 0 0 0 0
+43 18 0 0 0 0
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::alloc_node(unsigned long, unsigned int)
+0 47 0 0 0 0
+37 24 0 0 0 0
+43 36 0 0 0 0
+63 33 0 0 0 0
+fl=/usr/include/c++/v1/__split_buffer
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::alloc_node(unsigned long, unsigned int)
+335 12 0 0 0 0
+341 24 12 1 0 0
+fl=/usr/include/c++/v1/__utility/pair.h
+fn=_ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImN3lob2v85BookTINS5_12ChecksumSinkELj16EE3LocEEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSJ_9allocatorINSJ_4pairIKmSA_EEEEE22for_all_elements_whileIZNSR_22for_all_elements_whileIZNSR_16for_all_elementsIZNSR_16unchecked_rehashERNSF_ISP_SE_NS2_16pow2_size_policyESQ_EEEUlPSP_E_EEDTcmclfL1p0_LDnEEcvv_EERKSW_T_EUlSY_E_EES10_S12_S13_EUlPSE_jSY_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EES12_S13_
+196 20640 0 0 0 0
+fn=boost::unordered::detail::foa::table_locator<boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, std::__1::pair<unsigned long const, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc> > boost::unordered::detail::foa::table_core<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::table_arrays, boost::unordered::detail::foa::plain_size_control, boost::hash<unsigned long>, std::__1::equal_to<unsigned long>, std::__1::allocator<std::__1::pair<unsigned long const, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc> > >::unchecked_emplace_with_rehash<boost::unordered::detail::foa::try_emplace_args_t, unsigned long&, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc>(unsigned long, boost::unordered::detail::foa::try_emplace_args_t&&, unsigned long&, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc&&)
+445 18 0 0 0 0
+446 18 0 0 0 0
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+445 496093 0 0 0 0
+446 992186 0 0 0 0
+fl=/usr/include/c++/v1/__utility/swap.h
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::alloc_node(unsigned long, unsigned int)
+44 36 0 0 0 0
+fl=/usr/include/c++/v1/__vector/vector.h
+fn=auto lob::for_each_type<std::__1::tuple<lob::v0::Book<lob::ChecksumSink>, lob::v1::Book<lob::ChecksumSink>, lob::v2::Book<lob::ChecksumSink>, lob::v3::BookT<lob::ChecksumSink, 16u>, lob::v4::BookT<lob::ChecksumSink, 16u>, lob::v5::BookT<lob::ChecksumSink, 16u>, lob::v7::BookT<lob::ChecksumSink, 16u>, lob::v8::BookT<lob::ChecksumSink, 16u> >, (anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}>((anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}&&)::{lambda<unsigned long... $N0>(std::__1::integer_sequence<unsigned long, ($N0)...>)#1}::operator()<0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>(std::__1::integer_sequence<unsigned long, 0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul>) const
+0 1 0 0 0 0
+388 1 0 0 0 0
+407 1757916 0 0 0 0
+449 1 0 0 0 0
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::alloc_node(unsigned long, unsigned int)
+0 72 0 0 0 0
+388 18018 0 0 0 0
+391 48 0 0 0 0
+407 1486304 0 0 0 0
+475 1990 0 0 0 0
+902 24 12 0 0 0
+905 60 0 0 0 0
+1128 12 0 0 0 0
+1131 24 0 0 0 0
+1146 6006 2002 14 0 0
+1149 1990 0 0 0 0
+1152 2002 0 0 0 0
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::erase(boost::unordered::detail::foa::table_iterator<boost::unordered::detail::foa::flat_map_types<unsigned long, lob::v8::BookT<lob::ChecksumSink, 16u>::Loc>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>*, false>)
+407 66312 0 0 0 0
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+407 111270 0 0 0 0
+fn=lob::v8::BookT<lob::ChecksumSink, 16u>::rest(unsigned long, lob::Side, long, unsigned int)
+407 496102 0 0 0 0
+fn=unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)
+407 31005 0 0 0 0
+fn=unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)
+407 30701 0 0 0 0
+fl=/usr/include/c++/v1/map
+fn=unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)0>(unsigned long, long, unsigned int)
+1031 527593 0 0 0 0
+fn=unsigned int lob::v8::BookT<lob::ChecksumSink, 16u>::match<(lob::Side)1>(unsigned long, long, unsigned int)
+1031 526386 0 0 0 0
+fl=???
+fn=???
+0 179 0 0 120 43
+fn=operator delete(void*)
+0 95 0 0 0 0
+fn=operator delete(void*, unsigned long)
+0 95 0 0 0 0
+fn=operator new(unsigned long)
+0 357 21 5 0 0
+summary: 218631891 17636188 863990 120 43

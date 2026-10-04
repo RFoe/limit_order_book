@@ -1,0 +1,15 @@
+tsc: constant_tsc=true nonstop_tsc=true freq=1.1904 GHz timer_overhead=58 cycles
+ver    class            count     p50     p90     p99    p99.9   p99.99       max   (cycles, incl. timer overhead)
+v0     all            8045735     496     852    1459     3991    78432   3367629
+v0     push_rest      3978560     515     977    1532     5082    81945   3367629
+v0     cancel         3978560     492     670    1288     3398    74348   2402285
+v0     modify           88615     335     453     759     1978    59770    218000
+v4     all            8045735     192     263     436      773    55400   1701233
+v4     push_rest      3978560     207     285     459      794    56861   1701233
+v4     cancel         3978560     178     231     399      750    31580    414689
+v4     modify           88615     147     202     354      663    13049    169291
+v8     all            8045735     186     254     412      748    53221   1309547
+v8     push_rest      3978560     205     275     432      771    57113   1309547
+v8     cancel         3978560     153     207     383      723    22000    333316
+v8     modify           88615     140     194     337      608     9597    100473
+wrote /home/wang/sources/cxx/book/results/latency_20261004-1737_9c66918_vm_itch12302019_AAPL.csv

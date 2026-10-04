@@ -1,0 +1,18 @@
+tsc: constant_tsc=true nonstop_tsc=true freq=1.1904 GHz timer_overhead=58 cycles
+ver    class            count     p50     p90     p99    p99.9   p99.99       max   (cycles, incl. timer overhead)
+v0     all            5000000     279     397     676     1242    57947    942311
+v0     push_rest      2398080     260     347     566      963    57094    405794
+v0     push_trade      126350     332     636    1133     1999    64854    238316
+v0     cancel         2197395     299     392     612     1126    58103    942311
+v0     modify          278175     294     601    1002     1788    65937    273825
+v4     all            5000000     175     217     341      663    49950    283851
+v4     push_rest      2398080     188     215     298      630    53000    283851
+v4     push_trade      126350     236     331     509      854    50871    103180
+v4     cancel         2197395     149     178     288      629    40292    267745
+v4     modify          278175     193     316     471      846    54070    166798
+v8     all            5000000     181     219     339      613    18420    804855
+v8     push_rest      2398080     195     219     283      542    31091    291762
+v8     push_trade      126350     248     354     519      876    54252    145983
+v8     cancel         2197395     148     178     285      581    14361    197009
+v8     modify          278175     188     310     465      760    54018    804855
+wrote /home/wang/sources/cxx/book/results/latency_20261004-1737_9c66918_vm_syn_default_s42.csv

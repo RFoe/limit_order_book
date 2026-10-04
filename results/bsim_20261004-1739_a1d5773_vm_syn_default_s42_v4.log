@@ -1,0 +1,11 @@
+==52792== Cachegrind, a high-precision tracing profiler
+==52792== Copyright (C) 2002-2017, and GNU GPL'd, by Nicholas Nethercote et al.
+==52792== Using Valgrind-3.22.0 and LibVEX; rerun with -h for copyright info
+==52792== Command: build/profile/book replay --workload data/syn_default_s42.ops --version v4
+==52792== 
+==52792== 
+==52792== I refs:        204,844,598
+==52792== 
+==52792== Branches:       19,123,520  (19,123,400 cond + 120 ind)
+==52792== Mispredicts:       874,580  (   874,537 cond +  43 ind)
+==52792== Mispred rate:          4.6% (       4.6%     + 35.8%   )
