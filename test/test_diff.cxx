@@ -26,6 +26,7 @@
 #include <lob/v16/book.hpp>
 #include <lob/v17/book.hpp>
 #include <lob/v18/book.hpp>
+#include <lob/v19/book.hpp>
 #include <lob/versions.hpp>
 #include <lob/workload/generator.hpp>
 
@@ -203,6 +204,7 @@ TEST_CASE("grid + fallback map match v0 (v3 and later)", "[diff][grid]") {
         check.template operator()<v16::BookT<RecordingSink, 6>>();
         check.template operator()<v17::BookT<RecordingSink, 6>>();
         check.template operator()<v18::BookT<RecordingSink, 6>>();
+        check.template operator()<v19::BookT<RecordingSink, 6>>();
       } else {
         check.template operator()<v3::BookT<RecordingSink, 16>>();
         check.template operator()<v4::BookT<RecordingSink, 16>>();
@@ -219,6 +221,7 @@ TEST_CASE("grid + fallback map match v0 (v3 and later)", "[diff][grid]") {
         check.template operator()<v16::BookT<RecordingSink, 16>>();
         check.template operator()<v17::BookT<RecordingSink, 16>>();
         check.template operator()<v18::BookT<RecordingSink, 16>>();
+        check.template operator()<v19::BookT<RecordingSink, 16>>();
       }
     }
   }
@@ -228,9 +231,11 @@ TEST_CASE("grid + fallback map match v0 (v3 and later)", "[diff][grid]") {
 // ids outside [base, base + 2^32). Generated ids are small and dense, so the
 // generic test only exercises the compact one. Remapping the ids (injectively)
 // puts many of them out of range, including ids that alternate between the two
-// indexes and ids far below/above the anchor.
-TEST_CASE("v5 compact + wide order index match v0", "[diff][v5]") {
-  if (!selected("v5")) SKIP("v5 not selected by LOB_DIFF_VERSIONS");
+// indexes and ids far below/above the anchor. v19's order table keeps ids
+// >= 2^32 - 1 in a separate pool whose nodes link with the table's, so the same
+// remaps exercise that pool.
+TEST_CASE("v5 compact + wide order index match v0", "[diff][v5][v19]") {
+  if (!selected("v5") && !selected("v19")) SKIP("v5 / v19 not selected by LOB_DIFF_VERSIONS");
   struct Remap {
     const char* label;
     OrderId (*f)(OrderId);
@@ -246,11 +251,16 @@ TEST_CASE("v5 compact + wide order index match v0", "[diff][v5]") {
     for (const auto seed : seeds) {
       auto ops = workload::generate(params_for(seed, n_ops));
       for (Op& op : ops) op.id = r.f(op.id);
-      using Cand = v5::Book<RecordingSink>;
-      if (auto f = testing::run_diff<Ref, Cand>(ops)) {
-        const auto minimal = testing::shrink<Ref, Cand>(ops);
-        FAIL(r.label << "\n" << testing::report(seed, *f, minimal, testing::run_diff<Ref, Cand>(minimal)));
-      }
+      auto check = [&]<class Cand>() {
+        if (!selected(Cand::name)) return;
+        if (auto f = testing::run_diff<Ref, Cand>(ops)) {
+          const auto minimal = testing::shrink<Ref, Cand>(ops);
+          FAIL(Cand::name << " " << r.label << "\n"
+                          << testing::report(seed, *f, minimal, testing::run_diff<Ref, Cand>(minimal)));
+        }
+      };
+      check.template operator()<v5::Book<RecordingSink>>();
+      check.template operator()<v19::Book<RecordingSink>>();
     }
   }
 }

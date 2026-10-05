@@ -1,0 +1,648 @@
+#pragma once
+// v19: v18 with the order index and the node pool merged (v19/order_table.hpp):
+// one open-addressing table keyed by order id whose 64-byte buckets hold 3 ids
+// and their 16-byte hot nodes. A cancel's lookup lands on the line that holds
+// the node, so the bucket -> node-index -> node chain of v15..v18 (two
+// dependent misses for old orders, which made up two thirds of the AAPL p99
+// tail) becomes one line. The node pool, its free list and the cold id array
+// disappear (the id is the key; a maker's id comes from the table); the price
+// of an off-grid order is kept in a small map keyed by order id. Node
+// references are table positions; when the table grows (warm-up), the table
+// fixes the nodes' links and the book re-links level heads / tails.
+// Everything else is identical to v18; v18's description follows.
+//
+// v18: v17 with the order node split hot / cold. The hot node is 16 bytes,
+// {qty, next, prev, where = grid slot | side << 31}, four per cache line (v17:
+// 32 bytes with id and price); id and price go to a parallel cold array that
+// only matching (maker id), off-grid orders (price), snapshots and invariant
+// checks read, and that rest writes once (a store). The node pool of AAPL
+// shrinks from ~870 KB to ~430 KB, so the nodes of old orders are likelier to
+// still be cached when they are cancelled (two thirds of v16's AAPL p99 tail
+// were cancels of orders older than 1024 pushes). Since the node no longer
+// holds the price, a cancel takes the grid slot straight from `where` instead
+// of computing slot_of(price) - a consequence of the split, noted rather than
+// split into its own version. Everything else is identical to v17; v17's
+// description follows.
+//
+// v17: v16 without per-level aggregates on the hot path. Level shrinks from
+// {head, tail, total_qty, count} (24 B) to {head, tail} (8 B); the order count
+// and total quantity of a level are only needed for snapshots (levels()) and
+// invariant checks, which now walk the level's list. Whether a cancel empties
+// its level is read off the cancelled node itself (no prev and no next), so a
+// cancel no longer reads the level's line at all: it only stores to head /
+// tail when the order is at an end of its queue. Measured upper bound before
+// this version (ablation): p99 of cancels of old orders -10..-13% on AAPL.
+// Everything else is identical to v16; v16's description follows.
+//
+// v16: v15 with an index insert that does not read the bucket line
+// (v16/order_index.hpp): a free slot comes from a per-bucket occupancy byte
+// (L1-resident) and a push whose id is above every id inserted so far skips
+// the duplicate check (it cannot be present). Such a push only writes the
+// bucket line, so its miss is a store miss (store buffer) instead of a load
+// miss on the op's critical path (v15: AAPL push p99 +22% vs v12). Everything
+// else is identical to v15; v15's description follows.
+//
+// v15: v12 with its own order index (v15/order_index.hpp) in place of
+// boost::unordered_flat_map<OrderId, Loc>: one 64-byte bucket per cache line
+// holding 7 x (u32 key = id, u32 node index) plus an exact overflow
+// counter, all keys compared with one AVX2 instruction. Key and value share the
+// line and an insert writes the line its lookup just read; boost needed the
+// group's metadata line plus the element's line (and wrote that line on
+// insert). The index value shrinks from Loc {price, node, side} (16 B) to the
+// node index, so price and side move into OrderNode (24 -> 32 bytes); cancel
+// reads that node anyway (unlink needs prev / next / qty). Prototype in
+// tools/index_proto: AAPL index replay 59.5 -> 29.9 cycles/op.
+// Everything else is identical to v12; v12's description follows.
+//
+// v12: v11 with the per-op dispatch owned by the book (apply(op), picked up by
+// lob::apply in every harness) and the inlining of the whole hot path pinned:
+// apply, push, add, rest, alloc_node, cancel and erase are always_inline, so
+// the harness's loop contains the complete push / cancel path with no call
+// (v11: push -> rest -> alloc_node were three out-of-line calls, 36 push/pop
+// + 15 stack accesses on the 236-instruction push path; cancel was inlined
+// only because the replay caller allows a higher inline threshold). Cold
+// paths are explicitly out of line: match (crossing pushes), modify, the
+// fallback-map level paths and anchoring. No algorithmic change; v11's
+// description follows.
+//
+// v11: v10 with slot_of() computed without a div. v10 did, per op (push in
+// rest(), cancel in erase()): d = price - base; d < 0? d % tick? d / tick, one
+// 32/64-bit div on the path to the level's address. v11 precomputes the
+// modular inverse of tick's odd part (ExactDiv) and computes
+//   s = rotr((price - base) * inv, ctz(tick)),  on grid <=> s < kSlots
+// (one multiply and one rotate; the three range / divisibility checks fold
+// into that single compare). Everything else is identical to v10; v10's
+// description follows.
+//
+// v10: v9 with one index probe per key and operation (v7's change, redone on
+// v9 with the inlining kept): push reserves the order's slot with try_emplace
+// (which is also the duplicate-id check) and fills it when the order rests, or
+// erases it through the iterator when the order fully fills; a repricing
+// modify keeps the slot it found instead of erase + emplace. Iterators stay
+// valid across match(): it only erases other keys, and
+// boost::unordered_flat_map erase never moves elements. v7 lost its gain
+// because push (now holding the insert path) stopped being inlined into the
+// caller's loop. Here push is deliberately out of line with add() forced into
+// it, so the call structure matches v9's (see push()).
+// Everything else is identical to v9; v9's description follows.
+//
+// v9: v8 without the side dispatch on the common path. v8's add() branched on
+// `side` to call match<Buy> / match<Sell> (40% mispredicted on AAPL: the side
+// of consecutive pushes is random). Most pushes on real data do not cross, so
+// add() first asks may_cross(), computed without branching on side:
+//   - the bid bitmap is stored mirrored (bit s ^ (kSlots - 1) marks slot s),
+//     so the best opposite slot is min() of either bitmap; side only selects
+//     the bitmap and the mirror mask (cmov)
+//   - the comparison against the limit is sign-normalised
+//   - a non-empty opposite fallback map conservatively counts as "may cross"
+// Only pushes that may cross take the original match<Side> dispatch, so the
+// remaining side branch sits behind a branch that is almost never taken on
+// ITCH data. Everything else is identical to v8; v8's description follows.
+//
+// v8: v4 without the data-dependent branches that cachegrind's branch
+// simulation ranked high in our own code (v4 on AAPL):
+//   - unlink: "is the order the head / the tail of its level" (24% of all
+//     mispredicts) -> select the link to patch (neighbour node or Level
+//     head/tail) with __builtin_unpredictable so clang emits cmov, then store
+//   - push_back: "was the level empty" -> same select-then-store
+//   - rest: "was the level empty" before setting its bitmap bit (9%) -> set
+//     unconditionally (HierBitmap::set is idempotent; its own early exit only
+//     depends on the whole 64-slot word being empty)
+//   - erase: "did the level become empty" before clearing its bit -> clear_if
+//     (removing unlink's branches had made this one unpredictable: it was
+//     correlated with them in the branch history)
+// Everything else is identical to v4; v4's description follows.
+//
+// v4: v3 with Loc packed from 24 to 16 bytes (price, node, side), so each
+// flat_map slot (pair<const OrderId, Loc>) shrinks from 32 to 24 bytes.
+// Everything else is identical to v3; v3's description follows.
+//
+// v3: v2 with the price levels moved from std::map into a tick-indexed array.
+//
+//   grid_       : Level[2^WindowBits], one slot per tick, shared by both sides
+//                 (a price can rest on one side only: the book never crosses)
+//   bid/ask bits: one n-level 64-ary HierBitmap per side marking non-empty
+//                 slots; best bid = max(), best ask = min() via clz/ctz
+//   window      : anchored once, centred on the first on-grid resting price
+//                 (no look-ahead); slot = (price - base) / tick
+//   fallback    : prices off the tick grid or outside the window use the v2
+//                 std::map levels unchanged; best price = better of the two
+//   memory      : grid + bitmaps are one HugeBuffer (2 MiB pages if possible,
+//                 pre-faulted at construction, outside any measurement)
+// Order nodes, the free list and the flat_map index are unchanged from v2.
+
+#include <lob/book_concept.hpp>
+#include <lob/book_config.hpp>
+#include <lob/events.hpp>
+#include <lob/mem/huge_buffer.hpp>
+#include <lob/types.hpp>
+#include <lob/v3/hier_bitmap.hpp>
+#include <lob/v11/exact_div.hpp>
+
+#include <algorithm>
+#include <cstdint>
+#include <format>
+#include <functional>
+#include <limits>
+#include <map>
+#include <memory>
+#include <new>
+#include <optional>
+#include <stdexcept>
+#include <string>
+#include <string_view>
+#include <utility>
+#include <vector>
+
+#include <lob/v19/order_table.hpp>
+
+namespace lob::v19 {
+
+template <EventSink Sink, unsigned WindowBits = 16>
+class BookT {
+ public:
+  static constexpr std::string_view name = "v19";
+
+  struct OrderView {
+    Side side;
+    Price price;
+    Qty qty;
+  };
+
+  explicit BookT(Sink& sink) : BookT(sink, BookConfig{}) {}
+
+  BookT(Sink& sink, const BookConfig& cfg)
+      : sink_(sink),
+        buf_(kSlots * sizeof(Level) + 2 * Bitmap::kTotalWords * sizeof(std::uint64_t)),
+        tick_(cfg.tick) {
+    if (tick_ < 1) throw std::invalid_argument("v19: tick must be >= 1");
+    // ExactDiv's "quotient < n" test needs n * tick <= 2^64
+    if (static_cast<std::uint64_t>(tick_) > std::numeric_limits<std::uint64_t>::max() / kSlots)
+      throw std::invalid_argument("v19: tick too large for the grid window");
+    slot_div_ = v11::ExactDiv(static_cast<std::uint64_t>(tick_));
+    grid_ = static_cast<Level*>(buf_.data());
+    std::uninitialized_default_construct_n(grid_, kSlots);
+    auto* words = reinterpret_cast<std::uint64_t*>(grid_ + kSlots);  // zero-filled by the kernel
+    bid_bits_ = Bitmap(words);
+    ask_bits_ = Bitmap(words + Bitmap::kTotalWords);
+  }
+
+  // the book's own per-op dispatch (see lob::apply); everything on the push and
+  // cancel paths is always_inline into it, so the harness loop has no calls
+  [[gnu::always_inline]] void apply(const Op& op) {
+    switch (op.type) {
+      case OpType::Push:
+        return push(op.id, op.side, op.price, op.qty);
+      case OpType::Cancel:
+        return cancel(op.id);
+      case OpType::Modify:
+        return modify(op.id, op.price, op.qty);
+    }
+    std::unreachable();
+  }
+
+  [[gnu::always_inline]] void push(OrderId id, Side side, Price price, Qty qty) {
+    if (qty == 0) return reject(id, OpType::Push, RejectReason::InvalidQty);
+    if (price <= 0) return reject(id, OpType::Push, RejectReason::InvalidPrice);
+    bool inserted = false;
+    const std::uint32_t slot = table_.try_insert(id, inserted);  // the only probe for this id
+    if (table_.grew()) [[unlikely]]
+      relink_after_grow();
+    if (!inserted) return reject(id, OpType::Push, RejectReason::DuplicateId);
+    add(id, side, price, qty, slot);
+  }
+
+  [[gnu::always_inline]] void cancel(OrderId id) {
+    const std::uint32_t r = table_.find(id);
+    if (r == kNil) return reject(id, OpType::Cancel, RejectReason::UnknownId);
+    const Qty remaining = table_.node(r).qty;
+    remove_from_level(r, id);
+    table_.erase(r);
+    sink_.on(Cancelled{id, remaining});
+  }
+
+  [[gnu::noinline]] void modify(OrderId id, Price price, Qty qty) {  // 1% of ITCH ops
+    const std::uint32_t r = table_.find(id);
+    if (r == kNil) return reject(id, OpType::Modify, RejectReason::UnknownId);
+    if (qty == 0) return reject(id, OpType::Modify, RejectReason::InvalidQty);
+    if (price <= 0) return reject(id, OpType::Modify, RejectReason::InvalidPrice);
+
+    const Loc loc = loc_of(r, id);
+    OrderNode& node = table_.node(r);
+    if (price == loc.price && qty <= node.qty) {  // reduce: keep priority (no level aggregate to adjust)
+      node.qty = qty;
+      sink_.on(Reduced{id, qty});
+      return;
+    }
+    const Side side = loc.side;
+    const Qty old_qty = node.qty;
+    remove_from_level(r, id);  // keep the table slot: add() refills or erases it
+    sink_.on(Cancelled{id, old_qty});
+    add(id, side, price, qty, r);
+  }
+
+  [[nodiscard]] auto best_bid() const -> std::optional<Price> {
+    std::optional<Price> best;
+    if (!bid_bits_.empty()) best = price_of(bid_bits_.min() ^ kMirror);
+    if (!bids_.empty() && (!best || bids_.begin()->first > *best)) best = bids_.begin()->first;
+    return best;
+  }
+  [[nodiscard]] auto best_ask() const -> std::optional<Price> {
+    std::optional<Price> best;
+    if (!ask_bits_.empty()) best = price_of(ask_bits_.min());
+    if (!asks_.empty() && (!best || asks_.begin()->first < *best)) best = asks_.begin()->first;
+    return best;
+  }
+  [[nodiscard]] auto order_count() const -> std::size_t { return table_.size(); }
+
+  [[nodiscard]] auto find(OrderId id) const -> std::optional<OrderView> {
+    const std::uint32_t r = table_.find(id);
+    if (r == kNil) return std::nullopt;
+    const Loc loc = loc_of(r, id);
+    return OrderView{loc.side, loc.price, table_.node(r).qty};
+  }
+
+  [[nodiscard]] auto levels(Side side) const -> std::vector<LevelSnapshot> {
+    std::vector<LevelSnapshot> out;
+    const Bitmap& bits = side == Side::Buy ? bid_bits_ : ask_bits_;
+    bits.for_each([&](std::uint32_t b) {
+      const std::uint32_t s = b ^ mirror(side);
+      out.push_back(snapshot(price_of(s), grid_[s]));
+    });
+    auto collect = [&](const auto& levels) {
+      for (const auto& [price, level] : levels) out.push_back(snapshot(price, level));
+    };
+    if (side == Side::Buy)
+      collect(bids_);
+    else
+      collect(asks_);
+    if (side == Side::Buy)
+      std::ranges::sort(out, std::greater<>{}, &LevelSnapshot::price);
+    else
+      std::ranges::sort(out, std::less<>{}, &LevelSnapshot::price);
+    return out;
+  }
+
+  void check_invariants() const {
+    std::size_t orders = 0;
+    auto check_level = [&](const Level& level, Price price, Side side) {
+      if (level.head == kNil) fail(std::format("empty level {} on {}", price, to_string(side)));
+      std::uint32_t prev = kNil;
+      for (std::uint32_t i = level.head; i != kNil; prev = i, i = table_.node(i).next) {
+        const OrderNode& o = table_.node(i);
+        const OrderId oid = table_.id_of(i);
+        if (o.prev != prev) fail(std::format("node {} (order {}) has a broken prev link", i, oid));
+        if (o.qty == 0) fail(std::format("order {} has qty 0", oid));
+        if (table_.find(oid) != i) fail(std::format("table lookup of order {} does not return its node", oid));
+        const Loc loc = loc_of(i, oid);
+        if (loc.side != side || loc.price != price) fail(std::format("order {} has a stale price / side / slot", oid));
+        ++orders;
+      }
+      if (prev != level.tail) fail(std::format("level {} tail {} != last node {}", price, level.tail, prev));
+    };
+    // grid levels: every marked slot is non-empty; unmarked non-empty slots would
+    // hold orders that are never visited, which the order count below catches
+    for (Side side : {Side::Buy, Side::Sell}) {
+      const Bitmap& bits = side == Side::Buy ? bid_bits_ : ask_bits_;
+      if (!bits.consistent()) fail(std::format("{} bitmap summary levels inconsistent", to_string(side)));
+      bits.for_each([&](std::uint32_t b) {
+        const std::uint32_t s = b ^ mirror(side);
+        check_level(grid_[s], price_of(s), side);
+      });
+    }
+    bid_bits_.for_each([&](std::uint32_t b) {
+      if (ask_bits_.test(b ^ kMirror)) fail(std::format("slot {} marked on both sides", b ^ kMirror));
+    });
+    // fallback levels must hold exactly the prices the grid cannot
+    auto check_map = [&](const auto& levels, Side side) {
+      for (const auto& [price, level] : levels) {
+        if (slot_of(price) != kNoSlot) fail(std::format("price {} is on the grid but stored in the map", price));
+        check_level(level, price, side);
+      }
+    };
+    check_map(bids_, Side::Buy);
+    check_map(asks_, Side::Sell);
+    const Price want_buy = asks_.empty() ? kNoMapLevel : asks_.begin()->first;
+    const Price want_sell = bids_.empty() ? kNoMapLevel : -bids_.begin()->first;
+    if (taker_map_best_[0] != want_buy || taker_map_best_[1] != want_sell)
+      fail(std::format("cached map best {}/{} != {}/{}", taker_map_best_[0], taker_map_best_[1], want_buy, want_sell));
+    if (orders != table_.size()) fail(std::format("table size {} != orders on book {}", table_.size(), orders));
+    std::size_t off_grid = 0;
+    for (const auto& [price, level] : bids_) off_grid += snapshot(price, level).order_count;
+    for (const auto& [price, level] : asks_) off_grid += snapshot(price, level).order_count;
+    if (off_grid != off_price_.size())
+      fail(std::format("{} off-grid orders but {} off-grid prices kept", off_grid, off_price_.size()));
+    const auto bid = best_bid();
+    const auto ask = best_ask();
+    if (bid && ask && *bid >= *ask) fail(std::format("crossed book: bid {} >= ask {}", *bid, *ask));
+  }
+
+  // not part of the OrderBook concept; printed by `book replay`
+  [[nodiscard]] auto memory_info() const -> std::string {
+    return std::format("v19 grid: {} slots x {} B + 2 x {}-level bitmap = {} B mapped, pages={} huge_backed={} B, "
+                       "tick={} base={} fallback_levels={} order table: {} buckets, {} B",
+                       kSlots, sizeof(Level), Bitmap::kDepth, buf_.size(), mem::to_string(buf_.mode()),
+                       buf_.huge_bytes(), tick_, anchored_ ? std::format("{}", base_) : std::string("unset"),
+                       bids_.size() + asks_.size(), table_.buckets(), table_.bytes());
+  }
+
+ private:
+  static constexpr std::uint32_t kNil = std::numeric_limits<std::uint32_t>::max();
+  static constexpr std::uint32_t kNoSlot = std::numeric_limits<std::uint32_t>::max();
+  static constexpr std::uint32_t kSlots = std::uint32_t{1} << WindowBits;
+  using Bitmap = v3::HierBitmap<WindowBits>;
+  // bid bitmap bit = slot ^ kMirror (= kSlots - 1 - slot): best bid is min() like best ask
+  static constexpr std::uint32_t kMirror = kSlots - 1;
+  static constexpr auto mirror(Side side) -> std::uint32_t { return side == Side::Buy ? kMirror : 0; }
+
+  using OrderNode = v19::OrderNode;  // {qty, next, prev, where}, stored in the order table
+  static constexpr std::uint32_t kSideBit = std::uint32_t{1} << 31;
+  static constexpr std::uint32_t kOffGrid = kSideBit - 1;  // also the slot mask
+  static_assert(kSlots <= kOffGrid);
+  static constexpr auto where_of(std::uint32_t slot, Side side) -> std::uint32_t {
+    return (slot == kNoSlot ? kOffGrid : slot) | (side == Side::Sell ? kSideBit : 0);
+  }
+  static constexpr auto slot_in(std::uint32_t where) -> std::uint32_t { return where & kOffGrid; }
+  static constexpr auto side_in(std::uint32_t where) -> Side { return where & kSideBit ? Side::Sell : Side::Buy; }
+  static_assert(sizeof(OrderNode) <= std::hardware_destructive_interference_size / 2,
+                "keep several order nodes per cache line");
+
+  struct Level {  // v17: no aggregates (snapshots walk the list)
+    std::uint32_t head = kNil;
+    std::uint32_t tail = kNil;
+  };
+  static_assert(sizeof(Level) == 8);
+  using Bids = std::map<Price, Level, std::greater<>>;
+  using Asks = std::map<Price, Level, std::less<>>;
+  struct Loc {  // where an order rests; built from its node (no longer stored in the index)
+    Price price;
+    std::uint32_t node;
+    Side side;
+  };
+  [[nodiscard]] auto loc_of(std::uint32_t r, OrderId id) const -> Loc {
+    const std::uint32_t w = table_.node(r).where;
+    const Price price = slot_in(w) != kOffGrid ? price_of(slot_in(w)) : off_price_.at(id);
+    return {price, r, side_in(w)};
+  }
+
+  [[noreturn]] static void fail(const std::string& what) { throw std::logic_error("v19 invariant: " + what); }
+
+  void reject(OrderId id, OpType op, RejectReason reason) { sink_.on(Rejected{id, op, reason}); }
+
+  // ---- price grid ---------------------------------------------------------------
+  [[nodiscard]] auto slot_of(Price price) const -> std::uint32_t {
+    if (!anchored_) return kNoSlot;
+    // price on the grid <=> price - base is a multiple of tick in [0, kSlots * tick)
+    // <=> quotient < kSlots (a negative difference wraps to a huge unsigned value,
+    // which ExactDiv also maps to >= 2^64 / tick)
+    const std::uint64_t s =
+        slot_div_.quotient(static_cast<std::uint64_t>(price) - static_cast<std::uint64_t>(base_));
+    return s < kSlots ? static_cast<std::uint32_t>(s) : kNoSlot;
+  }
+  [[nodiscard]] auto price_of(std::uint32_t slot) const -> Price { return base_ + static_cast<Price>(slot) * tick_; }
+
+  void anchor(Price price) {  // centre the window on the first on-grid resting price
+    base_ = price - static_cast<Price>(kSlots / 2) * tick_;
+    anchored_ = true;
+  }
+
+  // Best fallback-map price seen by a taker of each side, sign-normalised like
+  // may_cross(): [Buy] = lowest ask, [Sell] = -highest bid; kNoMapLevel when the
+  // map is empty. Refreshed on every (cold) change of the maps.
+  static constexpr Price kNoMapLevel = std::numeric_limits<Price>::max();
+  void refresh_map_best() {
+    taker_map_best_[0] = asks_.empty() ? kNoMapLevel : asks_.begin()->first;
+    taker_map_best_[1] = bids_.empty() ? kNoMapLevel : -bids_.begin()->first;
+  }
+
+  // snapshot of one level: order count and total quantity by walking its list
+  [[nodiscard]] auto snapshot(Price price, const Level& level) const -> LevelSnapshot {
+    std::uint64_t total = 0;
+    std::uint32_t n = 0;
+    for (std::uint32_t i = level.head; i != kNil; i = table_.node(i).next) {
+      total += table_.node(i).qty;
+      ++n;
+    }
+    return {price, total, n};
+  }
+
+  // after the table grew: node references moved; the table fixed the nodes'
+  // own links, the level heads / tails are fixed here (cold, warm-up only)
+  [[gnu::noinline]] void relink_after_grow() {
+    auto fix = [&](Level& level) {
+      level.head = table_.remap(level.head);
+      level.tail = table_.remap(level.tail);
+    };
+    for (Side side : {Side::Buy, Side::Sell}) {
+      const Bitmap& bits = side == Side::Buy ? bid_bits_ : ask_bits_;
+      bits.for_each([&](std::uint32_t b) { fix(grid_[b ^ mirror(side)]); });
+    }
+    for (auto& [price, level] : bids_) fix(level);
+    for (auto& [price, level] : asks_) fix(level);
+    table_.clear_remap();
+  }
+
+  // ---- level list ---------------------------------------------------------------
+  // The link to patch is either a neighbour node's field or the Level's
+  // head/tail. Select its address branch-free (clang turns an unpredictable
+  // ternary into cmov), then store unconditionally. kNil indexes are replaced
+  // by 0 before forming the node address so no out-of-range pointer is formed
+  // (the pool is never empty here: node i exists).
+  [[gnu::always_inline]] void push_back(Level& level, std::uint32_t i) {
+    const std::uint32_t tail = level.tail;
+    const bool has_tail = __builtin_unpredictable(tail != kNil);
+    // address first, then one select: with node()'s own base select nested in
+    // the ternary, clang emitted a branch here (27% mispredicted on AAPL)
+    std::uint32_t* const tail_next = &table_.node(has_tail ? tail : 0).next;
+    std::uint32_t* link = has_tail ? tail_next : &level.head;
+    *link = i;
+    table_.node(i).prev = tail;
+    table_.node(i).next = kNil;
+    level.tail = i;
+  }
+
+  [[gnu::always_inline]] void unlink(Level& level, std::uint32_t i) {
+    const OrderNode& n = table_.node(i);
+    const std::uint32_t prev = n.prev;
+    const std::uint32_t next = n.next;
+    const bool has_prev = __builtin_unpredictable(prev != kNil);
+    const bool has_next = __builtin_unpredictable(next != kNil);
+    std::uint32_t* to_next = has_prev ? &table_.node(has_prev ? prev : 0).next : &level.head;
+    std::uint32_t* to_prev = has_next ? &table_.node(has_next ? next : 0).prev : &level.tail;
+    *to_next = next;
+    *to_prev = prev;
+  }
+
+  // false => match() would consume nothing (no opposite level at or through the
+  // limit). Prices are normalised by the taker's sign (sell side negated) so
+  // "crosses" is `best <= limit` for both sides; the only data-dependent branch
+  // left is "opposite grid empty", which is rare.
+  [[nodiscard]] auto may_cross(Side side, Price limit) const -> bool {
+    const auto t = static_cast<std::uint32_t>(side);          // Buy = 0, Sell = 1
+    const Price sign = 1 - 2 * static_cast<Price>(t);
+    const std::uint32_t opp_mirror = kMirror & (0U - t);       // bids are mirrored
+    const Bitmap& opp = __builtin_unpredictable(t != 0) ? bid_bits_ : ask_bits_;
+    Price best = taker_map_best_[t];  // already normalised; sentinel when the map is empty
+    if (!opp.empty()) [[likely]]
+      best = std::min(best, sign * price_of(opp.min() ^ opp_mirror));
+    return best <= sign * limit;
+  }
+
+  // slot: this order's table entry (just reserved by push, or kept by modify).
+  // match() only erases other entries, which never moves anything, so slot stays valid.
+  [[gnu::always_inline]] void add(OrderId id, Side side, Price price, Qty qty, std::uint32_t slot) {
+    if (!may_cross(side, price)) [[likely]] return rest(id, side, price, qty, slot);
+    if (side == Side::Buy)
+      qty = match<Side::Buy>(id, price, qty);
+    else
+      qty = match<Side::Sell>(id, price, qty);
+    if (qty == 0) {
+      table_.erase(slot);  // fully filled: never rests
+      return;
+    }
+    rest(id, side, price, qty, slot);
+  }
+
+  // Consume opposite levels best-first; the best level is the better of the
+  // grid's (bitmap min/max) and the fallback map's first entry.
+  template <Side TakerSide>
+  [[gnu::noinline]] auto match(OrderId taker, Price limit, Qty qty) -> Qty {  // only pushes that may cross
+    constexpr bool buy = TakerSide == Side::Buy;
+    Bitmap& opp_bits = buy ? ask_bits_ : bid_bits_;
+    constexpr std::uint32_t opp_mirror = buy ? 0 : kMirror;
+    auto& opp_map = [this]() -> auto& {
+      if constexpr (buy)
+        return asks_;
+      else
+        return bids_;
+    }();
+    while (qty > 0) {
+      const bool have_grid = !opp_bits.empty();
+      const bool have_map = !opp_map.empty();
+      if (!have_grid && !have_map) break;
+      std::uint32_t slot = kNoSlot;
+      Price price{};
+      if (have_grid) {
+        slot = opp_bits.min() ^ opp_mirror;  // best bid = max slot = min mirrored bit
+        price = price_of(slot);
+      }
+      const bool use_map =
+          have_map && (!have_grid || (buy ? opp_map.begin()->first < price : opp_map.begin()->first > price));
+      if (use_map) price = opp_map.begin()->first;
+      if (buy ? price > limit : price < limit) break;
+      Level& level = use_map ? opp_map.begin()->second : grid_[slot];
+      while (qty > 0 && level.head != kNil) {
+        const std::uint32_t head = level.head;
+        OrderNode& maker = table_.node(head);
+        const Qty fill = std::min(qty, maker.qty);
+        const OrderId maker_id = table_.id_of(head);
+        sink_.on(Trade{taker, maker_id, price, fill});
+        qty -= fill;
+        maker.qty -= fill;
+        if (maker.qty == 0) {
+          unlink(level, head);
+          if (use_map) off_price_.erase(maker_id);
+          table_.erase(head);
+        }
+      }
+      if (level.head == kNil) {
+        if (use_map) {
+          opp_map.erase(opp_map.begin());
+          refresh_map_best();
+        } else
+          opp_bits.clear(slot ^ opp_mirror);
+      }
+    }
+    return qty;
+  }
+
+  // slot: the order's table entry; its node is filled here
+  [[gnu::always_inline]] void rest(OrderId id, Side side, Price price, Qty qty, std::uint32_t slot) {
+    if (!anchored_) anchor_if_on_tick(price);
+    const std::uint32_t s = slot_of(price);
+    table_.node(slot) = OrderNode{qty, kNil, kNil, where_of(s, side)};
+    Level* level = nullptr;
+    if (s != kNoSlot) {
+      level = &grid_[s];
+      (side == Side::Buy ? bid_bits_ : ask_bits_).set(s ^ mirror(side));  // idempotent: no "was it empty" branch
+    } else {
+      level = off_grid_level(side, price, id);
+    }
+    push_back(*level, slot);
+    sink_.on(Rested{id, side, price, qty});
+  }
+
+  // modify's half of erase(): unlink the order from its level (grid or fallback
+  // map) and free its node, keeping the index slot. erase() keeps v9's own copy
+  // of this code so the cancel path is what v9 inlines.
+  // unlink order node i from its level (grid or fallback map) and free it; the
+  // grid slot and side come from the hot node, the level line is only stored to
+  // (the table slot itself is freed, or kept, by the caller)
+  [[gnu::always_inline]] void remove_from_level(std::uint32_t i, OrderId id) {
+    const OrderNode& n = table_.node(i);
+    const std::uint32_t s = slot_in(n.where);
+    const Side side = side_in(n.where);
+    if (s != kOffGrid) {
+      // the level empties iff the order is alone in it (no prev and no next;
+      // kNil is all ones): decided from the node, so the level line is not read
+      const bool emptied = (n.prev & n.next) == kNil;
+      unlink(grid_[s], i);
+      (side == Side::Buy ? bid_bits_ : ask_bits_).clear_if(s ^ mirror(side), emptied);
+    } else {
+      unlink_off_grid(loc_of(i, id), id);
+    }
+  }
+
+  // ---- cold paths (out of line on purpose) --------------------------------------
+  [[gnu::noinline]] auto off_grid_level(Side side, Price price, OrderId id) -> Level* {
+    Level* level = side == Side::Buy ? &bids_[price] : &asks_[price];
+    refresh_map_best();
+    off_price_[id] = price;
+    return level;
+  }
+
+  // unlink an order resting on a fallback-map level and free its node
+  [[gnu::noinline]] void unlink_off_grid(const Loc& loc, OrderId id) {
+    off_price_.erase(id);
+    auto remove_from = [&](auto& levels) {
+      auto level_it = levels.find(loc.price);
+      Level& level = level_it->second;
+      unlink(level, loc.node);
+      if (level.head == kNil) {
+        levels.erase(level_it);
+        refresh_map_best();
+      }
+    };
+    if (loc.side == Side::Buy)
+      remove_from(bids_);
+    else
+      remove_from(asks_);
+  }
+
+  [[gnu::noinline]] void anchor_if_on_tick(Price price) {
+    if (static_cast<std::uint64_t>(price) % static_cast<std::uint64_t>(tick_) == 0) anchor(price);
+  }
+
+  Sink& sink_;
+  mem::HugeBuffer buf_;  // grid_ + both bitmaps
+  Level* grid_ = nullptr;
+  Bitmap bid_bits_;
+  Bitmap ask_bits_;
+  Price tick_;
+  v11::ExactDiv slot_div_;  // division by tick_ for slot_of()
+  Price base_ = 0;
+  bool anchored_ = false;
+  Bids bids_;  // fallback: off-grid / out-of-window prices
+  Asks asks_;
+  Price taker_map_best_[2] = {kNoMapLevel, kNoMapLevel};
+  OrderTable table_;  // order id -> node, nodes stored in the table
+  boost::unordered_flat_map<OrderId, Price> off_price_;  // price of each off-grid order (cold)
+};
+
+template <class Sink>
+using Book = BookT<Sink>;
+
+static_assert(OrderBook<Book<RecordingSink>>);
+static_assert(OrderBook<Book<ChecksumSink>>);
+
+}  // namespace lob::v19
