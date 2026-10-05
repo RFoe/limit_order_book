@@ -1,0 +1,12 @@
+# workload=data/itch12302019_QQQ.ops rounds=5 tsc_ghz=1.1904 timer_overhead_cycles=58
+version,class,count,p50,p90,p99,p99.9,p99.99,max
+# v18    tail > all-p99 (254 cycles), share of tail (share of class): push_rest 49.7% (1.01%) cancel 47.6% (0.97%) modify 2.7% (1.64%)
+v18,all,12416100,149,165,254,500,32412,913727
+v18,push_rest,6105480,157,165,256,475,32484,589097
+v18,cancel,6105480,146,165,252,517,32494,435943
+v18,modify,205140,138,149,292,676,28556,913727
+# v19    tail > all-p99 (279 cycles), share of tail (share of class): push_rest 56.8% (1.13%) cancel 40.9% (0.81%) modify 2.4% (1.40%)
+v19,all,12416100,159,196,279,527,19941,2165139
+v19,push_rest,6105480,157,173,286,514,19305,2165139
+v19,cancel,6105480,167,203,269,527,21316,278318
+v19,modify,205140,144,157,312,756,18272,335714

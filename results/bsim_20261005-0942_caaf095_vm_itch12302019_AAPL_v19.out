@@ -1,0 +1,1460 @@
+cmd: build/profile/book replay --workload data/itch12302019_AAPL.ops --version v19
+events: Ir Bc Bcm Bi Bim
+fl=./elf/../sysdeps/generic/dl-new-hash.h
+fn=_dl_lookup_symbol_x
+69 2 0 0 0 0
+70 4 0 0 0 0
+74 15 0 0 0 0
+77 30 15 7 0 0
+80 14 0 0 0 0
+81 28 14 1 0 0
+87 1 0 0 0 0
+88 1 0 0 0 0
+89 2 0 0 0 0
+90 1 0 0 0 0
+99 13 0 0 0 0
+101 13 0 0 0 0
+102 26 0 0 0 0
+104 13 0 0 0 0
+105 13 0 0 0 0
+fl=./elf/../sysdeps/generic/dl-protected.h
+fn=do_lookup_x
+29 8 2 0 0 0
+fl=./elf/../sysdeps/generic/ldsodefs.h
+fn=do_lookup_x
+139 4 0 0 0 0
+140 6 0 0 0 0
+fl=./elf/../sysdeps/x86_64/dl-machine.h
+fn=_dl_fixup
+234 2 0 0 0 0
+fl=./elf/../sysdeps/x86_64/dl-runtime.h
+fn=_dl_fixup
+28 2 0 0 0 0
+fl=./elf/../sysdeps/x86_64/dl-trampoline.h
+fn=_dl_runtime_resolve_xsave
+71 2 0 0 0 0
+76 2 0 0 0 0
+79 2 0 0 0 0
+81 2 0 0 0 0
+91 2 0 0 0 0
+97 2 0 0 0 0
+98 2 0 0 0 0
+99 2 0 0 0 0
+100 2 0 0 0 0
+101 2 0 0 0 0
+102 2 0 0 0 0
+103 2 0 0 0 0
+107 2 0 0 0 0
+108 2 0 0 0 0
+111 2 0 0 0 0
+112 2 0 0 0 0
+114 2 0 0 0 0
+115 2 0 0 0 0
+116 2 0 0 0 0
+117 2 0 0 0 0
+118 2 0 0 0 0
+119 2 0 0 0 0
+121 2 0 0 0 0
+128 2 0 0 0 0
+129 2 0 0 0 0
+130 2 0 0 0 0
+131 2 0 0 0 0
+136 2 0 0 0 0
+137 2 0 0 0 0
+138 2 0 0 0 0
+140 2 0 0 0 0
+141 2 0 0 0 0
+142 2 0 0 0 0
+143 2 0 0 0 0
+144 2 0 0 0 0
+145 2 0 0 0 0
+146 2 0 0 0 0
+148 2 0 0 0 0
+150 2 0 0 0 0
+154 2 0 0 0 0
+156 2 0 0 2 2
+fl=./elf/./elf/dl-lookup.c
+fn=_dl_lookup_symbol_x
+772 26 0 0 0 0
+774 4 0 0 0 0
+775 8 0 0 0 0
+778 2 0 0 0 0
+782 4 2 2 0 0
+785 4 2 0 0 0
+787 4 0 0 0 0
+791 28 2 0 0 0
+792 34 2 0 0 0
+797 10 2 0 0 0
+816 2 0 0 0 0
+820 4 0 0 0 0
+821 14 4 0 0 0
+828 2 0 0 0 0
+856 8 2 0 0 0
+870 6 2 0 0 0
+873 4 2 0 0 0
+890 8 0 0 0 0
+892 18 0 0 0 0
+fn=check_match
+70 30 0 0 0 0
+73 16 2 0 0 0
+86 10 2 0 0 0
+89 16 4 0 0 0
+93 2 0 0 0 0
+94 4 2 2 0 0
+144 4 2 0 0 0
+146 12 2 2 0 0
+147 8 0 0 0 0
+161 2 0 0 0 0
+162 16 0 0 0 0
+fn=do_lookup_x
+347 28 0 0 0 0
+348 2 0 0 0 0
+353 2 0 0 0 0
+354 2 0 0 0 0
+358 16 0 0 0 0
+361 16 8 0 0 0
+365 20 8 4 0 0
+386 16 8 4 0 0
+390 16 8 4 0 0
+396 24 8 0 0 0
+400 8 0 0 0 0
+401 8 0 0 0 0
+404 40 8 2 0 0
+405 24 0 0 0 0
+408 8 0 0 0 0
+409 16 8 0 0 0
+411 8 0 0 0 0
+412 6 0 0 0 0
+413 16 0 0 0 0
+415 14 0 0 0 0
+416 32 0 0 0 0
+419 56 8 2 0 0
+422 4 0 0 0 0
+423 6 0 0 0 0
+424 4 2 0 0 0
+426 4 0 0 0 0
+429 15 3 1 0 0
+431 6 0 0 0 0
+432 50 0 0 0 0
+433 4 0 0 0 0
+436 6 2 2 0 0
+439 3 1 0 0 0
+461 16 0 0 0 0
+476 4 2 0 0 0
+483 8 2 2 0 0
+487 6 2 2 0 0
+499 4 0 0 0 0
+500 2 0 0 0 0
+501 2 0 0 0 0
+518 18 6 0 0 0
+522 16 0 0 0 0
+fl=./elf/./elf/dl-runtime.c
+fn=_dl_fixup
+46 22 0 0 0 0
+48 10 2 2 0 0
+49 6 0 0 0 0
+54 2 0 0 0 0
+55 8 0 0 0 0
+56 14 0 0 0 0
+58 4 0 0 0 0
+63 4 2 0 0 0
+67 4 2 0 0 0
+69 4 0 0 0 0
+71 6 2 0 0 0
+75 6 0 0 0 0
+76 8 0 0 0 0
+77 6 2 0 0 0
+84 2 0 0 0 0
+85 6 2 2 0 0
+95 22 0 0 0 0
+99 10 2 0 0 0
+109 20 4 0 0 0
+124 8 2 0 0 0
+133 6 2 2 0 0
+159 6 2 0 0 0
+163 16 0 0 0 0
+fl=./malloc/./malloc/arena.c
+fn=_mid_memalign.isra.0
+153 14 7 6 0 0
+fn=free
+153 138 46 23 0 0
+fn=malloc
+153 72 36 18 0 0
+fl=./malloc/./malloc/malloc.c
+fn=_int_free
+1792 28 0 0 0 0
+1992 45 15 0 0 0
+3163 36 0 0 0 0
+3165 72 0 0 0 0
+3166 18 0 0 0 0
+3167 36 0 0 0 0
+4495 322 0 0 0 0
+4499 138 0 0 0 0
+4505 184 46 0 0 0
+4506 92 46 0 0 0
+4510 230 46 2 0 0
+4517 92 0 0 0 0
+4518 276 92 7 0 0
+4521 33 0 0 0 0
+4527 99 33 0 0 0
+4547 165 33 4 0 0
+4550 18 0 0 0 0
+4561 56 28 2 0 0
+4572 60 15 0 0 0
+4574 45 15 0 0 0
+4593 15 0 0 0 0
+4595 15 0 0 0 0
+4596 15 0 0 0 0
+4600 45 0 0 0 0
+4602 30 15 2 0 0
+4606 30 15 2 0 0
+4608 45 0 0 0 0
+4609 15 0 0 0 0
+4628 60 15 2 0 0
+4637 26 13 0 0 0
+4640 26 0 0 0 0
+4643 26 13 0 0 0
+4646 26 0 0 0 0
+4658 263 0 0 0 0
+fn=_int_free_maybe_consolidate
+4770 187 0 0 0 0
+4776 34 17 5 0 0
+4778 20 5 0 0 0
+4781 15 5 4 0 0
+4784 25 5 4 0 0
+4798 187 17 0 0 0
+fn=_int_free_merge_chunk
+1992 45 15 0 0 0
+4665 120 0 0 0 0
+4666 15 0 0 0 0
+4670 90 15 0 0 0
+4673 60 30 8 0 0
+4675 45 0 0 0 0
+4678 45 15 0 0 0
+4681 30 0 0 0 0
+4682 30 15 0 0 0
+4683 30 15 0 0 0
+4689 30 15 8 0 0
+4691 4 0 0 0 0
+4692 4 0 0 0 0
+4693 4 0 0 0 0
+4694 16 4 0 0 0
+4696 8 0 0 0 0
+4701 45 0 0 0 0
+4702 105 0 0 0 0
+4714 30 15 3 0 0
+4720 24 12 6 0 0
+4721 12 0 0 0 0
+4722 12 0 0 0 0
+4724 6 0 0 0 0
+4732 12 0 0 0 0
+4733 48 0 0 0 0
+4734 24 12 2 0 0
+4736 12 0 0 0 0
+4738 24 12 8 0 0
+4740 30 0 0 0 0
+4743 12 0 0 0 0
+4744 12 0 0 0 0
+4746 36 0 0 0 0
+4747 12 0 0 0 0
+4756 3 0 0 0 0
+4757 9 0 0 0 0
+4758 6 0 0 0 0
+fn=_int_malloc
+1326 86 43 0 0 0
+1345 258 43 0 0 0
+1794 43 0 0 0 0
+1985 33 11 4 0 0
+2008 8 2 2 0 0
+2552 42 0 0 0 0
+2553 2 0 0 0 0
+2564 14 7 2 0 0
+2565 15 5 0 0 0
+2568 20 5 0 0 0
+2576 30 0 0 0 0
+2577 10 5 3 0 0
+2589 8 0 0 0 0
+2590 4 0 0 0 0
+2599 24 6 0 0 0
+2605 6 2 0 0 0
+2608 6 2 2 0 0
+2669 6 0 0 0 0
+2677 4 2 0 0 0
+2678 6 0 0 0 0
+2691 6 2 0 0 0
+2693 2 0 0 0 0
+2699 10 0 0 0 0
+2707 4 2 2 0 0
+2709 8 0 0 0 0
+2710 6 2 0 0 0
+2711 2 0 0 0 0
+2712 2 0 0 0 0
+2715 4 2 0 0 0
+2744 14 2 0 0 0
+2746 4 0 0 0 0
+2752 16 4 0 0 0
+2753 12 0 0 0 0
+2921 6 2 0 0 0
+2922 2 0 0 0 0
+2926 2 0 0 0 0
+2930 10 2 2 0 0
+2932 2 0 0 0 0
+2933 2 0 0 0 0
+2934 2 0 0 0 0
+2935 14 0 0 0 0
+2936 4 0 0 0 0
+2938 2 0 0 0 0
+3846 473 0 0 0 0
+3887 86 43 0 0 0
+3914 86 43 9 0 0
+3916 84 0 0 0 0
+3919 21 0 0 0 0
+3921 42 21 2 0 0
+3930 63 0 0 0 0
+3977 44 22 3 0 0
+3979 54 0 0 0 0
+3980 46 0 0 0 0
+3982 69 23 4 0 0
+4039 340 61 19 0 0
+4040 60 20 0 0 0
+4058 129 0 0 0 0
+4059 129 0 0 0 0
+4060 129 43 0 0 0
+4069 72 0 0 0 0
+4070 286 66 13 0 0
+4072 41 0 0 0 0
+4073 82 0 0 0 0
+4074 41 0 0 0 0
+4076 82 41 0 0 0
+4077 123 41 0 0 0
+4079 41 0 0 0 0
+4080 164 41 0 0 0
+4082 164 41 0 0 0
+4084 82 41 0 0 0
+4085 82 41 0 0 0
+4087 82 41 0 0 0
+4098 164 41 13 0 0
+4099 46 23 6 0 0
+4100 36 18 2 0 0
+4101 18 0 0 0 0
+4104 18 0 0 0 0
+4105 18 0 0 0 0
+4106 18 0 0 0 0
+4107 54 0 0 0 0
+4108 54 0 0 0 0
+4109 36 18 0 0 0
+4111 36 0 0 0 0
+4115 144 0 0 0 0
+4117 54 0 0 0 0
+4118 18 0 0 0 0
+4121 18 0 0 0 0
+4122 54 0 0 0 0
+4123 18 0 0 0 0
+4127 23 0 0 0 0
+4128 23 0 0 0 0
+4132 46 23 0 0 0
+4161 48 23 4 0 0
+4163 6 0 0 0 0
+4164 12 0 0 0 0
+4165 3 0 0 0 0
+4169 321 52 13 0 0
+4170 60 0 0 0 0
+4171 20 0 0 0 0
+4174 40 20 8 0 0
+4218 80 0 0 0 0
+4221 161 0 0 0 0
+4222 23 0 0 0 0
+4223 23 0 0 0 0
+4224 23 0 0 0 0
+4225 23 0 0 0 0
+4230 46 0 0 0 0
+4231 46 23 10 0 0
+4240 92 23 8 0 0
+4246 36 18 0 0 0
+4257 75 25 8 0 0
+4259 80 0 0 0 0
+4262 60 20 6 0 0
+4263 26 1 1 0 0
+4266 1 0 0 0 0
+4267 6 1 0 0 0
+4273 2 1 1 0 0
+4278 3 0 0 0 0
+4279 3 0 0 0 0
+4282 4 1 0 0 0
+4291 1 0 0 0 0
+4295 4 0 0 0 0
+4296 2 1 0 0 0
+4299 1 0 0 0 0
+4300 1 0 0 0 0
+4301 1 0 0 0 0
+4302 2 1 1 0 0
+4307 8 0 0 0 0
+4309 3 0 0 0 0
+4310 1 0 0 0 0
+4313 1 0 0 0 0
+4330 24 0 0 0 0
+4331 48 0 0 0 0
+4332 48 0 0 0 0
+4333 48 0 0 0 0
+4334 144 0 0 0 0
+4339 125 32 11 0 0
+4343 92 28 9 0 0
+4346 60 15 7 0 0
+4348 32 0 0 0 0
+4349 16 0 0 0 0
+4353 300 150 52 0 0
+4355 131 0 0 0 0
+4357 262 131 0 0 0
+4361 19 0 0 0 0
+4364 38 19 9 0 0
+4366 40 0 0 0 0
+4367 8 0 0 0 0
+4368 8 0 0 0 0
+4373 44 0 0 0 0
+4376 22 11 0 0 0
+4378 33 0 0 0 0
+4381 33 0 0 0 0
+4384 44 11 0 0 0
+4394 11 0 0 0 0
+4399 44 0 0 0 0
+4400 22 11 0 0 0
+4403 11 0 0 0 0
+4404 11 0 0 0 0
+4405 11 0 0 0 0
+4408 22 11 6 0 0
+4409 4 0 0 0 0
+4410 22 11 0 0 0
+4412 22 0 0 0 0
+4415 88 0 0 0 0
+4417 33 0 0 0 0
+4418 11 0 0 0 0
+4421 11 0 0 0 0
+4443 13 0 0 0 0
+4444 26 0 0 0 0
+4446 26 13 0 0 0
+4449 39 13 5 0 0
+4451 6 0 0 0 0
+4452 12 0 0 0 0
+4453 6 0 0 0 0
+4454 48 0 0 0 0
+4456 12 0 0 0 0
+4459 14 0 0 0 0
+4460 42 0 0 0 0
+4461 14 0 0 0 0
+4466 28 7 2 0 0
+4482 12 5 0 0 0
+4487 516 43 0 0 0
+fn=_int_memalign
+1326 14 7 0 0 0
+1345 56 0 0 0 0
+4714 4 2 2 0 0
+4756 2 0 0 0 0
+4757 6 0 0 0 0
+4758 4 0 0 0 0
+5039 56 0 0 0 0
+5069 28 0 0 0 0
+5071 21 7 0 0 0
+5074 7 0 0 0 0
+5076 28 7 0 0 0
+5083 35 0 0 0 0
+5085 28 7 3 0 0
+5086 1 0 0 0 0
+5089 2 0 0 0 0
+5090 28 0 0 0 0
+5093 14 7 3 0 0
+5095 10 0 0 0 0
+5096 10 0 0 0 0
+5097 5 0 0 0 0
+5101 20 0 0 0 0
+5103 2 0 0 0 0
+5104 10 0 0 0 0
+5105 4 0 0 0 0
+5106 2 0 0 0 0
+5108 18 4 0 0 0
+5113 6 2 0 0 0
+5115 4 0 0 0 0
+5116 2 0 0 0 0
+5117 4 0 0 0 0
+5118 4 2 0 0 0
+5120 2 0 0 0 0
+5121 4 2 2 0 0
+5122 2 0 0 0 0
+5129 2 0 0 0 0
+5130 6 0 0 0 0
+5134 6 0 0 0 0
+5140 2 0 0 0 0
+5141 63 0 0 0 0
+fn=_mid_memalign.isra.0
+1326 14 7 0 0 0
+1345 35 7 0 0 0
+3575 49 0 0 0 0
+3581 14 7 0 0 0
+3585 14 7 4 0 0
+3590 21 7 0 0 0
+3598 21 7 2 0 0
+3615 21 0 0 0 0
+3617 14 7 2 0 0
+3638 14 7 2 0 0
+3640 35 0 0 0 0
+3641 35 7 0 0 0
+3643 14 0 0 0 0
+3662 42 0 0 0 0
+fn=aligned_alloc
+3556 49 0 0 0 0
+3557 14 7 0 0 0
+3564 35 7 0 0 0
+3571 21 0 0 0 0
+3572 21 0 0 0 0
+fn=alloc_perturb
+1985 96 32 0 0 0
+1987 32 0 0 0 0
+fn=free
+3359 350 0 0 0 0
+3363 100 50 0 0 0
+3371 100 0 0 0 0
+3373 50 0 0 0 0
+3375 150 50 7 0 0
+3379 12 4 0 0 0
+3381 16 4 0 0 0
+3383 8 0 0 0 0
+3384 8 0 0 0 0
+3385 4 0 0 0 0
+3388 8 0 0 0 0
+3392 138 46 0 0 0
+3398 138 0 0 0 0
+3401 50 0 0 0 0
+3402 300 0 0 0 0
+fn=malloc
+1326 90 45 1 0 0
+1345 225 45 0 0 0
+3178 18 0 0 0 0
+3182 18 9 0 0 0
+3186 36 0 0 0 0
+3190 18 0 0 0 0
+3191 9 0 0 0 0
+3294 360 0 0 0 0
+3301 90 45 0 0 0
+3311 90 0 0 0 0
+3313 180 45 0 0 0
+3316 90 45 17 0 0
+3318 99 33 12 0 0
+3326 72 36 8 0 0
+3328 144 0 0 0 0
+3329 180 36 0 0 0
+3354 270 0 0 0 0
+fn=munmap_chunk
+3024 8 0 0 0 0
+3025 8 0 0 0 0
+3026 12 0 0 0 0
+3028 8 4 0 0 0
+3030 4 0 0 0 0
+3031 12 0 0 0 0
+3032 4 0 0 0 0
+3038 16 0 0 0 0
+3039 20 4 4 0 0
+3042 4 4 0 0 0
+3043 12 4 0 0 0
+3048 8 0 0 0 0
+3049 4 0 0 0 0
+fn=sysmalloc_mmap.isra.0
+2008 20 5 0 0 0
+2400 30 0 0 0 0
+2413 15 0 0 0 0
+2418 10 5 3 0 0
+2421 50 0 0 0 0
+2424 10 5 0 0 0
+2428 10 5 0 0 0
+2432 20 0 0 0 0
+2448 15 5 0 0 0
+2466 5 0 0 0 0
+2467 15 0 0 0 0
+2471 15 5 0 0 0
+2472 19 7 1 0 0
+2475 15 5 1 0 0
+2476 25 10 0 0 0
+2481 35 0 0 0 0
+fn=unlink_chunk.isra.0
+1608 44 0 0 0 0
+1610 110 22 0 0 0
+1613 44 0 0 0 0
+1614 44 0 0 0 0
+1616 88 44 4 0 0
+1619 22 0 0 0 0
+1620 22 0 0 0 0
+1621 98 40 4 0 0
+1623 36 18 0 0 0
+1624 54 18 0 0 0
+1627 36 18 0 0 0
+1641 18 0 0 0 0
+1642 18 0 0 0 0
+1645 44 0 0 0 0
+fl=./malloc/./malloc/morecore.c
+fn=__glibc_morecore
+25 6 0 0 0 0
+26 4 2 2 0 0
+29 2 0 0 0 0
+30 4 2 0 0 0
+34 4 0 0 0 0
+fl=./misc/../sysdeps/unix/syscall-template.S
+fn=munmap
+117 20 4 0 0 0
+122 4 0 0 0 0
+fl=./misc/../sysdeps/unix/sysv/linux/brk.c
+fn=brk
+36 2 0 0 0 0
+37 4 0 0 0 0
+38 4 2 0 0 0
+44 2 0 0 0 0
+45 2 0 0 0 0
+fl=./misc/../sysdeps/unix/sysv/linux/brk_call.h
+fn=brk
+24 4 0 0 0 0
+fl=./misc/../sysdeps/unix/sysv/linux/mmap64.c
+fn=mmap
+47 35 0 0 0 0
+50 10 5 0 0 0
+53 35 10 4 0 0
+58 30 5 0 0 0
+60 20 0 0 0 0
+fl=./misc/../sysdeps/unix/sysv/linux/setvmaname.c
+fn=__set_vma_name
+33 35 0 0 0 0
+35 25 5 0 0 0
+49 45 5 0 0 0
+fl=./misc/./misc/sbrk.c
+fn=sbrk
+37 16 0 0 0 0
+40 4 0 0 0 0
+43 4 2 2 0 0
+58 4 2 0 0 0
+62 4 2 0 0 0
+66 8 4 1 0 0
+74 6 2 0 0 0
+78 14 0 0 0 0
+fl=./string/../sysdeps/x86_64/multiarch/../multiarch/strcmp-sse2.S
+fn=strcmp
+98 2 0 0 0 0
+131 2 0 0 0 0
+132 2 0 0 0 0
+134 2 0 0 0 0
+135 2 0 0 0 0
+156 2 0 0 0 0
+157 2 2 0 0 0
+158 2 0 0 0 0
+159 2 2 0 0 0
+160 2 0 0 0 0
+161 2 0 0 0 0
+162 2 0 0 0 0
+163 2 0 0 0 0
+180 2 0 0 0 0
+181 2 0 0 0 0
+182 2 0 0 0 0
+183 2 0 0 0 0
+184 2 0 0 0 0
+185 2 0 0 0 0
+186 2 2 1 0 0
+191 1 0 0 0 0
+192 3 0 0 0 0
+201 1 0 0 0 0
+202 1 0 0 0 0
+203 1 0 0 0 0
+204 1 0 0 0 0
+205 1 0 0 0 0
+206 1 0 0 0 0
+207 1 0 0 0 0
+208 1 1 0 0 0
+209 1 1 1 0 0
+214 1 0 0 0 0
+215 1 0 0 0 0
+216 1 0 0 0 0
+217 1 0 0 0 0
+218 1 0 0 0 0
+219 1 0 0 1 1
+1613 1 0 0 0 0
+1614 1 0 0 0 0
+1615 1 0 0 0 0
+1616 1 0 0 0 0
+1617 1 0 0 0 0
+1619 1 0 0 0 0
+1620 1 0 0 0 0
+1621 1 0 0 0 0
+1622 1 0 0 0 0
+1623 1 0 0 0 0
+1624 1 0 0 0 0
+1625 1 1 1 0 0
+2095 1 0 0 0 0
+2096 1 0 0 0 0
+2097 1 0 0 0 0
+2098 1 1 1 0 0
+2104 2 0 0 0 0
+2110 2 0 0 0 0
+2111 2 0 0 0 0
+2119 2 0 0 0 0
+2120 2 0 0 0 0
+fl=./string/../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S
+fn=__memset_avx2_unaligned_erms
+158 9 0 0 0 0
+159 18 0 0 0 0
+164 9 0 0 0 0
+165 9 9 0 0 0
+166 9 0 0 0 0
+167 9 0 0 0 0
+168 9 9 4 0 0
+170 2 0 0 0 0
+171 2 0 0 0 0
+172 4 0 0 0 0
+237 7 0 0 0 0
+238 7 7 3 0 0
+244 3 0 0 0 0
+245 3 0 0 0 0
+257 3 0 0 0 0
+260 3 0 0 0 0
+261 3 3 0 0 0
+273 3 0 0 0 0
+274 3 0 0 0 0
+287 3 0 0 0 0
+288 3 0 0 0 0
+290 3 3 0 0 0
+293 3 0 0 0 0
+296 3 0 0 0 0
+299 23 0 0 0 0
+300 23 0 0 0 0
+301 23 0 0 0 0
+302 23 0 0 0 0
+303 23 0 0 0 0
+304 23 0 0 0 0
+305 26 23 16 0 0
+308 3 0 0 0 0
+309 3 0 0 0 0
+310 3 0 0 0 0
+311 3 0 0 0 0
+314 6 0 0 0 0
+325 4 0 0 0 0
+326 4 0 0 0 0
+327 4 0 0 0 0
+328 61444 61444 16 0 0
+329 4 0 0 0 0
+330 8 0 0 0 0
+fl=/home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/core.hpp
+fn=_ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImlEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSD_9allocatorINSD_4pairIKmlEEEEE22for_all_elements_whileIZNSL_22for_all_elements_whileIZNSL_16for_all_elementsIZNSL_16unchecked_rehashERNS9_ISJ_S8_NS2_16pow2_size_policyESK_EEEUlPSJ_E_EEDTcmclfL1p0_LDnEEcvv_EERKSQ_T_EUlSS_E_EESU_SW_SX_EUlPS8_jSS_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EESW_SX_
+0 23 0 0 0 0
+296 62 0 0 0 0
+297 29 0 0 0 0
+313 2 0 0 0 0
+389 58 0 0 0 0
+849 29 0 0 0 0
+927 116 0 0 0 0
+1033 2 0 0 0 0
+1034 1 0 0 0 0
+1955 29 0 0 0 0
+1961 14 0 0 0 0
+2061 14 0 0 0 0
+2063 4 2 1 0 0
+2064 5 2 1 0 0
+2065 4 0 0 0 0
+2067 64 31 9 0 0
+2069 58 0 0 0 0
+2075 16 0 0 0 0
+2350 29 0 0 0 0
+2373 116 0 0 0 0
+2375 29 29 0 0 0
+2377 116 0 0 0 0
+fn=boost::unordered::detail::foa::table_core<boost::unordered::detail::foa::flat_map_types<unsigned long, long>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::table_arrays, boost::unordered::detail::foa::plain_size_control, boost::hash<unsigned long>, std::__1::equal_to<unsigned long>, std::__1::allocator<std::__1::pair<unsigned long const, long> > >::unchecked_rehash(boost::unordered::detail::foa::table_arrays<std::__1::pair<unsigned long const, long>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::pow2_size_policy, std::__1::allocator<std::__1::pair<unsigned long const, long> > >&)
+0 8 0 0 0 0
+1033 4 0 0 0 0
+1096 4 2 1 0 0
+1098 1 0 0 0 0
+1113 1 0 0 0 0
+1563 24 2 0 0 0
+1811 10 0 0 0 0
+2025 10 0 0 0 0
+2054 2 0 0 0 0
+2288 10 0 0 0 0
+2289 2 0 0 0 0
+2320 4 0 0 0 0
+2321 2 0 0 0 0
+2322 10 0 0 0 0
+fn=boost::unordered::detail::foa::table_locator<boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, std::__1::pair<unsigned long const, long> > boost::unordered::detail::foa::table_core<boost::unordered::detail::foa::flat_map_types<unsigned long, long>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::table_arrays, boost::unordered::detail::foa::plain_size_control, boost::hash<unsigned long>, std::__1::equal_to<unsigned long>, std::__1::allocator<std::__1::pair<unsigned long const, long> > >::unchecked_emplace_with_rehash<boost::unordered::detail::foa::try_emplace_args_t, unsigned long const&>(unsigned long, boost::unordered::detail::foa::try_emplace_args_t&&, unsigned long const&)
+0 32 0 0 0 0
+296 4 0 0 0 0
+297 4 0 0 0 0
+389 6 0 0 0 0
+837 8 0 0 0 0
+842 4 0 0 0 0
+849 2 0 0 0 0
+859 4 0 0 0 0
+927 4 0 0 0 0
+1031 8 0 0 0 0
+1051 4 0 0 0 0
+1057 8 0 0 0 0
+1058 6 0 0 0 0
+1059 2 0 0 0 0
+1066 2 0 0 0 0
+1073 4 2 0 0 0
+1085 2 0 0 0 0
+1113 4 0 0 0 0
+1125 8 0 0 0 0
+1689 2 0 0 0 0
+1983 22 0 0 0 0
+1988 8 0 0 0 0
+1999 4 0 0 0 0
+2000 2 0 0 0 0
+2002 18 0 0 0 0
+2132 36 2 0 0 0
+2373 4 0 0 0 0
+2375 2 2 0 0 0
+2377 10 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::loc_of(unsigned int, unsigned long) const
+0 168 0 0 0 0
+271 84 0 0 0 0
+272 84 0 0 0 0
+336 42 0 0 0 0
+849 294 0 0 0 0
+927 84 0 0 0 0
+1727 84 0 0 0 0
+1729 42 42 0 0 0
+1732 84 0 0 0 0
+1733 42 0 0 0 0
+1737 84 42 2 0 0
+1955 42 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::off_grid_level(lob::Side, long, unsigned long)
+0 661 0 0 0 0
+271 84 0 0 0 0
+272 43 0 0 0 0
+279 42 0 0 0 0
+296 80 0 0 0 0
+297 80 0 0 0 0
+336 42 0 0 0 0
+849 42 0 0 0 0
+927 82 0 0 0 0
+1727 84 0 0 0 0
+1729 42 42 23 0 0
+1732 2 0 0 0 0
+1733 2 0 0 0 0
+1737 2 1 0 0 0
+1743 2 1 0 0 0
+1745 42 42 18 0 0
+1955 42 0 0 0 0
+1970 80 0 0 0 0
+2373 160 0 0 0 0
+2375 40 40 0 0 0
+2377 200 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::unlink_off_grid(lob::v19::BookT<lob::ChecksumSink, 16u>::Loc const&, unsigned long)
+0 168 0 0 0 0
+271 84 0 0 0 0
+272 84 0 0 0 0
+279 126 0 0 0 0
+336 42 0 0 0 0
+404 42 0 0 0 0
+849 294 0 0 0 0
+927 84 0 0 0 0
+1727 84 0 0 0 0
+1729 42 42 0 0 0
+1732 84 0 0 0 0
+1733 42 0 0 0 0
+1737 126 42 2 0 0
+1955 42 0 0 0 0
+2266 294 0 0 0 0
+fn=lob::v19::OrderTable::grow()
+1033 7 0 0 0 0
+fl=/home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/foa/table.hpp
+fn=_ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImlEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSD_9allocatorINSD_4pairIKmlEEEEE22for_all_elements_whileIZNSL_22for_all_elements_whileIZNSL_16for_all_elementsIZNSL_16unchecked_rehashERNS9_ISJ_S8_NS2_16pow2_size_policyESK_EEEUlPSJ_E_EEDTcmclfL1p0_LDnEEcvv_EERKSQ_T_EUlSS_E_EESU_SW_SX_EUlPS8_jSS_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EESW_SX_
+40 29 0 0 0 0
+fn=boost::unordered::detail::foa::table_locator<boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, std::__1::pair<unsigned long const, long> > boost::unordered::detail::foa::table_core<boost::unordered::detail::foa::flat_map_types<unsigned long, long>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::table_arrays, boost::unordered::detail::foa::plain_size_control, boost::hash<unsigned long>, std::__1::equal_to<unsigned long>, std::__1::allocator<std::__1::pair<unsigned long const, long> > >::unchecked_emplace_with_rehash<boost::unordered::detail::foa::try_emplace_args_t, unsigned long const&>(unsigned long, boost::unordered::detail::foa::try_emplace_args_t&&, unsigned long const&)
+0 6 0 0 0 0
+40 4 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::off_grid_level(lob::Side, long, unsigned long)
+0 2 0 0 0 0
+40 40 0 0 0 0
+626 2 0 0 0 0
+640 126 42 2 0 0
+641 40 0 0 0 0
+650 6 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::unlink_off_grid(lob::v19::BookT<lob::ChecksumSink, 16u>::Loc const&, unsigned long)
+0 42 0 0 0 0
+40 42 0 0 0 0
+140 42 0 0 0 0
+fn=lob::v19::OrderTable::grow()
+390 14 7 5 0 0
+fl=/home/wang/git-repositories/vcpkg/installed/x64-linux-clang-libcxx/include/boost/unordered/detail/mulx.hpp
+fn=_ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImlEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSD_9allocatorINSD_4pairIKmlEEEEE22for_all_elements_whileIZNSL_22for_all_elements_whileIZNSL_16for_all_elementsIZNSL_16unchecked_rehashERNS9_ISJ_S8_NS2_16pow2_size_policyESK_EEEUlPSJ_E_EEDTcmclfL1p0_LDnEEcvv_EERKSQ_T_EUlSS_E_EESU_SW_SX_EUlPS8_jSS_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EESW_SX_
+45 29 0 0 0 0
+46 29 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::loc_of(unsigned int, unsigned long) const
+45 42 0 0 0 0
+46 42 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::off_grid_level(lob::Side, long, unsigned long)
+45 84 0 0 0 0
+46 42 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::unlink_off_grid(lob::v19::BookT<lob::ChecksumSink, 16u>::Loc const&, unsigned long)
+45 42 0 0 0 0
+46 42 0 0 0 0
+fl=/home/wang/sources/cxx/book/include/lob/events.hpp
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+92 17723 0 0 0 0
+93 106338 0 0 0 0
+fn=void lob::replay<lob::v19::BookT<lob::ChecksumSink, 16u> >(lob::v19::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)
+0 3182848 0 0 0 0
+92 1591424 0 0 0 0
+93 15914240 0 0 0 0
+fl=/home/wang/sources/cxx/book/include/lob/replay.hpp
+fn=void lob::replay<lob::v19::BookT<lob::ChecksumSink, 16u> >(lob::v19::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)
+0 18 0 0 0 0
+53 1609148 1609148 1 0 0
+57 1 0 0 0 0
+fl=/home/wang/sources/cxx/book/include/lob/v11/exact_div.hpp
+fn=void lob::replay<lob::v19::BookT<lob::ChecksumSink, 16u> >(lob::v19::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)
+37 2387136 0 0 0 0
+fl=/home/wang/sources/cxx/book/include/lob/v19/book.hpp
+fn=auto lob::v19::BookT<lob::ChecksumSink, 16u>::unlink_off_grid(lob::v19::BookT<lob::ChecksumSink, 16u>::Loc const&, unsigned long)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v19::BookT<lob::ChecksumSink, 16u>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v19::BookT<lob::ChecksumSink, 16u>::Level> > > >(std::__1::map<long, lob::v19::BookT<lob::ChecksumSink, 16u>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v19::BookT<lob::ChecksumSink, 16u>::Level> > >&) const
+0 39 0 0 0 0
+414 21 7 0 0 0
+415 20 7 1 0 0
+466 26 0 0 0 0
+467 13 0 0 0 0
+469 13 0 0 0 0
+470 19 13 5 0 0
+471 31 13 8 0 0
+472 13 0 0 0 0
+473 13 0 0 0 0
+607 39 0 0 0 0
+608 13 0 0 0 0
+609 13 0 0 0 0
+611 26 13 1 0 0
+615 52 0 0 0 0
+fn=auto lob::v19::BookT<lob::ChecksumSink, 16u>::unlink_off_grid(lob::v19::BookT<lob::ChecksumSink, 16u>::Loc const&, unsigned long)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v19::BookT<lob::ChecksumSink, 16u>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v19::BookT<lob::ChecksumSink, 16u>::Level> > > >(std::__1::map<long, lob::v19::BookT<lob::ChecksumSink, 16u>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v19::BookT<lob::ChecksumSink, 16u>::Level> > >&) const
+0 87 0 0 0 0
+414 65 22 1 0 0
+415 65 22 1 0 0
+466 58 0 0 0 0
+467 29 0 0 0 0
+469 29 0 0 0 0
+470 39 29 10 0 0
+471 63 29 13 0 0
+472 29 0 0 0 0
+473 29 0 0 0 0
+607 87 0 0 0 0
+608 29 0 0 0 0
+609 29 0 0 0 0
+611 58 29 2 0 0
+615 116 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::anchor_if_on_tick(long)
+405 3 0 0 0 0
+406 1 0 0 0 0
+623 10 2 1 0 0
+624 1 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::loc_of(unsigned int, unsigned long) const
+0 42 0 0 0 0
+365 35530 0 0 0 0
+366 17765 0 0 0 0
+382 88825 0 0 0 0
+383 17765 0 0 0 0
+384 53295 17765 6 0 0
+386 159885 0 0 0 0
+402 35446 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+0 194953 0 0 0 0
+224 159507 0 0 0 0
+225 17723 0 0 0 0
+226 35446 17723 0 0 0
+227 35446 17723 185 0 0
+228 35446 17723 0 0 0
+230 106338 0 0 0 0
+232 70892 17723 2 0 0
+233 17723 0 0 0 0
+234 17723 0 0 0 0
+238 17723 0 0 0 0
+242 141784 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::off_grid_level(lob::Side, long, unsigned long)
+0 126 0 0 0 0
+414 121 42 7 0 0
+415 126 42 0 0 0
+597 462 0 0 0 0
+598 184 42 11 0 0
+600 84 0 0 0 0
+601 378 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::relink_after_grow()
+0 12 0 0 0 0
+431 28 0 0 0 0
+433 22578 0 0 0 0
+434 22578 0 0 0 0
+438 4754 0 0 0 0
+440 23 23 5 0 0
+441 34 34 7 0 0
+443 7 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::unlink_off_grid(lob::v19::BookT<lob::ChecksumSink, 16u>::Loc const&, unsigned long)
+0 71 0 0 0 0
+605 378 0 0 0 0
+607 84 0 0 0 0
+616 84 42 6 0 0
+617 39 0 0 0 0
+619 87 0 0 0 0
+620 336 0 0 0 0
+fn=void lob::replay<lob::v19::BookT<lob::ChecksumSink, 16u> >(lob::v19::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)
+0 6401253 0 0 0 0
+193 8010289 3200571 759107 0 0
+195 3182848 0 0 0 0
+199 88615 0 0 0 0
+205 795712 795712 0 0 0
+206 2387136 795712 0 0 0
+207 795712 0 0 0 0
+209 795712 795712 11 0 0
+210 28 0 0 0 0
+211 1591424 795712 790 0 0
+217 1591424 795712 2 0 0
+218 2387136 0 0 0 0
+221 795712 0 0 0 0
+356 4774020 0 0 0 0
+363 7957120 0 0 0 0
+365 1591424 0 0 0 0
+394 2 1 0 0 0
+399 1591424 0 0 0 0
+400 2387136 0 0 0 0
+402 1591422 0 0 0 0
+452 795712 0 0 0 0
+453 1591424 0 0 0 0
+456 2387136 0 0 0 0
+457 795712 0 0 0 0
+458 795712 0 0 0 0
+459 795712 0 0 0 0
+460 795712 0 0 0 0
+461 795712 0 0 0 0
+468 795670 0 0 0 0
+469 1591340 0 0 0 0
+470 8752370 0 0 0 0
+471 7161030 0 0 0 0
+472 795670 0 0 0 0
+473 1591340 0 0 0 0
+482 2387136 0 0 0 0
+483 2387133 0 0 0 0
+484 4774146 0 0 0 0
+485 795712 0 0 0 0
+486 795712 795712 1 0 0
+487 3182844 0 0 0 0
+488 1591424 0 0 0 0
+494 795712 795712 0 0 0
+561 1591429 795712 149 0 0
+563 3978560 0 0 0 0
+565 795712 795712 40 0 0
+566 2387010 0 0 0 0
+567 795670 0 0 0 0
+569 252 0 0 0 0
+572 795712 0 0 0 0
+585 1591424 795712 46 0 0
+588 3978350 0 0 0 0
+589 795670 0 0 0 0
+590 3182680 0 0 0 0
+592 420 0 0 0 0
+fl=/home/wang/sources/cxx/book/include/lob/v19/order_table.hpp
+fn=auto lob::v19::BookT<lob::ChecksumSink, 16u>::unlink_off_grid(lob::v19::BookT<lob::ChecksumSink, 16u>::Loc const&, unsigned long)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v19::BookT<lob::ChecksumSink, 16u>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v19::BookT<lob::ChecksumSink, 16u>::Level> > > >(std::__1::map<long, lob::v19::BookT<lob::ChecksumSink, 16u>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v19::BookT<lob::ChecksumSink, 16u>::Level> > >&) const
+74 105 0 0 0 0
+75 50 0 0 0 0
+fn=auto lob::v19::BookT<lob::ChecksumSink, 16u>::unlink_off_grid(lob::v19::BookT<lob::ChecksumSink, 16u>::Loc const&, unsigned long)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v19::BookT<lob::ChecksumSink, 16u>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v19::BookT<lob::ChecksumSink, 16u>::Level> > > >(std::__1::map<long, lob::v19::BookT<lob::ChecksumSink, 16u>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v19::BookT<lob::ChecksumSink, 16u>::Level> > >&) const
+74 209 0 0 0 0
+75 88 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::loc_of(unsigned int, unsigned long) const
+74 88825 0 0 0 0
+75 53295 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+0 36300 0 0 0 0
+74 88615 0 0 0 0
+75 70892 0 0 0 0
+88 53169 17723 0 0 0
+92 36304 18152 449 0 0
+93 858 429 0 0 0
+163 88615 0 0 0 0
+165 1287 0 0 0 0
+167 17723 0 0 0 0
+172 37162 0 0 0 0
+174 36304 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::relink_after_grow()
+0 7511 0 0 0 0
+143 15052 15052 12 0 0
+144 15052 0 0 0 0
+fn=lob::v19::OrderTable::grow()
+0 293359 0 0 0 0
+144 49972 0 0 0 0
+163 130048 0 0 0 0
+165 280 0 0 0 0
+167 65024 0 0 0 0
+184 32582 0 0 0 0
+185 162858 32582 134 0 0
+187 172424 0 0 0 0
+188 162560 0 0 0 0
+191 210 0 0 0 0
+195 7 0 0 0 0
+196 7 0 0 0 0
+197 28 0 0 0 0
+198 7 0 0 0 0
+200 14 0 0 0 0
+201 32589 8149 29 0 0
+202 65024 0 0 0 0
+203 65024 0 0 0 0
+207 56 0 0 0 0
+210 7 0 0 0 0
+211 7 0 0 0 0
+212 28 0 0 0 0
+213 97550 32519 9 0 0
+215 257619 97536 26648 0 0
+216 32512 0 0 0 0
+218 227584 0 0 0 0
+219 32512 0 0 0 0
+222 260110 65031 7 0 0
+224 486943 195072 37662 0 0
+226 130048 32512 8586 0 0
+227 130048 32512 5770 0 0
+267 70 0 0 0 0
+fn=void lob::replay<lob::v19::BookT<lob::ChecksumSink, 16u> >(lob::v19::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)
+0 5652367 0 0 0 0
+74 22279726 0 0 0 0
+75 4774272 0 0 0 0
+88 1591424 795712 0 0 0
+92 1622822 811411 16166 0 0
+93 31398 15699 0 0 0
+100 2387136 1591424 511 0 0
+101 1549236 0 0 0 0
+102 2323854 774618 3 0 0
+103 9 0 0 0 0
+105 774618 0 0 0 0
+106 1549242 0 0 0 0
+109 42188 21094 0 0 0
+111 63282 21094 4 0 0
+112 12 0 0 0 0
+116 42388 21194 8 0 0
+120 42388 21194 109 0 0
+122 21094 0 0 0 0
+123 42188 0 0 0 0
+129 795712 795712 0 0 0
+131 1591424 0 0 0 0
+132 795712 0 0 0 0
+133 2387136 0 0 0 0
+134 795712 0 0 0 0
+135 3182848 0 0 0 0
+136 1669919 811411 16152 0 0
+137 795712 0 0 0 0
+163 11956774 0 0 0 0
+165 191120 0 0 0 0
+167 2387136 0 0 0 0
+172 1754695 0 0 0 0
+174 1686304 0 0 0 0
+184 811969 0 0 0 0
+185 4043588 811969 16946 0 0
+187 3203942 0 0 0 0
+188 3182848 0 0 0 0
+191 48771 0 0 0 0
+fl=/home/wang/sources/cxx/book/include/lob/v3/hier_bitmap.hpp
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::relink_after_grow()
+0 5396 0 0 0 0
+112 43008 14336 14 0 0
+113 58886 21819 1939 0 0
+115 4754 0 0 0 0
+fn=void lob::replay<lob::v19::BookT<lob::ChecksumSink, 16u> >(lob::v19::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)
+0 1849 1831 21 0 0
+48 2387136 0 0 0 0
+57 1593189 0 0 0 0
+58 2392503 797501 16937 0 0
+59 2392557 0 0 0 0
+78 2387010 0 0 0 0
+79 2387010 0 0 0 0
+80 795670 795670 1862 0 0
+83 1849 0 0 0 0
+84 5565 0 0 0 0
+95 3978555 0 0 0 0
+fl=/home/wang/sources/cxx/book/source/main.cxx
+fn=auto lob::for_each_type<std::__1::tuple<lob::v0::Book<lob::ChecksumSink>, lob::v1::Book<lob::ChecksumSink>, lob::v2::Book<lob::ChecksumSink>, lob::v3::BookT<lob::ChecksumSink, 16u>, lob::v4::BookT<lob::ChecksumSink, 16u>, lob::v5::BookT<lob::ChecksumSink, 16u>, lob::v7::BookT<lob::ChecksumSink, 16u>, lob::v8::BookT<lob::ChecksumSink, 16u>, lob::v9::BookT<lob::ChecksumSink, 16u>, lob::v10::BookT<lob::ChecksumSink, 16u>, lob::v11::BookT<lob::ChecksumSink, 16u>, lob::v12::BookT<lob::ChecksumSink, 16u>, lob::v13::BookT<lob::ChecksumSink, 16u>, lob::v14::BookT<lob::ChecksumSink, 16u>, lob::v15::BookT<lob::ChecksumSink, 16u>, lob::v16::BookT<lob::ChecksumSink, 16u>, lob::v17::BookT<lob::ChecksumSink, 16u>, lob::v18::BookT<lob::ChecksumSink, 16u>, lob::v19::BookT<lob::ChecksumSink, 16u> >, (anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}>((anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}&&)::{lambda<unsigned long... $N0>(std::__1::integer_sequence<unsigned long, ($N0)...>)#1}::operator()<0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul, 8ul, 9ul, 10ul, 11ul, 12ul, 13ul, 14ul, 15ul, 16ul, 17ul, 18ul>(std::__1::integer_sequence<unsigned long, 0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul, 8ul, 9ul, 10ul, 11ul, 12ul, 13ul, 14ul, 15ul, 16ul, 17ul, 18ul>) const
+294 2 0 0 0 0
+295 3 0 0 0 0
+296 9 0 0 0 0
+fl=/usr/include/c++/v1/__algorithm/fill_n.h
+fn=std::__1::vector<unsigned int, std::__1::allocator<unsigned int> >::assign(unsigned long, unsigned int const&)
+0 70 0 0 0 0
+fl=/usr/include/c++/v1/__bit/countr.h
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::modify(unsigned long, long, unsigned int)
+28 35446 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::relink_after_grow()
+28 14966 0 0 0 0
+fn=lob::v19::OrderTable::grow()
+28 65024 0 0 0 0
+fn=void lob::replay<lob::v19::BookT<lob::ChecksumSink, 16u> >(lob::v19::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)
+28 5591075 0 0 0 0
+fl=/usr/include/c++/v1/__functional/operations.h
+fn=auto lob::v19::BookT<lob::ChecksumSink, 16u>::unlink_off_grid(lob::v19::BookT<lob::ChecksumSink, 16u>::Loc const&, unsigned long)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v19::BookT<lob::ChecksumSink, 16u>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v19::BookT<lob::ChecksumSink, 16u>::Level> > > >(std::__1::map<long, lob::v19::BookT<lob::ChecksumSink, 16u>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v19::BookT<lob::ChecksumSink, 16u>::Level> > >&) const
+462 103 0 0 0 0
+fn=auto lob::v19::BookT<lob::ChecksumSink, 16u>::unlink_off_grid(lob::v19::BookT<lob::ChecksumSink, 16u>::Loc const&, unsigned long)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v19::BookT<lob::ChecksumSink, 16u>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v19::BookT<lob::ChecksumSink, 16u>::Level> > > >(std::__1::map<long, lob::v19::BookT<lob::ChecksumSink, 16u>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v19::BookT<lob::ChecksumSink, 16u>::Level> > >&) const
+375 308 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::loc_of(unsigned int, unsigned long) const
+300 42 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::off_grid_level(lob::Side, long, unsigned long)
+300 1 0 0 0 0
+375 158 0 0 0 0
+462 52 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::unlink_off_grid(lob::v19::BookT<lob::ChecksumSink, 16u>::Loc const&, unsigned long)
+300 42 0 0 0 0
+fl=/usr/include/c++/v1/__iterator/wrap_iter.h
+fn=void lob::replay<lob::v19::BookT<lob::ChecksumSink, 16u> >(lob::v19::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)
+65 1609147 0 0 0 0
+125 1609148 0 0 0 0
+fl=/usr/include/c++/v1/__math/rounding_functions.h
+fn=boost::unordered::detail::foa::table_locator<boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, std::__1::pair<unsigned long const, long> > boost::unordered::detail::foa::table_core<boost::unordered::detail::foa::flat_map_types<unsigned long, long>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::table_arrays, boost::unordered::detail::foa::plain_size_control, boost::hash<unsigned long>, std::__1::equal_to<unsigned long>, std::__1::allocator<std::__1::pair<unsigned long const, long> > >::unchecked_emplace_with_rehash<boost::unordered::detail::foa::try_emplace_args_t, unsigned long const&>(unsigned long, boost::unordered::detail::foa::try_emplace_args_t&&, unsigned long const&)
+29 2 0 0 0 0
+fl=/usr/include/c++/v1/__memory/construct_at.h
+fn=std::__1::vector<unsigned int, std::__1::allocator<unsigned int> >::assign(unsigned long, unsigned int const&)
+38 20327 0 0 0 0
+fl=/usr/include/c++/v1/__memory/unique_ptr.h
+fn=lob::v19::OrderTable::grow()
+91 14 0 0 0 0
+281 7 0 0 0 0
+282 7 0 0 0 0
+287 7 0 0 0 0
+288 7 0 0 0 0
+289 28 14 4 0 0
+597 7 0 0 0 0
+598 7 0 0 0 0
+606 7 0 0 0 0
+607 7 0 0 0 0
+609 14 7 4 0 0
+617 14 7 0 0 0
+765 49 0 0 0 0
+fn=void lob::replay<lob::v19::BookT<lob::ChecksumSink, 16u> >(lob::v19::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)
+583 795712 0 0 0 0
+fl=/usr/include/c++/v1/__new/allocate.h
+fn=auto lob::v19::BookT<lob::ChecksumSink, 16u>::unlink_off_grid(lob::v19::BookT<lob::ChecksumSink, 16u>::Loc const&, unsigned long)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v19::BookT<lob::ChecksumSink, 16u>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v19::BookT<lob::ChecksumSink, 16u>::Level> > > >(std::__1::map<long, lob::v19::BookT<lob::ChecksumSink, 16u>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v19::BookT<lob::ChecksumSink, 16u>::Level> > >&) const
+63 21 0 0 0 0
+fn=auto lob::v19::BookT<lob::ChecksumSink, 16u>::unlink_off_grid(lob::v19::BookT<lob::ChecksumSink, 16u>::Loc const&, unsigned long)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v19::BookT<lob::ChecksumSink, 16u>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v19::BookT<lob::ChecksumSink, 16u>::Level> > > >(std::__1::map<long, lob::v19::BookT<lob::ChecksumSink, 16u>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v19::BookT<lob::ChecksumSink, 16u>::Level> > >&) const
+63 66 0 0 0 0
+fn=boost::unordered::detail::foa::table_core<boost::unordered::detail::foa::flat_map_types<unsigned long, long>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::table_arrays, boost::unordered::detail::foa::plain_size_control, boost::hash<unsigned long>, std::__1::equal_to<unsigned long>, std::__1::allocator<std::__1::pair<unsigned long const, long> > >::unchecked_rehash(boost::unordered::detail::foa::table_arrays<std::__1::pair<unsigned long const, long>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::pow2_size_policy, std::__1::allocator<std::__1::pair<unsigned long const, long> > >&)
+57 1 0 0 0 0
+63 1 0 0 0 0
+fn=boost::unordered::detail::foa::table_locator<boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, std::__1::pair<unsigned long const, long> > boost::unordered::detail::foa::table_core<boost::unordered::detail::foa::flat_map_types<unsigned long, long>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::table_arrays, boost::unordered::detail::foa::plain_size_control, boost::hash<unsigned long>, std::__1::equal_to<unsigned long>, std::__1::allocator<std::__1::pair<unsigned long const, long> > >::unchecked_emplace_with_rehash<boost::unordered::detail::foa::try_emplace_args_t, unsigned long const&>(unsigned long, boost::unordered::detail::foa::try_emplace_args_t&&, unsigned long const&)
+0 4 0 0 0 0
+37 2 0 0 0 0
+43 4 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::off_grid_level(lob::Side, long, unsigned long)
+43 87 0 0 0 0
+fn=std::__1::vector<unsigned int, std::__1::allocator<unsigned int> >::assign(unsigned long, unsigned int const&)
+37 7 0 0 0 0
+43 7 0 0 0 0
+63 6 0 0 0 0
+fl=/usr/include/c++/v1/__tree
+fn=auto lob::v19::BookT<lob::ChecksumSink, 16u>::unlink_off_grid(lob::v19::BookT<lob::ChecksumSink, 16u>::Loc const&, unsigned long)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v19::BookT<lob::ChecksumSink, 16u>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v19::BookT<lob::ChecksumSink, 16u>::Level> > > >(std::__1::map<long, lob::v19::BookT<lob::ChecksumSink, 16u>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v19::BookT<lob::ChecksumSink, 16u>::Level> > >&) const
+0 116 0 0 0 0
+105 10 0 0 0 0
+163 8 2 0 0 0
+191 21 7 6 0 0
+193 5 5 0 0 0
+680 13 0 0 0 0
+862 13 0 0 0 0
+884 13 0 0 0 0
+915 19 0 0 0 0
+1824 14 7 5 0 0
+1825 2 0 0 0 0
+1826 7 0 0 0 0
+1827 14 0 0 0 0
+1994 26 26 9 0 0
+2049 86 43 7 0 0
+2050 30 0 0 0 0
+fn=auto lob::v19::BookT<lob::ChecksumSink, 16u>::unlink_off_grid(lob::v19::BookT<lob::ChecksumSink, 16u>::Loc const&, unsigned long)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v19::BookT<lob::ChecksumSink, 16u>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v19::BookT<lob::ChecksumSink, 16u>::Level> > > >(std::__1::map<long, lob::v19::BookT<lob::ChecksumSink, 16u>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v19::BookT<lob::ChecksumSink, 16u>::Level> > >&) const
+0 316 0 0 0 0
+105 50 0 0 0 0
+163 34 9 3 0 0
+191 66 22 10 0 0
+193 25 25 13 0 0
+680 29 0 0 0 0
+862 29 0 0 0 0
+884 29 0 0 0 0
+915 63 0 0 0 0
+1824 44 22 11 0 0
+1825 7 0 0 0 0
+1826 22 0 0 0 0
+1827 44 0 0 0 0
+1994 58 58 10 0 0
+2049 244 122 19 0 0
+2050 93 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::off_grid_level(lob::Side, long, unsigned long)
+0 451 79 16 0 0
+862 42 0 0 0 0
+884 42 0 0 0 0
+915 121 0 0 0 0
+1593 105 105 36 0 0
+1594 37 0 0 0 0
+1601 68 68 10 0 0
+1602 165 55 16 0 0
+1673 58 0 0 0 0
+1674 29 0 0 0 0
+1676 29 0 0 0 0
+1677 116 29 20 0 0
+1678 6 0 0 0 0
+1679 116 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::relink_after_grow()
+0 78 0 0 0 0
+105 86 0 0 0 0
+163 75 20 5 0 0
+191 129 43 17 0 0
+193 71 43 8 0 0
+680 57 0 0 0 0
+859 14 0 0 0 0
+915 14 0 0 0 0
+fn=void std::__1::__tree_balance_after_insert[abi:ne210105]<std::__1::__tree_node_base<void*>*>(std::__1::__tree_node_base<void*>*, std::__1::__tree_node_base<void*>*)
+0 13 0 0 0 0
+105 69 0 0 0 0
+235 6 0 0 0 0
+236 12 0 0 0 0
+237 12 6 4 0 0
+239 10 0 0 0 0
+240 4 4 3 0 0
+241 6 0 0 0 0
+244 6 0 0 0 0
+254 2 0 0 0 0
+255 10 0 0 0 0
+256 10 5 4 0 0
+258 10 0 0 0 0
+259 5 5 1 0 0
+260 1 0 0 0 0
+262 5 0 0 0 0
+263 5 0 0 0 0
+278 58 0 0 0 0
+279 109 69 29 0 0
+281 16 16 8 0 0
+282 7 0 0 0 0
+283 20 10 5 0 0
+285 3 0 0 0 0
+287 6 0 0 0 0
+288 6 0 0 0 0
+290 6 4 2 0 0
+295 4 0 0 0 0
+297 4 0 0 0 0
+303 30 15 6 0 0
+305 5 0 0 0 0
+307 10 0 0 0 0
+308 10 0 0 0 0
+310 7 4 1 0 0
+315 4 0 0 0 0
+317 4 0 0 0 0
+323 29 0 0 0 0
+569 35 0 0 0 0
+571 13 0 0 0 0
+fn=void std::__1::__tree_remove[abi:ne210105]<std::__1::__tree_node_base<void*>*>(std::__1::__tree_node_base<void*>*, std::__1::__tree_node_base<void*>*)
+0 84 0 0 0 0
+105 186 0 0 0 0
+163 27 9 2 0 0
+235 3 0 0 0 0
+236 6 0 0 0 0
+237 6 3 2 0 0
+239 6 0 0 0 0
+240 3 3 2 0 0
+241 2 0 0 0 0
+243 1 0 0 0 0
+244 3 0 0 0 0
+254 2 0 0 0 0
+255 4 0 0 0 0
+256 4 2 2 0 0
+258 4 0 0 0 0
+259 2 2 2 0 0
+260 2 0 0 0 0
+263 2 0 0 0 0
+339 152 38 15 0 0
+341 27 0 0 0 0
+345 54 27 13 0 0
+346 18 0 0 0 0
+347 29 29 10 0 0
+348 16 0 0 0 0
+349 32 16 4 0 0
+350 12 0 0 0 0
+354 13 0 0 0 0
+358 29 0 0 0 0
+361 68 29 10 0 0
+363 14 0 0 0 0
+364 7 7 6 0 0
+365 7 0 0 0 0
+368 14 0 0 0 0
+370 14 0 0 0 0
+371 14 7 2 0 0
+373 14 0 0 0 0
+374 14 0 0 0 0
+379 83 56 19 0 0
+392 34 17 9 0 0
+393 6 0 0 0 0
+401 13 13 4 0 0
+403 14 7 6 0 0
+415 33 13 7 0 0
+416 21 7 3 0 0
+417 4 0 0 0 0
+420 14 6 2 0 0
+429 9 3 3 0 0
+439 6 0 0 0 0
+440 3 0 0 0 0
+441 3 0 0 0 0
+446 12 6 4 0 0
+458 22 8 7 0 0
+459 12 4 4 0 0
+460 4 0 0 0 0
+463 14 7 4 0 0
+472 2 0 0 0 0
+482 4 0 0 0 0
+483 2 0 0 0 0
+484 2 0 0 0 0
+492 29 0 0 0 0
+569 13 0 0 0 0
+571 12 0 0 0 0
+fl=/usr/include/c++/v1/__utility/pair.h
+fn=_ZN5boost9unordered6detail3foa10table_coreINS2_14flat_map_typesImlEENS2_7group15INS2_14plain_integralEEENS2_12table_arraysENS2_18plain_size_controlENS_4hashImEENSt3__18equal_toImEENSD_9allocatorINSD_4pairIKmlEEEEE22for_all_elements_whileIZNSL_22for_all_elements_whileIZNSL_16for_all_elementsIZNSL_16unchecked_rehashERNS9_ISJ_S8_NS2_16pow2_size_policyESK_EEEUlPSJ_E_EEDTcmclfL1p0_LDnEEcvv_EERKSQ_T_EUlSS_E_EESU_SW_SX_EUlPS8_jSS_E_EEDTcmclfp0_LDnELi0ELDnEEcvv_EESW_SX_
+196 116 0 0 0 0
+fn=boost::unordered::detail::foa::table_locator<boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, std::__1::pair<unsigned long const, long> > boost::unordered::detail::foa::table_core<boost::unordered::detail::foa::flat_map_types<unsigned long, long>, boost::unordered::detail::foa::group15<boost::unordered::detail::foa::plain_integral>, boost::unordered::detail::foa::table_arrays, boost::unordered::detail::foa::plain_size_control, boost::hash<unsigned long>, std::__1::equal_to<unsigned long>, std::__1::allocator<std::__1::pair<unsigned long const, long> > >::unchecked_emplace_with_rehash<boost::unordered::detail::foa::try_emplace_args_t, unsigned long const&>(unsigned long, boost::unordered::detail::foa::try_emplace_args_t&&, unsigned long const&)
+445 4 0 0 0 0
+446 2 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::off_grid_level(lob::Side, long, unsigned long)
+445 69 0 0 0 0
+446 69 0 0 0 0
+fl=/usr/include/c++/v1/__vector/vector.h
+fn=auto lob::for_each_type<std::__1::tuple<lob::v0::Book<lob::ChecksumSink>, lob::v1::Book<lob::ChecksumSink>, lob::v2::Book<lob::ChecksumSink>, lob::v3::BookT<lob::ChecksumSink, 16u>, lob::v4::BookT<lob::ChecksumSink, 16u>, lob::v5::BookT<lob::ChecksumSink, 16u>, lob::v7::BookT<lob::ChecksumSink, 16u>, lob::v8::BookT<lob::ChecksumSink, 16u>, lob::v9::BookT<lob::ChecksumSink, 16u>, lob::v10::BookT<lob::ChecksumSink, 16u>, lob::v11::BookT<lob::ChecksumSink, 16u>, lob::v12::BookT<lob::ChecksumSink, 16u>, lob::v13::BookT<lob::ChecksumSink, 16u>, lob::v14::BookT<lob::ChecksumSink, 16u>, lob::v15::BookT<lob::ChecksumSink, 16u>, lob::v16::BookT<lob::ChecksumSink, 16u>, lob::v17::BookT<lob::ChecksumSink, 16u>, lob::v18::BookT<lob::ChecksumSink, 16u>, lob::v19::BookT<lob::ChecksumSink, 16u> >, (anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}>((anonymous namespace)::with_version<(anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0>(std::__1::basic_string_view<char, std::__1::char_traits<char> >, (anonymous namespace)::cmd_replay((anonymous namespace)::Args const&)::$_0&&)::{lambda<typename $T0>()#1}&&)::{lambda<unsigned long... $N0>(std::__1::integer_sequence<unsigned long, ($N0)...>)#1}::operator()<0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul, 8ul, 9ul, 10ul, 11ul, 12ul, 13ul, 14ul, 15ul, 16ul, 17ul, 18ul>(std::__1::integer_sequence<unsigned long, 0ul, 1ul, 2ul, 3ul, 4ul, 5ul, 6ul, 7ul, 8ul, 9ul, 10ul, 11ul, 12ul, 13ul, 14ul, 15ul, 16ul, 17ul, 18ul>) const
+388 4 0 0 0 0
+449 1 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::relink_after_grow()
+388 7 0 0 0 0
+764 7 0 0 0 0
+fn=lob::v19::OrderTable::grow()
+407 32512 0 0 0 0
+fn=std::__1::vector<unsigned int, std::__1::allocator<unsigned int> >::assign(unsigned long, unsigned int const&)
+0 14 0 0 0 0
+391 42 0 0 0 0
+572 14 7 0 0 0
+575 7 0 0 0 0
+577 14 0 0 0 0
+741 7 0 0 0 0
+746 14 0 0 0 0
+764 6 0 0 0 0
+889 14 7 1 0 0
+893 24 0 0 0 0
+902 21 7 0 0 0
+905 42 0 0 0 0
+935 8177 4085 31 0 0
+1080 56 0 0 0 0
+1081 14 7 0 0 0
+1093 49 0 0 0 0
+fn=void lob::replay<lob::v19::BookT<lob::ChecksumSink, 16u> >(lob::v19::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)
+394 1591424 0 0 0 0
+fl=/usr/include/c++/v1/map
+fn=auto lob::v19::BookT<lob::ChecksumSink, 16u>::unlink_off_grid(lob::v19::BookT<lob::ChecksumSink, 16u>::Loc const&, unsigned long)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v19::BookT<lob::ChecksumSink, 16u>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v19::BookT<lob::ChecksumSink, 16u>::Level> > > >(std::__1::map<long, lob::v19::BookT<lob::ChecksumSink, 16u>::Level, std::__1::greater<void>, std::__1::allocator<std::__1::pair<long const, lob::v19::BookT<lob::ChecksumSink, 16u>::Level> > >&) const
+1031 21 0 0 0 0
+fn=auto lob::v19::BookT<lob::ChecksumSink, 16u>::unlink_off_grid(lob::v19::BookT<lob::ChecksumSink, 16u>::Loc const&, unsigned long)::{lambda(auto:1&)#1}::operator()<std::__1::map<long, lob::v19::BookT<lob::ChecksumSink, 16u>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v19::BookT<lob::ChecksumSink, 16u>::Level> > > >(std::__1::map<long, lob::v19::BookT<lob::ChecksumSink, 16u>::Level, std::__1::less<void>, std::__1::allocator<std::__1::pair<long const, lob::v19::BookT<lob::ChecksumSink, 16u>::Level> > >&) const
+1031 66 0 0 0 0
+fn=lob::v19::BookT<lob::ChecksumSink, 16u>::off_grid_level(lob::Side, long, unsigned long)
+1031 126 0 0 0 0
+fl=???
+fn=???
+0 423 0 0 265 115
+fn=operator delete(void*)
+0 215 0 0 0 0
+fn=operator delete(void*, std::align_val_t)
+0 35 0 0 0 0
+fn=operator delete(void*, unsigned long)
+0 180 0 0 0 0
+fn=operator delete[](void*)
+0 35 0 0 0 0
+fn=operator new(unsigned long)
+0 765 45 17 0 0
+fn=operator new(unsigned long, std::align_val_t)
+0 189 7 4 0 0
+fn=operator new[](unsigned long)
+0 35 0 0 0 0
+summary: 260392086 21597710 911490 268 118

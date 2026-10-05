@@ -1,0 +1,13 @@
+tsc: constant_tsc=true nonstop_tsc=true freq=1.1904 GHz timer_overhead=58 cycles
+ver    class            count     p50     p90     p99    p99.9   p99.99       max   (cycles, incl. timer overhead)
+v18    tail > all-p99 (310 cycles), share of tail (share of class): push_rest 44.9% (0.90%) cancel 53.7% (1.08%) modify 1.4% (1.22%)
+v18    all            8045735     155     175     310      632    15531    632190
+v18    push_rest      3978560     157     168     303      589    14482    381926
+v18    cancel         3978560     152     178     316      658    15744    632190
+v18    modify           88615     143     161     329      728    56683    107663
+v19    tail > all-p99 (355 cycles), share of tail (share of class): push_rest 54.8% (1.10%) cancel 43.7% (0.88%) modify 1.5% (1.34%)
+v19    all            8045735     163     213     355      693    21923   3957536
+v19    push_rest      3978560     158     215     362      703    21673   3957536
+v19    cancel         3978560     173     213     343      672    22276    286126
+v19    modify           88615     145     159     448      889    29316    147886
+wrote /home/wang/sources/cxx/book/results/latency_20261005-0946_caaf095_vm_itch12302019_AAPL.csv

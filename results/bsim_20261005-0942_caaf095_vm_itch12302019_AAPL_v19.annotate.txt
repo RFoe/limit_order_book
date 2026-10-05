@@ -1,0 +1,672 @@
+--------------------------------------------------------------------------------
+-- Metadata
+--------------------------------------------------------------------------------
+Invocation:       /usr/bin/cg_annotate --show=Ir,Bc,Bcm,Bi,Bim --sort=Bcm results/bsim_20261005-0942_caaf095_vm_itch12302019_AAPL_v19.out
+Command:          build/profile/book replay --workload data/itch12302019_AAPL.ops --version v19
+Events recorded:  Ir Bc Bcm Bi Bim
+Events shown:     Ir Bc Bcm Bi Bim
+Event sort order: Bcm
+Threshold:        0.1%
+Annotation:       on
+
+--------------------------------------------------------------------------------
+-- Summary
+--------------------------------------------------------------------------------
+Ir__________________ Bc_________________ Bcm_____________ Bi__________ Bim_________ 
+
+260,392,086 (100.0%) 21,597,710 (100.0%) 911,490 (100.0%) 268 (100.0%) 118 (100.0%)  PROGRAM TOTALS
+
+--------------------------------------------------------------------------------
+-- File:function summary
+--------------------------------------------------------------------------------
+  Ir________________________ Bc_______________________ Bcm___________________ Bi____________ Bim___________  file:function
+
+< 116,071,518 (44.6%, 44.6%) 11,246,760 (52.1%, 52.1%) 760,418 (83.4%, 83.4%) 0 (0.0%, 0.0%) 0 (0.0%, 0.0%)  /home/wang/sources/cxx/book/include/lob/v19/book.hpp:
+  114,758,509 (44.1%)        11,157,692 (51.7%)        760,146 (83.4%)        0              0                 void lob::replay<lob::v19::BookT<lob::ChecksumSink, 16u> >(lob::v19::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)
+
+<  89,605,493 (34.4%, 79.0%)  7,039,801 (32.6%, 84.7%) 129,205 (14.2%, 97.6%) 0 (0.0%, 0.0%) 0 (0.0%, 0.0%)  /home/wang/sources/cxx/book/include/lob/v19/order_table.hpp:
+    2,887,111  (1.1%)           495,913  (2.3%)         78,845  (8.7%)        0              0                 lob::v19::OrderTable::grow()
+   86,070,966 (33.1%)         6,492,532 (30.1%)         49,899  (5.5%)        0              0                 void lob::replay<lob::v19::BookT<lob::ChecksumSink, 16u> >(lob::v19::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)
+
+<  18,434,937  (7.1%, 86.1%)  1,631,157  (7.6%, 92.2%)  20,773  (2.3%, 99.9%) 0 (0.0%, 0.0%) 0 (0.0%, 0.0%)  /home/wang/sources/cxx/book/include/lob/v3/hier_bitmap.hpp:
+   18,322,893  (7.0%)         1,595,002  (7.4%)         18,820  (2.1%)        0              0                 void lob::replay<lob::v19::BookT<lob::ChecksumSink, 16u> >(lob::v19::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>)
+      112,044  (0.0%)            36,155  (0.2%)          1,953  (0.2%)        0              0                 lob::v19::BookT<lob::ChecksumSink, 16u>::relink_after_grow()
+
+--------------------------------------------------------------------------------
+-- Function:file summary
+--------------------------------------------------------------------------------
+  Ir________________________ Bc_______________________ Bcm___________________ Bi____________ Bim___________  function:file
+
+> 255,033,689 (97.9%, 97.9%) 20,854,374 (96.6%, 96.6%) 828,866 (90.9%, 90.9%) 0 (0.0%, 0.0%) 0 (0.0%, 0.0%)  void lob::replay<lob::v19::BookT<lob::ChecksumSink, 16u> >(lob::v19::BookT<lob::ChecksumSink, 16u>&, std::__1::span<lob::Op const, 18446744073709551615ul>):
+  114,758,509 (44.1%)        11,157,692 (51.7%)        760,146 (83.4%)        0              0                 /home/wang/sources/cxx/book/include/lob/v19/book.hpp
+   86,070,966 (33.1%)         6,492,532 (30.1%)         49,899  (5.5%)        0              0                 /home/wang/sources/cxx/book/include/lob/v19/order_table.hpp
+   18,322,893  (7.0%)         1,595,002  (7.4%)         18,820  (2.1%)        0              0                 /home/wang/sources/cxx/book/include/lob/v3/hier_bitmap.hpp
+
+>   2,984,843  (1.1%, 99.1%)    495,948  (2.3%, 98.9%)  78,858  (8.7%, 99.6%) 0 (0.0%, 0.0%) 0 (0.0%, 0.0%)  lob::v19::OrderTable::grow():
+    2,887,111  (1.1%)           495,913  (2.3%)         78,845  (8.7%)        0              0                 /home/wang/sources/cxx/book/include/lob/v19/order_table.hpp
+
+>     215,177  (0.1%, 99.2%)     51,370  (0.2%, 99.1%)   2,007  (0.2%, 99.8%) 0 (0.0%, 0.0%) 0 (0.0%, 0.0%)  lob::v19::BookT<lob::ChecksumSink, 16u>::relink_after_grow():
+      112,044  (0.0%)            36,155  (0.2%)          1,953  (0.2%)        0              0                 /home/wang/sources/cxx/book/include/lob/v3/hier_bitmap.hpp
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /home/wang/sources/cxx/book/include/lob/v19/book.hpp
+--------------------------------------------------------------------------------
+Ir______________ Bc_______________ Bcm____________ Bi Bim 
+
+6,596,583 (2.5%)         0               0          0   0  <unknown (line 0)>
+
+-- line 185 ----------------------------------------
+        .                .               .          .   .      auto* words = reinterpret_cast<std::uint64_t*>(grid_ + kSlots);  // zero-filled by the kernel
+        .                .               .          .   .      bid_bits_ = Bitmap(words);
+        .                .               .          .   .      ask_bits_ = Bitmap(words + Bitmap::kTotalWords);
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    // the book's own per-op dispatch (see lob::apply); everything on the push and
+        .                .               .          .   .    // cancel paths is always_inline into it, so the harness loop has no calls
+        .                .               .          .   .    [[gnu::always_inline]] void apply(const Op& op) {
+8,010,289 (3.1%) 3,200,571 (14.8%) 759,107 (83.3%)  0   0      switch (op.type) {
+        .                .               .          .   .        case OpType::Push:
+3,182,848 (1.2%)         0               0          0   0          return push(op.id, op.side, op.price, op.qty);
+        .                .               .          .   .        case OpType::Cancel:
+        .                .               .          .   .          return cancel(op.id);
+        .                .               .          .   .        case OpType::Modify:
+   88,615 (0.0%)         0               0          0   0          return modify(op.id, op.price, op.qty);
+        .                .               .          .   .      }
+        .                .               .          .   .      std::unreachable();
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    [[gnu::always_inline]] void push(OrderId id, Side side, Price price, Qty qty) {
+  795,712 (0.3%)   795,712  (3.7%)       0          0   0      if (qty == 0) return reject(id, OpType::Push, RejectReason::InvalidQty);
+2,387,136 (0.9%)   795,712  (3.7%)       0          0   0      if (price <= 0) return reject(id, OpType::Push, RejectReason::InvalidPrice);
+  795,712 (0.3%)         0               0          0   0      bool inserted = false;
+        .                .               .          .   .      const std::uint32_t slot = table_.try_insert(id, inserted);  // the only probe for this id
+  795,712 (0.3%)   795,712  (3.7%)      11  (0.0%)  0   0      if (table_.grew()) [[unlikely]]
+       28 (0.0%)         0               0          0   0        relink_after_grow();
+1,591,424 (0.6%)   795,712  (3.7%)     790  (0.1%)  0   0      if (!inserted) return reject(id, OpType::Push, RejectReason::DuplicateId);
+        .                .               .          .   .      add(id, side, price, qty, slot);
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    [[gnu::always_inline]] void cancel(OrderId id) {
+        .                .               .          .   .      const std::uint32_t r = table_.find(id);
+1,591,424 (0.6%)   795,712  (3.7%)       2  (0.0%)  0   0      if (r == kNil) return reject(id, OpType::Cancel, RejectReason::UnknownId);
+2,387,136 (0.9%)         0               0          0   0      const Qty remaining = table_.node(r).qty;
+        .                .               .          .   .      remove_from_level(r, id);
+        .                .               .          .   .      table_.erase(r);
+  795,712 (0.3%)         0               0          0   0      sink_.on(Cancelled{id, remaining});
+        .                .               .          .   .    }
+        .                .               .          .   .  
+  159,507 (0.1%)         0               0          0   0    [[gnu::noinline]] void modify(OrderId id, Price price, Qty qty) {  // 1% of ITCH ops
+   17,723 (0.0%)         0               0          0   0      const std::uint32_t r = table_.find(id);
+   35,446 (0.0%)    17,723  (0.1%)       0          0   0      if (r == kNil) return reject(id, OpType::Modify, RejectReason::UnknownId);
+   35,446 (0.0%)    17,723  (0.1%)     185  (0.0%)  0   0      if (qty == 0) return reject(id, OpType::Modify, RejectReason::InvalidQty);
+   35,446 (0.0%)    17,723  (0.1%)       0          0   0      if (price <= 0) return reject(id, OpType::Modify, RejectReason::InvalidPrice);
+        .                .               .          .   .  
+  106,338 (0.0%)         0               0          0   0      const Loc loc = loc_of(r, id);
+        .                .               .          .   .      OrderNode& node = table_.node(r);
+   70,892 (0.0%)    17,723  (0.1%)       2  (0.0%)  0   0      if (price == loc.price && qty <= node.qty) {  // reduce: keep priority (no level aggregate to adjust)
+   17,723 (0.0%)         0               0          0   0        node.qty = qty;
+   17,723 (0.0%)         0               0          0   0        sink_.on(Reduced{id, qty});
+        .                .               .          .   .        return;
+        .                .               .          .   .      }
+        .                .               .          .   .      const Side side = loc.side;
+   17,723 (0.0%)         0               0          0   0      const Qty old_qty = node.qty;
+        .                .               .          .   .      remove_from_level(r, id);  // keep the table slot: add() refills or erases it
+        .                .               .          .   .      sink_.on(Cancelled{id, old_qty});
+        .                .               .          .   .      add(id, side, price, qty, r);
+  141,784 (0.1%)         0               0          0   0    }
+        .                .               .          .   .  
+        .                .               .          .   .    [[nodiscard]] auto best_bid() const -> std::optional<Price> {
+        .                .               .          .   .      std::optional<Price> best;
+        .                .               .          .   .      if (!bid_bits_.empty()) best = price_of(bid_bits_.min() ^ kMirror);
+        .                .               .          .   .      if (!bids_.empty() && (!best || bids_.begin()->first > *best)) best = bids_.begin()->first;
+        .                .               .          .   .      return best;
+        .                .               .          .   .    }
+        .                .               .          .   .    [[nodiscard]] auto best_ask() const -> std::optional<Price> {
+-- line 250 ----------------------------------------
+-- line 348 ----------------------------------------
+        .                .               .          .   .  
+        .                .               .          .   .   private:
+        .                .               .          .   .    static constexpr std::uint32_t kNil = std::numeric_limits<std::uint32_t>::max();
+        .                .               .          .   .    static constexpr std::uint32_t kNoSlot = std::numeric_limits<std::uint32_t>::max();
+        .                .               .          .   .    static constexpr std::uint32_t kSlots = std::uint32_t{1} << WindowBits;
+        .                .               .          .   .    using Bitmap = v3::HierBitmap<WindowBits>;
+        .                .               .          .   .    // bid bitmap bit = slot ^ kMirror (= kSlots - 1 - slot): best bid is min() like best ask
+        .                .               .          .   .    static constexpr std::uint32_t kMirror = kSlots - 1;
+4,774,020 (1.8%)         0               0          0   0    static constexpr auto mirror(Side side) -> std::uint32_t { return side == Side::Buy ? kMirror : 0; }
+        .                .               .          .   .  
+        .                .               .          .   .    using OrderNode = v19::OrderNode;  // {qty, next, prev, where}, stored in the order table
+        .                .               .          .   .    static constexpr std::uint32_t kSideBit = std::uint32_t{1} << 31;
+        .                .               .          .   .    static constexpr std::uint32_t kOffGrid = kSideBit - 1;  // also the slot mask
+        .                .               .          .   .    static_assert(kSlots <= kOffGrid);
+        .                .               .          .   .    static constexpr auto where_of(std::uint32_t slot, Side side) -> std::uint32_t {
+7,957,120 (3.1%)         0               0          0   0      return (slot == kNoSlot ? kOffGrid : slot) | (side == Side::Sell ? kSideBit : 0);
+        .                .               .          .   .    }
+1,626,954 (0.6%)         0               0          0   0    static constexpr auto slot_in(std::uint32_t where) -> std::uint32_t { return where & kOffGrid; }
+   17,765 (0.0%)         0               0          0   0    static constexpr auto side_in(std::uint32_t where) -> Side { return where & kSideBit ? Side::Sell : Side::Buy; }
+        .                .               .          .   .    static_assert(sizeof(OrderNode) <= std::hardware_destructive_interference_size / 2,
+        .                .               .          .   .                  "keep several order nodes per cache line");
+        .                .               .          .   .  
+        .                .               .          .   .    struct Level {  // v17: no aggregates (snapshots walk the list)
+        .                .               .          .   .      std::uint32_t head = kNil;
+        .                .               .          .   .      std::uint32_t tail = kNil;
+        .                .               .          .   .    };
+        .                .               .          .   .    static_assert(sizeof(Level) == 8);
+        .                .               .          .   .    using Bids = std::map<Price, Level, std::greater<>>;
+        .                .               .          .   .    using Asks = std::map<Price, Level, std::less<>>;
+        .                .               .          .   .    struct Loc {  // where an order rests; built from its node (no longer stored in the index)
+        .                .               .          .   .      Price price;
+        .                .               .          .   .      std::uint32_t node;
+        .                .               .          .   .      Side side;
+        .                .               .          .   .    };
+   88,825 (0.0%)         0               0          0   0    [[nodiscard]] auto loc_of(std::uint32_t r, OrderId id) const -> Loc {
+   17,765 (0.0%)         0               0          0   0      const std::uint32_t w = table_.node(r).where;
+   53,295 (0.0%)    17,765  (0.1%)       6  (0.0%)  0   0      const Price price = slot_in(w) != kOffGrid ? price_of(slot_in(w)) : off_price_.at(id);
+        .                .               .          .   .      return {price, r, side_in(w)};
+  159,885 (0.1%)         0               0          0   0    }
+        .                .               .          .   .  
+        .                .               .          .   .    [[noreturn]] static void fail(const std::string& what) { throw std::logic_error("v19 invariant: " + what); }
+        .                .               .          .   .  
+        .                .               .          .   .    void reject(OrderId id, OpType op, RejectReason reason) { sink_.on(Rejected{id, op, reason}); }
+        .                .               .          .   .  
+        .                .               .          .   .    // ---- price grid ---------------------------------------------------------------
+        .                .               .          .   .    [[nodiscard]] auto slot_of(Price price) const -> std::uint32_t {
+        2 (0.0%)         1  (0.0%)       0          0   0      if (!anchored_) return kNoSlot;
+        .                .               .          .   .      // price on the grid <=> price - base is a multiple of tick in [0, kSlots * tick)
+        .                .               .          .   .      // <=> quotient < kSlots (a negative difference wraps to a huge unsigned value,
+        .                .               .          .   .      // which ExactDiv also maps to >= 2^64 / tick)
+        .                .               .          .   .      const std::uint64_t s =
+1,591,424 (0.6%)         0               0          0   0          slot_div_.quotient(static_cast<std::uint64_t>(price) - static_cast<std::uint64_t>(base_));
+2,387,136 (0.9%)         0               0          0   0      return s < kSlots ? static_cast<std::uint32_t>(s) : kNoSlot;
+        .                .               .          .   .    }
+1,626,868 (0.6%)         0               0          0   0    [[nodiscard]] auto price_of(std::uint32_t slot) const -> Price { return base_ + static_cast<Price>(slot) * tick_; }
+        .                .               .          .   .  
+        .                .               .          .   .    void anchor(Price price) {  // centre the window on the first on-grid resting price
+        3 (0.0%)         0               0          0   0      base_ = price - static_cast<Price>(kSlots / 2) * tick_;
+        1 (0.0%)         0               0          0   0      anchored_ = true;
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    // Best fallback-map price seen by a taker of each side, sign-normalised like
+        .                .               .          .   .    // may_cross(): [Buy] = lowest ask, [Sell] = -highest bid; kNoMapLevel when the
+        .                .               .          .   .    // map is empty. Refreshed on every (cold) change of the maps.
+        .                .               .          .   .    static constexpr Price kNoMapLevel = std::numeric_limits<Price>::max();
+        .                .               .          .   .    void refresh_map_best() {
+      207 (0.0%)        71  (0.0%)       8  (0.0%)  0   0      taker_map_best_[0] = asks_.empty() ? kNoMapLevel : asks_.begin()->first;
+      211 (0.0%)        71  (0.0%)       2  (0.0%)  0   0      taker_map_best_[1] = bids_.empty() ? kNoMapLevel : -bids_.begin()->first;
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    // snapshot of one level: order count and total quantity by walking its list
+        .                .               .          .   .    [[nodiscard]] auto snapshot(Price price, const Level& level) const -> LevelSnapshot {
+        .                .               .          .   .      std::uint64_t total = 0;
+        .                .               .          .   .      std::uint32_t n = 0;
+        .                .               .          .   .      for (std::uint32_t i = level.head; i != kNil; i = table_.node(i).next) {
+        .                .               .          .   .        total += table_.node(i).qty;
+        .                .               .          .   .        ++n;
+        .                .               .          .   .      }
+        .                .               .          .   .      return {price, total, n};
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    // after the table grew: node references moved; the table fixed the nodes'
+        .                .               .          .   .    // own links, the level heads / tails are fixed here (cold, warm-up only)
+       28 (0.0%)         0               0          0   0    [[gnu::noinline]] void relink_after_grow() {
+        .                .               .          .   .      auto fix = [&](Level& level) {
+   22,578 (0.0%)         0               0          0   0        level.head = table_.remap(level.head);
+   22,578 (0.0%)         0               0          0   0        level.tail = table_.remap(level.tail);
+        .                .               .          .   .      };
+        .                .               .          .   .      for (Side side : {Side::Buy, Side::Sell}) {
+        .                .               .          .   .        const Bitmap& bits = side == Side::Buy ? bid_bits_ : ask_bits_;
+    4,754 (0.0%)         0               0          0   0        bits.for_each([&](std::uint32_t b) { fix(grid_[b ^ mirror(side)]); });
+        .                .               .          .   .      }
+       23 (0.0%)        23  (0.0%)       5  (0.0%)  0   0      for (auto& [price, level] : bids_) fix(level);
+       34 (0.0%)        34  (0.0%)       7  (0.0%)  0   0      for (auto& [price, level] : asks_) fix(level);
+        .                .               .          .   .      table_.clear_remap();
+        7 (0.0%)         0               0          0   0    }
+        .                .               .          .   .  
+        .                .               .          .   .    // ---- level list ---------------------------------------------------------------
+        .                .               .          .   .    // The link to patch is either a neighbour node's field or the Level's
+        .                .               .          .   .    // head/tail. Select its address branch-free (clang turns an unpredictable
+        .                .               .          .   .    // ternary into cmov), then store unconditionally. kNil indexes are replaced
+        .                .               .          .   .    // by 0 before forming the node address so no out-of-range pointer is formed
+        .                .               .          .   .    // (the pool is never empty here: node i exists).
+        .                .               .          .   .    [[gnu::always_inline]] void push_back(Level& level, std::uint32_t i) {
+  795,712 (0.3%)         0               0          0   0      const std::uint32_t tail = level.tail;
+1,591,424 (0.6%)         0               0          0   0      const bool has_tail = __builtin_unpredictable(tail != kNil);
+        .                .               .          .   .      // address first, then one select: with node()'s own base select nested in
+        .                .               .          .   .      // the ternary, clang emitted a branch here (27% mispredicted on AAPL)
+2,387,136 (0.9%)         0               0          0   0      std::uint32_t* const tail_next = &table_.node(has_tail ? tail : 0).next;
+  795,712 (0.3%)         0               0          0   0      std::uint32_t* link = has_tail ? tail_next : &level.head;
+  795,712 (0.3%)         0               0          0   0      *link = i;
+  795,712 (0.3%)         0               0          0   0      table_.node(i).prev = tail;
+  795,712 (0.3%)         0               0          0   0      table_.node(i).next = kNil;
+  795,712 (0.3%)         0               0          0   0      level.tail = i;
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    [[gnu::always_inline]] void unlink(Level& level, std::uint32_t i) {
+        .                .               .          .   .      const OrderNode& n = table_.node(i);
+       84 (0.0%)         0               0          0   0      const std::uint32_t prev = n.prev;
+       42 (0.0%)         0               0          0   0      const std::uint32_t next = n.next;
+  795,670 (0.3%)         0               0          0   0      const bool has_prev = __builtin_unpredictable(prev != kNil);
+1,591,382 (0.6%)         0               0          0   0      const bool has_next = __builtin_unpredictable(next != kNil);
+8,752,428 (3.4%)        42  (0.0%)      15  (0.0%)  0   0      std::uint32_t* to_next = has_prev ? &table_.node(has_prev ? prev : 0).next : &level.head;
+7,161,124 (2.8%)        42  (0.0%)      21  (0.0%)  0   0      std::uint32_t* to_prev = has_next ? &table_.node(has_next ? next : 0).prev : &level.tail;
+  795,712 (0.3%)         0               0          0   0      *to_next = next;
+1,591,382 (0.6%)         0               0          0   0      *to_prev = prev;
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    // false => match() would consume nothing (no opposite level at or through the
+        .                .               .          .   .    // limit). Prices are normalised by the taker's sign (sell side negated) so
+        .                .               .          .   .    // "crosses" is `best <= limit` for both sides; the only data-dependent branch
+        .                .               .          .   .    // left is "opposite grid empty", which is rare.
+        .                .               .          .   .    [[nodiscard]] auto may_cross(Side side, Price limit) const -> bool {
+        .                .               .          .   .      const auto t = static_cast<std::uint32_t>(side);          // Buy = 0, Sell = 1
+2,387,136 (0.9%)         0               0          0   0      const Price sign = 1 - 2 * static_cast<Price>(t);
+2,387,133 (0.9%)         0               0          0   0      const std::uint32_t opp_mirror = kMirror & (0U - t);       // bids are mirrored
+4,774,146 (1.8%)         0               0          0   0      const Bitmap& opp = __builtin_unpredictable(t != 0) ? bid_bits_ : ask_bits_;
+  795,712 (0.3%)         0               0          0   0      Price best = taker_map_best_[t];  // already normalised; sentinel when the map is empty
+  795,712 (0.3%)   795,712  (3.7%)       1  (0.0%)  0   0      if (!opp.empty()) [[likely]]
+3,182,844 (1.2%)         0               0          0   0        best = std::min(best, sign * price_of(opp.min() ^ opp_mirror));
+1,591,424 (0.6%)         0               0          0   0      return best <= sign * limit;
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    // slot: this order's table entry (just reserved by push, or kept by modify).
+        .                .               .          .   .    // match() only erases other entries, which never moves anything, so slot stays valid.
+        .                .               .          .   .    [[gnu::always_inline]] void add(OrderId id, Side side, Price price, Qty qty, std::uint32_t slot) {
+  795,712 (0.3%)   795,712  (3.7%)       0          0   0      if (!may_cross(side, price)) [[likely]] return rest(id, side, price, qty, slot);
+        .                .               .          .   .      if (side == Side::Buy)
+        .                .               .          .   .        qty = match<Side::Buy>(id, price, qty);
+        .                .               .          .   .      else
+        .                .               .          .   .        qty = match<Side::Sell>(id, price, qty);
+        .                .               .          .   .      if (qty == 0) {
+        .                .               .          .   .        table_.erase(slot);  // fully filled: never rests
+        .                .               .          .   .        return;
+        .                .               .          .   .      }
+-- line 502 ----------------------------------------
+-- line 553 ----------------------------------------
+        .                .               .          .   .            opp_bits.clear(slot ^ opp_mirror);
+        .                .               .          .   .        }
+        .                .               .          .   .      }
+        .                .               .          .   .      return qty;
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    // slot: the order's table entry; its node is filled here
+        .                .               .          .   .    [[gnu::always_inline]] void rest(OrderId id, Side side, Price price, Qty qty, std::uint32_t slot) {
+1,591,429 (0.6%)   795,712  (3.7%)     149  (0.0%)  0   0      if (!anchored_) anchor_if_on_tick(price);
+        .                .               .          .   .      const std::uint32_t s = slot_of(price);
+3,978,560 (1.5%)         0               0          0   0      table_.node(slot) = OrderNode{qty, kNil, kNil, where_of(s, side)};
+        .                .               .          .   .      Level* level = nullptr;
+  795,712 (0.3%)   795,712  (3.7%)      40  (0.0%)  0   0      if (s != kNoSlot) {
+2,387,010 (0.9%)         0               0          0   0        level = &grid_[s];
+  795,670 (0.3%)         0               0          0   0        (side == Side::Buy ? bid_bits_ : ask_bits_).set(s ^ mirror(side));  // idempotent: no "was it empty" branch
+        .                .               .          .   .      } else {
+      252 (0.0%)         0               0          0   0        level = off_grid_level(side, price, id);
+        .                .               .          .   .      }
+        .                .               .          .   .      push_back(*level, slot);
+  795,712 (0.3%)         0               0          0   0      sink_.on(Rested{id, side, price, qty});
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    // modify's half of erase(): unlink the order from its level (grid or fallback
+        .                .               .          .   .    // map) and free its node, keeping the index slot. erase() keeps v9's own copy
+        .                .               .          .   .    // of this code so the cancel path is what v9 inlines.
+        .                .               .          .   .    // unlink order node i from its level (grid or fallback map) and free it; the
+        .                .               .          .   .    // grid slot and side come from the hot node, the level line is only stored to
+        .                .               .          .   .    // (the table slot itself is freed, or kept, by the caller)
+        .                .               .          .   .    [[gnu::always_inline]] void remove_from_level(std::uint32_t i, OrderId id) {
+        .                .               .          .   .      const OrderNode& n = table_.node(i);
+        .                .               .          .   .      const std::uint32_t s = slot_in(n.where);
+        .                .               .          .   .      const Side side = side_in(n.where);
+1,591,424 (0.6%)   795,712  (3.7%)      46  (0.0%)  0   0      if (s != kOffGrid) {
+        .                .               .          .   .        // the level empties iff the order is alone in it (no prev and no next;
+        .                .               .          .   .        // kNil is all ones): decided from the node, so the level line is not read
+3,978,350 (1.5%)         0               0          0   0        const bool emptied = (n.prev & n.next) == kNil;
+  795,670 (0.3%)         0               0          0   0        unlink(grid_[s], i);
+3,182,680 (1.2%)         0               0          0   0        (side == Side::Buy ? bid_bits_ : ask_bits_).clear_if(s ^ mirror(side), emptied);
+        .                .               .          .   .      } else {
+      420 (0.0%)         0               0          0   0        unlink_off_grid(loc_of(i, id), id);
+        .                .               .          .   .      }
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    // ---- cold paths (out of line on purpose) --------------------------------------
+      462 (0.0%)         0               0          0   0    [[gnu::noinline]] auto off_grid_level(Side side, Price price, OrderId id) -> Level* {
+      184 (0.0%)        42  (0.0%)      11  (0.0%)  0   0      Level* level = side == Side::Buy ? &bids_[price] : &asks_[price];
+        .                .               .          .   .      refresh_map_best();
+       84 (0.0%)         0               0          0   0      off_price_[id] = price;
+      378 (0.0%)         0               0          0   0      return level;
+        .                .               .          .   .    }
+        .                .               .          .   .  
+        .                .               .          .   .    // unlink an order resting on a fallback-map level and free its node
+      378 (0.0%)         0               0          0   0    [[gnu::noinline]] void unlink_off_grid(const Loc& loc, OrderId id) {
+        .                .               .          .   .      off_price_.erase(id);
+      210 (0.0%)         0               0          0   0      auto remove_from = [&](auto& levels) {
+       42 (0.0%)         0               0          0   0        auto level_it = levels.find(loc.price);
+       42 (0.0%)         0               0          0   0        Level& level = level_it->second;
+        .                .               .          .   .        unlink(level, loc.node);
+       84 (0.0%)        42  (0.0%)       3  (0.0%)  0   0        if (level.head == kNil) {
+        .                .               .          .   .          levels.erase(level_it);
+        .                .               .          .   .          refresh_map_best();
+        .                .               .          .   .        }
+      168 (0.0%)         0               0          0   0      };
+       84 (0.0%)        42  (0.0%)       6  (0.0%)  0   0      if (loc.side == Side::Buy)
+       39 (0.0%)         0               0          0   0        remove_from(bids_);
+        .                .               .          .   .      else
+       87 (0.0%)         0               0          0   0        remove_from(asks_);
+      336 (0.0%)         0               0          0   0    }
+        .                .               .          .   .  
+        .                .               .          .   .    [[gnu::noinline]] void anchor_if_on_tick(Price price) {
+       10 (0.0%)         2  (0.0%)       1  (0.0%)  0   0      if (static_cast<std::uint64_t>(price) % static_cast<std::uint64_t>(tick_) == 0) anchor(price);
+        1 (0.0%)         0               0          0   0    }
+        .                .               .          .   .  
+        .                .               .          .   .    Sink& sink_;
+        .                .               .          .   .    mem::HugeBuffer buf_;  // grid_ + both bitmaps
+        .                .               .          .   .    Level* grid_ = nullptr;
+        .                .               .          .   .    Bitmap bid_bits_;
+        .                .               .          .   .    Bitmap ask_bits_;
+        .                .               .          .   .    Price tick_;
+        .                .               .          .   .    v11::ExactDiv slot_div_;  // division by tick_ for slot_of()
+-- line 632 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /home/wang/sources/cxx/book/include/lob/v19/order_table.hpp
+--------------------------------------------------------------------------------
+Ir_______________ Bc______________ Bcm__________ Bi Bim 
+
+ 5,989,537 (2.3%)         0             0         0   0  <unknown (line 0)>
+
+-- line 66 ----------------------------------------
+         .                .             .         .   .    static constexpr std::uint32_t kBig = std::uint32_t{1} << 31;  // ref tag: big-id pool
+         .                .             .         .   .  
+         .                .             .         .   .    OrderTable() { alloc(kInitialBuckets); }
+         .                .             .         .   .  
+         .                .             .         .   .    [[nodiscard]] auto size() const noexcept -> std::size_t { return size_ + big_index_.size(); }
+         .                .             .         .   .  
+         .                .             .         .   .    // the node of a live ref (ref != kNil); branch-free base selection
+         .                .             .         .   .    [[gnu::always_inline]] auto node(std::uint32_t ref) -> OrderNode& {
+22,457,480 (8.6%)         0             0         0   0      OrderNode* base = __builtin_unpredictable(ref & kBig) ? big_nodes_.data() : nodes_;
+ 4,898,597 (1.9%)         0             0         0   0      return base[ref & ~kBig];
+         .                .             .         .   .    }
+         .                .             .         .   .    [[gnu::always_inline]] auto node(std::uint32_t ref) const -> const OrderNode& {
+         .                .             .         .   .      return const_cast<OrderTable*>(this)->node(ref);
+         .                .             .         .   .    }
+         .                .             .         .   .    [[nodiscard]] auto id_of(std::uint32_t ref) const -> Id {
+         .                .             .         .   .      if (ref & kBig) [[unlikely]]
+         .                .             .         .   .        return big_ids_[ref & ~kBig];
+         .                .             .         .   .      return bk_[ref >> 2].key[ref & 3];
+         .                .             .         .   .    }
+         .                .             .         .   .  
+         .                .             .         .   .    // ref of id, kNil if absent
+         .                .             .         .   .    [[gnu::always_inline]] [[nodiscard]] auto find(Id id) const -> std::uint32_t {
+ 1,644,593 (0.6%)   813,435 (3.8%)      0         0   0      if (id >= kEmpty) [[unlikely]]
+         .                .             .         .   .        return find_big(id);
+         .                .             .         .   .      const auto k = static_cast<std::uint32_t>(id);
+         .                .             .         .   .      for (std::size_t j = home(k);; j = next(j)) {
+ 1,659,126 (0.6%)   829,563 (3.8%) 16,615 (1.8%)  0   0        if (const unsigned m = match(j, k)) return ref(j, static_cast<unsigned>(std::countr_zero(m)));
+    32,256 (0.0%)    16,128 (0.1%)      0         0   0        if (bk_[j].key[kCounter] == 0) return kNil;
+         .                .             .         .   .      }
+         .                .             .         .   .    }
+         .                .             .         .   .  
+         .                .             .         .   .    // ref of id, inserting a slot (node unset) if absent. May grow: then
+         .                .             .         .   .    // grew() is true and remap() holds the old -> new references until clear_remap().
+         .                .             .         .   .    [[gnu::always_inline]] auto try_insert(Id id, bool& inserted) -> std::uint32_t {
+ 2,387,136 (0.9%) 1,591,424 (7.4%)    511 (0.1%)  0   0      if (id >= next_new_ && id < kEmpty) [[likely]] {  // never inserted: no duplicate check, no load
+ 1,549,236 (0.6%)         0             0         0   0        next_new_ = id + 1;
+ 2,323,854 (0.9%)   774,618 (3.6%)      3 (0.0%)  0   0        if (size_ >= limit_) [[unlikely]]
+         9 (0.0%)         0             0         0   0          grow();
+         .                .             .         .   .        const auto k = static_cast<std::uint32_t>(id);
+   774,618 (0.3%)         0             0         0   0        inserted = true;
+ 1,549,242 (0.6%)         0             0         0   0        ++size_;
+         .                .             .         .   .        return place(home(k), k);
+         .                .             .         .   .      }
+    42,188 (0.0%)    21,094 (0.1%)      0         0   0      if (id >= kEmpty) [[unlikely]]
+         .                .             .         .   .        return insert_big(id, inserted);
+    63,282 (0.0%)    21,094 (0.1%)      4 (0.0%)  0   0      if (size_ >= limit_) [[unlikely]]
+        12 (0.0%)         0             0         0   0        grow();
+         .                .             .         .   .      const auto k = static_cast<std::uint32_t>(id);
+         .                .             .         .   .      const std::size_t b = home(k);
+         .                .             .         .   .      for (std::size_t j = b;; j = next(j)) {  // already present?
+    42,388 (0.0%)    21,194 (0.1%)      8 (0.0%)  0   0        if (const unsigned m = match(j, k)) {
+         .                .             .         .   .          inserted = false;
+         .                .             .         .   .          return ref(j, static_cast<unsigned>(std::countr_zero(m)));
+         .                .             .         .   .        }
+    42,388 (0.0%)    21,194 (0.1%)    109 (0.0%)  0   0        if (bk_[j].key[kCounter] == 0) break;
+         .                .             .         .   .      }
+    21,094 (0.0%)         0             0         0   0      inserted = true;
+    42,188 (0.0%)         0             0         0   0      ++size_;
+         .                .             .         .   .      return place(b, k);
+         .                .             .         .   .    }
+         .                .             .         .   .  
+         .                .             .         .   .    // frees a live ref; other refs are unaffected
+         .                .             .         .   .    [[gnu::always_inline]] void erase(std::uint32_t r) {
+   795,712 (0.3%)   795,712 (3.7%)      0         0   0      if (r & kBig) [[unlikely]]
+         .                .             .         .   .        return erase_big(r);
+ 1,591,424 (0.6%)         0             0         0   0      const std::size_t j = r >> 2;
+   795,712 (0.3%)         0             0         0   0      const unsigned s = r & 3;
+ 2,387,136 (0.9%)         0             0         0   0      const std::uint32_t k = bk_[j].key[s];
+   795,712 (0.3%)         0             0         0   0      bk_[j].key[s] = kEmpty;
+ 3,182,848 (1.2%)         0             0         0   0      occ_[j] = static_cast<std::uint8_t>(occ_[j] & ~(1u << s));
+ 1,669,919 (0.6%)   811,411 (3.8%) 16,152 (1.8%)  0   0      for (std::size_t i = home(k); i != j; i = next(i)) --bk_[i].key[kCounter];
+   795,712 (0.3%)         0             0         0   0      --size_;
+         .                .             .         .   .    }
+         .                .             .         .   .  
+         .                .             .         .   .    // ---- growth bookkeeping for the owner -------------------------------------------
+         .                .             .         .   .    [[nodiscard]] auto grew() const noexcept -> bool { return !remap_.empty(); }
+         .                .             .         .   .    [[nodiscard]] auto remap(std::uint32_t old_ref) const -> std::uint32_t {
+    15,052 (0.0%)    15,052 (0.1%)     12 (0.0%)  0   0      if (old_ref == kNil || (old_ref & kBig)) return old_ref;
+    65,024 (0.0%)         0             0         0   0      return remap_[old_ref];
+         .                .             .         .   .    }
+         .                .             .         .   .    void clear_remap() { remap_.clear(); }
+         .                .             .         .   .  
+         .                .             .         .   .    [[nodiscard]] auto bytes() const noexcept -> std::size_t { return nb_ * (sizeof(Bucket) + 1); }
+         .                .             .         .   .    [[nodiscard]] auto buckets() const noexcept -> std::size_t { return nb_; }
+         .                .             .         .   .  
+         .                .             .         .   .   private:
+         .                .             .         .   .    struct alignas(64) Bucket {
+-- line 152 ----------------------------------------
+-- line 155 ----------------------------------------
+         .                .             .         .   .    };
+         .                .             .         .   .    static_assert(sizeof(Bucket) == 64);
+         .                .             .         .   .    static constexpr std::uint32_t kEmpty = ~std::uint32_t{0};
+         .                .             .         .   .    static constexpr unsigned kSlots = 3, kCounter = 3, kSlotLanes = 0x7;
+         .                .             .         .   .    static constexpr std::size_t kInitialBuckets = 256;
+         .                .             .         .   .  
+         .                .             .         .   .    // bucket of key k: 32-bit multiplicative hash, scaled to [0, nb) (any nb)
+         .                .             .         .   .    [[nodiscard]] auto home(std::uint32_t k) const -> std::size_t {
+12,175,437 (4.7%)         0             0         0   0      return static_cast<std::size_t>((std::uint64_t{k * 0x9E3779B9u} * nb_) >> 32);
+         .                .             .         .   .    }
+   192,687 (0.1%)         0             0         0   0    [[nodiscard]] auto next(std::size_t j) const -> std::size_t { return j + 1 == nb_ ? 0 : j + 1; }
+         .                .             .         .   .    [[nodiscard]] static auto ref(std::size_t j, unsigned s) -> std::uint32_t {
+ 2,469,883 (0.9%)         0             0         0   0      return static_cast<std::uint32_t>(j << 2 | s);
+         .                .             .         .   .    }
+         .                .             .         .   .    // bit s set when key[s] == k, for the 3 slots
+         .                .             .         .   .    [[nodiscard]] auto match(std::size_t j, std::uint32_t k) const -> unsigned {
+         .                .             .         .   .  #if defined(__SSE2__)
+ 1,791,857 (0.7%)         0             0         0   0      const __m128i keys = _mm_load_si128(reinterpret_cast<const __m128i*>(bk_[j].key));
+         .                .             .         .   .      const __m128i eq = _mm_cmpeq_epi32(keys, _mm_set1_epi32(static_cast<int>(k)));
+ 1,722,608 (0.7%)         0             0         0   0      return static_cast<unsigned>(_mm_movemask_ps(_mm_castsi128_ps(eq))) & kSlotLanes;
+         .                .             .         .   .  #else
+         .                .             .         .   .      unsigned m = 0;
+         .                .             .         .   .      for (unsigned s = 0; s < kSlots; ++s) m |= unsigned{bk_[j].key[s] == k} << s;
+         .                .             .         .   .      return m;
+         .                .             .         .   .  #endif
+         .                .             .         .   .    }
+         .                .             .         .   .    // free slot from the occupancy byte: the bucket line is only written
+         .                .             .         .   .    [[gnu::always_inline]] auto place(std::size_t b, std::uint32_t k) -> std::uint32_t {
+         .                .             .         .   .      for (std::size_t j = b;; j = next(j)) {
+   844,551 (0.3%)         0             0         0   0        const unsigned occupied = occ_[j];
+ 4,206,446 (1.6%)   844,551 (3.9%) 17,080 (1.9%)  0   0        if (const unsigned free = ~occupied & kSlotLanes) {
+         .                .             .         .   .          const auto s = static_cast<unsigned>(std::countr_zero(free));
+ 3,376,366 (1.3%)         0             0         0   0          occ_[j] = static_cast<std::uint8_t>(occupied | (1u << s));
+ 3,345,408 (1.3%)         0             0         0   0          bk_[j].key[s] = k;
+         .                .             .         .   .          return ref(j, s);
+         .                .             .         .   .        }
+    48,981 (0.0%)         0             0         0   0        ++bk_[j].key[kCounter];  // passing a full bucket (read-modify-write, rare)
+         .                .             .         .   .      }
+         .                .             .         .   .    }
+         .                .             .         .   .    void alloc(std::size_t nb) {
+         7 (0.0%)         0             0         0   0      nb_ = nb;
+         7 (0.0%)         0             0         0   0      limit_ = nb;  // max load 1/3: one entry per 3-slot bucket on average
+        28 (0.0%)         0             0         0   0      mem_.reset(static_cast<Bucket*>(::operator new(nb * sizeof(Bucket), std::align_val_t{64})));
+         7 (0.0%)         0             0         0   0      bk_ = mem_.get();
+         .                .             .         .   .      // node[s] of bucket b at 16 + 16 * s bytes into it: nodes_[b * 4 + s]
+        14 (0.0%)         0             0         0   0      nodes_ = reinterpret_cast<OrderNode*>(reinterpret_cast<char*>(bk_) + offsetof(Bucket, node));
+    32,589 (0.0%)     8,149 (0.0%)     29 (0.0%)  0   0      for (std::size_t i = 0; i < nb; ++i) {
+    65,024 (0.0%)         0             0         0   0        for (auto& x : bk_[i].key) x = kEmpty;
+    65,024 (0.0%)         0             0         0   0        bk_[i].key[kCounter] = 0;
+         .                .             .         .   .      }
+         .                .             .         .   .      occ_ = std::make_unique<std::uint8_t[]>(nb);
+         .                .             .         .   .    }
+        56 (0.0%)         0             0         0   0    [[gnu::noinline]] void grow() {
+         .                .             .         .   .      auto old_mem = std::move(mem_);
+         .                .             .         .   .      auto old_occ = std::move(occ_);
+         7 (0.0%)         0             0         0   0      const std::size_t old_nb = nb_;
+         7 (0.0%)         0             0         0   0      alloc(nb_ * 2);
+        28 (0.0%)         0             0         0   0      remap_.assign(old_nb * 4, kNil);
+    97,550 (0.0%)    32,519 (0.2%)      9 (0.0%)  0   0      for (std::size_t j = 0; j < old_nb; ++j)
+         .                .             .         .   .        for (unsigned s = 0; s < kSlots; ++s)
+   257,619 (0.1%)    97,536 (0.5%) 26,648 (2.9%)  0   0          if (old_occ[j] & (1u << s)) {
+    32,512 (0.0%)         0             0         0   0            const std::uint32_t k = old_mem.get()[j].key[s];
+         .                .             .         .   .            const std::uint32_t r = place(home(k), k);
+   227,584 (0.1%)         0             0         0   0            bk_[r >> 2].node[r & 3] = old_mem.get()[j].node[s];
+    32,512 (0.0%)         0             0         0   0            remap_[ref(j, s)] = r;
+         .                .             .         .   .          }
+         .                .             .         .   .      // the nodes' own links (main table and big pool)
+   260,110 (0.1%)    65,031 (0.3%)      7 (0.0%)  0   0      for (std::size_t j = 0; j < nb_; ++j)
+         .                .             .         .   .        for (unsigned s = 0; s < kSlots; ++s)
+   486,943 (0.2%)   195,072 (0.9%) 37,662 (4.1%)  0   0          if (occ_[j] & (1u << s)) {
+         .                .             .         .   .            OrderNode& n = bk_[j].node[s];
+   130,048 (0.0%)    32,512 (0.2%)  8,586 (0.9%)  0   0            n.next = remap(n.next);
+   130,048 (0.0%)    32,512 (0.2%)  5,770 (0.6%)  0   0            n.prev = remap(n.prev);
+         .                .             .         .   .          }
+         .                .             .         .   .      for (const auto& [id, i] : big_index_) {
+         .                .             .         .   .        OrderNode& n = big_nodes_[i];
+         .                .             .         .   .        n.next = remap(n.next);
+         .                .             .         .   .        n.prev = remap(n.prev);
+         .                .             .         .   .      }
+         .                .             .         .   .    }
+         .                .             .         .   .  
+-- line 235 ----------------------------------------
+-- line 259 ----------------------------------------
+         .                .             .         .   .    }
+         .                .             .         .   .    [[gnu::noinline]] void erase_big(std::uint32_t r) {
+         .                .             .         .   .      const std::uint32_t i = r & ~kBig;
+         .                .             .         .   .      big_index_.erase(big_ids_[i]);
+         .                .             .         .   .      big_free_.push_back(i);
+         .                .             .         .   .    }
+         .                .             .         .   .  
+         .                .             .         .   .    struct Free {
+        70 (0.0%)         0             0         0   0      void operator()(Bucket* p) const { ::operator delete(p, std::align_val_t{64}); }
+         .                .             .         .   .    };
+         .                .             .         .   .    std::unique_ptr<Bucket, Free> mem_;
+         .                .             .         .   .    Bucket* bk_ = nullptr;
+         .                .             .         .   .    OrderNode* nodes_ = nullptr;           // bk_ viewed as a node array (see node())
+         .                .             .         .   .    std::unique_ptr<std::uint8_t[]> occ_;  // per bucket: bit s = slot s in use
+         .                .             .         .   .    std::size_t nb_ = 0, limit_ = 0, size_ = 0;
+         .                .             .         .   .    Id next_new_ = 0;  // ids >= next_new_ were never inserted
+         .                .             .         .   .    std::vector<std::uint32_t> remap_;  // after grow(): old ref -> new ref
+-- line 275 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Annotated source file: /home/wang/sources/cxx/book/include/lob/v3/hier_bitmap.hpp
+--------------------------------------------------------------------------------
+Ir______________ Bc____________ Bcm__________ Bi Bim 
+
+    7,245 (0.0%)   1,831 (0.0%)     21 (0.0%)  0   0  <unknown (line 0)>
+
+-- line 40 ----------------------------------------
+        .              .             .         .   .      static constexpr std::size_t kSize       = std::size_t{1} << Bits;
+        .              .             .         .   .      static constexpr std::size_t kTotalWords = kOffset[kLevels - 1] + 1;
+        .              .             .         .   .      static constexpr unsigned    kDepth      = kLevels;
+        .              .             .         .   .  
+        .              .             .         .   .      HierBitmap() = default;
+        .              .             .         .   .      explicit HierBitmap(std::uint64_t *words) noexcept : w_(words) {}
+        .              .             .         .   .  
+        .              .             .         .   .      [[nodiscard]] auto empty() const noexcept -> bool {
+2,387,136 (0.9%)       0             0         0   0          return w_[kOffset[kLevels - 1]] == 0;
+        .              .             .         .   .      }
+        .              .             .         .   .  
+        .              .             .         .   .      [[nodiscard]] auto test(std::uint32_t i) const noexcept -> bool {
+        .              .             .         .   .          return (w_[i >> 6] >> (i & 63)) & 1U;
+        .              .             .         .   .      }
+        .              .             .         .   .  
+        .              .             .         .   .      void set(std::uint32_t i) noexcept {
+        .              .             .         .   .          for (unsigned l = 0; l < kLevels; ++l) {
+1,593,189 (0.6%)       0             0         0   0              std::uint64_t &word      = w_[kOffset[l] + (i >> 6)];
+2,392,503 (0.9%) 797,501 (3.7%) 16,937 (1.9%)  0   0              const bool     was_empty = word == 0;
+2,392,557 (0.9%)       0             0         0   0              word |= std::uint64_t{1} << (i & 63);
+        .              .             .         .   .              if (!was_empty) return;
+        .              .             .         .   .              i >>= 6;
+        .              .             .         .   .          }
+        .              .             .         .   .      }
+        .              .             .         .   .  
+        .              .             .         .   .      void clear(std::uint32_t i) noexcept {
+        .              .             .         .   .          for (unsigned l = 0; l < kLevels; ++l) {
+        .              .             .         .   .              std::uint64_t &word = w_[kOffset[l] + (i >> 6)];
+-- line 67 ----------------------------------------
+-- line 70 ----------------------------------------
+        .              .             .         .   .              i >>= 6;
+        .              .             .         .   .          }
+        .              .             .         .   .      }
+        .              .             .         .   .  
+        .              .             .         .   .      // clear slot i only if `cond`, without branching on cond: the leaf update is
+        .              .             .         .   .      // a masked and-not; propagation upward happens only when the whole 64-slot
+        .              .             .         .   .      // word became empty (when !cond the leaf keeps bit i and stays non-zero)
+        .              .             .         .   .      void clear_if(std::uint32_t i, bool cond) noexcept {
+2,387,010 (0.9%)       0             0         0   0          std::uint64_t &leaf = w_[i >> 6];
+2,387,010 (0.9%)       0             0         0   0          leaf &= ~(std::uint64_t{cond} << (i & 63));
+  795,670 (0.3%) 795,670 (3.7%)  1,862 (0.2%)  0   0          if (leaf != 0) return;
+        .              .             .         .   .          i >>= 6;
+        .              .             .         .   .          for (unsigned l = 1; l < kLevels; ++l) {
+    1,849 (0.0%)       0             0         0   0              std::uint64_t &word = w_[kOffset[l] + (i >> 6)];
+    5,565 (0.0%)       0             0         0   0              word &= ~(std::uint64_t{1} << (i & 63));
+        .              .             .         .   .              if (word != 0) return;
+        .              .             .         .   .              i >>= 6;
+        .              .             .         .   .          }
+        .              .             .         .   .      }
+        .              .             .         .   .  
+        .              .             .         .   .      // lowest set slot; precondition: !empty()
+        .              .             .         .   .      [[nodiscard]] auto min() const noexcept -> std::uint32_t {
+        .              .             .         .   .          std::uint32_t i = 0;
+        .              .             .         .   .          for (unsigned l = kLevels; l-- > 0;) {
+        .              .             .         .   .              const std::uint64_t word = w_[kOffset[l] + i];
+3,978,555 (1.5%)       0             0         0   0              i = (i << 6) | static_cast<std::uint32_t>(std::countr_zero(word));
+        .              .             .         .   .          }
+        .              .             .         .   .          return i;
+        .              .             .         .   .      }
+        .              .             .         .   .  
+        .              .             .         .   .      // highest set slot; precondition: !empty()
+        .              .             .         .   .      [[nodiscard]] auto max() const noexcept -> std::uint32_t {
+        .              .             .         .   .          std::uint32_t i = 0;
+        .              .             .         .   .          for (unsigned l = kLevels; l-- > 0;) {
+-- line 103 ----------------------------------------
+-- line 104 ----------------------------------------
+        .              .             .         .   .              const std::uint64_t word = w_[kOffset[l] + i];
+        .              .             .         .   .              i = (i << 6) | static_cast<std::uint32_t>(63 - std::countl_zero(word));
+        .              .             .         .   .          }
+        .              .             .         .   .          return i;
+        .              .             .         .   .      }
+        .              .             .         .   .  
+        .              .             .         .   .      // every set slot, ascending (snapshots / invariant checks, not hot path)
+        .              .             .         .   .      template <class F> void for_each(F &&f) const {
+   43,008 (0.0%)  14,336 (0.1%)     14 (0.0%)  0   0          for (std::size_t w = 0; w < kWords[0]; ++w)
+   58,886 (0.0%)  21,819 (0.1%)  1,939 (0.2%)  0   0              for (std::uint64_t bits = w_[w]; bits != 0; bits &= bits - 1)
+        .              .             .         .   .                  f(static_cast<std::uint32_t>(
+    4,754 (0.0%)       0             0         0   0                      w * 64 + static_cast<std::size_t>(std::countr_zero(bits))));
+        .              .             .         .   .      }
+        .              .             .         .   .  
+        .              .             .         .   .      // summary bits agree with the level below (invariant check)
+        .              .             .         .   .      [[nodiscard]] auto consistent() const noexcept -> bool {
+        .              .             .         .   .          for (unsigned l = 0; l + 1 < kLevels; ++l)
+        .              .             .         .   .              for (std::size_t w = 0; w < kWords[l]; ++w) {
+        .              .             .         .   .                  const bool child  = w_[kOffset[l] + w] != 0;
+        .              .             .         .   .                  const bool parent = (w_[kOffset[l + 1] + (w >> 6)] >> (w & 63)) & 1U;
+-- line 123 ----------------------------------------
+
+--------------------------------------------------------------------------------
+-- Annotation summary
+--------------------------------------------------------------------------------
+Ir_________________ Bc________________ Bcm____________ Bi_________ Bim________ 
+
+211,518,583 (81.2%) 19,915,887 (92.2%) 910,375 (99.9%)   0           0            annotated: files known & above threshold & readable, line numbers known
+ 12,593,365  (4.8%)      1,831  (0.0%)      21  (0.0%)   0           0            annotated: files known & above threshold & readable, line numbers unknown
+          0                  0               0           0           0          unannotated: files known & above threshold & two or more non-identical
+          0                  0               0           0           0          unannotated: files known & above threshold & unreadable 
+ 36,278,261 (13.9%)  1,679,940  (7.8%)   1,073  (0.1%)   3  (1.1%)   3  (2.5%)  unannotated: files known & below threshold
+      1,877  (0.0%)         52  (0.0%)      21  (0.0%) 265 (98.9%) 115 (97.5%)  unannotated: files unknown
+
